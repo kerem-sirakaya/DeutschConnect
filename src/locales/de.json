@@ -1,0 +1,474 @@
+{
+  "common": {
+    "back": "Zurück",
+    "showAll": "Alle",
+    "skipToContent": "Zum Inhalt springen",
+    "cancel": "Abbrechen",
+    "yourSchool": "Deine Schule",
+    "clearSearch": "Suche löschen"
+  },
+  "demo": {
+    "label": "Demo",
+    "tooltip": "Demo-Modus: fiktive Profile und Beispieldaten",
+    "notice": "Demo-Modus: Profile, Events und Ideen sind fiktive Beispieldaten. Die Profilauswahl ist keine echte Anmeldung.",
+    "localOnly": "Demo: Wird nur in diesem Browser gespeichert.",
+    "example": "Beispiel",
+    "exampleEvent": "Beispiel-Event"
+  },
+  "nav": {
+    "home": "Start",
+    "events": "Events",
+    "ideas": "Ideen",
+    "network": "Netzwerk",
+    "me": "Mein Bereich",
+    "meShort": "Mein Bereich",
+    "about": "Über DeutschConnect",
+    "mainLabel": "Hauptnavigation"
+  },
+  "profileMenu": {
+    "open": "Profilmenü öffnen (Demo-Profil: {name})",
+    "demoProfiles": "Demo-Profil wechseln",
+    "hint": "Nur zur Vorführung – keine echte Anmeldung.",
+    "openAccount": "Profilmenü öffnen (angemeldet als {name})",
+    "toMyArea": "Zu Mein Bereich"
+  },
+  "profile": {
+    "grade": "Klasse {grade}",
+    "demoProfile": "Demo-Profil",
+    "realAccount": "Dein Konto"
+  },
+  "home": {
+    "greeting": "Willkommen zurück, {name}!",
+    "quickActionsLabel": "Schnellzugriff",
+    "updates": "Neu für dich",
+    "myNextEvents": "Meine nächsten Events",
+    "noEventsTitle": "Noch keine Events geplant",
+    "noEventsText": "Melde dich für ein Event an oder bekunde Interesse.",
+    "forYou": "Für dich empfohlen",
+    "noRecsTitle": "Gerade keine passenden Events",
+    "noRecsText": "Wähle weitere Interessen aus, damit wir Events für dich finden.",
+    "myProjectsIdeas": "Meine Projekte & Ideen",
+    "noProjectsIdeas": "Du hast noch keine Projekte oder Ideen.",
+    "suggestedProject": "Projekt, das zu dir passt",
+    "typeProject": "Projekt"
+  },
+  "quick": {
+    "discover": "Events entdecken",
+    "myEvents": "Meine Events",
+    "newIdea": "Idee einreichen",
+    "schools": "Schulen erkunden"
+  },
+  "updates": {
+    "invitation": "{school} lädt dich ein: {event}",
+    "reminder": "{when}: {event}",
+    "ideaReview": "Deine Idee „{idea}“ wird gerade von den Schulen geprüft.",
+    "view": "Ansehen",
+    "dismiss": "Hinweis ausblenden"
+  },
+  "recommend": {
+    "matches": "Passt zu: {topics}",
+    "yourSchool": "Deine Schule ist dabei",
+    "basedOn": "Basierend auf deinen Interessen: {topics}.",
+    "noInterests": "Du hast noch keine Interessen gewählt.",
+    "editInterests": "Interessen bearbeiten"
+  },
+  "roles": {
+    "organizer": "Organisierst du",
+    "registered": "Angemeldet",
+    "interested": "Interessiert",
+    "member": "Mitglied"
+  },
+  "status": {
+    "event": {
+      "planned": "In Planung",
+      "confirmed": "Bestätigt",
+      "completed": "Abgeschlossen",
+      "cancelled": "Abgesagt"
+    },
+    "idea": {
+      "submitted": "Eingereicht",
+      "collecting": "Sammelt Interesse",
+      "review": "In Prüfung",
+      "planned": "Wird geplant"
+    },
+    "project": {
+      "active": "Aktiv",
+      "planning": "In Planung"
+    },
+    "partnership": {
+      "initiator": "Initiatorin",
+      "interest": "Interesse bekundet",
+      "confirmed": "Bestätigte Kooperation"
+    }
+  },
+  "topics": {
+    "languages": "Sprachen",
+    "science": "Naturwissenschaften",
+    "technology": "Technik & IT",
+    "arts": "Kunst & Medien",
+    "music": "Musik",
+    "sports": "Sport",
+    "culture": "Kultur & Austausch",
+    "debate": "Debatte & Gesellschaft",
+    "career": "Studium & Beruf",
+    "social": "Soziales Engagement"
+  },
+  "formats": {
+    "workshop": "Workshop",
+    "meetup": "Treffen",
+    "discussion": "Diskussion",
+    "competition": "Wettbewerb",
+    "online": "Online",
+    "project": "Projekt"
+  },
+  "events": {
+    "title": "Events",
+    "tabsLabel": "Event-Bereiche",
+    "tabs": {
+      "mine": "Meine",
+      "foryou": "Für mich",
+      "all": "Alle"
+    },
+    "online": "Online",
+    "all": "Alle",
+    "roleFilterLabel": "Nach meiner Rolle filtern",
+    "mineEmptyTitle": "Keine bevorstehenden Events",
+    "mineEmptyText": "Hier erscheinen Events, für die du angemeldet bist, Interesse bekundet hast oder die du organisierst.",
+    "past_one": "Vergangenes Event ({count})",
+    "past_other": "Vergangene Events ({count})",
+    "searchLabel": "Events durchsuchen",
+    "searchPlaceholder": "Titel, Thema oder Ort suchen …",
+    "filters": "Filter",
+    "filtersActive": "Filter ({count})",
+    "resetFilters": "Filter zurücksetzen",
+    "filterTime": "Zeitraum",
+    "filterSchool": "Schule",
+    "filterTopic": "Thema",
+    "filterFormat": "Format",
+    "time": {
+      "upcoming": "Demnächst",
+      "week": "7 Tage",
+      "month": "30 Tage",
+      "past": "Vergangen"
+    },
+    "results_one": "{count} Event",
+    "results_other": "{count} Events",
+    "noResultsTitle": "Keine passenden Events",
+    "noResultsText": "Ändere die Suche oder setze die Filter zurück.",
+    "noRealEventsTitle": "Noch keine Events geplant",
+    "noRealEventsText": "Sobald das DeutschConnect-Team ein Event einträgt, erscheint es hier."
+  },
+  "eventDetail": {
+    "notFound": "Event nicht gefunden",
+    "when": "Wann",
+    "where": "Wo",
+    "host": "Veranstaltet von",
+    "schools": "Beteiligte Schulen",
+    "audience": "Zielgruppe",
+    "capacity": "max. {count} Plätze",
+    "format": "Format",
+    "about": "Worum geht’s?",
+    "yourParticipation": "Deine Teilnahme",
+    "register": "Teilnehmen",
+    "cancelRegistration": "Abmelden",
+    "markInterest": "Interesse bekunden",
+    "removeInterest": "Interesse zurückziehen",
+    "state": {
+      "none": "Du bist noch nicht angemeldet.",
+      "registered": "Du bist angemeldet.",
+      "interested": "Du hast Interesse bekundet."
+    },
+    "organizerNote": "Du organisierst dieses Event.",
+    "pastNote": "Dieses Event ist bereits vorbei.",
+    "pastNoteParticipated": "Dieses Event ist vorbei. Rückmeldungen werden in einer späteren Version gesammelt.",
+    "cancelledNote": "Dieses Event wurde abgesagt.",
+    "closedNote": "Für dieses Event sind keine neuen Anmeldungen mehr möglich.",
+    "savedToAccount": "Anmeldung und Interesse werden in deinem Konto gespeichert. „Interessiert“ ist keine verbindliche Anmeldung.",
+    "errors": {
+      "closed": "Für dieses Event ist keine Anmeldung mehr möglich (z. B. weil es schon begonnen hat).",
+      "conflict": "Dein Eintrag hat sich inzwischen geändert. Der aktuelle Stand wird angezeigt.",
+      "network": "Keine Verbindung zum Server. Bitte versuche es noch einmal.",
+      "generic": "Das hat nicht geklappt. Bitte versuche es noch einmal."
+    }
+  },
+  "ideas": {
+    "title": "Ideen",
+    "tabsLabel": "Ideen-Bereiche",
+    "tabs": {
+      "discover": "Entdecken",
+      "mine": "Meine Ideen"
+    },
+    "newIdea": "Neue Idee",
+    "searchLabel": "Ideen durchsuchen",
+    "searchPlaceholder": "Ideen suchen …",
+    "sortLabel": "Sortierung",
+    "sort": {
+      "popular": "Beliebt",
+      "new": "Neu"
+    },
+    "results_one": "{count} Idee",
+    "results_other": "{count} Ideen",
+    "supportHint": "Unterstützung zeigt Interesse. Über die Umsetzung entscheiden die beteiligten Schulen.",
+    "noRealIdeasTitle": "Noch keine Ideen",
+    "noRealIdeasText": "Neue Ideen erscheinen hier, sobald das Team sie freigegeben hat. Du kannst auch selbst eine einreichen.",
+    "errors": {
+      "notAllowed": "Das ist nicht erlaubt (z. B. eigene oder noch nicht freigegebene Idee).",
+      "alreadySupported": "Du unterstützt diese Idee bereits.",
+      "invalid": "Einige Angaben sind ungültig. Bitte prüfe das Formular.",
+      "deleteFailed": "Die Idee konnte nicht gelöscht werden.",
+      "network": "Keine Verbindung zum Server. Bitte versuche es noch einmal.",
+      "generic": "Das hat nicht geklappt. Bitte versuche es noch einmal."
+    },
+    "fromSchool": "Aus: {school}",
+    "yourIdea": "Deine Idee",
+    "support": "Unterstützen",
+    "supported": "Unterstützt",
+    "supportCount_one": "{count} Unterstützung",
+    "supportCount_other": "{count} Unterstützungen",
+    "supportAria": "Idee „{title}“ unterstützen",
+    "authored": "Von mir eingereicht",
+    "supportedSection": "Von mir unterstützt",
+    "noOwnTitle": "Du hast noch keine Idee eingereicht",
+    "noOwnText": "Hast du eine Idee für ein gemeinsames Projekt? Teile sie mit den anderen Schulen.",
+    "noSupportedText": "Du unterstützt noch keine Ideen.",
+    "noResultsTitle": "Keine passenden Ideen",
+    "noResultsText": "Versuche einen anderen Suchbegriff oder ein anderes Thema."
+  },
+  "ideaDetail": {
+    "notFound": "Idee nicht gefunden",
+    "created": "Deine Idee wurde gespeichert.",
+    "createdHint": "Im Demo-Modus ist sie nur in diesem Browser sichtbar.",
+    "createdHintAccount": "Andere sehen deine Idee, sobald das DeutschConnect-Team sie freigegeben hat.",
+    "awaitingApproval": "Wartet auf Freigabe – bisher kannst nur du diese Idee sehen.",
+    "from": "Von",
+    "fromYou": "Dir",
+    "fromStudentOf": "Schüler:in der {school}",
+    "submitted": "Eingereicht",
+    "targetSchools": "Für Schulen",
+    "about": "Beschreibung",
+    "progress": "Vom Vorschlag zum Event",
+    "steps": {
+      "submitted": "Eingereicht",
+      "collecting": "Interesse sammeln",
+      "review": "Prüfung durch Schulen",
+      "planned": "Planung"
+    },
+    "approvalNote": "Viel Unterstützung führt nicht automatisch zur Durchführung. Die Schulen prüfen jede Idee.",
+    "supportTitle": "Unterstützung",
+    "supportText": "Gefällt dir die Idee? Zeig, dass du mitmachen würdest.",
+    "ownIdeaNote": "Das ist deine Idee. Hier siehst du, wie viele sie unterstützen.",
+    "delete": "Idee löschen",
+    "deleteConfirm": "Möchtest du diese Idee wirklich löschen?",
+    "deleteYes": "Ja, löschen"
+  },
+  "newIdea": {
+    "title": "Neue Idee",
+    "subtitle": "Schlage eine Aktivität vor, die Schulen verbindet. Eingereicht als Schüler:in der {school}.",
+    "titleLabel": "Titel",
+    "titlePlaceholder": "z. B. Gemeinsamer Filmabend",
+    "descriptionLabel": "Beschreibung",
+    "descriptionHint": "Was soll passieren, und warum ist es schulübergreifend spannend?",
+    "topicsLabel": "Themen (1–3)",
+    "formatLabel": "Format",
+    "schoolsLabel": "Mit welchen Schulen?",
+    "privacyLabel": "Ich habe keine persönlichen Daten anderer Personen (z. B. Namen oder Telefonnummern) eingetragen.",
+    "demoHint": "Demo: Die Idee wird nur in diesem Browser gespeichert und nicht an die Schulen gesendet.",
+    "accountHint": "Deine Idee wird in deinem Konto gespeichert. Andere Schüler:innen sehen sie erst nach der Freigabe – und nur mit deiner Schule, nicht mit deinem Namen.",
+    "submit": "Idee einreichen",
+    "errorSummary_one": "Bitte prüfe das markierte Feld.",
+    "errorSummary_other": "Bitte prüfe die {count} markierten Felder.",
+    "errors": {
+      "title": "Bitte gib einen Titel mit mindestens 5 Zeichen ein.",
+      "description": "Bitte beschreibe deine Idee mit mindestens 20 Zeichen.",
+      "topicsRequired": "Bitte wähle mindestens ein Thema.",
+      "topicsMax": "Bitte wähle höchstens drei Themen.",
+      "schools": "Bitte wähle mindestens eine Schule.",
+      "privacy": "Bitte bestätige den Datenschutzhinweis."
+    }
+  },
+  "network": {
+    "title": "Netzwerk",
+    "tabsLabel": "Netzwerk-Bereiche",
+    "tabs": {
+      "schools": "Schulen",
+      "projects": "Projekte"
+    },
+    "eventsCount_one": "{count} Event",
+    "eventsCount_other": "{count} Events",
+    "projectsCount_one": "{count} Projekt",
+    "projectsCount_other": "{count} Projekte",
+    "statusTitle": "Stand der Zusammenarbeit",
+    "legend": {
+      "initiator": "Hier ist DeutschConnect entstanden.",
+      "interest": "Interesse an Zusammenarbeit bekundet, Details werden abgestimmt.",
+      "confirmed": "Formell bestätigte Kooperation."
+    },
+    "statusText": "Bisher ist noch keine Kooperation formell bestätigt. Die Zusammenarbeit zwischen ERS und Anka Bilim wird gerade abgestimmt.",
+    "plannedTitle": "Geplantes Netzwerk",
+    "plannedText": "Nach dem ersten Pilot sollen weitere Schulen in Ankara eingeladen werden. Gespräche mit weiteren Schulen gibt es noch nicht.",
+    "projectsFilterLabel": "Projekte filtern",
+    "filter": {
+      "all": "Alle Projekte",
+      "mine": "Meine Projekte"
+    },
+    "noMyProjects": "Du bist noch in keinem Projekt",
+    "noMyProjectsText": "Öffne ein Projekt und melde dein Interesse am Mitmachen."
+  },
+  "school": {
+    "notFound": "Schule nicht gefunden",
+    "city": "Ort",
+    "ideas": "Ideen aus dieser Schule",
+    "events": "Bevorstehende Events",
+    "projects": "Projekte",
+    "noEvents": "Derzeit keine bevorstehenden Events.",
+    "noProjects": "Noch keine Projekte."
+  },
+  "project": {
+    "notFound": "Projekt nicht gefunden",
+    "realProject": "Echtes Projekt",
+    "nextStep": "Nächster Schritt",
+    "about": "Über das Projekt",
+    "yourRole": "Deine Rolle",
+    "memberNote": "Du bist Teil dieses Projekts.",
+    "joinText": "Möchtest du mitmachen? Melde dein Interesse.",
+    "joinedNote": "Du hast Interesse am Mitmachen gemeldet.",
+    "join": "Interesse am Mitmachen",
+    "joined": "Interesse gemeldet"
+  },
+  "me": {
+    "title": "Mein Bereich",
+    "profile": "Profil",
+    "switchProfile": "Profil wechseln",
+    "stats": {
+      "events": "Events",
+      "ideas": "Ideen",
+      "projects": "Projekte"
+    },
+    "interests": "Meine Interessen",
+    "edit": "Bearbeiten",
+    "noInterests": "Noch keine Interessen gewählt.",
+    "myProjects": "Meine Projekte",
+    "settingsSection": "Einstellungen",
+    "rows": {
+      "interests": "Interessen & Empfehlungen",
+      "interestsHint": "Bestimmt, was dir empfohlen wird",
+      "language": "Sprache",
+      "settings": "Demo-Profil & lokale Daten",
+      "settingsHint": "Profil wechseln, Demo zurücksetzen",
+      "about": "Über DeutschConnect"
+    }
+  },
+  "interests": {
+    "title": "Interessen",
+    "intro": "Wähle, was dich interessiert. Deine Empfehlungen passen sich sofort an.",
+    "groupLabel": "Interessen",
+    "matching_one": "{count} passendes Event für dich",
+    "matching_other": "{count} passende Events für dich",
+    "showRecs": "Empfehlungen ansehen",
+    "savedToAccount": "Deine Interessen werden in deinem Konto gespeichert."
+  },
+  "auth": {
+    "loginTitle": "Anmelden",
+    "loginSubtitle": "Mit deinem DeutschConnect-Konto",
+    "registerTitle": "Registrieren",
+    "registerSubtitle": "Konto für Schüler:innen der beteiligten Schulen",
+    "firstNameLabel": "Vorname",
+    "firstNameHint": "Nur dein Vorname. Andere Nutzer:innen sehen ihn nicht.",
+    "emailLabel": "E-Mail",
+    "passwordLabel": "Passwort",
+    "passwordHint": "Mindestens {min} Zeichen.",
+    "schoolLabel": "Schule",
+    "schoolPlaceholder": "Schule auswählen",
+    "gradeLabel": "Klasse",
+    "gradePlaceholder": "Klasse auswählen",
+    "consentLabel": "Ich bin einverstanden, dass mein Vorname, meine Schule und meine Klasse für mein Konto gespeichert werden.",
+    "submitLogin": "Anmelden",
+    "submitRegister": "Konto erstellen",
+    "loading": "Bitte warten …",
+    "logout": "Abmelden",
+    "toRegister": "Registrieren",
+    "toLogin": "Anmelden",
+    "checkEmailTitle": "Fast geschafft!",
+    "checkEmailText": "Wir haben dir eine E-Mail geschickt. Bestätige darin deine Adresse und melde dich danach an.",
+    "signedInAs": "Angemeldet als {name}",
+    "profileLoading": "Profil wird geladen …",
+    "profileMissing": "Dein Profil konnte nicht geladen werden.",
+    "notConfigured": "Echte Konten sind in dieser Version nicht verfügbar. Die App läuft im Demo-Modus.",
+    "signupClosed": "Die Registrierung ist noch nicht freigeschaltet. Wende dich an das DeutschConnect-Team deiner Schule.",
+    "demoStillActive": "Events, Ideen und Projekte sind vorerst weiterhin Demo-Daten.",
+    "accountTitle": "Konto",
+    "accountSignedOut": "Du bist nicht angemeldet. Die App funktioniert weiterhin im Demo-Modus.",
+    "meRow": "Konto & Anmeldung",
+    "meRowSignedIn": "Angemeldet",
+    "gateLoading": "Dein Profil wird geladen …",
+    "gateErrorTitle": "Profil konnte nicht geladen werden",
+    "gateErrorText": "Du kannst es erneut versuchen oder dich abmelden und die Demo weiter nutzen.",
+    "retry": "Erneut versuchen",
+    "gateEventsErrorTitle": "Events konnten nicht geladen werden",
+    "gateIdeasErrorTitle": "Ideen konnten nicht geladen werden",
+    "errorSummary_one": "1 Feld muss noch korrigiert werden.",
+    "errorSummary_other": "{count} Felder müssen noch korrigiert werden.",
+    "errors": {
+      "firstName": "Bitte gib deinen Vornamen ein (höchstens 40 Zeichen).",
+      "email": "Bitte gib eine gültige E-Mail-Adresse ein.",
+      "password": "Das Passwort muss mindestens 8 Zeichen lang sein.",
+      "passwordRequired": "Bitte gib dein Passwort ein.",
+      "school": "Bitte wähle deine Schule.",
+      "grade": "Bitte wähle deine Klasse.",
+      "consent": "Bitte bestätige die Einwilligung.",
+      "invalidCredentials": "E-Mail oder Passwort ist falsch.",
+      "emailNotConfirmed": "Bitte bestätige zuerst deine E-Mail-Adresse.",
+      "userExists": "Mit dieser E-Mail-Adresse gibt es bereits ein Konto.",
+      "signupDisabled": "Die Registrierung ist zurzeit geschlossen.",
+      "weakPassword": "Dieses Passwort ist zu schwach. Bitte wähle ein längeres Passwort.",
+      "rateLimit": "Zu viele Versuche. Bitte warte ein paar Minuten.",
+      "emailInvalid": "Diese E-Mail-Adresse wird nicht akzeptiert.",
+      "profileFailed": "Das Profil konnte nicht angelegt werden. Bitte prüfe Schule und Klasse.",
+      "network": "Keine Verbindung zum Server. Bitte prüfe deine Internetverbindung.",
+      "generic": "Etwas ist schiefgelaufen. Bitte versuche es noch einmal.",
+      "interestsSave": "Deine Interessen konnten nicht gespeichert werden. Es wird der zuletzt gespeicherte Stand angezeigt.",
+      "eventsLoad": "Die Events konnten nicht vom Server geladen werden. Bitte prüfe deine Internetverbindung.",
+      "ideasLoad": "Die Ideen konnten nicht vom Server geladen werden. Bitte prüfe deine Internetverbindung."
+    }
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "language": "Sprache",
+    "profile": "Demo-Profil",
+    "profileHint": "Wechsle zwischen fiktiven Schülerprofilen, um die Personalisierung auszuprobieren. Das ist keine echte Anmeldung.",
+    "data": "Lokale Daten",
+    "dataText": "Anmeldungen, Interessen und eigene Ideen werden nur in diesem Browser gespeichert (localStorage) und nicht an einen Server gesendet.",
+    "reset": "Demo zurücksetzen",
+    "resetConfirm": "Alle lokalen Änderungen (Anmeldungen, Interessen, eigene Ideen) werden gelöscht. Fortfahren?",
+    "resetYes": "Ja, zurücksetzen",
+    "resetDone": "Die Demo wurde zurückgesetzt.",
+    "profileSignedIn": "Du bist mit deinem echten Konto angemeldet. Demo-Profile kannst du nach dem Abmelden wieder auswählen."
+  },
+  "about": {
+    "title": "Über DeutschConnect",
+    "tagline": "Deine Schule. Deine Ideen. Dein Netzwerk.",
+    "whatTitle": "Was ist DeutschConnect?",
+    "whatText": "DeutschConnect ist eine von Schüler:innen entwickelte Plattform, über die Schulen gemeinsame Veranstaltungen, Ideen und Projekte organisieren. Schüler:innen sollen selbst Initiative ergreifen und Kontakte zu anderen Schulen aufbauen können.",
+    "originTitle": "Wie es entstanden ist",
+    "originText": "Die Idee entstand in einer Schülergruppe der Ernst-Reuter-Schule Ankara. Aus einem früheren Design-Prototyp für Deutschunterricht wurde eine Plattform für schulübergreifende Zusammenarbeit. Als erste Partnerschule hat Anka Bilim Interesse gezeigt.",
+    "statusTitle": "Aktueller Stand",
+    "worksTitle": "Bereits umgesetzt",
+    "works1": "Web-Prototyp für Smartphone und Desktop",
+    "works2": "Oberfläche auf Deutsch, Türkisch und Englisch",
+    "works3": "Demo mit fiktiven Profilen und Beispieldaten",
+    "openTitle": "Noch nicht umgesetzt",
+    "open1": "Echte Benutzerkonten und Anmeldung",
+    "open2": "Gemeinsame Datenbank für alle Schulen",
+    "open3": "Über die Plattform organisierte reale Veranstaltung",
+    "open4": "Formell bestätigte Schulkooperation",
+    "schoolsTitle": "Beteiligte Schulen",
+    "impactTitle": "Wirkung",
+    "impactText": "Bisher wurden noch keine Ergebnisse erhoben. Nach dem ersten Pilot werden hier echte Aktivitäten und Rückmeldungen dokumentiert.",
+    "competition": "DeutschConnect soll beim 10. DIHK-Auslandsschulwettbewerb „Schüler bauen weltweit Brücken“ eingereicht werden."
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "text": "Diese Seite gibt es nicht (mehr).",
+    "home": "Zur Startseite"
+  }
+}

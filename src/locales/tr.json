@@ -1,0 +1,474 @@
+{
+  "common": {
+    "back": "Geri",
+    "showAll": "Tümü",
+    "skipToContent": "İçeriğe geç",
+    "cancel": "İptal",
+    "yourSchool": "Okulun",
+    "clearSearch": "Aramayı temizle"
+  },
+  "demo": {
+    "label": "Demo",
+    "tooltip": "Demo modu: kurgusal profiller ve örnek veriler",
+    "notice": "Demo modu: Profiller, etkinlikler ve fikirler kurgusal örnek verilerdir. Profil seçimi gerçek bir giriş değildir.",
+    "localOnly": "Demo: Yalnızca bu tarayıcıda kaydedilir.",
+    "example": "Örnek",
+    "exampleEvent": "Örnek etkinlik"
+  },
+  "nav": {
+    "home": "Ana Sayfa",
+    "events": "Etkinlikler",
+    "ideas": "Fikirler",
+    "network": "Ağ",
+    "me": "Alanım",
+    "meShort": "Alanım",
+    "about": "DeutschConnect Hakkında",
+    "mainLabel": "Ana gezinme"
+  },
+  "profileMenu": {
+    "open": "Profil menüsünü aç (demo profili: {name})",
+    "demoProfiles": "Demo profilini değiştir",
+    "hint": "Yalnızca tanıtım amaçlı – gerçek bir giriş değildir.",
+    "openAccount": "Profil menüsünü aç ({name} olarak giriş yapıldı)",
+    "toMyArea": "Alanıma git"
+  },
+  "profile": {
+    "grade": "{grade}. sınıf",
+    "demoProfile": "Demo profili",
+    "realAccount": "Hesabın"
+  },
+  "home": {
+    "greeting": "Tekrar hoş geldin, {name}!",
+    "quickActionsLabel": "Hızlı erişim",
+    "updates": "Senin için yeni",
+    "myNextEvents": "Yaklaşan etkinliklerim",
+    "noEventsTitle": "Henüz planlanmış etkinlik yok",
+    "noEventsText": "Bir etkinliğe kaydol ya da ilgini belirt.",
+    "forYou": "Senin için önerilenler",
+    "noRecsTitle": "Şu anda uygun etkinlik yok",
+    "noRecsText": "Sana uygun etkinlikler bulabilmemiz için daha fazla ilgi alanı seç.",
+    "myProjectsIdeas": "Projelerim ve fikirlerim",
+    "noProjectsIdeas": "Henüz bir projen ya da fikrin yok.",
+    "suggestedProject": "Sana uygun bir proje",
+    "typeProject": "Proje"
+  },
+  "quick": {
+    "discover": "Etkinlikleri keşfet",
+    "myEvents": "Etkinliklerim",
+    "newIdea": "Fikir gönder",
+    "schools": "Okulları keşfet"
+  },
+  "updates": {
+    "invitation": "{school} seni davet ediyor: {event}",
+    "reminder": "{when}: {event}",
+    "ideaReview": "“{idea}” fikrin şu anda okullar tarafından inceleniyor.",
+    "view": "Görüntüle",
+    "dismiss": "Bildirimi gizle"
+  },
+  "recommend": {
+    "matches": "Uygun olduğu alanlar: {topics}",
+    "yourSchool": "Okulun da katılıyor",
+    "basedOn": "İlgi alanlarına göre: {topics}.",
+    "noInterests": "Henüz ilgi alanı seçmedin.",
+    "editInterests": "İlgi alanlarını düzenle"
+  },
+  "roles": {
+    "organizer": "Düzenleyen sensin",
+    "registered": "Kayıtlı",
+    "interested": "İlgileniyorum",
+    "member": "Üye"
+  },
+  "status": {
+    "event": {
+      "planned": "Planlanıyor",
+      "confirmed": "Onaylandı",
+      "completed": "Tamamlandı",
+      "cancelled": "İptal edildi"
+    },
+    "idea": {
+      "submitted": "Gönderildi",
+      "collecting": "İlgi topluyor",
+      "review": "İnceleniyor",
+      "planned": "Planlanıyor"
+    },
+    "project": {
+      "active": "Aktif",
+      "planning": "Planlanıyor"
+    },
+    "partnership": {
+      "initiator": "Başlatan okul",
+      "interest": "İlgi gösterdi",
+      "confirmed": "Onaylı iş birliği"
+    }
+  },
+  "topics": {
+    "languages": "Diller",
+    "science": "Fen bilimleri",
+    "technology": "Teknoloji ve BT",
+    "arts": "Sanat ve medya",
+    "music": "Müzik",
+    "sports": "Spor",
+    "culture": "Kültür ve değişim",
+    "debate": "Münazara ve toplum",
+    "career": "Üniversite ve kariyer",
+    "social": "Sosyal sorumluluk"
+  },
+  "formats": {
+    "workshop": "Atölye",
+    "meetup": "Buluşma",
+    "discussion": "Tartışma",
+    "competition": "Yarışma",
+    "online": "Çevrim içi",
+    "project": "Proje"
+  },
+  "events": {
+    "title": "Etkinlikler",
+    "tabsLabel": "Etkinlik bölümleri",
+    "tabs": {
+      "mine": "Benimkiler",
+      "foryou": "Bana özel",
+      "all": "Tümü"
+    },
+    "online": "Çevrim içi",
+    "all": "Tümü",
+    "roleFilterLabel": "Rolüme göre filtrele",
+    "mineEmptyTitle": "Yaklaşan etkinlik yok",
+    "mineEmptyText": "Kaydolduğun, ilgilendiğin ya da düzenlediğin etkinlikler burada görünür.",
+    "past_one": "Geçmiş etkinlik ({count})",
+    "past_other": "Geçmiş etkinlikler ({count})",
+    "searchLabel": "Etkinliklerde ara",
+    "searchPlaceholder": "Başlık, konu ya da yer ara …",
+    "filters": "Filtreler",
+    "filtersActive": "Filtreler ({count})",
+    "resetFilters": "Filtreleri sıfırla",
+    "filterTime": "Zaman",
+    "filterSchool": "Okul",
+    "filterTopic": "Konu",
+    "filterFormat": "Biçim",
+    "time": {
+      "upcoming": "Yaklaşan",
+      "week": "7 gün",
+      "month": "30 gün",
+      "past": "Geçmiş"
+    },
+    "results_one": "{count} etkinlik",
+    "results_other": "{count} etkinlik",
+    "noResultsTitle": "Uygun etkinlik bulunamadı",
+    "noResultsText": "Aramanı değiştir ya da filtreleri sıfırla.",
+    "noRealEventsTitle": "Henüz planlanmış etkinlik yok",
+    "noRealEventsText": "DeutschConnect ekibi bir etkinlik eklediğinde burada görünecek."
+  },
+  "eventDetail": {
+    "notFound": "Etkinlik bulunamadı",
+    "when": "Ne zaman",
+    "where": "Nerede",
+    "host": "Düzenleyen",
+    "schools": "Katılan okullar",
+    "audience": "Hedef kitle",
+    "capacity": "en fazla {count} kişi",
+    "format": "Biçim",
+    "about": "Konu nedir?",
+    "yourParticipation": "Katılımın",
+    "register": "Katıl",
+    "cancelRegistration": "Kaydı iptal et",
+    "markInterest": "İlgimi belirt",
+    "removeInterest": "İlgimi geri çek",
+    "state": {
+      "none": "Henüz kaydolmadın.",
+      "registered": "Kaydın yapıldı.",
+      "interested": "İlgini belirttin."
+    },
+    "organizerNote": "Bu etkinliği sen düzenliyorsun.",
+    "pastNote": "Bu etkinlik sona erdi.",
+    "pastNoteParticipated": "Bu etkinlik sona erdi. Geri bildirimler ilerideki bir sürümde toplanacak.",
+    "cancelledNote": "Bu etkinlik iptal edildi.",
+    "closedNote": "Bu etkinlik için artık yeni kayıt yapılamıyor.",
+    "savedToAccount": "Kayıt ve ilgi hesabına kaydedilir. „İlgileniyorum“ bağlayıcı bir kayıt değildir.",
+    "errors": {
+      "closed": "Bu etkinliğe artık kayıt olunamıyor (örneğin etkinlik başladığı için).",
+      "conflict": "Kaydın bu arada değişti. Güncel durum gösteriliyor.",
+      "network": "Sunucuya bağlanılamadı. Lütfen tekrar dene.",
+      "generic": "Bu işlem başarısız oldu. Lütfen tekrar dene."
+    }
+  },
+  "ideas": {
+    "title": "Fikirler",
+    "tabsLabel": "Fikir bölümleri",
+    "tabs": {
+      "discover": "Keşfet",
+      "mine": "Fikirlerim"
+    },
+    "newIdea": "Yeni fikir",
+    "searchLabel": "Fikirlerde ara",
+    "searchPlaceholder": "Fikir ara …",
+    "sortLabel": "Sıralama",
+    "sort": {
+      "popular": "Popüler",
+      "new": "Yeni"
+    },
+    "results_one": "{count} fikir",
+    "results_other": "{count} fikir",
+    "supportHint": "Destek, ilgiyi gösterir. Fikrin hayata geçip geçmeyeceğine katılan okullar karar verir.",
+    "noRealIdeasTitle": "Henüz fikir yok",
+    "noRealIdeasText": "Yeni fikirler ekip tarafından onaylandığında burada görünür. Sen de bir fikir gönderebilirsin.",
+    "errors": {
+      "notAllowed": "Buna izin verilmiyor (örneğin kendi fikrin ya da henüz onaylanmamış bir fikir).",
+      "alreadySupported": "Bu fikri zaten destekliyorsun.",
+      "invalid": "Bazı bilgiler geçersiz. Lütfen formu kontrol et.",
+      "deleteFailed": "Fikir silinemedi.",
+      "network": "Sunucuya bağlanılamadı. Lütfen tekrar dene.",
+      "generic": "Bu işlem başarısız oldu. Lütfen tekrar dene."
+    },
+    "fromSchool": "Okul: {school}",
+    "yourIdea": "Senin fikrin",
+    "support": "Destekle",
+    "supported": "Destekledin",
+    "supportCount_one": "{count} destek",
+    "supportCount_other": "{count} destek",
+    "supportAria": "“{title}” fikrini destekle",
+    "authored": "Gönderdiklerim",
+    "supportedSection": "Desteklediklerim",
+    "noOwnTitle": "Henüz fikir göndermedin",
+    "noOwnText": "Ortak bir proje için fikrin mi var? Diğer okullarla paylaş.",
+    "noSupportedText": "Henüz hiçbir fikri desteklemiyorsun.",
+    "noResultsTitle": "Uygun fikir bulunamadı",
+    "noResultsText": "Başka bir arama terimi ya da konu dene."
+  },
+  "ideaDetail": {
+    "notFound": "Fikir bulunamadı",
+    "created": "Fikrin kaydedildi.",
+    "createdHint": "Demo modunda yalnızca bu tarayıcıda görünür.",
+    "createdHintAccount": "DeutschConnect ekibi onayladığında fikrin başkaları tarafından görülebilir.",
+    "awaitingApproval": "Onay bekliyor – şu anda bu fikri yalnızca sen görebilirsin.",
+    "from": "Gönderen",
+    "fromYou": "Sen",
+    "fromStudentOf": "{school} öğrencisi",
+    "submitted": "Gönderilme",
+    "targetSchools": "Hedef okullar",
+    "about": "Açıklama",
+    "progress": "Öneriden etkinliğe",
+    "steps": {
+      "submitted": "Gönderildi",
+      "collecting": "İlgi toplama",
+      "review": "Okul incelemesi",
+      "planned": "Planlama"
+    },
+    "approvalNote": "Çok destek almak, fikrin otomatik olarak hayata geçeceği anlamına gelmez. Okullar her fikri inceler.",
+    "supportTitle": "Destek",
+    "supportText": "Bu fikri beğendin mi? Katılacağını göster.",
+    "ownIdeaNote": "Bu senin fikrin. Burada kaç kişinin desteklediğini görebilirsin.",
+    "delete": "Fikri sil",
+    "deleteConfirm": "Bu fikri gerçekten silmek istiyor musun?",
+    "deleteYes": "Evet, sil"
+  },
+  "newIdea": {
+    "title": "Yeni fikir",
+    "subtitle": "Okulları birbirine bağlayan bir etkinlik öner. {school} öğrencisi olarak gönderilir.",
+    "titleLabel": "Başlık",
+    "titlePlaceholder": "ör. Ortak film gecesi",
+    "descriptionLabel": "Açıklama",
+    "descriptionHint": "Ne yapılmalı ve okullar arası neden ilgi çekici?",
+    "topicsLabel": "Konular (1–3)",
+    "formatLabel": "Biçim",
+    "schoolsLabel": "Hangi okullarla?",
+    "privacyLabel": "Başka kişilere ait kişisel bilgi (ör. isim veya telefon numarası) girmedim.",
+    "demoHint": "Demo: Fikir yalnızca bu tarayıcıda kaydedilir ve okullara gönderilmez.",
+    "accountHint": "Fikrin hesabına kaydedilir. Diğer öğrenciler onu yalnızca onaydan sonra görür – adınla değil, yalnızca okulunla.",
+    "submit": "Fikri gönder",
+    "errorSummary_one": "Lütfen işaretli alanı kontrol et.",
+    "errorSummary_other": "Lütfen işaretli {count} alanı kontrol et.",
+    "errors": {
+      "title": "Lütfen en az 5 karakterlik bir başlık gir.",
+      "description": "Lütfen fikrini en az 20 karakterle açıkla.",
+      "topicsRequired": "Lütfen en az bir konu seç.",
+      "topicsMax": "Lütfen en fazla üç konu seç.",
+      "schools": "Lütfen en az bir okul seç.",
+      "privacy": "Lütfen gizlilik notunu onayla."
+    }
+  },
+  "network": {
+    "title": "Ağ",
+    "tabsLabel": "Ağ bölümleri",
+    "tabs": {
+      "schools": "Okullar",
+      "projects": "Projeler"
+    },
+    "eventsCount_one": "{count} etkinlik",
+    "eventsCount_other": "{count} etkinlik",
+    "projectsCount_one": "{count} proje",
+    "projectsCount_other": "{count} proje",
+    "statusTitle": "İş birliğinin durumu",
+    "legend": {
+      "initiator": "DeutschConnect burada doğdu.",
+      "interest": "İş birliğine ilgi gösterildi, ayrıntılar netleştiriliyor.",
+      "confirmed": "Resmî olarak onaylanmış iş birliği."
+    },
+    "statusText": "Henüz resmî olarak onaylanmış bir iş birliği yok. ERS ile Anka Bilim arasındaki iş birliği şu anda netleştiriliyor.",
+    "plannedTitle": "Planlanan ağ",
+    "plannedText": "İlk pilot uygulamadan sonra Ankara'daki başka okulların da davet edilmesi planlanıyor. Başka okullarla henüz görüşme yapılmadı.",
+    "projectsFilterLabel": "Projeleri filtrele",
+    "filter": {
+      "all": "Tüm projeler",
+      "mine": "Projelerim"
+    },
+    "noMyProjects": "Henüz bir projede değilsin",
+    "noMyProjectsText": "Bir proje aç ve katılmak istediğini belirt."
+  },
+  "school": {
+    "notFound": "Okul bulunamadı",
+    "city": "Şehir",
+    "ideas": "Bu okuldan fikirler",
+    "events": "Yaklaşan etkinlikler",
+    "projects": "Projeler",
+    "noEvents": "Şu anda yaklaşan etkinlik yok.",
+    "noProjects": "Henüz proje yok."
+  },
+  "project": {
+    "notFound": "Proje bulunamadı",
+    "realProject": "Gerçek proje",
+    "nextStep": "Sonraki adım",
+    "about": "Proje hakkında",
+    "yourRole": "Rolün",
+    "memberNote": "Bu projenin bir parçasısın.",
+    "joinText": "Katılmak ister misin? İlgini belirt.",
+    "joinedNote": "Katılmak istediğini belirttin.",
+    "join": "Katılmak istiyorum",
+    "joined": "İlgi bildirildi"
+  },
+  "me": {
+    "title": "Alanım",
+    "profile": "Profil",
+    "switchProfile": "Profili değiştir",
+    "stats": {
+      "events": "Etkinlik",
+      "ideas": "Fikir",
+      "projects": "Proje"
+    },
+    "interests": "İlgi alanlarım",
+    "edit": "Düzenle",
+    "noInterests": "Henüz ilgi alanı seçilmedi.",
+    "myProjects": "Projelerim",
+    "settingsSection": "Ayarlar",
+    "rows": {
+      "interests": "İlgi alanları ve öneriler",
+      "interestsHint": "Sana neyin önerileceğini belirler",
+      "language": "Dil",
+      "settings": "Demo profili ve yerel veriler",
+      "settingsHint": "Profili değiştir, demoyu sıfırla",
+      "about": "DeutschConnect Hakkında"
+    }
+  },
+  "interests": {
+    "title": "İlgi alanları",
+    "intro": "Neyle ilgilendiğini seç. Önerilerin anında güncellenir.",
+    "groupLabel": "İlgi alanları",
+    "matching_one": "Sana uygun {count} etkinlik",
+    "matching_other": "Sana uygun {count} etkinlik",
+    "showRecs": "Önerileri gör",
+    "savedToAccount": "İlgi alanların hesabına kaydedilir."
+  },
+  "auth": {
+    "loginTitle": "Giriş yap",
+    "loginSubtitle": "DeutschConnect hesabınla",
+    "registerTitle": "Kayıt ol",
+    "registerSubtitle": "Katılımcı okulların öğrencileri için hesap",
+    "firstNameLabel": "Adın",
+    "firstNameHint": "Sadece adın. Diğer kullanıcılar bunu görmez.",
+    "emailLabel": "E-posta",
+    "passwordLabel": "Şifre",
+    "passwordHint": "En az {min} karakter.",
+    "schoolLabel": "Okul",
+    "schoolPlaceholder": "Okul seç",
+    "gradeLabel": "Sınıf",
+    "gradePlaceholder": "Sınıf seç",
+    "consentLabel": "Adımın, okulumun ve sınıfımın hesabım için kaydedilmesini kabul ediyorum.",
+    "submitLogin": "Giriş yap",
+    "submitRegister": "Hesap oluştur",
+    "loading": "Lütfen bekle …",
+    "logout": "Çıkış yap",
+    "toRegister": "Kayıt ol",
+    "toLogin": "Giriş yap",
+    "checkEmailTitle": "Neredeyse bitti!",
+    "checkEmailText": "Sana bir e-posta gönderdik. E-postadaki bağlantıyla adresini onayla, ardından giriş yap.",
+    "signedInAs": "{name} olarak giriş yapıldı",
+    "profileLoading": "Profil yükleniyor …",
+    "profileMissing": "Profilin yüklenemedi.",
+    "notConfigured": "Bu sürümde gerçek hesaplar kullanılamıyor. Uygulama demo modunda çalışıyor.",
+    "signupClosed": "Kayıt henüz açılmadı. Okulundaki DeutschConnect ekibine başvur.",
+    "demoStillActive": "Etkinlikler, fikirler ve projeler şimdilik demo verileridir.",
+    "accountTitle": "Hesap",
+    "accountSignedOut": "Giriş yapmadın. Uygulama demo modunda çalışmaya devam ediyor.",
+    "meRow": "Hesap ve giriş",
+    "meRowSignedIn": "Giriş yapıldı",
+    "gateLoading": "Profilin yükleniyor …",
+    "gateErrorTitle": "Profil yüklenemedi",
+    "gateErrorText": "Tekrar deneyebilir ya da çıkış yapıp demoyu kullanmaya devam edebilirsin.",
+    "retry": "Tekrar dene",
+    "gateEventsErrorTitle": "Etkinlikler yüklenemedi",
+    "gateIdeasErrorTitle": "Fikirler yüklenemedi",
+    "errorSummary_one": "1 alanın düzeltilmesi gerekiyor.",
+    "errorSummary_other": "{count} alanın düzeltilmesi gerekiyor.",
+    "errors": {
+      "firstName": "Lütfen adını gir (en fazla 40 karakter).",
+      "email": "Lütfen geçerli bir e-posta adresi gir.",
+      "password": "Şifre en az 8 karakter olmalı.",
+      "passwordRequired": "Lütfen şifreni gir.",
+      "school": "Lütfen okulunu seç.",
+      "grade": "Lütfen sınıfını seç.",
+      "consent": "Lütfen onay kutusunu işaretle.",
+      "invalidCredentials": "E-posta veya şifre yanlış.",
+      "emailNotConfirmed": "Lütfen önce e-posta adresini onayla.",
+      "userExists": "Bu e-posta adresiyle zaten bir hesap var.",
+      "signupDisabled": "Kayıt şu anda kapalı.",
+      "weakPassword": "Bu şifre çok zayıf. Lütfen daha uzun bir şifre seç.",
+      "rateLimit": "Çok fazla deneme yapıldı. Lütfen birkaç dakika bekle.",
+      "emailInvalid": "Bu e-posta adresi kabul edilmiyor.",
+      "profileFailed": "Profil oluşturulamadı. Lütfen okul ve sınıf bilgilerini kontrol et.",
+      "network": "Sunucuya bağlanılamadı. Lütfen internet bağlantını kontrol et.",
+      "generic": "Bir şeyler ters gitti. Lütfen tekrar dene.",
+      "interestsSave": "İlgi alanların kaydedilemedi. En son kaydedilen durum gösteriliyor.",
+      "eventsLoad": "Etkinlikler sunucudan yüklenemedi. Lütfen internet bağlantını kontrol et.",
+      "ideasLoad": "Fikirler sunucudan yüklenemedi. Lütfen internet bağlantını kontrol et."
+    }
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "language": "Dil",
+    "profile": "Demo profili",
+    "profileHint": "Kişiselleştirmeyi denemek için kurgusal öğrenci profilleri arasında geçiş yap. Bu gerçek bir giriş değildir.",
+    "data": "Yerel veriler",
+    "dataText": "Kayıtlar, ilgi alanları ve kendi fikirlerin yalnızca bu tarayıcıda (localStorage) saklanır ve hiçbir sunucuya gönderilmez.",
+    "reset": "Demoyu sıfırla",
+    "resetConfirm": "Tüm yerel değişiklikler (kayıtlar, ilgi alanları, kendi fikirlerin) silinecek. Devam edilsin mi?",
+    "resetYes": "Evet, sıfırla",
+    "resetDone": "Demo sıfırlandı.",
+    "profileSignedIn": "Gerçek hesabınla giriş yaptın. Çıkış yaptıktan sonra demo profillerini yeniden seçebilirsin."
+  },
+  "about": {
+    "title": "DeutschConnect Hakkında",
+    "tagline": "Senin okulun. Senin fikirlerin. Senin ağın.",
+    "whatTitle": "DeutschConnect nedir?",
+    "whatText": "DeutschConnect, öğrenciler tarafından geliştirilen ve okulların ortak etkinlikler, fikirler ve projeler düzenlemesini sağlayan bir platformdur. Öğrenciler inisiyatif alabilmeli ve başka okullarla bağlantı kurabilmelidir.",
+    "originTitle": "Nasıl başladı",
+    "originText": "Fikir, Ernst-Reuter-Schule Ankara'daki bir öğrenci grubundan çıktı. Almanca dersleri için hazırlanan önceki bir tasarım prototipi, okullar arası iş birliği platformuna dönüştü. Anka Bilim ilk ortak okul olarak ilgi gösterdi.",
+    "statusTitle": "Güncel durum",
+    "worksTitle": "Tamamlananlar",
+    "works1": "Akıllı telefon ve masaüstü için web prototipi",
+    "works2": "Almanca, Türkçe ve İngilizce arayüz",
+    "works3": "Kurgusal profiller ve örnek verilerle demo",
+    "openTitle": "Henüz tamamlanmayanlar",
+    "open1": "Gerçek kullanıcı hesapları ve giriş",
+    "open2": "Tüm okullar için ortak veri tabanı",
+    "open3": "Platform üzerinden düzenlenmiş gerçek bir etkinlik",
+    "open4": "Resmî olarak onaylanmış okul iş birliği",
+    "schoolsTitle": "Katılan okullar",
+    "impactTitle": "Etki",
+    "impactText": "Henüz sonuç toplanmadı. İlk pilot uygulamadan sonra gerçek etkinlikler ve geri bildirimler burada belgelenecek.",
+    "competition": "DeutschConnect'in 10. DIHK Yurt Dışı Okullar Yarışması'na („Schüler bauen weltweit Brücken“) gönderilmesi planlanıyor."
+  },
+  "notFound": {
+    "title": "Sayfa bulunamadı",
+    "text": "Bu sayfa mevcut değil.",
+    "home": "Ana sayfaya git"
+  }
+}

@@ -1333,3 +1333,104 @@ Weitere Module sollen zunächst nur vorbereitet, aber nicht ohne ausdrücklichen
 **Wichtigstes Gestaltungsprinzip:**
 
 Die neue DeutschConnect-Website soll wie eine Weiterentwicklung des ursprünglichen Prototyps aussehen, aber die neue Mission einer schülergetragenen, schulübergreifenden Bildungsplattform konsequent widerspiegeln.
+
+---
+
+## 22. Technischer Stand des Prototyps (Stand: 7. November 2026)
+
+### 22.1 Lokal starten
+
+Voraussetzung: Node.js (LTS oder neuer) mit npm.
+
+```bash
+npm install      # einmalig: Abhängigkeiten installieren
+npm run dev      # Entwicklungsserver starten → http://localhost:5173
+npm test         # automatische Tests (Personalisierung, Übersetzungen)
+npm run build    # Produktions-Build nach dist/
+npm run preview  # Produktions-Build lokal ansehen → http://localhost:4173
+```
+
+### 22.2 Was funktioniert – und was nur Demo ist
+
+**Funktioniert tatsächlich (im Browser):** Navigation mit Unterseiten, persönliches Dashboard, Empfehlungen auf Basis von Interessen und Schule, Event-Suche und -Filter, Anmeldung/Interesse an Events, Ideen einreichen (mit Validierung), Ideen unterstützen, Interesse an Projekten, Interessen bearbeiten, Sprachwechsel DE/TR/EN, Speicherung im Browser.
+
+**Demonstrationscharakter:**
+
+- Drei fiktive Demo-Profile (Alex, Elif, Deniz). Die Profilauswahl ist **keine** Anmeldung.
+- Alle Events, Ideen und zwei der drei Projekte sind Beispieldaten. Event-Termine werden relativ zum heutigen Datum berechnet.
+- Alle Eingaben werden nur per `localStorage` im jeweiligen Browser gespeichert. Es gibt **keine** Synchronisierung zwischen Geräten oder Schulen und keinen Server.
+
+### 22.3 Architektur
+
+| Ordner / Datei | Zweck |
+| --- | --- |
+| `src/pages/` | Eine Datei pro Seite (Start, Events, Event-Detail, Ideen, Neue Idee, Netzwerk, Schule, Projekt, Mein Bereich, Interessen, Einstellungen, Über uns) |
+| `src/components/` | Wiederverwendbare Bausteine (EventCard, IdeaCard, FilterChips, Tabs, StatusBadge …) |
+| `src/components/layout/` | App-Gerüst: Bottom-Navigation (Smartphone), Seitenleiste (Desktop), Kopfleiste |
+| `src/data/` | Schulen, Demo-Profile und Beispieldaten |
+| `src/lib/selectors.js` | Personalisierung, Empfehlungen, Filter – reine Funktionen, getestet in `tests/` |
+| `src/state/AppStateContext.jsx` | Zentraler Zustand: Demo-Modus oder echtes Konto (siehe 22.3a). **Hier werden später auch Events/Ideen aus der Datenbank angebunden.** |
+| `src/i18n/`, `src/locales/` | Eigenes kleines i18n-System; alle festen Texte in `de.json`, `tr.json`, `en.json` |
+| `src/styles/variables.css` | Farben, Abstände, Radien – abgeleitet aus den FlutterFlow-Screenshots |
+
+Entscheidungen:
+
+- **Einzige Zusatzbibliothek:** `react-router` für echte Unterseiten und funktionierende Zurück-Navigation.
+- **Keine i18n-Bibliothek:** Für drei Sprachen reicht ein kleiner eigener Context. Ein Test stellt sicher, dass alle drei Sprachdateien vollständig sind.
+- **Keine externen Schriftarten:** Systemschriften, damit keine Daten an Dritte (z. B. Google Fonts) übertragen werden.
+- **Datenschutz:** Ideen anderer Schüler:innen zeigen keinen Namen, nur die Schule.
+
+### 22.3a Supabase-Anmeldung (in Vorbereitung)
+
+Stand: Registrierung, E-Mail-Bestätigung und Login wurden mit einem echten Testkonto erfolgreich getestet. **Angemeldete Nutzer sehen echte Events und echte Ideen aus Supabase**; Event-Anmeldungen und Ideen-Unterstützungen werden direkt in der Datenbank gespeichert (Events im Browser getestet; Ideen: noch vom Team zu testen). Projekte bleiben vorerst Demo-Inhalte.
+
+**Zwei getrennte Modi** (`src/state/AppStateContext.jsx`, alle Seiten nutzen `useAppState()`):
+
+| | Abgemeldet = Demo | Angemeldet = echtes Konto |
+|---|---|---|
+| Name, Schule, Klasse, Avatar-Farbe | Demo-Profil | Supabase `profiles` |
+| Interessen | Browser (`deutschconnect.demoState`) | Supabase `profiles.interests` |
+| Events | Demo-Events (`src/data/events.js`) | Supabase `events` – leer = Hinweis „Noch keine Events“, **nie** Demo-Events als Ersatz |
+| Event-Anmeldung / „Interessiert“ | Browser (`deutschconnect.demoState`) | Supabase `event_registrations` (`status` = `registered` bzw. `interested`; „interested“ ist keine Anmeldung) |
+| Ideen | Demo-Ideen + eigene im Browser | Supabase `ideas` – eigene in jedem Status, fremde nur freigegeben; leer = Hinweis, **nie** Demo-Ideen als Ersatz |
+| Unterstützungen | Browser (`deutschconnect.demoState`) | Supabase `idea_supports` (nur fremde, freigegebene Ideen) |
+| Unterstützer-Zahlen | aus allen Demo-Profilen | Datenbank-Funktion `get_idea_support_counts()` (ohne Namen) |
+| Projekt-Interesse, ausgeblendete Hinweise | Browser (`deutschconnect.demoState`) | Browser, eigener Schlüssel pro Konto (`deutschconnect.accountState.v1.<id>`) |
+
+Beim Abmelden ist wieder das zuletzt gewählte Demo-Profil aktiv. „Demo zurücksetzen“ betrifft nur die Demo-Daten.
+
+| Datei | Aufgabe |
+|---|---|
+| `src/lib/supabaseClient.js` | Einziger Supabase-Client (liest `.env.local`) |
+| `src/auth/AuthContext.jsx` | Sitzung, eigenes Profil, `signUp` / `signIn` / `signOut` |
+| `src/lib/authValidation.js` | Formularregeln + Fehlertexte (getestet in `tests/authValidation.test.js`) |
+| `src/pages/LoginPage.jsx`, `RegisterPage.jsx` | Seiten `/login` und `/register` |
+| `src/components/AccountCard.jsx` | Konto-Status in den Einstellungen |
+| `src/lib/accountProfile.js` | Macht aus dem Supabase-Profil das aktive Profil (getestet in `tests/accountProfile.test.js`) |
+| `src/components/ProfileGate.jsx` | Lade-/Fehleranzeige, solange das echte Profil oder die Events nicht bereit sind |
+| `src/lib/eventsApi.js` | Events + eigene Anmeldungen laden/speichern (getestet in `tests/eventsApi.test.js`) |
+| `src/state/useAccountEvents.js` | Lade-, Fehler- und Speicherzustand der echten Events |
+
+| `src/lib/ideasApi.js` | Ideen, Unterstützungen, Zahlen laden/speichern (getestet in `tests/ideasApi.test.js`) |
+| `src/state/useAccountIdeas.js` | Lade-, Fehler- und Speicherzustand der echten Ideen |
+| `supabase/tests/ideas_rls_test.sql` | Sicherheitstest für Ideen-RLS im SQL Editor (rollt immer zurück) |
+
+**Moderation von Ideen (Regel fürs Team):** Neue Ideen haben den Status `submitted` und sind nur für ihre Autor:innen sichtbar. Freigeben = im Table Editor `status` auf `collecting` setzen. `review` heißt „Schulen prüfen die Umsetzung“ und ist **öffentlich** – nicht zum Moderieren verwenden. Abgelehnte Ideen bleiben `submitted` oder werden gelöscht (einen Status `rejected` gibt es nicht).
+
+Neue Events trägt das Team im Supabase-Dashboard ein (Table Editor → `events`). Freie Plätze werden für den Pilot **nicht** gezählt; `capacity` ist nur eine Anzeige. Wer sich verbindlich angemeldet hat, sieht das Team im Dashboard mit dem Filter `status = registered`.
+
+- Bei der Registrierung gehen `first_name`, `school_id`, `grade` als *user metadata* an Supabase; der Trigger `handle_new_user()` legt daraus das Profil an.
+- Das Registrierungsformular erscheint nur mit `VITE_ENABLE_SIGNUP=true` in `.env.local`. **Der eigentliche Schutz** ist im Supabase-Dashboard: *Authentication → Sign In / Providers → Allow new users to sign up*. Ist das aus, kann sich niemand registrieren, auch nicht am Formular vorbei.
+- Die Schulauswahl lädt die Schulen aus der Tabelle `schools`. Besucher ohne Login dürfen dort nur `id`, `name`, `short_name`, `city` lesen (Migration `003_public_school_info.sql`). Schlägt die Abfrage fehl, wird die lokale Liste `src/data/schools.js` verwendet.
+
+### 22.4 Für den Echtbetrieb fehlt noch
+
+- Echte Benutzerkonten mit Anmeldung und Rollen (Schüler:in, Lehrkraft, Koordination), serverseitig abgesichert
+- Gemeinsame Datenbank (z. B. Supabase) für Events, Anmeldungen, Ideen und Unterstützungen
+- Oberfläche für Lehrkräfte/Koordination: Ideen prüfen, Events anlegen und freigeben
+- Rückmeldungen nach Veranstaltungen
+- Datenschutz- und Einwilligungsprüfung durch die Schulen
+- Hosting (z. B. Vercel) inkl. Weiterleitung aller Pfade auf `index.html`
+- Prüfung der türkischen und englischen Übersetzungen durch sprachkundige Teammitglieder
+
+Die Designreferenzen liegen derzeit unter `design references/` und noch nicht unter dem in Abschnitt 21.1 vorgesehenen Pfad `docs/design-references/`.
