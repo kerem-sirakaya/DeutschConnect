@@ -1,0 +1,292 @@
+{
+  "siteTitle": "Okulları buluşturuyoruz",
+  "siteDescription": "DeutschConnect – Ankara'da okullar arası iş birliği için bir öğrenci girişimi.",
+  "brandTagline": "Öğrencilerden. Birlikte üretmek için.",
+  "navigationLabel": "Ana gezinme",
+  "language": "Dil seçin",
+  "skipLink": "İçeriğe geç",
+  "nav": {
+    "home": "Ana sayfa",
+    "events": "Etkinlikler",
+    "ideas": "Fikirler",
+    "network": "Ağımız",
+    "about": "Hakkımızda",
+    "me": "Alanım"
+  },
+  "eyebrow": "Öğrenci girişimi · Ankara",
+  "hero": {
+    "badge": "Okulların ötesinde, birlikte",
+    "lineOne": "Senin okulun.",
+    "lineTwo": "Senin fikirlerin.",
+    "lineThree": "Senin ağın.",
+    "description": "İyi fikirler okul sınırlarını aşar. Ortak etkinlikleri keşfet, katkıda bulun ve Ankara'daki okullar arasındaki iş birliğini bizimle şekillendir.",
+    "primary": "Etkinlikleri keşfet",
+    "secondary": "Fikirlere göz at",
+    "mapLabel": "Bağlantı burada başlıyor",
+    "mapNote": "Planlanan bir pilot. İki okul. Ortak olanaklar.",
+    "mapCaption": "ERS × Anka Bilim",
+    "mapStatus": "İş birliği planlama aşamasında"
+  },
+  "pilot": {
+    "title": "Bir bağlantının başlangıcı",
+    "description": "Ernst-Reuter-Schule Ankara'dan yola çıkarak Anka Bilim ile ilk ortak pilot çalışmamızı başlatmak istiyoruz.",
+    "link": "Ağımızı tanı",
+    "label": "Planlanan ilk pilot"
+  },
+  "homeEvents": {
+    "eyebrow": "Keşfet ve katkıda bulun",
+    "title": "Bizi neler bir araya getirebilir?",
+    "description": "Bir sohbet, bir deney, yeni bir bakış açısı. Ortak etkinlikler böyle olabilir.",
+    "link": "Tüm örnekleri gör"
+  },
+  "example": "Örnek",
+  "dateOpen": "Tarih henüz belli değil",
+  "crossSchool": "Okullar arası etkinlik",
+  "details": "Ayrıntıları gör",
+  "demoNotice": "Bu etkinlikler hayalî örneklerdir. Henüz onaylanmış bir tarih veya kayıt olanağı bulunmuyor.",
+  "categories": {
+    "all": "Tüm konular",
+    "language": "Dil ve paylaşım",
+    "science": "Bilim ve fikirler",
+    "culture": "Kültür ve buluşma",
+    "technology": "Teknoloji ve kod"
+  },
+  "activities": {
+    "sprachwerkstatt": {
+      "title": "Almanca buluşturur",
+      "description": "Sohbet edelim, birbirimizden öğrenelim ve Almancayı birlikte deneyelim.",
+      "detail": "Ortak bir dil atölyesi, iki okuldan öğrencileri küçük gruplarda buluşturabilir. Tanışma oyunları, sohbetler ve yaratıcı çalışmalar, not kaygısı olmadan Almanca kullanmaya alan açabilir."
+    },
+    "ideenlabor": {
+      "title": "Birlikte yeni fikirler",
+      "description": "Sorular soralım, fikirlerimizi paylaşalım ve ekip olarak küçük deneyler geliştirelim.",
+      "detail": "Okullar arası bir fikir laboratuvarı, bilime ilgi duyan öğrencileri buluşturabilir. Öğrenciler ortak bir araştırma sorusu geliştirip bu soruyu basit deneylerle nasıl inceleyebileceklerini düşünebilir."
+    },
+    "kulturbruecken": {
+      "title": "İki okul. Farklı bakış açıları.",
+      "description": "Birbirimizin dillerini, hikâyelerini ve okul yaşamını tanıyalım.",
+      "detail": "Bir kültür buluşması; müzik, diller ve iki okuldaki günlük yaşam üzerine konuşma fırsatı sunabilir. Program, katılan öğrenciler ve okul sorumlularıyla birlikte hazırlanabilir."
+    },
+    "codewerkstatt": {
+      "title": "Birlikte kod yazalım.",
+      "description": "Küçük bir web sitesi oluşturalım ve ilk kod satırlarımızı birlikte yazalım.",
+      "detail": "Bu hayalî kod atölyesinde iki okuldan öğrenciler birlikte küçük bir web sitesi geliştirir. Demo formatı, teknoloji konularında uygulamalı bir iş birliğinin nasıl olabileceğini gösterir."
+    }
+  },
+  "steps": {
+    "eyebrow": "Bir fikirden bir buluşmaya",
+    "title": "Birlikte olmak seninle başlar.",
+    "items": [
+      {
+        "title": "Olanakları keşfet",
+        "text": "Kendi okulunun ötesinde ilgini çeken konu ve etkinlikleri bul."
+      },
+      {
+        "title": "Fikirleri birlikte geliştir",
+        "text": "Kendi bakış açını paylaş. En iyi projeler fikir alışverişiyle doğar."
+      },
+      {
+        "title": "Buluşmayı mümkün kıl",
+        "text": "Gerekli görüşmeler ve okul onaylarından sonra bir fikir gerçek bir etkinliğe dönüşebilir."
+      }
+    ]
+  },
+  "cta": {
+    "eyebrow": "Senin bakış açın değerli",
+    "title": "Bir fikirle başlar.\nBirlikte büyür.",
+    "text": "Bir atölye, bir buluşma ya da bambaşka bir şey? Ağımızı hangi fikirlerin bir araya getirebileceğini keşfet.",
+    "button": "Fikirler bölümüne git"
+  },
+  "eventsPage": {
+    "title": "Birlikte yeni deneyimler.",
+    "description": "Burası okullar arası etkinliklerin buluşma noktası olacak. Önce planlanan pilot çalışmamız için olası etkinlik biçimlerini keşfet.",
+    "filterLabel": "Etkinlikleri konuya göre filtrele",
+    "back": "Etkinliklere dön",
+    "about": "Etkinliğin arkasındaki fikir",
+    "organization": "Henüz netleştirilmesi gerekenler",
+    "organizationText": "Tarih, yer, hedef kitle, sorumlu okul koordinatörleri ve katılım yöntemi henüz belirlenmedi. Etkinliğin gerçekleşmesi için organizasyonun netleştirilmesi ve gerekli okul onaylarının alınması gerekiyor.",
+    "status": "Örnek etkinlik · onaylanmadı",
+    "registration": "Henüz kayıt olanağı bulunmuyor",
+    "explore": "Ağımızı tanı"
+  },
+  "ideasPage": {
+    "title": "Büyük şeyler bir fikirle başlar.",
+    "description": "DeutschConnect, öğrencilerin kendi önerilerini sunmalarını ve başka okullarla birlikte geliştirmelerini sağlamayı hedefliyor.",
+    "eyebrow": "Öğrenci girişimine alan açıyoruz",
+    "noticeTitle": "Fikirler bölümü bizimle büyüyor.",
+    "noticeText": "Burada ilk konu örneklerini keşfedebilirsin. Kendi önerilerini gönderme ve birlikte toplama işlevi bir sonraki geliştirme adımı için planlanıyor.",
+    "sampleTitle": "Ortak projeler için ilham",
+    "samples": [
+      {
+        "title": "Dil arkadaşlığını deneyelim",
+        "text": "Dil öğrenirken birbirimize destek olalım ve yeni bakış açıları kazanalım."
+      },
+      {
+        "title": "Ortak bir gelecek atölyesi",
+        "text": "Okul yaşamımızı nasıl daha sürdürülebilir hâle getirebileceğimizi birlikte düşünelim."
+      },
+      {
+        "title": "İki bakış açısından okul yaşamı",
+        "text": "Ortak bir sergide okullarımızı özel kılan yönleri gösterelim."
+      }
+    ],
+    "approval": "Bir öneri, onaylanmış bir etkinlik değildir. Uygulama, sorumlu okullarla birlikte kararlaştırılır."
+  },
+  "networkPage": {
+    "title": "Bağlantı yakınımızda başlar.",
+    "description": "Planlanan ilk pilot çalışmamızın, Ernst-Reuter-Schule Ankara ve Anka Bilim öğrencilerini buluşturmasını istiyoruz.",
+    "projectTitle": "ERS × Anka Bilim",
+    "projectText": "Anka Bilim iş birliğine ilgi gösterdi. Ortak çalışma biçimi, katılacak gruplar ve olası tarihler henüz birlikte netleştirilmeli.",
+    "projectStatus": "Pilot hazırlık aşamasında",
+    "nextTitle": "Birlikte atılacak sonraki adımlar",
+    "nextSteps": [
+      "İki okulun ihtiyaçlarını ve fikirlerini toplamak",
+      "İlk buluşma için uygun bir format belirlemek",
+      "Sorumlulukları ve okul onaylarını netleştirmek",
+      "Etkinliği denemek ve birlikte geri bildirim toplamak"
+    ],
+    "note": "Resmî ve uzun vadeli bir ortaklık ile ilk etkinlik henüz kesinleşmedi."
+  },
+  "schools": {
+    "ers": {
+      "status": "Projenin doğduğu okul",
+      "description": "DeutschConnect burada bir öğrenci girişimi olarak doğdu. Ekip, konsepti ve ilk web sitesini geliştiriyor."
+    },
+    "anka": {
+      "status": "Planlanan okul ortağı",
+      "description": "Anka Bilim, okullar arası iş birliğine ilgi gösterdi ve ilk ortak pilot için öngörülüyor."
+    }
+  },
+  "aboutPage": {
+    "title": "Öğrencilerden. Yeni bağlantılar için.",
+    "description": "Dijital okul organizasyonunu tek bir okulun sınırlarının ötesinde düşünmek istiyoruz.",
+    "storyTitle": "DeutschConnect nasıl doğdu?",
+    "storyText": "Başlangıçta bir Almanca öğrenme platformu fikri olan proje, Ernst-Reuter-Schule Ankara'da yeni bir odak kazandı: Farklı okullardan öğrenciler, eğitim olanaklarını ve buluşmaları birlikte şekillendirebilmeli. Ege'nin daha önce hazırladığı FlutterFlow prototipi, bu yeni yönün görsel temelini oluşturuyor.",
+    "missionTitle": "Amacımız",
+    "missionText": "Öğrenciler resmî bir görevleri olmasa da fikirlerini paylaşabilmeli, birlikte çalışacak kişiler bulabilmeli ve ortak etkinliklere katkıda bulunabilmeli. İlk uygulama odağımız Almanca iletişim ve paylaşım.",
+    "statusTitle": "Şu an neredeyiz?",
+    "statusText": "DeutschConnect, tasarım ve prototip aşamasında. Bu web sitesi ilk teknik adım. Anka Bilim ile bir pilot çalışma hedefleniyor; henüz belgelenmiş etkinlik sonuçları bulunmuyor.",
+    "valuesTitle": "Bizim için önemli olanlar",
+    "values": [
+      {
+        "title": "Öğrenci girişimi",
+        "text": "Gençler projenin hedeflerine, fikirlerine ve gelişimine katkıda bulunur."
+      },
+      {
+        "title": "Sorumlu iş birliği",
+        "text": "Okullarla koordinasyon ve kişisel verilerin korunması en başından itibaren önemlidir."
+      },
+      {
+        "title": "Şeffaf gelişim",
+        "text": "Olasılıkları, planlanan adımları ve gerçekten elde edilen sonuçları açıkça ayırırız."
+      }
+    ]
+  },
+  "footer": {
+    "text": "Okulları buluşturuyoruz. Fikirlere alan açıyoruz.",
+    "status": "Geliştirilmekte olan bir proje · Ankara",
+    "note": "İşaretlenmiş örnekler içeren prototip. Kullanıcı hesabı veya gerçek kayıt bulunmuyor."
+  },
+  "notFound": {
+    "title": "Bu sayfa bulunamadı.",
+    "description": "Gezinme menüsünden DeutschConnect bölümlerine ulaşabilirsin.",
+    "back": "Ana sayfaya dön"
+  },
+  "app": {
+    "demoLabel": "Demo modu",
+    "demoShort": "Hayalî profiller · yalnızca yerel",
+    "demoExplain": "Tüm profiller, katılımlar ve tarihler hayalîdir. Oturum açma veya senkronizasyon yoktur. Lütfen gerçek kişisel veri girmeyin.",
+    "switchProfile": "Demo profilini değiştir",
+    "storageUnavailable": "Tarayıcı depolaması kullanılamıyor. Değişiklikler yalnızca bu sayfa kapanana kadar korunur.",
+    "greeting": "Merhaba",
+    "dashboardSubtitle": "Etkinliklerin ve sana uygun olanaklar bir arada.",
+    "myEvents": "Etkinliklerim",
+    "myIdeas": "Fikirlerim ve projelerim",
+    "forYou": "Senin için",
+    "viewAll": "Tümünü gör",
+    "quickActions": "Hızlı erişim",
+    "browseEvents": "Etkinlik bul",
+    "newIdea": "Fikir öner",
+    "schools": "Okulları keşfet",
+    "myArea": "Alanım",
+    "eventTabs": {
+      "my": "Etkinliklerim",
+      "recommended": "Bana uygun",
+      "all": "Tümünü keşfet"
+    },
+    "ideaTabs": {
+      "my": "Fikirlerim",
+      "all": "Keşfet",
+      "new": "Yeni fikir"
+    },
+    "searchEvents": "Etkinliklerde ara",
+    "searchIdeas": "Fikirlerde ara",
+    "searchSchools": "Okul ara",
+    "filterSchool": "Okula göre filtrele",
+    "allSchools": "Tüm okullar",
+    "clearFilters": "Filtreleri sıfırla",
+    "noResults": "Uygun sonuç bulunamadı. Aramanı veya filtrelerini değiştir.",
+    "emptyMyEvents": "Henüz bir etkinlik seçmedin. Bir format keşfet ve ilgini belirt.",
+    "emptyMyIdeas": "Gönderdiğin fikirler ve katkıda bulunduğun projeler burada görünür.",
+    "emptyRecommendations": "Şu an başka öneri yok. İlgi alanlarını düzenle veya tüm etkinlikleri keşfet.",
+    "interestReason": "İlgi alanlarına uygun",
+    "schoolReason": "Okuluna uygun demo formatı",
+    "participationTitle": "Katılımın",
+    "status": {
+      "interested": "İlgi belirtildi",
+      "joined": "Kayıtlı · yerel demo",
+      "organized": "Organizasyon · yerel demo",
+      "none": "Henüz katılmıyorsun"
+    },
+    "interestAction": "İlgimi belirt",
+    "joinAction": "Katıl (demo)",
+    "cancelAction": "Katılımı / ilgiyi geri çek",
+    "participationHint": "Bu seçim yalnızca yerel bir demodur. Herhangi bir okula kayıt gönderilmez.",
+    "updated": "Seçimin yerel olarak güncellendi.",
+    "back": "Geri",
+    "demoSchedule": "Hayalî demo tarihi",
+    "eventOverview": "Etkinlik ayrıntıları",
+    "titleLabel": "Başlık",
+    "descriptionLabel": "Açıklama",
+    "topicLabel": "Konu",
+    "submitIdea": "Fikri yerel olarak gönder",
+    "formHint": "Fikrin tarayıcıda kaydedilir ve bu demoda Keşfet bölümünde de görünür. Okullara gönderilmez.",
+    "validationTitle": "Lütfen 5 ile 90 karakter arasında bir başlık gir.",
+    "validationDescription": "Lütfen 20 ile 1000 karakter arasında bir açıklama gir.",
+    "validationName": "Lütfen 2 ile 40 karakter arasında bir görünen ad gir.",
+    "saveChanges": "Değişiklikleri kaydet",
+    "saved": "Tarayıcıya kaydedildi.",
+    "profileName": "Görünen ad",
+    "schoolLabel": "Okulun",
+    "interestsLabel": "İlgi alanların",
+    "preferences": "Profil ve ayarlar",
+    "preferredLanguage": "Tercih edilen dil",
+    "privacyHint": "Hayalî demo profili. Lütfen gerçek ad veya iletişim bilgisi kullanma.",
+    "owner": "Senin fikrin",
+    "collaborator": "Katkıda bulunuyorsun",
+    "community": "Demo ekibi",
+    "authorLabel": "Öneren",
+    "collaborate": "Katkıda bulun (demo)",
+    "leaveIdea": "Katkıdan ayrıl",
+    "proposalState": "Öneri · henüz onaylanmadı",
+    "ideasTitle": "Fikirleri birlikte geliştirelim",
+    "ideasSubtitle": "Önerilerin, ortak projeler ve yeni ilham kaynakları.",
+    "eventsSubtitle": "Katılımını yönet veya sana uygun bir format bul.",
+    "schoolDirectory": "Okul dizini",
+    "schoolProfile": "Okul profili",
+    "collaborations": "Planlanan iş birliği",
+    "relatedEvents": "Bu okuldan örnek formatlar",
+    "ownSchool": "Senin okulun",
+    "aboutLink": "DeutschConnect hakkında",
+    "profileActivities": "Etkinliklerini yönet",
+    "profileIntro": "İlgi alanların, önerilerini şekillendirir.",
+    "interestHint": "İlgini çeken konuları seç. Seçim yapmasan da tüm etkinlikler Keşfet bölümünde görünür.",
+    "ideaDetail": "Fikir ayrıntıları",
+    "newIdeaDescription": "Başka bir okulla birlikte ne yapmak istersin?",
+    "notTranslated": "Kendi yazdığın metinler özgün dilinde gösterilir.",
+    "seedCode": {
+      "title": "Kod, okullarımızı birleştirir",
+      "description": "Birlikte küçük bir web sitesi geliştirelim: İki okuldan öğrenciler teknoloji fikirlerini paylaşır ve birbirlerinden öğrenir. Görevler ve olası uygulama okullarla birlikte kararlaştırılmalıdır."
+    }
+  }
+}

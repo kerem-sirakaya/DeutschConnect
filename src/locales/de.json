@@ -1,0 +1,292 @@
+{
+  "siteTitle": "Schulen verbinden",
+  "siteDescription": "DeutschConnect – eine Schülerinitiative für schulübergreifende Zusammenarbeit in Ankara.",
+  "brandTagline": "Von Schülern. Für Zusammenarbeit.",
+  "navigationLabel": "Hauptnavigation",
+  "language": "Sprache wählen",
+  "skipLink": "Zum Inhalt springen",
+  "nav": {
+    "home": "Übersicht",
+    "events": "Events",
+    "ideas": "Ideen",
+    "network": "Netzwerk",
+    "about": "Über uns",
+    "me": "Mein Bereich"
+  },
+  "eyebrow": "Schülerinitiative · Ankara",
+  "hero": {
+    "badge": "Gemeinsam über Schulgrenzen hinaus",
+    "lineOne": "Deine Schule.",
+    "lineTwo": "Deine Ideen.",
+    "lineThree": "Dein Netzwerk.",
+    "description": "Gute Ideen kennen keine Schulgrenzen. Entdecke gemeinsame Aktivitäten, bring dich ein und gestalte mit uns die Zusammenarbeit zwischen Schulen in Ankara.",
+    "primary": "Events entdecken",
+    "secondary": "Ideen erkunden",
+    "mapLabel": "Hier beginnt Verbindung",
+    "mapNote": "Ein geplanter Pilot. Zwei Schulen. Gemeinsame Möglichkeiten.",
+    "mapCaption": "ERS × Anka Bilim",
+    "mapStatus": "Zusammenarbeit in Planung"
+  },
+  "pilot": {
+    "title": "Der Anfang einer Verbindung",
+    "description": "Von der Ernst-Reuter-Schule Ankara aus möchten wir mit Anka Bilim einen ersten gemeinsamen Pilot starten.",
+    "link": "Unser Netzwerk",
+    "label": "Erster geplanter Pilot"
+  },
+  "homeEvents": {
+    "eyebrow": "Entdecken & mitgestalten",
+    "title": "Was uns zusammenbringen könnte",
+    "description": "Ein Gespräch, ein Experiment, eine neue Perspektive. So könnten gemeinsame Aktivitäten aussehen.",
+    "link": "Alle Beispiele ansehen"
+  },
+  "example": "Beispiel",
+  "dateOpen": "Termin offen",
+  "crossSchool": "Schulübergreifendes Format",
+  "details": "Details ansehen",
+  "demoNotice": "Diese Aktivitäten sind fiktive Beispiele. Es gibt noch keine bestätigten Termine oder Anmeldungen.",
+  "categories": {
+    "all": "Alle Themen",
+    "language": "Sprache & Austausch",
+    "science": "Wissenschaft & Ideen",
+    "culture": "Kultur & Begegnung",
+    "technology": "Technik & Code"
+  },
+  "activities": {
+    "sprachwerkstatt": {
+      "title": "Deutsch verbindet",
+      "description": "Ins Gespräch kommen, voneinander lernen und Deutsch gemeinsam ausprobieren.",
+      "detail": "Eine gemeinsame Sprachwerkstatt könnte Schüler beider Schulen in kleinen Gruppen zusammenbringen. Kennenlernspiele, Gespräche und kreative Aufgaben bieten Raum, Deutsch ohne Leistungsdruck zu nutzen."
+    },
+    "ideenlabor": {
+      "title": "Gemeinsam weiterdenken",
+      "description": "Fragen stellen, Ideen teilen und im Team kleine Experimente entwickeln.",
+      "detail": "Ein schulübergreifendes Ideenlabor könnte naturwissenschaftliche Interessen verbinden. Schüler entwickeln gemeinsam eine Fragestellung und überlegen, wie sich diese mit einfachen Experimenten untersuchen lässt."
+    },
+    "kulturbruecken": {
+      "title": "Zwei Schulen. Viele Perspektiven.",
+      "description": "Sprachen, Geschichten und den Schulalltag der anderen kennenlernen.",
+      "detail": "Ein Kulturnachmittag könnte Gelegenheit bieten, über Musik, Sprachen und den Alltag an beiden Schulen zu sprechen. Das konkrete Programm würde gemeinsam mit den beteiligten Schülern und Schulverantwortlichen entstehen."
+    },
+    "codewerkstatt": {
+      "title": "Programmieren, zusammen.",
+      "description": "Eine kleine Website bauen und gemeinsam die ersten Zeilen Code schreiben.",
+      "detail": "In dieser fiktiven Codewerkstatt entwickeln Schüler beider Schulen gemeinsam eine kleine Website. Das Demoformat zeigt, wie eine praktische Zusammenarbeit zu Technikthemen aussehen könnte."
+    }
+  },
+  "steps": {
+    "eyebrow": "Aus einer Idee wird Begegnung",
+    "title": "Zusammen beginnt mit dir.",
+    "items": [
+      {
+        "title": "Möglichkeiten entdecken",
+        "text": "Finde Themen und Aktivitäten, die dich auch über deine Schule hinaus interessieren."
+      },
+      {
+        "title": "Ideen gemeinsam entwickeln",
+        "text": "Bringe deine Perspektive ein. Die besten Projekte entstehen im Austausch."
+      },
+      {
+        "title": "Begegnung möglich machen",
+        "text": "Nach Abstimmung und schulischer Freigabe kann aus einer Idee eine echte Aktivität werden."
+      }
+    ]
+  },
+  "cta": {
+    "eyebrow": "Deine Perspektive zählt",
+    "title": "Eine Idee ist der Anfang.\nGemeinsam wird mehr daraus.",
+    "text": "Ein Workshop, ein Austausch oder etwas ganz anderes? Entdecke, welche Ideen unser Netzwerk verbinden könnten.",
+    "button": "Zum Ideenbereich"
+  },
+  "eventsPage": {
+    "title": "Gemeinsam etwas erleben.",
+    "description": "Hier sollen schulübergreifende Veranstaltungen ihren Platz finden. Entdecke zunächst mögliche Formate für unseren geplanten Pilot.",
+    "filterLabel": "Aktivitäten nach Thema filtern",
+    "back": "Zur Eventübersicht",
+    "about": "Die Idee hinter der Aktivität",
+    "organization": "Was noch abgestimmt werden muss",
+    "organizationText": "Datum, Ort, Zielgruppe, verantwortliche Schulkoordination und Teilnahmeverfahren sind noch offen. Eine Durchführung setzt die organisatorische Abstimmung und die nötigen schulischen Genehmigungen voraus.",
+    "status": "Beispielformat · nicht bestätigt",
+    "registration": "Noch keine Anmeldung verfügbar",
+    "explore": "Netzwerk kennenlernen"
+  },
+  "ideasPage": {
+    "title": "Große Dinge beginnen mit einer Idee.",
+    "description": "DeutschConnect soll Schülern ermöglichen, eigene Vorschläge einzubringen und gemeinsam mit anderen Schulen weiterzuentwickeln.",
+    "eyebrow": "Raum für Schülerinitiative",
+    "noticeTitle": "Der Ideenbereich wächst mit uns.",
+    "noticeText": "Du kannst hier erste Themen entdecken. Das Einreichen und gemeinsame Sammeln eigener Vorschläge ist für einen nächsten Entwicklungsschritt vorgesehen.",
+    "sampleTitle": "Impulse für gemeinsame Projekte",
+    "samples": [
+      {
+        "title": "Ein Sprach-Tandem ausprobieren",
+        "text": "Sich gegenseitig beim Sprachenlernen unterstützen und neue Blickwinkel kennenlernen."
+      },
+      {
+        "title": "Eine gemeinsame Zukunftswerkstatt",
+        "text": "Zusammen überlegen, wie wir unseren Schulalltag nachhaltiger gestalten könnten."
+      },
+      {
+        "title": "Schulalltag aus zwei Perspektiven",
+        "text": "In einer gemeinsamen Ausstellung zeigen, was unsere Schulen besonders macht."
+      }
+    ],
+    "approval": "Ein Vorschlag ist noch keine genehmigte Veranstaltung. Die Umsetzung wird mit den zuständigen Schulen abgestimmt."
+  },
+  "networkPage": {
+    "title": "Verbindung beginnt vor Ort.",
+    "description": "Unser erster geplanter Pilot soll Schüler der Ernst-Reuter-Schule Ankara und von Anka Bilim zusammenbringen.",
+    "projectTitle": "ERS × Anka Bilim",
+    "projectText": "Anka Bilim hat Interesse an einer Zusammenarbeit bekundet. Das gemeinsame Format, die beteiligten Gruppen und mögliche Termine müssen noch abgestimmt werden.",
+    "projectStatus": "Pilot in Vorbereitung",
+    "nextTitle": "Die nächsten gemeinsamen Schritte",
+    "nextSteps": [
+      "Bedürfnisse und Ideen beider Schulen sammeln",
+      "Ein erstes geeignetes Begegnungsformat abstimmen",
+      "Verantwortlichkeiten und schulische Freigaben klären",
+      "Aktivität erproben und gemeinsam Rückmeldungen sammeln"
+    ],
+    "note": "Eine formelle langfristige Partnerschaft und eine erste Veranstaltung sind bisher nicht bestätigt."
+  },
+  "schools": {
+    "ers": {
+      "status": "Projektursprung",
+      "description": "Hier entstand DeutschConnect als Schülerinitiative. Das Team entwickelt das Konzept und die erste Website."
+    },
+    "anka": {
+      "status": "Vorgesehener Schulpartner",
+      "description": "Anka Bilim hat Interesse an schulischer Zusammenarbeit bekundet und ist für den ersten gemeinsamen Pilot vorgesehen."
+    }
+  },
+  "aboutPage": {
+    "title": "Von Schülern. Für neue Verbindungen.",
+    "description": "Wir möchten digitale Schulorganisation über die Grenzen einer einzelnen Schule hinausdenken.",
+    "storyTitle": "Wie DeutschConnect entstand",
+    "storyText": "Aus einer ursprünglichen Idee für eine Deutschlernplattform entwickelte sich an der Ernst-Reuter-Schule Ankara ein neuer Schwerpunkt: Schüler verschiedener Schulen sollen gemeinsam Bildungsangebote und Begegnungen gestalten können. Ein früherer FlutterFlow-Prototyp von Ege liefert die visuelle Grundlage für diese neue Richtung.",
+    "missionTitle": "Unsere Mission",
+    "missionText": "Schüler sollen eigene Ideen einbringen, Mitstreiter finden und gemeinsame Aktivitäten mitgestalten können – auch ohne ein offizielles Amt. Deutschsprachiger Austausch ist unser erster praktischer Schwerpunkt.",
+    "statusTitle": "Wo wir gerade stehen",
+    "statusText": "DeutschConnect befindet sich in der Konzeptions- und Prototypphase. Diese Website ist ein erster technischer Schritt. Der praktische Pilot mit Anka Bilim wird angestrebt; belegte Veranstaltungsergebnisse liegen noch nicht vor.",
+    "valuesTitle": "Was uns wichtig ist",
+    "values": [
+      {
+        "title": "Schülerinitiative",
+        "text": "Jugendliche gestalten die Ziele, Ideen und Entwicklung des Projekts mit."
+      },
+      {
+        "title": "Verantwortungsvolle Zusammenarbeit",
+        "text": "Schulische Abstimmung und der Schutz persönlicher Daten gehören von Anfang an dazu."
+      },
+      {
+        "title": "Ehrliche Entwicklung",
+        "text": "Wir unterscheiden klar zwischen Möglichkeiten, geplanten Schritten und tatsächlich erreichten Ergebnissen."
+      }
+    ]
+  },
+  "footer": {
+    "text": "Schulen verbinden. Ideen möglich machen.",
+    "status": "Ein Projekt im Aufbau · Ankara",
+    "note": "Prototyp mit gekennzeichneten Beispielen. Keine Nutzerkonten oder echten Anmeldungen."
+  },
+  "notFound": {
+    "title": "Diese Seite wurde nicht gefunden.",
+    "description": "Über die Navigation findest du zu den Bereichen von DeutschConnect.",
+    "back": "Zur Startseite"
+  },
+  "app": {
+    "demoLabel": "Demo-Modus",
+    "demoShort": "Fiktive Profile · nur lokal",
+    "demoExplain": "Alle Profile, Teilnahmen und Termine sind fiktiv. Keine Anmeldung, keine Synchronisierung. Bitte keine echten persönlichen Daten eingeben.",
+    "switchProfile": "Demo-Profil wechseln",
+    "storageUnavailable": "Browserspeicher ist nicht verfügbar. Änderungen bleiben nur bis zum Schließen dieser Seite erhalten.",
+    "greeting": "Hallo",
+    "dashboardSubtitle": "Deine Aktivitäten und Möglichkeiten auf einen Blick.",
+    "myEvents": "Meine Events",
+    "myIdeas": "Meine Ideen & Projekte",
+    "forYou": "Für dich",
+    "viewAll": "Alle ansehen",
+    "quickActions": "Schnellzugriff",
+    "browseEvents": "Events finden",
+    "newIdea": "Idee einreichen",
+    "schools": "Schulen entdecken",
+    "myArea": "Mein Bereich",
+    "eventTabs": {
+      "my": "Meine Events",
+      "recommended": "Für mich",
+      "all": "Alle entdecken"
+    },
+    "ideaTabs": {
+      "my": "Meine Ideen",
+      "all": "Entdecken",
+      "new": "Neue Idee"
+    },
+    "searchEvents": "Events durchsuchen",
+    "searchIdeas": "Ideen durchsuchen",
+    "searchSchools": "Schulen suchen",
+    "filterSchool": "Schule filtern",
+    "allSchools": "Alle Schulen",
+    "clearFilters": "Filter zurücksetzen",
+    "noResults": "Keine passenden Ergebnisse. Passe deine Suche oder Filter an.",
+    "emptyMyEvents": "Noch kein Event vorgemerkt. Entdecke ein Format und melde dein Interesse an.",
+    "emptyMyIdeas": "Hier erscheinen deine eingereichten Ideen und Projekte, bei denen du mitwirkst.",
+    "emptyRecommendations": "Gerade keine weiteren Empfehlungen. Passe deine Interessen an oder entdecke alle Events.",
+    "interestReason": "Passend zu deinen Interessen",
+    "schoolReason": "Demoformat deiner Schule",
+    "participationTitle": "Deine Teilnahme",
+    "status": {
+      "interested": "Interesse angemeldet",
+      "joined": "Angemeldet · lokale Demo",
+      "organized": "Organisation · lokale Demo",
+      "none": "Noch nicht dabei"
+    },
+    "interestAction": "Interesse anmelden",
+    "joinAction": "Teilnehmen (Demo)",
+    "cancelAction": "Teilnahme / Interesse zurücknehmen",
+    "participationHint": "Diese Auswahl ist nur eine lokale Demonstration. Es wird keine Anmeldung an eine Schule gesendet.",
+    "updated": "Deine Auswahl wurde lokal aktualisiert.",
+    "back": "Zurück",
+    "demoSchedule": "Fiktiver Demo-Termin",
+    "eventOverview": "Alle Eventdetails",
+    "titleLabel": "Titel",
+    "descriptionLabel": "Beschreibung",
+    "topicLabel": "Themenbereich",
+    "submitIdea": "Idee lokal einreichen",
+    "formHint": "Deine Idee wird im Browser gespeichert und ist in dieser Demo auch unter „Entdecken“ sichtbar. Es erfolgt keine Übermittlung an die Schulen.",
+    "validationTitle": "Bitte einen Titel mit 5 bis 90 Zeichen eingeben.",
+    "validationDescription": "Bitte eine Beschreibung mit 20 bis 1000 Zeichen eingeben.",
+    "validationName": "Bitte einen Anzeigenamen mit 2 bis 40 Zeichen eingeben.",
+    "saveChanges": "Änderungen speichern",
+    "saved": "Im Browser gespeichert.",
+    "profileName": "Anzeigename",
+    "schoolLabel": "Deine Schule",
+    "interestsLabel": "Deine Interessen",
+    "preferences": "Profil & Einstellungen",
+    "preferredLanguage": "Bevorzugte Sprache",
+    "privacyHint": "Fiktives Demo-Profil. Bitte keine echten Namen oder Kontaktdaten verwenden.",
+    "owner": "Deine Idee",
+    "collaborator": "Du wirkst mit",
+    "community": "Demo-Team",
+    "authorLabel": "Eingereicht von",
+    "collaborate": "Mitwirken (Demo)",
+    "leaveIdea": "Mitwirkung beenden",
+    "proposalState": "Vorschlag · noch nicht genehmigt",
+    "ideasTitle": "Ideen gemeinsam weiterdenken",
+    "ideasSubtitle": "Deine Vorschläge, gemeinsame Projekte und neue Impulse.",
+    "eventsSubtitle": "Verwalte deine Teilnahme oder finde ein passendes Format.",
+    "schoolDirectory": "Schulverzeichnis",
+    "schoolProfile": "Schulprofil",
+    "collaborations": "Geplante Zusammenarbeit",
+    "relatedEvents": "Beispielformate dieser Schule",
+    "ownSchool": "Deine Schule",
+    "aboutLink": "Über DeutschConnect",
+    "profileActivities": "Deine Aktivitäten verwalten",
+    "profileIntro": "Was dich interessiert, bestimmt deine Empfehlungen.",
+    "interestHint": "Wähle Themen aus, die dich interessieren. Auch ohne Auswahl bleiben alle Events unter „Entdecken“ sichtbar.",
+    "ideaDetail": "Idee im Detail",
+    "newIdeaDescription": "Was möchtest du mit einer anderen Schule auf die Beine stellen?",
+    "notTranslated": "Eigene Texte werden in ihrer Originalsprache angezeigt.",
+    "seedCode": {
+      "title": "Code verbindet unsere Schulen",
+      "description": "Eine gemeinsame kleine Website entwickeln: Schüler beider Schulen teilen ihre Technikideen und lernen voneinander. Die Aufgaben und eine mögliche Umsetzung müssen mit den Schulen abgestimmt werden."
+    }
+  }
+}

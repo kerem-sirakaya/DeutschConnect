@@ -1,0 +1,208 @@
+{
+  "nav": {
+    "home": "Start",
+    "discover": "Entdecken",
+    "tutoring": "Nachhilfe",
+    "community": "Community"
+  },
+  "open": "Freies Thema",
+  "create": "Eigenes Projekt erstellen",
+  "discover": {
+    "title": "Möglichkeiten entdecken",
+    "description": "Starte mit einer Initiative oder bringe etwas ganz Eigenes ein.",
+    "initiatives": "Initiativen",
+    "events": "Events",
+    "projects": "Schülerprojekte",
+    "schools": "Schulen",
+    "team": "Team-Vorschlag",
+    "student": "Schülerinitiative",
+    "proposal": "Formatvorschlag · kein bestätigter Termin",
+    "demo": "Demo-Beispiel",
+    "noneConfirmed": "Aktuell gibt es keine bestätigten realen Aktivitäten. Eventtermine sind fiktive Demo-Daten.",
+    "interest": "Interesse vormerken",
+    "withdraw": "Interesse zurücknehmen",
+    "interviewIdea": "Eigene Interviewidee vorschlagen",
+    "openModule": "Modul öffnen",
+    "interviewContext": "Dein Vorschlag ergänzt die Interview-Initiative. Thema und Gestaltung bleiben frei."
+  },
+  "initiatives": {
+    "interviews": {
+      "title": "Zwischen Sprachen und Schulen",
+      "description": "Schülerinterviews über Identität, Sprachen und den Alltag an verschiedenen Schulen.",
+      "detail": "Organisiert gemeinsam Gespräche über eure Beziehungen zu Sprachen, Ländern und Kulturen. Entwickelt eigene Fragen, findet freiwillige Gesprächspartner und besprecht das Format mit der Schulkoordination. Aufnahmen und Veröffentlichungen benötigen vorherige Einwilligungen sowie eine redaktionelle Prüfung. Hier werden keine Interviews oder bestätigten Teilnehmer vorgetäuscht."
+    },
+    "workshops": {
+      "title": "Wissen gemeinsam ausprobieren",
+      "description": "Schulübergreifende Workshops zu Themen, die euch interessieren.",
+      "detail": "Entwickelt einen Workshop, verteilt Aufgaben und sammelt zunächst Interesse. Thema, Ort und Durchführung werden mit den beteiligten Schulen abgestimmt. Die Eventübersicht enthält testbare Beispielformate."
+    },
+    "exchange": {
+      "title": "Den anderen Schulalltag kennenlernen",
+      "description": "Eine Begegnung oder ein Schulbesuch als gemeinsamer Austausch.",
+      "detail": "Plant eine Begegnung zwischen Schülergruppen und lernt unterschiedliche Perspektiven kennen. Schulbesuche, Begleitung und mögliche Termine sind noch abzustimmen. Es gibt keinen bestätigten Austausch und keine buchbare Reise."
+    },
+    "tutoring": {
+      "title": "Voneinander lernen",
+      "description": "Nichtkommerzielle Unterstützung von Schülern für Schüler.",
+      "detail": "Biete Hilfe an oder beschreibe, wobei du Unterstützung suchst. Die Nachhilfe-Börse verbindet Fächer, Themen, Sprachen und Verfügbarkeit. Kontaktentwürfe und Interessen werden ausschließlich lokal gespeichert."
+    },
+    "projects": {
+      "title": "Deine Idee hat Platz",
+      "description": "Eigene Projekte ohne vorgeschriebenes Format entwickeln.",
+      "detail": "Ob Kreativprojekt, Experiment, soziales Engagement oder eine ganz andere Idee: Du bestimmst Ziele, Themen und gesuchte Mitwirkende selbst. Ein selbst gewählter Planungsstatus ersetzt keine schulische Genehmigung."
+    }
+  },
+  "tutoring": {
+    "title": "Nachhilfe-Börse",
+    "description": "Unterstützung suchen und freiwillig Wissen teilen – ohne Bezahlung.",
+    "offers": "Angebote",
+    "requests": "Gesuche",
+    "my": "Meine Einträge",
+    "newOffer": "Nachhilfe anbieten",
+    "newRequest": "Nachhilfe suchen",
+    "kind": "Eintragsart",
+    "offer": "Angebot",
+    "request": "Gesuch",
+    "subject": "Fach",
+    "topics": "Themen",
+    "support": "Angebotene oder gewünschte Unterstützung",
+    "languages": "Mögliche Sprachen",
+    "format": "Bevorzugtes Format",
+    "availability": "Mögliche Termine / Verfügbarkeit",
+    "submit": "Eintrag lokal speichern",
+    "validation": "Bitte Fach (2–80 Zeichen), Themen (3–200), Unterstützung (20–1000), Verfügbarkeit (3–200) und mindestens eine Sprache angeben.",
+    "search": "Fach oder Thema suchen",
+    "subjectFilter": "Fach filtern",
+    "languageFilter": "Sprache filtern",
+    "formatFilter": "Format filtern",
+    "allSubjects": "Alle Fächer",
+    "allLanguages": "Alle Sprachen",
+    "allFormats": "Alle Formate",
+    "localHint": "Fiktive Einträge und lokale Demo. Keine Vermittlung an Schulen, keine Zahlungen und keine öffentlichen Kontaktdaten.",
+    "own": "Dein Eintrag",
+    "interest": "Interesse vormerken",
+    "withdraw": "Interesse zurücknehmen",
+    "contact": "Kontaktanfrage vorbereiten",
+    "contactNote": "Dein Anfrageentwurf",
+    "contactHint": "Dieser Text wird nur in diesem Browser gespeichert. Er wird nicht versendet. Bitte keine Telefonnummern, Adressen oder anderen persönlichen Kontaktdaten eingeben.",
+    "saveContact": "Entwurf lokal speichern",
+    "contactSaved": "Entwurf gespeichert – nicht versendet.",
+    "contactValidation": "Bitte einen Entwurf mit 10 bis 600 Zeichen eingeben.",
+    "matches": "Passende Lernunterstützung",
+    "matchHint": "Gegenläufige Einträge mit passendem Fach, gemeinsamer Sprache und vereinbarem Format. Verfügbarkeit und genaue Themen müssen noch gemeinsam abgestimmt werden.",
+    "drafts": "Meine Kontaktentwürfe",
+    "empty": "Hier gibt es noch keine passenden Einträge. Passe die Filter an oder erstelle einen eigenen Eintrag."
+  },
+  "subjects": {
+    "math": "Mathematik",
+    "german": "Deutsch",
+    "coding": "Informatik"
+  },
+  "formats": {
+    "online": "Online",
+    "school": "An der Schule",
+    "either": "Nach Absprache"
+  },
+  "languages": {
+    "de": "Deutsch",
+    "tr": "Türkisch",
+    "en": "Englisch"
+  },
+  "tutorSeeds": {
+    "math-offer": {
+      "topics": "Algebra und Gleichungen",
+      "description": "Ich möchte in der Demo beim Verständnis von Gleichungen helfen und gemeinsam Beispielaufgaben besprechen.",
+      "availability": "Demo: nachmittags, genauer Termin offen"
+    },
+    "math-request": {
+      "topics": "Lineare Gleichungen",
+      "description": "Ich suche in dieser Demo jemanden, der mit mir lineare Gleichungen übt und die einzelnen Rechenschritte erklärt.",
+      "availability": "Demo: unter der Woche nach Absprache"
+    },
+    "german-offer": {
+      "topics": "Deutsch sprechen und Wortschatz",
+      "description": "Ich biete in der Demo gemeinsame Gesprächsübungen und Unterstützung beim Lernen neuer Wörter an.",
+      "availability": "Demo: ein Nachmittag nach Absprache"
+    },
+    "coding-request": {
+      "topics": "Erste Schritte mit JavaScript",
+      "description": "Ich suche in der Demo Unterstützung bei Funktionen und möchte ein kleines eigenes Programm besser verstehen.",
+      "availability": "Demo: online am Nachmittag, Termin offen"
+    }
+  },
+  "community": {
+    "title": "Community",
+    "description": "Finde Projektpartner und probiere gemeinsamen Austausch lokal aus.",
+    "people": "Menschen",
+    "projects": "Projektpartner",
+    "rooms": "Diskussionsräume",
+    "my": "Meine Aktivitäten",
+    "search": "Demo-Profile suchen",
+    "allInterests": "Alle Interessen",
+    "filterInterest": "Interesse filtern",
+    "visibility": "Mein fiktives Demo-Profil im lokalen Verzeichnis zeigen",
+    "privacy": "Die Freigabe für das Verzeichnis ist freiwillig und rücknehmbar. Eigene Beiträge und Einträge bleiben davon unabhängig sichtbar. Nur fiktive Daten verwenden. Dies ist keine sichere Zugriffskontrolle.",
+    "shared": "Fiktiv freigegeben",
+    "common": "Gemeinsame Interessen",
+    "connect": "Vernetzungsinteresse vormerken",
+    "disconnect": "Vormerkung zurücknehmen",
+    "localHint": "Alle Beiträge bleiben in diesem Browser. Ein Profilwechsel zeigt dieselbe lokale Demo; andere Geräte erhalten nichts.",
+    "write": "Beitrag schreiben",
+    "body": "Dein Beitrag",
+    "post": "Lokal hinzufügen",
+    "validation": "Bitte 3 bis 1200 Zeichen eingeben und keine persönlichen Daten veröffentlichen.",
+    "emptyRoom": "Noch keine lokalen Beiträge. Starte eine Frage oder einen Austausch.",
+    "remove": "Eigenen Beitrag entfernen",
+    "report": "Melden (Demo)",
+    "reason": "Meldegrund",
+    "saveReport": "Meldung lokal vormerken",
+    "reported": "Demo-Meldung vorgemerkt. Sie wurde niemandem übermittelt.",
+    "moderation": "Sicher miteinander umgehen",
+    "backendHint": "Teile keine privaten Kontaktdaten. Beiträge und Meldungen in der Gastdemo bleiben in diesem Browser; Meldungen werden niemandem zugestellt. Bei einem echten Problem wende dich an eine vertraute erwachsene Person.",
+    "ownPosts": "Meine lokalen Beiträge",
+    "ownConnections": "Meine Vormerkungen",
+    "noActivity": "Noch keine eigenen lokalen Community-Aktivitäten.",
+    "projectHint": "Finde offene Projekte und bekunde dein Interesse. Projektgruppen werden hier über gemeinsame Projektideen organisiert; es gibt keine privaten Gruppenchats.",
+    "contactFree": "Keine privaten Nachrichten oder öffentlich sichtbaren Kontaktdaten.",
+    "guestHint": "Zusätzliches fiktives Beispielprofil"
+  },
+  "reportReasons": {
+    "privacy": "Persönliche Daten",
+    "inappropriate": "Unangemessener Inhalt",
+    "spam": "Spam"
+  },
+  "roomNames": {
+    "general": "Schulübergreifender Austausch",
+    "learning": "Nachhilfe und Lernen",
+    "projects": "Projekte und Zusammenarbeit",
+    "events": "Events und Workshops"
+  },
+  "roomDescriptions": {
+    "general": "Fragen zum Schulalltag und neue Perspektiven.",
+    "learning": "Lernfragen, Erfahrungen und gegenseitige Unterstützung.",
+    "projects": "Ideen weiterdenken und Mitwirkende finden.",
+    "events": "Formate und organisatorische Fragen besprechen."
+  },
+  "project": {
+    "goals": "Ziele",
+    "collaborators": "Gesuchte Mitwirkende",
+    "topics": "Freie Themen und Interessen",
+    "topicHint": "Optional: bis zu acht Themen mit Kommas trennen, jeweils höchstens 40 Zeichen. Keine Kategorie ist vorgeschrieben.",
+    "schools": "Gewünschte Schulen",
+    "status": "Eigener Planungsstand",
+    "freeHint": "Dein Projekt muss zu keinem vorgegebenen Format passen. Ziele und Mitwirkende sind optional; schulische Freigaben werden hier nicht erteilt.",
+    "statuses": {
+      "proposal": "Idee",
+      "looking": "Mitwirkende gesucht",
+      "preparing": "Eigene Vorbereitung"
+    },
+    "validation": "Bitte die Längengrenzen für Ziele, Mitwirkende und Themen einhalten.",
+    "initiative": "Bezug zur Interview-Initiative"
+  },
+  "dashboard": {
+    "community": "Meine Community",
+    "explore": "Neue Möglichkeiten",
+    "myTutoring": "Meine Nachhilfe",
+    "initiativeInterests": "Vorgemerkte Initiativen"
+  }
+}

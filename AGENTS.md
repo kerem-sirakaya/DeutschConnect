@@ -6,6 +6,8 @@ Cross-school collaboration platform
 
 Before making changes, read `README.md` to understand the project's purpose, current status, priorities, and constraints.
 
+Before starting any new development task, read README.md and docs/SESSION_HANDOFF.md to understand the current project state, known issues, priorities and ongoing work.
+
 DeutschConnect is a student-led, cross-school collaboration platform being developed for an initial pilot between Ernst-Reuter-Schule Ankara and Anka Bilim.
 
 The immediate goal is a functional, responsive web prototype that supports the organization of real cross-school activities.

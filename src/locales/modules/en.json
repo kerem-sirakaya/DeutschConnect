@@ -1,0 +1,208 @@
+{
+  "nav": {
+    "home": "Home",
+    "discover": "Discover",
+    "tutoring": "Tutoring",
+    "community": "Community"
+  },
+  "open": "Open topic",
+  "create": "Create your own project",
+  "discover": {
+    "title": "Discover possibilities",
+    "description": "Start with an initiative or bring something entirely your own.",
+    "initiatives": "Initiatives",
+    "events": "Events",
+    "projects": "Student projects",
+    "schools": "Schools",
+    "team": "Team proposal",
+    "student": "Student initiative",
+    "proposal": "Format proposal · no confirmed date",
+    "demo": "Demo example",
+    "noneConfirmed": "There are currently no confirmed real activities. Event dates are fictional demo data.",
+    "interest": "Save interest",
+    "withdraw": "Withdraw interest",
+    "interviewIdea": "Propose your own interview idea",
+    "openModule": "Open module",
+    "interviewContext": "Your proposal develops the interview initiative. Topic and format remain open."
+  },
+  "initiatives": {
+    "interviews": {
+      "title": "Between languages and schools",
+      "description": "Student interviews about identity, languages and life at different schools.",
+      "detail": "Organise conversations about your relationships with languages, countries and cultures. Develop your own questions, find voluntary interview partners and discuss the format with school coordinators. Recording and publication require prior consent and editorial review. No completed interviews or confirmed participants are implied here."
+    },
+    "workshops": {
+      "title": "Explore knowledge together",
+      "description": "Cross-school workshops on topics that interest you.",
+      "detail": "Develop a workshop, share tasks and collect interest first. The topic, location and delivery are agreed with the participating schools. The event directory contains example formats to try."
+    },
+    "exchange": {
+      "title": "Discover another school day",
+      "description": "A shared encounter or school visit as an exchange.",
+      "detail": "Plan a meeting between student groups and discover different perspectives. School visits, supervision and possible dates still need to be agreed. There is no confirmed exchange or bookable trip."
+    },
+    "tutoring": {
+      "title": "Learn from each other",
+      "description": "Non-commercial support from students for students.",
+      "detail": "Offer support or describe what you need help with. The tutoring board connects subjects, topics, languages and availability. Contact drafts and interests are stored locally only."
+    },
+    "projects": {
+      "title": "There is room for your idea",
+      "description": "Develop your own projects without a prescribed format.",
+      "detail": "A creative project, experiment, social initiative or something entirely different: you choose the goals, topics and collaborators yourself. A self-selected planning status does not replace school approval."
+    }
+  },
+  "tutoring": {
+    "title": "Tutoring board",
+    "description": "Find support and share knowledge voluntarily – without payments.",
+    "offers": "Offers",
+    "requests": "Requests",
+    "my": "My listings",
+    "newOffer": "Offer tutoring",
+    "newRequest": "Find tutoring",
+    "kind": "Listing type",
+    "offer": "Offer",
+    "request": "Request",
+    "subject": "Subject",
+    "topics": "Topics",
+    "support": "Support offered or needed",
+    "languages": "Possible languages",
+    "format": "Preferred format",
+    "availability": "Possible dates / availability",
+    "submit": "Save listing locally",
+    "validation": "Please provide a subject (2–80 characters), topics (3–200), support (20–1000), availability (3–200) and at least one language.",
+    "search": "Search subjects or topics",
+    "subjectFilter": "Filter subject",
+    "languageFilter": "Filter language",
+    "formatFilter": "Filter format",
+    "allSubjects": "All subjects",
+    "allLanguages": "All languages",
+    "allFormats": "All formats",
+    "localHint": "Fictional listings and local demo. No school referral, payments or public contact details.",
+    "own": "Your listing",
+    "interest": "Save interest",
+    "withdraw": "Withdraw interest",
+    "contact": "Prepare a contact request",
+    "contactNote": "Your request draft",
+    "contactHint": "This text is saved in this browser only. It is not sent. Please do not enter phone numbers, addresses or other personal contact details.",
+    "saveContact": "Save draft locally",
+    "contactSaved": "Draft saved – not sent.",
+    "contactValidation": "Please enter a draft with 10 to 600 characters.",
+    "matches": "Relevant learning support",
+    "matchHint": "Opposite listings with the same subject, a shared language and a compatible format. Availability and exact topics still need to be agreed together.",
+    "drafts": "My contact drafts",
+    "empty": "No matching listings yet. Adjust filters or create your own listing."
+  },
+  "subjects": {
+    "math": "Mathematics",
+    "german": "German",
+    "coding": "Computer science"
+  },
+  "formats": {
+    "online": "Online",
+    "school": "At school",
+    "either": "By arrangement"
+  },
+  "languages": {
+    "de": "German",
+    "tr": "Turkish",
+    "en": "English"
+  },
+  "tutorSeeds": {
+    "math-offer": {
+      "topics": "Algebra and equations",
+      "description": "In this demo I would like to help with understanding equations and discuss example exercises together.",
+      "availability": "Demo: afternoons, exact date open"
+    },
+    "math-request": {
+      "topics": "Linear equations",
+      "description": "In this demo I am looking for someone to practise linear equations with me and explain each step.",
+      "availability": "Demo: weekdays by arrangement"
+    },
+    "german-offer": {
+      "topics": "Speaking German and vocabulary",
+      "description": "In this demo I offer shared conversation practice and support with learning new words.",
+      "availability": "Demo: an afternoon by arrangement"
+    },
+    "coding-request": {
+      "topics": "First steps with JavaScript",
+      "description": "In this demo I am looking for help with functions and would like to understand a small programme better.",
+      "availability": "Demo: online in the afternoon, date open"
+    }
+  },
+  "community": {
+    "title": "Community",
+    "description": "Find collaborators and try shared exchange locally.",
+    "people": "People",
+    "projects": "Project partners",
+    "rooms": "Discussion rooms",
+    "my": "My activity",
+    "search": "Search demo profiles",
+    "allInterests": "All interests",
+    "filterInterest": "Filter interest",
+    "visibility": "Show my fictional demo profile in the local directory",
+    "privacy": "Directory sharing is voluntary and can be withdrawn. Your own posts and listings remain visible independently. Use fictional data only. This is not secure access control.",
+    "shared": "Fictional sharing consent",
+    "common": "Shared interests",
+    "connect": "Save connection interest",
+    "disconnect": "Withdraw interest",
+    "localHint": "All posts stay in this browser. Switching profiles shows the same local demo; other devices receive nothing.",
+    "write": "Write a post",
+    "body": "Your post",
+    "post": "Add locally",
+    "validation": "Please enter 3 to 1200 characters and do not publish personal data.",
+    "emptyRoom": "No local posts yet. Start a question or exchange.",
+    "remove": "Remove your post",
+    "report": "Report (demo)",
+    "reason": "Report reason",
+    "saveReport": "Save report locally",
+    "reported": "Demo report saved. It has not been sent to anyone.",
+    "moderation": "Staying safe together",
+    "backendHint": "Do not share private contact details. Posts and reports in the guest demo stay in this browser; reports are not sent to anyone. If you face a real problem, speak to a trusted adult.",
+    "ownPosts": "My local posts",
+    "ownConnections": "My saved interests",
+    "noActivity": "No local community activity of your own yet.",
+    "projectHint": "Find open projects and register interest. Project groups are organised through shared ideas here; there are no private group chats.",
+    "contactFree": "No private messages or public personal contact details.",
+    "guestHint": "Additional fictional example profile"
+  },
+  "reportReasons": {
+    "privacy": "Personal data",
+    "inappropriate": "Inappropriate content",
+    "spam": "Spam"
+  },
+  "roomNames": {
+    "general": "Cross-school exchange",
+    "learning": "Tutoring and learning",
+    "projects": "Projects and collaboration",
+    "events": "Events and workshops"
+  },
+  "roomDescriptions": {
+    "general": "Questions about school life and new perspectives.",
+    "learning": "Learning questions, experiences and mutual support.",
+    "projects": "Develop ideas and find collaborators.",
+    "events": "Discuss formats and organisational questions."
+  },
+  "project": {
+    "goals": "Goals",
+    "collaborators": "Collaborators wanted",
+    "topics": "Open topics and interests",
+    "topicHint": "Optional: up to eight comma-separated topics, each at most 40 characters. No category is required.",
+    "schools": "Desired schools",
+    "status": "Your planning stage",
+    "freeHint": "Your project does not have to fit a predefined format. Goals and collaborators are optional; no school approval is granted here.",
+    "statuses": {
+      "proposal": "Idea",
+      "looking": "Looking for collaborators",
+      "preparing": "Own preparation"
+    },
+    "validation": "Please respect the length limits for goals, collaborators and topics.",
+    "initiative": "Link to the interview initiative"
+  },
+  "dashboard": {
+    "community": "My community",
+    "explore": "New possibilities",
+    "myTutoring": "My tutoring",
+    "initiativeInterests": "Saved initiatives"
+  }
+}

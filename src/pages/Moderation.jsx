@@ -1,0 +1,10 @@
+import { useDemo } from '../state/DemoContext.jsx';
+import { useLanguage } from '../i18n/LanguageContext.jsx';
+import ActionButton from '../components/ActionButton.jsx';
+import NotFound from './NotFound.jsx';
+export default function Moderation() {
+  const { state,profile,access } = useDemo(), { t } = useLanguage();
+  if (access.mode !== 'account' || !profile.isModerator) return <NotFound />;
+  const reports = state.modules.reports.filter((r) => r.status === 'pending');
+  return <><section className="section-block"><h2>{t.real.reports}</h2>{!reports.length && <p>{t.real.noReports}</p>}{reports.map((r) => <article className="content-card" key={r.ownerId+r.targetId}><h3>{t.ext.reportReasons[r.reason]}</h3><p className="user-content">{r.targetType === 'message' ? state.modules.messages.find((v) => v.id === r.targetId)?.body : state.profiles[r.targetId]?.displayName}</p><div className="form-actions">{r.targetType === 'message' && <ActionButton action={{ type:'moderateMessage',id:r.targetId }}>{t.real.remove}</ActionButton>}<ActionButton action={{ type:'resolveReport',targetId:r.targetId,ownerId:r.ownerId }}>{t.real.resolve}</ActionButton></div></article>)}</section><section className="section-block"><h2>{t.nav.events}</h2>{state.activities.map((event) => <article className="content-card" key={event.id}><h3>{event.title}</h3>{event.approval !== 'confirmed' && <ActionButton action={{ type:'approveEvent',eventId:event.id }}>{t.real.approve}</ActionButton>}{event.approval === 'confirmed' && Date.parse(event.startsAt) <= Date.now() && Object.keys(state.participation).filter((id) => state.participation[id][event.id] === 'joined').map((id) => <div className="request-review-row" key={id}><span>{state.profiles[id]?.displayName}</span>{event.attendance?.[id] ? <ActionButton action={{ type:'awardRecognition',eventId:event.id,profileId:id }}>{t.real.award}</ActionButton> : <ActionButton action={{ type:'confirmAttendance',eventId:event.id,profileId:id }}>{t.real.confirmAttendance}</ActionButton>}</div>)}</article>)}</section></>;
+}

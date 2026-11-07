@@ -1,0 +1,208 @@
+{
+  "nav": {
+    "home": "Ana sayfa",
+    "discover": "Keşfet",
+    "tutoring": "Ders desteği",
+    "community": "Topluluk"
+  },
+  "open": "Serbest konu",
+  "create": "Kendi projeni oluştur",
+  "discover": {
+    "title": "Olanakları keşfet",
+    "description": "Bir girişimle başla veya tamamen kendi fikrini getir.",
+    "initiatives": "Girişimler",
+    "events": "Etkinlikler",
+    "projects": "Öğrenci projeleri",
+    "schools": "Okullar",
+    "team": "Ekip önerisi",
+    "student": "Öğrenci girişimi",
+    "proposal": "Format önerisi · onaylanmış tarih yok",
+    "demo": "Demo örneği",
+    "noneConfirmed": "Henüz onaylanmış gerçek etkinlik yok. Etkinlik tarihleri hayalî demo verileridir.",
+    "interest": "İlgimi kaydet",
+    "withdraw": "İlgiyi geri çek",
+    "interviewIdea": "Kendi röportaj fikrini öner",
+    "openModule": "Modülü aç",
+    "interviewContext": "Önerin röportaj girişimini geliştirir. Konu ve biçim serbesttir."
+  },
+  "initiatives": {
+    "interviews": {
+      "title": "Diller ve okullar arasında",
+      "description": "Kimlik, diller ve farklı okullardaki yaşam üzerine öğrenci röportajları.",
+      "detail": "Diller, ülkeler ve kültürlerle ilişkileriniz üzerine konuşmalar düzenleyin. Kendi sorularınızı geliştirin, gönüllü katılımcılar bulun ve formatı okul koordinatörleriyle görüşün. Kayıt ve yayın öncesinde izinler ve editoryal inceleme gerekir. Burada yapılmış röportajlar veya kesinleşmiş katılımcılar varmış gibi gösterilmez."
+    },
+    "workshops": {
+      "title": "Bilgiyi birlikte deneyelim",
+      "description": "İlginizi çeken konularda okullar arası atölyeler.",
+      "detail": "Bir atölye geliştirin, görevleri paylaşın ve önce ilgiyi toplayın. Konu, yer ve uygulama ilgili okullarla kararlaştırılır. Etkinlik dizininde denenebilir örnek formatlar bulunur."
+    },
+    "exchange": {
+      "title": "Diğer okulun yaşamını tanıyalım",
+      "description": "Ortak bir buluşma veya okul ziyaretiyle deneyim paylaşımı.",
+      "detail": "Öğrenci grupları arasında bir buluşma planlayın ve farklı bakış açılarını tanıyın. Okul ziyaretleri, gözetim ve olası tarihler henüz belirlenmelidir. Kesinleşmiş bir değişim veya rezervasyon yapılabilir gezi yoktur."
+    },
+    "tutoring": {
+      "title": "Birbirimizden öğrenelim",
+      "description": "Öğrencilerden öğrencilere, ticari olmayan destek.",
+      "detail": "Destek sun veya ne konuda yardıma ihtiyaç duyduğunu anlat. Ders desteği panosu; dersleri, konuları, dilleri ve uygun zamanları bir araya getirir. İletişim taslakları ve ilgi kayıtları yalnızca yerel olarak saklanır."
+    },
+    "projects": {
+      "title": "Fikrine yer var",
+      "description": "Zorunlu bir format olmadan kendi projelerini geliştir.",
+      "detail": "Yaratıcı çalışma, deney, sosyal sorumluluk veya bambaşka bir fikir: Hedefleri, konuları ve aradığın katkıları sen belirlersin. Kendi planlama durumunu seçmek okul onayı yerine geçmez."
+    }
+  },
+  "tutoring": {
+    "title": "Ders desteği panosu",
+    "description": "Destek ara ve bilgini gönüllü paylaş – ücret olmadan.",
+    "offers": "Teklifler",
+    "requests": "Talepler",
+    "my": "İlanlarım",
+    "newOffer": "Destek sun",
+    "newRequest": "Destek ara",
+    "kind": "İlan türü",
+    "offer": "Teklif",
+    "request": "Talep",
+    "subject": "Ders",
+    "topics": "Konular",
+    "support": "Sunulan veya istenen destek",
+    "languages": "Uygun diller",
+    "format": "Tercih edilen format",
+    "availability": "Olası tarihler / uygun zamanlar",
+    "submit": "İlanı yerel kaydet",
+    "validation": "Lütfen ders (2–80 karakter), konular (3–200), destek (20–1000), uygun zamanlar (3–200) ve en az bir dil belirt.",
+    "search": "Ders veya konu ara",
+    "subjectFilter": "Derse göre filtrele",
+    "languageFilter": "Dile göre filtrele",
+    "formatFilter": "Formata göre filtrele",
+    "allSubjects": "Tüm dersler",
+    "allLanguages": "Tüm diller",
+    "allFormats": "Tüm formatlar",
+    "localHint": "Hayalî ilanlar ve yerel demo. Okullara iletim, ödeme veya herkese açık iletişim bilgisi yoktur.",
+    "own": "Senin ilanın",
+    "interest": "İlgimi kaydet",
+    "withdraw": "İlgiyi geri çek",
+    "contact": "İletişim talebi hazırla",
+    "contactNote": "Talep taslağın",
+    "contactHint": "Bu metin yalnızca bu tarayıcıya kaydedilir, gönderilmez. Telefon, adres veya başka kişisel iletişim bilgisi yazma.",
+    "saveContact": "Taslağı yerel kaydet",
+    "contactSaved": "Taslak kaydedildi – gönderilmedi.",
+    "contactValidation": "Lütfen 10 ile 600 karakter arasında bir taslak yaz.",
+    "matches": "Uygun öğrenme desteği",
+    "matchHint": "Aynı ders, ortak dil ve uyumlu biçime sahip karşıt ilanlar. Uygun zamanlar ve ayrıntılı konular daha sonra birlikte belirlenmelidir.",
+    "drafts": "İletişim taslaklarım",
+    "empty": "Henüz uygun ilan yok. Filtreleri değiştir veya kendi ilanını oluştur."
+  },
+  "subjects": {
+    "math": "Matematik",
+    "german": "Almanca",
+    "coding": "Bilişim"
+  },
+  "formats": {
+    "online": "Çevrim içi",
+    "school": "Okulda",
+    "either": "Birlikte kararlaştırılır"
+  },
+  "languages": {
+    "de": "Almanca",
+    "tr": "Türkçe",
+    "en": "İngilizce"
+  },
+  "tutorSeeds": {
+    "math-offer": {
+      "topics": "Cebir ve denklemler",
+      "description": "Bu demoda denklemleri anlamaya yardımcı olmak ve örnek soruları birlikte konuşmak istiyorum.",
+      "availability": "Demo: öğleden sonra, kesin tarih belli değil"
+    },
+    "math-request": {
+      "topics": "Birinci dereceden denklemler",
+      "description": "Bu demoda birinci dereceden denklemleri çalışabileceğim ve işlem adımlarını açıklayacak birini arıyorum.",
+      "availability": "Demo: hafta içi birlikte belirlenir"
+    },
+    "german-offer": {
+      "topics": "Almanca konuşma ve kelime bilgisi",
+      "description": "Bu demoda ortak konuşma alıştırmaları ve yeni kelimeler öğrenirken destek sunuyorum.",
+      "availability": "Demo: bir öğleden sonra birlikte belirlenir"
+    },
+    "coding-request": {
+      "topics": "JavaScript ile ilk adımlar",
+      "description": "Bu demoda fonksiyonlar konusunda destek arıyorum ve küçük bir programı daha iyi anlamak istiyorum.",
+      "availability": "Demo: öğleden sonra çevrim içi, tarih belli değil"
+    }
+  },
+  "community": {
+    "title": "Topluluk",
+    "description": "Proje arkadaşları bul ve ortak paylaşımı yerel olarak dene.",
+    "people": "Kişiler",
+    "projects": "Proje arkadaşları",
+    "rooms": "Tartışma odaları",
+    "my": "Etkinliklerim",
+    "search": "Demo profillerinde ara",
+    "allInterests": "Tüm ilgi alanları",
+    "filterInterest": "İlgi alanına göre filtrele",
+    "visibility": "Hayalî demo profilimi yerel dizinde göster",
+    "privacy": "Dizin paylaşımı gönüllüdür ve geri alınabilir. Kendi yazıların ve ilanların bundan bağımsız olarak görünür kalır. Yalnızca hayalî veriler kullan. Bu, güvenli erişim kontrolü değildir.",
+    "shared": "Hayalî paylaşım izni",
+    "common": "Ortak ilgi alanları",
+    "connect": "Bağlantı ilgisini kaydet",
+    "disconnect": "Kaydı geri çek",
+    "localHint": "Tüm yazılar bu tarayıcıda kalır. Profil değişimi aynı yerel demoyu gösterir; diğer cihazlara hiçbir şey ulaşmaz.",
+    "write": "Yazı yaz",
+    "body": "Yazın",
+    "post": "Yerel olarak ekle",
+    "validation": "Lütfen 3 ile 1200 karakter yaz ve kişisel veri yayımlama.",
+    "emptyRoom": "Henüz yerel yazı yok. Bir soru veya paylaşım başlat.",
+    "remove": "Kendi yazını kaldır",
+    "report": "Bildir (demo)",
+    "reason": "Bildirim nedeni",
+    "saveReport": "Bildirimi yerel kaydet",
+    "reported": "Demo bildirimi kaydedildi. Kimseye iletilmedi.",
+    "moderation": "Birlikte güvende kalmak",
+    "backendHint": "Özel iletişim bilgilerini paylaşma. Misafir demosundaki iletiler ve bildirimler bu tarayıcıda kalır; bildirimler kimseye gönderilmez. Gerçek bir sorun yaşarsan güvendiğin bir yetişkinle konuş.",
+    "ownPosts": "Yerel yazılarım",
+    "ownConnections": "İlgi kayıtlarım",
+    "noActivity": "Henüz kendi yerel topluluk etkinliğin yok.",
+    "projectHint": "Açık projeleri bul ve ilgini belirt. Proje grupları ortak fikirler üzerinden düzenlenir; özel grup sohbetleri yoktur.",
+    "contactFree": "Özel mesaj veya herkese açık kişisel iletişim bilgisi yoktur.",
+    "guestHint": "Ek hayalî örnek profil"
+  },
+  "reportReasons": {
+    "privacy": "Kişisel veri",
+    "inappropriate": "Uygunsuz içerik",
+    "spam": "Spam"
+  },
+  "roomNames": {
+    "general": "Okullar arası paylaşım",
+    "learning": "Ders desteği ve öğrenme",
+    "projects": "Projeler ve iş birliği",
+    "events": "Etkinlikler ve atölyeler"
+  },
+  "roomDescriptions": {
+    "general": "Okul yaşamına dair sorular ve yeni bakış açıları.",
+    "learning": "Öğrenme soruları, deneyimler ve karşılıklı destek.",
+    "projects": "Fikirleri geliştirmek ve katkıda bulunacak kişiler bulmak.",
+    "events": "Formatları ve organizasyon sorularını konuşmak."
+  },
+  "project": {
+    "goals": "Hedefler",
+    "collaborators": "Aranan katkılar",
+    "topics": "Serbest konular ve ilgi alanları",
+    "topicHint": "İsteğe bağlı: virgülle ayrılmış en fazla sekiz konu, her biri en fazla 40 karakter. Zorunlu kategori yoktur.",
+    "schools": "İstenen okullar",
+    "status": "Kendi planlama durumun",
+    "freeHint": "Projenin önceden belirlenmiş bir formata uyması gerekmez. Hedefler ve aranan katkılar isteğe bağlıdır; burada okul onayı verilmez.",
+    "statuses": {
+      "proposal": "Fikir",
+      "looking": "Katkı sağlayacak kişiler aranıyor",
+      "preparing": "Kendi hazırlığı"
+    },
+    "validation": "Lütfen hedef, aranan katkı ve konuların uzunluk sınırlarına uy.",
+    "initiative": "Röportaj girişimiyle bağlantı"
+  },
+  "dashboard": {
+    "community": "Topluluğum",
+    "explore": "Yeni olanaklar",
+    "myTutoring": "Ders desteğim",
+    "initiativeInterests": "İlgi duyulan girişimler"
+  }
+}

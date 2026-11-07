@@ -1,0 +1,33 @@
+.game-directory-icon { display: block; color: #a9ceff; font-size: 2.4rem; margin-bottom: 12px; }
+.game-directory h2 { margin-bottom: 12px; }
+.game-directory .button { margin-top: 16px; }
+.offline-card { margin-top: 24px; }
+.offline-card .button { margin-top: 16px; }
+.game-score { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: .95rem; padding: 18px 0; color: #d1e4fc; }
+.arcade-field { display: block; padding: 0; border: 2px solid #4b719c; border-radius: 14px; overflow: hidden; width: 100%; touch-action: manipulation; cursor: pointer; }
+.arcade-field svg { width: 100%; display: block; }
+.memory-game { max-width: 650px; }
+.memory-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 9px; margin: 10px 0 20px; }
+.memory-card { aspect-ratio: 1; min-height: 52px; border: 1px solid #4873a3; background: #214773; color: #dcecff; border-radius: 13px; font-size: clamp(1.1rem,5vw,2.3rem); cursor: pointer; }
+.memory-card.revealed { background: #aad2ff; color: #14243b; }
+.memory-card > span { font-size: 1rem; font-weight: 650; }
+.chess-panel { max-width: 760px; }
+.chess-grid { display: grid; grid-template-columns: repeat(8,minmax(0,1fr)); width: min(100%,560px); border: 2px solid #6b8bab; margin-top: 14px; }
+.chess-square { aspect-ratio: 1; position: relative; display: grid; place-items: center; padding: 0; border: 0; cursor: pointer; min-width: 0; font-size: clamp(1.6rem,6vw,3.2rem); font-family: 'Segoe UI Symbol','Noto Sans Symbols',serif; line-height: 1; touch-action: manipulation; }
+.chess-square.light { background: #b2c7de; }
+.chess-square.dark { background: #577493; }
+.chess-square.white-piece { color: #fff; text-shadow: 0 1px 2px #061323,1px 0 1px #061323,-1px 0 1px #061323; }
+.chess-square.black-piece { color: #061323; }
+.chess-square small { position: absolute; left: 2px; bottom: 2px; font: 9px/1 sans-serif; color: #112b44; text-shadow: none; }
+.chess-square.selected { box-shadow: inset 0 0 0 4px #ffe398; }
+.chess-square.legal::after { content: ''; position: absolute; width: 30%; height: 30%; border-radius: 50%; background: #14375f77; border: 2px solid #d5e8ff; pointer-events: none; }
+.chess-square:disabled { opacity: 1; cursor: default; }
+.chess-controls { display: flex; flex-wrap: wrap; align-items: end; gap: 14px; margin-top: 18px; }
+.chess-controls label,.chess-panel form label { display: flex; flex-direction: column; gap: 8px; font-size: .85rem; }
+.chess-controls select,.chess-panel input { min-height: 46px; padding: 8px 12px; background: #12253d; border: 1px solid #53759c; border-radius: 10px; font-size: 1rem; }
+.chess-panel input { max-width: 100px; }
+.chess-moves { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px 30px; padding: 20px; font-size: .9rem; }
+.group-actions { margin-bottom: 20px; }
+.auth-panel { max-width: 650px; }
+.auth-panel .form-actions { margin-top: 18px; }
+@media (min-width:600px) { .chess-moves { grid-template-columns: repeat(5,minmax(0,1fr)); } }

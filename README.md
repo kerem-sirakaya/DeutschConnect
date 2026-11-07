@@ -3,12 +3,16 @@ Cross-school collaboration platform
 # DeutschConnect
 ### Eine schulübergreifende digitale Plattform für Zusammenarbeit, Bildung und Schülerinitiative
 
-**Projektstatus:** Konzeptions- und Prototypphase  
-**Stand der Dokumentation:** 7. November 2026  
+**Projektstatus:** Funktionaler Webprototyp mit eigener Supabase-Anbindung; schulübergreifende Mehrnutzer-Abnahme noch offen
+
+**Stand der Dokumentation:** 8. November 2026
+
 **Ausgangspunkt:** Ernst-Reuter-Schule Ankara (ERS), Türkei  
 **Erster vorgesehener Schulpartner:** Anka Bilim, Ankara  
 **Wettbewerb:** 10. DIHK-Auslandsschulwettbewerb 2026/2027 – „Schüler bauen weltweit Brücken“  
 **Bewerbungsschluss:** 15. November 2026
+
+**Aktueller Einstieg für die nächste Sitzung:** [docs/SESSION_HANDOFF.md](docs/SESSION_HANDOFF.md). Dort stehen der geprüfte Tagesstand, bekannte Grenzen, Git-Sicherungsbedarf und die erste Aufgabe für morgen. Die Abschnitte 22–26 sind ein historisches Entwicklungsprotokoll; frühere Aussagen zu noch fehlenden Konten oder Backend-Diensten beschreiben nicht den heutigen Stand.
 
 ---
 
@@ -262,7 +266,7 @@ Beispielsweise könnte ein Schüler Unterstützung in Mathematik anbieten oder b
 
 Ein Nachhilfesystem müsste geeignete Regeln für Qualifikation, Betreuung, Kommunikation und Sicherheit berücksichtigen.
 
-Diese Funktion ist nicht Bestandteil der ersten Version.
+Nachhilfe war ursprünglich nicht für den ersten MVP vorgesehen. Mit dem ausdrücklich beauftragten Modulausbau wurde inzwischen eine nichtkommerzielle lokale Demo-Börse ergänzt; siehe Abschnitt 24. Eine echte schulübergreifende Vermittlung besteht weiterhin nicht.
 
 ### Modul 5: Gemeinsame Medienprojekte
 
@@ -595,9 +599,9 @@ Die tatsächliche Ordnerstruktur muss an den implementierten Code angepasst werd
 
 ### 10.5 Aktueller Code-Status
 
-Zum Zeitpunkt der Erstellung dieser README ist nicht bestätigt, dass im aktuellen Repository bereits eine funktionsfähige React-Anwendung existiert.
+Im Repository existiert inzwischen ein lokaler React/Vite-Prototyp. Der Umfang und die verbleibenden Einschränkungen sind in Abschnitt 22 und in `docs/DEVELOPMENT.md` dokumentiert.
 
-Diese Dokumentation darf daher nicht als Beweis für bereits implementierte Funktionen verstanden werden.
+Die langfristigen Funktionsbeschreibungen dieser README dürfen weiterhin nicht als Beweis für bereits implementierte Funktionen verstanden werden.
 
 Vor der Programmierung muss der tatsächliche Dateibestand untersucht werden.
 
@@ -938,7 +942,7 @@ Wenn eine Entscheidung die technische Umsetzung wesentlich beeinflusst, soll zun
 
 ### Noch nicht als umgesetzt bestätigt
 
-- Eine funktionsfähige neue DeutschConnect-Website
+- Eine produktiv eingesetzte DeutschConnect-Website mit echten Mehrnutzerfunktionen
 - Ein importierter FlutterFlow-Quellcode
 - Eine produktive Datenbank
 - Echte schulübergreifende Benutzerkonten
@@ -1207,7 +1211,7 @@ Mögliche Inhalte:
 
 Da die erste Version noch keine vollständige Benutzerverwaltung benötigt, kann dieser Bereich zunächst mit klar gekennzeichneten Beispieldaten demonstriert werden.
 
-Eine vollständige Personalisierung wird erst nach Einführung einer geeigneten Benutzerverwaltung umgesetzt.
+Echte persönliche Konten und synchronisierte Personalisierung setzen eine geeignete Benutzerverwaltung voraus. Der lokale Prototyp demonstriert inzwischen profilabhängige Ansichten mit ausdrücklich fiktiven Personas (siehe Abschnitt 23).
 
 **Impact → Wirkung und Entwicklung**
 
@@ -1333,3 +1337,63 @@ Weitere Module sollen zunächst nur vorbereitet, aber nicht ohne ausdrücklichen
 **Wichtigstes Gestaltungsprinzip:**
 
 Die neue DeutschConnect-Website soll wie eine Weiterentwicklung des ursprünglichen Prototyps aussehen, aber die neue Mission einer schülergetragenen, schulübergreifenden Bildungsplattform konsequent widerspiegeln.
+
+## 22. Erste React-Implementierung – 7. November 2026
+
+Im Repository besteht jetzt ein lokales React/Vite-Grundgerüst mit responsiver Startseite, Navigation für Start, Events, Ideen, Netzwerk und Über uns, wiederverwendbaren Komponenten sowie vollständigen festen Oberflächentexten auf Deutsch, Türkisch und Englisch. Die Sprachwahl wird im Browser gespeichert. Beispiel-Events besitzen Detailansichten und Themenfilter.
+
+Die Aktivitäten und Ideen sind gekennzeichnete fiktive Beispiele. Es gibt noch keine echte Anmeldung, Ideenübermittlung, Benutzerkonten, Datenbank oder schulübergreifende Synchronisierung. Die technischen Schritte bestätigen keine organisatorische Umsetzung des Pilots.
+
+Start nach Installation: `npm.cmd run dev`. Produktions-Build: `npm.cmd run build`. Übersetzungscheck: `npm.cmd run check`.
+
+Einrichtung, Architekturentscheidungen und Prüfgrenzen stehen in [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md). Die neun Designreferenzen liegen derzeit unter `design references/`.
+
+## 23. Personalisierte Demo-Anwendung – 7. November 2026
+
+Die Startseite wurde zu einer kompakten persönlichen Übersicht mit eigenen Events, Empfehlungen, eigenen Ideen und Schnellaktionen weiterentwickelt. Die Hauptnavigation lautet Übersicht, Events, Ideen, Netzwerk und Mein Bereich. Über uns bleibt als zusätzliche Informationsseite erreichbar.
+
+Zwei fiktive Personas zeigen unterschiedliche Schulen, Interessen, Teilnahmen und Projektideen. Im Demo-Umschalter lässt sich zwischen Alex (ERS, Technik/Wissenschaft) und Deniz (Anka Bilim, Sprachen/Kultur) wechseln. Schule und Interessen beeinflussen Empfehlungen. Teilnahmen, Interessenbekundungen und Ideen werden pro Persona zugeordnet; übergreifend sichtbar ist nur das gemeinsame lokale Demo-Verzeichnis.
+
+Neu funktionieren lokal: Interesse anmelden, Demo-Teilnahme und Rücknahme, validiertes Ideenformular, Mitwirkung an Ideen sowie Änderungen an Demo-Anzeigename, Schule, Interessen und bevorzugter Sprache. Events sind in eigene, empfohlene und alle Formate gegliedert; Ideen besitzen persönliche Listen, Übersicht und Details. Das Netzwerk enthält Schulverzeichnis, Schulprofile und eine getrennte Ansicht der geplanten Kooperation.
+
+Der versionierte Zustand liegt ausschließlich im Browserspeicher. Es gibt weiterhin keine echten Konten, Authentifizierung, geschützten privaten Bereiche, echten Anmeldungen, Übermittlung an Schulen oder Synchronisierung zwischen Geräten. Alle voreingestellten Profile und Termine sind fiktiv. Einladungen und Benachrichtigungen werden ohne entsprechende Daten beziehungsweise Infrastruktur nicht dargestellt.
+
+Prüfungen: `npm.cmd run check`, `npm.cmd test`, `npm.cmd run check:render`, `npm.cmd run build`. Die noch ausstehende interaktive Browser- und Mobilprüfung sowie die genaue Demo-Anleitung stehen in [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md).
+
+## 24. Nachhilfe, Initiativen, Community und freie Projekte
+
+Auf ausdrücklichen Erweiterungsauftrag wurden die vorhandenen Funktionen um eine interaktive lokale Nachhilfe-Börse, konkrete Team-Vorschläge und eine Community-Demonstration ergänzt. Die Hauptnavigation lautet jetzt Start, Entdecken, Nachhilfe, Community und Mein Bereich. Events, Ideen und Schulinformationen bleiben unter Entdecken und über ihre bisherigen URLs erreichbar. Eine Plus-Aktion führt direkt zum Erstellen eigener Projekte.
+
+Die Nachhilfe-Börse enthält Angebote und Gesuche mit Fach, Themen, Unterstützung, Sprachen, Format und Verfügbarkeit. Nutzer können Einträge erstellen, kombiniert suchen und filtern, Interesse vormerken und einen Kontaktentwurf lokal speichern. Das Angebot ist nichtkommerziell; es gibt keine Zahlungsfunktion, keinen Nachrichtenversand und keine öffentliche Anzeige persönlicher Kontaktdaten.
+
+Entdecken zeigt die vorgeschlagenen Formate Schülerinterviews, Workshops, Schüleraustausch, gegenseitige Nachhilfe und freie gemeinsame Projekte. Interviews knüpfen an das Medienkonzept aus Modul 5 an. Interesse kann lokal vorgemerkt und eine eigene Interviewidee ergänzt werden. Es werden keine bereits durchgeführten Interviews, bestätigten Teilnehmer oder Termine erfunden.
+
+Eigene Projekte sind nicht mehr an eine Pflichtkategorie gebunden. Neben Titel und Beschreibung können Ziele, gesuchte Mitwirkende, freie Themen, gewünschte Schulen und ein eigener Planungsstand angegeben werden. Dieser Status ist keine schulische Genehmigung. Herkunft und Status werden zwischen Team-Vorschlag, Schülerinitiative und Demo-Beispiel unterschieden; bestätigte reale Aktivitäten liegen nicht vor.
+
+Die Community demonstriert freiwillig freigegebene fiktive Kurzprofile, Interessensuche, Projektpartnersuche und vier lokale Diskussionsräume. Beiträge, eigene Löschaktionen und Meldeentwürfe funktionieren ausschließlich im selben Browser. Die Freigabe betrifft das Verzeichnis; eigene Beiträge bleiben davon unabhängig sichtbar. Es gibt keine echten Konten, privaten Nachrichten, geräteübergreifenden Chats oder laufende Moderation. Meldungen und Kontaktentwürfe werden niemandem zugestellt.
+
+Bestehende Demo-Präferenzen und Interaktionen werden beim Laden um fehlende Module ergänzt. Alle neuen festen Texte stehen auf Deutsch, Türkisch und Englisch zur Verfügung. Die Architektur und die für echte Kommunikation erforderlichen Komponenten stehen in [docs/MODULES.md](docs/MODULES.md), einschließlich Prüfstand und noch offener Browser-Abnahme.
+
+## 25. Gezielte Qualitätsverbesserung und gemeinsame Version
+
+Die lokale Demo besitzt jetzt eine zentrale Speichergrenze mit isolierter Datenwiederherstellung, Sicherung der Originaldaten und serialisierten Mehrtab-Schreibzugriffen über Web Locks. Ungültige Gesamtdateien werden nicht automatisch überschrieben. Ohne verfügbare Speichersperre werden Änderungen vorsichtig abgelehnt. Die Demo-Persona, Filter und Formularentwürfe bleiben je Tab getrennt.
+
+Eigene Projekte und Nachhilfeeinträge lassen sich bearbeiten, zurückziehen beziehungsweise schließen und entfernen. Vorgemerkte Nachhilfe ist wiederauffindbar. Freie Interessen und Projektthemen fließen in Vorschläge ein; direkte Nachhilfetreffer und allgemeine Entdeckung sind getrennt. Optionale Formularabschnitte, Feldfehler, Touchflächen und aktive Untertabs wurden gezielt verbessert. Alle festen Texte bleiben auf Deutsch, Türkisch und Englisch verfügbar.
+
+Prüfung: `npm.cmd test`, `npm.cmd run check`, `npm.cmd run check:render`, `npm.cmd run build`. Änderungen, betroffene Dateien und noch offene Browser-/Mobiltests beschreibt [docs/QUALITY.md](docs/QUALITY.md). Die Bestandsaufnahme und Vorbereitung für den Vergleich mit der zweiten Version stehen in [docs/INTEGRATION.md](docs/INTEGRATION.md). Es wurden keine Supabase-Datenbank, SQL-Tabellen, echten Konten, öffentlichen Chats oder Deployments ergänzt.
+
+## 26. Persönlicher Bereich und klare Teilnahmeabläufe – Phase A
+
+„Mein Bereich“ enthält jetzt eine berechnete Übersicht und eigene Unterseiten für Aktivitäten, Projekte, Nachhilfe, Vormerkungen, Community und Profil/Einstellungen. Die Zahlen unterscheiden lokale Eventanmeldung, Interesse, eigene Projekte, Demo-Mitgliedschaften, Anfragen und offene Nachhilfeeinträge. Vergangene Demo-Termine sind keine Nachweise tatsächlicher Teilnahme.
+
+Der Zugang ist ausdrücklich eine Gastdemo ohne authentifiziertes Konto. Eine eigene Informationsseite erklärt die noch fehlende E-Mail-/Supabase-Anbindung. Der Projektablauf unterscheidet Interesse, Teilnahmeanfrage und Annahme/Ablehnung durch das Eigentümer-Demo-Profil. Vorhandene lokale Daten und alle Module bleiben erhalten; nichts wird an andere Geräte oder Schulen übermittelt.
+
+Phase B (gemeinsames Backend und betreute Kommunikation) und Phase C (Schach, optionale Minispiele, Offline-Prüfung und freiwillige Anerkennung) sind noch nicht implementiert. Der nach Abhängigkeiten und Aufwand gegliederte Plan, benötigte Informationen des zweiten Teams, Änderungen und Prüfgrenzen stehen in [docs/PHASES-B-C.md](docs/PHASES-B-C.md). Die Umsetzung dieser Phasen benötigt einen abgestimmten Architekturvertrag und einen weiteren Auftrag.
+
+## 27. Eigenes Backend und benutzbare Spiele – 8. November 2026
+
+Auf Folgeauftrag werden Phase B/C jetzt unabhängig von der zweiten Implementierung umgesetzt. Unter **Community → Spiele** sind Schach, Brückenläufer, Papierflug und Symbolpaare benutzbar. Die Gastdemo unterstützt lokale Partien und Herausforderungen zwischen fiktiven Profilen desselben Browsers. Der Produktions-Build enthält eine ausdrücklich aktivierbare Offline-Speicherung der statischen Spieldateien.
+
+Ein eigenes Supabase-Setup mit verifizierter E-Mail-Anmeldung, privaten Daten, serverseitiger Befehlsprüfung, Gruppenmitgliedschaften, betreuten Beiträgen, Blockieren/Melden, Moderation, Online-Schach und nachgewiesener Anerkennung ist im Code enthalten. Im eigenen Cloud-Projekt **DeutschConnect - Codex Demo** sind Migration und Edge Function inzwischen eingerichtet. Lokale Rücksprungadressen, zwölf Zeichen Mindestpasswortlänge und verpflichtende E-Mail-Bestätigung sind gesetzt. Die echten Datenbankrechte und die Ablehnung unberechtigter API-Zugriffe sind live geprüft. Registrierung, bestätigte E-Mail, Passwort-Anmeldung und geschützter Plattformstart sind für das Betreiber-Testkonto belegt; der dabei gefundene 404-Fehler bei abgelaufenen beziehungsweise verwendeten Bestätigungslinks wurde korrigiert. Die Betreiber-Moderation wurde nach gesonderter Zustimmung serverseitig eingerichtet. Der Projektinhaber hat auch den Sitzungserhalt nach Neuladen und die Abmeldung zurück zur Gastdemo ausdrücklich erfolgreich bestätigt. Die Zwei-Konten-/Zwei-Geräte-Abnahme der Zusammenarbeit steht noch aus. Ohne Konfiguration bleibt die Gastdemo aktiv; echte Daten und Online-Partien werden nicht vorgetäuscht. Die gemeinsame Ansicht aktualisiert sich alle vier Sekunden; ein WebSocket-Dienst wird nicht behauptet.
+
+Die konkrete Einrichtung, Architektur, Rechte, Unterschiede zwischen Gast und Konto, tatsächliche Tests und verbleibende Grenzen stehen in [docs/SUPABASE-SETUP.md](docs/SUPABASE-SETUP.md). `.env.local` enthält die öffentliche Projektkonfiguration und wird von Git ignoriert. Geheime Schlüssel gehören niemals in `VITE_*`. Die Kontoseite ist direkt unter **Mein Bereich → Anmelden** erreichbar. Die Backend-Funktion wurde mit Freigabe im eigenen Projekt bereitgestellt; keine Commits, Git-Pushes oder öffentliche Website-Bereitstellung wurden ausgeführt.
