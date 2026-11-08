@@ -1,5 +1,7 @@
 # Eigenes Supabase-Backend und benutzbare Spiele
 
+**Aktueller Nachtrag vom 8. November 2026:** Erreichbarkeit, Migration, `platform` ACTIVE/Version 2, RLS und explizite Zugriffssperren erneut live lesend geprüft. Keine Cloudänderung durchgeführt. Die neueren lokalen Profil-/Benachrichtigungs-/Auditkorrekturen einschließlich `_shared/platformHandler.js` sind noch nicht bereitgestellt. 30 erfolgreiche Browserprüfungen verwenden ausdrücklich lokalen simulierten Auth-/SQL-Transport; sie ersetzen keinen Supabase-Mehrnutzerlauf. Aktuelle Nachweise und Testanleitung: [END_TO_END_AUDIT.md](END_TO_END_AUDIT.md). Ältere Testzahlen und Live-Nachweise darunter sind historisch.
+
 Stand: 8. November 2026. Auf ausdrücklichen Folgeauftrag sind die Funktionen aus Phase B/C jetzt im Code umgesetzt. Es wird ein eigenes Supabase-Projekt verwendet; eine zweite Implementierung ist keine Voraussetzung mehr.
 
 Tagesabschluss und nächste Sitzung: [SESSION_HANDOFF.md](SESSION_HANDOFF.md). Die folgenden Live-Nachweise stammen aus der vorausgehenden freigegebenen Einrichtung. Beim anschließenden Dokumentationsauftrag wurden keine Migrationen, Deployments oder Cloud-Änderungen ausgeführt.

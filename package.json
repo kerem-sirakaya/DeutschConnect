@@ -10,13 +10,17 @@
     "check": "node scripts/check-locales.mjs",
     "test": "node --test scripts/*.test.mjs",
     "check:render": "node scripts/check-render.mjs",
-    "check:offline": "node scripts/check-offline.mjs"
+    "check:offline": "node scripts/check-offline.mjs",
+    "test:e2e": "playwright test",
+    "test:e2e:live": "node scripts/run-live-e2e.mjs",
+    "check:backend:live": "node scripts/check-backend-live.mjs"
   },
   "dependencies": {
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.65.0",
     "@vitejs/plugin-react": "^5.1.0",
     "vite": "^7.2.0"
   }

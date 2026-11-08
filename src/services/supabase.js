@@ -114,7 +114,7 @@ export function createSupabaseService({ config, fetcher = globalThis.fetch, stor
       const identity = await request('/auth/v1/user',{ method:'GET',token });
       if (!expectedUser || identity.id !== expectedUser || user?.id !== expectedUser) throw new Error('account-required');
       const response = await request('/functions/v1/platform',{ token, body:action ? { action,commandId } : {} });
-      if (response.protocol !== 1 || response.state?.activeId !== expectedUser || !response.state.profiles?.[expectedUser]) throw new Error('invalid-response');
+      if (response.protocol !== 1 || !Number.isSafeInteger(response.revision) || response.revision < 0 || response.state?.activeId !== expectedUser || !response.state.profiles?.[expectedUser]) throw new Error('invalid-response');
       return response;
     },
   };

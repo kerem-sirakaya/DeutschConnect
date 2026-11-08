@@ -7,6 +7,8 @@ Cross-school collaboration platform
 
 **Stand der Dokumentation:** 8. November 2026
 
+**Neuester Stand: End-to-End-Prüfung.** Das eigene Supabase-Testprojekt samt Migration, aktiver Function und Zugriffssperren live lesend geprüft. 30 lokale Browserprüfungen mit getrennten Kontositzungen, echter Oberfläche und produktivem HTTP-Handler erfolgreich; Auth/SQL dabei simuliert. Zwei neue Fehler lokal korrigiert, 136 Unit-/Integrationstests erfolgreich. Die echte schulübergreifende Cloud-Abnahme bleibt bis zu zwei bestätigten Testzugängen und aktueller Function-Bereitstellung offen. Nachhilfe-Kontakttexte werden weiterhin nur privat gespeichert, nicht zugestellt. Ergebnisse, Statusmatrix und Zwei-Geräte-Anleitung: [docs/END_TO_END_AUDIT.md](docs/END_TO_END_AUDIT.md).
+
 **Neuester Prüfstand: Gaming und Self-Audit.** 14 Ursachen in Datenschutz, Anmeldung, Speicherung, Gruppen, Formularen und Spielen lokal korrigiert. 132 automatisierte Tests, 796 Texte je Sprache, erweiterte Routenprüfung, Produktions-Build und Offline-Prüfung erfolgreich. Interaktive Smartphone-/Zwei-Geräte-Abnahme und externe Function-Bereitstellung bleiben offen. Bericht: [docs/SELF-AUDIT.md](docs/SELF-AUDIT.md); aktueller Übergabestand: [docs/SESSION_HANDOFF.md](docs/SESSION_HANDOFF.md).
 
 **Neu: Schacheinladungen** besitzen jetzt eine appweite Glocke und die Übersicht `#/me/notifications` mit Annehmen/Ablehnen, direktem Partie-Einstieg und Antworten für den Einladenden. E-Mail-Texte und Versandvertrag sind vorbereitet; ein Versanddienst wurde auf Wunsch noch nicht eingerichtet. Bei geschlossener Website werden deshalb noch keine externen Hinweise verschickt. Details: [docs/CHESS-INVITATIONS.md](docs/CHESS-INVITATIONS.md). Kein Deployment oder Mailversand ausgeführt.
