@@ -1,4 +1,4 @@
-import { routeFromHash } from '../data/navigation.js';
+import { captureAuthCallback } from './authCallback.js';
 
 // Uses Supabase's documented Auth/REST endpoints. No secrets or SQL privileges
 // in the browser. The backend verifies the bearer token again for every call.
@@ -14,10 +14,11 @@ export function readBackendConfig(env = {}) {
   return { url, key };
 }
 
-export function createSupabaseService({ config, fetcher = globalThis.fetch, storage, locks, location, history } = {}) {
+export function createSupabaseService({ config, fetcher = globalThis.fetch, storage, locks, location, history, initialCallback } = {}) {
   const storageKey = 'deutschconnect.auth.' + (config ? new URL(config.url).host : 'disabled');
   let session = null, user = null, initialized = false, authGeneration = 0, memoryOnly = false;
   let pending = Promise.resolve(); const listeners = new Set();
+  let initialization=null, callback=initialCallback, candidate=null, confirmation={kind:'none'};
   const emit = () => { for (const listener of listeners) listener(); };
   const read = () => { if(!storage)return undefined;let raw;try{raw=storage.getItem(storageKey);}catch{return undefined;}try{return raw===null?null:JSON.parse(raw);}catch{return null;} };
   const save = (value) => { session = value; try { if(!storage)throw new Error('storage');if (value) storage.setItem(storageKey,JSON.stringify(value)); else storage.removeItem(storageKey);memoryOnly=false; } catch { memoryOnly=true; } };
@@ -32,7 +33,6 @@ export function createSupabaseService({ config, fetcher = globalThis.fetch, stor
   }
   const normalize = (value) => ({ access_token:value.access_token, refresh_token:value.refresh_token, expires_at:value.expires_at || Math.floor(Date.now()/1000) + Number(value.expires_in || 3600) });
   const confirmationRedirect = () => location?.origin ? '?redirect_to=' + encodeURIComponent(location.origin + location.pathname) : '';
-  const clearCallback = () => history?.replaceState({...history.state,dcRoute:'/me/account',...(history.state?.dcPrevious?{dcPrevious:routeFromHash(history.state.dcPrevious)}:{})},'',location.pathname + location.search + '#/me/account');
   async function refresh() {
     const work = async () => {
       const marker = authGeneration;
@@ -54,40 +54,80 @@ export function createSupabaseService({ config, fetcher = globalThis.fetch, stor
     if (!value.id || !value.email_confirmed_at) throw new Error('verification-required');
     user = { id:value.id, email:value.email, confirmed:true }; emit(); return user;
   }
-  async function initialize() {
-    if (initialized || !config) return;
-    const marker = authGeneration;
-    initialized = true;
-    const hash = location?.hash?.slice(1) || '';
-    const params = new URLSearchParams(hash);
-    let callbackError = '';
-    if (params.has('error') || params.has('error_code')) {
-      // Auth callbacks are not app routes. Never render provider descriptions
-      // from the URL, and do not discard a valid session for a reused link.
-      clearCallback();
-      callbackError = params.get('error_code') === 'otp_expired' ? 'confirmation-link-expired' : 'confirmation-link-invalid';
-      session = read();
-    } else if (params.has('access_token')) {
-      const access = params.get('access_token'), refreshToken = params.get('refresh_token');
-      // Remove credentials from the URL before rendering or following links.
-      clearCallback();
-      if (access && refreshToken) save(normalize({ access_token:access, refresh_token:refreshToken, expires_in:Number(params.get('expires_in')) || 3600 }));
-    } else session = read();
-    if (session) { try { await verify(); } catch (error) { if (marker === authGeneration) { user = null; if (error.status === 401 || error.message === 'verification-required') save(null); } } }
-    emit();
-    if (callbackError) throw new Error(callbackError);
+  const identityOf=value=>{if(!value?.id || !value.email_confirmed_at)throw new Error('verification-required');return {id:value.id,email:value.email,confirmed:true};};
+  const sameSession=(a,b)=>a?.access_token===b?.access_token && a?.refresh_token===b?.refresh_token;
+  async function restoreSession(marker) {
+    const stored=read();session=stored===undefined || (memoryOnly && stored===null)?session:stored;
+    if(!session)return;
+    try { await verify(); }
+    catch(error){if(marker===authGeneration){user=null;if(error.status===401 || error.status===400 || error.message==='verification-required')save(null);emit();}throw error;}
   }
+  async function verifyCandidate(value) {
+    if(!value?.access_token || !value.refresh_token)throw new Error('confirmation-link-invalid');
+    return identityOf(await request('/auth/v1/user',{method:'GET',token:value.access_token}));
+  }
+  function adopt(value,identity,marker,observed) {
+    if(marker!==authGeneration || (read()!==undefined && !sameSession(read(),observed)))throw new Error('account-required');
+    save(value);user=identity;candidate=null;callback=null;confirmation={kind:'confirmed',signedIn:true};emit();
+  }
+  async function rejectCallback(code,marker) {
+    candidate=null;callback=null;confirmation={kind:'error',code};
+    try{await restoreSession(marker);}catch(error){if(error.message==='network')throw error;}
+    emit();throw new Error(code);
+  }
+  async function initializeOnce() {
+    if(!config)return;
+    const marker = authGeneration;
+    if(!initialized){initialized=true;callback??=captureAuthCallback(location,history);}
+    if(callback?.kind==='error'){
+      return rejectCallback(callback.code,marker);
+    }
+    if(callback?.kind==='otp'){
+      let result;
+      try{result=await request('/auth/v1/verify',{body:{token_hash:callback.token_hash,type:callback.type}});}
+      catch(error){
+        if([400,401,403,422].includes(error.status))return rejectCallback(error.message==='otp_expired'?'confirmation-link-expired':'confirmation-link-invalid',marker);
+        throw error;
+      }
+      if(result.access_token && result.refresh_token)candidate=normalize(result);
+      else {identityOf(result.user);callback=null;confirmation={kind:'confirmed',signedIn:false};await restoreSession(marker);emit();return;}
+    }else if(callback?.kind==='tokens')candidate??=normalize(callback);
+    if(candidate){
+      let identity;
+      try{identity=await verifyCandidate(candidate);}catch(error){
+        if(error.status===400 || error.status===401 || error.message==='verification-required'){
+          return rejectCallback('confirmation-link-invalid',marker);
+        }
+        throw error;
+      }
+      try{await restoreSession(marker);}catch(error){if(error.message==='network')throw error;}
+      if(marker!==authGeneration)throw new Error('account-required');
+      if(user && user.id!==identity.id){confirmation={kind:'different-account',email:identity.email};emit();return;}
+      const observed=session;adopt(candidate,identity,marker,observed);return;
+    }
+    await restoreSession(marker);emit();
+  }
+  function initialize(){return initialization??=(initializeOnce());}
+  function retryAuth(){initialization=null;return initialize();}
+  async function acceptConfirmation(){
+    if(!candidate)throw new Error('confirmation-link-invalid');
+    const marker=++authGeneration,observed=read();
+    const identity=await verifyCandidate(candidate);adopt(candidate,identity,marker,observed);
+  }
+  function dismissConfirmation(){candidate=null;callback=null;confirmation={kind:'none'};emit();}
   async function signIn(email,password) {
     const marker = ++authGeneration;
     const data = await request('/auth/v1/token?grant_type=password',{ body:{ email,password } });
     if (marker !== authGeneration) throw new Error('account-required');
-    save(normalize(data)); try { await verify(); } catch (error) { if (marker === authGeneration) { save(null); user = null; } throw error; }
+    const observed=read(),next=normalize(data),identity=await verifyCandidate(next);
+    adopt(next,identity,marker,observed);confirmation={kind:'none'};emit();
   }
   async function signUp(email,password,displayName,language) {
     await request('/auth/v1/signup' + confirmationRedirect(),{ body:{ email,password,data:{ displayName,language } } });
     // Never infer verification or session from the signup response.
   }
   async function signOut() {
+    candidate=null;callback=null;confirmation={kind:'none'};
     const marker = ++authGeneration, target = user?.id;
     try {
       if (session) { const token = await refresh(); const identity = await request('/auth/v1/user',{ method:'GET',token }); if (marker !== authGeneration || (target && identity.id !== target)) throw new Error('account-required'); await request('/auth/v1/logout',{token}); }
@@ -95,7 +135,7 @@ export function createSupabaseService({ config, fetcher = globalThis.fetch, stor
     finally { if (marker === authGeneration) { save(null); user = null; emit(); } }
   }
   return {
-    configured:Boolean(config), getUser:() => user, subscribe(listener) { listeners.add(listener); return () => listeners.delete(listener); }, initialize, signIn, signUp, signOut,
+    configured:Boolean(config), getUser:() => user, getConfirmation:()=>confirmation, subscribe(listener) { listeners.add(listener); return () => listeners.delete(listener); }, initialize, retryAuth, acceptConfirmation, dismissConfirmation, signIn, signUp, signOut,
     resend: (email) => request('/auth/v1/resend' + confirmationRedirect(),{ body:{ type:'signup',email } }),
     async synchronize(event) {
       if(event?.type==='storage' && event.key!==null && event.key!==storageKey)return;
@@ -109,13 +149,21 @@ export function createSupabaseService({ config, fetcher = globalThis.fetch, stor
       catch(error){if(marker===authGeneration && (changed || error.status===401 || error.message==='verification-required')){user=null;if(error.status===401 || error.message==='verification-required')save(null);emit();}throw error;}
     },
     async platform(action, commandId) {
-      const expectedUser = user?.id;
+      const expectedUser = user?.id, marker = authGeneration;
       const token = await refresh();
-      const identity = await request('/auth/v1/user',{ method:'GET',token });
-      if (!expectedUser || identity.id !== expectedUser || user?.id !== expectedUser) throw new Error('account-required');
-      const response = await request('/functions/v1/platform',{ token, body:action ? { action,commandId } : {} });
-      if (response.protocol !== 1 || !Number.isSafeInteger(response.revision) || response.revision < 0 || response.state?.activeId !== expectedUser || !response.state.profiles?.[expectedUser]) throw new Error('invalid-response');
-      return response;
+      try {
+        const identity = await request('/auth/v1/user',{ method:'GET',token });
+        if (!expectedUser || identity.id !== expectedUser || user?.id !== expectedUser) throw new Error('account-required');
+        if (!identity.email_confirmed_at) throw new Error('verification-required');
+        const response = await request('/functions/v1/platform',{ token, body:action ? { action,commandId } : {} });
+        if (response.protocol !== 1 || !Number.isSafeInteger(response.revision) || response.revision < 0 || response.state?.activeId !== expectedUser || !response.state.profiles?.[expectedUser]) throw new Error('invalid-response');
+        return response;
+      } catch(error) {
+        if (marker === authGeneration && session?.access_token === token && (error.status === 401 || error.message === 'verification-required')) {
+          authGeneration++;save(null);user=null;emit();
+        }
+        throw error;
+      }
     },
   };
 }

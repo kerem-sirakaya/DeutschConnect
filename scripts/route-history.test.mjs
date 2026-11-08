@@ -58,3 +58,11 @@ test('incoming auth tokens never enter application route history metadata',()=>{
   assert.equal(b.history.state.dcRoute,'/me/account');
   assert.ok(!JSON.stringify(b.history.state).includes('fake-access'));stop();
 });
+
+test('a route changed before subscription is synchronized even when the pending hash event repeats it',()=>{
+  const b=browser('/me/account');let rendered='/me/account';
+  const old=listenToRoutes(b,{confirm:()=>true,onRoute:route=>{rendered=route;}});old();
+  b.navigate('/ideas/new');
+  const stop=listenToRoutes(b,{confirm:()=>true,onRoute:route=>{rendered=route;}});b.dispatchEvent();
+  assert.equal(rendered,'/ideas/new');assert.equal(b.history.state.dcRoute,'/ideas/new');stop();
+});

@@ -15,6 +15,8 @@ export function listenToRoutes(browser, { confirm, onRoute }) {
     current = next; index = nextIndex; onRoute(next);
   };
   browser.addEventListener('hashchange',change);
+  // A URL may change between the first render and effect subscription.
+  onRoute(current);
   return () => browser.removeEventListener('hashchange',change);
 }
 

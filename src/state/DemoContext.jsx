@@ -4,6 +4,7 @@ import { createLocalRepository } from './localRepository.js';
 import { guestAccess } from '../data/access.js';
 import { useAccount } from './AccountContext.jsx';
 import { activities as demoActivities } from '../data/activities.js';
+import AccountRecovery from '../components/AccountRecovery.jsx';
 
 export const DemoContext = createContext(null);
 const personaKey = 'deutschconnect.demo.persona';
@@ -56,7 +57,7 @@ export function DemoProvider({ children }) {
 
   function updatePreferences(patch, expectedProfile) { return dispatch({ type: 'preferences', patch, ...(expectedProfile !== undefined ? { expectedProfile } : {}) }); }
 
-  if (account?.user && !account.state) return <main className="main-container"><h1>{t.real.loadingAccount}</h1><p role="status">{account.error ? t.real.connectionError : t.real.loading}</p><div className="form-actions"><button className="button" onClick={account.reload}>{t.quality.reloadStorage}</button><button className="button button-secondary" onClick={account.signOut}>{t.real.signOut}</button></div></main>;
+  if ((account?.loading&&!account.user) || (account?.user&&!account.state)) return <AccountRecovery />;
   const access = account?.user ? { mode:'account', subjectId:account.user.id, authenticationAvailable:true, synchronized:true, confirmedAttendanceAvailable:true } : account?.configured ? { ...guestAccess,authenticationAvailable:true } : guestAccess;
   return <DemoContext.Provider value={{ state, profile, activities:state.activities || demoActivities, access, participation: state.participation[profile.id], dispatch, updatePreferences, switchProfile,
     storageAvailable: ['ready', 'recovered'].includes(storageStatus.kind), storageStatus,

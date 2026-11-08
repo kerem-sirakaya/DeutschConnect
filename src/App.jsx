@@ -27,6 +27,7 @@ import { safeReturnTo, routeFromHash } from './data/navigation.js';
 import { listenToRoutes } from './state/routeHistory.js';
 import { ChessNotificationProvider } from './state/ChessNotificationContext.jsx';
 import { ChessNotificationBanner } from './components/ChessInvitations.jsx';
+import ConfirmationNotice from './components/ConfirmationNotice.jsx';
 
 function readRoute() { return routeFromHash(window.location.hash); }
 const personalSections = ['activities', 'projects', 'tutoring', 'saved', 'community', 'settings', 'account', 'achievements', 'moderation', 'notifications'];
@@ -37,6 +38,8 @@ function AppContent() {
   const [route, setRoute] = useState(readRoute);
   const mainRef = useRef(null);
   const previousRoute = useRef(route);
+  const unsavedMessage = useRef(t.quality.unsavedWarning);
+  unsavedMessage.current = t.quality.unsavedWarning;
   const [path, search = ''] = route.split('?');
   const requestedBack = new URLSearchParams(search).get('from');
   const returnTo = safeReturnTo(requestedBack);
@@ -44,8 +47,8 @@ function AppContent() {
   const page = path === '/' ? 'home' : ['me', 'about'].includes(parts[1]) ? 'me' : ['tutoring', 'community'].includes(parts[1]) ? parts[1] : 'discover';
 
   useEffect(() => {
-    return listenToRoutes(window, { confirm:() => confirmUnsavedNavigation(t.quality.unsavedWarning), onRoute:setRoute });
-  }, [t.quality.unsavedWarning]);
+    return listenToRoutes(window, { confirm:() => confirmUnsavedNavigation(unsavedMessage.current), onRoute:setRoute });
+  }, []);
 
   useEffect(() => {
     if (previousRoute.current !== route) {
@@ -88,6 +91,7 @@ function AppContent() {
   return <>
     <a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); mainRef.current?.focus(); }}>{t.skipLink}</a>
     <Header page={page} />
+    {path!=='/me/account'&&<ConfirmationNotice />}
     {path !== '/me/notifications' && <ChessNotificationBanner />}
     {access.mode === 'account' ? <AccountStatus /> : <PersistenceNotice />}
     {/* Page state intentionally resets per route/persona; filters and drafts restore from isolated session storage. */}

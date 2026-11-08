@@ -1,4 +1,22 @@
 {
+  "auth": {
+    "otherAccount": "Bağlantıdaki e-posta doğrulandı. Bu tarayıcıda başka bir hesap açık; hesap değiştirilmedi.",
+    "acceptAccount": "Doğrulanan hesaba geç",
+    "keepAccount": "Mevcut hesapta kal",
+    "confirmedSignedIn": "E-posta doğrulandı. Oturumun başarıyla kontrol edildi ve devralındı.",
+    "confirmedSignIn": "E-posta doğrulandı. Oturum açılmadı. Şimdi şifrenle giriş yap.",
+    "dismiss": "Bildirimi kapat",
+    "checking": "Doğrulama ve oturum kontrol ediliyor",
+    "profileTitle": "Kişisel alanın hazırlanıyor",
+    "profilePending": "Oturumun doğrulandı. Uygulama profilinin sunucudan yüklenmesi gerekiyor; bu, e-posta doğrulamasından ayrı bir adımdır.",
+    "profileFailed": "Uygulama profili henüz yüklenemedi. Doğrulanan oturumun başka bir hesapla birleştirilmedi.",
+    "profileHelp": "Bağlantıyı ve kullandığın site adresini kontrol et. Profili yeniden yükleyebilir veya normal giriş formunu açabilirsin.",
+    "retryProfile": "Profili yeniden yükle",
+    "openSignIn": "Normal giriş formunu aç",
+    "reauthHint": "Buraya girilen hesap başarıyla kontrol edilene kadar mevcut oturum korunur. Başka hesaba yalnızca bilinçli girişinle geçilir.",
+    "retryAuth": "Oturumu yeniden kontrol et",
+    "diagnosticCode": "Giriş bilgileri içermeyen teknik hata kodu"
+  },
   "chessNotices": {
     "title": "Bildirimler",
     "unread": "Okunmamış",
@@ -157,6 +175,9 @@
     "offlineFailed": "Çevrim dışı dosyalar tamamen kaydedilemedi. İnternet bağlantısıyla tekrar dene."
   },
   "real": {
+    "invalidEmail": "Lütfen geçerli bir e-posta adresi gir.",
+    "passwordRequired": "Lütfen şifreni gir.",
+    "signingOut": "Oturum kapatılıyor…",
     "account": "Kullanıcı hesabı",
     "accountShort": "Oturum açık · eşitlenmiş",
     "liveHint": "Doğrulanmış hesabını kullanıyorsun. Değişiklikler ortak sunucuya kaydedilir.",
@@ -244,6 +265,7 @@
     "moderationRequired": "Gerçek grup iletileri yapılandırılmış moderasyon gerektirir.",
     "polling": "Dört saniyede bir otomatik güncellenir.",
     "errors": {
+      "confirmation-password-required": "Bu dönüş doğrudan kullanılabilir bir oturum içermiyor. Lütfen şifrenle giriş yap. E-posta henüz doğrulanmadıysa yeni doğrulama bağlantısı iste.",
       "over_email_send_rate_limit": "E-posta gönderimi geçici olarak sınırlı. Lütfen daha sonra tekrar dene. E-postan zaten doğrulandıysa şifrenle doğrudan oturum açabilirsin.",
       "not-configured": "Oturum açma şu anda kullanılamıyor.",
       "invalid_credentials": "E-posta veya şifre yanlış.",

@@ -1,4 +1,7 @@
 {
+  "validationEventDescription": "Enter a description between 20 and 1500 characters.",
+  "validationEventDate": "Choose a valid date in the future.",
+  "validationSchool": "Choose the school organizing the event.",
   "schoolRequired": "Select your school in your profile before publishing projects or tutoring. Existing drafts stay saved.",
   "edit": "Edit",
   "save": "Save changes",

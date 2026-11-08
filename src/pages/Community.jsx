@@ -35,8 +35,9 @@ export default function Community({ section = 'people', roomId }) {
   const members = visibleMembers(state);
   const roomItems = access.mode === 'account' ? state.modules.groups : [...rooms.map((id) => ({ id,kind:'topic',memberIds:Object.keys(state.profiles) })),...(state.modules.groups || []).filter((g) => !rooms.includes(g.id))];
   const group = roomId ? displayedGroup(state,roomId,access.mode) || roomItems.find((g) => g.id === roomId) : null;
-  const canRead = !roomId || group?.memberIds.includes(profile.id) || profile.isModerator;
-  const canWrite = canRead && !group?.closed && (access.mode === 'guest' || state.modules.moderationAvailable);
+  const member = group?.memberIds.includes(profile.id) || false;
+  const canRead = !roomId || member || profile.isModerator;
+  const canWrite = member && !group?.closed && (access.mode === 'guest' || state.modules.moderationAvailable);
   const roomTitle = group?.title || t.ext.roomNames[roomId] || t.real.groups;
   if (roomId && !group) return <NotFound />;
 
@@ -71,7 +72,7 @@ export default function Community({ section = 'people', roomId }) {
     {section === 'projects' && <><p className="module-note">{t.ext.community.projectHint}</p><div className="search-toolbar"><SearchField label={t.app.searchIdeas} value={query} onChange={(value) => changeFilter('query', value)} /></div><div className="task-grid">{projects.map((idea) => <IdeaCard key={idea.id} idea={idea} returnTo="/community/projects" />)}</div>{!projects.length && <EmptyState icon="bulb" text={t.app.noResults} />}</>}
     {section === 'rooms' && !roomId && <div className="initiative-grid">{roomItems.map(({id,title}) => <article className="content-card" key={id}><Icon name="chat" size={26} /><h2><a href={'#/community/rooms/' + id}>{title || t.ext.roomNames[id]}<Icon name="arrow" size={16} /></a></h2><p>{t.ext.roomDescriptions[id]}</p></article>)}</div>}
     {section === 'rooms' && roomId && <>
-      {access.mode === 'account' && group.kind === 'topic' && <div className="group-actions"><ActionButton action={{ type:canRead ? 'leaveGroup':'joinGroup',id:roomId }}>{canRead ? t.real.leaveGroup : t.real.joinGroup}</ActionButton></div>}
+      {access.mode === 'account' && group.kind === 'topic' && <div className="group-actions"><ActionButton action={{ type:member ? 'leaveGroup':'joinGroup',id:roomId }}>{member ? t.real.leaveGroup : t.real.joinGroup}</ActionButton></div>}
       {!canRead && <p className="form-notice">{t.real.groupRequired}</p>}
       {canRead && <>
       {group?.memberIds?.length > 0 && <details className="disclosure"><summary>{t.personal.profile.members}</summary><div className="profile-members">{group.memberIds.map((id) => <ProfileLink id={id} key={id} />)}</div></details>}

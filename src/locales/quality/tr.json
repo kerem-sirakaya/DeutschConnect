@@ -1,4 +1,7 @@
 {
+  "validationEventDescription": "20 ile 1500 karakter arasında bir açıklama gir.",
+  "validationEventDate": "Lütfen gelecekte geçerli bir tarih seç.",
+  "validationSchool": "Lütfen etkinliği düzenleyen okulu seç.",
   "schoolRequired": "Proje veya ders desteği yayımlamadan önce profilinde okulunu seç. Mevcut taslakların kayıtlı kalır.",
   "edit": "Düzenle",
   "save": "Değişiklikleri kaydet",

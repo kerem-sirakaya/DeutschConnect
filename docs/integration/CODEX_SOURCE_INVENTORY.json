@@ -1,0 +1,2403 @@
+{
+  "formatVersion": 1,
+  "capturedAt": "2026-11-08T17:31:48.889Z",
+  "scope": "Working tree Codex source including pre-existing uncommitted changes; hashes are evidence, not a release commit.",
+  "branch": "codex-version-1.0",
+  "head": "889ad1bdf09f11da3249ba367d78f0297e40a095",
+  "initialGitStatus": [
+    " M README.md",
+    " M docs/END_TO_END_AUDIT.md",
+    " M docs/SESSION_HANDOFF.md",
+    " M docs/SUPABASE-SETUP.md",
+    " M scripts/check-render.mjs",
+    " M scripts/route-history.test.mjs",
+    " M scripts/server-confirmation.test.mjs",
+    " M src/App.jsx",
+    " M src/components/AccountStatus.jsx",
+    " M src/locales/platform/de.json",
+    " M src/locales/platform/en.json",
+    " M src/locales/platform/tr.json",
+    " M src/locales/quality/de.json",
+    " M src/locales/quality/en.json",
+    " M src/locales/quality/tr.json",
+    " M src/main.jsx",
+    " M src/pages/Account.jsx",
+    " M src/pages/Community.jsx",
+    " M src/pages/EventNew.jsx",
+    " M src/services/supabase.js",
+    " M src/state/AccountContext.jsx",
+    " M src/state/DemoContext.jsx",
+    " M src/state/routeHistory.js",
+    " M tests/e2e/backend.js",
+    " M tests/e2e/local.spec.js",
+    "?? docs/ADMIN_INTEGRATION_CONTRACT.md",
+    "?? docs/AUTH_CONFIRMATION_FIX.md",
+    "?? docs/INTEGRATION_READINESS.md",
+    "?? scripts/auth-confirmation.test.mjs",
+    "?? src/components/AccountRecovery.jsx",
+    "?? src/components/ConfirmationNotice.jsx",
+    "?? src/services/authCallback.js"
+  ],
+  "claudeRef": "origin/claude-version-1.0",
+  "claudeCommit": "9121665b98eef74ede9f3792b852180502eb8e0d",
+  "remoteFreshness": "Local reference only; no fetch or cloud access performed for this analysis.",
+  "files": [
+    {
+      "path": ".env.example",
+      "sha256": "2b6a324ee8508079ade12ee81a4139d57bb2e42edbc91fe19e88aaca609f7404",
+      "bytes": 201,
+      "lines": 5,
+      "symbols": []
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "f4f1e4d726a04534877a631d7f039cf948712281e688d128e7600262bc52517e",
+      "bytes": 2364,
+      "lines": 142,
+      "symbols": []
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "4f3e5ccfd2a3e4e4d2a244003b311af843da4bdcca53831a0f4e3532a82ff1a6",
+      "bytes": 4040,
+      "lines": 74,
+      "symbols": []
+    },
+    {
+      "path": "design references/01 - homepage upper part.jpeg",
+      "sha256": "6e81f0c9236fa63bfa9679b49d614062558933571dac439795f6757b9e3f08f5",
+      "bytes": 88445
+    },
+    {
+      "path": "design references/02 - homepage lower part.jpeg",
+      "sha256": "d5689c2809eea77dad3a42e98230c3a5778a7ca877074de90f4ce902dd223ecf",
+      "bytes": 61975
+    },
+    {
+      "path": "design references/03 - offered courses page with options to choose level.jpeg",
+      "sha256": "3129ce4c925f42b46e544dc3b6a3d8e8534d955ec94008b47ea3c7dd42ed2ec2",
+      "bytes": 89590
+    },
+    {
+      "path": "design references/04 - available teachers page.jpeg",
+      "sha256": "21677b7b40cb7a6aa95669e749b91892c58b7c41834ad0ea4fc075da6fbaf449",
+      "bytes": 82988
+    },
+    {
+      "path": "design references/05 - Dashboard page.jpeg",
+      "sha256": "67e22ad07ef6abb2762d8da8e8488444587e2914d4d6d16000e8ce0b2521b30c",
+      "bytes": 62782
+    },
+    {
+      "path": "design references/06 - Impact page - 50 50 model tab upper part.jpeg",
+      "sha256": "eaaa4e63612edce2d3bf8f9cce788ef6a10479d5d7a53af22a754e1f7fdcf1a2",
+      "bytes": 80110
+    },
+    {
+      "path": "design references/07 - Impact page - 50 50 model tab lower part.jpeg",
+      "sha256": "da3287272a16ba2c4e76dc932a22fdbf0b323b2edf8ed6a2be416be4f5d527af",
+      "bytes": 76818
+    },
+    {
+      "path": "design references/08 - Impact page - About us tab upper part.jpeg",
+      "sha256": "afcc7796057208c4b27afa6a5370b50d026b940d4f9c435c6fe71117a7a2a5ad",
+      "bytes": 71805
+    },
+    {
+      "path": "design references/09 - Impact page - About us lower part.jpeg",
+      "sha256": "c431dd7503c265d02c55017896d8dda9b55f34f059a5bbc1f114184edb8c55b9",
+      "bytes": 79678
+    },
+    {
+      "path": "index.html",
+      "sha256": "027bb7b55ce5801c5cc68b9022202b1574b6f3fe8eaaecfab29016ce9db6dce5",
+      "bytes": 573,
+      "lines": 16,
+      "symbols": []
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "3deed390478d2c6e53ddc5e8e81e6d0b65af03eabf15ed7c74385de749cb5011",
+      "bytes": 61562,
+      "lines": 1880,
+      "symbols": []
+    },
+    {
+      "path": "package.json",
+      "sha256": "16af34c3389763c8e05654aa9d13196a88f9578fb8bd22c7032f40667bc3787a",
+      "bytes": 775,
+      "lines": 28,
+      "symbols": []
+    },
+    {
+      "path": "playwright.config.js",
+      "sha256": "455b513efb5cb7424ad4db5f71a23bf88cdd30b2237d897da083fdb78425a4a8",
+      "bytes": 1443,
+      "lines": 31,
+      "symbols": []
+    },
+    {
+      "path": "public/favicon.svg",
+      "sha256": "8e6cfc25df3ef94cc41b59b079492d719faebc16824a73f1b8837face8a70e03",
+      "bytes": 285
+    },
+    {
+      "path": "scripts/audit.test.mjs",
+      "sha256": "e485f2570b4a75f62fa744a04610abf5f46bd137194182f3847d580aaf76f77b",
+      "bytes": 10092
+    },
+    {
+      "path": "scripts/auth-confirmation.test.mjs",
+      "sha256": "416301b933af199f223c3a93e75347c5741a9218bd287e994a1f8552ec8709dc",
+      "bytes": 6702
+    },
+    {
+      "path": "scripts/backend.test.mjs",
+      "sha256": "34f1a9ddc7d3ed7b0dc9ace94944c94a8dc5b4e5ed19b8eba7fd28fff0265265",
+      "bytes": 17404
+    },
+    {
+      "path": "scripts/check-backend-live.mjs",
+      "sha256": "29f763f5e201f33ca141f662911164159b20d4591552e773fbf4eeadb9f9191a",
+      "bytes": 2468
+    },
+    {
+      "path": "scripts/check-locales.mjs",
+      "sha256": "5b29a782db8af2ce3fbedc13b4af395214d1bf41d57e2dd5295081f609448f01",
+      "bytes": 2054
+    },
+    {
+      "path": "scripts/check-offline.mjs",
+      "sha256": "078d0e515eb68452edd508499da64a4cefe019e01b30790fb5d743057b12cc8c",
+      "bytes": 2866
+    },
+    {
+      "path": "scripts/check-render.mjs",
+      "sha256": "651ba98e77d6e5e9f0e5ac39f1b749b907238f21e1d1b46fd9979308fb3ce3fa",
+      "bytes": 33473
+    },
+    {
+      "path": "scripts/chess-games.test.mjs",
+      "sha256": "600e79c597ef448428d06f79fc3bff473c7233e2add3ce369f62569d27a92944",
+      "bytes": 6207
+    },
+    {
+      "path": "scripts/chess-notifications.test.mjs",
+      "sha256": "1b204f571d3ee93000a69e9a6b0a83bd360bd4cc848f9d27194f9badc9eef7e0",
+      "bytes": 6255
+    },
+    {
+      "path": "scripts/demo.test.mjs",
+      "sha256": "5dae7024b546eaccb9f28568c30143b77cfe51085a47f25549a3666aa3b78ae0",
+      "bytes": 6407
+    },
+    {
+      "path": "scripts/e2e-live-readonly.sql",
+      "sha256": "61b3bcc4aa1629b66b7ef5bfc009b080c0e854dae81bc03b36a744a73c46c75b",
+      "bytes": 1299,
+      "lines": 14,
+      "symbols": []
+    },
+    {
+      "path": "scripts/encoding.test.mjs",
+      "sha256": "2b3ed471792e253eb975888ad751c072152bf936956987d5aba23cff36ecc0d5",
+      "bytes": 1684
+    },
+    {
+      "path": "scripts/http-handler.test.mjs",
+      "sha256": "053d730342231a7e45b57d9958599b01c7390dfaaa257404cc5f73a819668179",
+      "bytes": 2381
+    },
+    {
+      "path": "scripts/leaderboards.test.mjs",
+      "sha256": "942d975e657dd1855d6e5f9f83c1ca250df8fcc7076bfd070fdf6b3980a91cfb",
+      "bytes": 11377
+    },
+    {
+      "path": "scripts/modules.test.mjs",
+      "sha256": "3576941cd81f67d5bfb6ca3dfbddf9282291fd203f7db5950ec03900e246430c",
+      "bytes": 6402
+    },
+    {
+      "path": "scripts/navigation-matching.test.mjs",
+      "sha256": "b11f1e92d1cf432d29fdfbc93ad4b0ea8a2c9c4b4062fef973858c95d4a33204",
+      "bytes": 6510
+    },
+    {
+      "path": "scripts/offline-build.mjs",
+      "sha256": "4d0e3584ab4eb8ef35b10c5a75e9618e2955fabefe1e4bcc555e421f40e6a3dd",
+      "bytes": 1935
+    },
+    {
+      "path": "scripts/personal-area.test.mjs",
+      "sha256": "bd75a3b5d8e18948bd9976ebcf5275290f2f245ab18ff7c182941550f075c3cf",
+      "bytes": 8413
+    },
+    {
+      "path": "scripts/profiles-statistics.test.mjs",
+      "sha256": "a4e2a6a3a6ff9e6503d7f09e42a145fb74319d669c365f70a9ab44ff2b308b24",
+      "bytes": 8468
+    },
+    {
+      "path": "scripts/route-history.test.mjs",
+      "sha256": "795e59e1277442d9d4f2b0c242f22d7de145f2642adea18a877144827f637cfb",
+      "bytes": 4173
+    },
+    {
+      "path": "scripts/run-live-e2e.mjs",
+      "sha256": "5f8a2472f47af727ac034b4b21c57397c3f3dc5bf3764f44ef7b06b798e30c21",
+      "bytes": 251
+    },
+    {
+      "path": "scripts/server-confirmation.test.mjs",
+      "sha256": "fd1e052a121da61174f8b81ba58439a8bb77c896feaa2c9e9c885575e692b286",
+      "bytes": 2052
+    },
+    {
+      "path": "scripts/state-quality.test.mjs",
+      "sha256": "26fd96d014f4e97f70edced8573c1dc574389897041f5944c07759c60ec5864d",
+      "bytes": 15776
+    },
+    {
+      "path": "scripts/text-encoding.mjs",
+      "sha256": "49fbd21506c62eeeed65c8766fa6c7f6e3e2146462b67f60eb681f4feb0943f7",
+      "bytes": 1123
+    },
+    {
+      "path": "src/App.jsx",
+      "sha256": "6d5dfbe1864e79b3019cf6f5aa6cf21006bb48fb54a3e138fa13c701906d8019",
+      "bytes": 6623,
+      "lines": 107,
+      "symbols": [
+        {
+          "name": "readRoute",
+          "line": 32
+        },
+        {
+          "name": "AppContent",
+          "line": 35
+        },
+        {
+          "name": "App",
+          "line": 103
+        }
+      ]
+    },
+    {
+      "path": "src/components/AccountRecovery.jsx",
+      "sha256": "e9f3e3077e9e65d32a79b0669620bb5e2e81b1e0ec3b21178c0c3aae7c204c7b",
+      "bytes": 1544,
+      "lines": 19,
+      "symbols": [
+        {
+          "name": "AccountRecovery",
+          "line": 6
+        }
+      ]
+    },
+    {
+      "path": "src/components/AccountStatus.jsx",
+      "sha256": "e07b9e1aa43985ded40bd3466ed23c1bfad084f18f46536291291803a2514f0b",
+      "bytes": 804,
+      "lines": 10,
+      "symbols": [
+        {
+          "name": "AccountStatus",
+          "line": 4
+        },
+        {
+          "name": "reload",
+          "line": 7
+        }
+      ]
+    },
+    {
+      "path": "src/components/ActionButton.jsx",
+      "sha256": "1f30f7e01a837e7134cd68ee89a606f81311959600331347babb3b11ba766c30",
+      "bytes": 1052,
+      "lines": 10,
+      "symbols": [
+        {
+          "name": "ActionButton",
+          "line": 4
+        },
+        {
+          "name": "run",
+          "line": 7
+        }
+      ]
+    },
+    {
+      "path": "src/components/ActivityStatistics.jsx",
+      "sha256": "d806be88fd0ab93cceb05a3eccc994ed5653e6d22b5cb9369abfcb694915a5f4",
+      "bytes": 545,
+      "lines": 8,
+      "symbols": [
+        {
+          "name": "ActivityStatistics",
+          "line": 3
+        }
+      ]
+    },
+    {
+      "path": "src/components/BackLink.jsx",
+      "sha256": "f063e6cee1c4e11f89362b84cac28333fa71d0e6cdd6d396918cd56aaa725116",
+      "bytes": 525,
+      "lines": 11,
+      "symbols": [
+        {
+          "name": "BackLink",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "path": "src/components/ChessInvitations.jsx",
+      "sha256": "3d37e5176c6e5318b3add5c90c6571eabbe0323ded9074cc427165130936d213",
+      "bytes": 4250,
+      "lines": 58,
+      "symbols": [
+        {
+          "name": "ChessNotificationLink",
+          "line": 6
+        },
+        {
+          "name": "ChessNotificationBanner",
+          "line": 14
+        },
+        {
+          "name": "ChessInvitations",
+          "line": 21
+        },
+        {
+          "name": "respond",
+          "line": 29
+        },
+        {
+          "name": "read",
+          "line": 38
+        }
+      ]
+    },
+    {
+      "path": "src/components/CommunityCards.jsx",
+      "sha256": "c27d3a268f99921348efc462bb68e53e8509802ad9a45dbf739ddb5a17aacdb9",
+      "bytes": 3518,
+      "lines": 51,
+      "symbols": [
+        {
+          "name": "MemberCard",
+          "line": 11
+        },
+        {
+          "name": "MessageCard",
+          "line": 25
+        },
+        {
+          "name": "remove",
+          "line": 31
+        },
+        {
+          "name": "MemberActions",
+          "line": 46
+        }
+      ]
+    },
+    {
+      "path": "src/components/ConfirmationNotice.jsx",
+      "sha256": "f9ddbd288c656d1f0bbf16b65fab04db9253fe701b62cd46d996e2bb5955430a",
+      "bytes": 1509,
+      "lines": 16,
+      "symbols": [
+        {
+          "name": "ConfirmationNotice",
+          "line": 5
+        },
+        {
+          "name": "accept",
+          "line": 8
+        }
+      ]
+    },
+    {
+      "path": "src/components/ContentManagement.jsx",
+      "sha256": "fc010fa8c5961b678c033cba8c2e57bf467657a8a3d53524bfa42de17aa39c11",
+      "bytes": 1804,
+      "lines": 32,
+      "symbols": [
+        {
+          "name": "ContentManagement",
+          "line": 5
+        },
+        {
+          "name": "run",
+          "line": 10
+        }
+      ]
+    },
+    {
+      "path": "src/components/EventCard.jsx",
+      "sha256": "6e62864f1e650c22a6118caf6232c4ffbbc524107a5d6c4136e45514ca1db98a",
+      "bytes": 1812,
+      "lines": 25,
+      "symbols": [
+        {
+          "name": "EventCard",
+          "line": 7
+        }
+      ]
+    },
+    {
+      "path": "src/components/FormFields.jsx",
+      "sha256": "57e04ebd2d64cbb4c40213cd317dc3e725726d17dc07b968f16506c6400d5970",
+      "bytes": 1614,
+      "lines": 11,
+      "symbols": [
+        {
+          "name": "TextField",
+          "line": 1
+        },
+        {
+          "name": "CheckOptions",
+          "line": 7
+        }
+      ]
+    },
+    {
+      "path": "src/components/GameLeaderboard.jsx",
+      "sha256": "d058f04f9fa7afd1e2c215c6c9b6e9ffe4363799ce7c35f19f0841a67b8a3724",
+      "bytes": 5429,
+      "lines": 56,
+      "symbols": [
+        {
+          "name": "historyTime",
+          "line": 9
+        },
+        {
+          "name": "GameLeaderboard",
+          "line": 14
+        },
+        {
+          "name": "toggle",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "path": "src/components/HeroSection.jsx",
+      "sha256": "948196c89110e450cb3866420618e5fc542aef98636b3ed17ad41eeb535ea0d5",
+      "bytes": 863,
+      "lines": 19,
+      "symbols": [
+        {
+          "name": "HeroSection",
+          "line": 7
+        }
+      ]
+    },
+    {
+      "path": "src/components/Icon.jsx",
+      "sha256": "ebe67f6834943a678ad32fbf7bbdb3eb0bc5974ebddef5a3e3922db8de178f75",
+      "bytes": 2178,
+      "lines": 27,
+      "symbols": [
+        {
+          "name": "Icon",
+          "line": 24
+        }
+      ]
+    },
+    {
+      "path": "src/components/IdeaCard.jsx",
+      "sha256": "2d024c3dafadaf248cce5eaab054189cb633af74513d54271ce16f961e30438e",
+      "bytes": 2094,
+      "lines": 36,
+      "symbols": [
+        {
+          "name": "ideaContent",
+          "line": 8
+        },
+        {
+          "name": "IdeaCard",
+          "line": 18
+        }
+      ]
+    },
+    {
+      "path": "src/components/InterestToggle.jsx",
+      "sha256": "217a0633842d2a6149b8a950e0713107c9b37659ad4b528574cd5f6b0edd7f0d",
+      "bytes": 1211,
+      "lines": 20,
+      "symbols": [
+        {
+          "name": "InterestToggle",
+          "line": 4
+        },
+        {
+          "name": "toggle",
+          "line": 10
+        }
+      ]
+    },
+    {
+      "path": "src/components/ModuleNavigation.jsx",
+      "sha256": "21d9a0ae14253885aac66474a5cda7ca6a28039ed72444f6a2e6f3649d294c51",
+      "bytes": 764,
+      "lines": 15,
+      "symbols": [
+        {
+          "name": "DiscoverNavigation",
+          "line": 4
+        },
+        {
+          "name": "CommunityNavigation",
+          "line": 11
+        }
+      ]
+    },
+    {
+      "path": "src/components/Navigation.jsx",
+      "sha256": "ca575c7bb184ad6fd39a481dd26408addf57918afa6403509d7441fdaa0f122e",
+      "bytes": 3145,
+      "lines": 56,
+      "symbols": [
+        {
+          "name": "Navigation",
+          "line": 12
+        },
+        {
+          "name": "LanguageSwitcher",
+          "line": 21
+        },
+        {
+          "name": "Header",
+          "line": 34
+        }
+      ]
+    },
+    {
+      "path": "src/components/ParticipationControl.jsx",
+      "sha256": "a6301fca07aa5320955fbc01168d0202bc3c5eafab3a8bb2dc57228721a4bf71",
+      "bytes": 2272,
+      "lines": 37,
+      "symbols": [
+        {
+          "name": "ParticipationControl",
+          "line": 6
+        },
+        {
+          "name": "change",
+          "line": 14
+        }
+      ]
+    },
+    {
+      "path": "src/components/PersistenceNotice.jsx",
+      "sha256": "88944052c9b2f080e2bdcb409abc5af883f07d45c30fc044fc7fa8ee1ed60011",
+      "bytes": 2473,
+      "lines": 51,
+      "symbols": [
+        {
+          "name": "PersistenceNotice",
+          "line": 7
+        },
+        {
+          "name": "reload",
+          "line": 19
+        },
+        {
+          "name": "download",
+          "line": 23
+        }
+      ]
+    },
+    {
+      "path": "src/components/ProfileLink.jsx",
+      "sha256": "35e3324290dfb2fad859d76ba865dbb3a6cd9fc1a70a5eb1e58de2d9b246d6cf",
+      "bytes": 910,
+      "lines": 15,
+      "symbols": [
+        {
+          "name": "ProfileLink",
+          "line": 5
+        }
+      ]
+    },
+    {
+      "path": "src/components/ProfileSchoolNotice.jsx",
+      "sha256": "62d791a8bb471a243d10b8772c5808a9f06195bf92ab8cddbcc9c10cacad1843",
+      "bytes": 322,
+      "lines": 7,
+      "symbols": [
+        {
+          "name": "ProfileSchoolNotice",
+          "line": 3
+        }
+      ]
+    },
+    {
+      "path": "src/components/ProjectParticipation.jsx",
+      "sha256": "144a475189ceaee62c422a443a1c87d70415c9fc5e6cdd2caaa576b58682dfe3",
+      "bytes": 3590,
+      "lines": 39,
+      "symbols": [
+        {
+          "name": "ProjectParticipation",
+          "line": 9
+        },
+        {
+          "name": "run",
+          "line": 18
+        }
+      ]
+    },
+    {
+      "path": "src/components/ReportControl.jsx",
+      "sha256": "5fac528bbbbc07e2d3109b1e7f73cfab0399288596eda405350aba4d424017ee",
+      "bytes": 1689,
+      "lines": 28,
+      "symbols": [
+        {
+          "name": "ReportControl",
+          "line": 6
+        },
+        {
+          "name": "report",
+          "line": 14
+        }
+      ]
+    },
+    {
+      "path": "src/components/SchoolCard.jsx",
+      "sha256": "21df57fc1f6d329feeb1185d9a6c7a03e4748d8d0ce289ef48dcfebd81b3341f",
+      "bytes": 888,
+      "lines": 15,
+      "symbols": [
+        {
+          "name": "SchoolCard",
+          "line": 6
+        }
+      ]
+    },
+    {
+      "path": "src/components/TutoringCard.jsx",
+      "sha256": "7956a66c9604cd1bacbf3a3509e5b889c40ca9e21ba95bb4316a38a4b94d4e92",
+      "bytes": 1409,
+      "lines": 22,
+      "symbols": [
+        {
+          "name": "TutoringCard",
+          "line": 7
+        }
+      ]
+    },
+    {
+      "path": "src/components/UI.jsx",
+      "sha256": "be9794edec6e6224c4125d8d976d8359bf29a064ff96049e2701dda1f39744cf",
+      "bytes": 2417,
+      "lines": 43,
+      "symbols": [
+        {
+          "name": "LinkButton",
+          "line": 5
+        },
+        {
+          "name": "StatusBadge",
+          "line": 9
+        },
+        {
+          "name": "SectionHeading",
+          "line": 13
+        },
+        {
+          "name": "DemoNotice",
+          "line": 17
+        },
+        {
+          "name": "PageIntro",
+          "line": 22
+        },
+        {
+          "name": "ModuleTabs",
+          "line": 26
+        },
+        {
+          "name": "EmptyState",
+          "line": 36
+        },
+        {
+          "name": "SearchField",
+          "line": 40
+        }
+      ]
+    },
+    {
+      "path": "src/data/access.js",
+      "sha256": "e183bcabb678b921f1c5a2600ac1a1a42965783de71af756a05b88b6a1bf2d62",
+      "bytes": 406,
+      "lines": 11,
+      "symbols": [
+        {
+          "name": "guestAccess",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "path": "src/data/activities.js",
+      "sha256": "bd2e2c0d182474608ecb66c3881a2e09d733a2f29eb95950e6d0caa88538d000",
+      "bytes": 1997,
+      "lines": 36,
+      "symbols": [
+        {
+          "name": "activities",
+          "line": 2
+        },
+        {
+          "name": "interests",
+          "line": 9
+        },
+        {
+          "name": "schools",
+          "line": 11
+        },
+        {
+          "name": "eventDate",
+          "line": 16
+        },
+        {
+          "name": "eventContent",
+          "line": 22
+        },
+        {
+          "name": "filterEvents",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "path": "src/data/demoState.js",
+      "sha256": "52d59e59b9a63752f0f805a3a20378aea13ce983b0b952d157f6aa7b6625f427",
+      "bytes": 13736,
+      "lines": 199,
+      "symbols": [
+        {
+          "name": "demoStorageKey",
+          "line": 8
+        },
+        {
+          "name": "createDemoState",
+          "line": 16
+        },
+        {
+          "name": "validProfile",
+          "line": 35
+        },
+        {
+          "name": "validIdeaInput",
+          "line": 43
+        },
+        {
+          "name": "projectFields",
+          "line": 54
+        },
+        {
+          "name": "inspectDemoState",
+          "line": 66
+        },
+        {
+          "name": "readDemoState",
+          "line": 132
+        },
+        {
+          "name": "myEvents",
+          "line": 137
+        },
+        {
+          "name": "recommendationReason",
+          "line": 141
+        },
+        {
+          "name": "recommendedEvents",
+          "line": 147
+        },
+        {
+          "name": "myIdeas",
+          "line": 154
+        },
+        {
+          "name": "demoReducer",
+          "line": 159
+        }
+      ]
+    },
+    {
+      "path": "src/data/groups.js",
+      "sha256": "44159ef548e8070af15af04ad4b037b0483293309edb9bc8dc7c055f17b1d39c",
+      "bytes": 397,
+      "lines": 8,
+      "symbols": [
+        {
+          "name": "displayedGroup",
+          "line": 5
+        }
+      ]
+    },
+    {
+      "path": "src/data/matching.js",
+      "sha256": "5804d6d85cb1bb30dfa1c566e5518c0e5c38c2402357ccf7b5c86d5fcd7f6d78",
+      "bytes": 4371,
+      "lines": 73,
+      "symbols": [
+        {
+          "name": "fold",
+          "line": 3
+        },
+        {
+          "name": "normalizeTopic",
+          "line": 28
+        },
+        {
+          "name": "normalizeSubject",
+          "line": 29
+        },
+        {
+          "name": "isActive",
+          "line": 30
+        },
+        {
+          "name": "topicKeys",
+          "line": 33
+        },
+        {
+          "name": "overlap",
+          "line": 44
+        },
+        {
+          "name": "projectMatchScore",
+          "line": 47
+        },
+        {
+          "name": "memberMatchScore",
+          "line": 52
+        },
+        {
+          "name": "subjectOf",
+          "line": 54
+        },
+        {
+          "name": "compatible",
+          "line": 55
+        },
+        {
+          "name": "matchingTutoring",
+          "line": 61
+        },
+        {
+          "name": "discoverTutoring",
+          "line": 66
+        }
+      ]
+    },
+    {
+      "path": "src/data/modules.js",
+      "sha256": "19660a7c7961ddae9741e1ac1524a45f82b53fc49d36cc02d186fa6607226157",
+      "bytes": 13637,
+      "lines": 177,
+      "symbols": [
+        {
+          "name": "initiatives",
+          "line": 7
+        },
+        {
+          "name": "rooms",
+          "line": 14
+        },
+        {
+          "name": "tutorLanguages",
+          "line": 15
+        },
+        {
+          "name": "tutorFormats",
+          "line": 16
+        },
+        {
+          "name": "tutorSubjects",
+          "line": 17
+        },
+        {
+          "name": "reportReasons",
+          "line": 18
+        },
+        {
+          "name": "projectStatuses",
+          "line": 19
+        },
+        {
+          "name": "guestMembers",
+          "line": 22
+        },
+        {
+          "name": "createModuleState",
+          "line": 26
+        },
+        {
+          "name": "validTutoring",
+          "line": 40
+        },
+        {
+          "name": "tutoringContent",
+          "line": 47
+        },
+        {
+          "name": "filterTutoring",
+          "line": 51
+        },
+        {
+          "name": "visibleMembers",
+          "line": 64
+        },
+        {
+          "name": "targetExists",
+          "line": 68
+        },
+        {
+          "name": "moduleReducer",
+          "line": 75
+        },
+        {
+          "name": "restoreModuleState",
+          "line": 124
+        }
+      ]
+    },
+    {
+      "path": "src/data/navigation.js",
+      "sha256": "399e6c2d64e06346a68804112e35fed47c10c5cc86aa338aba503993169ae379",
+      "bytes": 967,
+      "lines": 20,
+      "symbols": [
+        {
+          "name": "routeFromHash",
+          "line": 1
+        },
+        {
+          "name": "safeReturnTo",
+          "line": 12
+        }
+      ]
+    },
+    {
+      "path": "src/data/personalArea.js",
+      "sha256": "71ccbfb44b359b6c1c842d7195a2df76a73dbd8b5fdfaf37aae349d822a6935b",
+      "bytes": 4500,
+      "lines": 54,
+      "symbols": [
+        {
+          "name": "selectPersonalArea",
+          "line": 8
+        }
+      ]
+    },
+    {
+      "path": "src/data/profiles.js",
+      "sha256": "ee8c6f503104562ec92d07c0a3914da1e30705ecddf9e0be9ee235791206d81d",
+      "bytes": 921,
+      "lines": 15,
+      "symbols": [
+        {
+          "name": "selectPublicProfile",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "path": "src/data/projectParticipation.js",
+      "sha256": "685c25c49eeb6130e1b502a140ff3b16f6d9639dafa004d24b1294a153d624c1",
+      "bytes": 2832,
+      "lines": 42,
+      "symbols": [
+        {
+          "name": "projectParticipation",
+          "line": 3
+        },
+        {
+          "name": "restoreProjectPeople",
+          "line": 11
+        },
+        {
+          "name": "reduceProjectParticipation",
+          "line": 23
+        }
+      ]
+    },
+    {
+      "path": "src/data/recordHistory.js",
+      "sha256": "895fea62eb82f7eddd906f6754a0ef76a1241b7be6444d528b3447af21e493f9",
+      "bytes": 588,
+      "lines": 10,
+      "symbols": [
+        {
+          "name": "recordHistory",
+          "line": 2
+        },
+        {
+          "name": "appendHistory",
+          "line": 7
+        }
+      ]
+    },
+    {
+      "path": "src/games/ArcadeGame.jsx",
+      "sha256": "74852a1e860ee79fd479dcd68651c0903c6b12cdef4a2e1217e9cd55c7e785ab",
+      "bytes": 5232,
+      "lines": 60,
+      "symbols": [
+        {
+          "name": "ArcadeGame",
+          "line": 8
+        },
+        {
+          "name": "start",
+          "line": 35
+        },
+        {
+          "name": "act",
+          "line": 36
+        }
+      ]
+    },
+    {
+      "path": "src/games/ChessBoard.jsx",
+      "sha256": "a83ff7e5995fbf632284275d139a9c4a4cb7e7c33b59345e0d9fb5c8d0a1becf",
+      "bytes": 5547,
+      "lines": 44,
+      "symbols": [
+        {
+          "name": "ChessBoard",
+          "line": 8
+        },
+        {
+          "name": "run",
+          "line": 21
+        },
+        {
+          "name": "choose",
+          "line": 26
+        }
+      ]
+    },
+    {
+      "path": "src/games/ChessLobby.jsx",
+      "sha256": "cd4450061f539303c91dd402cea41e22807f314f3670603b8c28027a2d74f5ea",
+      "bytes": 4232,
+      "lines": 41,
+      "symbols": [
+        {
+          "name": "ChessLobby",
+          "line": 9
+        },
+        {
+          "name": "run",
+          "line": 19
+        },
+        {
+          "name": "start",
+          "line": 20
+        },
+        {
+          "name": "invite",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "path": "src/games/GameResultsContext.jsx",
+      "sha256": "670f4fd8f630d4ee7f2dcf57ada1e71ceacc3d467e0b1dcf03e50ba5e1fc2453",
+      "bytes": 2627,
+      "lines": 42,
+      "symbols": [
+        {
+          "name": "GameResultsContext",
+          "line": 7
+        },
+        {
+          "name": "GameResultsProvider",
+          "line": 8
+        },
+        {
+          "name": "useGameResults",
+          "line": 25
+        },
+        {
+          "name": "useResultRecorder",
+          "line": 28
+        },
+        {
+          "name": "save",
+          "line": 33
+        }
+      ]
+    },
+    {
+      "path": "src/games/MemoryGame.jsx",
+      "sha256": "f4cd28ba399be8d3f8d29530a88bda580c38b7fdfa65b4bad47a1916b6739a54",
+      "bytes": 2682,
+      "lines": 30,
+      "symbols": [
+        {
+          "name": "MemoryGame",
+          "line": 8
+        },
+        {
+          "name": "reveal",
+          "line": 21
+        },
+        {
+          "name": "reset",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "path": "src/games/arcade.js",
+      "sha256": "6e683ef2478ccdc046660fb3c6b23b70fabbbc8e3d0e4a2f9776e93608bc7a04",
+      "bytes": 2417,
+      "lines": 38,
+      "symbols": [
+        {
+          "name": "freshRunner",
+          "line": 1
+        },
+        {
+          "name": "stepRunner",
+          "line": 2
+        },
+        {
+          "name": "freshFlight",
+          "line": 15
+        },
+        {
+          "name": "flightDifficulty",
+          "line": 16
+        },
+        {
+          "name": "stepFlight",
+          "line": 21
+        },
+        {
+          "name": "shuffledPairs",
+          "line": 33
+        }
+      ]
+    },
+    {
+      "path": "src/games/leaderboards.js",
+      "sha256": "321c4afcc6ed6870e284caef18f208bf507e9a7c3e3f8824fd5eaf4f9622e8f6",
+      "bytes": 4857,
+      "lines": 76,
+      "symbols": [
+        {
+          "name": "leaderboardGames",
+          "line": 3
+        },
+        {
+          "name": "leaderboardViews",
+          "line": 4
+        },
+        {
+          "name": "validLocalResult",
+          "line": 7
+        },
+        {
+          "name": "arcadeResult",
+          "line": 14
+        },
+        {
+          "name": "pairsResult",
+          "line": 20
+        },
+        {
+          "name": "chessOutcome",
+          "line": 29
+        },
+        {
+          "name": "personalGameStats",
+          "line": 44
+        },
+        {
+          "name": "rankGame",
+          "line": 68
+        }
+      ]
+    },
+    {
+      "path": "src/games/offline.js",
+      "sha256": "476bb8805692123a860331d23300c3da8a85d907b209170650eebb2d8f196b78",
+      "bytes": 1155,
+      "lines": 16,
+      "symbols": [
+        {
+          "name": "prepareOffline",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "path": "src/games/resultRepository.js",
+      "sha256": "74f173e936a7e60c87a673431bae98b767550bf3b9dba02f31a923f1d2386811",
+      "bytes": 3347,
+      "lines": 55,
+      "symbols": [
+        {
+          "name": "resultsKey",
+          "line": 3
+        },
+        {
+          "name": "createGameRepository",
+          "line": 7
+        },
+        {
+          "name": "read",
+          "line": 11
+        },
+        {
+          "name": "reload",
+          "line": 21
+        },
+        {
+          "name": "write",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "path": "src/i18n/LanguageContext.jsx",
+      "sha256": "bc418bd4df9266cf4f5468ec5f26401ee339ca39a00f2cd2318cc61a9b45c597",
+      "bytes": 2582,
+      "lines": 54,
+      "symbols": [
+        {
+          "name": "initialLanguage",
+          "line": 23
+        },
+        {
+          "name": "LanguageProvider",
+          "line": 32
+        },
+        {
+          "name": "useLanguage",
+          "line": 46
+        },
+        {
+          "name": "LanguageOverride",
+          "line": 50
+        }
+      ]
+    },
+    {
+      "path": "src/i18n/accountCopy.js",
+      "sha256": "6f3673ceeee93df56cf7f71c6218ea0fe42434cbfac0130327e0b8e7a12d829f",
+      "bytes": 1558,
+      "lines": 9,
+      "symbols": [
+        {
+          "name": "accountCopy",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "path": "src/locales/de.json",
+      "sha256": "cc160869c2f04897093530e1e7a4ec1b1d85d4b2c3235caafbe5edffd15060de",
+      "bytes": 15088,
+      "lines": 293,
+      "symbols": []
+    },
+    {
+      "path": "src/locales/en.json",
+      "sha256": "d9b528434245fce4f12d1f23ae4c9fffd43ec613aa38ee09c0328f4e4199d0ab",
+      "bytes": 14141,
+      "lines": 293,
+      "symbols": []
+    },
+    {
+      "path": "src/locales/modules/de.json",
+      "sha256": "418f04784ae94ba53a110c28bd8db8649e6672764d07910be3ce3c5f9dd12eb4",
+      "bytes": 10630,
+      "lines": 209,
+      "symbols": []
+    },
+    {
+      "path": "src/locales/modules/en.json",
+      "sha256": "c82aed55922dd9562dae730a6136230d0479238b2c4dbce46bc9fd6bb64b248b",
+      "bytes": 9818,
+      "lines": 209,
+      "symbols": []
+    },
+    {
+      "path": "src/locales/modules/tr.json",
+      "sha256": "1f307267caf02db3f785e962b5147ebd3e5b529e8c9ed9868e8cf41311caf9f3",
+      "bytes": 10303,
+      "lines": 209,
+      "symbols": []
+    },
+    {
+      "path": "src/locales/personal/de.json",
+      "sha256": "d293ecefe492b56d7d01f3a27d9c33c4a2b5401538fc2c257c8a70e2eb9696ad",
+      "bytes": 7616,
+      "lines": 126,
+      "symbols": []
+    },
+    {
+      "path": "src/locales/personal/en.json",
+      "sha256": "1c93fa8dee9849871ad57db636bc860a9fe4f9d171fe1d050bb13e037dd94e6c",
+      "bytes": 6946,
+      "lines": 126,
+      "symbols": []
+    },
+    {
+      "path": "src/locales/personal/tr.json",
+      "sha256": "daddf61b99c26824728692a1268ccf344db8137dabf9a20fbc7be314c2d79ced",
+      "bytes": 7233,
+      "lines": 126,
+      "symbols": []
+    },
+    {
+      "path": "src/locales/platform/de.json",
+      "sha256": "ca382e50ad08b767ee4f8aae13031c659804fe22071d4ede3ae36666237e1db6",
+      "bytes": 19620,
+      "lines": 299,
+      "symbols": []
+    },
+    {
+      "path": "src/locales/platform/en.json",
+      "sha256": "e5495def08602eb20731a46f5a2c48349aa47ace6416946610347171e2dbf7de",
+      "bytes": 17065,
+      "lines": 299,
+      "symbols": []
+    },
+    {
+      "path": "src/locales/platform/tr.json",
+      "sha256": "0c28707d1f52a231200ae23d4b851e6b3692d3fee041630ef844be7beb8ecd6d",
+      "bytes": 17981,
+      "lines": 299,
+      "symbols": []
+    },
+    {
+      "path": "src/locales/quality/de.json",
+      "sha256": "706e1ac4a05924a24acf588b3ae1ab94c124b7b99f97cd9a665548f85b256bb4",
+      "bytes": 4432,
+      "lines": 61,
+      "symbols": []
+    },
+    {
+      "path": "src/locales/quality/en.json",
+      "sha256": "dc208b3924342bbd992826123365d535f16b20968984b2f43762cdeb4ea303b8",
+      "bytes": 3763,
+      "lines": 61,
+      "symbols": []
+    },
+    {
+      "path": "src/locales/quality/tr.json",
+      "sha256": "803840889e658ab9c0b2ce2c24a4085a124be634f0592abf34c393be66545e71",
+      "bytes": 4042,
+      "lines": 61,
+      "symbols": []
+    },
+    {
+      "path": "src/locales/tr.json",
+      "sha256": "4061b98e6a160d601eb41745bb7d0a2a3350ef7984196587be84c5f742bead30",
+      "bytes": 14970,
+      "lines": 293,
+      "symbols": []
+    },
+    {
+      "path": "src/main.jsx",
+      "sha256": "226a5fdbbfedc7da8cba17c2ba27a185bdd93d14c547a54dcd742da237c621de",
+      "bytes": 762,
+      "lines": 18,
+      "symbols": []
+    },
+    {
+      "path": "src/pages/About.jsx",
+      "sha256": "b1b13919b05cb32a64f466ce8bd64804b8c8c34c62469355b48c019968d7dec5",
+      "bytes": 1279,
+      "lines": 14,
+      "symbols": [
+        {
+          "name": "About",
+          "line": 5
+        }
+      ]
+    },
+    {
+      "path": "src/pages/Account.jsx",
+      "sha256": "56139682dd04f1ed4a13bbc2a449f055f927b8de96672ed1ecffafdd151f6e56",
+      "bytes": 5900,
+      "lines": 57,
+      "symbols": [
+        {
+          "name": "Account",
+          "line": 7
+        },
+        {
+          "name": "submit",
+          "line": 14
+        },
+        {
+          "name": "signOut",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "path": "src/pages/Achievements.jsx",
+      "sha256": "644c84a0d0abef010c0e65ca3339877b2f29dc41253c6fa75fff8fa434599879",
+      "bytes": 1172,
+      "lines": 10,
+      "symbols": [
+        {
+          "name": "Achievements",
+          "line": 5
+        }
+      ]
+    },
+    {
+      "path": "src/pages/Community.jsx",
+      "sha256": "c8f89cf6483871c94d57f382a05663fa91936fe8891d5b2491f065280433b9ce",
+      "bytes": 9675,
+      "lines": 92,
+      "symbols": [
+        {
+          "name": "Community",
+          "line": 23
+        },
+        {
+          "name": "submit",
+          "line": 44
+        }
+      ]
+    },
+    {
+      "path": "src/pages/Discover.jsx",
+      "sha256": "dc00c2fce955e7b82afb44e622c99836562668936a0e838f7f43e5a257656a8f",
+      "bytes": 2652,
+      "lines": 37,
+      "symbols": [
+        {
+          "name": "Discover",
+          "line": 11
+        }
+      ]
+    },
+    {
+      "path": "src/pages/EventDetails.jsx",
+      "sha256": "9cdb9d89a4c60e4dbb2187eeeb816ebfb2c15b5fc12467a32d0cb108de99374b",
+      "bytes": 2819,
+      "lines": 38,
+      "symbols": [
+        {
+          "name": "EventDetails",
+          "line": 12
+        }
+      ]
+    },
+    {
+      "path": "src/pages/EventNew.jsx",
+      "sha256": "66148527a3c9fb374af9d9d6d654d2bee777a7af00f487ed190e99089269d149",
+      "bytes": 4955,
+      "lines": 49,
+      "symbols": [
+        {
+          "name": "EventNew",
+          "line": 12
+        },
+        {
+          "name": "save",
+          "line": 19
+        }
+      ]
+    },
+    {
+      "path": "src/pages/Events.jsx",
+      "sha256": "41e7cea794fe0b72726cf9646d3f0a97e93913380f10179fa0421e5285192e55",
+      "bytes": 3228,
+      "lines": 38,
+      "symbols": [
+        {
+          "name": "Events",
+          "line": 10
+        },
+        {
+          "name": "reset",
+          "line": 19
+        }
+      ]
+    },
+    {
+      "path": "src/pages/Games.jsx",
+      "sha256": "8444585a49f34268a5787bd8a4bc5f59aeecf9913f0c8246e16993d36844cde8",
+      "bytes": 2848,
+      "lines": 38,
+      "symbols": [
+        {
+          "name": "GamesContent",
+          "line": 16
+        },
+        {
+          "name": "cache",
+          "line": 22
+        },
+        {
+          "name": "Games",
+          "line": 35
+        }
+      ]
+    },
+    {
+      "path": "src/pages/Home.jsx",
+      "sha256": "6eeeccb3b8f5eb36e0e32421952c0af1fdbf4f913bba39cfd6bcc28c36516be9",
+      "bytes": 3738,
+      "lines": 46,
+      "symbols": [
+        {
+          "name": "Home",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "path": "src/pages/IdeaDetails.jsx",
+      "sha256": "7709170e7094510694bebc7dc46954779f3118a3328303ddb6b6f3b23cd129db",
+      "bytes": 3575,
+      "lines": 43,
+      "symbols": [
+        {
+          "name": "IdeaDetails",
+          "line": 14
+        }
+      ]
+    },
+    {
+      "path": "src/pages/IdeaSubmit.jsx",
+      "sha256": "0f80756dc31c33c74c58cc87409590eb0b03415a79ecdf801817c9fb6ae7dd49",
+      "bytes": 7585,
+      "lines": 90,
+      "symbols": [
+        {
+          "name": "IdeaSubmit",
+          "line": 17
+        },
+        {
+          "name": "submit",
+          "line": 32
+        }
+      ]
+    },
+    {
+      "path": "src/pages/Ideas.jsx",
+      "sha256": "480b6468c6bb0c089e5a08949e45e4796bba41ef7621e8793e606b36e9a54cf3",
+      "bytes": 1882,
+      "lines": 29,
+      "symbols": [
+        {
+          "name": "Ideas",
+          "line": 10
+        }
+      ]
+    },
+    {
+      "path": "src/pages/Moderation.jsx",
+      "sha256": "4a5687a437ce1182684969b70f07acf1e55f920eb80782eeb30c0b79d41cf0e0",
+      "bytes": 2642,
+      "lines": 13,
+      "symbols": [
+        {
+          "name": "Moderation",
+          "line": 6
+        }
+      ]
+    },
+    {
+      "path": "src/pages/MyArea.jsx",
+      "sha256": "1eb6f2344493299a55a6612fe1fedfce632e7500056f673434475228a70ae3c0",
+      "bytes": 10461,
+      "lines": 88,
+      "symbols": [
+        {
+          "name": "CardList",
+          "line": 21
+        },
+        {
+          "name": "MyArea",
+          "line": 25
+        }
+      ]
+    },
+    {
+      "path": "src/pages/Network.jsx",
+      "sha256": "3e06cd85cc882a0933108a3b81e0ff64e166abf907227fd50e44c39e93989e9e",
+      "bytes": 2941,
+      "lines": 41,
+      "symbols": [
+        {
+          "name": "Network",
+          "line": 11
+        }
+      ]
+    },
+    {
+      "path": "src/pages/NotFound.jsx",
+      "sha256": "b78d756338ba71e42321e6d07c8b9acc86cd46cd692e3faa458097d8c957f3f1",
+      "bytes": 349,
+      "lines": 8,
+      "symbols": [
+        {
+          "name": "NotFound",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "path": "src/pages/PersonalSettings.jsx",
+      "sha256": "b398b3af3cf8cbcbfd0aa7f3969ea2463f9455e56026daf5359815be37d374f3",
+      "bytes": 6955,
+      "lines": 74,
+      "symbols": [
+        {
+          "name": "PersonalSettings",
+          "line": 12
+        },
+        {
+          "name": "change",
+          "line": 25
+        },
+        {
+          "name": "submit",
+          "line": 26
+        }
+      ]
+    },
+    {
+      "path": "src/pages/StudentProfile.jsx",
+      "sha256": "831d6a3cf426394b99f1675c5927f9955baba4d36a5424e970a1eb4fdbf5173f",
+      "bytes": 2936,
+      "lines": 29,
+      "symbols": [
+        {
+          "name": "StudentProfile",
+          "line": 12
+        }
+      ]
+    },
+    {
+      "path": "src/pages/Tutoring.jsx",
+      "sha256": "b6d403bcefa6ac41f220d203a9f620e6138a92c22ac5e228eb939eddda99a0e1",
+      "bytes": 4563,
+      "lines": 42,
+      "symbols": [
+        {
+          "name": "Tutoring",
+          "line": 9
+        }
+      ]
+    },
+    {
+      "path": "src/pages/TutoringDetails.jsx",
+      "sha256": "dd2bfa290f7ee4c66c39b40ed1eb2fc325faf67c4df51d073035918cd9fb094a",
+      "bytes": 5563,
+      "lines": 79,
+      "symbols": [
+        {
+          "name": "TutoringDetails",
+          "line": 15
+        },
+        {
+          "name": "submit",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "path": "src/pages/TutoringNew.jsx",
+      "sha256": "226a1380b7e82953eb30a3664325a134f7c6b9a37bc6708b4037af95270c1517",
+      "bytes": 6756,
+      "lines": 76,
+      "symbols": [
+        {
+          "name": "TutoringNew",
+          "line": 15
+        },
+        {
+          "name": "submit",
+          "line": 29
+        }
+      ]
+    },
+    {
+      "path": "src/services/authCallback.js",
+      "sha256": "509df196db3b63d023af5813a9d5170efb8a4d1490a49f5582d5e5b59bbb028c",
+      "bytes": 1817,
+      "lines": 22,
+      "symbols": [
+        {
+          "name": "captureAuthCallback",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "path": "src/services/supabase.js",
+      "sha256": "d55b82f8c210d31cb8d644a3f4e8c4f65b85865992f2d817ef6bbeaeb7669953",
+      "bytes": 11908,
+      "lines": 170,
+      "symbols": [
+        {
+          "name": "readBackendConfig",
+          "line": 5
+        },
+        {
+          "name": "createSupabaseService",
+          "line": 17
+        },
+        {
+          "name": "request",
+          "line": 25
+        },
+        {
+          "name": "refresh",
+          "line": 36
+        },
+        {
+          "name": "verify",
+          "line": 49
+        },
+        {
+          "name": "restoreSession",
+          "line": 59
+        },
+        {
+          "name": "verifyCandidate",
+          "line": 65
+        },
+        {
+          "name": "adopt",
+          "line": 69
+        },
+        {
+          "name": "rejectCallback",
+          "line": 73
+        },
+        {
+          "name": "initializeOnce",
+          "line": 78
+        },
+        {
+          "name": "initialize",
+          "line": 110
+        },
+        {
+          "name": "retryAuth",
+          "line": 111
+        },
+        {
+          "name": "acceptConfirmation",
+          "line": 112
+        },
+        {
+          "name": "dismissConfirmation",
+          "line": 117
+        },
+        {
+          "name": "signIn",
+          "line": 118
+        },
+        {
+          "name": "signUp",
+          "line": 125
+        },
+        {
+          "name": "signOut",
+          "line": 129
+        }
+      ]
+    },
+    {
+      "path": "src/state/AccountContext.jsx",
+      "sha256": "e5d31241c2a4c8034eea8895dd7e29ba5c84e77c4e46137011d110c8efd93ee8",
+      "bytes": 7255,
+      "lines": 88,
+      "symbols": [
+        {
+          "name": "AccountContext",
+          "line": 8
+        },
+        {
+          "name": "service",
+          "line": 9
+        },
+        {
+          "name": "AccountProvider",
+          "line": 13
+        },
+        {
+          "name": "applySnapshot",
+          "line": 19
+        },
+        {
+          "name": "reload",
+          "line": 20
+        },
+        {
+          "name": "dispatch",
+          "line": 67
+        },
+        {
+          "name": "signOut",
+          "line": 80
+        },
+        {
+          "name": "signIn",
+          "line": 81
+        },
+        {
+          "name": "retryAuth",
+          "line": 82
+        },
+        {
+          "name": "acceptConfirmation",
+          "line": 83
+        },
+        {
+          "name": "dismissConfirmation",
+          "line": 84
+        },
+        {
+          "name": "useAccount",
+          "line": 87
+        }
+      ]
+    },
+    {
+      "path": "src/state/ChessNotificationContext.jsx",
+      "sha256": "bda6b155ff5ecb119423c478829ae817d051b7bee3c904356b57fad8ab2fa225",
+      "bytes": 2640,
+      "lines": 40,
+      "symbols": [
+        {
+          "name": "readReceipts",
+          "line": 7
+        },
+        {
+          "name": "ChessNotificationProvider",
+          "line": 11
+        },
+        {
+          "name": "markRead",
+          "line": 26
+        },
+        {
+          "name": "useChessNotifications",
+          "line": 39
+        }
+      ]
+    },
+    {
+      "path": "src/state/DemoContext.jsx",
+      "sha256": "c4d34d176c8809ffd85109462ec41685c37a08c2884e29b3c515f3e573fe9afa",
+      "bytes": 3855,
+      "lines": 70,
+      "symbols": [
+        {
+          "name": "DemoContext",
+          "line": 9
+        },
+        {
+          "name": "browserRepository",
+          "line": 12
+        },
+        {
+          "name": "DemoProvider",
+          "line": 18
+        },
+        {
+          "name": "switchProfile",
+          "line": 42
+        },
+        {
+          "name": "dispatch",
+          "line": 52
+        },
+        {
+          "name": "updatePreferences",
+          "line": 58
+        },
+        {
+          "name": "useDemo",
+          "line": 69
+        }
+      ]
+    },
+    {
+      "path": "src/state/localRepository.js",
+      "sha256": "caf589f962ce2da1c2c5c0141e4afc96ea940183ba6c4b571032afa9a1b620d6",
+      "bytes": 7766,
+      "lines": 148,
+      "symbols": [
+        {
+          "name": "demoLockName",
+          "line": 3
+        },
+        {
+          "name": "recoveryPrefix",
+          "line": 4
+        },
+        {
+          "name": "createLocalRepository",
+          "line": 12
+        },
+        {
+          "name": "applyRead",
+          "line": 26
+        },
+        {
+          "name": "load",
+          "line": 34
+        },
+        {
+          "name": "mutate",
+          "line": 56
+        }
+      ]
+    },
+    {
+      "path": "src/state/navigationGuard.js",
+      "sha256": "771206c55ebbcd17a30524b2a6574bba09c83f21a3e2d6522e7531a09d6a1165",
+      "bytes": 209,
+      "lines": 4,
+      "symbols": [
+        {
+          "name": "setNavigationRisk",
+          "line": 2
+        },
+        {
+          "name": "allowNavigation",
+          "line": 3
+        }
+      ]
+    },
+    {
+      "path": "src/state/pageMemory.js",
+      "sha256": "03eb0a6d3ac246add7519aeea07e157f9a76cecdc5d3c27e8184aedd9e8aabb5",
+      "bytes": 2482,
+      "lines": 47,
+      "symbols": [
+        {
+          "name": "pageMemoryKey",
+          "line": 4
+        },
+        {
+          "name": "compatible",
+          "line": 7
+        },
+        {
+          "name": "readPageMemory",
+          "line": 14
+        },
+        {
+          "name": "writePageMemory",
+          "line": 25
+        },
+        {
+          "name": "clearPageMemory",
+          "line": 34
+        },
+        {
+          "name": "submissionId",
+          "line": 40
+        }
+      ]
+    },
+    {
+      "path": "src/state/routeHistory.js",
+      "sha256": "70327de8dc11f2c3092830724a9df896824f3bc2ad74fcf9b96d0d50df4d80cd",
+      "bytes": 1392,
+      "lines": 28,
+      "symbols": [
+        {
+          "name": "listenToRoutes",
+          "line": 3
+        },
+        {
+          "name": "replaceRoute",
+          "line": 24
+        }
+      ]
+    },
+    {
+      "path": "src/state/useActiveView.js",
+      "sha256": "1bdb39e1f44fdd1c9b3e073d00014d6ceeef9fa9d03ee8dda5d22db36613390a",
+      "bytes": 291,
+      "lines": 9,
+      "symbols": [
+        {
+          "name": "useActiveView",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "path": "src/state/usePageMemory.js",
+      "sha256": "283c6d5ce1936ae9b36d7a2f798ce069f3cc7c5982df341103247d99745aad48",
+      "bytes": 3532,
+      "lines": 69,
+      "symbols": [
+        {
+          "name": "confirmUnsavedNavigation",
+          "line": 6
+        },
+        {
+          "name": "useUnsavedGuard",
+          "line": 8
+        },
+        {
+          "name": "storage",
+          "line": 20
+        },
+        {
+          "name": "useMemory",
+          "line": 22
+        },
+        {
+          "name": "setValue",
+          "line": 29
+        },
+        {
+          "name": "clearDraft",
+          "line": 37
+        },
+        {
+          "name": "useRememberedState",
+          "line": 46
+        },
+        {
+          "name": "useFormDraft",
+          "line": 51
+        }
+      ]
+    },
+    {
+      "path": "src/styles/games.css",
+      "sha256": "e60ee62c406f74d0da9e303625c39d960184402f8dc27acf3e8ca615f04267ea",
+      "bytes": 5589,
+      "lines": 60,
+      "symbols": []
+    },
+    {
+      "path": "src/styles/global.css",
+      "sha256": "1ff3ba41897f82ded1f68e5f69393bf4344b67b4d314d07aab60542b28606fbc",
+      "bytes": 20997,
+      "lines": 265,
+      "symbols": []
+    },
+    {
+      "path": "src/styles/modules.css",
+      "sha256": "a4b4b877012231d1162ee50271a0a0d1ed31fbc889d49cd4e8a7d5aebf54b2f4",
+      "bytes": 7031,
+      "lines": 90,
+      "symbols": []
+    },
+    {
+      "path": "supabase/.temp/cli-latest",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "supabase/.temp/linked-project.json",
+      "sha256": "c3d6fff259c6f7b5ce7c73e5fa14a29f769c59eaaad9942a8d9b7b7c48525539",
+      "bytes": 151,
+      "lines": 1,
+      "symbols": []
+    },
+    {
+      "path": "supabase/config.toml",
+      "sha256": "4cc658dc6d9d77302388f23cb64580cfc6c0aeaa160ac4828e9b52f46d61a073",
+      "bytes": 449,
+      "lines": 16,
+      "symbols": []
+    },
+    {
+      "path": "supabase/functions/_shared/chess.js",
+      "sha256": "143bd9ed494010efc94d65925ce173f0d1a83706c4279c240c0df10761a2b8a1",
+      "bytes": 8226,
+      "lines": 103,
+      "symbols": [
+        {
+          "name": "initialFen",
+          "line": 3
+        },
+        {
+          "name": "squareName",
+          "line": 8
+        },
+        {
+          "name": "squareIndex",
+          "line": 9
+        },
+        {
+          "name": "fromFen",
+          "line": 10
+        },
+        {
+          "name": "toFen",
+          "line": 17
+        },
+        {
+          "name": "attacked",
+          "line": 24
+        },
+        {
+          "name": "inCheck",
+          "line": 41
+        },
+        {
+          "name": "applyRaw",
+          "line": 42
+        },
+        {
+          "name": "legalMoves",
+          "line": 53
+        },
+        {
+          "name": "move",
+          "line": 80
+        },
+        {
+          "name": "positionKey",
+          "line": 87
+        },
+        {
+          "name": "replay",
+          "line": 88
+        },
+        {
+          "name": "gameStatus",
+          "line": 94
+        }
+      ]
+    },
+    {
+      "path": "supabase/functions/_shared/chessInvitations.js",
+      "sha256": "45a6790b14182408d7f7b0a26336ca0d5548f9b1de2d330c6bb93b8be438fd7a",
+      "bytes": 3508,
+      "lines": 50,
+      "symbols": [
+        {
+          "name": "validChessNoticeKey",
+          "line": 2
+        },
+        {
+          "name": "chessInvitationEvents",
+          "line": 7
+        },
+        {
+          "name": "chessInviteEmail",
+          "line": 36
+        }
+      ]
+    },
+    {
+      "path": "supabase/functions/_shared/platform.js",
+      "sha256": "d129580eeb7006c09ed22cd272c368f5f1babd42fc8da5aa4c789977c5c7fe9a",
+      "bytes": 22076,
+      "lines": 187,
+      "symbols": [
+        {
+          "name": "emptyPlatform",
+          "line": 10
+        },
+        {
+          "name": "addAccount",
+          "line": 13
+        },
+        {
+          "name": "groupFor",
+          "line": 21
+        },
+        {
+          "name": "applyPlatformAction",
+          "line": 28
+        },
+        {
+          "name": "projectPlatform",
+          "line": 142
+        }
+      ]
+    },
+    {
+      "path": "supabase/functions/_shared/platformHandler.js",
+      "sha256": "7c173af99608d9078e944d78fe698cf96dbf3b3f80d70e7e23e3eaccb5a4bdb6",
+      "bytes": 4293,
+      "lines": 55,
+      "symbols": [
+        {
+          "name": "createPlatformHandler",
+          "line": 4
+        },
+        {
+          "name": "database",
+          "line": 5
+        }
+      ]
+    },
+    {
+      "path": "supabase/functions/_shared/profiles.js",
+      "sha256": "5900147d44369310e354759e4eb312a78791cf82cb9afb78e2b17204a9f63bb4",
+      "bytes": 2290,
+      "lines": 32,
+      "symbols": [
+        {
+          "name": "sharingKeys",
+          "line": 2
+        },
+        {
+          "name": "validSharing",
+          "line": 3
+        },
+        {
+          "name": "sharingFor",
+          "line": 7
+        },
+        {
+          "name": "completedProject",
+          "line": 10
+        },
+        {
+          "name": "publicProfile",
+          "line": 17
+        }
+      ]
+    },
+    {
+      "path": "supabase/functions/_shared/social.js",
+      "sha256": "a71fbf9a8ef29bd64bd5aa7bfd2c365654b3f931709cb3bddf3e5283895d1281",
+      "bytes": 10078,
+      "lines": 114,
+      "symbols": [
+        {
+          "name": "freshSocial",
+          "line": 4
+        },
+        {
+          "name": "blocked",
+          "line": 7
+        },
+        {
+          "name": "reduceSocial",
+          "line": 8
+        },
+        {
+          "name": "restoreSocial",
+          "line": 88
+        }
+      ]
+    },
+    {
+      "path": "supabase/functions/platform/index.ts",
+      "sha256": "0586b42f74832487f0eba5b31e073665577917a6b10bbfde565484b57e798bfc",
+      "bytes": 519,
+      "lines": 10,
+      "symbols": []
+    },
+    {
+      "path": "supabase/migrations/202611070001_platform.sql",
+      "sha256": "5afd8b28bc6b01d6f0b16dfdcd16c6b64de38d7a2bbfb02e75026c357021b2f7",
+      "bytes": 1968,
+      "lines": 36,
+      "symbols": [
+        {
+          "name": "public",
+          "line": 20
+        },
+        {
+          "name": "public",
+          "line": 34
+        },
+        {
+          "name": "public",
+          "line": 35
+        }
+      ]
+    },
+    {
+      "path": "supabase/tests/security.sql",
+      "sha256": "992565656296f17d08c6390fc68646719071e3a0c9882702de2279ea4f87871b",
+      "bytes": 1223,
+      "lines": 16,
+      "symbols": []
+    },
+    {
+      "path": "tests/e2e/backend.js",
+      "sha256": "96b815921a726cce525a973318b20dc4fc2ac0c10fb3248969155ec1035f383e",
+      "bytes": 6992,
+      "lines": 96,
+      "symbols": [
+        {
+          "name": "password",
+          "line": 7
+        },
+        {
+          "name": "startBackend",
+          "line": 9
+        }
+      ]
+    },
+    {
+      "path": "tests/e2e/live.spec.js",
+      "sha256": "33f2bc422bb58aca62045878315193c9390075823030d3a7e82b0ff669a5d674",
+      "bytes": 4911,
+      "lines": 55,
+      "symbols": []
+    },
+    {
+      "path": "tests/e2e/local.spec.js",
+      "sha256": "dbc30cbb52af1b2345a7d76db15f37e9379f2ccb12768ebe98bd0ec4bfe2f5ba",
+      "bytes": 35686,
+      "lines": 346,
+      "symbols": [
+        {
+          "name": "login",
+          "line": 20
+        },
+        {
+          "name": "openConfirmation",
+          "line": 24
+        },
+        {
+          "name": "register",
+          "line": 30
+        },
+        {
+          "name": "api",
+          "line": 34
+        },
+        {
+          "name": "createProject",
+          "line": 41
+        },
+        {
+          "name": "createTutor",
+          "line": 45
+        }
+      ]
+    },
+    {
+      "path": "vite.config.js",
+      "sha256": "9dc8432d5bff0733cd52898075854d0701dcade709c183aa4b02e511d641e4db",
+      "bytes": 209,
+      "lines": 6,
+      "symbols": []
+    }
+  ]
+}

@@ -1,0 +1,4192 @@
+{
+  "manifestVersion": 1,
+  "generatedAt": "2026-11-08T17:51:24.063Z",
+  "documentDate": "2026-11-08",
+  "timeZone": "Europe/Istanbul",
+  "project": "DeutschConnect",
+  "scope": "Documentation-only; current Codex working tree including pre-existing uncommitted changes.",
+  "repository": {
+    "branch": "codex-version-1.0",
+    "head": "889ad1bdf09f11da3249ba367d78f0297e40a095",
+    "sourceInventory": "docs/integration/CODEX_SOURCE_INVENTORY.json",
+    "uncommittedSourceMustBeIncluded": true,
+    "claudeComparison": {
+      "ref": "origin/claude-version-1.0",
+      "commit": "9121665b98eef74ede9f3792b852180502eb8e0d",
+      "fetchPerformed": false,
+      "readOnly": true,
+      "liveProjectAccessed": false,
+      "inspectedPaths": [
+        "package.json",
+        "src/main.jsx",
+        "src/App.jsx",
+        "src/auth/AuthContext.jsx",
+        "src/state/AppStateContext.jsx",
+        "src/lib/supabaseClient.js",
+        "src/lib/eventsApi.js",
+        "src/lib/ideasApi.js",
+        "src/styles/variables.css",
+        "supabase/migrations/001_initial_schema.sql",
+        "supabase/migrations/004_ideas_moderation.sql",
+        "supabase/migrations/005_admin_role.sql",
+        "supabase/migrations/006_admin_events_ideas.sql",
+        "docs/HANDOFF.md"
+      ]
+    },
+    "remoteConfigured": true,
+    "remoteHostIsGitHub": true,
+    "githubActionsConfigurationPresent": false
+  },
+  "entrypoints": {
+    "browser": "src/main.jsx",
+    "app": "src/App.jsx",
+    "backend": "supabase/functions/platform/index.ts",
+    "httpHandler": "supabase/functions/_shared/platformHandler.js",
+    "providerOrder": [
+      "LanguageProvider",
+      "AccountProvider",
+      "DemoProvider",
+      "App",
+      "ChessNotificationProvider"
+    ],
+    "router": "custom_hash_router",
+    "mainAreas": [
+      "/",
+      "/discover",
+      "/tutoring",
+      "/community",
+      "/me"
+    ],
+    "gameIds": [
+      "chess",
+      "memory",
+      "flight",
+      "runner"
+    ],
+    "leaderboardViews": [
+      "global",
+      "school",
+      "personal"
+    ]
+  },
+  "stack": {
+    "declared": {
+      "react": "^19.2.0",
+      "react-dom": "^19.2.0"
+    },
+    "dev": {
+      "@playwright/test": "^1.65.0",
+      "@vitejs/plugin-react": "^5.1.0",
+      "vite": "^7.2.0"
+    },
+    "nodeTested": "26.13.0",
+    "npmTested": "11.20.0",
+    "installed": {
+      "react": "19.3.1",
+      "react-dom": "19.3.1",
+      "vite": "7.3.7",
+      "@vitejs/plugin-react": "5.2.0",
+      "@playwright/test": "1.65.0"
+    }
+  },
+  "modules": [
+    {
+      "id": "authentication",
+      "entrypoints": [
+        "src/pages/Account.jsx",
+        "src/state/AccountContext.jsx",
+        "src/services/supabase.js",
+        "src/services/authCallback.js"
+      ],
+      "models": [
+        "AuthIdentity",
+        "Session",
+        "Profile"
+      ],
+      "commands": [],
+      "persistence": [
+        "supabase_auth",
+        "host_scoped_browser_session"
+      ],
+      "status": "locally_tested_real_two_device_email_acceptance_pending",
+      "liveAcceptance": "not_repeated_in_this_documentation_task",
+      "integrationDependencies": [
+        "single_auth_identity",
+        "agreed_read_model",
+        "server_authorization",
+        "router_and_i18n_adapter"
+      ]
+    },
+    {
+      "id": "profiles",
+      "entrypoints": [
+        "src/pages/PersonalSettings.jsx",
+        "src/pages/StudentProfile.jsx",
+        "src/components/ProfileLink.jsx"
+      ],
+      "models": [
+        "Profile",
+        "PublicProfile"
+      ],
+      "commands": [
+        "preferences",
+        "setCommunityVisibility",
+        "shareAwards"
+      ],
+      "persistence": [
+        "workspace_projection",
+        "session_drafts"
+      ],
+      "status": "implemented_opt_in",
+      "liveAcceptance": "not_repeated_in_this_documentation_task",
+      "integrationDependencies": [
+        "single_auth_identity",
+        "agreed_read_model",
+        "server_authorization",
+        "router_and_i18n_adapter"
+      ]
+    },
+    {
+      "id": "projects",
+      "entrypoints": [
+        "src/pages/Ideas.jsx",
+        "src/pages/IdeaSubmit.jsx",
+        "src/pages/IdeaDetails.jsx",
+        "src/components/ProjectParticipation.jsx"
+      ],
+      "models": [
+        "Idea",
+        "Completion",
+        "Group"
+      ],
+      "commands": [
+        "submitIdea",
+        "updateIdea",
+        "withdrawIdea",
+        "removeIdea",
+        "setIdeaInterest",
+        "requestIdea",
+        "cancelIdeaRequest",
+        "leaveIdea",
+        "reviewIdeaRequest",
+        "confirmProjectCompletion",
+        "createProjectGroup"
+      ],
+      "persistence": [
+        "workspace",
+        "demo",
+        "session_drafts"
+      ],
+      "status": "implemented_no_general_publication_approval",
+      "liveAcceptance": "not_repeated_in_this_documentation_task",
+      "integrationDependencies": [
+        "single_auth_identity",
+        "agreed_read_model",
+        "server_authorization",
+        "router_and_i18n_adapter"
+      ]
+    },
+    {
+      "id": "tutoring",
+      "entrypoints": [
+        "src/pages/Tutoring.jsx",
+        "src/pages/TutoringNew.jsx",
+        "src/pages/TutoringDetails.jsx"
+      ],
+      "models": [
+        "Tutoring",
+        "ContactDraft"
+      ],
+      "commands": [
+        "submitTutoring",
+        "updateTutoring",
+        "closeTutoring",
+        "removeTutoring",
+        "saveContactDraft",
+        "toggleModuleInterest"
+      ],
+      "persistence": [
+        "workspace",
+        "demo",
+        "session_drafts"
+      ],
+      "status": "contact_drafts_private_no_delivery_or_reply",
+      "liveAcceptance": "not_repeated_in_this_documentation_task",
+      "integrationDependencies": [
+        "single_auth_identity",
+        "agreed_read_model",
+        "server_authorization",
+        "router_and_i18n_adapter"
+      ]
+    },
+    {
+      "id": "events",
+      "entrypoints": [
+        "src/pages/Events.jsx",
+        "src/pages/EventNew.jsx",
+        "src/pages/EventDetails.jsx",
+        "src/components/ParticipationControl.jsx"
+      ],
+      "models": [
+        "Event",
+        "Evidence",
+        "Participation",
+        "Award"
+      ],
+      "commands": [
+        "createEvent",
+        "approveEvent",
+        "participation",
+        "confirmAttendance",
+        "awardRecognition",
+        "createEventGroup"
+      ],
+      "persistence": [
+        "workspace",
+        "demo_fixtures",
+        "session_drafts"
+      ],
+      "status": "implemented_with_confirmed_publication_and_time_rule_findings",
+      "liveAcceptance": "not_repeated_in_this_documentation_task",
+      "integrationDependencies": [
+        "single_auth_identity",
+        "agreed_read_model",
+        "server_authorization",
+        "router_and_i18n_adapter"
+      ]
+    },
+    {
+      "id": "community",
+      "entrypoints": [
+        "src/pages/Community.jsx",
+        "src/components/CommunityCards.jsx"
+      ],
+      "models": [
+        "Group",
+        "Message",
+        "Report"
+      ],
+      "commands": [
+        "joinGroup",
+        "leaveGroup",
+        "postMessage",
+        "removeMessage",
+        "report",
+        "blockPerson"
+      ],
+      "persistence": [
+        "workspace",
+        "demo"
+      ],
+      "status": "group_messages_no_private_direct_messages",
+      "liveAcceptance": "not_repeated_in_this_documentation_task",
+      "integrationDependencies": [
+        "single_auth_identity",
+        "agreed_read_model",
+        "server_authorization",
+        "router_and_i18n_adapter"
+      ]
+    },
+    {
+      "id": "moderation",
+      "entrypoints": [
+        "src/pages/Moderation.jsx"
+      ],
+      "models": [
+        "Report",
+        "Event",
+        "Completion",
+        "Award"
+      ],
+      "commands": [
+        "moderateMessage",
+        "resolveReport",
+        "approveEvent",
+        "confirmAttendance",
+        "awardRecognition",
+        "confirmProjectCompletion"
+      ],
+      "persistence": [
+        "workspace"
+      ],
+      "status": "small_global_moderator_ui_not_full_admin",
+      "liveAcceptance": "not_repeated_in_this_documentation_task",
+      "integrationDependencies": [
+        "single_auth_identity",
+        "agreed_read_model",
+        "server_authorization",
+        "router_and_i18n_adapter"
+      ]
+    },
+    {
+      "id": "chess",
+      "entrypoints": [
+        "src/games/ChessLobby.jsx",
+        "src/games/ChessBoard.jsx",
+        "supabase/functions/_shared/chess.js"
+      ],
+      "models": [
+        "Challenge",
+        "ChessGame",
+        "ChessNotification"
+      ],
+      "commands": [
+        "readChessNotices",
+        "challengeChess",
+        "respondChess",
+        "startChess",
+        "chessMove",
+        "chessResign",
+        "chessDraw",
+        "chessOfferDraw"
+      ],
+      "persistence": [
+        "workspace",
+        "demo"
+      ],
+      "status": "server_validated_moves_local_browser_tested_live_two_devices_pending",
+      "liveAcceptance": "not_repeated_in_this_documentation_task",
+      "integrationDependencies": [
+        "single_auth_identity",
+        "agreed_read_model",
+        "server_authorization",
+        "router_and_i18n_adapter"
+      ]
+    },
+    {
+      "id": "memory",
+      "entrypoints": [
+        "src/games/MemoryGame.jsx"
+      ],
+      "models": [
+        "LocalGameResult"
+      ],
+      "commands": [],
+      "persistence": [
+        "local_game_repository"
+      ],
+      "status": "complete_pair_count_local",
+      "liveAcceptance": "not_repeated_in_this_documentation_task",
+      "integrationDependencies": [
+        "single_auth_identity",
+        "agreed_read_model",
+        "server_authorization",
+        "router_and_i18n_adapter"
+      ]
+    },
+    {
+      "id": "flight",
+      "entrypoints": [
+        "src/games/ArcadeGame.jsx",
+        "src/games/arcade.js"
+      ],
+      "models": [
+        "LocalGameResult"
+      ],
+      "commands": [],
+      "persistence": [
+        "local_game_repository"
+      ],
+      "status": "single_run_highscore_progressive_speed",
+      "liveAcceptance": "not_repeated_in_this_documentation_task",
+      "integrationDependencies": [
+        "single_auth_identity",
+        "agreed_read_model",
+        "server_authorization",
+        "router_and_i18n_adapter"
+      ]
+    },
+    {
+      "id": "runner",
+      "entrypoints": [
+        "src/games/ArcadeGame.jsx",
+        "src/games/arcade.js"
+      ],
+      "models": [
+        "LocalGameResult"
+      ],
+      "commands": [],
+      "persistence": [
+        "local_game_repository"
+      ],
+      "status": "single_run_highscore",
+      "liveAcceptance": "not_repeated_in_this_documentation_task",
+      "integrationDependencies": [
+        "single_auth_identity",
+        "agreed_read_model",
+        "server_authorization",
+        "router_and_i18n_adapter"
+      ]
+    },
+    {
+      "id": "leaderboards",
+      "entrypoints": [
+        "src/components/GameLeaderboard.jsx",
+        "src/games/leaderboards.js",
+        "src/games/resultRepository.js"
+      ],
+      "models": [
+        "LocalGameResult",
+        "LeaderboardEntry"
+      ],
+      "commands": [],
+      "persistence": [
+        "local_game_repository",
+        "authorized_chess_projection"
+      ],
+      "status": "global_school_demo_only_personal_local_no_shared_account_boards",
+      "liveAcceptance": "not_repeated_in_this_documentation_task",
+      "integrationDependencies": [
+        "single_auth_identity",
+        "agreed_read_model",
+        "server_authorization",
+        "router_and_i18n_adapter"
+      ]
+    },
+    {
+      "id": "chess_notifications",
+      "entrypoints": [
+        "src/state/ChessNotificationContext.jsx",
+        "src/components/ChessInvitations.jsx",
+        "supabase/functions/_shared/chessInvitations.js"
+      ],
+      "models": [
+        "Challenge",
+        "ChessNotification"
+      ],
+      "commands": [
+        "readChessNotices",
+        "challengeChess",
+        "respondChess"
+      ],
+      "persistence": [
+        "derived_workspace",
+        "private_read_receipts"
+      ],
+      "status": "in_app_only_email_template_prepared_no_transport",
+      "liveAcceptance": "not_repeated_in_this_documentation_task",
+      "integrationDependencies": [
+        "single_auth_identity",
+        "agreed_read_model",
+        "server_authorization",
+        "router_and_i18n_adapter"
+      ]
+    },
+    {
+      "id": "personal_statistics",
+      "entrypoints": [
+        "src/data/personalArea.js",
+        "src/components/ActivityStatistics.jsx",
+        "src/pages/MyArea.jsx"
+      ],
+      "models": [
+        "Completion",
+        "Evidence",
+        "Award"
+      ],
+      "commands": [],
+      "persistence": [
+        "derived_workspace_or_demo"
+      ],
+      "status": "source_derived_no_independent_counters",
+      "liveAcceptance": "not_repeated_in_this_documentation_task",
+      "integrationDependencies": [
+        "single_auth_identity",
+        "agreed_read_model",
+        "server_authorization",
+        "router_and_i18n_adapter"
+      ]
+    },
+    {
+      "id": "discovery_network",
+      "entrypoints": [
+        "src/pages/Discover.jsx",
+        "src/pages/Network.jsx",
+        "src/pages/About.jsx",
+        "src/data/modules.js"
+      ],
+      "models": [
+        "School"
+      ],
+      "commands": [
+        "toggleModuleInterest"
+      ],
+      "persistence": [
+        "static_catalog",
+        "private_interest_map"
+      ],
+      "status": "initiatives_and_pilot_info_no_proven_impact_totals",
+      "liveAcceptance": "not_repeated_in_this_documentation_task",
+      "integrationDependencies": [
+        "single_auth_identity",
+        "agreed_read_model",
+        "server_authorization",
+        "router_and_i18n_adapter"
+      ]
+    },
+    {
+      "id": "navigation_offline_i18n",
+      "entrypoints": [
+        "src/state/routeHistory.js",
+        "src/state/usePageMemory.js",
+        "src/games/offline.js",
+        "scripts/offline-build.mjs",
+        "src/i18n/LanguageContext.jsx"
+      ],
+      "models": [],
+      "commands": [],
+      "persistence": [
+        "session_storage",
+        "language_storage",
+        "asset_cache"
+      ],
+      "status": "hash_navigation_three_languages_opt_in_static_offline",
+      "liveAcceptance": "not_repeated_in_this_documentation_task",
+      "integrationDependencies": [
+        "single_auth_identity",
+        "agreed_read_model",
+        "server_authorization",
+        "router_and_i18n_adapter"
+      ]
+    }
+  ],
+  "components": [
+    {
+      "path": "src/App.jsx",
+      "symbols": [
+        {
+          "name": "readRoute",
+          "line": 32
+        },
+        {
+          "name": "AppContent",
+          "line": 35
+        },
+        {
+          "name": "App",
+          "line": 103
+        }
+      ],
+      "exports": [
+        {
+          "name": "App",
+          "parameters": ""
+        }
+      ],
+      "imports": [
+        "react",
+        "./i18n/LanguageContext.jsx",
+        "./state/DemoContext.jsx",
+        "./components/Navigation.jsx",
+        "./pages/Home.jsx",
+        "./pages/Events.jsx",
+        "./pages/EventDetails.jsx",
+        "./pages/Ideas.jsx",
+        "./pages/IdeaDetails.jsx",
+        "./pages/IdeaSubmit.jsx",
+        "./pages/Network.jsx",
+        "./pages/MyArea.jsx",
+        "./pages/About.jsx",
+        "./pages/NotFound.jsx",
+        "./pages/Discover.jsx",
+        "./pages/Tutoring.jsx",
+        "./pages/TutoringNew.jsx",
+        "./pages/TutoringDetails.jsx",
+        "./pages/Community.jsx",
+        "./components/PersistenceNotice.jsx",
+        "./pages/Games.jsx",
+        "./pages/EventNew.jsx",
+        "./components/AccountStatus.jsx",
+        "./state/usePageMemory.js",
+        "./pages/StudentProfile.jsx",
+        "./data/navigation.js",
+        "./state/routeHistory.js",
+        "./state/ChessNotificationContext.jsx",
+        "./components/ChessInvitations.jsx",
+        "./components/ConfirmationNotice.jsx"
+      ],
+      "localDependencies": [
+        "src/i18n/LanguageContext.jsx",
+        "src/state/DemoContext.jsx",
+        "src/components/Navigation.jsx",
+        "src/pages/Home.jsx",
+        "src/pages/Events.jsx",
+        "src/pages/EventDetails.jsx",
+        "src/pages/Ideas.jsx",
+        "src/pages/IdeaDetails.jsx",
+        "src/pages/IdeaSubmit.jsx",
+        "src/pages/Network.jsx",
+        "src/pages/MyArea.jsx",
+        "src/pages/About.jsx",
+        "src/pages/NotFound.jsx",
+        "src/pages/Discover.jsx",
+        "src/pages/Tutoring.jsx",
+        "src/pages/TutoringNew.jsx",
+        "src/pages/TutoringDetails.jsx",
+        "src/pages/Community.jsx",
+        "src/components/PersistenceNotice.jsx",
+        "src/pages/Games.jsx",
+        "src/pages/EventNew.jsx",
+        "src/components/AccountStatus.jsx",
+        "src/state/usePageMemory.js",
+        "src/pages/StudentProfile.jsx",
+        "src/data/navigation.js",
+        "src/state/routeHistory.js",
+        "src/state/ChessNotificationContext.jsx",
+        "src/components/ChessInvitations.jsx",
+        "src/components/ConfirmationNotice.jsx"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo",
+        "useState",
+        "useRef",
+        "useEffect"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/AccountRecovery.jsx",
+      "symbols": [
+        {
+          "name": "AccountRecovery",
+          "line": 6
+        }
+      ],
+      "exports": [
+        {
+          "name": "AccountRecovery",
+          "parameters": ""
+        }
+      ],
+      "imports": [
+        "react",
+        "../state/AccountContext.jsx",
+        "../i18n/LanguageContext.jsx",
+        "../pages/Account.jsx"
+      ],
+      "localDependencies": [
+        "src/state/AccountContext.jsx",
+        "src/i18n/LanguageContext.jsx",
+        "src/pages/Account.jsx"
+      ],
+      "hooks": [
+        "useAccount",
+        "useLanguage",
+        "useState"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/AccountStatus.jsx",
+      "symbols": [
+        {
+          "name": "AccountStatus",
+          "line": 4
+        },
+        {
+          "name": "reload",
+          "line": 7
+        }
+      ],
+      "exports": [
+        {
+          "name": "AccountStatus",
+          "parameters": ""
+        }
+      ],
+      "imports": [
+        "react",
+        "../state/AccountContext.jsx",
+        "../i18n/LanguageContext.jsx"
+      ],
+      "localDependencies": [
+        "src/state/AccountContext.jsx",
+        "src/i18n/LanguageContext.jsx"
+      ],
+      "hooks": [
+        "useAccount",
+        "useLanguage",
+        "useRef",
+        "useState"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/ActionButton.jsx",
+      "symbols": [
+        {
+          "name": "ActionButton",
+          "line": 4
+        },
+        {
+          "name": "run",
+          "line": 7
+        }
+      ],
+      "exports": [
+        {
+          "name": "ActionButton",
+          "parameters": "{ action, children, secondary = true, onSuccess, disabled = false }"
+        }
+      ],
+      "imports": [
+        "react",
+        "../state/DemoContext.jsx",
+        "../i18n/LanguageContext.jsx"
+      ],
+      "localDependencies": [
+        "src/state/DemoContext.jsx",
+        "src/i18n/LanguageContext.jsx"
+      ],
+      "hooks": [
+        "useDemo",
+        "useLanguage",
+        "useState",
+        "useRef"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/ActivityStatistics.jsx",
+      "symbols": [
+        {
+          "name": "ActivityStatistics",
+          "line": 3
+        }
+      ],
+      "exports": [
+        {
+          "name": "ActivityStatistics",
+          "parameters": "{ counts, publicView = false }"
+        }
+      ],
+      "imports": [
+        "../i18n/LanguageContext.jsx"
+      ],
+      "localDependencies": [
+        "src/i18n/LanguageContext.jsx"
+      ],
+      "hooks": [
+        "useLanguage"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/BackLink.jsx",
+      "symbols": [
+        {
+          "name": "BackLink",
+          "line": 4
+        }
+      ],
+      "exports": [
+        {
+          "name": "BackLink",
+          "parameters": "{ fallback }"
+        }
+      ],
+      "imports": [
+        "../i18n/LanguageContext.jsx",
+        "../data/navigation.js"
+      ],
+      "localDependencies": [
+        "src/i18n/LanguageContext.jsx",
+        "src/data/navigation.js"
+      ],
+      "hooks": [
+        "useLanguage"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/ChessInvitations.jsx",
+      "symbols": [
+        {
+          "name": "ChessNotificationLink",
+          "line": 6
+        },
+        {
+          "name": "ChessNotificationBanner",
+          "line": 14
+        },
+        {
+          "name": "ChessInvitations",
+          "line": 21
+        },
+        {
+          "name": "respond",
+          "line": 29
+        },
+        {
+          "name": "read",
+          "line": 38
+        }
+      ],
+      "exports": [
+        {
+          "name": "ChessNotificationLink",
+          "parameters": ""
+        },
+        {
+          "name": "ChessNotificationBanner",
+          "parameters": ""
+        },
+        {
+          "name": "ChessInvitations",
+          "parameters": ""
+        }
+      ],
+      "imports": [
+        "react",
+        "../i18n/LanguageContext.jsx",
+        "../state/DemoContext.jsx",
+        "../state/ChessNotificationContext.jsx"
+      ],
+      "localDependencies": [
+        "src/i18n/LanguageContext.jsx",
+        "src/state/DemoContext.jsx",
+        "src/state/ChessNotificationContext.jsx"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useChessNotifications",
+        "useDemo",
+        "useState",
+        "useRef",
+        "useEffect"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/CommunityCards.jsx",
+      "symbols": [
+        {
+          "name": "MemberCard",
+          "line": 11
+        },
+        {
+          "name": "MessageCard",
+          "line": 25
+        },
+        {
+          "name": "remove",
+          "line": 31
+        },
+        {
+          "name": "MemberActions",
+          "line": 46
+        }
+      ],
+      "exports": [
+        {
+          "name": "MemberCard",
+          "parameters": "{ member }"
+        },
+        {
+          "name": "MessageCard",
+          "parameters": "{ message, showRoom = false }"
+        },
+        {
+          "name": "MemberActions",
+          "parameters": "{ member }"
+        }
+      ],
+      "imports": [
+        "react",
+        "../state/DemoContext.jsx",
+        "../i18n/LanguageContext.jsx",
+        "./InterestToggle.jsx",
+        "./ReportControl.jsx",
+        "../data/matching.js",
+        "./ActionButton.jsx",
+        "./ProfileLink.jsx",
+        "../data/profiles.js"
+      ],
+      "localDependencies": [
+        "src/state/DemoContext.jsx",
+        "src/i18n/LanguageContext.jsx",
+        "src/components/InterestToggle.jsx",
+        "src/components/ReportControl.jsx",
+        "src/data/matching.js",
+        "src/components/ActionButton.jsx",
+        "src/components/ProfileLink.jsx",
+        "src/data/profiles.js"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo",
+        "useState"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/ConfirmationNotice.jsx",
+      "symbols": [
+        {
+          "name": "ConfirmationNotice",
+          "line": 5
+        },
+        {
+          "name": "accept",
+          "line": 8
+        }
+      ],
+      "exports": [
+        {
+          "name": "ConfirmationNotice",
+          "parameters": ""
+        }
+      ],
+      "imports": [
+        "react",
+        "../state/AccountContext.jsx",
+        "../i18n/LanguageContext.jsx"
+      ],
+      "localDependencies": [
+        "src/state/AccountContext.jsx",
+        "src/i18n/LanguageContext.jsx"
+      ],
+      "hooks": [
+        "useAccount",
+        "useLanguage",
+        "useState"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/ContentManagement.jsx",
+      "symbols": [
+        {
+          "name": "ContentManagement",
+          "line": 5
+        },
+        {
+          "name": "run",
+          "line": 10
+        }
+      ],
+      "exports": [
+        {
+          "name": "ContentManagement",
+          "parameters": "{ editHref, inactive, inactiveLabel, onWithdraw, onDelete }"
+        }
+      ],
+      "imports": [
+        "react",
+        "../i18n/LanguageContext.jsx"
+      ],
+      "localDependencies": [
+        "src/i18n/LanguageContext.jsx"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useState"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/EventCard.jsx",
+      "symbols": [
+        {
+          "name": "EventCard",
+          "line": 7
+        }
+      ],
+      "exports": [
+        {
+          "name": "EventCard",
+          "parameters": "{ activity, recommended = false, returnTo = '/events/my' }"
+        }
+      ],
+      "imports": [
+        "../i18n/LanguageContext.jsx",
+        "./Icon.jsx",
+        "../state/DemoContext.jsx",
+        "../data/activities.js",
+        "../data/demoState.js"
+      ],
+      "localDependencies": [
+        "src/i18n/LanguageContext.jsx",
+        "src/components/Icon.jsx",
+        "src/state/DemoContext.jsx",
+        "src/data/activities.js",
+        "src/data/demoState.js"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/FormFields.jsx",
+      "symbols": [
+        {
+          "name": "TextField",
+          "line": 1
+        },
+        {
+          "name": "CheckOptions",
+          "line": 7
+        }
+      ],
+      "exports": [
+        {
+          "name": "TextField",
+          "parameters": "{ id, name = id, label, value, onChange, maxLength, minLength, required = false, multiline = false, error, hint, autoComplete, disabled = false }"
+        },
+        {
+          "name": "CheckOptions",
+          "parameters": "{ id, legend, options, value, onChange, error, hint }"
+        }
+      ],
+      "imports": [],
+      "localDependencies": [],
+      "hooks": [],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/GameLeaderboard.jsx",
+      "symbols": [
+        {
+          "name": "historyTime",
+          "line": 9
+        },
+        {
+          "name": "GameLeaderboard",
+          "line": 14
+        },
+        {
+          "name": "toggle",
+          "line": 30
+        }
+      ],
+      "exports": [
+        {
+          "name": "GameLeaderboard",
+          "parameters": "{ game = 'chess' }"
+        }
+      ],
+      "imports": [
+        "react",
+        "../i18n/LanguageContext.jsx",
+        "../state/DemoContext.jsx",
+        "../games/GameResultsContext.jsx",
+        "../games/leaderboards.js",
+        "../state/usePageMemory.js",
+        "../../supabase/functions/_shared/social.js"
+      ],
+      "localDependencies": [
+        "src/i18n/LanguageContext.jsx",
+        "src/state/DemoContext.jsx",
+        "src/games/GameResultsContext.jsx",
+        "src/games/leaderboards.js",
+        "src/state/usePageMemory.js",
+        "supabase/functions/_shared/social.js"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo",
+        "useGameResults",
+        "useRememberedState",
+        "useState"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/HeroSection.jsx",
+      "symbols": [
+        {
+          "name": "HeroSection",
+          "line": 7
+        }
+      ],
+      "exports": [
+        {
+          "name": "HeroSection",
+          "parameters": ""
+        }
+      ],
+      "imports": [
+        "../state/DemoContext.jsx",
+        "../i18n/LanguageContext.jsx",
+        "../data/activities.js",
+        "./Icon.jsx"
+      ],
+      "localDependencies": [
+        "src/state/DemoContext.jsx",
+        "src/i18n/LanguageContext.jsx",
+        "src/data/activities.js",
+        "src/components/Icon.jsx"
+      ],
+      "hooks": [
+        "useDemo",
+        "useLanguage"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/Icon.jsx",
+      "symbols": [
+        {
+          "name": "Icon",
+          "line": 24
+        }
+      ],
+      "exports": [
+        {
+          "name": "Icon",
+          "parameters": "{ name, size = 20, className = '' }"
+        }
+      ],
+      "imports": [],
+      "localDependencies": [],
+      "hooks": [],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/IdeaCard.jsx",
+      "symbols": [
+        {
+          "name": "ideaContent",
+          "line": 8
+        },
+        {
+          "name": "IdeaCard",
+          "line": 18
+        }
+      ],
+      "exports": [
+        {
+          "name": "ideaContent",
+          "parameters": "idea, t"
+        },
+        {
+          "name": "IdeaCard",
+          "parameters": "{ idea, returnTo = '/ideas/my' }"
+        }
+      ],
+      "imports": [
+        "../state/DemoContext.jsx",
+        "../i18n/LanguageContext.jsx",
+        "./Icon.jsx",
+        "../data/matching.js",
+        "../data/projectParticipation.js",
+        "./ProfileLink.jsx"
+      ],
+      "localDependencies": [
+        "src/state/DemoContext.jsx",
+        "src/i18n/LanguageContext.jsx",
+        "src/components/Icon.jsx",
+        "src/data/matching.js",
+        "src/data/projectParticipation.js",
+        "src/components/ProfileLink.jsx"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/InterestToggle.jsx",
+      "symbols": [
+        {
+          "name": "InterestToggle",
+          "line": 4
+        },
+        {
+          "name": "toggle",
+          "line": 10
+        }
+      ],
+      "exports": [
+        {
+          "name": "InterestToggle",
+          "parameters": "{ targetType, targetId, label, withdraw, disabled = false }"
+        }
+      ],
+      "imports": [
+        "../state/DemoContext.jsx",
+        "../i18n/LanguageContext.jsx",
+        "react"
+      ],
+      "localDependencies": [
+        "src/state/DemoContext.jsx",
+        "src/i18n/LanguageContext.jsx"
+      ],
+      "hooks": [
+        "useDemo",
+        "useLanguage",
+        "useState"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/ModuleNavigation.jsx",
+      "symbols": [
+        {
+          "name": "DiscoverNavigation",
+          "line": 4
+        },
+        {
+          "name": "CommunityNavigation",
+          "line": 11
+        }
+      ],
+      "exports": [
+        {
+          "name": "DiscoverNavigation",
+          "parameters": "{ active }"
+        },
+        {
+          "name": "CommunityNavigation",
+          "parameters": "{ active }"
+        }
+      ],
+      "imports": [
+        "../i18n/LanguageContext.jsx",
+        "./UI.jsx"
+      ],
+      "localDependencies": [
+        "src/i18n/LanguageContext.jsx",
+        "src/components/UI.jsx"
+      ],
+      "hooks": [
+        "useLanguage"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/Navigation.jsx",
+      "symbols": [
+        {
+          "name": "Navigation",
+          "line": 12
+        },
+        {
+          "name": "LanguageSwitcher",
+          "line": 21
+        },
+        {
+          "name": "Header",
+          "line": 34
+        }
+      ],
+      "exports": [
+        {
+          "name": "Navigation",
+          "parameters": "{ page }"
+        },
+        {
+          "name": "LanguageSwitcher",
+          "parameters": ""
+        },
+        {
+          "name": "Header",
+          "parameters": "{ page }"
+        }
+      ],
+      "imports": [
+        "./Icon.jsx",
+        "../i18n/LanguageContext.jsx",
+        "../state/DemoContext.jsx",
+        "../state/usePageMemory.js",
+        "./ChessInvitations.jsx"
+      ],
+      "localDependencies": [
+        "src/components/Icon.jsx",
+        "src/i18n/LanguageContext.jsx",
+        "src/state/DemoContext.jsx",
+        "src/state/usePageMemory.js",
+        "src/components/ChessInvitations.jsx"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/ParticipationControl.jsx",
+      "symbols": [
+        {
+          "name": "ParticipationControl",
+          "line": 6
+        },
+        {
+          "name": "change",
+          "line": 14
+        }
+      ],
+      "exports": [
+        {
+          "name": "ParticipationControl",
+          "parameters": "{ eventId }"
+        }
+      ],
+      "imports": [
+        "react",
+        "../state/DemoContext.jsx",
+        "../i18n/LanguageContext.jsx",
+        "./UI.jsx"
+      ],
+      "localDependencies": [
+        "src/state/DemoContext.jsx",
+        "src/i18n/LanguageContext.jsx",
+        "src/components/UI.jsx"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo",
+        "useState"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/PersistenceNotice.jsx",
+      "symbols": [
+        {
+          "name": "PersistenceNotice",
+          "line": 7
+        },
+        {
+          "name": "reload",
+          "line": 19
+        },
+        {
+          "name": "download",
+          "line": 23
+        }
+      ],
+      "exports": [
+        {
+          "name": "PersistenceNotice",
+          "parameters": ""
+        }
+      ],
+      "imports": [
+        "react",
+        "../i18n/LanguageContext.jsx",
+        "../state/DemoContext.jsx"
+      ],
+      "localDependencies": [
+        "src/i18n/LanguageContext.jsx",
+        "src/state/DemoContext.jsx"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo",
+        "useState"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/ProfileLink.jsx",
+      "symbols": [
+        {
+          "name": "ProfileLink",
+          "line": 5
+        }
+      ],
+      "exports": [
+        {
+          "name": "ProfileLink",
+          "parameters": "{ id }"
+        }
+      ],
+      "imports": [
+        "../state/DemoContext.jsx",
+        "../i18n/LanguageContext.jsx",
+        "../data/profiles.js"
+      ],
+      "localDependencies": [
+        "src/state/DemoContext.jsx",
+        "src/i18n/LanguageContext.jsx",
+        "src/data/profiles.js"
+      ],
+      "hooks": [
+        "useDemo",
+        "useLanguage"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/ProfileSchoolNotice.jsx",
+      "symbols": [
+        {
+          "name": "ProfileSchoolNotice",
+          "line": 3
+        }
+      ],
+      "exports": [
+        {
+          "name": "ProfileSchoolNotice",
+          "parameters": ""
+        }
+      ],
+      "imports": [
+        "../i18n/LanguageContext.jsx"
+      ],
+      "localDependencies": [
+        "src/i18n/LanguageContext.jsx"
+      ],
+      "hooks": [
+        "useLanguage"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/ProjectParticipation.jsx",
+      "symbols": [
+        {
+          "name": "ProjectParticipation",
+          "line": 9
+        },
+        {
+          "name": "run",
+          "line": 18
+        }
+      ],
+      "exports": [
+        {
+          "name": "ProjectParticipation",
+          "parameters": "{ idea }"
+        }
+      ],
+      "imports": [
+        "react",
+        "../state/DemoContext.jsx",
+        "../i18n/LanguageContext.jsx",
+        "../data/projectParticipation.js",
+        "../data/matching.js",
+        "./UI.jsx",
+        "./ProfileLink.jsx"
+      ],
+      "localDependencies": [
+        "src/state/DemoContext.jsx",
+        "src/i18n/LanguageContext.jsx",
+        "src/data/projectParticipation.js",
+        "src/data/matching.js",
+        "src/components/UI.jsx",
+        "src/components/ProfileLink.jsx"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo",
+        "useState",
+        "useRef"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/ReportControl.jsx",
+      "symbols": [
+        {
+          "name": "ReportControl",
+          "line": 6
+        },
+        {
+          "name": "report",
+          "line": 14
+        }
+      ],
+      "exports": [
+        {
+          "name": "ReportControl",
+          "parameters": "{ targetType, targetId }"
+        }
+      ],
+      "imports": [
+        "react",
+        "../state/DemoContext.jsx",
+        "../i18n/LanguageContext.jsx",
+        "../data/modules.js"
+      ],
+      "localDependencies": [
+        "src/state/DemoContext.jsx",
+        "src/i18n/LanguageContext.jsx",
+        "src/data/modules.js"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo",
+        "useState"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/SchoolCard.jsx",
+      "symbols": [
+        {
+          "name": "SchoolCard",
+          "line": 6
+        }
+      ],
+      "exports": [
+        {
+          "name": "SchoolCard",
+          "parameters": "{ school, compact = false }"
+        }
+      ],
+      "imports": [
+        "../i18n/LanguageContext.jsx",
+        "./UI.jsx",
+        "./Icon.jsx",
+        "../state/DemoContext.jsx"
+      ],
+      "localDependencies": [
+        "src/i18n/LanguageContext.jsx",
+        "src/components/UI.jsx",
+        "src/components/Icon.jsx",
+        "src/state/DemoContext.jsx"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/TutoringCard.jsx",
+      "symbols": [
+        {
+          "name": "TutoringCard",
+          "line": 7
+        }
+      ],
+      "exports": [
+        {
+          "name": "TutoringCard",
+          "parameters": "{ record, returnTo = '/tutoring' }"
+        }
+      ],
+      "imports": [
+        "../data/modules.js",
+        "../i18n/LanguageContext.jsx",
+        "../state/DemoContext.jsx",
+        "./Icon.jsx",
+        "../data/matching.js"
+      ],
+      "localDependencies": [
+        "src/data/modules.js",
+        "src/i18n/LanguageContext.jsx",
+        "src/state/DemoContext.jsx",
+        "src/components/Icon.jsx",
+        "src/data/matching.js"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/components/UI.jsx",
+      "symbols": [
+        {
+          "name": "LinkButton",
+          "line": 5
+        },
+        {
+          "name": "StatusBadge",
+          "line": 9
+        },
+        {
+          "name": "SectionHeading",
+          "line": 13
+        },
+        {
+          "name": "DemoNotice",
+          "line": 17
+        },
+        {
+          "name": "PageIntro",
+          "line": 22
+        },
+        {
+          "name": "ModuleTabs",
+          "line": 26
+        },
+        {
+          "name": "EmptyState",
+          "line": 36
+        },
+        {
+          "name": "SearchField",
+          "line": 40
+        }
+      ],
+      "exports": [
+        {
+          "name": "LinkButton",
+          "parameters": "{ href, children, secondary = false, className = '' }"
+        },
+        {
+          "name": "StatusBadge",
+          "parameters": "{ children, muted = false }"
+        },
+        {
+          "name": "SectionHeading",
+          "parameters": "{ eyebrow, title, description, href, link }"
+        },
+        {
+          "name": "DemoNotice",
+          "parameters": ""
+        },
+        {
+          "name": "PageIntro",
+          "parameters": "{ eyebrow, title, description }"
+        },
+        {
+          "name": "ModuleTabs",
+          "parameters": "{ items, label }"
+        },
+        {
+          "name": "EmptyState",
+          "parameters": "{ text, href, action, icon = 'calendar' }"
+        },
+        {
+          "name": "SearchField",
+          "parameters": "{ value, onChange, label }"
+        }
+      ],
+      "imports": [
+        "./Icon.jsx",
+        "../i18n/LanguageContext.jsx",
+        "react"
+      ],
+      "localDependencies": [
+        "src/components/Icon.jsx",
+        "src/i18n/LanguageContext.jsx"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useRef",
+        "useEffect"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/games/ArcadeGame.jsx",
+      "symbols": [
+        {
+          "name": "ArcadeGame",
+          "line": 8
+        },
+        {
+          "name": "start",
+          "line": 35
+        },
+        {
+          "name": "act",
+          "line": 36
+        }
+      ],
+      "exports": [
+        {
+          "name": "ArcadeGame",
+          "parameters": "{ kind }"
+        }
+      ],
+      "imports": [
+        "react",
+        "../i18n/LanguageContext.jsx",
+        "./arcade.js",
+        "../state/DemoContext.jsx",
+        "./GameResultsContext.jsx",
+        "./leaderboards.js"
+      ],
+      "localDependencies": [
+        "src/i18n/LanguageContext.jsx",
+        "src/games/arcade.js",
+        "src/state/DemoContext.jsx",
+        "src/games/GameResultsContext.jsx",
+        "src/games/leaderboards.js"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useState",
+        "useDemo",
+        "useGameResults",
+        "useResultRecorder",
+        "useRef",
+        "useMemo",
+        "useEffect"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/games/ChessBoard.jsx",
+      "symbols": [
+        {
+          "name": "ChessBoard",
+          "line": 8
+        },
+        {
+          "name": "run",
+          "line": 21
+        },
+        {
+          "name": "choose",
+          "line": 26
+        }
+      ],
+      "exports": [
+        {
+          "name": "ChessBoard",
+          "parameters": "{ id }"
+        }
+      ],
+      "imports": [
+        "react",
+        "../state/DemoContext.jsx",
+        "../i18n/LanguageContext.jsx",
+        "../../supabase/functions/_shared/chess.js",
+        "../pages/NotFound.jsx"
+      ],
+      "localDependencies": [
+        "src/state/DemoContext.jsx",
+        "src/i18n/LanguageContext.jsx",
+        "supabase/functions/_shared/chess.js",
+        "src/pages/NotFound.jsx"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo",
+        "useMemo",
+        "useState"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/games/ChessLobby.jsx",
+      "symbols": [
+        {
+          "name": "ChessLobby",
+          "line": 9
+        },
+        {
+          "name": "run",
+          "line": 19
+        },
+        {
+          "name": "start",
+          "line": 20
+        },
+        {
+          "name": "invite",
+          "line": 21
+        }
+      ],
+      "exports": [
+        {
+          "name": "ChessLobby",
+          "parameters": "{initialTarget}"
+        }
+      ],
+      "imports": [
+        "react",
+        "../state/DemoContext.jsx",
+        "../i18n/LanguageContext.jsx",
+        "../data/modules.js",
+        "../../supabase/functions/_shared/social.js",
+        "../components/UI.jsx",
+        "../state/useActiveView.js"
+      ],
+      "localDependencies": [
+        "src/state/DemoContext.jsx",
+        "src/i18n/LanguageContext.jsx",
+        "src/data/modules.js",
+        "supabase/functions/_shared/social.js",
+        "src/components/UI.jsx",
+        "src/state/useActiveView.js"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo",
+        "useState",
+        "useRef",
+        "useActiveView"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/games/GameResultsContext.jsx",
+      "symbols": [
+        {
+          "name": "GameResultsContext",
+          "line": 7
+        },
+        {
+          "name": "GameResultsProvider",
+          "line": 8
+        },
+        {
+          "name": "useGameResults",
+          "line": 25
+        },
+        {
+          "name": "useResultRecorder",
+          "line": 28
+        },
+        {
+          "name": "save",
+          "line": 33
+        }
+      ],
+      "exports": [
+        {
+          "name": "GameResultsProvider",
+          "parameters": "{children}"
+        },
+        {
+          "name": "useResultRecorder",
+          "parameters": ""
+        }
+      ],
+      "imports": [
+        "react",
+        "../state/DemoContext.jsx",
+        "../i18n/LanguageContext.jsx",
+        "./resultRepository.js",
+        "../state/usePageMemory.js"
+      ],
+      "localDependencies": [
+        "src/state/DemoContext.jsx",
+        "src/i18n/LanguageContext.jsx",
+        "src/games/resultRepository.js",
+        "src/state/usePageMemory.js"
+      ],
+      "hooks": [
+        "useDemo",
+        "useState",
+        "useEffect",
+        "useContext",
+        "useResultRecorder",
+        "useGameResults",
+        "useLanguage",
+        "useRef",
+        "useUnsavedGuard"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/games/MemoryGame.jsx",
+      "symbols": [
+        {
+          "name": "MemoryGame",
+          "line": 8
+        },
+        {
+          "name": "reveal",
+          "line": 21
+        },
+        {
+          "name": "reset",
+          "line": 27
+        }
+      ],
+      "exports": [
+        {
+          "name": "MemoryGame",
+          "parameters": ""
+        }
+      ],
+      "imports": [
+        "react",
+        "../i18n/LanguageContext.jsx",
+        "./arcade.js",
+        "../state/DemoContext.jsx",
+        "./GameResultsContext.jsx",
+        "./leaderboards.js"
+      ],
+      "localDependencies": [
+        "src/i18n/LanguageContext.jsx",
+        "src/games/arcade.js",
+        "src/state/DemoContext.jsx",
+        "src/games/GameResultsContext.jsx",
+        "src/games/leaderboards.js"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useState",
+        "useRef",
+        "useDemo",
+        "useResultRecorder",
+        "useEffect"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/i18n/LanguageContext.jsx",
+      "symbols": [
+        {
+          "name": "initialLanguage",
+          "line": 23
+        },
+        {
+          "name": "LanguageProvider",
+          "line": 32
+        },
+        {
+          "name": "useLanguage",
+          "line": 46
+        },
+        {
+          "name": "LanguageOverride",
+          "line": 50
+        }
+      ],
+      "exports": [
+        {
+          "name": "LanguageProvider",
+          "parameters": "{ children }"
+        },
+        {
+          "name": "useLanguage",
+          "parameters": ""
+        },
+        {
+          "name": "LanguageOverride",
+          "parameters": "{ transform, children }"
+        }
+      ],
+      "imports": [
+        "react",
+        "../locales/de.json",
+        "../locales/tr.json",
+        "../locales/en.json",
+        "../locales/modules/de.json",
+        "../locales/modules/tr.json",
+        "../locales/modules/en.json",
+        "../locales/quality/de.json",
+        "../locales/quality/tr.json",
+        "../locales/quality/en.json",
+        "../locales/personal/de.json",
+        "../locales/personal/tr.json",
+        "../locales/personal/en.json",
+        "../locales/platform/de.json",
+        "../locales/platform/tr.json",
+        "../locales/platform/en.json"
+      ],
+      "localDependencies": [
+        "src/locales/de.json",
+        "src/locales/tr.json",
+        "src/locales/en.json",
+        "src/locales/modules/de.json",
+        "src/locales/modules/tr.json",
+        "src/locales/modules/en.json",
+        "src/locales/quality/de.json",
+        "src/locales/quality/tr.json",
+        "src/locales/quality/en.json",
+        "src/locales/personal/de.json",
+        "src/locales/personal/tr.json",
+        "src/locales/personal/en.json",
+        "src/locales/platform/de.json",
+        "src/locales/platform/tr.json",
+        "src/locales/platform/en.json"
+      ],
+      "hooks": [
+        "useState",
+        "useEffect",
+        "useLanguage",
+        "useContext"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/main.jsx",
+      "symbols": [],
+      "exports": [],
+      "imports": [
+        "react",
+        "react-dom/client",
+        "./App.jsx",
+        "./i18n/LanguageContext.jsx",
+        "./state/DemoContext.jsx",
+        "./state/AccountContext.jsx",
+        "./services/authCallback.js",
+        "./styles/global.css",
+        "./styles/modules.css",
+        "./styles/games.css"
+      ],
+      "localDependencies": [
+        "src/App.jsx",
+        "src/i18n/LanguageContext.jsx",
+        "src/state/DemoContext.jsx",
+        "src/state/AccountContext.jsx",
+        "src/services/authCallback.js",
+        "src/styles/global.css",
+        "src/styles/modules.css",
+        "src/styles/games.css"
+      ],
+      "hooks": [],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/pages/About.jsx",
+      "symbols": [
+        {
+          "name": "About",
+          "line": 5
+        }
+      ],
+      "exports": [
+        {
+          "name": "About",
+          "parameters": ""
+        }
+      ],
+      "imports": [
+        "../i18n/LanguageContext.jsx",
+        "../components/UI.jsx",
+        "../components/Icon.jsx"
+      ],
+      "localDependencies": [
+        "src/i18n/LanguageContext.jsx",
+        "src/components/UI.jsx",
+        "src/components/Icon.jsx"
+      ],
+      "hooks": [
+        "useLanguage"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/pages/Account.jsx",
+      "symbols": [
+        {
+          "name": "Account",
+          "line": 7
+        },
+        {
+          "name": "submit",
+          "line": 14
+        },
+        {
+          "name": "signOut",
+          "line": 27
+        }
+      ],
+      "exports": [
+        {
+          "name": "Account",
+          "parameters": "{allowExistingSignIn=false}"
+        }
+      ],
+      "imports": [
+        "react",
+        "../state/AccountContext.jsx",
+        "../i18n/LanguageContext.jsx",
+        "../components/FormFields.jsx",
+        "../components/ConfirmationNotice.jsx"
+      ],
+      "localDependencies": [
+        "src/state/AccountContext.jsx",
+        "src/i18n/LanguageContext.jsx",
+        "src/components/FormFields.jsx",
+        "src/components/ConfirmationNotice.jsx"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useAccount",
+        "useState",
+        "useRef"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/pages/Achievements.jsx",
+      "symbols": [
+        {
+          "name": "Achievements",
+          "line": 5
+        }
+      ],
+      "exports": [
+        {
+          "name": "Achievements",
+          "parameters": ""
+        }
+      ],
+      "imports": [
+        "../state/DemoContext.jsx",
+        "../i18n/LanguageContext.jsx",
+        "../components/UI.jsx",
+        "../components/ActionButton.jsx"
+      ],
+      "localDependencies": [
+        "src/state/DemoContext.jsx",
+        "src/i18n/LanguageContext.jsx",
+        "src/components/UI.jsx",
+        "src/components/ActionButton.jsx"
+      ],
+      "hooks": [
+        "useDemo",
+        "useLanguage"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/pages/Community.jsx",
+      "symbols": [
+        {
+          "name": "Community",
+          "line": 23
+        },
+        {
+          "name": "submit",
+          "line": 44
+        }
+      ],
+      "exports": [
+        {
+          "name": "Community",
+          "parameters": "{ section = 'people', roomId }"
+        }
+      ],
+      "imports": [
+        "react",
+        "../state/DemoContext.jsx",
+        "../i18n/LanguageContext.jsx",
+        "../data/activities.js",
+        "../data/modules.js",
+        "../components/ModuleNavigation.jsx",
+        "../components/CommunityCards.jsx",
+        "../components/UI.jsx",
+        "../components/FormFields.jsx",
+        "../components/IdeaCard.jsx",
+        "../components/Icon.jsx",
+        "./NotFound.jsx",
+        "../state/usePageMemory.js",
+        "../data/matching.js",
+        "../data/groups.js",
+        "../../supabase/functions/_shared/social.js",
+        "../components/ActionButton.jsx",
+        "../data/profiles.js",
+        "../components/ProfileLink.jsx",
+        "../components/BackLink.jsx",
+        "../state/useActiveView.js"
+      ],
+      "localDependencies": [
+        "src/state/DemoContext.jsx",
+        "src/i18n/LanguageContext.jsx",
+        "src/data/activities.js",
+        "src/data/modules.js",
+        "src/components/ModuleNavigation.jsx",
+        "src/components/CommunityCards.jsx",
+        "src/components/UI.jsx",
+        "src/components/FormFields.jsx",
+        "src/components/IdeaCard.jsx",
+        "src/components/Icon.jsx",
+        "src/pages/NotFound.jsx",
+        "src/state/usePageMemory.js",
+        "src/data/matching.js",
+        "src/data/groups.js",
+        "supabase/functions/_shared/social.js",
+        "src/components/ActionButton.jsx",
+        "src/data/profiles.js",
+        "src/components/ProfileLink.jsx",
+        "src/components/BackLink.jsx",
+        "src/state/useActiveView.js"
+      ],
+      "hooks": [
+        "useActiveView",
+        "useLanguage",
+        "useDemo",
+        "useRememberedState",
+        "useFormDraft",
+        "useState",
+        "useRef"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/pages/Discover.jsx",
+      "symbols": [
+        {
+          "name": "Discover",
+          "line": 11
+        }
+      ],
+      "exports": [
+        {
+          "name": "Discover",
+          "parameters": "{ id }"
+        }
+      ],
+      "imports": [
+        "../data/modules.js",
+        "../i18n/LanguageContext.jsx",
+        "../state/DemoContext.jsx",
+        "../components/UI.jsx",
+        "../components/ModuleNavigation.jsx",
+        "../components/InterestToggle.jsx",
+        "../components/Icon.jsx",
+        "./NotFound.jsx",
+        "../components/BackLink.jsx"
+      ],
+      "localDependencies": [
+        "src/data/modules.js",
+        "src/i18n/LanguageContext.jsx",
+        "src/state/DemoContext.jsx",
+        "src/components/UI.jsx",
+        "src/components/ModuleNavigation.jsx",
+        "src/components/InterestToggle.jsx",
+        "src/components/Icon.jsx",
+        "src/pages/NotFound.jsx",
+        "src/components/BackLink.jsx"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/pages/EventDetails.jsx",
+      "symbols": [
+        {
+          "name": "EventDetails",
+          "line": 12
+        }
+      ],
+      "exports": [
+        {
+          "name": "EventDetails",
+          "parameters": "{ id, returnTo = '/events/my' }"
+        }
+      ],
+      "imports": [
+        "../i18n/LanguageContext.jsx",
+        "../data/activities.js",
+        "../components/Icon.jsx",
+        "../components/ParticipationControl.jsx",
+        "../components/UI.jsx",
+        "./NotFound.jsx",
+        "../state/DemoContext.jsx",
+        "../components/ActionButton.jsx",
+        "../components/ProfileLink.jsx",
+        "../components/BackLink.jsx"
+      ],
+      "localDependencies": [
+        "src/i18n/LanguageContext.jsx",
+        "src/data/activities.js",
+        "src/components/Icon.jsx",
+        "src/components/ParticipationControl.jsx",
+        "src/components/UI.jsx",
+        "src/pages/NotFound.jsx",
+        "src/state/DemoContext.jsx",
+        "src/components/ActionButton.jsx",
+        "src/components/ProfileLink.jsx",
+        "src/components/BackLink.jsx"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/pages/EventNew.jsx",
+      "symbols": [
+        {
+          "name": "EventNew",
+          "line": 12
+        },
+        {
+          "name": "save",
+          "line": 19
+        }
+      ],
+      "exports": [
+        {
+          "name": "EventNew",
+          "parameters": ""
+        }
+      ],
+      "imports": [
+        "react",
+        "../state/DemoContext.jsx",
+        "../i18n/LanguageContext.jsx",
+        "../components/UI.jsx",
+        "../components/FormFields.jsx",
+        "../data/activities.js",
+        "../state/usePageMemory.js",
+        "../components/BackLink.jsx",
+        "../state/routeHistory.js",
+        "../state/useActiveView.js"
+      ],
+      "localDependencies": [
+        "src/state/DemoContext.jsx",
+        "src/i18n/LanguageContext.jsx",
+        "src/components/UI.jsx",
+        "src/components/FormFields.jsx",
+        "src/data/activities.js",
+        "src/state/usePageMemory.js",
+        "src/components/BackLink.jsx",
+        "src/state/routeHistory.js",
+        "src/state/useActiveView.js"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo",
+        "useFormDraft",
+        "useState",
+        "useRef",
+        "useActiveView"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/pages/Events.jsx",
+      "symbols": [
+        {
+          "name": "Events",
+          "line": 10
+        },
+        {
+          "name": "reset",
+          "line": 19
+        }
+      ],
+      "exports": [
+        {
+          "name": "Events",
+          "parameters": "{ mode = 'my' }"
+        }
+      ],
+      "imports": [
+        "../i18n/LanguageContext.jsx",
+        "../state/DemoContext.jsx",
+        "../components/EventCard.jsx",
+        "../components/UI.jsx",
+        "../data/activities.js",
+        "../components/ModuleNavigation.jsx",
+        "../data/demoState.js",
+        "../state/usePageMemory.js"
+      ],
+      "localDependencies": [
+        "src/i18n/LanguageContext.jsx",
+        "src/state/DemoContext.jsx",
+        "src/components/EventCard.jsx",
+        "src/components/UI.jsx",
+        "src/data/activities.js",
+        "src/components/ModuleNavigation.jsx",
+        "src/data/demoState.js",
+        "src/state/usePageMemory.js"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo",
+        "useRememberedState"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/pages/Games.jsx",
+      "symbols": [
+        {
+          "name": "GamesContent",
+          "line": 16
+        },
+        {
+          "name": "cache",
+          "line": 22
+        },
+        {
+          "name": "Games",
+          "line": 35
+        }
+      ],
+      "exports": [
+        {
+          "name": "Games",
+          "parameters": "props"
+        }
+      ],
+      "imports": [
+        "react",
+        "../i18n/LanguageContext.jsx",
+        "../components/UI.jsx",
+        "../components/ModuleNavigation.jsx",
+        "../games/ArcadeGame.jsx",
+        "../games/MemoryGame.jsx",
+        "../games/ChessLobby.jsx",
+        "../games/ChessBoard.jsx",
+        "../games/offline.js",
+        "./NotFound.jsx",
+        "../state/DemoContext.jsx",
+        "../components/BackLink.jsx",
+        "../components/GameLeaderboard.jsx",
+        "../games/GameResultsContext.jsx"
+      ],
+      "localDependencies": [
+        "src/i18n/LanguageContext.jsx",
+        "src/components/UI.jsx",
+        "src/components/ModuleNavigation.jsx",
+        "src/games/ArcadeGame.jsx",
+        "src/games/MemoryGame.jsx",
+        "src/games/ChessLobby.jsx",
+        "src/games/ChessBoard.jsx",
+        "src/games/offline.js",
+        "src/pages/NotFound.jsx",
+        "src/state/DemoContext.jsx",
+        "src/components/BackLink.jsx",
+        "src/components/GameLeaderboard.jsx",
+        "src/games/GameResultsContext.jsx"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo",
+        "useState"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/pages/Home.jsx",
+      "symbols": [
+        {
+          "name": "Home",
+          "line": 13
+        }
+      ],
+      "exports": [
+        {
+          "name": "Home",
+          "parameters": ""
+        }
+      ],
+      "imports": [
+        "../i18n/LanguageContext.jsx",
+        "../state/DemoContext.jsx",
+        "../data/demoState.js",
+        "../components/HeroSection.jsx",
+        "../components/EventCard.jsx",
+        "../components/IdeaCard.jsx",
+        "../components/Icon.jsx",
+        "../components/UI.jsx",
+        "../data/modules.js",
+        "../data/matching.js",
+        "../components/TutoringCard.jsx"
+      ],
+      "localDependencies": [
+        "src/i18n/LanguageContext.jsx",
+        "src/state/DemoContext.jsx",
+        "src/data/demoState.js",
+        "src/components/HeroSection.jsx",
+        "src/components/EventCard.jsx",
+        "src/components/IdeaCard.jsx",
+        "src/components/Icon.jsx",
+        "src/components/UI.jsx",
+        "src/data/modules.js",
+        "src/data/matching.js",
+        "src/components/TutoringCard.jsx"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/pages/IdeaDetails.jsx",
+      "symbols": [
+        {
+          "name": "IdeaDetails",
+          "line": 14
+        }
+      ],
+      "exports": [
+        {
+          "name": "IdeaDetails",
+          "parameters": "{ id, returnTo = '/ideas/my' }"
+        }
+      ],
+      "imports": [
+        "../i18n/LanguageContext.jsx",
+        "../state/DemoContext.jsx",
+        "../components/IdeaCard.jsx",
+        "../components/UI.jsx",
+        "./NotFound.jsx",
+        "../data/activities.js",
+        "../components/ContentManagement.jsx",
+        "../components/ProjectParticipation.jsx",
+        "../components/ActionButton.jsx",
+        "../components/ProfileLink.jsx",
+        "../components/BackLink.jsx",
+        "../state/useActiveView.js"
+      ],
+      "localDependencies": [
+        "src/i18n/LanguageContext.jsx",
+        "src/state/DemoContext.jsx",
+        "src/components/IdeaCard.jsx",
+        "src/components/UI.jsx",
+        "src/pages/NotFound.jsx",
+        "src/data/activities.js",
+        "src/components/ContentManagement.jsx",
+        "src/components/ProjectParticipation.jsx",
+        "src/components/ActionButton.jsx",
+        "src/components/ProfileLink.jsx",
+        "src/components/BackLink.jsx",
+        "src/state/useActiveView.js"
+      ],
+      "hooks": [
+        "useActiveView",
+        "useLanguage",
+        "useDemo"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/pages/IdeaSubmit.jsx",
+      "symbols": [
+        {
+          "name": "IdeaSubmit",
+          "line": 17
+        },
+        {
+          "name": "submit",
+          "line": 32
+        }
+      ],
+      "exports": [
+        {
+          "name": "IdeaSubmit",
+          "parameters": "{ initiativeId, id }"
+        }
+      ],
+      "imports": [
+        "react",
+        "../state/DemoContext.jsx",
+        "../i18n/LanguageContext.jsx",
+        "../data/activities.js",
+        "../data/demoState.js",
+        "../data/modules.js",
+        "../components/UI.jsx",
+        "../components/BackLink.jsx",
+        "../state/routeHistory.js",
+        "../components/FormFields.jsx",
+        "../components/IdeaCard.jsx",
+        "../state/usePageMemory.js",
+        "./NotFound.jsx",
+        "../components/ProfileSchoolNotice.jsx",
+        "../state/useActiveView.js"
+      ],
+      "localDependencies": [
+        "src/state/DemoContext.jsx",
+        "src/i18n/LanguageContext.jsx",
+        "src/data/activities.js",
+        "src/data/demoState.js",
+        "src/data/modules.js",
+        "src/components/UI.jsx",
+        "src/components/BackLink.jsx",
+        "src/state/routeHistory.js",
+        "src/components/FormFields.jsx",
+        "src/components/IdeaCard.jsx",
+        "src/state/usePageMemory.js",
+        "src/pages/NotFound.jsx",
+        "src/components/ProfileSchoolNotice.jsx",
+        "src/state/useActiveView.js"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo",
+        "useFormDraft",
+        "useState",
+        "useActiveView"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/pages/Ideas.jsx",
+      "symbols": [
+        {
+          "name": "Ideas",
+          "line": 10
+        }
+      ],
+      "exports": [
+        {
+          "name": "Ideas",
+          "parameters": "{ mode = 'my' }"
+        }
+      ],
+      "imports": [
+        "../i18n/LanguageContext.jsx",
+        "../state/DemoContext.jsx",
+        "../data/demoState.js",
+        "../components/IdeaCard.jsx",
+        "../components/UI.jsx",
+        "../components/ModuleNavigation.jsx",
+        "../state/usePageMemory.js",
+        "../data/matching.js"
+      ],
+      "localDependencies": [
+        "src/i18n/LanguageContext.jsx",
+        "src/state/DemoContext.jsx",
+        "src/data/demoState.js",
+        "src/components/IdeaCard.jsx",
+        "src/components/UI.jsx",
+        "src/components/ModuleNavigation.jsx",
+        "src/state/usePageMemory.js",
+        "src/data/matching.js"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo",
+        "useRememberedState"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/pages/Moderation.jsx",
+      "symbols": [
+        {
+          "name": "Moderation",
+          "line": 6
+        }
+      ],
+      "exports": [
+        {
+          "name": "Moderation",
+          "parameters": ""
+        }
+      ],
+      "imports": [
+        "../state/DemoContext.jsx",
+        "../i18n/LanguageContext.jsx",
+        "../components/ActionButton.jsx",
+        "./NotFound.jsx",
+        "../components/IdeaCard.jsx"
+      ],
+      "localDependencies": [
+        "src/state/DemoContext.jsx",
+        "src/i18n/LanguageContext.jsx",
+        "src/components/ActionButton.jsx",
+        "src/pages/NotFound.jsx",
+        "src/components/IdeaCard.jsx"
+      ],
+      "hooks": [
+        "useDemo",
+        "useLanguage"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/pages/MyArea.jsx",
+      "symbols": [
+        {
+          "name": "CardList",
+          "line": 21
+        },
+        {
+          "name": "MyArea",
+          "line": 25
+        }
+      ],
+      "exports": [
+        {
+          "name": "MyArea",
+          "parameters": "{ section = 'overview', view }"
+        }
+      ],
+      "imports": [
+        "react",
+        "../i18n/LanguageContext.jsx",
+        "../state/DemoContext.jsx",
+        "../data/personalArea.js",
+        "../components/UI.jsx",
+        "../state/usePageMemory.js",
+        "../components/EventCard.jsx",
+        "../components/IdeaCard.jsx",
+        "../components/TutoringCard.jsx",
+        "../components/CommunityCards.jsx",
+        "../components/Icon.jsx",
+        "./PersonalSettings.jsx",
+        "./Account.jsx",
+        "./Achievements.jsx",
+        "./Moderation.jsx",
+        "../components/BackLink.jsx",
+        "../components/ActivityStatistics.jsx",
+        "../components/ChessInvitations.jsx"
+      ],
+      "localDependencies": [
+        "src/i18n/LanguageContext.jsx",
+        "src/state/DemoContext.jsx",
+        "src/data/personalArea.js",
+        "src/components/UI.jsx",
+        "src/state/usePageMemory.js",
+        "src/components/EventCard.jsx",
+        "src/components/IdeaCard.jsx",
+        "src/components/TutoringCard.jsx",
+        "src/components/CommunityCards.jsx",
+        "src/components/Icon.jsx",
+        "src/pages/PersonalSettings.jsx",
+        "src/pages/Account.jsx",
+        "src/pages/Achievements.jsx",
+        "src/pages/Moderation.jsx",
+        "src/components/BackLink.jsx",
+        "src/components/ActivityStatistics.jsx",
+        "src/components/ChessInvitations.jsx"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo",
+        "useRememberedState",
+        "useState"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/pages/Network.jsx",
+      "symbols": [
+        {
+          "name": "Network",
+          "line": 11
+        }
+      ],
+      "exports": [
+        {
+          "name": "Network",
+          "parameters": "{ section = 'directory', schoolId }"
+        }
+      ],
+      "imports": [
+        "../i18n/LanguageContext.jsx",
+        "../state/DemoContext.jsx",
+        "../components/SchoolCard.jsx",
+        "../components/EventCard.jsx",
+        "../components/UI.jsx",
+        "../data/activities.js",
+        "./NotFound.jsx",
+        "../components/ModuleNavigation.jsx",
+        "../state/usePageMemory.js"
+      ],
+      "localDependencies": [
+        "src/i18n/LanguageContext.jsx",
+        "src/state/DemoContext.jsx",
+        "src/components/SchoolCard.jsx",
+        "src/components/EventCard.jsx",
+        "src/components/UI.jsx",
+        "src/data/activities.js",
+        "src/pages/NotFound.jsx",
+        "src/components/ModuleNavigation.jsx",
+        "src/state/usePageMemory.js"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo",
+        "useRememberedState"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/pages/NotFound.jsx",
+      "symbols": [
+        {
+          "name": "NotFound",
+          "line": 4
+        }
+      ],
+      "exports": [
+        {
+          "name": "NotFound",
+          "parameters": ""
+        }
+      ],
+      "imports": [
+        "../i18n/LanguageContext.jsx",
+        "../components/UI.jsx"
+      ],
+      "localDependencies": [
+        "src/i18n/LanguageContext.jsx",
+        "src/components/UI.jsx"
+      ],
+      "hooks": [
+        "useLanguage"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/pages/PersonalSettings.jsx",
+      "symbols": [
+        {
+          "name": "PersonalSettings",
+          "line": 12
+        },
+        {
+          "name": "change",
+          "line": 25
+        },
+        {
+          "name": "submit",
+          "line": 26
+        }
+      ],
+      "exports": [
+        {
+          "name": "PersonalSettings",
+          "parameters": ""
+        }
+      ],
+      "imports": [
+        "react",
+        "../state/DemoContext.jsx",
+        "../i18n/LanguageContext.jsx",
+        "../data/activities.js",
+        "../components/Navigation.jsx",
+        "../components/FormFields.jsx",
+        "../state/usePageMemory.js",
+        "../../supabase/functions/_shared/profiles.js",
+        "../components/ActionButton.jsx",
+        "../state/useActiveView.js"
+      ],
+      "localDependencies": [
+        "src/state/DemoContext.jsx",
+        "src/i18n/LanguageContext.jsx",
+        "src/data/activities.js",
+        "src/components/Navigation.jsx",
+        "src/components/FormFields.jsx",
+        "src/state/usePageMemory.js",
+        "supabase/functions/_shared/profiles.js",
+        "src/components/ActionButton.jsx",
+        "src/state/useActiveView.js"
+      ],
+      "hooks": [
+        "useActiveView",
+        "useLanguage",
+        "useDemo",
+        "useFormDraft",
+        "useState"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/pages/StudentProfile.jsx",
+      "symbols": [
+        {
+          "name": "StudentProfile",
+          "line": 12
+        }
+      ],
+      "exports": [
+        {
+          "name": "StudentProfile",
+          "parameters": "{ id, returnTo = '/community/people' }"
+        }
+      ],
+      "imports": [
+        "../state/DemoContext.jsx",
+        "../i18n/LanguageContext.jsx",
+        "../data/profiles.js",
+        "../components/UI.jsx",
+        "../components/IdeaCard.jsx",
+        "../components/CommunityCards.jsx",
+        "../components/ActivityStatistics.jsx",
+        "../components/BackLink.jsx",
+        "./NotFound.jsx",
+        "../../supabase/functions/_shared/social.js"
+      ],
+      "localDependencies": [
+        "src/state/DemoContext.jsx",
+        "src/i18n/LanguageContext.jsx",
+        "src/data/profiles.js",
+        "src/components/UI.jsx",
+        "src/components/IdeaCard.jsx",
+        "src/components/CommunityCards.jsx",
+        "src/components/ActivityStatistics.jsx",
+        "src/components/BackLink.jsx",
+        "src/pages/NotFound.jsx",
+        "supabase/functions/_shared/social.js"
+      ],
+      "hooks": [
+        "useDemo",
+        "useLanguage"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/pages/Tutoring.jsx",
+      "symbols": [
+        {
+          "name": "Tutoring",
+          "line": 9
+        }
+      ],
+      "exports": [
+        {
+          "name": "Tutoring",
+          "parameters": "{ mode = 'offers' }"
+        }
+      ],
+      "imports": [
+        "../state/DemoContext.jsx",
+        "../i18n/LanguageContext.jsx",
+        "../data/modules.js",
+        "../components/TutoringCard.jsx",
+        "../components/UI.jsx",
+        "../state/usePageMemory.js",
+        "../data/matching.js"
+      ],
+      "localDependencies": [
+        "src/state/DemoContext.jsx",
+        "src/i18n/LanguageContext.jsx",
+        "src/data/modules.js",
+        "src/components/TutoringCard.jsx",
+        "src/components/UI.jsx",
+        "src/state/usePageMemory.js",
+        "src/data/matching.js"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo",
+        "useRememberedState"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/pages/TutoringDetails.jsx",
+      "symbols": [
+        {
+          "name": "TutoringDetails",
+          "line": 15
+        },
+        {
+          "name": "submit",
+          "line": 30
+        }
+      ],
+      "exports": [
+        {
+          "name": "TutoringDetails",
+          "parameters": "{ id, returnTo = '/tutoring' }"
+        }
+      ],
+      "imports": [
+        "react",
+        "../state/DemoContext.jsx",
+        "../i18n/LanguageContext.jsx",
+        "../data/modules.js",
+        "../components/UI.jsx",
+        "../components/FormFields.jsx",
+        "../components/ContentManagement.jsx",
+        "../state/usePageMemory.js",
+        "./NotFound.jsx",
+        "../components/InterestToggle.jsx",
+        "../components/ProfileLink.jsx",
+        "../components/BackLink.jsx",
+        "../state/useActiveView.js"
+      ],
+      "localDependencies": [
+        "src/state/DemoContext.jsx",
+        "src/i18n/LanguageContext.jsx",
+        "src/data/modules.js",
+        "src/components/UI.jsx",
+        "src/components/FormFields.jsx",
+        "src/components/ContentManagement.jsx",
+        "src/state/usePageMemory.js",
+        "src/pages/NotFound.jsx",
+        "src/components/InterestToggle.jsx",
+        "src/components/ProfileLink.jsx",
+        "src/components/BackLink.jsx",
+        "src/state/useActiveView.js"
+      ],
+      "hooks": [
+        "useActiveView",
+        "useLanguage",
+        "useDemo",
+        "useFormDraft",
+        "useState"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/pages/TutoringNew.jsx",
+      "symbols": [
+        {
+          "name": "TutoringNew",
+          "line": 15
+        },
+        {
+          "name": "submit",
+          "line": 29
+        }
+      ],
+      "exports": [
+        {
+          "name": "TutoringNew",
+          "parameters": "{ kind = 'request', id }"
+        }
+      ],
+      "imports": [
+        "react",
+        "../state/DemoContext.jsx",
+        "../i18n/LanguageContext.jsx",
+        "../data/modules.js",
+        "../data/matching.js",
+        "../components/FormFields.jsx",
+        "../components/UI.jsx",
+        "../state/usePageMemory.js",
+        "./NotFound.jsx",
+        "../components/BackLink.jsx",
+        "../state/routeHistory.js",
+        "../components/ProfileSchoolNotice.jsx",
+        "../state/useActiveView.js"
+      ],
+      "localDependencies": [
+        "src/state/DemoContext.jsx",
+        "src/i18n/LanguageContext.jsx",
+        "src/data/modules.js",
+        "src/data/matching.js",
+        "src/components/FormFields.jsx",
+        "src/components/UI.jsx",
+        "src/state/usePageMemory.js",
+        "src/pages/NotFound.jsx",
+        "src/components/BackLink.jsx",
+        "src/state/routeHistory.js",
+        "src/components/ProfileSchoolNotice.jsx",
+        "src/state/useActiveView.js"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useDemo",
+        "useFormDraft",
+        "useState",
+        "useActiveView"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/state/AccountContext.jsx",
+      "symbols": [
+        {
+          "name": "AccountContext",
+          "line": 8
+        },
+        {
+          "name": "service",
+          "line": 9
+        },
+        {
+          "name": "AccountProvider",
+          "line": 13
+        },
+        {
+          "name": "applySnapshot",
+          "line": 19
+        },
+        {
+          "name": "reload",
+          "line": 20
+        },
+        {
+          "name": "dispatch",
+          "line": 67
+        },
+        {
+          "name": "signOut",
+          "line": 80
+        },
+        {
+          "name": "signIn",
+          "line": 81
+        },
+        {
+          "name": "retryAuth",
+          "line": 82
+        },
+        {
+          "name": "acceptConfirmation",
+          "line": 83
+        },
+        {
+          "name": "dismissConfirmation",
+          "line": 84
+        },
+        {
+          "name": "useAccount",
+          "line": 87
+        }
+      ],
+      "exports": [
+        {
+          "name": "AccountProvider",
+          "parameters": "{ children,initialCallback }"
+        },
+        {
+          "name": "useAccount",
+          "parameters": ""
+        }
+      ],
+      "imports": [
+        "react",
+        "../services/supabase.js",
+        "../i18n/LanguageContext.jsx",
+        "../i18n/accountCopy.js",
+        "./routeHistory.js",
+        "../data/navigation.js"
+      ],
+      "localDependencies": [
+        "src/services/supabase.js",
+        "src/i18n/LanguageContext.jsx",
+        "src/i18n/accountCopy.js",
+        "src/state/routeHistory.js",
+        "src/data/navigation.js"
+      ],
+      "hooks": [
+        "useState",
+        "useRef",
+        "useEffect",
+        "useAccount",
+        "useContext"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/state/ChessNotificationContext.jsx",
+      "symbols": [
+        {
+          "name": "readReceipts",
+          "line": 7
+        },
+        {
+          "name": "ChessNotificationProvider",
+          "line": 11
+        },
+        {
+          "name": "markRead",
+          "line": 26
+        },
+        {
+          "name": "useChessNotifications",
+          "line": 39
+        }
+      ],
+      "exports": [
+        {
+          "name": "ChessNotificationProvider",
+          "parameters": "{children}"
+        }
+      ],
+      "imports": [
+        "react",
+        "./DemoContext.jsx",
+        "../../supabase/functions/_shared/chessInvitations.js"
+      ],
+      "localDependencies": [
+        "src/state/DemoContext.jsx",
+        "supabase/functions/_shared/chessInvitations.js"
+      ],
+      "hooks": [
+        "useDemo",
+        "useState",
+        "useRef",
+        "useEffect",
+        "useContext"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    },
+    {
+      "path": "src/state/DemoContext.jsx",
+      "symbols": [
+        {
+          "name": "DemoContext",
+          "line": 9
+        },
+        {
+          "name": "browserRepository",
+          "line": 12
+        },
+        {
+          "name": "DemoProvider",
+          "line": 18
+        },
+        {
+          "name": "switchProfile",
+          "line": 42
+        },
+        {
+          "name": "dispatch",
+          "line": 52
+        },
+        {
+          "name": "updatePreferences",
+          "line": 58
+        },
+        {
+          "name": "useDemo",
+          "line": 69
+        }
+      ],
+      "exports": [
+        {
+          "name": "DemoProvider",
+          "parameters": "{ children }"
+        },
+        {
+          "name": "useDemo",
+          "parameters": ""
+        }
+      ],
+      "imports": [
+        "react",
+        "../i18n/LanguageContext.jsx",
+        "./localRepository.js",
+        "../data/access.js",
+        "./AccountContext.jsx",
+        "../data/activities.js",
+        "../components/AccountRecovery.jsx"
+      ],
+      "localDependencies": [
+        "src/i18n/LanguageContext.jsx",
+        "src/state/localRepository.js",
+        "src/data/access.js",
+        "src/state/AccountContext.jsx",
+        "src/data/activities.js",
+        "src/components/AccountRecovery.jsx"
+      ],
+      "hooks": [
+        "useLanguage",
+        "useAccount",
+        "useState",
+        "useRef",
+        "useEffect",
+        "useDemo",
+        "useContext"
+      ],
+      "transferGuide": "docs/integration/COMPONENTS_AND_FEATURES.md"
+    }
+  ],
+  "services": [
+    {
+      "path": "src/services/supabase.js",
+      "symbol": "createSupabaseService",
+      "line": 17
+    },
+    {
+      "path": "src/services/authCallback.js",
+      "symbol": "captureAuthCallback",
+      "line": 4
+    },
+    {
+      "path": "src/state/localRepository.js",
+      "symbol": "createLocalRepository",
+      "line": 12
+    },
+    {
+      "path": "src/games/resultRepository.js",
+      "symbol": "createGameRepository",
+      "line": 7
+    },
+    {
+      "path": "supabase/functions/_shared/platformHandler.js",
+      "symbol": "createPlatformHandler",
+      "line": 4
+    }
+  ],
+  "backend": {
+    "transport": "POST /functions/v1/platform",
+    "readBody": {},
+    "writeShape": {
+      "commandId": "opaque stable command id",
+      "action": {
+        "type": "one of commands[].name"
+      }
+    },
+    "responseShape": {
+      "protocol": 1,
+      "revision": "nonnegative safe integer",
+      "state": "authorized user projection"
+    },
+    "commandCount": 42,
+    "commands": [
+      {
+        "name": "preferences",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "participation",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "createEvent",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "approveEvent",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "confirmAttendance",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "submitIdea",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "confirmProjectCompletion",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "updateIdea",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "withdrawIdea",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "removeIdea",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "setIdeaInterest",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "requestIdea",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "cancelIdeaRequest",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "leaveIdea",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "reviewIdeaRequest",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "submitTutoring",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "updateTutoring",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "closeTutoring",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "removeTutoring",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "toggleModuleInterest",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "saveContactDraft",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "setCommunityVisibility",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "postMessage",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "removeMessage",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "moderateMessage",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "report",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "resolveReport",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "awardRecognition",
+        "source": {
+          "path": "supabase/functions/_shared/platform.js",
+          "symbol": "applyPlatformAction",
+          "line": 28
+        }
+      },
+      {
+        "name": "readChessNotices",
+        "source": {
+          "path": "supabase/functions/_shared/social.js",
+          "symbol": "reduceSocial",
+          "line": 8
+        }
+      },
+      {
+        "name": "blockPerson",
+        "source": {
+          "path": "supabase/functions/_shared/social.js",
+          "symbol": "reduceSocial",
+          "line": 8
+        }
+      },
+      {
+        "name": "shareAwards",
+        "source": {
+          "path": "supabase/functions/_shared/social.js",
+          "symbol": "reduceSocial",
+          "line": 8
+        }
+      },
+      {
+        "name": "challengeChess",
+        "source": {
+          "path": "supabase/functions/_shared/social.js",
+          "symbol": "reduceSocial",
+          "line": 8
+        }
+      },
+      {
+        "name": "respondChess",
+        "source": {
+          "path": "supabase/functions/_shared/social.js",
+          "symbol": "reduceSocial",
+          "line": 8
+        }
+      },
+      {
+        "name": "startChess",
+        "source": {
+          "path": "supabase/functions/_shared/social.js",
+          "symbol": "reduceSocial",
+          "line": 8
+        }
+      },
+      {
+        "name": "chessMove",
+        "source": {
+          "path": "supabase/functions/_shared/social.js",
+          "symbol": "reduceSocial",
+          "line": 8
+        }
+      },
+      {
+        "name": "chessResign",
+        "source": {
+          "path": "supabase/functions/_shared/social.js",
+          "symbol": "reduceSocial",
+          "line": 8
+        }
+      },
+      {
+        "name": "chessDraw",
+        "source": {
+          "path": "supabase/functions/_shared/social.js",
+          "symbol": "reduceSocial",
+          "line": 8
+        }
+      },
+      {
+        "name": "chessOfferDraw",
+        "source": {
+          "path": "supabase/functions/_shared/social.js",
+          "symbol": "reduceSocial",
+          "line": 8
+        }
+      },
+      {
+        "name": "joinGroup",
+        "source": {
+          "path": "supabase/functions/_shared/social.js",
+          "symbol": "reduceSocial",
+          "line": 8
+        }
+      },
+      {
+        "name": "leaveGroup",
+        "source": {
+          "path": "supabase/functions/_shared/social.js",
+          "symbol": "reduceSocial",
+          "line": 8
+        }
+      },
+      {
+        "name": "createProjectGroup",
+        "source": {
+          "path": "supabase/functions/_shared/social.js",
+          "symbol": "reduceSocial",
+          "line": 8
+        }
+      },
+      {
+        "name": "createEventGroup",
+        "source": {
+          "path": "supabase/functions/_shared/social.js",
+          "symbol": "reduceSocial",
+          "line": 8
+        }
+      }
+    ],
+    "sqlTables": [
+      "public.dc_workspace",
+      "public.dc_commands"
+    ],
+    "rpc": "public.dc_commit(bigint,jsonb,uuid,text)",
+    "migration": "supabase/migrations/202611070001_platform.sql",
+    "browserRawTableAccess": false,
+    "gatewayVerifyJwt": false,
+    "handlerIndependentlyVerifiesAuthUser": true,
+    "protocolVersion": 1,
+    "workspaceVersion": 1
+  },
+  "models": [
+    {
+      "name": "AuthIdentity",
+      "fields": [
+        "id",
+        "email",
+        "confirmed"
+      ],
+      "representation": "auth_memory_or_session",
+      "fieldTypesAndRules": "docs/integration/API_AND_DATA_MODELS.md",
+      "notATable": true
+    },
+    {
+      "name": "Session",
+      "fields": [
+        "access_token",
+        "refresh_token",
+        "expires_at"
+      ],
+      "representation": "auth_memory_or_session",
+      "fieldTypesAndRules": "docs/integration/API_AND_DATA_MODELS.md",
+      "notATable": true
+    },
+    {
+      "name": "Profile",
+      "fields": [
+        "id",
+        "displayName",
+        "schoolId",
+        "interests",
+        "customInterests?",
+        "language",
+        "joinedAt",
+        "profileSharing?"
+      ],
+      "representation": "workspace_json_entity",
+      "fieldTypesAndRules": "docs/integration/API_AND_DATA_MODELS.md",
+      "notATable": true
+    },
+    {
+      "name": "School",
+      "fields": [
+        "id",
+        "initials",
+        "name",
+        "city"
+      ],
+      "representation": "workspace_json_entity",
+      "fieldTypesAndRules": "docs/integration/API_AND_DATA_MODELS.md",
+      "notATable": true
+    },
+    {
+      "name": "Idea",
+      "fields": [
+        "id",
+        "ownerId",
+        "schoolId",
+        "title",
+        "description",
+        "category",
+        "goals",
+        "collaborators",
+        "topics",
+        "desiredSchoolIds",
+        "projectStatus",
+        "initiativeId?",
+        "participantIds",
+        "requestedIds",
+        "interestedIds",
+        "revision",
+        "updatedAt?",
+        "lifecycle?",
+        "completion?"
+      ],
+      "representation": "workspace_json_entity",
+      "fieldTypesAndRules": "docs/integration/API_AND_DATA_MODELS.md",
+      "notATable": true
+    },
+    {
+      "name": "Completion",
+      "fields": [
+        "confirmedBy",
+        "confirmedAt",
+        "memberIds"
+      ],
+      "representation": "workspace_json_entity",
+      "fieldTypesAndRules": "docs/integration/API_AND_DATA_MODELS.md",
+      "notATable": true
+    },
+    {
+      "name": "Event",
+      "fields": [
+        "id",
+        "ownerId",
+        "title",
+        "description",
+        "detail",
+        "category",
+        "hostSchoolId",
+        "schoolIds",
+        "startsAt",
+        "icon",
+        "approval",
+        "revision",
+        "attendance",
+        "updatedAt?",
+        "cancelled?"
+      ],
+      "representation": "workspace_json_entity",
+      "fieldTypesAndRules": "docs/integration/API_AND_DATA_MODELS.md",
+      "notATable": true
+    },
+    {
+      "name": "Evidence",
+      "fields": [
+        "confirmedBy",
+        "confirmedAt"
+      ],
+      "representation": "workspace_json_entity",
+      "fieldTypesAndRules": "docs/integration/API_AND_DATA_MODELS.md",
+      "notATable": true
+    },
+    {
+      "name": "Participation",
+      "fields": [
+        "userId map key",
+        "eventId map key",
+        "status:interested|joined"
+      ],
+      "representation": "nested_workspace_map",
+      "fieldTypesAndRules": "docs/integration/API_AND_DATA_MODELS.md",
+      "notATable": true
+    },
+    {
+      "name": "Tutoring",
+      "fields": [
+        "id",
+        "ownerId",
+        "schoolId",
+        "revision",
+        "updatedAt",
+        "kind",
+        "subject",
+        "topics",
+        "description",
+        "availability",
+        "languages",
+        "format",
+        "lifecycle?"
+      ],
+      "representation": "workspace_json_entity",
+      "fieldTypesAndRules": "docs/integration/API_AND_DATA_MODELS.md",
+      "notATable": true
+    },
+    {
+      "name": "ContactDraft",
+      "fields": [
+        "ownerId",
+        "targetId",
+        "note"
+      ],
+      "representation": "workspace_json_entity",
+      "fieldTypesAndRules": "docs/integration/API_AND_DATA_MODELS.md",
+      "notATable": true
+    },
+    {
+      "name": "Group",
+      "fields": [
+        "id",
+        "kind",
+        "memberIds",
+        "closed?",
+        "title?",
+        "contextId?",
+        "ownerId?"
+      ],
+      "representation": "workspace_json_entity",
+      "fieldTypesAndRules": "docs/integration/API_AND_DATA_MODELS.md",
+      "notATable": true
+    },
+    {
+      "name": "Message",
+      "fields": [
+        "id",
+        "ownerId",
+        "roomId",
+        "body",
+        "createdAt"
+      ],
+      "representation": "workspace_json_entity",
+      "fieldTypesAndRules": "docs/integration/API_AND_DATA_MODELS.md",
+      "notATable": true
+    },
+    {
+      "name": "Report",
+      "fields": [
+        "ownerId",
+        "targetId",
+        "targetType",
+        "reason",
+        "createdAt",
+        "status",
+        "reviewedAt?"
+      ],
+      "representation": "workspace_json_entity",
+      "fieldTypesAndRules": "docs/integration/API_AND_DATA_MODELS.md",
+      "notATable": true
+    },
+    {
+      "name": "Challenge",
+      "fields": [
+        "id",
+        "fromId",
+        "toId",
+        "status",
+        "createdAt",
+        "gameId?"
+      ],
+      "representation": "workspace_json_entity",
+      "fieldTypesAndRules": "docs/integration/API_AND_DATA_MODELS.md",
+      "notATable": true
+    },
+    {
+      "name": "ChessGame",
+      "fields": [
+        "id",
+        "whiteId",
+        "blackId",
+        "mode",
+        "moves",
+        "revision",
+        "status",
+        "createdAt",
+        "drawOffer?",
+        "result?"
+      ],
+      "representation": "workspace_json_entity",
+      "fieldTypesAndRules": "docs/integration/API_AND_DATA_MODELS.md",
+      "notATable": true
+    },
+    {
+      "name": "ChessNotification",
+      "fields": [
+        "key",
+        "challengeId",
+        "kind",
+        "otherId",
+        "otherName",
+        "createdAt",
+        "gameId?",
+        "finished?",
+        "canRead"
+      ],
+      "representation": "derived_read_model",
+      "fieldTypesAndRules": "docs/integration/API_AND_DATA_MODELS.md",
+      "notATable": true
+    },
+    {
+      "name": "Award",
+      "fields": [
+        "id",
+        "ownerId",
+        "eventId",
+        "kind",
+        "awardedBy",
+        "awardedAt"
+      ],
+      "representation": "workspace_json_entity",
+      "fieldTypesAndRules": "docs/integration/API_AND_DATA_MODELS.md",
+      "notATable": true
+    },
+    {
+      "name": "PublicProfile",
+      "fields": [
+        "id",
+        "displayName",
+        "schoolId",
+        "interests",
+        "sharing",
+        "ownedProjectIds",
+        "currentProjectIds",
+        "completedProjectIds",
+        "awards",
+        "counts"
+      ],
+      "representation": "derived_read_model",
+      "fieldTypesAndRules": "docs/integration/API_AND_DATA_MODELS.md",
+      "notATable": true
+    },
+    {
+      "name": "LocalGameResult",
+      "fields": [
+        "id",
+        "ownerId",
+        "game",
+        "score",
+        "completed",
+        "completedAt",
+        "pairs?",
+        "turns?"
+      ],
+      "representation": "local_browser_result",
+      "fieldTypesAndRules": "docs/integration/API_AND_DATA_MODELS.md",
+      "notATable": true
+    },
+    {
+      "name": "LeaderboardEntry",
+      "fields": [
+        "id",
+        "displayName",
+        "score",
+        "completed",
+        "history",
+        "rank",
+        "wins?",
+        "losses?",
+        "draws?",
+        "practice?"
+      ],
+      "representation": "derived_read_model",
+      "fieldTypesAndRules": "docs/integration/API_AND_DATA_MODELS.md",
+      "notATable": true
+    }
+  ],
+  "configuration": {
+    "frontendPublicNames": [
+      "VITE_SUPABASE_URL",
+      "VITE_SUPABASE_PUBLISHABLE_KEY",
+      "VITE_SUPABASE_ANON_KEY"
+    ],
+    "serverOnlyNames": [
+      "SUPABASE_URL",
+      "SUPABASE_SERVICE_ROLE_KEY",
+      "SUPABASE_ANON_KEY",
+      "DC_ALLOWED_ORIGINS",
+      "DC_MODERATOR_IDS"
+    ],
+    "liveTestNames": [
+      "DC_E2E_LIVE",
+      "DC_E2E_TEST_ACCOUNTS_ONLY",
+      "DC_E2E_A_EMAIL",
+      "DC_E2E_A_PASSWORD",
+      "DC_E2E_B_EMAIL",
+      "DC_E2E_B_PASSWORD"
+    ],
+    "secretValuesIncluded": false,
+    "checkedInHostingConfigurationPaths": []
+  },
+  "tests": {
+    "packageScripts": {
+      "dev": "vite --host 127.0.0.1",
+      "build": "vite build",
+      "preview": "vite preview --host 127.0.0.1",
+      "check": "node scripts/check-locales.mjs",
+      "test": "node --test scripts/*.test.mjs",
+      "check:render": "node scripts/check-render.mjs",
+      "check:offline": "node scripts/check-offline.mjs",
+      "test:e2e": "playwright test",
+      "test:e2e:live": "node scripts/run-live-e2e.mjs",
+      "check:backend:live": "node scripts/check-backend-live.mjs"
+    },
+    "unit": {
+      "command": "npm.cmd test",
+      "passed": 147,
+      "failed": 0,
+      "environment": "Node; mocked Auth/HTTP/SQL where used"
+    },
+    "browser": {
+      "command": "npm.cmd run test:e2e",
+      "passed": 52,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "projects": [
+        "desktop_chromium",
+        "pixel_7_emulation"
+      ],
+      "simulation": "Real React and platform handler; simulated Auth and PostgREST/CAS; no physical-device or cloud-write proof"
+    },
+    "locales": {
+      "command": "npm.cmd run check",
+      "keysPerLanguage": 819,
+      "languages": [
+        "de",
+        "tr",
+        "en"
+      ],
+      "status": "passed"
+    },
+    "render": {
+      "command": "npm.cmd run check:render",
+      "routesPerDemoPersonaLanguage": 87,
+      "status": "passed"
+    },
+    "build": {
+      "command": "npm.cmd run build -- --configLoader native",
+      "status": "passed",
+      "modules": 133,
+      "mainJsKb": 561.98,
+      "gzipKb": 172.24,
+      "warning": "chunk larger than 500 kB"
+    },
+    "offline": {
+      "command": "npm.cmd run check:offline",
+      "resources": 5,
+      "status": "passed"
+    },
+    "live": {
+      "executedInThisTask": false,
+      "status": "not_run_missing_dedicated_confirmed_test_accounts",
+      "historicalEvidence": [
+        "docs/END_TO_END_AUDIT.md",
+        "docs/AUTH_CONFIRMATION_FIX.md"
+      ]
+    }
+  },
+  "blockers": [
+    {
+      "id": "DC-I01",
+      "status": "confirmed_unfixed",
+      "severity": "high",
+      "description": "Event proposals visible to unrelated accounts; existing negative E2E assertion can use stale snapshot."
+    },
+    {
+      "id": "DC-I02",
+      "status": "confirmed_unfixed",
+      "severity": "medium",
+      "description": "Server permits joined on past confirmed events."
+    },
+    {
+      "id": "AUTH-HTTPS",
+      "status": "open",
+      "description": "Only loopback redirects; shared reachable HTTPS address and real two-device acceptance missing."
+    },
+    {
+      "id": "CLAUDE-004-006",
+      "status": "source_difference_confirmed_live_unknown",
+      "description": "Checked-in 004 denylist differs from allowlist v3 required by 006."
+    },
+    {
+      "id": "IDENTITY-AUTHORITY",
+      "status": "decision_required",
+      "description": "One Auth project, identity map, role authority and data writer must be agreed."
+    },
+    {
+      "id": "MISSING-FLOWS",
+      "status": "not_implemented",
+      "description": "No tutoring delivery/reply, external invite mail/push, shared account arcade/global boards."
+    }
+  ],
+  "documents": [
+    "docs/CODEX_INTEGRATION_BLUEPRINT.md",
+    "docs/integration/API_AND_DATA_MODELS.md",
+    "docs/integration/COMPONENTS_AND_FEATURES.md",
+    "docs/integration/CLAUDE_COMPARISON_AND_HANDOFF.md",
+    "docs/integration/CODEX_INTEGRATION_MANIFEST.json",
+    "docs/integration/CODEX_SOURCE_INVENTORY.json",
+    "docs/integration/CODEX_ANALYSIS_FINDINGS.json"
+  ],
+  "prohibitedActionsPerformed": {
+    "merge": false,
+    "commit": false,
+    "push": false,
+    "deploy": false,
+    "migration": false,
+    "applicationCodeModification": false
+  },
+  "validation": {
+    "pending": false,
+    "checkedAt": "2026-11-08T17:56:26.889Z",
+    "jsonValid": true,
+    "unchangedInventoriedFiles": 159,
+    "markdownLinksChecked": 90,
+    "componentDependencyPathsChecked": 440,
+    "all42CommandsDocumented": true,
+    "sourceHashesMatch": true,
+    "branchAndHeadUnchanged": true,
+    "secretPatternScan": "no_matches_in_new_documents; private env files not read or exported",
+    "markdownLineCounts": {
+      "docs/CODEX_INTEGRATION_BLUEPRINT.md": 419,
+      "docs/integration/API_AND_DATA_MODELS.md": 178,
+      "docs/integration/COMPONENTS_AND_FEATURES.md": 133,
+      "docs/integration/CLAUDE_COMPARISON_AND_HANDOFF.md": 150
+    },
+    "finalGitStatus": [
+      " M README.md",
+      " M docs/END_TO_END_AUDIT.md",
+      " M docs/SESSION_HANDOFF.md",
+      " M docs/SUPABASE-SETUP.md",
+      " M scripts/check-render.mjs",
+      " M scripts/route-history.test.mjs",
+      " M scripts/server-confirmation.test.mjs",
+      " M src/App.jsx",
+      " M src/components/AccountStatus.jsx",
+      " M src/locales/platform/de.json",
+      " M src/locales/platform/en.json",
+      " M src/locales/platform/tr.json",
+      " M src/locales/quality/de.json",
+      " M src/locales/quality/en.json",
+      " M src/locales/quality/tr.json",
+      " M src/main.jsx",
+      " M src/pages/Account.jsx",
+      " M src/pages/Community.jsx",
+      " M src/pages/EventNew.jsx",
+      " M src/services/supabase.js",
+      " M src/state/AccountContext.jsx",
+      " M src/state/DemoContext.jsx",
+      " M src/state/routeHistory.js",
+      " M tests/e2e/backend.js",
+      " M tests/e2e/local.spec.js",
+      "?? docs/ADMIN_INTEGRATION_CONTRACT.md",
+      "?? docs/AUTH_CONFIRMATION_FIX.md",
+      "?? docs/CODEX_INTEGRATION_BLUEPRINT.md",
+      "?? docs/INTEGRATION_READINESS.md",
+      "?? docs/integration/API_AND_DATA_MODELS.md",
+      "?? docs/integration/CLAUDE_COMPARISON_AND_HANDOFF.md",
+      "?? docs/integration/CODEX_ANALYSIS_FINDINGS.json",
+      "?? docs/integration/CODEX_INTEGRATION_MANIFEST.json",
+      "?? docs/integration/CODEX_SOURCE_INVENTORY.json",
+      "?? docs/integration/COMPONENTS_AND_FEATURES.md",
+      "?? scripts/auth-confirmation.test.mjs",
+      "?? src/components/AccountRecovery.jsx",
+      "?? src/components/ConfirmationNotice.jsx",
+      "?? src/services/authCallback.js"
+    ],
+    "changedByThisTask": [
+      "docs/CODEX_INTEGRATION_BLUEPRINT.md",
+      "docs/integration/API_AND_DATA_MODELS.md",
+      "docs/integration/COMPONENTS_AND_FEATURES.md",
+      "docs/integration/CLAUDE_COMPARISON_AND_HANDOFF.md",
+      "docs/integration/CODEX_INTEGRATION_MANIFEST.json",
+      "docs/integration/CODEX_SOURCE_INVENTORY.json",
+      "docs/integration/CODEX_ANALYSIS_FINDINGS.json",
+      "docs/SESSION_HANDOFF.md",
+      "docs/END_TO_END_AUDIT.md"
+    ]
+  }
+}

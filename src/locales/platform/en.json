@@ -1,4 +1,22 @@
 {
+  "auth": {
+    "otherAccount": "The link's email has been confirmed. Another account is signed in here; it has not been replaced.",
+    "acceptAccount": "Switch to the confirmed account",
+    "keepAccount": "Keep the current account",
+    "confirmedSignedIn": "Email confirmed. Your session has been successfully verified and adopted.",
+    "confirmedSignIn": "Email confirmed. No sign-in was adopted. Sign in now with your password.",
+    "dismiss": "Dismiss notice",
+    "checking": "Checking confirmation and session",
+    "profileTitle": "Preparing your personal area",
+    "profilePending": "Your sign-in has been verified. The app profile still needs to load from the server; this is separate from email confirmation.",
+    "profileFailed": "The app profile could not be loaded yet. Your verified sign-in has not been mixed with another account.",
+    "profileHelp": "Check the connection and website address. You can retry loading your profile or open the regular sign-in form.",
+    "retryProfile": "Reload profile",
+    "openSignIn": "Open regular sign-in",
+    "reauthHint": "Your current sign-in is kept until the account entered here is successfully verified. Another account is adopted only through your explicit sign-in.",
+    "retryAuth": "Check session again",
+    "diagnosticCode": "Technical error code without credentials"
+  },
   "chessNotices": {
     "title": "Notifications",
     "unread": "Unread",
@@ -157,6 +175,9 @@
     "offlineFailed": "Offline files could not be fully saved. Try again with an internet connection."
   },
   "real": {
+    "invalidEmail": "Enter a valid email address.",
+    "passwordRequired": "Enter your password.",
+    "signingOut": "Signing out…",
     "account": "Account",
     "accountShort": "Signed in · synchronized",
     "liveHint": "You are using your verified account. Changes are saved on the shared server.",
@@ -244,6 +265,7 @@
     "moderationRequired": "Real group posts require configured moderation.",
     "polling": "Automatically refreshes every four seconds.",
     "errors": {
+      "confirmation-password-required": "This return does not include a directly usable session. Sign in with your password. If the email is not confirmed yet, request a new confirmation link.",
       "over_email_send_rate_limit": "Email delivery is temporarily limited. Please try again later. If your email is already confirmed, you can sign in directly with your password.",
       "not-configured": "Sign-in is currently unavailable.",
       "invalid_credentials": "Email or password is incorrect.",

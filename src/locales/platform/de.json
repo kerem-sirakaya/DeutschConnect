@@ -1,4 +1,22 @@
 {
+  "auth": {
+    "otherAccount": "Die E-Mail des Links ist bestätigt. In diesem Browser ist ein anderes Konto angemeldet. Es wurde nicht gewechselt.",
+    "acceptAccount": "Zum bestätigten Konto wechseln",
+    "keepAccount": "Beim bisherigen Konto bleiben",
+    "confirmedSignedIn": "E-Mail bestätigt. Deine Sitzung wurde erfolgreich geprüft und übernommen.",
+    "confirmedSignIn": "E-Mail bestätigt. Es wurde keine Anmeldung übernommen. Melde dich jetzt mit deinem Passwort an.",
+    "dismiss": "Hinweis schließen",
+    "checking": "Bestätigung und Sitzung werden geprüft",
+    "profileTitle": "Dein persönlicher Bereich wird vorbereitet",
+    "profilePending": "Deine Anmeldung wurde geprüft. Das persönliche App-Profil muss noch vom Server geladen werden; das ist ein eigener Schritt nach der E-Mail-Bestätigung.",
+    "profileFailed": "Das App-Profil konnte noch nicht geladen werden. Deine geprüfte Anmeldung wurde nicht mit einem anderen Konto vermischt.",
+    "profileHelp": "Prüfe die Verbindung und die verwendete Website-Adresse. Du kannst das Profil erneut laden oder die reguläre Anmeldung öffnen.",
+    "retryProfile": "Profil erneut laden",
+    "openSignIn": "Reguläre Anmeldung öffnen",
+    "reauthHint": "Die bisherige Anmeldung bleibt erhalten, bis das hier eingegebene Konto erfolgreich geprüft wurde. Ein anderes Konto wird nur durch deine bewusste Anmeldung übernommen.",
+    "retryAuth": "Sitzung erneut prüfen",
+    "diagnosticCode": "Technische Fehlerkennung ohne Zugangsdaten"
+  },
   "chessNotices": {
     "title": "Benachrichtigungen",
     "unread": "Ungelesen",
@@ -157,6 +175,9 @@
     "offlineFailed": "Die Offline-Dateien konnten nicht vollständig gespeichert werden. Bitte mit Internetverbindung erneut versuchen."
   },
   "real": {
+    "invalidEmail": "Bitte eine gültige E-Mail-Adresse eingeben.",
+    "passwordRequired": "Bitte dein Passwort eingeben.",
+    "signingOut": "Abmeldung läuft…",
     "account": "Benutzerkonto",
     "accountShort": "Angemeldet · synchronisiert",
     "liveHint": "Du verwendest dein verifiziertes Konto. Änderungen werden auf dem gemeinsamen Server gespeichert.",
@@ -244,6 +265,7 @@
     "moderationRequired": "Echte Gruppenbeiträge sind erst mit einer eingerichteten Moderation verfügbar.",
     "polling": "Automatische Aktualisierung alle vier Sekunden.",
     "errors": {
+      "confirmation-password-required": "Dieser Rücksprung enthält keine direkt nutzbare Sitzung. Bitte melde dich mit deinem Passwort an. Falls die Adresse noch nicht bestätigt ist, fordere einen neuen Bestätigungslink an.",
       "over_email_send_rate_limit": "Der E-Mail-Versand ist vorübergehend begrenzt. Bitte versuche es später erneut. Ist deine E-Mail schon bestätigt, kannst du dich direkt mit deinem Passwort anmelden.",
       "not-configured": "Die Anmeldung ist derzeit noch nicht verfügbar.",
       "invalid_credentials": "E-Mail oder Passwort ist nicht korrekt.",

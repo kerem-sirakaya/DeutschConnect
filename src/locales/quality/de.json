@@ -1,4 +1,7 @@
 {
+  "validationEventDescription": "Bitte eine Beschreibung mit 20 bis 1500 Zeichen eingeben.",
+  "validationEventDate": "Bitte ein gültiges Datum in der Zukunft auswählen.",
+  "validationSchool": "Bitte die veranstaltende Schule auswählen.",
   "schoolRequired": "Wähle zuerst deine Schule im Profil, bevor du Projekte oder Nachhilfe veröffentlichst. Vorhandene Entwürfe bleiben gespeichert.",
   "edit": "Bearbeiten",
   "save": "Änderungen speichern",

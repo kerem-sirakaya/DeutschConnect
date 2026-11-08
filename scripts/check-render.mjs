@@ -17,6 +17,7 @@ try {
   const { LanguageProvider, LanguageOverride } = await server.ssrLoadModule('/src/i18n/LanguageContext.jsx');
   const { DemoProvider, DemoContext } = await server.ssrLoadModule('/src/state/DemoContext.jsx');
   const { AccountContext } = await server.ssrLoadModule('/src/state/AccountContext.jsx');
+  const { default: ConfirmationNotice } = await server.ssrLoadModule('/src/components/ConfirmationNotice.jsx');
   const routes = ['/', '/events', '/events/my', '/events/recommended', '/events/all', '/events/codewerkstatt', '/events/sprachwerkstatt', '/events/ideenlabor', '/events/kulturbruecken', '/events/unknown', '/ideas', '/ideas/my', '/ideas/all', '/ideas/new', '/ideas/schulcode', '/ideas/tandem', '/ideas/unknown', '/network', '/network/ers', '/network/anka', '/network/collaboration', '/network/unknown', '/me', '/about', '/unknown', '/discover', '/discover/interviews', '/discover/workshops', '/discover/exchange', '/discover/tutoring', '/discover/projects', '/discover/unknown', '/ideas/new?initiative=interviews', '/tutoring', '/tutoring/offers', '/tutoring/requests', '/tutoring/my', '/tutoring/new?kind=offer', '/tutoring/new?kind=request', '/tutoring/math-offer', '/tutoring/math-request', '/tutoring/german-offer', '/tutoring/coding-request', '/tutoring/unknown', '/community', '/community/people', '/community/projects', '/community/rooms', '/community/my', '/community/rooms/general', '/community/rooms/learning', '/community/rooms/projects', '/community/rooms/events', '/community/rooms/unknown', '/community/people/deniz', '/community/people/guest-mika', '/community/people/unknown'];
   routes.push('/ideas/schulcode/edit', '/ideas/unknown/edit', '/tutoring/math-offer/edit', '/tutoring/math-request/edit', '/tutoring/unknown/edit', '/tutoring/saved');
   routes.push('/me/activities', '/me/projects', '/me/tutoring', '/me/saved', '/me/community', '/me/settings', '/me/account', '/me/unknown', '/me/projects?view=collaborating', '/me/projects?view=requested', '/me/tutoring?view=requests', '/me/activities?view=joined', '/ideas/schulcode?from=' + encodeURIComponent('/me/projects?view=collaborating'));
@@ -140,6 +141,21 @@ try {
       assertRenderedText(html.replace(/<[^>]*>/g, ' '), language + ': confirmation recovery');
     }
     console.log(language + ': 2 confirmation recovery views rendered');
+    for(const confirmation of [{kind:'confirmed',signedIn:false},{kind:'confirmed',signedIn:true},{kind:'different-account',email:'other@test.invalid'}]){
+      const html=renderToString(React.createElement(LanguageProvider,null,React.createElement(AccountContext.Provider,{value:{confirmation}},React.createElement(ConfirmationNotice))));
+      const expected=confirmation.kind==='different-account'?t.auth.otherAccount:confirmation.signedIn?t.auth.confirmedSignedIn:t.auth.confirmedSignIn;
+      assert.ok(html.includes(escaped(expected)),'confirmation distinguishes proof, session and another account');
+      if(confirmation.kind==='different-account')for(const text of [t.auth.acceptAccount,t.auth.keepAccount])assert.ok(html.includes(escaped(text)),'account switch requires an explicit choice');
+      assertRenderedText(html.replace(/<[^>]*>/g,' '),language+': confirmation state');
+    }
+    for(const loading of [true,false]){
+      const value=loading?{configured:true,loading:true}:{configured:true,user:{id:'new-user',email:'new@test.invalid'},error:'unavailable',profileFailure:{status:503,code:'unavailable'}};
+      const html=renderToString(React.createElement(LanguageProvider,null,React.createElement(AccountContext.Provider,{value},React.createElement(DemoProvider,null,React.createElement(App))))).replace(/<!--.*?-->/g,'');
+      assert.ok(html.includes(escaped(loading?t.auth.checking:t.auth.profileTitle)),'auth and profile loading have distinct stages');
+      if(!loading){assert.ok(html.includes('HTTP 503 / unavailable'),'recovery includes safe status');assert.ok(html.includes(escaped(t.auth.openSignIn)),'profile error permits normal sign-in');}
+      assertRenderedText(html.replace(/<[^>]*>/g,' '),language+': auth/profile loading');
+    }
+    console.log(language+': 5 confirmation, account-choice and profile-loading states rendered');
     let flow = demoReducer(createDemoState(language), { type: 'requestIdea', id: 'schulcode', actorId: 'deniz' });
     for (const step of ['pending', 'accepted']) {
       if (step === 'accepted') flow = demoReducer(flow, { type: 'reviewIdeaRequest', id: 'schulcode', actorId: 'alex', profileId: 'deniz', decision: 'accept' });

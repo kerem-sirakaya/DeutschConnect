@@ -19,7 +19,17 @@ const go=(page,path)=>page.goto('/#'+path);
 const wake=(page)=>page.evaluate(()=>window.dispatchEvent(new Event('online')));
 async function login(page,key){
   await go(page,'/me/account');await page.locator('#account-email').fill(`${key}@test.invalid`);await page.locator('#account-password').fill(password);
-  await page.locator('form button[type=submit]').click();await expect(page.getByText(`${key}@test.invalid`,{exact:true})).toBeVisible();
+  await page.locator('form button[type=submit]').click();await expect(page).toHaveURL(/#\/me$/);await go(page,'/me/account');await expect(page.getByText(`${key}@test.invalid`,{exact:true})).toBeVisible();
+}
+async function openConfirmation(page,suffix){
+  // Model a navigation from the provider/Gmail, not an in-app hash-only link.
+  await page.goto('about:blank');
+  try{await page.goto('/'+suffix);}catch{throw Error('Synthetic callback navigation failed (URL suppressed).');}
+  expect(await page.evaluate(()=>!/access_token|refresh_token|token_hash|\?code=/.test(location.href))).toBe(true);
+}
+async function register(page,email,name){
+  await go(page,'/me/account');await page.locator('.header-actions select').selectOption('de');await page.locator('.auth-panel .filter-chips button').nth(1).click();
+  await page.locator('#account-name').fill(name);await page.locator('#account-email').fill(email);await page.locator('#account-password').fill(password);await page.locator('form button[type=submit]').click();await expect(page.locator('.auth-panel .save-status')).toBeVisible();
 }
 async function api(page,action,commandId=crypto.randomUUID()){
   return page.evaluate(async({action,commandId})=>{
@@ -145,6 +155,104 @@ test('identity and transport failures: invalid login, expired session and guest 
   await login(a,'a');backend.expire();await wake(a);await expect(a.locator('#account-email')).toBeVisible();await go(a,'/community/games');await expect(a.locator('.profile-switcher select')).toBeVisible();await expect(a.locator('h1')).toBeVisible();
 });
 
+test('a revoked session returns to sign-in through normal polling without a reconnect event',async({actors,backend})=>{
+  const {a}=actors;await login(a,'a');backend.expire();
+  await expect(a.locator('#account-email')).toBeVisible();await expect(a.locator('.profile-switcher select')).toBeVisible();
+});
+
+test('two new accounts confirm in independent browsers and the original registration browser signs into its own profile',async({actors,backend})=>{
+  const {a,b,c}=actors;
+  await register(a,'new-one@test.invalid','New Student One');await openConfirmation(b,backend.confirmation('new-one@test.invalid'));await expect(b).toHaveURL(/#\/me$/);
+  await register(a,'new-two@test.invalid','New Student Two');await openConfirmation(c,backend.confirmation('new-two@test.invalid'));await expect(c).toHaveURL(/#\/me$/);
+  const first=(await api(b)).body.state.activeId,second=(await api(c)).body.state.activeId;expect(first).not.toBe(second);
+  await a.locator('.auth-panel .filter-chips button').first().click();await a.locator('#account-email').fill('new-one@test.invalid');await a.locator('#account-password').fill(password);await a.locator('form button[type=submit]').click();await expect(a).toHaveURL(/#\/me$/);
+  expect((await api(a)).body.state.activeId).toBe(first);await a.reload();expect((await api(a)).body.state.activeId).toBe(first);
+  await go(b,'/me/account');await expect(b.getByText('new-one@test.invalid',{exact:true})).toBeVisible();await go(c,'/me/account');await expect(c.getByText('new-two@test.invalid',{exact:true})).toBeVisible();
+});
+
+test('a confirmation for another signed-in account requires a visible explicit switch',async({actors,backend})=>{
+  const {a}=actors;await login(a,'a');await openConfirmation(a,backend.confirmation('b@test.invalid'));
+  await expect(a.getByRole('button',{name:'Zum bestätigten Konto wechseln',exact:true})).toBeVisible();expect((await api(a)).body.state.activeId).toBe(backend.ids.a);
+  await a.getByRole('button',{name:'Beim bisherigen Konto bleiben',exact:true}).click();await expect(a.getByText('a@test.invalid',{exact:true})).toBeVisible();
+  await openConfirmation(a,backend.confirmation('b@test.invalid'));await a.getByRole('button',{name:'Zum bestätigten Konto wechseln',exact:true}).click();await expect(a).toHaveURL(/#\/me$/);
+  expect((await api(a)).body.state.activeId).toBe(backend.ids.b);await a.reload();expect((await api(a)).body.state.activeId).toBe(backend.ids.b);
+  await go(a,'/me/account');await expect(a.getByText('b@test.invalid',{exact:true})).toBeVisible();await expect(a.locator('main')).not.toContainText('a@test.invalid');
+});
+
+test('verified email with unavailable app profile offers real sign-in and recovers without forced logout',async({actors,backend})=>{
+  const {a}=actors;await register(a,'profile-retry@test.invalid','Profile Retry');backend.blockProfileReads(true);await openConfirmation(a,backend.confirmation('profile-retry@test.invalid'));
+  await expect(a.getByRole('heading',{level:1})).toHaveText('Dein persönlicher Bereich wird vorbereitet');await expect(a.getByText(/HTTP 503 \/ unavailable/)).toBeVisible();
+  await a.getByRole('button',{name:'Reguläre Anmeldung öffnen',exact:true}).click();await expect(a.locator('#account-email')).toBeVisible();
+  expect(Object.values(backend.getState().profiles).some(profile=>profile.displayName==='Profile Retry')).toBe(false);
+  backend.blockProfileReads(false);await a.locator('#account-email').fill('profile-retry@test.invalid');await a.locator('#account-password').fill(password);await a.locator('form button[type=submit]').click();await expect(a).toHaveURL(/#\/me$/);
+  await a.reload();await go(a,'/me/account');await expect(a.getByText('profile-retry@test.invalid',{exact:true})).toBeVisible();
+});
+
+test('confirmation without session, expired link, missing credentials and a foreign PKCE code all have honest recovery',async({actors,backend})=>{
+  const {a}=actors;await go(a,'/me/account');await a.locator('.header-actions select').selectOption('de');await openConfirmation(a,backend.confirmation('b@test.invalid',false));
+  await expect(a.getByText('E-Mail bestätigt. Es wurde keine Anmeldung übernommen. Melde dich jetzt mit deinem Passwort an.',{exact:true})).toBeVisible();await expect(a.locator('#account-email')).toBeVisible();await expect(a.locator('.profile-switcher select')).toBeVisible();
+  for(const suffix of ['#error=access_denied&error_code=otp_expired','#access_token=incomplete','?code=synthetic-other-browser-code']){
+    await openConfirmation(a,suffix);await expect(a.getByRole('alert')).toBeVisible();await expect(a.locator('#account-email')).toBeVisible();
+  }
+  await login(a,'a');await openConfirmation(a,'#error=access_denied&error_code=otp_expired');await expect(a.getByRole('alert')).toBeVisible();await expect(a.getByText('a@test.invalid',{exact:true})).toBeVisible();
+});
+
+test('email proof without a session leaves the current account intact and offers password sign-in without a dashboard redirect',async({actors,backend})=>{
+  const {a}=actors;await login(a,'a');
+  const proof=backend.confirmation('b@test.invalid',false);await openConfirmation(a,proof);
+  await expect(a.getByText('E-Mail bestätigt. Es wurde keine Anmeldung übernommen. Melde dich jetzt mit deinem Passwort an.',{exact:true})).toBeVisible();
+  await expect(a).toHaveURL(/#\/me\/account$/);await expect(a.getByText('a@test.invalid',{exact:true})).toBeVisible();
+  await a.getByRole('button',{name:'Reguläre Anmeldung öffnen',exact:true}).click();await expect(a.locator('#account-email')).toBeVisible();
+  await openConfirmation(a,proof);await expect(a.getByRole('alert')).toContainText('abgelaufen');await expect(a.getByText('a@test.invalid',{exact:true})).toBeVisible();
+});
+
+test('account actions stay locked while sending and mail feedback belongs only to the submitted mode',async({actors,backend})=>{
+  const page=actors.a;await go(page,'/me/account');await page.locator('.header-actions select').selectOption('de');
+  await page.locator('.auth-panel .filter-chips button').nth(1).click();
+  await page.locator('#account-name').fill('Fictional Registration');await page.locator('#account-email').fill('new@test.invalid');await page.locator('#account-password').fill(password);
+  backend.delayAuth('signup');await page.locator('form button[type=submit]').click();
+  await expect(page.locator('.auth-panel .filter-chips button').first()).toBeDisabled();await expect(page.locator('.auth-panel form')).toHaveAttribute('aria-busy','true');
+  backend.release();await expect(page.locator('.auth-panel .save-status')).toBeVisible();
+  await page.locator('.auth-panel .filter-chips button').first().click();await expect(page.locator('.auth-panel .save-status')).toHaveCount(0);
+  await page.locator('#account-email').fill('invalid');await page.locator('#account-password').fill('x');await page.locator('form button[type=submit]').click();
+  await expect(page.locator('#account-email')).toBeFocused();await expect(page.locator('#account-email')).toHaveAttribute('aria-invalid','true');
+});
+
+test('navigation matches the URL through immediate account and language transitions',async({actors})=>{
+  const {a}=actors;await login(a,'a');
+  for(const language of ['tr','en','de']){
+    await a.locator('.header-actions select').selectOption(language);await go(a,'/ideas/new');await expect(a.locator('#idea-title')).toBeVisible();
+    await go(a,'/me/account');await expect(a.getByText('a@test.invalid',{exact:true})).toBeVisible();
+  }
+});
+
+test('event form focuses specific errors, preserves failed drafts and visibly waits for one confirmed save',async({actors,backend})=>{
+  const {a}=actors;await login(a,'a');await go(a,'/events/new');await a.locator('#event-title').fill('ab');await a.locator('form button[type=submit]').click();
+  await expect(a.locator('#event-title')).toBeFocused();await expect(a.locator('#event-title')).toHaveAttribute('aria-invalid','true');
+  await a.locator('#event-title').fill('E2E reliable event form');await a.locator('#event-description').fill('A fictional event with precise validation and recoverable storage.');await a.locator('input[type=datetime-local]').fill('2000-01-01T12:00');await a.locator('form button[type=submit]').click();
+  await expect(a.locator('input[type=datetime-local]')).toBeFocused();await expect(a.locator('input[type=datetime-local]')).toHaveAttribute('aria-invalid','true');
+  expect(backend.log.filter(item=>item.type==='createEvent')).toHaveLength(0);
+  await a.locator('input[type=datetime-local]').fill('2090-01-01T12:00');backend.failNext('createEvent');await a.locator('form button[type=submit]').click();await expect(a.getByRole('alert')).toContainText('Speichern');
+  await a.reload();await expect(a.locator('#event-title')).toHaveValue('E2E reliable event form');await expect(a.locator('main')).toContainText('Entwurf');
+  backend.delayNext('createEvent');await a.evaluate(()=>{const form=document.querySelector('main form');form.requestSubmit();form.requestSubmit();});
+  await expect(a.locator('main form')).toHaveAttribute('aria-busy','true');await expect(a.locator('form button[type=submit]')).toHaveText('Wird gespeichert…');
+  await expect.poll(()=>backend.log.filter(item=>item.type==='createEvent').length).toBe(2);backend.release();await expect(a).toHaveURL(/#\/events\/local-/);expect(backend.getState().activities).toHaveLength(1);
+});
+
+test('manual retry and background refresh share one request and show a disabled loading control',async({actors,backend})=>{
+  const {a}=actors;await login(a,'a');backend.failNext('read');await wake(a);await expect(a.locator('.storage-warning button')).toBeVisible();
+  backend.delayNext('read');const before=backend.log.filter(item=>item.type==='read').length;
+  await a.locator('.storage-warning button').click();await expect(a.locator('.storage-warning button')).toBeDisabled();
+  await wake(a);await wake(a);await expect.poll(()=>backend.log.filter(item=>item.type==='read').length).toBe(before+1);
+  backend.release();await expect(a.locator('.storage-warning')).toHaveCount(0);await expect(a.getByText('a@test.invalid',{exact:true})).toBeVisible();
+});
+
+test('moderation read access does not claim group posting permission without membership',async({actors})=>{
+  const {c}=actors;await login(c,'c');await go(c,'/community/rooms/general');
+  await expect(c.getByRole('heading',{level:1})).toBeVisible();await expect(c.locator('#room-body')).toHaveCount(0);
+  await c.getByRole('button',{name:'Gruppe beitreten',exact:true}).click();await expect(c.locator('#room-body')).toBeVisible();
+});
+
 test('registration UI, simulated confirmation, reload and logout remain separate from guest identities',async({actors,backend})=>{
   const {a}=actors;await go(a,'/me/account');await a.locator('.auth-panel .filter-chips button').nth(1).click();
   await a.locator('#account-name').fill('Registered Test');await a.locator('#account-email').fill('registered@test.invalid');await a.locator('#account-password').fill(password);
@@ -152,7 +260,7 @@ test('registration UI, simulated confirmation, reload and logout remain separate
   // This is deliberately a simulated confirmation, not proof of email delivery.
   backend.confirm('registered@test.invalid');await a.locator('.auth-panel .filter-chips button').first().click();
   await a.locator('#account-password').fill(password);await a.locator('form button[type=submit]').click();
-  await expect(a.getByText('registered@test.invalid',{exact:true})).toBeVisible();await a.reload();await expect(a.getByText('registered@test.invalid',{exact:true})).toBeVisible();
+  await expect(a).toHaveURL(/#\/me$/);await go(a,'/me/account');await expect(a.getByText('registered@test.invalid',{exact:true})).toBeVisible();await a.reload();await expect(a.getByText('registered@test.invalid',{exact:true})).toBeVisible();
   expect(Object.values(backend.getState().profiles).some(profile=>profile.displayName==='Registered Test')).toBe(true);
   await a.locator('.auth-panel > button').click();await expect(a.locator('.profile-switcher select')).toBeVisible();
 });
@@ -232,4 +340,6 @@ for(const language of ['de','tr','en'])test('guest games, all categories, filter
   await page.evaluate(()=>window.scrollTo(0,0));
   await page.screenshot({path:testInfo.outputPath('games-'+language+'.png'),fullPage:true});
   await go(page,'/ideas/new');await page.locator('#idea-title').fill('A preserved fictional draft');await page.locator('a[href="#/tutoring"]').first().click();await page.goBack();await expect(page.locator('#idea-title')).toHaveValue('A preserved fictional draft');
+  await go(page,'/me/account');await page.locator('#account-email').fill('invalid');await page.locator('#account-password').fill('x');await page.locator('form button[type=submit]').click();
+  await expect(page.locator('#account-email')).toBeFocused();await expect(page.locator('#account-email')).toHaveAttribute('aria-invalid','true');await expect(page.locator('#account-email-error')).toBeVisible();
 });

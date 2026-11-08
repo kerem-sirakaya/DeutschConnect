@@ -7,10 +7,10 @@ import { emptyPlatform,addAccount,applyPlatformAction } from '../../supabase/fun
 export const password='Fictional-Test-Password-123';
 const ids={a:'aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaaa',b:'bbbbbbbb-bbbb-4bbb-bbbb-bbbbbbbbbbbb',c:'cccccccc-cccc-4ccc-cccc-cccccccccccc'};
 export async function startBackend(){
-  let state,revision,users,sessions,commands,failNext,loseNext,delayNext,release;
+  let state,revision,users,sessions,commands,failNext,loseNext,delayNext,delayNextAuth,release,confirmations,blockReads;
   const log=[];
   const reset=()=>{
-    state=emptyPlatform();revision=0;users=new Map();sessions=new Map();commands=new Set();failNext=null;loseNext=null;delayNext=null;release?.();release=null;log.length=0;
+    state=emptyPlatform();revision=0;users=new Map();sessions=new Map();commands=new Set();confirmations=new Map();blockReads=false;failNext=null;loseNext=null;delayNext=null;delayNextAuth=null;release?.();release=null;log.length=0;
     for(const [key,id] of Object.entries(ids)){
       const user={id,email:`${key}@test.invalid`,email_confirmed_at:new Date().toISOString(),user_metadata:{displayName:`Test ${key.toUpperCase()}`,language:'de'}};
       users.set(user.email,user);state=addAccount(state,user);
@@ -46,16 +46,20 @@ export async function startBackend(){
     if(req.method==='OPTIONS'){send({});return;}
     const request=new Request('http://127.0.0.1:4181'+req.url,{method:req.method,headers:req.headers,...(req.method!=='GET'?{body:text}:{})});
     if(path==='/functions/v1/platform'){
-      let action;try{action=JSON.parse(text).action;}catch{/* handler checks invalid JSON */}
-      if(action){log.push({type:action.type,actor:identity(request)?.id,commandId:JSON.parse(text).commandId});}
-      if(action?.type===failNext){failNext=null;send({error:'unavailable'},503);return;}
-      if(action?.type===delayNext){delayNext=null;await new Promise(resolve=>{release=resolve;});release=null;}
+      let envelope;try{envelope=JSON.parse(text||'{}');}catch{/* handler checks invalid JSON */}
+      const action=envelope?.action;
+      const kind=action?.type||'read';
+      if(kind==='read'&&blockReads){send({error:'unavailable'},503);return;}
+      log.push({type:kind,actor:identity(request)?.id,commandId:envelope?.commandId});
+      if(kind===failNext){failNext=null;send({error:'unavailable'},503);return;}
+      if(kind===delayNext){delayNext=null;await new Promise(resolve=>{release=resolve;});release=null;}
       const response=await handler(request);
       if(action?.type===loseNext){loseNext=null;res.writeHead(200,cors);res.write('{"interrupted":');res.flushHeaders();setTimeout(()=>res.destroy(),20);return;}
       res.writeHead(response.status,Object.fromEntries(response.headers));res.end(await response.text());return;
     }
     if(path==='/auth/v1/user'){const user=identity(request);send(user||{error:'invalid-token'},user?200:401);return;}
     let body={};try{body=JSON.parse(text||'{}');}catch{send({error:'invalid-input'},400);return;}
+    if(delayNextAuth===path){delayNextAuth=null;await new Promise(resolve=>{release=resolve;});release=null;}
     if(path==='/auth/v1/token'){
       const user=body.refresh_token? sessions.get(body.refresh_token):users.get(body.email);
       if(!user || (!body.refresh_token&&body.password!==password)){send({error:'invalid_credentials'},400);return;}
@@ -67,6 +71,9 @@ export async function startBackend(){
       if(!users.has(body.email))users.set(body.email,{id:crypto.randomUUID(),email:body.email,user_metadata:body.data||{}});
       send({});return;
     }
+    if(path==='/auth/v1/verify'){
+      const user=confirmations.get(body.token_hash);if(!user){send({error:'otp_expired'},400);return;}confirmations.delete(body.token_hash);send({user});return;
+    }
     if(path==='/auth/v1/resend'){send({});return;}
     if(path==='/auth/v1/logout'){sessions.delete((req.headers.authorization||'').replace('Bearer ',''));send({});return;}
     send({error:'not-found'},404);
@@ -74,6 +81,14 @@ export async function startBackend(){
   await new Promise(resolve=>server.listen(4181,'127.0.0.1',resolve));
   return {ids,log,reset,getState:()=>structuredClone(state),getRevision:()=>revision,
     failNext:type=>{failNext=type;},loseNext:type=>{loseNext=type;},delayNext:type=>{delayNext=type;},release:()=>release?.(),
+    delayAuth:path=>{delayNextAuth='/auth/v1/'+path;},
+    blockProfileReads:value=>{blockReads=value;},
+    confirmation:(email,withSession=true)=>{
+      const user=users.get(email);user.email_confirmed_at=new Date().toISOString();
+      if(!withSession){const hash=crypto.randomUUID();confirmations.set(hash,user);return '?token_hash='+hash+'&type=email';}
+      const access='callback-'+crypto.randomUUID(),refresh='callback-refresh-'+crypto.randomUUID();sessions.set(access,user);sessions.set(refresh,user);
+      return '#access_token='+access+'&refresh_token='+refresh+'&type=signup';
+    },
     confirm:email=>{users.get(email).email_confirmed_at=new Date().toISOString();},expire:()=>sessions.clear(),
     close:()=>new Promise(resolve=>server.close(resolve)),
   };
