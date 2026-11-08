@@ -60,7 +60,8 @@ test('real event registration requires approval; attendance and awards require m
  s=apply(s,{type:'awardRecognition',eventId:'local-event',profileId:'b'},'c',{moderator:true});
  assert.equal(s.modules.awards.length,1); assert.equal(projectPlatform(s,'a').modules.awards.length,0); assert.equal(projectPlatform(s,'b').modules.awards.length,1);
  assert.deepEqual(Object.keys(projectPlatform(s,'b').activities[0].attendance),['b']);
- s=apply(s,{type:'shareAwards',shared:true},'b'); assert.equal(projectPlatform(s,'a').modules.awards.length,1);
+ s=apply(s,{type:'shareAwards',shared:true},'b'); assert.equal(projectPlatform(s,'a').modules.awards.length,0);
+ s=apply(s,{type:'setCommunityVisibility',visible:true},'b'); assert.equal(projectPlatform(s,'a').modules.awards.length,1);
 });
 test('unshared and unrelated profiles and private contact drafts are not exposed',()=>{
  let s=base(); s=apply(s,{type:'submitTutoring',id:'local-tutor',record:tutor},'a');

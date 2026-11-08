@@ -4,30 +4,36 @@ import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { schools } from '../data/activities.js';
 import { validIdeaInput } from '../data/demoState.js';
 import { projectStatuses } from '../data/modules.js';
-import { ModuleTabs, PageIntro } from '../components/UI.jsx';
+import { PageIntro } from '../components/UI.jsx';
+import BackLink from '../components/BackLink.jsx';
+import { replaceRoute } from '../state/routeHistory.js';
 import { CheckOptions, TextField } from '../components/FormFields.jsx';
 import { ideaContent } from '../components/IdeaCard.jsx';
 import { useFormDraft } from '../state/usePageMemory.js';
 import NotFound from './NotFound.jsx';
+import ProfileSchoolNotice from '../components/ProfileSchoolNotice.jsx';
+import useActiveView from '../state/useActiveView.js';
 
 export default function IdeaSubmit({ initiativeId, id }) {
   const { t } = useLanguage();
   const { dispatch, profile, state } = useDemo();
   const existing = state.ideas.find((idea) => idea.id === id);
   const content = existing ? ideaContent(existing, t) : {};
-  const initial = { title: content.title || '', description: content.description || '', category: existing?.category || 'open', goals: existing?.goals || '', collaborators: existing?.collaborators || '', desiredSchoolIds: existing?.desiredSchoolIds || [profile.schoolId], projectStatus: existing?.projectStatus || 'proposal', topicsText: existing?.topics?.join(', ') || '', interview: existing?.initiativeId === 'interviews' || initiativeId === 'interviews', expectedRecord: existing ? JSON.stringify(existing) : null };
+  const initial = { title: content.title || '', description: content.description || '', category: existing?.category || 'open', goals: existing?.goals || '', collaborators: existing?.collaborators || '', desiredSchoolIds: existing?.desiredSchoolIds || (profile.schoolId?[profile.schoolId]:[]), projectStatus: existing?.projectStatus || 'proposal', topicsText: existing?.topics?.join(', ') || '', interview: existing?.initiativeId === 'interviews' || initiativeId === 'interviews', expectedRecord: existing ? JSON.stringify(existing) : null };
   const { draft, setDraft, clearDraft, getSubmissionId, restored, hasDraft, storageAvailable } = useFormDraft(id ? 'idea:edit:' + id : 'idea:new:' + (initiativeId || 'free'), initial);
   const [errors, setErrors] = useState({});
   const [busy, setBusy] = useState(false);
   const [failed, setFailed] = useState(false);
+  const active=useActiveView();
   if (id && (!existing || existing.ownerId !== profile.id || existing.lifecycle === 'deleted')) return <NotFound />;
+  if(!profile.schoolId)return <><BackLink fallback="/ideas/all" /><PageIntro title={id?t.quality.edit:t.app.newIdea} /><ProfileSchoolNotice /></>;
   const change = (key, value) => setDraft({ ...draft, [key]: value });
 
   async function submit(event) {
     event.preventDefault();
     if (busy) return;
     const topics = draft.topicsText.split(',').map((topic) => topic.trim()).filter(Boolean);
-    const idea = { title: draft.title, description: draft.description, category: draft.category, goals: draft.goals, collaborators: draft.collaborators, desiredSchoolIds: draft.desiredSchoolIds, projectStatus: draft.projectStatus, topics, ...(draft.interview ? { initiativeId: 'interviews' } : {}) };
+    const idea = { title: draft.title, description: draft.description, category: draft.category, goals: draft.goals, collaborators: draft.collaborators, desiredSchoolIds: draft.desiredSchoolIds.filter((id)=>schools.some((school)=>school.id===id)), projectStatus: draft.projectStatus, topics, ...(draft.interview ? { initiativeId: 'interviews' } : {}) };
     const nextErrors = {};
     if (idea.title.trim().length < 5 || idea.title.trim().length > 90) nextErrors.title = t.quality.validationTitle;
     if (idea.description.trim().length < 20 || idea.description.trim().length > 1000) nextErrors.description = t.quality.validationDescription;
@@ -48,15 +54,15 @@ export default function IdeaSubmit({ initiativeId, id }) {
     const targetId = id || getSubmissionId();
     try {
       const success = await dispatch({ type: id ? 'updateIdea' : 'submitIdea', idea, id: targetId, ...(id ? { expectedRecord: draft.expectedRecord } : {}) });
-      if (success) { clearDraft(); window.location.hash = '/ideas/' + targetId; }
+      if (success && active.current) { clearDraft(); replaceRoute(window, '/ideas/' + targetId + '?from=' + encodeURIComponent('/me/projects')); }
       else setFailed(true);
     } catch { setFailed(true); }
     finally { setBusy(false); }
   }
 
   return <>
+    <BackLink fallback={id ? '/ideas/' + id : '/ideas/all'} />
     <PageIntro title={id ? t.quality.edit : t.app.newIdea} description={t.app.newIdeaDescription} />
-    {!id && <ModuleTabs label={t.nav.ideas} items={Object.entries(t.app.ideaTabs).map(([key, label]) => ({ label, href: '#/ideas/' + key, active: key === 'new' }))} />}
     <form className="content-card app-form" onSubmit={submit} noValidate aria-busy={busy}>
       <fieldset className="app-form form-controls" disabled={busy} aria-label={id ? t.quality.edit : t.app.newIdea}>
       <p className="form-notice">{t.app.formHint}</p><p className="small-text">{t.ext.project.freeHint}</p>

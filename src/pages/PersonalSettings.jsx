@@ -3,13 +3,17 @@ import { useDemo } from '../state/DemoContext.jsx';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { interests, schools } from '../data/activities.js';
 import { LanguageSwitcher } from '../components/Navigation.jsx';
-import Icon from '../components/Icon.jsx';
 import { TextField } from '../components/FormFields.jsx';
 import { useFormDraft } from '../state/usePageMemory.js';
+import { sharingFor, sharingKeys } from '../../supabase/functions/_shared/profiles.js';
+import ActionButton from '../components/ActionButton.jsx';
+import useActiveView from '../state/useActiveView.js';
 
 export default function PersonalSettings() {
+  const active = useActiveView();
   const { t } = useLanguage();
-  const { profile, updatePreferences, storageAvailable } = useDemo();
+  const { state, access, profile, updatePreferences, storageAvailable } = useDemo();
+  const canShare = access.mode === 'guest' || state.modules.profileCapabilities;
   const initial = { displayName: profile.displayName, schoolId: profile.schoolId, interests: [...profile.interests], customInterestsText: (profile.customInterests || []).join(', '), expectedProfile: JSON.stringify(profile) };
   const { draft, setDraft, clearDraft, restored, hasDraft, storageAvailable: draftStorageAvailable } = useFormDraft('profile', initial);
   const [nameError, setNameError] = useState(false);
@@ -35,8 +39,9 @@ export default function PersonalSettings() {
     setBusy(true);
     setFailed(false);
     try {
-      const patch = { displayName: draft.displayName.trim(), schoolId: draft.schoolId, interests: draft.interests, customInterests };
+      const patch = { displayName: draft.displayName.trim(), ...(draft.schoolId ? {schoolId:draft.schoolId} : {}), interests: draft.interests, customInterests, ...(canShare ? {profileSharing:draft.profileSharing || sharingFor(profile)} : {}) };
       const success = await updatePreferences(patch, draft.expectedProfile);
+      if (!active.current) return;
       if (success) { clearDraft({ ...draft, displayName: patch.displayName, customInterestsText: customInterests.join(', '), expectedProfile: JSON.stringify({ ...profile, ...patch }) }); setSaved(true); }
       else setFailed(true);
     } catch { setFailed(true); }
@@ -57,11 +62,12 @@ export default function PersonalSettings() {
       <fieldset><legend>{t.app.interestsLabel}</legend><p className="small-text">{t.app.interestHint}</p><div className="interest-options">{interests.map((interest) => <label key={interest}><input type="checkbox" checked={draft.interests.includes(interest)} onChange={() => change({ interests: draft.interests.includes(interest) ? draft.interests.filter((key) => key !== interest) : [...draft.interests, interest] })} /><span>{t.categories[interest]}</span></label>)}</div></fieldset>
       <TextField id="profile-custom-interests" label={t.quality.customInterests} value={draft.customInterestsText} onChange={(value) => change({ customInterestsText: value })} maxLength={327} multiline hint={t.quality.customInterestsHint} error={topicsError ? t.quality.validationFreeTopics : undefined} />
       <div className="preference-language"><span>{t.app.preferredLanguage}</span><LanguageSwitcher /></div>
+      <fieldset><legend>{t.personal.profile.visibility}</legend><p className="small-text">{t.personal.profile.visibilityHint}</p>{canShare ? sharingKeys.map((key) => <label className="checkbox-row" key={key}><input type="checkbox" checked={(draft.profileSharing || sharingFor(profile))[key]} onChange={(event) => change({profileSharing:{...(draft.profileSharing || sharingFor(profile)),[key]:event.target.checked}})} />{t.personal.profile.fields[key]}</label>) : <p className="form-notice">{t.personal.profile.unavailable}</p>}</fieldset>
       {hasDraft && <p className="small-text">{draftStorageAvailable ? t.quality.savedDraft : t.quality.unsavedWarning}</p>}
       {failed && <p className="field-error" role="alert">{t.quality.saveFailed}</p>}
       <div className="form-actions"><button className="button" type="submit" disabled={busy}>{busy ? t.quality.saving : t.app.saveChanges}</button>{hasDraft && <button className="text-button" type="button" disabled={busy} onClick={() => { clearDraft(initial); setNameError(false); setTopicsError(false); setSaved(false); }}>{t.quality.discardDraft}</button>}<p className="save-status" role="status">{saved && storageAvailable ? t.app.saved : ''}</p></div>
       </fieldset>
     </form>
-    <div className="form-actions"><a className="text-link" href="#/me/account">{t.personal.accountLink}<Icon name="arrow" size={16} /></a><a className="text-link" href="#/about">{t.app.aboutLink}<Icon name="arrow" size={16} /></a></div>
+    <section className="content-card section-block"><h2>{t.personal.profile.visibility}</h2><ActionButton disabled={!canShare && !state.modules.visibility[profile.id]} action={{type:'setCommunityVisibility',visible:!state.modules.visibility[profile.id]}}>{state.modules.visibility[profile.id] ? t.personal.profile.disable : t.personal.profile.enable}</ActionButton><p className="module-note">{t.personal.profile.visibilityHint}</p>{state.modules.visibility[profile.id] && <a className="text-link" href={'#/community/people/' + profile.id}>{t.personal.profile.preview}</a>}</section>
   </>;
 }

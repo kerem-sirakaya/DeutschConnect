@@ -1,7 +1,8 @@
 import { replay, move, gameStatus, squareName, squareIndex } from './chess.js';
+import { chessInvitationEvents, validChessNoticeKey } from './chessInvitations.js';
 
 export function freshSocial(profileIds = []) {
-  return { blocks: Object.fromEntries(profileIds.map((id) => [id, []])), challenges: [], games: [], groups: [], awards: [], awardSharing: Object.fromEntries(profileIds.map((id) => [id, false])) };
+  return { blocks: Object.fromEntries(profileIds.map((id) => [id, []])), challenges: [], chessRead:{}, games: [], groups: [], awards: [], awardSharing: Object.fromEntries(profileIds.map((id) => [id, false])) };
 }
 export function blocked(state, a, b) { return Boolean(state.modules.blocks?.[a]?.includes(b) || state.modules.blocks?.[b]?.includes(a)); }
 export function reduceSocial(state, action, actor, options = {}) {
@@ -9,6 +10,11 @@ export function reduceSocial(state, action, actor, options = {}) {
   const validId = (id) => typeof id === 'string' && /^local-[a-z0-9-]{1,100}$/.test(id);
   const known = (id) => Object.hasOwn(state.profiles, id);
   const change = (patch) => ({ ...state, modules: { ...m, ...patch } });
+  if (action.type === 'readChessNotices' && Array.isArray(action.keys) && action.keys.length > 0 && action.keys.length <= 100) {
+    const allowed = new Set(chessInvitationEvents(state,actor).filter((event) => event.canRead).map((event) => event.key));
+    if (!action.keys.every((key) => validChessNoticeKey(key) && allowed.has(key))) return state;
+    return change({chessRead:{...m.chessRead,[actor]:[...new Set([...(m.chessRead?.[actor] || []),...action.keys])]}});
+  }
   if (action.type === 'blockPerson' && (known(action.profileId) || (options.demo && action.profileId === 'guest-mika')) && action.profileId !== actor && typeof action.blocked === 'boolean') {
     const ids = m.blocks?.[actor] || [];
     return change({ blocks: { ...m.blocks, [actor]: action.blocked ? [...new Set([...ids, action.profileId])] : ids.filter((id) => id !== action.profileId) } });
@@ -87,6 +93,11 @@ export function restoreSocial(saved, profiles, recovered = () => {}) {
     if (Array.isArray(ids)) result.blocks[id] = [...new Set(ids.filter((target) => target !== id && (known(target) || target === 'guest-mika')))];
     if (ids !== undefined && (!Array.isArray(ids) || result.blocks[id].length !== ids.length)) recovered('blocks.'+id);
     result.awardSharing[id] = saved?.awardSharing?.[id] === true;
+    const reads = saved?.chessRead?.[id];
+    if (reads !== undefined) {
+      if (Array.isArray(reads)) result.chessRead[id]=[...new Set(reads.filter(validChessNoticeKey))];
+      if (!Array.isArray(reads) || reads.length !== result.chessRead[id].length) recovered('chessRead.'+id);
+    }
   }
   for (const g of Array.isArray(saved?.games) ? saved.games : []) {
     try { if (!g || typeof g.id !== 'string' || !known(g.whiteId) || !known(g.blackId) || !['hotseat','challenge'].includes(g.mode) || !['active','ended'].includes(g.status) || !Number.isInteger(g.revision) || g.revision < 0 || (g.result && (!['w','b',null].includes(g.result.winner) || typeof g.result.reason !== 'string')) || result.games.some((item) => item.id === g.id)) throw new Error(); replay(g.moves); result.games.push(g); }

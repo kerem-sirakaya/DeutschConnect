@@ -1,7 +1,15 @@
 {
   "guest": "Gastdemo",
   "guestHint": "Du erkundest DeutschConnect mit einem fiktiven Profil. Deine Änderungen bleiben in diesem Browser. Du bist nicht angemeldet.",
-  "tabs": { "overview": "Übersicht", "activities": "Aktivitäten", "projects": "Projekte", "tutoring": "Nachhilfe", "saved": "Vorgemerkt", "community": "Community", "settings": "Profil & Einstellungen" },
+  "tabs": {
+    "overview": "Übersicht",
+    "activities": "Aktivitäten",
+    "projects": "Projekte",
+    "tutoring": "Nachhilfe",
+    "saved": "Vorgemerkt",
+    "community": "Community",
+    "settings": "Profil & Einstellungen"
+  },
   "subtitle": "Deine Vorhaben, Vormerkungen und nächsten Schritte.",
   "summary": "Dein Stand · lokale Demo",
   "eventRegistrations": "Event-Anmeldungen · Demo",
@@ -32,7 +40,13 @@
   "requests": "Meine Teilnahmeanfragen",
   "interested": "Mein Projektinteresse",
   "projectFilter": "Projektansicht",
-  "projectStates": { "owner": "Dein Projekt", "member": "Mitglied · lokale Demo", "requested": "Teilnahme angefragt · Demo", "interested": "Interesse vorgemerkt", "none": "Noch keine Auswahl" },
+  "projectStates": {
+    "owner": "Dein Projekt",
+    "member": "Mitglied · lokale Demo",
+    "requested": "Teilnahme angefragt · Demo",
+    "interested": "Interesse vorgemerkt",
+    "none": "Noch keine Auswahl"
+  },
   "projectParticipation": "Dein Projektstatus",
   "interest": "Interesse vormerken",
   "withdrawInterest": "Interesse zurücknehmen",
@@ -57,8 +71,55 @@
   "recentPosts": "Deine letzten lokalen Beiträge",
   "communityLink": "Alle Community-Aktivitäten",
   "roomsLink": "Diskussionsräume erkunden",
-  "account": { "title": "Gastmodus & Benutzerkonto", "state": "Aktueller Zugang", "guest": "Gast · nicht angemeldet", "unavailable": "E-Mail-Registrierung, Verifizierung, Anmeldung und Abmeldung sind in dieser Version noch nicht verbunden.", "explain": "Die Kontoanbindung wird mit der Supabase-Version des zweiten Teams abgestimmt. Der Demo-Umschalter wechselt ausschließlich fiktive Profile und meldet niemanden an.", "separation": "Lokale Demo-Daten werden später nicht automatisch einem echten Konto zugeordnet. Eine mögliche Übernahme benötigt eine bewusste, geprüfte Entscheidung.", "continue": "Gastdemo weiter erkunden" },
+  "account": {
+    "title": "Gastmodus & Benutzerkonto",
+    "state": "Aktueller Zugang",
+    "guest": "Gast · nicht angemeldet",
+    "unavailable": "E-Mail-Registrierung, Verifizierung, Anmeldung und Abmeldung sind in dieser Version noch nicht verbunden.",
+    "explain": "Die Kontoanbindung wird mit der Supabase-Version des zweiten Teams abgestimmt. Der Demo-Umschalter wechselt ausschließlich fiktive Profile und meldet niemanden an.",
+    "separation": "Lokale Demo-Daten werden später nicht automatisch einem echten Konto zugeordnet. Eine mögliche Übernahme benötigt eine bewusste, geprüfte Entscheidung.",
+    "continue": "Gastdemo weiter erkunden"
+  },
   "accountLink": "Gastmodus & Konto",
   "demoNotice": "Gastdemo · fiktive Daten · nur lokal",
-  "settingsIntro": "Passe dein fiktives Profil, Interessen und Sprache an."
+  "settingsIntro": "Passe dein fiktives Profil, Interessen und Sprache an.",
+  "profile": {
+    "open": "Profil öffnen",
+    "onlyShared": "Hier stehen nur freiwillig freigegebene Angaben. Private Aktivitäten und Kontaktdaten gehören nicht zu diesem Profil.",
+    "actions": "Weitere Aktionen",
+    "activity": "Freigegebene Aktivitäten",
+    "ideas": "Eigene veröffentlichte Projektideen",
+    "current": "Aktuelle Projektmitgliedschaften",
+    "completed": "Bestätigte Projektabschlüsse",
+    "empty": "Keine freigegebenen Einträge vorhanden.",
+    "members": "Mitglieder",
+    "visibility": "Profilfreigabe",
+    "visibilityHint": "Das Profil ist nur nach Aktivierung sichtbar. Schule, Interessen und Projektaktivitäten werden jeweils zusätzlich freiwillig freigegeben. Beiträge und veröffentlichte Inhalte bleiben davon unabhängig sichtbar. Verwende einen Anzeigenamen ohne private Kontaktdaten.",
+    "fields": {
+      "school": "Schule im Profil anzeigen",
+      "interests": "Interessen im Profil anzeigen",
+      "projects": "Öffentliche Projekte und Mitgliedschaften im Profil anzeigen"
+    },
+    "enable": "Profil für angemeldete Schüler freigeben",
+    "disable": "Profilfreigabe ausschalten",
+    "preview": "Freigegebenes Profil ansehen",
+    "unavailable": "Die erweiterten Freigaben sind für dieses Konto noch nicht verfügbar.",
+    "confirmCompletion": "Durchführung prüfen und Projektabschluss bestätigen",
+    "completionHint": "Nur tatsächlich abgeschlossene Projekte nach organisatorischer Prüfung bestätigen. Interesse und offene Anfragen sind kein Teilnahmenachweis."
+  },
+  "statistics": {
+    "activeProjects": "Aktuelle Projekte mit eigener Beteiligung",
+    "completedProjects": "Bestätigte Projektabschlüsse",
+    "ownedProjects": "Selbst erstellte Projektideen",
+    "upcomingRegistrations": "Kommende Eventanmeldungen",
+    "confirmedAttendance": "Bestätigte Veranstaltungsteilnahmen",
+    "tutoringOffers": "Offene Nachhilfeangebote",
+    "tutoringRequests": "Offene Nachhilfegesuche",
+    "awards": "Erhaltene Auszeichnungen",
+    "projectMemberships": "Aktuelle Projektmitgliedschaften",
+    "hint": "Aus zugeordneten Datensätzen berechnet. Interesse, Anfrage, Mitgliedschaft, Anmeldung und bestätigte Teilnahme werden getrennt gezählt. Projektabschlüsse benötigen eine Bestätigung der Moderation.",
+    "demo": "Diese Werte gehören ausschließlich zu fiktiven Demo-Profilen.",
+    "impact": "Gemeinschaftliche Wirkung",
+    "impactHint": "Noch keine geprüften Gesamtergebnisse veröffentlicht. Durchgeführte Kooperationen und beteiligte Schulen sollen erst nach organisatorischer Bestätigung zusammengefasst werden."
+  }
 }

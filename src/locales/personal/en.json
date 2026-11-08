@@ -1,7 +1,15 @@
 {
   "guest": "Guest demo",
   "guestHint": "You are exploring DeutschConnect with a fictional profile. Changes stay in this browser. You are not signed in.",
-  "tabs": { "overview": "Overview", "activities": "Activities", "projects": "Projects", "tutoring": "Tutoring", "saved": "Saved", "community": "Community", "settings": "Profile & settings" },
+  "tabs": {
+    "overview": "Overview",
+    "activities": "Activities",
+    "projects": "Projects",
+    "tutoring": "Tutoring",
+    "saved": "Saved",
+    "community": "Community",
+    "settings": "Profile & settings"
+  },
   "subtitle": "Your plans, saved activities and next steps.",
   "summary": "Your progress · local demo",
   "eventRegistrations": "Event registrations · demo",
@@ -32,7 +40,13 @@
   "requests": "My participation requests",
   "interested": "My project interests",
   "projectFilter": "Project view",
-  "projectStates": { "owner": "Your project", "member": "Member · local demo", "requested": "Participation requested · demo", "interested": "Interest saved", "none": "No selection yet" },
+  "projectStates": {
+    "owner": "Your project",
+    "member": "Member · local demo",
+    "requested": "Participation requested · demo",
+    "interested": "Interest saved",
+    "none": "No selection yet"
+  },
   "projectParticipation": "Your project status",
   "interest": "Save interest",
   "withdrawInterest": "Withdraw interest",
@@ -57,8 +71,55 @@
   "recentPosts": "Your latest local posts",
   "communityLink": "All community activities",
   "roomsLink": "Explore discussion rooms",
-  "account": { "title": "Guest mode & account", "state": "Current access", "guest": "Guest · not signed in", "unavailable": "Email registration, verification, sign-in and sign-out are not connected in this version yet.", "explain": "Accounts will be coordinated with the second team's Supabase version. The demo selector only switches fictional profiles and does not sign anyone in.", "separation": "Local demo data will not automatically be assigned to a real account. Any transfer requires a deliberate, reviewed decision.", "continue": "Continue exploring the guest demo" },
+  "account": {
+    "title": "Guest mode & account",
+    "state": "Current access",
+    "guest": "Guest · not signed in",
+    "unavailable": "Email registration, verification, sign-in and sign-out are not connected in this version yet.",
+    "explain": "Accounts will be coordinated with the second team's Supabase version. The demo selector only switches fictional profiles and does not sign anyone in.",
+    "separation": "Local demo data will not automatically be assigned to a real account. Any transfer requires a deliberate, reviewed decision.",
+    "continue": "Continue exploring the guest demo"
+  },
   "accountLink": "Guest mode & account",
   "demoNotice": "Guest demo · fictional data · local only",
-  "settingsIntro": "Adjust your fictional profile, interests and language."
+  "settingsIntro": "Adjust your fictional profile, interests and language.",
+  "profile": {
+    "open": "Open profile",
+    "onlyShared": "Only voluntarily shared information appears here. Private activities and contact details are excluded from this profile.",
+    "actions": "More actions",
+    "activity": "Shared activities",
+    "ideas": "Own published project ideas",
+    "current": "Current project memberships",
+    "completed": "Confirmed project completions",
+    "empty": "No shared entries available.",
+    "members": "Members",
+    "visibility": "Profile sharing",
+    "visibilityHint": "The profile is visible only after activation. School, interests and project activities each require an additional voluntary choice. Posts and published content remain visible independently. Use a display name without private contact details.",
+    "fields": {
+      "school": "Show school on profile",
+      "interests": "Show interests on profile",
+      "projects": "Show published projects and memberships on profile"
+    },
+    "enable": "Share profile with signed-in students",
+    "disable": "Turn profile sharing off",
+    "preview": "View shared profile",
+    "unavailable": "Extended sharing options are not yet available for this account.",
+    "confirmCompletion": "Check delivery and confirm project completion",
+    "completionHint": "Confirm only projects that have actually finished after organizational review. Interest and pending requests are not evidence of participation."
+  },
+  "statistics": {
+    "activeProjects": "Current projects you take part in",
+    "completedProjects": "Confirmed project completions",
+    "ownedProjects": "Project ideas you created",
+    "upcomingRegistrations": "Upcoming event registrations",
+    "confirmedAttendance": "Confirmed event attendance",
+    "tutoringOffers": "Open tutoring offers",
+    "tutoringRequests": "Open tutoring requests",
+    "awards": "Awards received",
+    "projectMemberships": "Current project memberships",
+    "hint": "Calculated from associated records. Interest, requests, membership, registration and confirmed attendance are counted separately. Project completions require confirmation by moderation.",
+    "demo": "These values belong only to fictional demo profiles.",
+    "impact": "Community impact",
+    "impactHint": "No verified totals have been published yet. Completed collaborations and participating schools will be summarized only after organizational confirmation."
+  }
 }

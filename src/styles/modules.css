@@ -58,6 +58,16 @@ button:disabled, input:disabled, textarea:disabled, select:disabled { cursor: pr
 .personal-statistics > a { display: flex; flex-direction: column; gap: 6px; padding: 14px; min-height: 100px; }
 .personal-statistics strong { color: #aed3ff; font-size: 1.65rem; line-height: 1.2; }
 .personal-statistics span { font-size: .8rem; color: #c5d3e6; line-height: 1.5; overflow-wrap: anywhere; }
+.personal-statistics > div { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 8px; padding: 14px; }
+.personal-statistics dt { font-size: .8rem; color: #c5d3e6; line-height: 1.5; overflow-wrap: anywhere; }
+.personal-statistics dd { margin: 0; color: #aed3ff; font-size: 1.65rem; line-height: 1.2; font-weight: 700; }
+.personal-menu { margin-bottom: 24px; }
+.personal-menu a { min-height: 48px; }
+.profile-members { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+.profile-members h3 { flex-basis: 100%; }
+.profile-link { min-height: 44px; align-items: center; display: inline-flex; }
+.task-copy h3 a { min-height: 44px; display: flex; align-items: center; }
+.initiative-card h2 a { min-height: 44px; display: inline-flex; align-items: center; gap: 8px; }
 .personal-next-grid { display: grid; gap: 24px; margin-top: 24px; }
 .personal-section-title { margin: 0 0 16px; }
 .attendance-note { margin-top: 24px; }

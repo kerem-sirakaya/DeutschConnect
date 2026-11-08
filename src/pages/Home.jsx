@@ -20,25 +20,16 @@ export default function Home() {
   const discovery = tutoring.length ? [] : discoverTutoring(profile, state.modules);
   const tutoringSuggestions = tutoring.length ? tutoring : discovery;
   const ownPosts = state.modules.messages.filter((message) => message.ownerId === profile.id);
-  const shortcuts = [
-    ['search', t.nav.discover, '/discover'],
-    ['bulb', t.nav.tutoring, '/tutoring'],
-    ['network', t.nav.community, '/community'],
-    ['plus', t.ext.create, '/ideas/new'],
-  ];
   return <>
     <HeroSection />
-    <nav className="quick-actions" aria-label={t.app.quickActions}>
-      {shortcuts.map(([icon, label, path]) => <a key={path} href={'#' + path}><Icon name={icon} size={21} /><span>{label}</span><Icon name="chevron" size={15} /></a>)}
-    </nav>
     <div className="dashboard-grid">
       <section className="dashboard-module">
-        <SectionHeading title={t.app.myEvents} href="#/events/my" link={t.app.viewAll} />
+        <SectionHeading title={t.app.myEvents} href="#/me/activities" link={t.app.viewAll} />
         <div className="task-list">{events.slice(0, 2).map((activity) => <EventCard key={activity.id} activity={activity} returnTo="/" />)}</div>
         {!events.length && <EmptyState text={t.app.emptyMyEvents} href="#/events/all" action={t.app.browseEvents} />}
       </section>
       <section className="dashboard-module dashboard-ideas">
-        <SectionHeading title={t.app.myIdeas} href="#/ideas/my" link={t.app.viewAll} />
+        <SectionHeading title={t.app.myIdeas} href="#/me/projects" link={t.app.viewAll} />
         <div className="task-list">{ideas.slice(0, 2).map((idea) => <IdeaCard key={idea.id} idea={idea} returnTo="/" />)}</div>
         {!ideas.length && <EmptyState icon="bulb" text={t.app.emptyMyIdeas} href="#/ideas/new" action={t.app.newIdea} />}
       </section>

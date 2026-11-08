@@ -10,5 +10,5 @@ export function DiscoverNavigation({ active }) {
 
 export function CommunityNavigation({ active }) {
   const { t } = useLanguage();
-  return <ModuleTabs label={t.nav.community} items={['people', 'projects', 'rooms', 'games', 'my'].map((key) => ({ label: key === 'games' ? t.games.title : t.ext.community[key], href: '#/community/' + key, active: active === key }))} />;
+  return <ModuleTabs label={t.nav.community} items={['people', 'rooms', 'games', 'my'].map((key) => ({ label: key === 'games' ? t.games.title : t.ext.community[key], href: '#/community/' + key, active: active === key }))} />;
 }

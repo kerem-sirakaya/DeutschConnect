@@ -88,7 +88,7 @@ export function positionKey(s) { return toFen(s).split(' ').slice(0,3).join(' ')
 export function replay(moves = [], fen = initialFen) {
   let state = fromFen(fen); const positions = [positionKey(state)];
   if (!Array.isArray(moves) || moves.length > 1200) throw new Error('invalid-game');
-  for (const item of moves) { if (!/^[a-h][1-8][a-h][1-8][qrbn]?$/.test(item)) throw new Error('invalid-move'); state = move(state, { from: item.slice(0,2), to: item.slice(2,4), promotion: item[4] }); positions.push(positionKey(state)); }
+  for (const item of moves) { if (gameStatus({...state,positions}).ended) throw new Error('game-ended');if (!/^[a-h][1-8][a-h][1-8][qrbn]?$/.test(item)) throw new Error('invalid-move'); state = move(state, { from: item.slice(0,2), to: item.slice(2,4), promotion: item[4] }); positions.push(positionKey(state)); }
   return { ...state, positions };
 }
 export function gameStatus(s) {

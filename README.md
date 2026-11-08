@@ -7,6 +7,14 @@ Cross-school collaboration platform
 
 **Stand der Dokumentation:** 8. November 2026
 
+**Neuester Prüfstand: Gaming und Self-Audit.** 14 Ursachen in Datenschutz, Anmeldung, Speicherung, Gruppen, Formularen und Spielen lokal korrigiert. 132 automatisierte Tests, 796 Texte je Sprache, erweiterte Routenprüfung, Produktions-Build und Offline-Prüfung erfolgreich. Interaktive Smartphone-/Zwei-Geräte-Abnahme und externe Function-Bereitstellung bleiben offen. Bericht: [docs/SELF-AUDIT.md](docs/SELF-AUDIT.md); aktueller Übergabestand: [docs/SESSION_HANDOFF.md](docs/SESSION_HANDOFF.md).
+
+**Neu: Schacheinladungen** besitzen jetzt eine appweite Glocke und die Übersicht `#/me/notifications` mit Annehmen/Ablehnen, direktem Partie-Einstieg und Antworten für den Einladenden. E-Mail-Texte und Versandvertrag sind vorbereitet; ein Versanddienst wurde auf Wunsch noch nicht eingerichtet. Bei geschlossener Website werden deshalb noch keine externen Hinweise verschickt. Details: [docs/CHESS-INVITATIONS.md](docs/CHESS-INVITATIONS.md). Kein Deployment oder Mailversand ausgeführt.
+
+**Neu: Spiele-Bestenlisten** unter Community → Spiele: Alle vier Spiele besitzen Global, Meine Schule und Persönlich als gemeinsame Oberfläche. Demo-Ranglisten nutzen freiwillige lokale Teilnahme; echte globale Ranglisten benötigen weiterhin serverseitig geprüfte gemeinsame Ergebnisse. Papierflug wird allmählich schneller. Details, Speicherung, Prüfungen und sicherer Ausbau: [docs/GAMES-LEADERBOARDS.md](docs/GAMES-LEADERBOARDS.md). Keine Migration oder Bereitstellung ausgeführt.
+
+**Neu: Navigation, Schülerprofile und Statistiken** wurden lokal gezielt erweitert. Analyse, Datenfreigaben, Testergebnisse und die noch erforderliche Browser-/Cloud-Abnahme stehen in [docs/NAVIGATION-PROFILES-STATISTICS.md](docs/NAVIGATION-PROFILES-STATISTICS.md). Der bestehende Funktionsumfang bleibt erhalten; keine Migration oder Cloud-Bereitstellung wurde für diese Erweiterung ausgeführt.
+
 **Ausgangspunkt:** Ernst-Reuter-Schule Ankara (ERS), Türkei  
 **Erster vorgesehener Schulpartner:** Anka Bilim, Ankara  
 **Wettbewerb:** 10. DIHK-Auslandsschulwettbewerb 2026/2027 – „Schüler bauen weltweit Brücken“  

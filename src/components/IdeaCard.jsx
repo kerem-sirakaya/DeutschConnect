@@ -3,6 +3,7 @@ import { useLanguage } from '../i18n/LanguageContext.jsx';
 import Icon from './Icon.jsx';
 import { isActive } from '../data/matching.js';
 import { projectParticipation } from '../data/projectParticipation.js';
+import ProfileLink from './ProfileLink.jsx';
 
 export function ideaContent(idea, t) {
   if (typeof idea.title === 'string' && typeof idea.description === 'string') return idea;
@@ -16,7 +17,7 @@ export function ideaContent(idea, t) {
 
 export default function IdeaCard({ idea, returnTo = '/ideas/my' }) {
   const { t } = useLanguage();
-  const { profile, state, access } = useDemo();
+  const { profile, access } = useDemo();
   const content = ideaContent(idea, t);
   const status = projectParticipation(idea, profile.id);
   const href = `#/ideas/${idea.id}?from=${encodeURIComponent(returnTo)}`;
@@ -25,10 +26,10 @@ export default function IdeaCard({ idea, returnTo = '/ideas/my' }) {
     <div className="task-copy">
       <div className="task-eyebrow"><span>{t.categories[idea.category]}</span><span>{idea.seedKey || Number.isInteger(idea.seedIndex) ? t.ext.discover.demo : t.ext.discover.student}</span>{access.mode === 'guest' && <span className="demo-tag">DEMO</span>}</div>
       <h3><a href={href}>{content.title}</a></h3>
-      <p className="small-text">{status !== 'none' ? t.personal.projectStates[status] : `${t.app.authorLabel}: ${state.profiles[idea.ownerId]?.displayName || t.app.community}`}</p>
+      <p className="small-text">{status !== 'none' ? t.personal.projectStates[status] : <>{t.app.authorLabel}: <ProfileLink id={idea.ownerId} /></>}</p>
       {status === 'owner' && idea.requestedIds?.length > 0 && <span className="participation-status">{t.personal.incomingRequests}: {idea.requestedIds.length}</span>}
       {!isActive(idea) && <span className="participation-status">{idea.lifecycle === 'withdrawn' ? t.quality.lifecycleWithdrawn : t.quality.lifecycleDeleted}</span>}
     </div>
-    <a className="row-arrow" href={href} aria-label={`${t.details}: ${content.title}`}><Icon name="chevron" size={17} /></a>
+    <span className="row-arrow" aria-hidden="true"><Icon name="chevron" size={17} /></span>
   </article>;
 }

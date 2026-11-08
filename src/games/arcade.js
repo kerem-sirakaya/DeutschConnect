@@ -13,14 +13,20 @@ export function stepRunner(s, delta, jump, random = Math.random) {
   return { time: s.time + dt, y, velocity, obstacles, spawn, score: Math.floor((s.time + dt) * 10), over };
 }
 export function freshFlight() { return { time: 0, y: 150, velocity: 0, pipes: [{ x: 650, gap: 150, counted: false }], score: 0, over: false, spawn: 1.8 }; }
+export function flightDifficulty(time) {
+  const speed = 160 + 100 * (1 - Math.exp(-Math.max(0,time) / 80));
+  // Keep roughly 304px between pipes. The gap stays 130px high at every speed.
+  return { speed, spawn:304 / speed };
+}
 export function stepFlight(s, delta, flap, random = Math.random) {
   if (s.over) return s;
   const dt = Math.min(.035, Math.max(0, delta));
+  const difficulty = flightDifficulty(s.time);
   const velocity = flap ? -240 : s.velocity + 680 * dt;
   const y = s.y + velocity * dt;
-  let score = s.score, pipes = s.pipes.map((p) => { const x = p.x - 160 * dt; if (!p.counted && x + 35 < 85) score++; return { ...p, x, counted: p.counted || x + 35 < 85 }; }).filter((p) => p.x > -40);
+  let score = s.score, pipes = s.pipes.map((p) => { const x = p.x - difficulty.speed * dt; if (!p.counted && x + 35 < 85) score++; return { ...p, x, counted: p.counted || x + 35 < 85 }; }).filter((p) => p.x > -40);
   let spawn = s.spawn - dt;
-  if (spawn <= 0) { pipes.push({ x: 650, gap: 85 + random() * 120, counted: false }); spawn = 1.9; }
+  if (spawn <= 0) { pipes.push({ x: 650, gap: 85 + random() * 120, counted: false }); spawn = difficulty.spawn; }
   const over = y < 10 || y > 290 || pipes.some((p) => p.x < 103 && p.x + 35 > 77 && (y - 10 < p.gap - 65 || y + 10 > p.gap + 65));
   return { time: s.time + dt, y, velocity, pipes, spawn, score, over };
 }

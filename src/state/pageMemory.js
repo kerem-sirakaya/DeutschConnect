@@ -5,6 +5,7 @@ export function pageMemoryKey(profileId, scope) { return prefix + encodeURICompo
 
 // Only restore the structure the form expects, never arbitrary storage properties.
 function compatible(value, initial) {
+  if(initial===null)return value===null;
   if (Array.isArray(initial)) return Array.isArray(value) && value.length <= 100 && value.every((item) => typeof item === 'string');
   if (initial && typeof initial === 'object') return value && typeof value === 'object' && !Array.isArray(value) && Object.keys(initial).every((key) => Object.hasOwn(value, key) && compatible(value[key], initial[key]));
   return typeof value === typeof initial && (typeof value !== 'string' || value.length <= 12000);

@@ -19,7 +19,7 @@ test('guest capabilities never treat a fictional persona as an authenticated acc
 
 test('personal counts derive from each persona and distinguish interest from registration', () => {
   const state = createDemoState();
-  assert.deepEqual(personal(state, 'alex').counts, { eventInterests: 1, eventRegistrations: 0, ownedProjects: 1, projectMemberships: 0, projectRequests: 0, tutoringOffers: 1, tutoringRequests: 1, saved: 1 });
+  assert.deepEqual(personal(state, 'alex').counts, { activeProjects:1, completedProjects:0, upcomingRegistrations:0, confirmedAttendance:0, awards:0, eventInterests: 1, eventRegistrations: 0, ownedProjects: 1, projectMemberships: 0, projectRequests: 0, tutoringOffers: 1, tutoringRequests: 1, saved: 1 });
   assert.equal(personal(state, 'deniz').counts.eventRegistrations, 1);
   assert.equal(personal(state, 'deniz').counts.eventInterests, 0);
   assert.equal(personal(state, 'deniz').counts.ownedProjects, 0);

@@ -4,6 +4,7 @@ import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { projectParticipation } from '../data/projectParticipation.js';
 import { isActive } from '../data/matching.js';
 import { StatusBadge } from './UI.jsx';
+import ProfileLink from './ProfileLink.jsx';
 
 export default function ProjectParticipation({ idea }) {
   const { t } = useLanguage();
@@ -13,7 +14,7 @@ export default function ProjectParticipation({ idea }) {
   const pending = useRef(false);
   const status = projectParticipation(idea, profile.id);
   const interested = idea.interestedIds?.includes(profile.id) || false;
-  const active = isActive(idea);
+  const active = isActive(idea) && !idea.completion;
   async function run(action) {
     if (pending.current) return;
     pending.current = true; setBusy(true); setFeedback('');
@@ -32,6 +33,6 @@ export default function ProjectParticipation({ idea }) {
     {status === 'owner' && idea.requestedIds?.length > 0 && <section className="request-review"><h3>{t.personal.incomingRequests}</h3>{idea.requestedIds.map((id) => <div className="request-review-row" key={id}><span>{state.profiles[id].displayName}{access.mode === 'guest' ? ' · DEMO' : ''}</span><div className="form-actions"><button className="button button-secondary" type="button" disabled={busy || !active} onClick={() => run({ type: 'reviewIdeaRequest', profileId: id, decision: 'accept' })}>{t.personal.accept}</button><button className="text-button" type="button" disabled={busy || !active} onClick={() => run({ type: 'reviewIdeaRequest', profileId: id, decision: 'decline' })}>{t.personal.decline}</button></div></div>)}</section>}
     <p className="module-note">{t.personal.projectHint}</p>
     <p className="save-status" role="status">{busy ? t.quality.saving : feedback === 'failed' ? t.quality.saveFailed : feedback === 'requested' ? t.personal.requestSaved : feedback === 'saved' ? t.personal.memberSaved : ''}</p>
-    <a className="text-link" href="#/me/projects">{t.personal.viewProjects}</a>
+    {idea.participantIds.length > 0 && <div className="profile-members"><h3>{t.personal.profile.members}</h3>{idea.participantIds.map((id) => <ProfileLink id={id} key={id} />)}</div>}
   </section>;
 }

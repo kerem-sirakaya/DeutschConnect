@@ -7,6 +7,10 @@ import { CheckOptions, TextField } from '../components/FormFields.jsx';
 import { PageIntro } from '../components/UI.jsx';
 import { useFormDraft } from '../state/usePageMemory.js';
 import NotFound from './NotFound.jsx';
+import BackLink from '../components/BackLink.jsx';
+import { replaceRoute } from '../state/routeHistory.js';
+import ProfileSchoolNotice from '../components/ProfileSchoolNotice.jsx';
+import useActiveView from '../state/useActiveView.js';
 
 export default function TutoringNew({ kind = 'request', id }) {
   const { t } = useLanguage();
@@ -18,7 +22,9 @@ export default function TutoringNew({ kind = 'request', id }) {
   const [errors, setErrors] = useState({});
   const [busy, setBusy] = useState(false);
   const [failed, setFailed] = useState(false);
+  const active=useActiveView();
   if (id && (!existing || existing.ownerId !== profile.id || existing.lifecycle === 'deleted')) return <NotFound />;
+  if(!profile.schoolId)return <><BackLink fallback="/tutoring" /><PageIntro title={id?t.quality.edit:kind==='offer'?t.ext.tutoring.newOffer:t.ext.tutoring.newRequest} /><ProfileSchoolNotice /></>;
   const change = (key, value) => setDraft({ ...draft, [key]: value });
   async function submit(event) {
     event.preventDefault();
@@ -40,13 +46,13 @@ export default function TutoringNew({ kind = 'request', id }) {
     try {
       const { expectedRecord, ...fields } = draft;
       const success = await dispatch({ type: id ? 'updateTutoring' : 'submitTutoring', id: targetId, record: { ...fields, subjectKey }, ...(id ? { expectedRecord } : {}) });
-      if (success) { clearDraft(); window.location.hash = '/tutoring/' + targetId; }
+      if (success && active.current) { clearDraft(); replaceRoute(window, '/tutoring/' + targetId + '?from=' + encodeURIComponent('/tutoring/my')); }
       else setFailed(true);
     } catch { setFailed(true); }
     finally { setBusy(false); }
   }
   return <>
-    <a className="text-link back-link" href={id ? '#/tutoring/' + id : '#/tutoring'}>← {t.app.back}</a>
+    <BackLink fallback={id ? '/tutoring/' + id : '/tutoring'} />
     <PageIntro title={id ? t.quality.edit : draft.kind === 'offer' ? t.ext.tutoring.newOffer : t.ext.tutoring.newRequest} />
     <form className="content-card app-form" noValidate onSubmit={submit} aria-busy={busy}>
       <fieldset className="app-form form-controls" disabled={busy} aria-label={id ? t.quality.edit : draft.kind === 'offer' ? t.ext.tutoring.newOffer : t.ext.tutoring.newRequest}>

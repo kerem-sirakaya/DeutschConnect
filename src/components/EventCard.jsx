@@ -19,6 +19,6 @@ export default function EventCard({ activity, recommended = false, returnTo = '/
       {status && <span className={`participation-status status-${status}`}><Icon name={status === 'joined' ? 'check' : 'calendar'} size={13} />{t.app.status[status]}</span>}
       {recommended && !status && <p className="recommendation-reason"><Icon name="spark" size={13} />{recommendationReason(activity, profile) === 'interest' ? t.app.interestReason : t.app.schoolReason}</p>}
     </div>
-    <a className="row-arrow" href={href} aria-label={`${t.details}: ${content.title}`}><Icon name="chevron" size={17} /></a>
+    <span className="row-arrow" aria-hidden="true"><Icon name="chevron" size={17} /></span>
   </article>;
 }

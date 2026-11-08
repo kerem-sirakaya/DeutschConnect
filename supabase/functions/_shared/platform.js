@@ -1,4 +1,5 @@
 import { freshSocial, reduceSocial, blocked } from './social.js';
+import { validSharing, sharingFor, publicProfile } from './profiles.js';
 
 const categories = ['open','technology','science','language','culture'];
 const languages = ['de','tr','en'];
@@ -36,10 +37,11 @@ export function applyPlatformAction(current, a, actor, options = {}) {
   const ideaInput = (v) => safeText(v?.title,5,90) && safeText(v.description,20,1000) && categories.includes(v.category) && (!v.topics || topics(v.topics)) && (!v.goals || safeText(v.goals,0,600)) && (!v.collaborators || safeText(v.collaborators,0,400)) && (!v.desiredSchoolIds || (Array.isArray(v.desiredSchoolIds) && v.desiredSchoolIds.every(school))) && (!v.projectStatus || ['proposal','looking','preparing'].includes(v.projectStatus));
   const tutorInput = (v) => ['offer','request'].includes(v?.kind) && safeText(v.subject,2,80) && safeText(v.topics,3,200) && safeText(v.description,20,1000) && safeText(v.availability,3,200) && ['online','school','either'].includes(v.format) && Array.isArray(v.languages) && v.languages.length > 0 && v.languages.every((l) => languages.includes(l));
   if (a.type === 'preferences') {
-    const fields = ['displayName','schoolId','interests','customInterests','language'];
+    const fields = ['displayName','schoolId','interests','customInterests','language','profileSharing'];
     if (!a.patch || Object.keys(a.patch).some((key) => !fields.includes(key))) fail();
     if (a.expectedProfile) { let expected; try { expected = JSON.parse(a.expectedProfile); } catch { fail(); } for (const key of Object.keys(a.patch)) if (JSON.stringify(expected[key] || []) !== JSON.stringify(profile[key] || [])) fail('conflict'); }
     const updated = { ...profile, ...a.patch };
+    if (updated.profileSharing !== undefined && !validSharing(updated.profileSharing)) fail();
     const validSchool = school(updated.schoolId) || (updated.schoolId === '' && profile.schoolId === '' && !Object.hasOwn(a.patch,'schoolId'));
     if (privateContact(updated.displayName) || privateContact((Array.isArray(updated.customInterests) ? updated.customInterests : []).join(' '))) fail('private-contact');
     if (!safeText(updated.displayName,2,40) || !validSchool || !languages.includes(updated.language) || !Array.isArray(updated.interests) || !updated.interests.every((v) => categories.includes(v) && v !== 'open') || !topics(updated.customInterests || [])) fail();
@@ -69,6 +71,15 @@ export function applyPlatformAction(current, a, actor, options = {}) {
     const v = a.idea;
     state.ideas.unshift({ id:a.id, ownerId:actor, schoolId:profile.schoolId, participantIds:[], requestedIds:[], interestedIds:[], category:v.category, title:v.title.trim(), description:v.description.trim(), goals:v.goals || '', collaborators:v.collaborators || '', topics:v.topics || [], desiredSchoolIds:v.desiredSchoolIds || [], projectStatus:v.projectStatus || 'proposal', ...(v.initiativeId === 'interviews' ? { initiativeId:'interviews' } : {}), revision:0 }); return state;
   }
+  if (a.type === 'confirmProjectCompletion') {
+    if (!moderator) fail('moderator-required');
+    const idea = state.ideas.find((item) => item.id === a.id && !['deleted','withdrawn'].includes(item.lifecycle));
+    if (!idea || idea.completion) fail('no-evidence');
+    // Freeze accepted membership at confirmation; interest/request never qualifies.
+    idea.completion = { confirmedBy:actor, confirmedAt:now, memberIds:[...new Set([idea.ownerId,...idea.participantIds])] };
+    idea.requestedIds = [];
+    bump(idea); return state;
+  }
   if (['updateIdea','withdrawIdea','removeIdea'].includes(a.type)) {
     if (a.type === 'updateIdea' && privateContact([a.idea?.title,a.idea?.description,a.idea?.goals,a.idea?.collaborators,...(Array.isArray(a.idea?.topics) ? a.idea.topics : [])].join(' '))) fail('private-contact');
     const record = own(state.ideas.find((i) => i.id === a.id));
@@ -80,10 +91,10 @@ export function applyPlatformAction(current, a, actor, options = {}) {
     if (a.type === 'reviewIdeaRequest') own(record);
     if (['requestIdea','reviewIdeaRequest'].includes(a.type) && blocked(state,actor,a.profileId || record.ownerId)) fail('blocked');
     if (a.type === 'setIdeaInterest') { if (actor === record.ownerId || typeof a.interested !== 'boolean' || (a.interested && record.lifecycle === 'withdrawn')) fail(); record.interestedIds = a.interested ? [...new Set([...record.interestedIds,actor])] : record.interestedIds.filter((id) => id !== actor); }
-    if (a.type === 'requestIdea') { if (actor === record.ownerId || record.lifecycle === 'withdrawn' || record.participantIds.includes(actor)) fail(); record.requestedIds = [...new Set([...record.requestedIds,actor])]; }
+    if (a.type === 'requestIdea') { if (actor === record.ownerId || record.lifecycle === 'withdrawn' || record.completion || record.participantIds.includes(actor)) fail(); record.requestedIds = [...new Set([...record.requestedIds,actor])]; }
     if (a.type === 'cancelIdeaRequest') record.requestedIds = record.requestedIds.filter((id) => id !== actor);
     if (a.type === 'leaveIdea') record.participantIds = record.participantIds.filter((id) => id !== actor);
-    if (a.type === 'reviewIdeaRequest') { if (record.lifecycle === 'withdrawn' || !record.requestedIds.includes(a.profileId) || !['accept','decline'].includes(a.decision)) fail(); record.requestedIds = record.requestedIds.filter((id) => id !== a.profileId); if (a.decision === 'accept') record.participantIds = [...new Set([...record.participantIds,a.profileId])]; }
+    if (a.type === 'reviewIdeaRequest') { if (record.lifecycle === 'withdrawn' || record.completion || !record.requestedIds.includes(a.profileId) || !['accept','decline'].includes(a.decision)) fail(); record.requestedIds = record.requestedIds.filter((id) => id !== a.profileId); if (a.decision === 'accept') record.participantIds = [...new Set([...record.participantIds,a.profileId])]; }
     bump(record); return state;
   }
   if (a.type === 'submitTutoring' || a.type === 'updateTutoring') {
@@ -104,7 +115,12 @@ export function applyPlatformAction(current, a, actor, options = {}) {
   if (a.type === 'postMessage') {
     if (!options.communityEnabled) fail('moderation-required');
     const group = groupFor(state,a.roomId); if (!group || group.closed || !group.memberIds.includes(actor)) fail('group-required');
-    if (!localId(a.id) || m.messages.some((v) => v.id === a.id) || !safeText(a.body,3,1200)) fail();
+    if (!localId(a.id) || !safeText(a.body,3,1200)) fail();
+    const existing = m.messages.find((v) => v.id === a.id);
+    if (existing) {
+      if (existing.ownerId === actor && existing.roomId === a.roomId && existing.body === a.body.trim()) return current;
+      fail();
+    }
     if (privateContact(a.body)) fail('private-contact');
     const recent = m.messages.filter((v) => v.ownerId === actor && Date.parse(v.createdAt) > Date.parse(now) - 60000); if (recent.length >= 10) fail('rate-limit');
     m.messages.push({ id:a.id, ownerId:actor, roomId:a.roomId, body:a.body.trim(), createdAt:now }); return state;
@@ -126,29 +142,44 @@ export function applyPlatformAction(current, a, actor, options = {}) {
 export function projectPlatform(state, actor, moderator = false, communityEnabled = false) {
   const m = state.modules, next = structuredClone(state);
   next.activeId = actor;
+  next.modules.chessNotificationCapabilities = {inApp:true,email:false};
+  next.modules.chessRead = {[actor]:m.chessRead?.[actor] || []};
+  next.modules.profileCapabilities = true;
+  const publicSource = { ...state, ideas:state.ideas.filter((idea) => !blocked(state,actor,idea.ownerId)) };
+  next.modules.publicProfiles = Object.fromEntries(Object.keys(state.profiles).filter((id) => !blocked(state,actor,id)).map((id) => [id,publicProfile(publicSource,id)]).filter(([,value]) => value));
   const referenced = new Set([actor,...Object.keys(m.visibility).filter((id)=>m.visibility[id])]);
   const contextNames = new Set();
-  for (const idea of state.ideas.filter((i)=>i.lifecycle!=='deleted')) { referenced.add(idea.ownerId); for(const id of idea.participantIds) referenced.add(id); if(idea.ownerId===actor) for(const id of idea.requestedIds) referenced.add(id); }
+  for (const idea of state.ideas.filter((i)=>i.lifecycle!=='deleted')) {
+    referenced.add(idea.ownerId);
+    const related=idea.ownerId===actor || idea.participantIds.includes(actor);
+    for(const id of idea.participantIds)if(related || (m.visibility[id] && sharingFor(state.profiles[id]).projects))referenced.add(id);
+    if(idea.ownerId===actor)for(const id of idea.requestedIds)referenced.add(id);
+  }
   for (const record of m.tutoring.filter((r)=>r.lifecycle!=='deleted')) referenced.add(record.ownerId);
+  for (const event of state.activities) if (event.ownerId) referenced.add(event.ownerId);
   for (const message of m.messages) if(moderator || groupFor(state,message.roomId)?.memberIds.includes(actor)) referenced.add(message.ownerId);
   for (const item of [...m.games,...m.challenges]) if([item.whiteId,item.blackId,item.fromId,item.toId].includes(actor)) for(const id of [item.whiteId,item.blackId,item.fromId,item.toId].filter(Boolean)) referenced.add(id);
   for(const idea of state.ideas) if(idea.ownerId===actor || idea.participantIds.includes(actor)) for(const id of [idea.ownerId,...idea.participantIds,...(idea.ownerId===actor ? idea.requestedIds : [])]) contextNames.add(id);
   for(const group of m.groups.map((g)=>groupFor(state,g.id)).filter(Boolean)) if(group.memberIds.includes(actor)) for(const id of group.memberIds) {contextNames.add(id);referenced.add(id);}
   for(const item of [...m.games,...m.challenges]) if([item.whiteId,item.blackId,item.fromId,item.toId].includes(actor)) for(const id of [item.whiteId,item.blackId,item.fromId,item.toId].filter(Boolean))contextNames.add(id);
-  next.profiles = Object.fromEntries(Object.entries(state.profiles).filter(([id]) => moderator || (referenced.has(id) && !blocked(state,actor,id))).map(([id,p]) => [id, id === actor || moderator ? { ...p, isModerator:id === actor && moderator } : m.visibility[id] ? { id, displayName:p.displayName, schoolId:p.schoolId, interests:p.interests, customInterests:p.customInterests, language:p.language } : { id, displayName:contextNames.has(id)?p.displayName:'—', schoolId:'', interests:[], language:'de' }]));
+  next.profiles = Object.fromEntries(Object.entries(state.profiles).filter(([id]) => moderator || (referenced.has(id) && !blocked(state,actor,id))).map(([id,p]) => [id, id === actor || moderator ? { ...p, isModerator:id === actor && moderator } : m.visibility[id] ? { id, displayName:p.displayName, schoolId:sharingFor(p).school ? p.schoolId : '', interests:sharingFor(p).interests ? p.interests : [], customInterests:sharingFor(p).interests ? p.customInterests : [], language:'de' } : { id, displayName:contextNames.has(id)?p.displayName:'—', schoolId:'', interests:[], language:'de' }]));
   next.modules.visibility = Object.fromEntries(Object.keys(next.profiles).map((id)=>[id,m.visibility[id]===true]));
   next.participation = moderator ? next.participation : { [actor]:state.participation[actor] || {} };
   next.modules.moderationAvailable = communityEnabled;
-  next.ideas = next.ideas.filter((i) => i.lifecycle !== 'deleted' && (i.ownerId === actor || !blocked(state,actor,i.ownerId))).map((i) => ({ ...i, interestedIds:i.interestedIds.filter((id) => id === actor), requestedIds:i.requestedIds.filter((id) => next.profiles[id] && (i.ownerId === actor || id === actor)) }));
+  next.ideas = next.ideas.filter((i) => i.lifecycle !== 'deleted' && (i.ownerId === actor || !blocked(state,actor,i.ownerId))).map((i) => {
+    const canSeeMembers = moderator || i.ownerId === actor || i.participantIds.includes(actor);
+    const visibleId = (id) => !blocked(state,actor,id) && (canSeeMembers || id === actor || (m.visibility[id] && sharingFor(state.profiles[id]).projects));
+    return { ...i, schoolId:i.ownerId === actor || moderator || (m.visibility[i.ownerId] && sharingFor(state.profiles[i.ownerId]).school) ? i.schoolId : '', participantIds:i.participantIds.filter(visibleId), ...(i.completion ? {completion:{...i.completion,memberIds:i.completion.memberIds.filter(visibleId)}} : {}), interestedIds:i.interestedIds.filter((id) => id === actor), requestedIds:i.requestedIds.filter((id) => next.profiles[id] && (i.ownerId === actor || id === actor)) };
+  });
   next.modules.interests = { [actor]:m.interests[actor] || [] }; next.modules.blocks = { [actor]:m.blocks[actor] || [] };
   next.modules.contactDrafts = m.contactDrafts.filter((d) => d.ownerId === actor);
-  next.modules.tutoring = m.tutoring.filter((r) => r.lifecycle !== 'deleted' && !blocked(state,actor,r.ownerId));
+  next.modules.tutoring = m.tutoring.filter((r) => r.lifecycle !== 'deleted' && !blocked(state,actor,r.ownerId)).map((r) => ({...r,schoolId:r.ownerId === actor || moderator || (m.visibility[r.ownerId] && sharingFor(state.profiles[r.ownerId]).school) ? r.schoolId : ''}));
   next.modules.groups = m.groups.map((g) => groupFor(state,g.id)).filter(Boolean).map((g) => g.memberIds.includes(actor) || moderator ? g : { id:g.id, kind:g.kind, title:g.title, closed:g.closed, memberIds:[] });
   next.modules.messages = m.messages.filter((v) => moderator || (groupFor(state,v.roomId)?.memberIds.includes(actor) && !blocked(state,actor,v.ownerId)));
   next.modules.reports = m.reports.filter((r) => moderator || r.ownerId === actor);
   next.modules.challenges = m.challenges.filter((c) => [c.fromId,c.toId].includes(actor) && !blocked(state,c.fromId,c.toId));
   next.modules.games = m.games.filter((g) => [g.whiteId,g.blackId].includes(actor) && !blocked(state,g.whiteId,g.blackId));
-  next.modules.awards = m.awards.filter((v) => v.ownerId === actor || (m.awardSharing[v.ownerId] && !blocked(state,actor,v.ownerId)));
+  next.modules.awards = m.awards.filter((v) => v.ownerId === actor || (m.visibility[v.ownerId] && m.awardSharing[v.ownerId] && !blocked(state,actor,v.ownerId))).map((v) => v.ownerId === actor || moderator ? v : { id:v.id, ownerId:v.ownerId, kind:v.kind, awardedAt:v.awardedAt });
   next.modules.awardSharing = { [actor]:m.awardSharing[actor] || false };
   for (const event of next.activities) event.attendance = moderator ? event.attendance : event.attendance?.[actor] ? { [actor]:event.attendance[actor] } : {};
   return next;

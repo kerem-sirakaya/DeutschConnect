@@ -1,7 +1,15 @@
 {
   "guest": "Misafir demosu",
   "guestHint": "DeutschConnect'i kurgusal bir profille keşfediyorsun. Değişiklikler bu tarayıcıda kalır. Oturum açmış değilsin.",
-  "tabs": { "overview": "Özet", "activities": "Etkinlikler", "projects": "Projeler", "tutoring": "Özel ders", "saved": "Kaydedilenler", "community": "Topluluk", "settings": "Profil ve ayarlar" },
+  "tabs": {
+    "overview": "Özet",
+    "activities": "Etkinlikler",
+    "projects": "Projeler",
+    "tutoring": "Özel ders",
+    "saved": "Kaydedilenler",
+    "community": "Topluluk",
+    "settings": "Profil ve ayarlar"
+  },
   "subtitle": "Planların, kaydettiklerin ve sonraki adımların.",
   "summary": "Durumun · yerel demo",
   "eventRegistrations": "Etkinlik kayıtları · demo",
@@ -32,7 +40,13 @@
   "requests": "Katılım taleplerim",
   "interested": "İlgilendiğim projeler",
   "projectFilter": "Proje görünümü",
-  "projectStates": { "owner": "Senin projen", "member": "Üye · yerel demo", "requested": "Katılım istendi · demo", "interested": "İlgi kaydedildi", "none": "Henüz seçim yok" },
+  "projectStates": {
+    "owner": "Senin projen",
+    "member": "Üye · yerel demo",
+    "requested": "Katılım istendi · demo",
+    "interested": "İlgi kaydedildi",
+    "none": "Henüz seçim yok"
+  },
   "projectParticipation": "Proje durumun",
   "interest": "İlgini kaydet",
   "withdrawInterest": "İlgini geri çek",
@@ -57,8 +71,55 @@
   "recentPosts": "Son yerel iletilerin",
   "communityLink": "Tüm topluluk faaliyetleri",
   "roomsLink": "Tartışma odalarını keşfet",
-  "account": { "title": "Misafir modu ve hesap", "state": "Mevcut erişim", "guest": "Misafir · oturum açık değil", "unavailable": "Bu sürümde e-posta kaydı, doğrulama, oturum açma ve kapatma henüz bağlı değil.", "explain": "Hesaplar ikinci ekibin Supabase sürümüyle birlikte planlanacak. Demo seçicisi yalnızca kurgusal profilleri değiştirir; oturum açmaz.", "separation": "Yerel demo verileri gerçek bir hesaba otomatik atanmaz. Aktarım için bilinçli ve gözden geçirilmiş bir karar gerekir.", "continue": "Misafir demosunu keşfetmeye devam et" },
+  "account": {
+    "title": "Misafir modu ve hesap",
+    "state": "Mevcut erişim",
+    "guest": "Misafir · oturum açık değil",
+    "unavailable": "Bu sürümde e-posta kaydı, doğrulama, oturum açma ve kapatma henüz bağlı değil.",
+    "explain": "Hesaplar ikinci ekibin Supabase sürümüyle birlikte planlanacak. Demo seçicisi yalnızca kurgusal profilleri değiştirir; oturum açmaz.",
+    "separation": "Yerel demo verileri gerçek bir hesaba otomatik atanmaz. Aktarım için bilinçli ve gözden geçirilmiş bir karar gerekir.",
+    "continue": "Misafir demosunu keşfetmeye devam et"
+  },
   "accountLink": "Misafir modu ve hesap",
   "demoNotice": "Misafir demosu · kurgusal veriler · yalnızca yerel",
-  "settingsIntro": "Kurgusal profilini, ilgi alanlarını ve dilini düzenle."
+  "settingsIntro": "Kurgusal profilini, ilgi alanlarını ve dilini düzenle.",
+  "profile": {
+    "open": "Profili aç",
+    "onlyShared": "Burada yalnızca gönüllü olarak paylaşılan bilgiler gösterilir. Özel etkinlikler ve iletişim bilgileri bu profile dahil değildir.",
+    "actions": "Diğer işlemler",
+    "activity": "Paylaşılan etkinlikler",
+    "ideas": "Yayımlanan kişisel proje fikirleri",
+    "current": "Güncel proje üyelikleri",
+    "completed": "Onaylanmış proje tamamlamaları",
+    "empty": "Paylaşılan kayıt bulunmuyor.",
+    "members": "Üyeler",
+    "visibility": "Profil paylaşımı",
+    "visibilityHint": "Profil yalnızca etkinleştirildiğinde görünür. Okul, ilgi alanları ve proje etkinlikleri ayrıca gönüllü olarak paylaşılır. Gönderiler ve yayımlanan içerikler bundan bağımsız olarak görünür kalır. Özel iletişim bilgisi içermeyen bir görünen ad kullan.",
+    "fields": {
+      "school": "Okulu profilde göster",
+      "interests": "İlgi alanlarını profilde göster",
+      "projects": "Yayımlanan projeleri ve üyelikleri profilde göster"
+    },
+    "enable": "Profili giriş yapmış öğrencilerle paylaş",
+    "disable": "Profil paylaşımını kapat",
+    "preview": "Paylaşılan profili görüntüle",
+    "unavailable": "Gelişmiş paylaşım seçenekleri bu hesapta henüz kullanılamıyor.",
+    "confirmCompletion": "Gerçekleştiğini kontrol et ve projenin tamamlandığını onayla",
+    "completionHint": "Yalnızca gerçekten tamamlanan projeleri organizasyon kontrolünden sonra onayla. İlgi ve bekleyen istekler katılım kanıtı değildir."
+  },
+  "statistics": {
+    "activeProjects": "Katıldığın güncel projeler",
+    "completedProjects": "Onaylanmış proje tamamlamaları",
+    "ownedProjects": "Oluşturduğun proje fikirleri",
+    "upcomingRegistrations": "Yaklaşan etkinlik kayıtları",
+    "confirmedAttendance": "Onaylanmış etkinlik katılımları",
+    "tutoringOffers": "Açık ders destek teklifleri",
+    "tutoringRequests": "Açık ders destek talepleri",
+    "awards": "Alınan ödüller",
+    "projectMemberships": "Güncel proje üyelikleri",
+    "hint": "İlişkili kayıtlardan hesaplanır. İlgi, istek, üyelik, kayıt ve onaylanmış katılım ayrı sayılır. Proje tamamlamaları moderasyon onayı gerektirir.",
+    "demo": "Bu değerler yalnızca kurgusal demo profillerine aittir.",
+    "impact": "Ortak etki",
+    "impactHint": "Henüz doğrulanmış toplam sonuçlar yayımlanmadı. Tamamlanan iş birlikleri ve katılan okullar ancak organizasyon onayından sonra özetlenecek."
+  }
 }

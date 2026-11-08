@@ -3,6 +3,7 @@ import { createModuleState, moduleReducer, projectStatuses, restoreModuleState }
 import { appendHistory, recordHistory } from './recordHistory.js';
 import { reduceProjectParticipation, restoreProjectPeople } from './projectParticipation.js';
 import { reduceSocial } from '../../supabase/functions/_shared/social.js';
+import { validSharing } from '../../supabase/functions/_shared/profiles.js';
 
 export const demoStorageKey = 'deutschconnect.demo.v1';
 const languages = ['de', 'tr', 'en'];
@@ -35,7 +36,8 @@ export function validProfile(profile) {
   return typeof profile?.displayName === 'string' && profile.displayName.trim().length >= 2 &&
     profile.displayName.trim().length <= 40 && schoolIds.has(profile.schoolId) &&
     Array.isArray(profile.interests) && profile.interests.every((interest) => interests.includes(interest)) &&
-    (profile.customInterests === undefined || validTopics(profile.customInterests)) && languages.includes(profile.language);
+    (profile.customInterests === undefined || validTopics(profile.customInterests)) &&
+    (profile.profileSharing === undefined || validSharing(profile.profileSharing)) && languages.includes(profile.language);
 }
 
 export function validIdeaInput(idea) {
@@ -77,8 +79,8 @@ export function inspectDemoState(raw, language = 'de') {
     const profile = { ...fallback };
     if (!source || typeof source !== 'object' || Array.isArray(source)) recovered('profiles.' + id);
     else {
-      for (const key of ['displayName', 'schoolId', 'interests', 'language', 'customInterests']) {
-        if (key === 'customInterests' && source[key] === undefined) continue;
+      for (const key of ['displayName', 'schoolId', 'interests', 'language', 'customInterests', 'profileSharing']) {
+        if (['customInterests', 'profileSharing'].includes(key) && source[key] === undefined) continue;
         const candidate = { ...profile, [key]: source[key] };
         if (validProfile(candidate)) profile[key] = source[key];
         else recovered('profiles.' + id + '.' + key);
@@ -159,8 +161,8 @@ export function demoReducer(state, action) {
   if (!Object.hasOwn(state.profiles, id)) return state;
   if (action.type === 'switchProfile' && Object.hasOwn(state.profiles, action.id)) return { ...state, activeId: action.id };
   if (action.type === 'preferences') {
-    const { displayName, schoolId, interests: selected, language, customInterests } = { ...state.profiles[id], ...action.patch };
-    const profile = { id, displayName, schoolId, interests: selected, language, ...(customInterests !== undefined ? { customInterests } : {}) };
+    const { displayName, schoolId, interests: selected, language, customInterests, profileSharing } = { ...state.profiles[id], ...action.patch };
+    const profile = { id, displayName, schoolId, interests: selected, language, ...(customInterests !== undefined ? { customInterests } : {}), ...(profileSharing !== undefined ? { profileSharing } : {}) };
     if (!validProfile(profile)) return state;
     return { ...state, profiles: { ...state.profiles, [id]: { ...profile, displayName: profile.displayName.trim(), interests: [...new Set(profile.interests)], ...(customInterests !== undefined ? { customInterests: cleanTopics(customInterests) } : {}) } } };
   }

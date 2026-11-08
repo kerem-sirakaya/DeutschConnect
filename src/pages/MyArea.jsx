@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useDemo } from '../state/DemoContext.jsx';
 import { selectPersonalArea } from '../data/personalArea.js';
-import { ModuleTabs, PageIntro, EmptyState, SectionHeading, StatusBadge } from '../components/UI.jsx';
+import { PageIntro, EmptyState, SectionHeading } from '../components/UI.jsx';
 import { useRememberedState } from '../state/usePageMemory.js';
 import EventCard from '../components/EventCard.jsx';
 import IdeaCard from '../components/IdeaCard.jsx';
@@ -13,8 +13,10 @@ import PersonalSettings from './PersonalSettings.jsx';
 import Account from './Account.jsx';
 import Achievements from './Achievements.jsx';
 import Moderation from './Moderation.jsx';
+import BackLink from '../components/BackLink.jsx';
+import ActivityStatistics from '../components/ActivityStatistics.jsx';
+import ChessInvitations from '../components/ChessInvitations.jsx';
 
-const sections = ['overview', 'account', 'activities', 'projects', 'tutoring', 'saved', 'community', 'settings'];
 
 function CardList({ children, empty, href, action }) {
   return children.length ? <div className="task-list">{children}</div> : <EmptyState text={empty} href={href} action={action} icon="bulb" />;
@@ -28,7 +30,7 @@ export default function MyArea({ section = 'overview', view }) {
   const [requestedView, setRequestedView] = useState(view);
   const selected = { ...filters };
   if (section === 'activities' && ['interested', 'joined', 'organized'].includes(requestedView)) selected.status = requestedView;
-  if (section === 'projects' && ['owned', 'collaborating', 'requested', 'interested'].includes(requestedView)) selected.projects = requestedView;
+  if (section === 'projects' && ['owned', 'collaborating', 'requested', 'interested', 'completed'].includes(requestedView)) selected.projects = requestedView;
   if (section === 'tutoring' && ['offers', 'requests'].includes(requestedView)) selected.tutoring = requestedView;
   const p = t.personal;
   const contextualView = section === 'activities' ? selected.status : section === 'projects' ? selected.projects : section === 'tutoring' ? selected.tutoring : undefined;
@@ -37,23 +39,17 @@ export default function MyArea({ section = 'overview', view }) {
   const ideaCards = (ideas) => ideas.map((idea) => <IdeaCard key={idea.id} idea={idea} returnTo={personalRoute} />);
   const tutorCards = (records) => records.map((record) => <TutoringCard key={record.id} record={record} returnTo={personalRoute} />);
   const change = (key, value) => { setRequestedView(undefined); setFilters({ ...selected, [key]: value }); };
-  const statistics = [
-    ['eventRegistrations', 'activities', 'joined'], ['eventInterests', 'activities', 'interested'],
-    ['ownedProjects', 'projects', 'owned'], ['projectMemberships', 'projects', 'collaborating'],
-    ['projectRequests', 'projects', 'requested'], ['tutoringOffers', 'tutoring', 'offers'],
-    ['tutoringRequests', 'tutoring', 'requests'], ['saved', 'saved'],
-  ];
-  const activities = selected.status === 'all' ? model.events.upcoming : model.events.upcoming.filter((event) => participation[event.id] === selected.status);
+  const activities = selected.status === 'all' ? model.events.upcoming : model.events.upcoming.filter((event) => participation[event.id] === selected.status || (selected.status === 'organized' && event.ownerId === profile.id));
 
   return <>
-    <PageIntro eyebrow={p.guest + ' · ' + profile.displayName} title={section === 'account' ? p.account.title : t.app.myArea} description={section === 'overview' ? p.subtitle : section === 'account' ? undefined : p.tabs[section]} />
-    <ModuleTabs label={t.app.myArea} items={sections.map((key) => ({ label: key === 'account' ? (access.mode === 'guest' ? t.real.signIn : t.real.account) : p.tabs[key], href: key === 'overview' ? '#/me' : '#/me/' + key, active: section === key }))} />
+    {section !== 'overview' && <BackLink fallback="/me" />}
+    <PageIntro eyebrow={p.guest + ' · ' + profile.displayName} title={section === 'overview' ? t.app.myArea : section === 'notifications' ? t.chessNotices.title : section === 'account' ? p.account.title : section === 'achievements' ? t.awards.title : section === 'moderation' ? t.real.moderation : p.tabs[section]} description={section === 'overview' ? p.subtitle : undefined} />
     {section === 'overview' && <>
-      <div className="personal-identity content-card"><span className="avatar" aria-hidden="true">{profile.displayName.slice(0, 1)}</span><div><h2>{profile.displayName}</h2><p>{profile.schoolId === 'ers' ? 'Ernst-Reuter-Schule Ankara' : profile.schoolId === 'anka' ? 'Anka Bilim' : t.real.noSchool} · {p.guest}</p></div><a className="text-link" href="#/me/settings">{t.quality.edit}<Icon name="arrow" size={16} /></a></div>
-      <section className="section-block" aria-labelledby="personal-summary"><h2 id="personal-summary">{p.summary}</h2><div className="personal-statistics">{statistics.map(([key, target, selection]) => <a className="content-card" key={key} href={'#/me/' + target + (selection ? '?view=' + selection : '')}><strong>{model.counts[key]}</strong><span>{key === 'saved' ? p.savedActivities : p[key]}</span></a>)}</div><p className="module-note">{p.countHint}</p></section>
-      <div className="personal-next-grid"><section><SectionHeading title={p.nextEvent} href="#/me/activities" link={t.app.viewAll} /><CardList empty={p.noNextEvent} href="#/events/all" action={t.app.browseEvents}>{eventCards(model.events.upcoming.slice(0, 1))}</CardList></section><section><SectionHeading title={p.nextStep} href="#/me/projects" link={t.app.viewAll} /><CardList empty={p.noProjects} href="#/ideas/new" action={t.app.newIdea}>{ideaCards([...model.projects.requested, ...model.projects.owned].slice(0, 1))}</CardList></section></div>
-      <p className="module-note">{p.guestHint} <a className="text-link" href="#/me/account">{p.accountLink}<Icon name="arrow" size={16} /></a></p>
-      <div className="form-actions"><a className="text-link" href="#/community/games">{t.games.title}</a><a className="text-link" href="#/me/achievements">{t.awards.title}</a>{profile.isModerator && <a className="text-link" href="#/me/moderation">{t.real.moderation}</a>}</div>
+      <div className="personal-identity content-card"><span className="avatar" aria-hidden="true">{profile.displayName.slice(0, 1)}</span><div><h2>{profile.displayName}</h2><p>{profile.schoolId === 'ers' ? 'Ernst-Reuter-Schule Ankara' : profile.schoolId === 'anka' ? 'Anka Bilim' : t.real.noSchool} · {p.guest}</p></div><a className="text-link" href="#/me/settings">{p.tabs.settings}<Icon name="arrow" size={16} /></a></div>
+      <nav className="personal-links personal-menu" aria-label={t.app.myArea}>{['activities','projects','tutoring','saved','community','achievements','account'].map((key) => <a key={key} href={'#/me/' + key}><span>{key === 'achievements' ? t.awards.title : key === 'account' ? (access.mode === 'guest' ? t.real.signIn : t.real.account) : p.tabs[key]}</span><Icon name="chevron" size={17} /></a>)}</nav>
+      <section className="section-block" aria-labelledby="personal-summary"><h2 id="personal-summary">{p.summary}</h2><ActivityStatistics counts={model.counts} /><p className="module-note">{p.statistics.hint} {access.mode === 'guest' ? p.statistics.demo : ''}</p></section>
+      <div className="personal-next-grid"><section><SectionHeading title={p.nextEvent} /><CardList empty={p.noNextEvent} href="#/events/all" action={t.app.browseEvents}>{eventCards(model.events.upcoming.slice(0, 1))}</CardList></section><section><SectionHeading title={p.nextStep} /><CardList empty={p.noProjects} href="#/ideas/new" action={t.app.newIdea}>{ideaCards([...model.projects.requested, ...model.projects.owned].slice(0, 1))}</CardList></section></div>
+      {profile.isModerator && <a className="text-link" href="#/me/moderation">{t.real.moderation}</a>}
     </>}
     {section === 'activities' && <>
       <div className="search-toolbar"><label className="select-field"><span>{p.activityStatus}</span><select value={selected.status} onChange={(event) => change('status', event.target.value)}><option value="all">{p.allStatuses}</option>{['interested', 'joined', 'organized'].map((key) => <option key={key} value={key}>{key === 'joined' ? p.registered : t.app.status[key]}</option>)}</select></label><a className="button button-secondary" href="#/events/all">{t.app.browseEvents}</a></div>
@@ -62,7 +58,7 @@ export default function MyArea({ section = 'overview', view }) {
       <section className="content-card attendance-note"><h2>{p.attendance}</h2>{model.confirmedAttendance.length ? <div className="task-list">{eventCards(model.confirmedAttendance)}</div> : <p>{p.noAttendance}</p>}</section>
     </>}
     {section === 'projects' && <>
-      <div className="search-toolbar"><label className="select-field"><span>{p.projectFilter}</span><select value={selected.projects} onChange={(event) => change('projects', event.target.value)}>{['owned', 'collaborating', 'requested', 'interested'].map((key) => <option key={key} value={key}>{key === 'requested' ? p.requests : p[key]}</option>)}</select></label><a className="button button-secondary" href="#/ideas/new">{t.app.newIdea}</a></div>
+      <div className="search-toolbar"><label className="select-field"><span>{p.projectFilter}</span><select value={selected.projects} onChange={(event) => change('projects', event.target.value)}>{['owned', 'collaborating', 'requested', 'interested', 'completed'].map((key) => <option key={key} value={key}>{key === 'completed' ? p.profile.completed : key === 'requested' ? p.requests : p[key]}</option>)}</select></label><a className="button button-secondary" href="#/ideas/new">{t.app.newIdea}</a></div>
       <CardList empty={p.noProjects} href="#/ideas/all" action={t.app.viewAll}>{ideaCards(model.projects[selected.projects] || model.projects.owned)}</CardList><p className="module-note">{p.projectHint}</p>
     </>}
     {section === 'tutoring' && <>
@@ -83,6 +79,7 @@ export default function MyArea({ section = 'overview', view }) {
       <section className="section-block"><h2 className="personal-section-title">{p.recentPosts}</h2><CardList empty={t.ext.community.noActivity}>{model.community.posts.slice(-3).reverse().map((message) => <MessageCard key={message.id} message={message} showRoom />)}</CardList></section><a className="text-link" href="#/community/rooms">{p.roomsLink}<Icon name="arrow" size={16} /></a>
     </>}
     {section === 'settings' && <PersonalSettings />}
+    {section === 'notifications' && <ChessInvitations />}
     {section === 'achievements' && <Achievements />}
     {section === 'moderation' && <Moderation />}
     {section === 'account' && <><p className="form-notice">{access.mode === 'guest' ? p.account.guest : t.real.accountShort}</p><Account /></>}

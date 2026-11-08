@@ -2,6 +2,7 @@ import Icon from './Icon.jsx';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useDemo } from '../state/DemoContext.jsx';
 import { confirmUnsavedNavigation } from '../state/usePageMemory.js';
+import { ChessNotificationLink } from './ChessInvitations.jsx';
 
 const destinations = [
   ['home', 'home', '/'], ['discover', 'search', '/discover'],
@@ -40,7 +41,7 @@ export default function Header({ page }) {
         <span>Deutsch<span className="brand-accent">Connect</span></span>
       </a>
       <Navigation page={page} />
-      <div className="header-actions"><LanguageSwitcher /><a className="create-link" href="#/ideas/new" aria-label={t.ext.create}><Icon name="plus" size={21} /></a><a className="avatar" href="#/me" aria-label={t.app.myArea}>{profile.displayName.slice(0, 1).toLocaleUpperCase()}</a></div>
+      <div className="header-actions"><ChessNotificationLink /><LanguageSwitcher /></div>
     </div>
     <div className="demo-bar"><div className="demo-bar-inner">
       <details className="demo-info"><summary>{access.mode === 'guest' && <span className="demo-tag">DEMO</span>}<span>{access.mode === 'guest' ? t.personal.guest : t.real.accountShort}</span><Icon name="info" size={14} /></summary><p>{t.personal.guestHint} <a className="text-link" href="#/me/account">{t.personal.accountLink}</a></p></details>

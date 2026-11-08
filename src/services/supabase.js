@@ -1,3 +1,5 @@
+import { routeFromHash } from '../data/navigation.js';
+
 // Uses Supabase's documented Auth/REST endpoints. No secrets or SQL privileges
 // in the browser. The backend verifies the bearer token again for every call.
 export function readBackendConfig(env = {}) {
@@ -14,11 +16,11 @@ export function readBackendConfig(env = {}) {
 
 export function createSupabaseService({ config, fetcher = globalThis.fetch, storage, locks, location, history } = {}) {
   const storageKey = 'deutschconnect.auth.' + (config ? new URL(config.url).host : 'disabled');
-  let session = null, user = null, initialized = false, authGeneration = 0;
+  let session = null, user = null, initialized = false, authGeneration = 0, memoryOnly = false;
   let pending = Promise.resolve(); const listeners = new Set();
   const emit = () => { for (const listener of listeners) listener(); };
-  const read = () => { try { return JSON.parse(storage?.getItem(storageKey) || 'null'); } catch { return null; } };
-  const save = (value) => { session = value; try { if (value) storage?.setItem(storageKey,JSON.stringify(value)); else storage?.removeItem(storageKey); } catch { /* session remains memory-only */ } };
+  const read = () => { if(!storage)return undefined;let raw;try{raw=storage.getItem(storageKey);}catch{return undefined;}try{return raw===null?null:JSON.parse(raw);}catch{return null;} };
+  const save = (value) => { session = value; try { if(!storage)throw new Error('storage');if (value) storage.setItem(storageKey,JSON.stringify(value)); else storage.removeItem(storageKey);memoryOnly=false; } catch { memoryOnly=true; } };
   async function request(path, { body, token, method = 'POST' } = {}) {
     if (!config) throw new Error('not-configured');
     let response;
@@ -30,10 +32,12 @@ export function createSupabaseService({ config, fetcher = globalThis.fetch, stor
   }
   const normalize = (value) => ({ access_token:value.access_token, refresh_token:value.refresh_token, expires_at:value.expires_at || Math.floor(Date.now()/1000) + Number(value.expires_in || 3600) });
   const confirmationRedirect = () => location?.origin ? '?redirect_to=' + encodeURIComponent(location.origin + location.pathname) : '';
+  const clearCallback = () => history?.replaceState({...history.state,dcRoute:'/me/account',...(history.state?.dcPrevious?{dcPrevious:routeFromHash(history.state.dcPrevious)}:{})},'',location.pathname + location.search + '#/me/account');
   async function refresh() {
     const work = async () => {
       const marker = authGeneration;
-      const latest = read() || session;
+      const stored = read();
+      const latest = stored === undefined || (memoryOnly && stored === null) ? session : stored;
       if (!latest?.refresh_token) throw new Error('account-required');
       if (latest.expires_at > Date.now()/1000 + 45) { session = latest; return latest.access_token; }
       try { const data = await request('/auth/v1/token?grant_type=refresh_token',{ body:{ refresh_token:latest.refresh_token } }); if (marker !== authGeneration) throw new Error('account-required'); save(normalize(data)); return session.access_token; }
@@ -60,13 +64,13 @@ export function createSupabaseService({ config, fetcher = globalThis.fetch, stor
     if (params.has('error') || params.has('error_code')) {
       // Auth callbacks are not app routes. Never render provider descriptions
       // from the URL, and do not discard a valid session for a reused link.
-      history?.replaceState(null,'',location.pathname + location.search + '#/me/account');
+      clearCallback();
       callbackError = params.get('error_code') === 'otp_expired' ? 'confirmation-link-expired' : 'confirmation-link-invalid';
       session = read();
     } else if (params.has('access_token')) {
       const access = params.get('access_token'), refreshToken = params.get('refresh_token');
       // Remove credentials from the URL before rendering or following links.
-      history?.replaceState(null,'',location.pathname + location.search + '#/me/account');
+      clearCallback();
       if (access && refreshToken) save(normalize({ access_token:access, refresh_token:refreshToken, expires_in:Number(params.get('expires_in')) || 3600 }));
     } else session = read();
     if (session) { try { await verify(); } catch (error) { if (marker === authGeneration) { user = null; if (error.status === 401 || error.message === 'verification-required') save(null); } } }
@@ -93,7 +97,17 @@ export function createSupabaseService({ config, fetcher = globalThis.fetch, stor
   return {
     configured:Boolean(config), getUser:() => user, subscribe(listener) { listeners.add(listener); return () => listeners.delete(listener); }, initialize, signIn, signUp, signOut,
     resend: (email) => request('/auth/v1/resend' + confirmationRedirect(),{ body:{ type:'signup',email } }),
-    async synchronize() { authGeneration++; session = read(); if (!session) { user = null; emit(); } else await verify(); },
+    async synchronize(event) {
+      if(event?.type==='storage' && event.key!==null && event.key!==storageKey)return;
+      const stored=read();
+      const latest=stored===undefined || (memoryOnly && stored===null && event?.type!=='storage')?session:stored;
+      const changed=latest?.access_token!==session?.access_token || latest?.refresh_token!==session?.refresh_token;
+      if(!changed && event?.type==='storage')return; // No-op events must not cancel in-flight work.
+      const marker=changed?++authGeneration:authGeneration;session=latest;
+      if(!session){user=null;emit();return;}
+      try{await verify();}
+      catch(error){if(marker===authGeneration && (changed || error.status===401 || error.message==='verification-required')){user=null;if(error.status===401 || error.message==='verification-required')save(null);emit();}throw error;}
+    },
     async platform(action, commandId) {
       const expectedUser = user?.id;
       const token = await refresh();

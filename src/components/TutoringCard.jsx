@@ -16,6 +16,6 @@ export default function TutoringCard({ record, returnTo = '/tutoring' }) {
       <p className="small-text">{record.languages.map((key) => t.ext.languages[key]).join(' · ')} · {t.ext.formats[record.format]}</p>
       {record.ownerId === profile.id && <span className="participation-status">{t.ext.tutoring.own}</span>}
       {!isActive(record) && <span className="participation-status">{record.lifecycle === 'closed' ? t.quality.lifecycleClosed : t.quality.lifecycleDeleted}</span>}
-    </div><a className="row-arrow" href={href} aria-label={t.details + ': ' + content.subject}><Icon name="chevron" size={17} /></a>
+    </div><span className="row-arrow" aria-hidden="true"><Icon name="chevron" size={17} /></span>
   </article>;
 }

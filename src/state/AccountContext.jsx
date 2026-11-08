@@ -32,7 +32,7 @@ export function AccountProvider({ children }) {
       }
     });
     setLoading(true); client.initialize().catch((e) => setError(e.message)).finally(() => { setLoading(false); window.dispatchEvent(new Event('hashchange')); });
-    const sync = () => client.synchronize().catch((e) => setError(e.message));
+    const sync = (event) => client.synchronize(event).catch((e) => setError(e.message));
     window.addEventListener('storage',sync);
     window.addEventListener('online',sync);
     return () => { unsubscribe(); window.removeEventListener('storage',sync); window.removeEventListener('online',sync); };

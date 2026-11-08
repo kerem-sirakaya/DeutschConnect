@@ -1,9 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDemo } from './DemoContext.jsx';
 import { clearPageMemory, readPageMemory, writePageMemory, submissionId } from './pageMemory.js';
+import { setNavigationRisk, allowNavigation } from './navigationGuard.js';
 
-const unsafeDrafts = new Set();
-export function confirmUnsavedNavigation(message) { return !unsafeDrafts.size || window.confirm(message); }
+export function confirmUnsavedNavigation(message) { return allowNavigation(()=>window.confirm(message)); }
+
+export function useUnsavedGuard(unsafe) {
+  const token=useRef(Symbol('unsaved-result'));
+  useEffect(()=>{
+    if(!unsafe)return;
+    const current=token.current;setNavigationRisk(current,true);
+    const beforeUnload=(event)=>{event.preventDefault();event.returnValue='';};
+    window.addEventListener('beforeunload',beforeUnload);
+    return()=>{setNavigationRisk(current,false);window.removeEventListener('beforeunload',beforeUnload);};
+  },[unsafe]);
+}
 
 // sessionStorage keeps filters and unfinished forms separate in each browser tab.
 function storage() { try { return window.sessionStorage; } catch { return undefined; } }
@@ -47,11 +58,11 @@ export function useFormDraft(scope, initial) {
     const beforeUnload = (event) => { event.preventDefault(); event.returnValue = ''; };
     // App hash navigation and the persona selector consult this registry.
     const token = guardToken.current;
-    if (!memory.available) unsafeDrafts.add(token);
+    if (!memory.available) setNavigationRisk(token,true);
     window.addEventListener('beforeunload', beforeUnload);
-    return () => { window.removeEventListener('beforeunload', beforeUnload); unsafeDrafts.delete(token); };
+    return () => { window.removeEventListener('beforeunload', beforeUnload); setNavigationRisk(token,false); };
   }, [memory.dirty, memory.available, scope]);
-  const clearDraft = (...args) => { unsafeDrafts.delete(guardToken.current); memory.clearDraft(...args); clearPageMemory(storage(),profile.id,'submission:'+scope); creation.current=null; };
+  const clearDraft = (...args) => { setNavigationRisk(guardToken.current,false); memory.clearDraft(...args); clearPageMemory(storage(),profile.id,'submission:'+scope); creation.current=null; };
   const getSubmissionId = () => creation.current || (creation.current=submissionId(storage(),profile.id,scope));
   return { draft: memory.value, setDraft: memory.setValue, clearDraft, getSubmissionId, restored: memory.restored, hasDraft: memory.dirty, storageAvailable: memory.available };
 }

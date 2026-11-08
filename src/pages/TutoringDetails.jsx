@@ -8,8 +8,12 @@ import ContentManagement from '../components/ContentManagement.jsx';
 import { useFormDraft } from '../state/usePageMemory.js';
 import NotFound from './NotFound.jsx';
 import InterestToggle from '../components/InterestToggle.jsx';
+import ProfileLink from '../components/ProfileLink.jsx';
+import BackLink from '../components/BackLink.jsx';
+import useActiveView from '../state/useActiveView.js';
 
 export default function TutoringDetails({ id, returnTo = '/tutoring' }) {
+  const active = useActiveView();
   const { t } = useLanguage();
   const { state, profile, dispatch, access } = useDemo();
   const record = state.modules.tutoring.find((item) => item.id === id);
@@ -36,24 +40,25 @@ export default function TutoringDetails({ id, returnTo = '/tutoring' }) {
     setBusy(true);
     try {
       const success = await dispatch({ type: 'saveContactDraft', targetId: id, note: draft.note });
+      if (!active.current) return;
       if (success) clearDraft({ note: draft.note.trim() });
       else setFailed(true);
     } catch { setFailed(true); }
     finally { setBusy(false); }
   }
   return <>
-    <a className="text-link back-link" href={'#' + returnTo}>← {t.app.back}</a>
+    <BackLink fallback={returnTo} />
     <PageIntro eyebrow={(access.mode === 'guest' ? t.ext.discover.demo : t.ext.discover.student) + ' · ' + t.ext.tutoring[record.kind]} title={content.subject + ' · ' + content.topics} />
     <div className="details-layout">
       <article className="content-card prose">
         {inactive && <StatusBadge muted>{t.quality.closed}</StatusBadge>}
         <h2>{t.ext.tutoring.support}</h2><p className="user-content">{content.description}</p>
         <dl className="record-facts"><dt>{t.ext.tutoring.languages}</dt><dd>{record.languages.map((key) => t.ext.languages[key]).join(' · ')}</dd><dt>{t.ext.tutoring.format}</dt><dd>{t.ext.formats[record.format]}</dd><dt>{t.ext.tutoring.availability}</dt><dd>{content.availability}</dd></dl>
-        <p className="small-text">{state.profiles[record.ownerId]?.displayName || t.app.community} · {record.schoolId === 'ers' ? 'ERS' : 'Anka Bilim'}{access.mode === 'guest' ? ' · DEMO' : ''}</p>
+        <p className="small-text"><ProfileLink id={record.ownerId} />{access.mode === 'guest' ? ' · DEMO' : ''}</p>
       </article>
       {own ? <aside className="content-card">
         <p className="participation-status">{t.ext.tutoring.own}</p>
-        <ContentManagement editHref={'#/tutoring/' + id + '/edit'} inactive={inactive} inactiveLabel={t.quality.close} onWithdraw={() => dispatch({ type: 'closeTutoring', id, expectedRecord: JSON.stringify(record) })} onDelete={async () => { const success = await dispatch({ type: 'removeTutoring', id, expectedRecord: JSON.stringify(record) }); if (success) window.location.hash = '/tutoring/my'; return success; }} />
+        <ContentManagement editHref={'#/tutoring/' + id + '/edit'} inactive={inactive} inactiveLabel={t.quality.close} onWithdraw={() => dispatch({ type: 'closeTutoring', id, expectedRecord: JSON.stringify(record) })} onDelete={async () => { const success = await dispatch({ type: 'removeTutoring', id, expectedRecord: JSON.stringify(record) }); if (success && active.current) window.location.hash = '/tutoring/my'; return success; }} />
       </aside> : <form className="content-card app-form" onSubmit={submit} noValidate aria-busy={busy}>
         <fieldset className="app-form form-controls" disabled={busy} aria-label={t.ext.tutoring.contact}>
         <InterestToggle targetType="tutoring" targetId={id} label={t.ext.tutoring.interest} withdraw={t.ext.tutoring.withdraw} disabled={inactive && !interested} />

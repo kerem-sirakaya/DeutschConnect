@@ -22,37 +22,29 @@ import Games from './pages/Games.jsx';
 import EventNew from './pages/EventNew.jsx';
 import AccountStatus from './components/AccountStatus.jsx';
 import { confirmUnsavedNavigation } from './state/usePageMemory.js';
+import StudentProfile from './pages/StudentProfile.jsx';
+import { safeReturnTo, routeFromHash } from './data/navigation.js';
+import { listenToRoutes } from './state/routeHistory.js';
+import { ChessNotificationProvider } from './state/ChessNotificationContext.jsx';
+import { ChessNotificationBanner } from './components/ChessInvitations.jsx';
 
-function readRoute() { return window.location.hash.slice(1) || '/'; }
-const personalSections = ['activities', 'projects', 'tutoring', 'saved', 'community', 'settings', 'account', 'achievements', 'moderation'];
-const backRoutes = ['/', '/events', '/events/my', '/events/recommended', '/events/all', '/ideas/my', '/ideas/all', '/me', ...personalSections.map((section) => '/me/' + section), '/network/ers', '/network/anka', '/discover', '/community/projects', '/tutoring', '/tutoring/offers', '/tutoring/requests', '/tutoring/my', '/tutoring/saved'];
+function readRoute() { return routeFromHash(window.location.hash); }
+const personalSections = ['activities', 'projects', 'tutoring', 'saved', 'community', 'settings', 'account', 'achievements', 'moderation', 'notifications'];
 
-export default function App() {
+function AppContent() {
   const { t } = useLanguage();
   const { profile,access } = useDemo();
   const [route, setRoute] = useState(readRoute);
   const mainRef = useRef(null);
   const previousRoute = useRef(route);
-  const currentRoute = useRef(route);
   const [path, search = ''] = route.split('?');
   const requestedBack = new URLSearchParams(search).get('from');
-  const returnTo = requestedBack?.length < 200 && backRoutes.includes(requestedBack.split('?')[0]) ? requestedBack : undefined;
+  const returnTo = safeReturnTo(requestedBack);
   const parts = path.split('/');
   const page = path === '/' ? 'home' : ['me', 'about'].includes(parts[1]) ? 'me' : ['tutoring', 'community'].includes(parts[1]) ? parts[1] : 'discover';
 
   useEffect(() => {
-    const onHashChange = () => {
-      const nextRoute = readRoute();
-      if (nextRoute === currentRoute.current) return;
-      if (!confirmUnsavedNavigation(t.quality.unsavedWarning)) {
-        window.location.hash = currentRoute.current;
-        return;
-      }
-      currentRoute.current = nextRoute;
-      setRoute(nextRoute);
-    };
-    window.addEventListener('hashchange', onHashChange);
-    return () => window.removeEventListener('hashchange', onHashChange);
+    return listenToRoutes(window, { confirm:() => confirmUnsavedNavigation(t.quality.unsavedWarning), onRoute:setRoute });
   }, [t.quality.unsavedWarning]);
 
   useEffect(() => {
@@ -87,18 +79,24 @@ export default function App() {
   else if (/^\/tutoring\/[^/]+$/.test(path)) content = <TutoringDetails id={parts[2]} returnTo={returnTo} />;
   else if (['/community', '/community/people', '/community/projects', '/community/rooms', '/community/my'].includes(path)) content = <Community section={parts[2] || 'people'} />;
   else if (path === '/community/games') content = <Games />;
-  else if (/^\/community\/games\/(runner|flight|memory|chess)$/.test(path)) content = <Games kind={parts[3]} />;
+  else if (/^\/community\/games\/(runner|flight|memory|chess)$/.test(path)) content = <Games kind={parts[3]} opponent={new URLSearchParams(search).get('opponent')} />;
   else if (/^\/community\/games\/chess\/[^/]+$/.test(path)) content = <Games kind="chess" gameId={parts[4]} />;
-  else if (/^\/community\/people\/[^/]+$/.test(path)) content = <Community personId={parts[3]} />;
+  else if (/^\/community\/people\/[^/]+$/.test(path)) content = <StudentProfile id={parts[3]} returnTo={returnTo} />;
   else if (/^\/community\/rooms\/[^/]+$/.test(path)) content = <Community section="rooms" roomId={parts[3]} />;
   else content = <NotFound />;
 
   return <>
     <a className="skip-link" href="#main-content" onClick={(event) => { event.preventDefault(); mainRef.current?.focus(); }}>{t.skipLink}</a>
     <Header page={page} />
+    {path !== '/me/notifications' && <ChessNotificationBanner />}
     {access.mode === 'account' ? <AccountStatus /> : <PersistenceNotice />}
     {/* Page state intentionally resets per route/persona; filters and drafts restore from isolated session storage. */}
     <main id="main-content" className="main-container" ref={mainRef} tabIndex={-1} key={route + profile.id}>{content}</main>
     <footer className="site-footer"><span>{t.app.demoShort}</span><a href="#/about">{t.app.aboutLink}</a></footer>
   </>;
+}
+
+export default function App() {
+  const {profile,access}=useDemo();
+  return <ChessNotificationProvider key={access.mode+':'+profile.id}><AppContent /></ChessNotificationProvider>;
 }
