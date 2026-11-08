@@ -1175,7 +1175,8 @@
 
 .stepper {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  /* Anzahl der Schritte kommt aus der Seite (abgelehnte Ideen: nur 2 Schritte) */
+  grid-template-columns: repeat(var(--stepper-count, 4), minmax(0, 1fr));
   gap: 4px;
   counter-reset: step;
 }
@@ -1230,6 +1231,18 @@
   border-color: var(--color-primary);
   color: var(--color-primary-text);
   box-shadow: 0 0 0 4px var(--color-primary-soft);
+}
+
+/* Abgelehnt: Weg endet hier (rot statt blau) */
+.stepper__step.is-done + .stepper__step.is-rejected::before {
+  background: var(--color-danger);
+}
+
+.stepper__step.is-rejected .stepper__dot {
+  border-color: var(--color-danger);
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+  box-shadow: none;
 }
 
 .stepper__label {
@@ -1292,4 +1305,62 @@
 
 .disclosure .card-list {
   margin-top: 8px;
+}
+
+/* ---------- Event-Status für Schüler:innen (Filter + Karten) ---------- */
+
+/* Status-Filter (Alle | Geplant | Abgesagt): gleiches Aussehen wie .tabs, aber als Umschalter */
+.tabs--status .tabs__item {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.tabs--status .tabs__item[aria-pressed='true'] {
+  background: var(--color-primary-strong);
+  color: #fff;
+}
+
+.tabs--status .tabs__item--cancelled[aria-pressed='true'] {
+  background: var(--color-danger-strong);
+}
+
+/* Karte eines abgesagten Events: deutlich anders als normale bevorstehende Events */
+.event-card--cancelled {
+  border-left: 4px solid var(--color-danger);
+  background: linear-gradient(0deg, var(--color-danger-soft), var(--color-danger-soft)), var(--color-surface);
+}
+
+.event-card--cancelled .date-block {
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+}
+
+.event-card--cancelled .event-card__title {
+  color: var(--color-text-muted);
+}
+
+/* Event-Status und eigene Teilnahme getrennt beschriftet */
+.event-card__state {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.event-card__state-label {
+  font-size: var(--text-xs);
+  color: var(--color-text-subtle);
+}
+
+.event-card__cancelled {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-danger);
+}
+
+.event-card__cancelled .icon {
+  margin-top: 2px;
 }

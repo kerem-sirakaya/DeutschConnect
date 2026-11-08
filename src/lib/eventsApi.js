@@ -15,8 +15,11 @@
  *   'interested' = nur Interesse – zählt NICHT als Anmeldung
  */
 
-export const EVENT_COLUMNS =
+/** Spalten bis Migration 007 */
+export const EVENT_COLUMNS_BASE =
   'id, title, summary, description, location, audience, start_at, duration_minutes, capacity, online, topics, format, host_school_id, school_ids, status';
+/** Ab Migration 008: zusätzlich Absage- und Archiv-Zeitpunkt */
+export const EVENT_COLUMNS = `${EVENT_COLUMNS_BASE}, cancelled_at, archived_at`;
 
 /** Datenbank-Zeile -> gleiche Form wie die Demo-Events (src/data/events.js). */
 export function mapDbEvent(row) {
@@ -36,6 +39,8 @@ export function mapDbEvent(row) {
     hostSchoolId: row.host_school_id,
     schoolIds: Array.isArray(row.school_ids) ? row.school_ids : [],
     status: row.status,
+    cancelledAt: row.cancelled_at ?? null, // ab Migration 008
+    archivedAt: row.archived_at ?? null, // ab Migration 008
     organizerIds: [],
     isDemo: false,
   };
@@ -51,7 +56,11 @@ export function registrationsToMap(rows) {
 }
 
 export async function fetchEvents(client) {
-  const { data, error } = await client.from('events').select(EVENT_COLUMNS).order('start_at', { ascending: true });
+  const load = (columns) => client.from('events').select(columns).order('start_at', { ascending: true });
+  let { data, error } = await load(EVENT_COLUMNS);
+  // 42703 = Spalte existiert nicht: Migration 008 ist noch nicht ausgeführt.
+  // Dann ohne die neuen Spalten laden, damit die App für Schüler:innen weiter funktioniert.
+  if (error?.code === '42703') ({ data, error } = await load(EVENT_COLUMNS_BASE));
   if (error) throw error;
   return (data ?? []).map(mapDbEvent);
 }
@@ -88,7 +97,11 @@ export async function saveRegistration(client, { userId, eventId, current, next 
 /** Fehler beim Speichern -> Übersetzungsschlüssel */
 export function registrationErrorKey(error) {
   if (!error) return null;
-  // 42501 = von RLS abgelehnt, z. B. Event hat schon begonnen oder ist abgesagt
+  // DC008 = ausgebucht (Platzprüfung im Trigger event_registrations_guard, Migration 006)
+  if (error.code === 'DC008') return 'eventDetail.errors.full';
+  // DC009 = falsche Isolationsstufe in der Datenbank – kein Fehler der Nutzer:in
+  if (error.code === 'DC009') return 'eventDetail.errors.technical';
+  // 42501 = von RLS oder dem Trigger abgelehnt, z. B. Event hat schon begonnen oder ist abgesagt
   if (error.code === '42501') return 'eventDetail.errors.closed';
   // 23505 = Eintrag existiert schon (z. B. in einem zweiten Tab angemeldet)
   if (error.code === '23505') return 'eventDetail.errors.conflict';

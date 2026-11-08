@@ -10,13 +10,23 @@ import { daysUntil, startOfDay } from './dates.js';
  */
 
 const UPCOMING_STATUSES = ['planned', 'confirmed'];
+// Für LISTEN: abgesagte Events bleiben sichtbar (mit Badge "Abgesagt"), damit Angemeldete
+// die Absage bemerken. Empfehlungen, Einladungen und Zählungen nutzen weiter isUpcoming.
+const LISTED_STATUSES = [...UPCOMING_STATUSES, 'cancelled'];
 
+/** Findet statt und hat noch nicht begonnen (Tag) – für Empfehlungen, Erinnerungen, Zählungen. */
 export function isUpcoming(event, now = new Date()) {
   return UPCOMING_STATUSES.includes(event.status) && new Date(event.start) >= startOfDay(now);
 }
 
+/** Wird in "bevorstehenden" Listen angezeigt – inklusive abgesagter Events. */
+export function isListed(event, now = new Date()) {
+  return LISTED_STATUSES.includes(event.status) && new Date(event.start) >= startOfDay(now);
+}
+
+/** Vergangen: abgeschlossen, oder Datum vorbei (auch abgesagte Events). */
 export function isPast(event, now = new Date()) {
-  return event.status === 'completed' || (event.status !== 'cancelled' && new Date(event.start) < startOfDay(now));
+  return event.status === 'completed' || new Date(event.start) < startOfDay(now);
 }
 
 export const byStart = (a, b) => new Date(a.start) - new Date(b.start);
@@ -30,7 +40,7 @@ export function getEventRole(user, event) {
 export function getMyEvents(user, events, now = new Date()) {
   const mine = events.filter((event) => getEventRole(user, event));
   return {
-    upcoming: mine.filter((event) => isUpcoming(event, now)).sort(byStart),
+    upcoming: mine.filter((event) => isListed(event, now)).sort(byStart),
     past: mine.filter((event) => isPast(event, now)).sort((a, b) => byStart(b, a)),
   };
 }
@@ -114,17 +124,39 @@ export function matchesQuery(query, ...values) {
 /**
  * timeframe: 'upcoming' | 'week' | 'month' | 'past'
  */
+/**
+ * Status-Filter der Events-Seite (Schüler:innen):
+ *   'all'       – wie bisher
+ *   'scheduled' – findet statt: planned (Geplant) + confirmed (Bestätigt)
+ *   'cancelled' – abgesagt
+ * Archivierte Events sind hier nie enthalten – sie werden vorher zentral ausgeblendet
+ * (AppStateContext -> visibleToStudents, Migration 008 / RLS).
+ */
+export const EVENT_STATUS_FILTERS = ['all', 'scheduled', 'cancelled'];
+const SCHEDULED_STATUSES = ['planned', 'confirmed'];
+
+export function matchesStatusFilter(event, status = 'all') {
+  if (status === 'scheduled') return SCHEDULED_STATUSES.includes(event.status);
+  if (status === 'cancelled') return event.status === 'cancelled';
+  return true;
+}
+
 export function filterEvents(
   events,
-  { query = '', schoolId = 'all', topic = 'all', format = 'all', timeframe = 'upcoming' } = {},
+  { query = '', schoolId = 'all', topic = 'all', format = 'all', timeframe = 'upcoming', status = 'all' } = {},
   now = new Date(),
 ) {
+  const statusFilter = EVENT_STATUS_FILTERS.includes(status) ? status : 'all';
   return events
     .filter((event) => {
+      if (!matchesStatusFilter(event, statusFilter)) return false;
       if (timeframe === 'past') {
         if (!isPast(event, now)) return false;
+      } else if (statusFilter === 'cancelled' && timeframe === 'upcoming') {
+        // "Abgesagt" + "Demnächst": ALLE noch sichtbaren Absagen – auch wenn das ursprüngliche
+        // Datum schon vorbei ist. Wie lange sie sichtbar bleiben, regelt allein die Archivierung.
       } else {
-        if (!isUpcoming(event, now)) return false;
+        if (!isListed(event, now)) return false;
         const days = daysUntil(event.start, now);
         if (timeframe === 'week' && days > 7) return false;
         if (timeframe === 'month' && days > 31) return false;
@@ -135,6 +167,13 @@ export function filterEvents(
       return matchesQuery(query, event.title, event.summary, event.location);
     })
     .sort(timeframe === 'past' ? (a, b) => byStart(b, a) : byStart);
+}
+
+/** Anzahl je Status-Filter – mit denselben übrigen Filtern (Zeitraum, Schule, Thema, Format, Suche). */
+export function countEventsByStatusFilter(events, filters = {}, now = new Date()) {
+  return Object.fromEntries(
+    EVENT_STATUS_FILTERS.map((status) => [status, filterEvents(events, { ...filters, status }, now).length]),
+  );
 }
 
 /** sort: 'popular' | 'new' */
@@ -161,6 +200,7 @@ export function getUpdates(user, { events, ideas }, now = new Date()) {
   }
 
   for (const event of getMyEvents(user, events, now).upcoming) {
+    if (event.status === 'cancelled') continue; // keine "in X Tagen"-Erinnerung für abgesagte Events
     const days = daysUntil(event.start, now);
     if (days <= 7) updates.push({ id: `reminder-${event.id}`, type: 'reminder', event, days });
   }

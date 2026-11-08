@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import {
   authErrorKey,
   buildSignUpMetadata,
+  safeRedirectPath,
   validateLogin,
   validateRegistration,
 } from '../src/lib/authValidation.js';
@@ -50,4 +51,17 @@ test('Supabase-Fehler werden übersetzbaren Texten zugeordnet', () => {
   assert.equal(authErrorKey({ name: 'AuthRetryableFetchError' }), 'auth.errors.network');
   assert.equal(authErrorKey({ message: '???' }), 'auth.errors.generic');
   assert.equal(authErrorKey(null), null);
+});
+
+test('safeRedirectPath erlaubt nur Pfade innerhalb der App', () => {
+  assert.equal(safeRedirectPath('/admin'), '/admin');
+  assert.equal(safeRedirectPath('/admin/events'), '/admin/events');
+  assert.equal(safeRedirectPath(undefined), '/me/settings');
+  assert.equal(safeRedirectPath(null), '/me/settings');
+  assert.equal(safeRedirectPath('https://evil.example'), '/me/settings');
+  assert.equal(safeRedirectPath('//evil.example'), '/me/settings');
+  assert.equal(safeRedirectPath('/\\evil.example'), '/me/settings');
+  assert.equal(safeRedirectPath('/login'), '/me/settings');
+  assert.equal(safeRedirectPath('/register'), '/me/settings');
+  assert.equal(safeRedirectPath({ pathname: '/admin' }), '/me/settings');
 });

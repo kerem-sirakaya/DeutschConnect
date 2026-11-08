@@ -23,7 +23,8 @@
     "me": "Mein Bereich",
     "meShort": "Mein Bereich",
     "about": "Über DeutschConnect",
-    "mainLabel": "Hauptnavigation"
+    "mainLabel": "Hauptnavigation",
+    "admin": "Admin-Bereich"
   },
   "profileMenu": {
     "open": "Profilmenü öffnen (Demo-Profil: {name})",
@@ -80,16 +81,18 @@
   },
   "status": {
     "event": {
-      "planned": "In Planung",
+      "planned": "Geplant",
       "confirmed": "Bestätigt",
       "completed": "Abgeschlossen",
-      "cancelled": "Abgesagt"
+      "cancelled": "Abgesagt",
+      "draft": "Entwurf"
     },
     "idea": {
       "submitted": "Eingereicht",
       "collecting": "Sammelt Interesse",
       "review": "In Prüfung",
-      "planned": "Wird geplant"
+      "planned": "Wird geplant",
+      "rejected": "Nicht freigegeben"
     },
     "project": {
       "active": "Aktiv",
@@ -156,7 +159,23 @@
     "noResultsTitle": "Keine passenden Events",
     "noResultsText": "Ändere die Suche oder setze die Filter zurück.",
     "noRealEventsTitle": "Noch keine Events geplant",
-    "noRealEventsText": "Sobald das DeutschConnect-Team ein Event einträgt, erscheint es hier."
+    "noRealEventsText": "Sobald das DeutschConnect-Team ein Event einträgt, erscheint es hier.",
+    "statusFilter": {
+      "label": "Nach Status filtern",
+      "all": "Alle",
+      "scheduled": "Geplant",
+      "cancelled": "Abgesagt"
+    },
+    "noCancelledTitle": "Zurzeit gibt es keine abgesagten Events.",
+    "noCancelledText": "Abgesagte Events bleiben 24 Stunden nach der Absage sichtbar.",
+    "card": {
+      "eventStatus": "Event:",
+      "eventStatusSr": "Event-Status:",
+      "yourStatus": "Du:",
+      "yourStatusSr": "Deine Teilnahme:",
+      "cancelled": "Dieses Event wurde abgesagt – es findet nicht statt.",
+      "cancelledOn": "Abgesagt am {date} (Ankara) – findet nicht statt."
+    }
   },
   "eventDetail": {
     "notFound": "Event nicht gefunden",
@@ -182,10 +201,14 @@
     "pastNote": "Dieses Event ist bereits vorbei.",
     "pastNoteParticipated": "Dieses Event ist vorbei. Rückmeldungen werden in einer späteren Version gesammelt.",
     "cancelledNote": "Dieses Event wurde abgesagt.",
+    "cancelledOn": "Abgesagt am {date} (Ankara).",
+    "cancelledRegistrationKept": "Deine Teilnahme bleibt gespeichert: {role}. Das Event selbst findet nicht statt.",
     "closedNote": "Für dieses Event sind keine neuen Anmeldungen mehr möglich.",
     "savedToAccount": "Anmeldung und Interesse werden in deinem Konto gespeichert. „Interessiert“ ist keine verbindliche Anmeldung.",
     "errors": {
       "closed": "Für dieses Event ist keine Anmeldung mehr möglich (z. B. weil es schon begonnen hat).",
+      "full": "Dieses Event ist leider ausgebucht. Du kannst stattdessen dein Interesse zeigen.",
+      "technical": "Technischer Fehler beim Speichern. Bitte versuche es später noch einmal oder gib dem Team Bescheid.",
       "conflict": "Dein Eintrag hat sich inzwischen geändert. Der aktuelle Stand wird angezeigt.",
       "network": "Keine Verbindung zum Server. Bitte versuche es noch einmal.",
       "generic": "Das hat nicht geklappt. Bitte versuche es noch einmal."
@@ -240,6 +263,7 @@
     "createdHint": "Im Demo-Modus ist sie nur in diesem Browser sichtbar.",
     "createdHintAccount": "Andere sehen deine Idee, sobald das DeutschConnect-Team sie freigegeben hat.",
     "awaitingApproval": "Wartet auf Freigabe – bisher kannst nur du diese Idee sehen.",
+    "rejectedText": "Das DeutschConnect-Team hat diese Idee nicht freigegeben. Sie ist weiterhin nur für dich sichtbar und kann nicht unterstützt werden. Du kannst sie löschen oder eine überarbeitete Idee neu einreichen.",
     "from": "Von",
     "fromYou": "Dir",
     "fromStudentOf": "Schüler:in der {school}",
@@ -251,7 +275,8 @@
       "submitted": "Eingereicht",
       "collecting": "Interesse sammeln",
       "review": "Prüfung durch Schulen",
-      "planned": "Planung"
+      "planned": "Planung",
+      "rejected": "Nicht freigegeben"
     },
     "approvalNote": "Viel Unterstützung führt nicht automatisch zur Durchführung. Die Schulen prüfen jede Idee.",
     "supportTitle": "Unterstützung",
@@ -470,5 +495,277 @@
     "title": "Seite nicht gefunden",
     "text": "Diese Seite gibt es nicht (mehr).",
     "home": "Zur Startseite"
+  },
+  "admin": {
+    "badge": "Admin-Bereich",
+    "navLabel": "Admin-Navigation",
+    "nav": {
+      "overview": "Übersicht",
+      "events": "Events",
+      "ideas": "Ideen"
+    },
+    "loading": "Zugriff wird geprüft …",
+    "denied": {
+      "title": "Kein Zugriff",
+      "text": "Dieser Bereich ist nur für das Pilot-Team.",
+      "hint": "Du bist angemeldet, hast aber keine Admin-Rechte. Wenn das ein Fehler ist, wende dich an das Team."
+    },
+    "statusError": {
+      "title": "Zugriff konnte nicht geprüft werden",
+      "retry": "Erneut prüfen"
+    },
+    "overview": {
+      "title": "Willkommen im DeutschConnect Admin-Dashboard",
+      "subtitle": "Hier erhältst du einen Überblick über die Aktivitäten und den aktuellen Stand von DeutschConnect.",
+      "context": "Angemeldet als {name} · {date}",
+      "contextNoName": "{date}",
+      "statsTitle": "Kennzahlen",
+      "statsLoading": "Kennzahlen werden geladen …",
+      "statsUnavailable": "Die Kennzahlen sind noch nicht verfügbar: In der Datenbank fehlt Migration 010 (admin_get_overview_stats). Schnellzugriff und Aktivitäten funktionieren trotzdem.",
+      "valueUnavailable": "nicht verfügbar",
+      "stats": {
+        "students": {
+          "label": "Registrierte Schüler:innen",
+          "desc": "Konten mit Profil, ohne Admins"
+        },
+        "upcoming": {
+          "label": "Bevorstehende Events",
+          "desc": "Veröffentlicht und in der Zukunft"
+        },
+        "registrations": {
+          "label": "Gesamte Anmeldungen",
+          "desc": "Verbindliche Anmeldungen, ohne „Interessiert“"
+        },
+        "pending": {
+          "label": "Zu prüfende Ideen",
+          "desc": "Eingereicht, warten auf Freigabe"
+        },
+        "archived": {
+          "label": "Archivierte Events",
+          "desc": "Für Schüler:innen ausgeblendet, Daten bleiben erhalten",
+          "unavailable": "Erst nach Migration 008 verfügbar"
+        }
+      },
+      "quickTitle": "Schnellzugriff",
+      "quick": {
+        "createEvent": {
+          "label": "Neues Event anlegen",
+          "desc": "Als Entwurf speichern"
+        },
+        "manageEvents": {
+          "label": "Events verwalten",
+          "desc": "Veröffentlichen, absagen, bearbeiten"
+        },
+        "reviewIdeas": {
+          "label": "Eingereichte Ideen prüfen",
+          "desc": "Freigeben oder ablehnen"
+        },
+        "manageIdeas": {
+          "label": "Alle Ideen verwalten",
+          "desc": "Status ändern oder löschen"
+        }
+      },
+      "activityTitle": "Aktivitäten",
+      "activityNote": "Zuletzt angelegte Events und eingereichte Ideen – kein vollständiges Protokoll aller Änderungen.",
+      "activityLoading": "Aktivitäten werden geladen …",
+      "activityEmpty": "Noch keine Events oder Ideen vorhanden.",
+      "activityEventCreated": "Event angelegt",
+      "activityIdeaSubmitted": "Idee eingereicht",
+      "activityUntitled": "Ohne Titel"
+    },
+    "events": {
+      "title": "Events verwalten",
+      "subtitle": "Events anlegen, veröffentlichen, absagen und abschließen.",
+      "new": "Neues Event",
+      "loading": "Events werden geladen …",
+      "statsTitle": "Übersicht der Events",
+      "stats": {
+        "all": "Gesamt"
+      },
+      "filters": {
+        "all": "Alle",
+        "archived": "Archiviert"
+      },
+      "empty": {
+        "all": "Es gibt noch keine Events. Lege das erste als Entwurf an.",
+        "filtered": "Keine Events mit diesem Status."
+      },
+      "when": "{date} (Ankara)",
+      "host": "Gastgeber: {school}",
+      "noLocation": "Kein Ort angegeben",
+      "offline": "Vor Ort",
+      "registered_one": "{count} angemeldet",
+      "registered_other": "{count} angemeldet",
+      "interested_one": "{count} interessiert",
+      "interested_other": "{count} interessiert",
+      "capacity": "{taken}/{capacity} Plätze belegt",
+      "noCapacity": "Keine Platzbegrenzung",
+      "draftHint": "Entwurf – nur für Admins sichtbar, Schüler:innen sehen dieses Event noch nicht.",
+      "archived": "Archiviert",
+      "archivedHint": "Archiviert am {date} (Ankara) – für Schüler:innen nicht mehr sichtbar. Alle Daten und Anmeldungen bleiben erhalten.",
+      "final": "Abgeschlossen oder abgesagt – der Status kann nicht mehr geändert werden.",
+      "timeZoneNote": "Alle Zeiten sind Ankara-Zeit (UTC+3). Veröffentlichte Events werden abgesagt, nicht gelöscht – so bleiben Anmeldungen nachvollziehbar.",
+      "actions": {
+        "edit": "Bearbeiten",
+        "publish": "Veröffentlichen",
+        "publishConfirmed": "Als bestätigt veröffentlichen",
+        "confirm": "Bestätigen",
+        "cancel": "Absagen",
+        "complete": "Abschließen",
+        "delete": "Entwurf löschen"
+      },
+      "confirm": {
+        "publish": "„{title}“ veröffentlichen? Alle angemeldeten Schüler:innen sehen das Event danach und können sich anmelden. Das Datum muss in der Zukunft liegen. Ein veröffentlichtes Event kann nicht wieder zum Entwurf werden.",
+        "publishConfirmed": "„{title}“ direkt als bestätigt veröffentlichen? Schüler:innen sehen das Event sofort als „Bestätigt“ und können sich anmelden. Das Datum muss in der Zukunft liegen.",
+        "confirm": "„{title}“ als bestätigt markieren? Schüler:innen sehen dann, dass das Event sicher stattfindet.",
+        "cancel": "„{title}“ absagen? Das Event bleibt sichtbar, wird aber als abgesagt angezeigt; neue Anmeldungen sind nicht mehr möglich. Es gibt keine automatische Benachrichtigung – informiere die Angemeldeten zusätzlich. Dieser Schritt ist endgültig.",
+        "complete": "„{title}“ als abgeschlossen markieren? Das geht erst, wenn das Event begonnen hat. Dieser Schritt ist endgültig.",
+        "delete": "Entwurf „{title}“ endgültig löschen? Das kann nicht rückgängig gemacht werden."
+      },
+      "statusChanged": "„{title}“ hat jetzt den Status „{status}“.",
+      "deleted": "Der Entwurf „{title}“ wurde gelöscht.",
+      "created": "„{title}“ wurde als Entwurf gespeichert. Veröffentliche es, wenn alles stimmt.",
+      "updated": "Die Änderungen an „{title}“ wurden gespeichert.",
+      "groups": {
+        "planned": {
+          "title": "Geplante Events",
+          "empty": "Keine geplanten Events vorhanden."
+        },
+        "cancelled": {
+          "title": "Abgesagte Events",
+          "empty": "Keine abgesagten Events vorhanden."
+        },
+        "draft": {
+          "title": "Entwürfe",
+          "empty": "Keine Entwürfe vorhanden."
+        },
+        "completed": {
+          "title": "Abgeschlossene Events",
+          "empty": "Keine abgeschlossenen Events vorhanden."
+        },
+        "archived": {
+          "title": "Archivierte Events",
+          "empty": "Keine archivierten Events vorhanden."
+        }
+      },
+      "groupCount_one": "{count} Event",
+      "groupCount_other": "{count} Events",
+      "cancelledOn": "Abgesagt am {date} (Ankara).",
+      "cancelledNote": "Dieses Event wurde abgesagt."
+    },
+    "ideas": {
+      "title": "Ideen moderieren",
+      "subtitle": "Eingereichte Ideen prüfen, freigeben oder ablehnen.",
+      "loading": "Ideen werden geladen …",
+      "workloadTitle": "Moderations-Übersicht",
+      "workload": {
+        "submitted": "Warten auf Freigabe",
+        "collecting": "Sammeln Interesse",
+        "review": "In Prüfung"
+      },
+      "filters": {
+        "all": "Alle"
+      },
+      "empty": {
+        "all": "Es wurden noch keine Ideen eingereicht.",
+        "submitted": "Keine offenen Ideen – alles erledigt.",
+        "filtered": "Keine Ideen mit diesem Status."
+      },
+      "supporters_one": "{count} Unterstützer:in",
+      "supporters_other": "{count} Unterstützer:innen",
+      "submittedAt": "Eingereicht {date}",
+      "actions": {
+        "approve": "Freigeben",
+        "reject": "Ablehnen",
+        "toReview": "In Prüfung geben",
+        "toPlanned": "Als geplant markieren",
+        "backToCollecting": "Zurück zu „Sammelt Interesse“",
+        "reopen": "Wieder zur Prüfung öffnen",
+        "delete": "Idee löschen"
+      },
+      "confirm": {
+        "approve": "„{title}“ freigeben? Die Idee wird danach für alle angemeldeten Schüler:innen sichtbar und kann unterstützt werden.",
+        "reject": "„{title}“ ablehnen? Die Idee ist danach nur noch für die Person sichtbar, die sie eingereicht hat.",
+        "toReview": "„{title}“ in Prüfung geben? Die Idee bleibt öffentlich sichtbar – die Schulen prüfen die Umsetzung.",
+        "toPlanned": "„{title}“ als geplant markieren? Dieser Schritt ist endgültig und kann nicht zurückgenommen werden.",
+        "backToCollecting": "„{title}“ zurück zu „Sammelt Interesse“ setzen? Die Idee bleibt öffentlich sichtbar.",
+        "reopen": "„{title}“ wieder zur Prüfung öffnen? Die Idee bleibt privat, bis du sie erneut freigibst.",
+        "delete": "„{title}“ endgültig löschen? Die Idee und alle ihre Unterstützungen werden dauerhaft entfernt – auch für die Person, die sie eingereicht hat. Das kann nicht rückgängig gemacht werden."
+      },
+      "success": "„{title}“ hat jetzt den Status „{status}“.",
+      "deleted": "„{title}“ wurde gelöscht.",
+      "final": "Geplant – keine weiteren Moderationsschritte möglich.",
+      "privacyNote": "Wer eine Idee eingereicht hat, wird hier bewusst nicht angezeigt."
+    },
+    "saving": "Wird gespeichert …",
+    "actionsLabel": "Aktionen für „{title}“",
+    "refresh": "Aktualisieren",
+    "filtersLabel": "Nach Status filtern",
+    "eventForm": {
+      "newTitle": "Neues Event",
+      "newSubtitle": "Das Event wird als Entwurf gespeichert und ist erst nach dem Veröffentlichen für Schüler:innen sichtbar.",
+      "editTitle": "Event bearbeiten",
+      "editSubtitle": "Alle Angaben des Events werden zusammen gespeichert.",
+      "statusNote": "Der Status wird hier nicht geändert – dafür gibt es die Knöpfe in der Event-Liste.",
+      "optional": "optional",
+      "languagesHint": "Mindestens eine Sprache ausfüllen, am besten alle drei.",
+      "titleLabel": "Titel",
+      "summaryLabel": "Kurzbeschreibung",
+      "descriptionLabel": "Beschreibung",
+      "locationLabel": "Ort",
+      "audienceLabel": "Zielgruppe",
+      "startLabel": "Datum und Uhrzeit",
+      "startHint": "Ankara-Zeit (UTC+3) – unabhängig davon, wo du gerade bist.",
+      "startLocked": "Das Datum eines abgesagten oder abgeschlossenen Events kann nicht mehr geändert werden.",
+      "durationLabel": "Dauer in Minuten",
+      "onlineLabel": "Findet online statt",
+      "schoolsLabel": "Beteiligte Schulen",
+      "hostLabel": "Gastgeber-Schule",
+      "hostPlaceholder": "Bitte wählen …",
+      "capacityLabel": "Maximale Teilnehmerzahl",
+      "capacityHint": "Wie viele Schüler:innen können sich verbindlich anmelden? Leer lassen = unbegrenzt.",
+      "capacityPlaceholder": "unbegrenzt",
+      "capacityHintRegistered_one": "Es gibt bereits {count} verbindliche Anmeldung – weniger Plätze sind nicht möglich.",
+      "capacityHintRegistered_other": "Es gibt bereits {count} verbindliche Anmeldungen – weniger Plätze sind nicht möglich.",
+      "topicsLabel": "Themen",
+      "draftHint": "Neue Events sind immer Entwürfe. Veröffentlichen kannst du sie danach in der Event-Liste.",
+      "editHint": "Status und Anmeldungen bleiben beim Speichern unverändert.",
+      "saveDraft": "Als Entwurf speichern",
+      "saveChanges": "Änderungen speichern",
+      "errors": {
+        "titleRequired": "Bitte gib einen Titel in mindestens einer Sprache ein.",
+        "tooLong": "Höchstens {max} Zeichen je Sprache.",
+        "startRequired": "Bitte wähle Datum und Uhrzeit.",
+        "startInvalid": "Dieses Datum ist ungültig.",
+        "startPast": "Das Datum liegt in der Vergangenheit. Bitte wähle einen Zeitpunkt in der Zukunft.",
+        "duration": "Die Dauer muss eine ganze Zahl zwischen 1 und 1440 Minuten sein.",
+        "capacity": "Die Plätze müssen eine ganze Zahl zwischen 1 und 10000 sein.",
+        "capacityBelowRegistrations": "Es gibt bereits {count} verbindliche Anmeldungen – mindestens so viele Plätze sind nötig.",
+        "schoolsRequired": "Bitte wähle mindestens eine beteiligte Schule.",
+        "schoolsInvalid": "Die Schul-Auswahl ist ungültig.",
+        "hostRequired": "Bitte wähle die Gastgeber-Schule.",
+        "hostNotParticipating": "Die Gastgeber-Schule muss zu den beteiligten Schulen gehören.",
+        "topics": "Bitte wähle höchstens zehn Themen aus der Liste.",
+        "format": "Bitte wähle ein Format aus der Liste."
+      }
+    },
+    "errors": {
+      "notAllowed": "Dafür fehlen dir die Admin-Rechte.",
+      "invalid": "Einige Angaben sind ungültig. Bitte prüfe deine Eingaben.",
+      "notFound": "Der Eintrag wurde nicht gefunden. Vielleicht wurde er inzwischen gelöscht.",
+      "hasEntries": "Dieses Event hat bereits Anmeldungen oder Interessierte und kann nicht gelöscht werden.",
+      "pastDate": "Das Datum liegt in der Vergangenheit. Bitte wähle ein Datum in der Zukunft.",
+      "onlyDrafts": "Nur Entwürfe können gelöscht werden. Veröffentlichte Events bitte absagen.",
+      "transition": "Dieser Statuswechsel ist nicht erlaubt.",
+      "capacityTooLow": "Es gibt schon mehr verbindliche Anmeldungen, als diese Platzzahl erlaubt.",
+      "dateLocked": "Das Datum eines abgesagten oder abgeschlossenen Events kann nicht mehr geändert werden.",
+      "notStarted": "Das Event hat noch nicht begonnen und kann deshalb nicht abgeschlossen werden.",
+      "full": "Das Event ist ausgebucht.",
+      "technical": "Technischer Fehler in der Datenbank. Bitte versuche es später noch einmal oder gib dem Team Bescheid.",
+      "ideaNotDeletable": "Diese Idee kann nicht gelöscht werden. Eingereichte Ideen bitte zuerst freigeben oder ablehnen.",
+      "unavailable": "Diese Admin-Funktion ist in der Datenbank nicht verfügbar. Wurden alle Migrationen (006, 007) ausgeführt?",
+      "network": "Keine Verbindung zum Server. Bitte versuche es noch einmal.",
+      "generic": "Das hat nicht geklappt. Bitte versuche es noch einmal."
+    }
   }
 }

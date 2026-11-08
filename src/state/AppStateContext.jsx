@@ -6,6 +6,11 @@ import { events as demoEvents } from '../data/events.js';
 import { useAccountEvents } from './useAccountEvents.js';
 import { useAccountIdeas } from './useAccountIdeas.js';
 import { getSupportCounts } from '../lib/selectors.js';
+import { visibleToStudents } from '../lib/eventArchive.js';
+
+// Wie oft die Archiv-Ausblendung neu berechnet wird (Events verschwinden pünktlich,
+// auch wenn die Seite lange offen bleibt)
+const ARCHIVE_TICK_MS = 5 * 60 * 1000;
 import {
   ACCOUNT_STORAGE_PREFIX,
   buildAccountUser,
@@ -169,6 +174,12 @@ export function AppStateProvider({ children }) {
   const auth = useAuth();
   const [state, dispatch] = useReducer(reducer, undefined, loadState);
   const [account, setAccount] = useState({ userId: null, data: null });
+  const [now, setNow] = useState(() => new Date());
+
+  useEffect(() => {
+    const id = setInterval(() => setNow(new Date()), ARCHIVE_TICK_MS);
+    return () => clearInterval(id);
+  }, []);
 
   // Demo-Daten speichern (wie bisher)
   useEffect(() => {
@@ -291,7 +302,10 @@ export function AppStateProvider({ children }) {
 
   const value = useMemo(() => {
     if (mode === 'account') {
-      const events = accountEvents.events;
+      // Archivierte Events (24 h nach Absage bzw. Ende) für Schüler:innen überall ausblenden –
+      // Listen, "Meine", Startseite, Schulen, Empfehlungen UND Detailseite (getEvent).
+      // Anmeldungen bleiben unverändert in accountEvents.registrations.
+      const events = visibleToStudents(accountEvents.events, now);
       return {
         mode,
         isRealAccount: true,
@@ -331,6 +345,7 @@ export function AppStateProvider({ children }) {
     };
   }, [
     mode,
+    now,
     auth.user,
     auth.profile,
     account,

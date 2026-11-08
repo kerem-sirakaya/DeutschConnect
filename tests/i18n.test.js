@@ -58,11 +58,14 @@ test('jeder im Code verwendete Schlüssel existiert in allen Sprachen', () => {
   // Dynamische Schlüssel (z. B. t(`topics.${id}`)) explizit ergänzen
   TOPICS.forEach((id) => used.add(`topics.${id}`));
   EVENT_FORMATS.forEach((id) => used.add(`formats.${id}`));
-  ['planned', 'confirmed', 'completed', 'cancelled'].forEach((s) => used.add(`status.event.${s}`));
+  ['draft', 'planned', 'confirmed', 'completed', 'cancelled'].forEach((s) => used.add(`status.event.${s}`));
   ['submitted', 'collecting', 'review', 'planned'].forEach((s) => {
     used.add(`status.idea.${s}`);
     used.add(`ideaDetail.steps.${s}`);
   });
+  // "rejected" (Migration 006): Status-Text + eigener End-Schritt in der Fortschrittsanzeige
+  used.add('status.idea.rejected');
+  used.add('ideaDetail.steps.rejected');
   ['initiator', 'interest', 'confirmed'].forEach((s) => {
     used.add(`status.partnership.${s}`);
     used.add(`network.legend.${s}`);

@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { useI18n } from '../i18n/LanguageContext.jsx';
 import { useAuth } from '../auth/AuthContext.jsx';
-import { authErrorKey, validateLogin } from '../lib/authValidation.js';
+import { authErrorKey, safeRedirectPath, validateLogin } from '../lib/authValidation.js';
 import PageHeader from '../components/PageHeader.jsx';
 import AccountCard from '../components/AccountCard.jsx';
 import Icon from '../components/Icon.jsx';
@@ -11,6 +11,7 @@ export default function LoginPage() {
   const { t } = useI18n();
   const auth = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const formRef = useRef(null);
   const [values, setValues] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
@@ -55,7 +56,8 @@ export default function LoginPage() {
       setServerError(authErrorKey(error));
       return;
     }
-    navigate('/me/settings', { replace: true });
+    // Kam man von einer geschützten Seite (z. B. /admin), geht es dorthin zurück – sonst wie bisher.
+    navigate(safeRedirectPath(location.state?.from), { replace: true });
   };
 
   const fieldProps = (name) => ({

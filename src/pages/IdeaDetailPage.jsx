@@ -6,15 +6,13 @@ import { useAppState } from '../state/AppStateContext.jsx';
 import { getSchool } from '../data/schools.js';
 import { daysUntil } from '../lib/dates.js';
 import { formatRelativeDays } from '../lib/format.js';
-import { PUBLIC_IDEA_STATUSES } from '../lib/ideasApi.js';
+import { ideaProgressSteps, ownIdeaNotice } from '../lib/ideaProgress.js';
 import PageHeader from '../components/PageHeader.jsx';
 import InfoList from '../components/InfoList.jsx';
 import SupportButton from '../components/SupportButton.jsx';
 import Icon from '../components/Icon.jsx';
 import { DemoBadge, StatusBadge, TopicTags } from '../components/Badges.jsx';
 import NotFoundPage from './NotFoundPage.jsx';
-
-const STEPS = ['submitted', 'collecting', 'review', 'planned'];
 
 export default function IdeaDetailPage() {
   const { ideaId } = useParams();
@@ -31,10 +29,11 @@ export default function IdeaDetailPage() {
 
   const isOwn = idea.authorId === user.id;
   const justCreated = location.state?.created && isOwn;
-  const currentStep = STEPS.indexOf(idea.status);
+  const steps = ideaProgressSteps(idea.status);
   const school = getSchool(idea.schoolId);
-  // Echtes Konto: eigene, noch nicht freigegebene Idee – andere sehen sie (noch) nicht.
-  const awaitingApproval = isRealAccount && isOwn && !PUBLIC_IDEA_STATUSES.includes(idea.status);
+  // Echtes Konto, eigene Idee: "wartet auf Freigabe" (submitted) oder "nicht freigegeben" (rejected).
+  // In beiden Fällen sehen andere die Idee nicht.
+  const notice = ownIdeaNotice({ status: idea.status, isOwn, isRealAccount });
   const canDelete = isOwn && (idea.isLocal || isRealAccount);
 
   const handleDelete = async () => {
@@ -63,11 +62,21 @@ export default function IdeaDetailPage() {
         </div>
       )}
 
-      {awaitingApproval && !justCreated && (
+      {notice === 'awaitingApproval' && !justCreated && (
         <p className="notice notice--demo" role="status">
           <Icon name="clock" size={16} />
           <span>{t('ideaDetail.awaitingApproval')}</span>
         </p>
+      )}
+
+      {notice === 'rejected' && (
+        <div className="notice notice--error" role="status">
+          <Icon name="info" size={18} />
+          <div>
+            <strong>{t('status.idea.rejected')}</strong>
+            <p>{t('ideaDetail.rejectedText')}</p>
+          </div>
+        </div>
       )}
 
       <div className="detail-layout">
@@ -107,17 +116,26 @@ export default function IdeaDetailPage() {
 
           <section className="detail-section">
             <h2>{t('ideaDetail.progress')}</h2>
-            <ol className="stepper">
-              {STEPS.map((step, index) => (
-                <li
-                  key={step}
-                  className={`stepper__step${index < currentStep ? ' is-done' : ''}${index === currentStep ? ' is-current' : ''}`}
-                  aria-current={index === currentStep ? 'step' : undefined}
-                >
-                  <span className="stepper__dot">{index < currentStep ? <Icon name="check" size={14} /> : index + 1}</span>
-                  <span className="stepper__label">{t(`ideaDetail.steps.${step}`)}</span>
-                </li>
-              ))}
+            <ol className="stepper" style={{ '--stepper-count': steps.length }}>
+              {steps.map((step, index) => {
+                const isCurrent = step.state === 'current' || step.state === 'rejected';
+                return (
+                  <li
+                    key={step.id}
+                    className={`stepper__step${step.state === 'done' ? ' is-done' : ''}${isCurrent ? ' is-current' : ''}${
+                      step.state === 'rejected' ? ' is-rejected' : ''
+                    }`}
+                    aria-current={isCurrent ? 'step' : undefined}
+                  >
+                    <span className="stepper__dot">
+                      {step.state === 'done' && <Icon name="check" size={14} />}
+                      {step.state === 'rejected' && <Icon name="close" size={14} />}
+                      {(step.state === 'current' || step.state === 'upcoming') && index + 1}
+                    </span>
+                    <span className="stepper__label">{t(step.labelKey)}</span>
+                  </li>
+                );
+              })}
             </ol>
             <p className="hint">
               <Icon name="info" size={14} />

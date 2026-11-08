@@ -5,7 +5,7 @@ import { localize } from '../i18n/localize.js';
 import { useAppState } from '../state/AppStateContext.jsx';
 import { getSchool } from '../data/schools.js';
 import { projects } from '../data/projects.js';
-import { byStart, getEventRole, isUpcoming } from '../lib/selectors.js';
+import { byStart, getEventRole, isListed } from '../lib/selectors.js';
 import PageHeader from '../components/PageHeader.jsx';
 import InfoList from '../components/InfoList.jsx';
 import Section from '../components/Section.jsx';
@@ -25,7 +25,7 @@ export default function SchoolDetailPage() {
 
   if (!school) return <NotFoundPage titleKey="school.notFound" backTo="/network" />;
 
-  const schoolEvents = events.filter((e) => e.schoolIds.includes(school.id) && isUpcoming(e, now)).sort(byStart);
+  const schoolEvents = events.filter((e) => e.schoolIds.includes(school.id) && isListed(e, now)).sort(byStart);
   const schoolProjects = projects.filter((p) => p.schoolIds.includes(school.id));
   const ideaCount = ideas.filter((i) => i.schoolId === school.id).length;
   const isOwn = user.schoolId === school.id;

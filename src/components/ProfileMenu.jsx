@@ -2,6 +2,7 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { useI18n } from '../i18n/LanguageContext.jsx';
 import { useAppState } from '../state/AppStateContext.jsx';
+import { useIsAdmin } from '../state/AdminStatusContext.jsx';
 import Avatar from './Avatar.jsx';
 import Icon from './Icon.jsx';
 import ProfileSwitcher from './ProfileSwitcher.jsx';
@@ -10,6 +11,7 @@ import ProfileSwitcher from './ProfileSwitcher.jsx';
 export default function ProfileMenu() {
   const { t } = useI18n();
   const { user, isRealAccount } = useAppState();
+  const { isAdmin } = useIsAdmin();
   const [open, setOpen] = useState(false);
   const containerRef = useRef(null);
   const buttonRef = useRef(null);
@@ -63,6 +65,13 @@ export default function ProfileMenu() {
                 {t('auth.accountTitle')}
                 <Icon name="chevronRight" size={16} />
               </Link>
+              {/* Nur sichtbar, wenn die Datenbank is_admin() = true bestätigt hat (Smartphone-Zugang) */}
+              {isAdmin && (
+                <Link to="/admin" className="profile-menu__link" onClick={() => setOpen(false)}>
+                  {t('nav.admin')}
+                  <Icon name="chevronRight" size={16} />
+                </Link>
+              )}
             </>
           ) : (
             <>

@@ -68,3 +68,15 @@ export function authErrorKey(error) {
   if (error.name === 'AuthRetryableFetchError' || error.status === 0) return 'auth.errors.network';
   return 'auth.errors.generic';
 }
+
+/**
+ * Ziel nach dem Login (z. B. zurück zu /admin). Nur Pfade INNERHALB der App sind erlaubt –
+ * keine fremden Adressen ("//evil.example", "https://…"), keine Login-/Registrierungsseite.
+ */
+export function safeRedirectPath(from, fallback = '/me/settings') {
+  if (typeof from !== 'string' || !from.startsWith('/') || from.startsWith('//') || from.includes('\\')) {
+    return fallback;
+  }
+  if (from === '/login' || from === '/register') return fallback;
+  return from;
+}

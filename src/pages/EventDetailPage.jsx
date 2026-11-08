@@ -7,6 +7,7 @@ import { getSchool } from '../data/schools.js';
 import { getEventRole, isPast } from '../lib/selectors.js';
 import { daysUntil, addMinutes } from '../lib/dates.js';
 import { formatDateLong, formatRelativeDays, formatTime } from '../lib/format.js';
+import { formatAnkaraDateTime } from '../lib/eventForm.js';
 import PageHeader from '../components/PageHeader.jsx';
 import InfoList from '../components/InfoList.jsx';
 import Icon from '../components/Icon.jsx';
@@ -117,7 +118,22 @@ export default function EventDetailPage() {
         <aside className="detail-aside card" aria-labelledby="participation-title">
           <h2 id="participation-title">{t('eventDetail.yourParticipation')}</h2>
 
-          {cancelled && <p>{t('eventDetail.cancelledNote')}</p>}
+          {/* Abgesagt: Event-Status und eigene Anmeldung GETRENNT zeigen – die Anmeldung bleibt gespeichert.
+              Keine Knöpfe zum Anmelden (die Datenbank würde es ohnehin ablehnen). */}
+          {cancelled && (
+            <div className="notice notice--error" role="status">
+              <Icon name="close" size={18} />
+              <div>
+                <strong>{t('eventDetail.cancelledNote')}</strong>
+                {event.cancelledAt && (
+                  <p>{t('eventDetail.cancelledOn', { date: formatAnkaraDateTime(event.cancelledAt, locale) })}</p>
+                )}
+                {role && role !== 'organizer' && (
+                  <p>{t('eventDetail.cancelledRegistrationKept', { role: t(`roles.${role}`) })}</p>
+                )}
+              </div>
+            </div>
+          )}
           {past && !cancelled && (
             <p>{role ? t('eventDetail.pastNoteParticipated') : t('eventDetail.pastNote')}</p>
           )}

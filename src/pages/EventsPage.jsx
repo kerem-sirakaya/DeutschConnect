@@ -4,7 +4,14 @@ import { useI18n } from '../i18n/LanguageContext.jsx';
 import { useAppState } from '../state/AppStateContext.jsx';
 import { schools } from '../data/schools.js';
 import { EVENT_FORMATS, TOPICS } from '../data/topics.js';
-import { filterEvents, getEventRecommendations, getEventRole, getMyEvents } from '../lib/selectors.js';
+import {
+  EVENT_STATUS_FILTERS,
+  countEventsByStatusFilter,
+  filterEvents,
+  getEventRecommendations,
+  getEventRole,
+  getMyEvents,
+} from '../lib/selectors.js';
 import { describeMatch } from '../lib/reasons.js';
 import PageHeader from '../components/PageHeader.jsx';
 import Tabs from '../components/Tabs.jsx';
@@ -137,7 +144,14 @@ function ForYou({ recommendations }) {
   );
 }
 
-const FILTER_DEFAULTS = { q: '', time: 'upcoming', school: 'all', topic: 'all', format: 'all' };
+const FILTER_DEFAULTS = { q: '', time: 'upcoming', school: 'all', topic: 'all', format: 'all', status: 'all' };
+
+// Feste Schlüssel, damit der i18n-Test jeden Text findet
+const STATUS_FILTER_OPTIONS = [
+  { value: 'all', labelKey: 'events.statusFilter.all' },
+  { value: 'scheduled', labelKey: 'events.statusFilter.scheduled' },
+  { value: 'cancelled', labelKey: 'events.statusFilter.cancelled' },
+];
 
 function AllEvents({ now }) {
   const { t } = useI18n();
@@ -164,11 +178,11 @@ function AllEvents({ now }) {
     (key) => filters[key] !== FILTER_DEFAULTS[key],
   ).length;
 
-  const results = filterEvents(
-    events,
-    { query: filters.q, timeframe: filters.time, schoolId: filters.school, topic: filters.topic, format: filters.format },
-    now,
-  );
+  const status = EVENT_STATUS_FILTERS.includes(filters.status) ? filters.status : 'all';
+  const baseFilters = { query: filters.q, timeframe: filters.time, schoolId: filters.school, topic: filters.topic, format: filters.format };
+  const results = filterEvents(events, { ...baseFilters, status }, now);
+  // Zahlen je Status – mit denselben übrigen Filtern, aus den für Schüler:innen sichtbaren Events
+  const statusCounts = countEventsByStatusFilter(events, baseFilters, now);
 
   const all = { value: 'all', label: t('events.all') };
 
@@ -192,6 +206,22 @@ function AllEvents({ now }) {
           <Icon name="sliders" size={18} />
           <span>{activeFilterCount ? t('events.filtersActive', { count: activeFilterCount }) : t('events.filters')}</span>
         </button>
+      </div>
+
+      {/* Status: Alle | Geplant (planned + confirmed) | Abgesagt – Wechsel ohne Neuladen (?status=…) */}
+      <div className="tabs tabs--status" role="group" aria-label={t('events.statusFilter.label')}>
+        {STATUS_FILTER_OPTIONS.map((option) => (
+          <button
+            key={option.value}
+            type="button"
+            className={`tabs__item tabs__item--${option.value}`}
+            aria-pressed={status === option.value}
+            onClick={() => setFilter('status', option.value)}
+          >
+            <span>{t(option.labelKey)}</span>
+            <span className="tabs__count">{statusCounts[option.value]}</span>
+          </button>
+        ))}
       </div>
 
       <FilterChips
@@ -246,8 +276,8 @@ function AllEvents({ now }) {
       ) : (
         <EmptyState
           icon="search"
-          title={t('events.noResultsTitle')}
-          text={t('events.noResultsText')}
+          title={t(status === 'cancelled' ? 'events.noCancelledTitle' : 'events.noResultsTitle')}
+          text={t(status === 'cancelled' ? 'events.noCancelledText' : 'events.noResultsText')}
           action={
             <button type="button" className="btn btn--secondary btn--sm" onClick={resetFilters}>
               {t('events.resetFilters')}

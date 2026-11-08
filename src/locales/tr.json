@@ -23,7 +23,8 @@
     "me": "Alanım",
     "meShort": "Alanım",
     "about": "DeutschConnect Hakkında",
-    "mainLabel": "Ana gezinme"
+    "mainLabel": "Ana gezinme",
+    "admin": "Yönetici alanı"
   },
   "profileMenu": {
     "open": "Profil menüsünü aç (demo profili: {name})",
@@ -80,16 +81,18 @@
   },
   "status": {
     "event": {
-      "planned": "Planlanıyor",
+      "planned": "Planlandı",
       "confirmed": "Onaylandı",
       "completed": "Tamamlandı",
-      "cancelled": "İptal edildi"
+      "cancelled": "İptal edildi",
+      "draft": "Taslak"
     },
     "idea": {
       "submitted": "Gönderildi",
       "collecting": "İlgi topluyor",
       "review": "İnceleniyor",
-      "planned": "Planlanıyor"
+      "planned": "Planlanıyor",
+      "rejected": "Onaylanmadı"
     },
     "project": {
       "active": "Aktif",
@@ -156,7 +159,23 @@
     "noResultsTitle": "Uygun etkinlik bulunamadı",
     "noResultsText": "Aramanı değiştir ya da filtreleri sıfırla.",
     "noRealEventsTitle": "Henüz planlanmış etkinlik yok",
-    "noRealEventsText": "DeutschConnect ekibi bir etkinlik eklediğinde burada görünecek."
+    "noRealEventsText": "DeutschConnect ekibi bir etkinlik eklediğinde burada görünecek.",
+    "statusFilter": {
+      "label": "Duruma göre filtrele",
+      "all": "Tümü",
+      "scheduled": "Planlandı",
+      "cancelled": "İptal edildi"
+    },
+    "noCancelledTitle": "Şu anda iptal edilen etkinlik yok.",
+    "noCancelledText": "İptal edilen etkinlikler iptalden sonra 24 saat görünür kalır.",
+    "card": {
+      "eventStatus": "Etkinlik:",
+      "eventStatusSr": "Etkinlik durumu:",
+      "yourStatus": "Sen:",
+      "yourStatusSr": "Katılımın:",
+      "cancelled": "Bu etkinlik iptal edildi – gerçekleşmeyecek.",
+      "cancelledOn": "{date} tarihinde iptal edildi (Ankara) – gerçekleşmeyecek."
+    }
   },
   "eventDetail": {
     "notFound": "Etkinlik bulunamadı",
@@ -182,10 +201,14 @@
     "pastNote": "Bu etkinlik sona erdi.",
     "pastNoteParticipated": "Bu etkinlik sona erdi. Geri bildirimler ilerideki bir sürümde toplanacak.",
     "cancelledNote": "Bu etkinlik iptal edildi.",
+    "cancelledOn": "{date} tarihinde iptal edildi (Ankara).",
+    "cancelledRegistrationKept": "Katılımın kayıtlı kalır: {role}. Etkinliğin kendisi gerçekleşmeyecek.",
     "closedNote": "Bu etkinlik için artık yeni kayıt yapılamıyor.",
     "savedToAccount": "Kayıt ve ilgi hesabına kaydedilir. „İlgileniyorum“ bağlayıcı bir kayıt değildir.",
     "errors": {
       "closed": "Bu etkinliğe artık kayıt olunamıyor (örneğin etkinlik başladığı için).",
+      "full": "Bu etkinliğin kontenjanı maalesef doldu. Bunun yerine ilgini gösterebilirsin.",
+      "technical": "Kaydederken teknik bir hata oluştu. Lütfen daha sonra tekrar dene veya ekibe haber ver.",
       "conflict": "Kaydın bu arada değişti. Güncel durum gösteriliyor.",
       "network": "Sunucuya bağlanılamadı. Lütfen tekrar dene.",
       "generic": "Bu işlem başarısız oldu. Lütfen tekrar dene."
@@ -240,6 +263,7 @@
     "createdHint": "Demo modunda yalnızca bu tarayıcıda görünür.",
     "createdHintAccount": "DeutschConnect ekibi onayladığında fikrin başkaları tarafından görülebilir.",
     "awaitingApproval": "Onay bekliyor – şu anda bu fikri yalnızca sen görebilirsin.",
+    "rejectedText": "DeutschConnect ekibi bu fikri onaylamadı. Fikir hâlâ yalnızca sana görünür ve desteklenemez. Fikri silebilir veya düzenlenmiş yeni bir fikir gönderebilirsin.",
     "from": "Gönderen",
     "fromYou": "Sen",
     "fromStudentOf": "{school} öğrencisi",
@@ -251,7 +275,8 @@
       "submitted": "Gönderildi",
       "collecting": "İlgi toplama",
       "review": "Okul incelemesi",
-      "planned": "Planlama"
+      "planned": "Planlama",
+      "rejected": "Onaylanmadı"
     },
     "approvalNote": "Çok destek almak, fikrin otomatik olarak hayata geçeceği anlamına gelmez. Okullar her fikri inceler.",
     "supportTitle": "Destek",
@@ -470,5 +495,277 @@
     "title": "Sayfa bulunamadı",
     "text": "Bu sayfa mevcut değil.",
     "home": "Ana sayfaya git"
+  },
+  "admin": {
+    "badge": "Yönetici alanı",
+    "navLabel": "Yönetici menüsü",
+    "nav": {
+      "overview": "Genel bakış",
+      "events": "Etkinlikler",
+      "ideas": "Fikirler"
+    },
+    "loading": "Erişim kontrol ediliyor …",
+    "denied": {
+      "title": "Erişim yok",
+      "text": "Bu alan yalnızca pilot ekibi içindir.",
+      "hint": "Giriş yaptın ancak yönetici yetkin yok. Bir hata olduğunu düşünüyorsan ekibe başvur."
+    },
+    "statusError": {
+      "title": "Erişim kontrol edilemedi",
+      "retry": "Tekrar kontrol et"
+    },
+    "overview": {
+      "title": "DeutschConnect yönetici paneline hoş geldin",
+      "subtitle": "Burada DeutschConnect’teki etkinliklere ve güncel duruma genel bir bakış bulursun.",
+      "context": "{name} olarak giriş yapıldı · {date}",
+      "contextNoName": "{date}",
+      "statsTitle": "Temel sayılar",
+      "statsLoading": "Sayılar yükleniyor …",
+      "statsUnavailable": "Sayılar henüz kullanılamıyor: Veritabanında migration 010 (admin_get_overview_stats) eksik. Hızlı erişim ve etkinlik akışı yine de çalışır.",
+      "valueUnavailable": "kullanılamıyor",
+      "stats": {
+        "students": {
+          "label": "Kayıtlı öğrenciler",
+          "desc": "Profili olan hesaplar, yöneticiler hariç"
+        },
+        "upcoming": {
+          "label": "Yaklaşan etkinlikler",
+          "desc": "Yayınlanmış ve ileri tarihli"
+        },
+        "registrations": {
+          "label": "Toplam kayıt",
+          "desc": "Kesin kayıtlar, “ilgileniyor” hariç"
+        },
+        "pending": {
+          "label": "İncelenecek fikirler",
+          "desc": "Gönderildi, onay bekliyor"
+        },
+        "archived": {
+          "label": "Arşivlenen etkinlikler",
+          "desc": "Öğrencilerden gizlendi, bilgiler korunur",
+          "unavailable": "Migration 008’den sonra kullanılabilir"
+        }
+      },
+      "quickTitle": "Hızlı erişim",
+      "quick": {
+        "createEvent": {
+          "label": "Yeni etkinlik oluştur",
+          "desc": "Taslak olarak kaydet"
+        },
+        "manageEvents": {
+          "label": "Etkinlikleri yönet",
+          "desc": "Yayınla, iptal et, düzenle"
+        },
+        "reviewIdeas": {
+          "label": "Gönderilen fikirleri incele",
+          "desc": "Onayla veya reddet"
+        },
+        "manageIdeas": {
+          "label": "Tüm fikirleri yönet",
+          "desc": "Durumu değiştir veya sil"
+        }
+      },
+      "activityTitle": "Etkinlik akışı",
+      "activityNote": "En son oluşturulan etkinlikler ve gönderilen fikirler – tüm değişikliklerin tam kaydı değildir.",
+      "activityLoading": "Etkinlik akışı yükleniyor …",
+      "activityEmpty": "Henüz etkinlik veya fikir yok.",
+      "activityEventCreated": "Etkinlik oluşturuldu",
+      "activityIdeaSubmitted": "Fikir gönderildi",
+      "activityUntitled": "Başlıksız"
+    },
+    "events": {
+      "title": "Etkinlikleri yönet",
+      "subtitle": "Etkinlik oluştur, yayınla, iptal et ve tamamla.",
+      "new": "Yeni etkinlik",
+      "loading": "Etkinlikler yükleniyor …",
+      "statsTitle": "Etkinlik özeti",
+      "stats": {
+        "all": "Toplam"
+      },
+      "filters": {
+        "all": "Tümü",
+        "archived": "Arşivlendi"
+      },
+      "empty": {
+        "all": "Henüz etkinlik yok. İlkini taslak olarak oluştur.",
+        "filtered": "Bu durumda etkinlik yok."
+      },
+      "when": "{date} (Ankara)",
+      "host": "Ev sahibi: {school}",
+      "noLocation": "Yer belirtilmedi",
+      "offline": "Yüz yüze",
+      "registered_one": "{count} kayıtlı",
+      "registered_other": "{count} kayıtlı",
+      "interested_one": "{count} ilgili",
+      "interested_other": "{count} ilgili",
+      "capacity": "{taken}/{capacity} yer dolu",
+      "noCapacity": "Kontenjan sınırı yok",
+      "draftHint": "Taslak – yalnızca yöneticiler görebilir, öğrenciler bu etkinliği henüz görmüyor.",
+      "archived": "Arşivlendi",
+      "archivedHint": "{date} tarihinde arşivlendi (Ankara) – öğrenciler artık göremez. Tüm bilgiler ve kayıtlar korunur.",
+      "final": "Tamamlandı veya iptal edildi – durum artık değiştirilemez.",
+      "timeZoneNote": "Tüm saatler Ankara saatidir (UTC+3). Yayınlanmış etkinlikler silinmez, iptal edilir – böylece kayıtlar izlenebilir kalır.",
+      "actions": {
+        "edit": "Düzenle",
+        "publish": "Yayınla",
+        "publishConfirmed": "Onaylı olarak yayınla",
+        "confirm": "Onayla",
+        "cancel": "İptal et",
+        "complete": "Tamamla",
+        "delete": "Taslağı sil"
+      },
+      "confirm": {
+        "publish": "“{title}” yayınlansın mı? Giriş yapmış tüm öğrenciler etkinliği görür ve kayıt olabilir. Tarih ileride olmalıdır. Yayınlanmış bir etkinlik tekrar taslak olamaz.",
+        "publishConfirmed": "“{title}” doğrudan onaylı olarak yayınlansın mı? Öğrenciler etkinliği hemen “Onaylandı” olarak görür ve kayıt olabilir. Tarih ileride olmalıdır.",
+        "confirm": "“{title}” onaylandı olarak işaretlensin mi? Öğrenciler etkinliğin kesin olarak gerçekleşeceğini görür.",
+        "cancel": "“{title}” iptal edilsin mi? Etkinlik görünür kalır ancak iptal edildi olarak gösterilir; yeni kayıt yapılamaz. Otomatik bildirim yoktur – kayıtlı kişilere ayrıca haber ver. Bu adım kesindir.",
+        "complete": "“{title}” tamamlandı olarak işaretlensin mi? Bu ancak etkinlik başladıktan sonra mümkündür. Bu adım kesindir.",
+        "delete": "“{title}” taslağı kalıcı olarak silinsin mi? Bu işlem geri alınamaz."
+      },
+      "statusChanged": "“{title}” artık “{status}” durumunda.",
+      "deleted": "“{title}” taslağı silindi.",
+      "created": "“{title}” taslak olarak kaydedildi. Her şey hazır olduğunda yayınla.",
+      "updated": "“{title}” üzerindeki değişiklikler kaydedildi.",
+      "groups": {
+        "planned": {
+          "title": "Planlanan etkinlikler",
+          "empty": "Planlanan etkinlik yok."
+        },
+        "cancelled": {
+          "title": "İptal edilen etkinlikler",
+          "empty": "İptal edilen etkinlik yok."
+        },
+        "draft": {
+          "title": "Taslaklar",
+          "empty": "Taslak yok."
+        },
+        "completed": {
+          "title": "Tamamlanan etkinlikler",
+          "empty": "Tamamlanan etkinlik yok."
+        },
+        "archived": {
+          "title": "Arşivlenen etkinlikler",
+          "empty": "Arşivlenen etkinlik yok."
+        }
+      },
+      "groupCount_one": "{count} etkinlik",
+      "groupCount_other": "{count} etkinlik",
+      "cancelledOn": "{date} tarihinde iptal edildi (Ankara).",
+      "cancelledNote": "Bu etkinlik iptal edildi."
+    },
+    "ideas": {
+      "title": "Fikirleri denetle",
+      "subtitle": "Gönderilen fikirleri incele, onayla veya reddet.",
+      "loading": "Fikirler yükleniyor …",
+      "workloadTitle": "Denetim özeti",
+      "workload": {
+        "submitted": "Onay bekliyor",
+        "collecting": "İlgi topluyor",
+        "review": "İnceleniyor"
+      },
+      "filters": {
+        "all": "Tümü"
+      },
+      "empty": {
+        "all": "Henüz hiç fikir gönderilmedi.",
+        "submitted": "Bekleyen fikir yok – hepsi tamam.",
+        "filtered": "Bu durumda fikir yok."
+      },
+      "supporters_one": "{count} destekçi",
+      "supporters_other": "{count} destekçi",
+      "submittedAt": "{date} gönderildi",
+      "actions": {
+        "approve": "Onayla",
+        "reject": "Reddet",
+        "toReview": "İncelemeye al",
+        "toPlanned": "Planlandı olarak işaretle",
+        "backToCollecting": "“İlgi topluyor” durumuna geri al",
+        "reopen": "Yeniden incelemeye aç",
+        "delete": "Fikri sil"
+      },
+      "confirm": {
+        "approve": "“{title}” onaylansın mı? Fikir bundan sonra giriş yapmış tüm öğrencilere görünür ve desteklenebilir.",
+        "reject": "“{title}” reddedilsin mi? Fikir bundan sonra yalnızca gönderen kişiye görünür.",
+        "toReview": "“{title}” incelemeye alınsın mı? Fikir herkese görünür kalır – okullar uygulanabilirliği inceler.",
+        "toPlanned": "“{title}” planlandı olarak işaretlensin mi? Bu adım kesindir ve geri alınamaz.",
+        "backToCollecting": "“{title}” “İlgi topluyor” durumuna geri alınsın mı? Fikir herkese görünür kalır.",
+        "reopen": "“{title}” yeniden incelemeye açılsın mı? Fikir, tekrar onaylayana kadar gizli kalır.",
+        "delete": "“{title}” kalıcı olarak silinsin mi? Fikir ve tüm destekleri kalıcı olarak kaldırılır – gönderen kişi için de. Bu işlem geri alınamaz."
+      },
+      "success": "“{title}” artık “{status}” durumunda.",
+      "deleted": "“{title}” silindi.",
+      "final": "Planlandı – başka denetim adımı yok.",
+      "privacyNote": "Fikri kimin gönderdiği burada bilerek gösterilmez."
+    },
+    "saving": "Kaydediliyor …",
+    "actionsLabel": "“{title}” için işlemler",
+    "refresh": "Yenile",
+    "filtersLabel": "Duruma göre filtrele",
+    "eventForm": {
+      "newTitle": "Yeni etkinlik",
+      "newSubtitle": "Etkinlik taslak olarak kaydedilir ve ancak yayınlandıktan sonra öğrencilere görünür.",
+      "editTitle": "Etkinliği düzenle",
+      "editSubtitle": "Etkinliğin tüm bilgileri birlikte kaydedilir.",
+      "statusNote": "Durum burada değiştirilmez – bunun için etkinlik listesindeki düğmeler var.",
+      "optional": "isteğe bağlı",
+      "languagesHint": "En az bir dili doldur, mümkünse üçünü de.",
+      "titleLabel": "Başlık",
+      "summaryLabel": "Kısa açıklama",
+      "descriptionLabel": "Açıklama",
+      "locationLabel": "Yer",
+      "audienceLabel": "Hedef kitle",
+      "startLabel": "Tarih ve saat",
+      "startHint": "Ankara saati (UTC+3) – şu an nerede olduğundan bağımsız.",
+      "startLocked": "İptal edilmiş veya tamamlanmış bir etkinliğin tarihi artık değiştirilemez.",
+      "durationLabel": "Süre (dakika)",
+      "onlineLabel": "Çevrim içi gerçekleşir",
+      "schoolsLabel": "Katılan okullar",
+      "hostLabel": "Ev sahibi okul",
+      "hostPlaceholder": "Lütfen seç …",
+      "capacityLabel": "Maksimum katılımcı sayısı",
+      "capacityHint": "Kaç öğrenci kesin kayıt yaptırabilir? Boş bırakırsan sınır olmaz.",
+      "capacityPlaceholder": "sınırsız",
+      "capacityHintRegistered_one": "Zaten {count} kesin kayıt var – daha az kontenjan mümkün değil.",
+      "capacityHintRegistered_other": "Zaten {count} kesin kayıt var – daha az kontenjan mümkün değil.",
+      "topicsLabel": "Konular",
+      "draftHint": "Yeni etkinlikler her zaman taslaktır. Daha sonra etkinlik listesinden yayınlayabilirsin.",
+      "editHint": "Kaydederken durum ve kayıtlar değişmez.",
+      "saveDraft": "Taslak olarak kaydet",
+      "saveChanges": "Değişiklikleri kaydet",
+      "errors": {
+        "titleRequired": "Lütfen en az bir dilde başlık gir.",
+        "tooLong": "Her dil için en fazla {max} karakter.",
+        "startRequired": "Lütfen tarih ve saat seç.",
+        "startInvalid": "Bu tarih geçersiz.",
+        "startPast": "Tarih geçmişte kalıyor. Lütfen ileri bir zaman seç.",
+        "duration": "Süre 1 ile 1440 dakika arasında bir tam sayı olmalıdır.",
+        "capacity": "Kontenjan 1 ile 10000 arasında bir tam sayı olmalıdır.",
+        "capacityBelowRegistrations": "Zaten {count} kesin kayıt var – en az bu kadar yer gerekli.",
+        "schoolsRequired": "Lütfen en az bir katılan okul seç.",
+        "schoolsInvalid": "Okul seçimi geçersiz.",
+        "hostRequired": "Lütfen ev sahibi okulu seç.",
+        "hostNotParticipating": "Ev sahibi okul katılan okullardan biri olmalıdır.",
+        "topics": "Lütfen listeden en fazla on konu seç.",
+        "format": "Lütfen listeden bir biçim seç."
+      }
+    },
+    "errors": {
+      "notAllowed": "Bunun için yönetici yetkin yok.",
+      "invalid": "Bazı bilgiler geçersiz. Lütfen girdiklerini kontrol et.",
+      "notFound": "Kayıt bulunamadı. Bu arada silinmiş olabilir.",
+      "hasEntries": "Bu etkinliğin zaten kayıtları veya ilgilenenleri var, bu yüzden silinemez.",
+      "pastDate": "Tarih geçmişte kalıyor. Lütfen ileri bir tarih seç.",
+      "onlyDrafts": "Yalnızca taslaklar silinebilir. Yayınlanmış etkinlikleri lütfen iptal et.",
+      "transition": "Bu durum değişikliğine izin verilmiyor.",
+      "capacityTooLow": "Bu kontenjanın izin verdiğinden daha fazla kesin kayıt zaten var.",
+      "dateLocked": "İptal edilmiş veya tamamlanmış bir etkinliğin tarihi artık değiştirilemez.",
+      "notStarted": "Etkinlik henüz başlamadı, bu yüzden tamamlandı olarak işaretlenemez.",
+      "full": "Etkinliğin kontenjanı doldu.",
+      "technical": "Veritabanında teknik bir hata oluştu. Lütfen daha sonra tekrar dene veya ekibe haber ver.",
+      "ideaNotDeletable": "Bu fikir silinemez. Gönderilen fikirleri lütfen önce onayla veya reddet.",
+      "unavailable": "Bu yönetici fonksiyonu veritabanında bulunamadı. Tüm migration dosyaları (006, 007) çalıştırıldı mı?",
+      "network": "Sunucuya bağlanılamadı. Lütfen tekrar dene.",
+      "generic": "Bu işlem başarısız oldu. Lütfen tekrar dene."
+    }
   }
 }

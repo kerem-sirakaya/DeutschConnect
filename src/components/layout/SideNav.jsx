@@ -1,6 +1,7 @@
 import { Link, NavLink } from 'react-router';
 import { useI18n } from '../../i18n/LanguageContext.jsx';
 import { useAppState } from '../../state/AppStateContext.jsx';
+import { useIsAdmin } from '../../state/AdminStatusContext.jsx';
 import Avatar from '../Avatar.jsx';
 import Icon from '../Icon.jsx';
 import Logo from '../Logo.jsx';
@@ -10,6 +11,7 @@ import { NAV_ITEMS } from './navigation.js';
 export default function SideNav() {
   const { t } = useI18n();
   const { user, isRealAccount } = useAppState();
+  const { isAdmin } = useIsAdmin();
 
   return (
     <aside className="sidebar">
@@ -32,6 +34,13 @@ export default function SideNav() {
       </nav>
 
       <div className="sidebar__footer">
+        {/* Nur sichtbar, wenn die Datenbank is_admin() = true bestätigt hat */}
+        {isAdmin && (
+          <NavLink to="/admin" className="sidebar__link sidebar__link--small">
+            <Icon name="shield" size={18} />
+            <span>{t('nav.admin')}</span>
+          </NavLink>
+        )}
         <NavLink to="/about" className="sidebar__link sidebar__link--small">
           <Icon name="info" size={18} />
           <span>{t('nav.about')}</span>

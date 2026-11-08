@@ -23,7 +23,8 @@
     "me": "My Area",
     "meShort": "My Area",
     "about": "About DeutschConnect",
-    "mainLabel": "Main navigation"
+    "mainLabel": "Main navigation",
+    "admin": "Admin area"
   },
   "profileMenu": {
     "open": "Open profile menu (demo profile: {name})",
@@ -80,16 +81,18 @@
   },
   "status": {
     "event": {
-      "planned": "Being planned",
+      "planned": "Planned",
       "confirmed": "Confirmed",
       "completed": "Completed",
-      "cancelled": "Cancelled"
+      "cancelled": "Cancelled",
+      "draft": "Draft"
     },
     "idea": {
       "submitted": "Submitted",
       "collecting": "Gathering interest",
       "review": "Under review",
-      "planned": "Being planned"
+      "planned": "Being planned",
+      "rejected": "Not approved"
     },
     "project": {
       "active": "Active",
@@ -156,7 +159,23 @@
     "noResultsTitle": "No matching events",
     "noResultsText": "Change your search or reset the filters.",
     "noRealEventsTitle": "No events planned yet",
-    "noRealEventsText": "As soon as the DeutschConnect team adds an event, it will appear here."
+    "noRealEventsText": "As soon as the DeutschConnect team adds an event, it will appear here.",
+    "statusFilter": {
+      "label": "Filter by status",
+      "all": "All",
+      "scheduled": "Planned",
+      "cancelled": "Cancelled"
+    },
+    "noCancelledTitle": "There are no cancelled events at the moment.",
+    "noCancelledText": "Cancelled events stay visible for 24 hours after the cancellation.",
+    "card": {
+      "eventStatus": "Event:",
+      "eventStatusSr": "Event status:",
+      "yourStatus": "You:",
+      "yourStatusSr": "Your participation:",
+      "cancelled": "This event has been cancelled – it will not take place.",
+      "cancelledOn": "Cancelled on {date} (Ankara) – will not take place."
+    }
   },
   "eventDetail": {
     "notFound": "Event not found",
@@ -182,10 +201,14 @@
     "pastNote": "This event is already over.",
     "pastNoteParticipated": "This event is over. Feedback will be collected in a later version.",
     "cancelledNote": "This event has been cancelled.",
+    "cancelledOn": "Cancelled on {date} (Ankara).",
+    "cancelledRegistrationKept": "Your participation stays saved: {role}. The event itself will not take place.",
     "closedNote": "New sign-ups are no longer possible for this event.",
     "savedToAccount": "Sign-ups and interest are saved to your account. “Interested” is not a binding sign-up.",
     "errors": {
       "closed": "Signing up for this event is no longer possible (e.g. because it has already started).",
+      "full": "Sorry, this event is fully booked. You can show your interest instead.",
+      "technical": "A technical error occurred while saving. Please try again later or let the team know.",
       "conflict": "Your entry has changed in the meantime. The current state is shown.",
       "network": "Cannot reach the server. Please try again.",
       "generic": "That did not work. Please try again."
@@ -240,6 +263,7 @@
     "createdHint": "In demo mode it is only visible in this browser.",
     "createdHintAccount": "Others will see your idea once the DeutschConnect team has approved it.",
     "awaitingApproval": "Awaiting approval – so far only you can see this idea.",
+    "rejectedText": "The DeutschConnect team did not approve this idea. It is still only visible to you and cannot be supported. You can delete it or submit a revised idea.",
     "from": "From",
     "fromYou": "You",
     "fromStudentOf": "A student at {school}",
@@ -251,7 +275,8 @@
       "submitted": "Submitted",
       "collecting": "Gathering interest",
       "review": "School review",
-      "planned": "Planning"
+      "planned": "Planning",
+      "rejected": "Not approved"
     },
     "approvalNote": "Lots of support does not automatically mean an idea will happen. The schools review every idea.",
     "supportTitle": "Support",
@@ -470,5 +495,277 @@
     "title": "Page not found",
     "text": "This page does not exist (anymore).",
     "home": "Go to home"
+  },
+  "admin": {
+    "badge": "Admin area",
+    "navLabel": "Admin navigation",
+    "nav": {
+      "overview": "Overview",
+      "events": "Events",
+      "ideas": "Ideas"
+    },
+    "loading": "Checking access …",
+    "denied": {
+      "title": "No access",
+      "text": "This area is only for the pilot team.",
+      "hint": "You are signed in but do not have admin permissions. If you think this is a mistake, contact the team."
+    },
+    "statusError": {
+      "title": "Access could not be checked",
+      "retry": "Check again"
+    },
+    "overview": {
+      "title": "Welcome to the DeutschConnect admin dashboard",
+      "subtitle": "Here you get an overview of the activity and current state of DeutschConnect.",
+      "context": "Signed in as {name} · {date}",
+      "contextNoName": "{date}",
+      "statsTitle": "Key figures",
+      "statsLoading": "Loading key figures …",
+      "statsUnavailable": "The key figures are not available yet: migration 010 (admin_get_overview_stats) is missing in the database. Quick access and activity still work.",
+      "valueUnavailable": "not available",
+      "stats": {
+        "students": {
+          "label": "Registered students",
+          "desc": "Accounts with a profile, excluding admins"
+        },
+        "upcoming": {
+          "label": "Upcoming events",
+          "desc": "Published and in the future"
+        },
+        "registrations": {
+          "label": "Total sign-ups",
+          "desc": "Confirmed sign-ups, excluding “interested”"
+        },
+        "pending": {
+          "label": "Ideas to review",
+          "desc": "Submitted, awaiting approval"
+        },
+        "archived": {
+          "label": "Archived events",
+          "desc": "Hidden from students, data is kept",
+          "unavailable": "Available after migration 008"
+        }
+      },
+      "quickTitle": "Quick access",
+      "quick": {
+        "createEvent": {
+          "label": "Create new event",
+          "desc": "Save as a draft"
+        },
+        "manageEvents": {
+          "label": "Manage events",
+          "desc": "Publish, cancel, edit"
+        },
+        "reviewIdeas": {
+          "label": "Review submitted ideas",
+          "desc": "Approve or reject"
+        },
+        "manageIdeas": {
+          "label": "Manage all ideas",
+          "desc": "Change status or delete"
+        }
+      },
+      "activityTitle": "Activity",
+      "activityNote": "Recently created events and submitted ideas – not a complete log of all changes.",
+      "activityLoading": "Loading activity …",
+      "activityEmpty": "There are no events or ideas yet.",
+      "activityEventCreated": "Event created",
+      "activityIdeaSubmitted": "Idea submitted",
+      "activityUntitled": "Untitled"
+    },
+    "events": {
+      "title": "Manage events",
+      "subtitle": "Create, publish, cancel and complete events.",
+      "new": "New event",
+      "loading": "Loading events …",
+      "statsTitle": "Event overview",
+      "stats": {
+        "all": "Total"
+      },
+      "filters": {
+        "all": "All",
+        "archived": "Archived"
+      },
+      "empty": {
+        "all": "There are no events yet. Create the first one as a draft.",
+        "filtered": "No events with this status."
+      },
+      "when": "{date} (Ankara)",
+      "host": "Host: {school}",
+      "noLocation": "No location given",
+      "offline": "In person",
+      "registered_one": "{count} signed up",
+      "registered_other": "{count} signed up",
+      "interested_one": "{count} interested",
+      "interested_other": "{count} interested",
+      "capacity": "{taken}/{capacity} places taken",
+      "noCapacity": "No limit on places",
+      "draftHint": "Draft – only visible to admins; students cannot see this event yet.",
+      "archived": "Archived",
+      "archivedHint": "Archived on {date} (Ankara) – no longer visible to students. All details and sign-ups are kept.",
+      "final": "Completed or cancelled – the status can no longer be changed.",
+      "timeZoneNote": "All times are Ankara time (UTC+3). Published events are cancelled, not deleted, so sign-ups remain traceable.",
+      "actions": {
+        "edit": "Edit",
+        "publish": "Publish",
+        "publishConfirmed": "Publish as confirmed",
+        "confirm": "Confirm",
+        "cancel": "Cancel event",
+        "complete": "Complete",
+        "delete": "Delete draft"
+      },
+      "confirm": {
+        "publish": "Publish “{title}”? All signed-in students will see the event and can sign up. The date must be in the future. A published event cannot become a draft again.",
+        "publishConfirmed": "Publish “{title}” directly as confirmed? Students will immediately see the event as “Confirmed” and can sign up. The date must be in the future.",
+        "confirm": "Mark “{title}” as confirmed? Students will see that the event will definitely take place.",
+        "cancel": "Cancel “{title}”? The event stays visible but is shown as cancelled; new sign-ups are no longer possible. There is no automatic notification – please also inform those who signed up. This step is final.",
+        "complete": "Mark “{title}” as completed? This is only possible once the event has started. This step is final.",
+        "delete": "Permanently delete the draft “{title}”? This cannot be undone."
+      },
+      "statusChanged": "“{title}” now has the status “{status}”.",
+      "deleted": "The draft “{title}” was deleted.",
+      "created": "“{title}” was saved as a draft. Publish it once everything is correct.",
+      "updated": "The changes to “{title}” were saved.",
+      "groups": {
+        "planned": {
+          "title": "Planned events",
+          "empty": "No planned events."
+        },
+        "cancelled": {
+          "title": "Cancelled events",
+          "empty": "No cancelled events."
+        },
+        "draft": {
+          "title": "Drafts",
+          "empty": "No drafts."
+        },
+        "completed": {
+          "title": "Completed events",
+          "empty": "No completed events."
+        },
+        "archived": {
+          "title": "Archived events",
+          "empty": "No archived events."
+        }
+      },
+      "groupCount_one": "{count} event",
+      "groupCount_other": "{count} events",
+      "cancelledOn": "Cancelled on {date} (Ankara).",
+      "cancelledNote": "This event has been cancelled."
+    },
+    "ideas": {
+      "title": "Moderate ideas",
+      "subtitle": "Review, approve or reject submitted ideas.",
+      "loading": "Loading ideas …",
+      "workloadTitle": "Moderation overview",
+      "workload": {
+        "submitted": "Awaiting approval",
+        "collecting": "Gathering interest",
+        "review": "Under review"
+      },
+      "filters": {
+        "all": "All"
+      },
+      "empty": {
+        "all": "No ideas have been submitted yet.",
+        "submitted": "No open ideas – all done.",
+        "filtered": "No ideas with this status."
+      },
+      "supporters_one": "{count} supporter",
+      "supporters_other": "{count} supporters",
+      "submittedAt": "Submitted {date}",
+      "actions": {
+        "approve": "Approve",
+        "reject": "Reject",
+        "toReview": "Move to review",
+        "toPlanned": "Mark as planned",
+        "backToCollecting": "Back to “Gathering interest”",
+        "reopen": "Reopen for review",
+        "delete": "Delete idea"
+      },
+      "confirm": {
+        "approve": "Approve “{title}”? The idea will then be visible to all signed-in students and can be supported.",
+        "reject": "Reject “{title}”? The idea will then only be visible to the person who submitted it.",
+        "toReview": "Move “{title}” to review? The idea stays publicly visible – the schools check whether it can be done.",
+        "toPlanned": "Mark “{title}” as planned? This step is final and cannot be undone.",
+        "backToCollecting": "Move “{title}” back to “Gathering interest”? The idea stays publicly visible.",
+        "reopen": "Reopen “{title}” for review? The idea stays private until you approve it again.",
+        "delete": "Permanently delete “{title}”? The idea and all of its support will be removed for good – also for the person who submitted it. This cannot be undone."
+      },
+      "success": "“{title}” now has the status “{status}”.",
+      "deleted": "“{title}” was deleted.",
+      "final": "Planned – no further moderation steps possible.",
+      "privacyNote": "Who submitted an idea is intentionally not shown here."
+    },
+    "saving": "Saving …",
+    "actionsLabel": "Actions for “{title}”",
+    "refresh": "Refresh",
+    "filtersLabel": "Filter by status",
+    "eventForm": {
+      "newTitle": "New event",
+      "newSubtitle": "The event is saved as a draft and only becomes visible to students once it is published.",
+      "editTitle": "Edit event",
+      "editSubtitle": "All details of the event are saved together.",
+      "statusNote": "The status is not changed here – use the buttons in the event list for that.",
+      "optional": "optional",
+      "languagesHint": "Fill in at least one language, ideally all three.",
+      "titleLabel": "Title",
+      "summaryLabel": "Short description",
+      "descriptionLabel": "Description",
+      "locationLabel": "Location",
+      "audienceLabel": "Audience",
+      "startLabel": "Date and time",
+      "startHint": "Ankara time (UTC+3) – regardless of where you are right now.",
+      "startLocked": "The date of a cancelled or completed event can no longer be changed.",
+      "durationLabel": "Duration in minutes",
+      "onlineLabel": "Takes place online",
+      "schoolsLabel": "Participating schools",
+      "hostLabel": "Host school",
+      "hostPlaceholder": "Please choose …",
+      "capacityLabel": "Maximum number of participants",
+      "capacityHint": "How many students can sign up? Leave empty for no limit.",
+      "capacityPlaceholder": "unlimited",
+      "capacityHintRegistered_one": "There is already {count} confirmed sign-up – fewer places are not possible.",
+      "capacityHintRegistered_other": "There are already {count} confirmed sign-ups – fewer places are not possible.",
+      "topicsLabel": "Topics",
+      "draftHint": "New events are always drafts. You can publish them afterwards in the event list.",
+      "editHint": "Status and sign-ups stay unchanged when saving.",
+      "saveDraft": "Save as draft",
+      "saveChanges": "Save changes",
+      "errors": {
+        "titleRequired": "Please enter a title in at least one language.",
+        "tooLong": "At most {max} characters per language.",
+        "startRequired": "Please choose a date and time.",
+        "startInvalid": "This date is invalid.",
+        "startPast": "The date is in the past. Please choose a time in the future.",
+        "duration": "The duration must be a whole number between 1 and 1440 minutes.",
+        "capacity": "Places must be a whole number between 1 and 10000.",
+        "capacityBelowRegistrations": "There are already {count} confirmed sign-ups – at least that many places are needed.",
+        "schoolsRequired": "Please choose at least one participating school.",
+        "schoolsInvalid": "The school selection is invalid.",
+        "hostRequired": "Please choose the host school.",
+        "hostNotParticipating": "The host school must be one of the participating schools.",
+        "topics": "Please choose at most ten topics from the list.",
+        "format": "Please choose a format from the list."
+      }
+    },
+    "errors": {
+      "notAllowed": "You do not have admin permissions for this.",
+      "invalid": "Some details are invalid. Please check your input.",
+      "notFound": "The entry was not found. It may have been deleted in the meantime.",
+      "hasEntries": "This event already has sign-ups or interested students and cannot be deleted.",
+      "pastDate": "The date is in the past. Please choose a future date.",
+      "onlyDrafts": "Only drafts can be deleted. Please cancel published events instead.",
+      "transition": "This status change is not allowed.",
+      "capacityTooLow": "There are already more confirmed sign-ups than this number of places allows.",
+      "dateLocked": "The date of a cancelled or completed event can no longer be changed.",
+      "notStarted": "The event has not started yet, so it cannot be marked as completed.",
+      "full": "The event is fully booked.",
+      "technical": "A technical database error occurred. Please try again later or let the team know.",
+      "ideaNotDeletable": "This idea cannot be deleted. Please approve or reject submitted ideas first.",
+      "unavailable": "This admin function is not available in the database. Have all migrations (006, 007) been run?",
+      "network": "Cannot reach the server. Please try again.",
+      "generic": "That did not work. Please try again."
+    }
   }
 }

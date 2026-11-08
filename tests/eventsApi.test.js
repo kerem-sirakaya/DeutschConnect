@@ -122,6 +122,8 @@ test('Interesse zählt nicht als Anmeldung, bleibt aber unter "Meine Events" sic
 test('Fehler beim Speichern werden verständlichen Texten zugeordnet', () => {
   assert.equal(registrationErrorKey({ code: '42501' }), 'eventDetail.errors.closed');
   assert.equal(registrationErrorKey({ code: '23505' }), 'eventDetail.errors.conflict');
+  assert.equal(registrationErrorKey({ code: 'DC008' }), 'eventDetail.errors.full');
+  assert.equal(registrationErrorKey({ code: 'DC009' }), 'eventDetail.errors.technical');
   assert.equal(registrationErrorKey({ name: 'TypeError', message: 'Failed to fetch' }), 'eventDetail.errors.network');
   assert.equal(registrationErrorKey({ code: 'XX' }), 'eventDetail.errors.generic');
   assert.equal(registrationErrorKey(null), null);

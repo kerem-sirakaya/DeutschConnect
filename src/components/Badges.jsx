@@ -3,8 +3,9 @@ import { getSchool } from '../data/schools.js';
 import Icon from './Icon.jsx';
 
 const STATUS_TONES = {
-  event: { planned: 'neutral', confirmed: 'success', completed: 'muted', cancelled: 'danger' },
-  idea: { submitted: 'info', collecting: 'info', review: 'warning', planned: 'success' },
+  // draft = noch nicht veröffentlicht (nur Admins sehen es), rejected = nur die Autor:in sieht es
+  event: { draft: 'muted', planned: 'neutral', confirmed: 'success', completed: 'muted', cancelled: 'danger' },
+  idea: { submitted: 'info', collecting: 'info', review: 'warning', planned: 'success', rejected: 'danger' },
   project: { active: 'success', planning: 'neutral' },
   partnership: { initiator: 'info', interest: 'warning', confirmed: 'success' },
 };
