@@ -971,7 +971,6 @@
     },
     "projectsTitle": "Proje önerileri",
     "noProjects": "Yayımlanmış proje önerisi yok.",
-    "membershipsLater": "Proje üyelikleri bir sonraki entegrasyon aşamasıyla gelecek.",
     "sharingTitle": "Profil paylaşımı",
     "sharingSubtitle": "Diğerlerinin ne göreceğine sen karar verirsin.",
     "sharingRowHint": "Herkese açık profil ve tek tek bilgiler",
@@ -982,7 +981,7 @@
       "isPublicHint": "Giriş yapmış diğer öğrenciler adını görür. Hesabı olmayan ziyaretçiler hiçbir şey görmez.",
       "school": "Okulu göster",
       "interests": "İlgi alanlarını göster",
-      "projects": "Kendi yayımlanmış proje önerilerimi göster",
+      "projects": "Proje önerilerini ve proje üyeliklerini göster",
       "activity": "Etkinlik sayılarını göster (proje fikirleri, etkinlik katılımları, destekler)"
     },
     "fieldsLegend": "Ek olarak paylaş",
@@ -1011,6 +1010,55 @@
       "tutoringOffers": "Aktif teklifler",
       "tutoringRequests": "Aktif talepler",
       "tutoringContacts": "Kabul edilen bağlantılar"
+    }
+  },
+  "projects": {
+    "title": "Katıl",
+    "demoHint": "Demo modunda katılım mümkün değil. Gerçek bir hesapla projede yer alıp alamayacağını sorabilirsin.",
+    "loginLink": "Katılmak için giriş yap",
+    "loading": "Proje verileri yükleniyor …",
+    "memberCount_one": "{count} üye",
+    "memberCount_other": "{count} üye",
+    "myStatus": {
+      "requested": "Talep gönderildi",
+      "member": "Üyesin",
+      "declined": "Talep reddedildi",
+      "left": "Ayrıldın"
+    },
+    "actions": {
+      "request": "Katılmak için talep gönder",
+      "cancel": "Talebi geri çek",
+      "leave": "Projeden ayrıl",
+      "accept": "Kabul et",
+      "decline": "Reddet"
+    },
+    "saved": {
+      "requested": "Talep gönderildi. Kararı fikir sahibi verir.",
+      "cancel": "Talep geri çekildi.",
+      "leave": "Projeden ayrıldın.",
+      "accepted": "Kabul edildi – kişi artık üye.",
+      "declined": "Talep reddedildi."
+    },
+    "closed": "Bu proje şu anda talep kabul etmiyor.",
+    "requestsTitle": "Açık talepler",
+    "noRequests": "Açık talep yok.",
+    "teamTitle": "Ekip",
+    "noMembers": "Henüz üye yok.",
+    "privacyHint": "İsimleri yalnızca fikir sahibi ve üyeler görür. Diğerleri yalnızca sayıyı görür.",
+    "noMemberships": "Henüz hiçbir projede yer almıyorsun. Yayımlanmış bir fikri aç ve katılıp katılamayacağını sor.",
+    "membershipsTitle": "Proje üyelikleri",
+    "noPublicMemberships": "Paylaşılan üyelik yok.",
+    "errors": {
+      "notInstalled": "Proje katılımı veritabanında henüz kurulmadı (Migration 013 eksik).",
+      "own": "Bu senin kendi fikrin.",
+      "exists": "Zaten talep gönderdin veya üyesin.",
+      "closed": "Bu proje açık değil.",
+      "transition": "Bu talep zaten yanıtlandı.",
+      "notFound": "Proje veya talep bulunamadı.",
+      "notAllowed": "Bunun için giriş yapmalısın.",
+      "invalid": "Geçersiz giriş.",
+      "generic": "Olmadı. Lütfen daha sonra tekrar dene.",
+      "loginRequired": "Bunun için gerçek bir hesaba ihtiyacın var."
     }
   }
 }

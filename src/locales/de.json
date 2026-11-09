@@ -971,7 +971,6 @@
     },
     "projectsTitle": "Projektvorschläge",
     "noProjects": "Keine veröffentlichten Projektvorschläge.",
-    "membershipsLater": "Projektmitgliedschaften kommen mit der nächsten Integrationsstufe.",
     "sharingTitle": "Profil-Freigabe",
     "sharingSubtitle": "Du entscheidest, was andere sehen.",
     "sharingRowHint": "Öffentliches Profil und einzelne Angaben",
@@ -982,7 +981,7 @@
       "isPublicHint": "Andere angemeldete Schüler:innen sehen dann deinen Vornamen. Besucher:innen ohne Konto sehen nichts.",
       "school": "Schule anzeigen",
       "interests": "Interessen anzeigen",
-      "projects": "Eigene veröffentlichte Projektvorschläge anzeigen",
+      "projects": "Projektvorschläge und Projekt-Mitgliedschaften anzeigen",
       "activity": "Aktivitätszahlen anzeigen (Projektideen, Event-Teilnahmen, Unterstützungen)"
     },
     "fieldsLegend": "Zusätzlich freigeben",
@@ -1011,6 +1010,55 @@
       "tutoringOffers": "Aktive Angebote",
       "tutoringRequests": "Aktive Gesuche",
       "tutoringContacts": "Angenommene Kontakte"
+    }
+  },
+  "projects": {
+    "title": "Mitmachen",
+    "demoHint": "Im Demo-Modus kann man nicht mitmachen. Mit einem echten Konto kannst du anfragen, ob du im Projekt mitwirken darfst.",
+    "loginLink": "Anmelden zum Mitmachen",
+    "loading": "Projektdaten werden geladen …",
+    "memberCount_one": "{count} Mitglied",
+    "memberCount_other": "{count} Mitglieder",
+    "myStatus": {
+      "requested": "Anfrage gesendet",
+      "member": "Du bist Mitglied",
+      "declined": "Anfrage abgelehnt",
+      "left": "Ausgetreten"
+    },
+    "actions": {
+      "request": "Mitmachen anfragen",
+      "cancel": "Anfrage zurückziehen",
+      "leave": "Projekt verlassen",
+      "accept": "Annehmen",
+      "decline": "Ablehnen"
+    },
+    "saved": {
+      "requested": "Anfrage gesendet. Die Autor:in entscheidet.",
+      "cancel": "Anfrage zurückgezogen.",
+      "leave": "Du hast das Projekt verlassen.",
+      "accepted": "Angenommen – die Person ist jetzt Mitglied.",
+      "declined": "Anfrage abgelehnt."
+    },
+    "closed": "Dieses Projekt nimmt gerade keine Anfragen an.",
+    "requestsTitle": "Offene Anfragen",
+    "noRequests": "Keine offenen Anfragen.",
+    "teamTitle": "Team",
+    "noMembers": "Noch keine Mitglieder.",
+    "privacyHint": "Namen sehen nur die Autor:in und die Mitglieder. Alle anderen sehen nur die Anzahl.",
+    "noMemberships": "Du wirkst noch an keinem Projekt mit. Öffne eine veröffentlichte Idee und frage an, ob du mitmachen darfst.",
+    "membershipsTitle": "Projekt-Mitgliedschaften",
+    "noPublicMemberships": "Keine freigegebenen Mitgliedschaften.",
+    "errors": {
+      "notInstalled": "Projekt-Mitwirkung ist in der Datenbank noch nicht eingerichtet (Migration 013 fehlt).",
+      "own": "Das ist deine eigene Idee.",
+      "exists": "Du hast schon angefragt oder bist bereits Mitglied.",
+      "closed": "Dieses Projekt ist nicht (mehr) offen.",
+      "transition": "Diese Anfrage wurde bereits beantwortet.",
+      "notFound": "Projekt oder Anfrage nicht gefunden.",
+      "notAllowed": "Dafür musst du angemeldet sein.",
+      "invalid": "Ungültige Eingabe.",
+      "generic": "Das hat nicht geklappt. Bitte später erneut versuchen.",
+      "loginRequired": "Dafür brauchst du ein echtes Konto."
     }
   }
 }

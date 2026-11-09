@@ -971,7 +971,6 @@
     },
     "projectsTitle": "Project proposals",
     "noProjects": "No published project proposals.",
-    "membershipsLater": "Project memberships will come with the next integration stage.",
     "sharingTitle": "Profile sharing",
     "sharingSubtitle": "You decide what others see.",
     "sharingRowHint": "Public profile and individual details",
@@ -982,7 +981,7 @@
       "isPublicHint": "Other signed-in students will then see your first name. Visitors without an account see nothing.",
       "school": "Show school",
       "interests": "Show interests",
-      "projects": "Show my published project proposals",
+      "projects": "Show project proposals and project memberships",
       "activity": "Show activity numbers (project ideas, events attended, support received)"
     },
     "fieldsLegend": "Also share",
@@ -1011,6 +1010,55 @@
       "tutoringOffers": "Active offers",
       "tutoringRequests": "Active requests",
       "tutoringContacts": "Accepted contacts"
+    }
+  },
+  "projects": {
+    "title": "Join in",
+    "demoHint": "You can't join projects in demo mode. With a real account you can ask to take part in the project.",
+    "loginLink": "Sign in to join",
+    "loading": "Loading project data …",
+    "memberCount_one": "{count} member",
+    "memberCount_other": "{count} members",
+    "myStatus": {
+      "requested": "Request sent",
+      "member": "You are a member",
+      "declined": "Request declined",
+      "left": "Left the project"
+    },
+    "actions": {
+      "request": "Ask to join",
+      "cancel": "Withdraw request",
+      "leave": "Leave project",
+      "accept": "Accept",
+      "decline": "Decline"
+    },
+    "saved": {
+      "requested": "Request sent. The author decides.",
+      "cancel": "Request withdrawn.",
+      "leave": "You have left the project.",
+      "accepted": "Accepted – the person is now a member.",
+      "declined": "Request declined."
+    },
+    "closed": "This project isn't accepting requests right now.",
+    "requestsTitle": "Open requests",
+    "noRequests": "No open requests.",
+    "teamTitle": "Team",
+    "noMembers": "No members yet.",
+    "privacyHint": "Only the author and members see names. Everyone else only sees the number.",
+    "noMemberships": "You're not part of a project yet. Open a published idea and ask to join.",
+    "membershipsTitle": "Project memberships",
+    "noPublicMemberships": "No shared memberships.",
+    "errors": {
+      "notInstalled": "Project participation is not set up in the database yet (migration 013 missing).",
+      "own": "This is your own idea.",
+      "exists": "You have already asked or are already a member.",
+      "closed": "This project is not open (any more).",
+      "transition": "This request has already been answered.",
+      "notFound": "Project or request not found.",
+      "notAllowed": "You need to be signed in for this.",
+      "invalid": "Invalid input.",
+      "generic": "That didn't work. Please try again later.",
+      "loginRequired": "You need a real account for this."
     }
   }
 }

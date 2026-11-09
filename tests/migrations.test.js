@@ -31,8 +31,8 @@ test('004 im Repo ist v3: get_idea_support_counts wie counts_body in 006', () =>
   assert.equal(fn.toLowerCase().replace(/\s+/g, ' ').trim(), expected.trim());
 });
 
-test('011 und 012 brauchen keine der nicht ausgeführten Migrationen 008–010', () => {
-  for (const name of ['011_tutoring.sql', '012_profiles_stats.sql']) {
+test('011–013 brauchen keine der nicht ausgeführten Migrationen 008–010', () => {
+  for (const name of ['011_tutoring.sql', '012_profiles_stats.sql', '013_project_members.sql']) {
     const sql = stripComments(read(name));
     assert.ok(!/archived_at|cancelled_at|archive_finished_events|admin_get_overview_stats|cron\./.test(sql), name);
     assert.ok(!/is_admin\(\)/.test(sql), `${name}: is_admin() kommt erst mit Admin-Anbindung (Stufe 7)`);

@@ -3,6 +3,7 @@ import { useI18n } from '../i18n/LanguageContext.jsx';
 import { localize } from '../i18n/localize.js';
 import { getSchool } from '../data/schools.js';
 import { usePublicProfile } from '../state/useProfiles.js';
+import { usePublicMemberships } from '../state/useProjects.js';
 import PageHeader from '../components/PageHeader.jsx';
 import Avatar from '../components/Avatar.jsx';
 import ListLink from '../components/ListLink.jsx';
@@ -103,9 +104,35 @@ export default function PublicProfilePage() {
           ) : (
             <p className="muted">{t('profiles.noProjects')}</p>
           )}
-          <p className="muted small">{t('profiles.membershipsLater')}</p>
         </Section>
       )}
+
+      {person.showProjects && <Memberships profileId={person.id} isDemo={person.isDemo} />}
     </div>
+  );
+}
+
+/** Projekt-Mitgliedschaften (Migration 013) – die Datenbank liefert sie nur mit Profil-Freigabe. */
+function Memberships({ profileId, isDemo }) {
+  const { t } = useI18n();
+  const memberships = usePublicMemberships(profileId);
+  if (isDemo || memberships.status === 'demo') return null;
+  return (
+    <Section title={t('projects.membershipsTitle')} icon="users">
+      {memberships.status === 'loading' && <p className="muted">{t('projects.loading')}</p>}
+      {(memberships.status === 'error' || memberships.status === 'notInstalled') && (
+        <p className="muted">{t(memberships.errorKey ?? 'projects.errors.generic')}</p>
+      )}
+      {memberships.status === 'ready' &&
+        (memberships.data.length > 0 ? (
+          <ul className="list-group">
+            {memberships.data.map((m) => (
+              <ListLink key={m.ideaId} to={`/ideas/${m.ideaId}`} icon="folder" title={m.title} subtitle={m.summary} />
+            ))}
+          </ul>
+        ) : (
+          <p className="muted">{t('projects.noPublicMemberships')}</p>
+        ))}
+    </Section>
   );
 }

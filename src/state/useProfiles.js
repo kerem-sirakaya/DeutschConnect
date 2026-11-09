@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { supabase } from '../lib/supabaseClient.js';
 import { useAppState } from './AppStateContext.jsx';
+import { useRemote as useRemoteData } from './useRemote.js';
 import { demoDirectory, demoPublicProfile, demoSharingFor } from '../data/publicProfiles.js';
-import { demoStats, isNotInstalled, isProfileId, profileErrorKey } from '../lib/profiles.js';
+import { demoStats, isProfileId, profileErrorKey } from '../lib/profiles.js';
 import {
   fetchMySharing,
   fetchMyStats,
@@ -22,33 +23,7 @@ import {
  *
  * Bewusst KEIN globaler Context: Die Daten werden nur auf den Seiten geladen, die sie brauchen.
  */
-function useRemote(load, demoValue, deps) {
-  const { mode } = useAppState();
-  const isAccount = mode === 'account' && Boolean(supabase);
-  const [state, setState] = useState({ key: null, status: 'loading', data: null, errorKey: null });
-  const [token, setToken] = useState(0);
-  const key = JSON.stringify([isAccount, token, ...deps]);
-
-  useEffect(() => {
-    if (!isAccount) return undefined;
-    let active = true;
-    load(supabase)
-      .then((data) => active && setState({ key, status: 'ready', data, errorKey: null }))
-      .catch((error) =>
-        active &&
-        setState({ key, status: isNotInstalled(error) ? 'notInstalled' : 'error', data: null, errorKey: profileErrorKey(error) }),
-      );
-    return () => {
-      active = false;
-    };
-  }, [key]);
-
-  const reload = useCallback(() => setToken((n) => n + 1), []);
-  if (!isAccount) return { status: 'demo', data: demoValue(), errorKey: null, reload };
-  // Noch nicht für die aktuellen Parameter geladen → loading (kein veralteter Stand)
-  if (state.key !== key) return { status: 'loading', data: null, errorKey: null, reload };
-  return { ...state, reload };
-}
+const useRemote = (load, demoValue, deps) => useRemoteData(load, demoValue, deps, profileErrorKey);
 
 /** Eigene Statistik. Demo: aus den Demo-Daten berechnet. */
 export function useMyStats() {

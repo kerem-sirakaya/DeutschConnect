@@ -15,6 +15,7 @@ import { RoleBadge, TopicTags } from '../components/Badges.jsx';
 import ActivityStats from '../components/profiles/ActivityStats.jsx';
 import ProfileStatusNotice from '../components/profiles/ProfileStatusNotice.jsx';
 import { useMySharing, useMyStats } from '../state/useProfiles.js';
+import { useMyMemberships } from '../state/useProjects.js';
 
 export default function MePage() {
   const { t, language } = useI18n();
@@ -27,13 +28,22 @@ export default function MePage() {
 
   const myEvents = getMyEvents(user, events, now);
   const myIdeas = getMyIdeas(user, ideas);
-  const myProjects = getMyProjects(user, projects);
+  // Demo: Beispiel-Projekte wie bisher. Konto: echte Mitwirkungen aus Migration 013.
+  const memberships = useMyMemberships();
+  const myProjects = isRealAccount ? [] : getMyProjects(user, projects);
+  const realMemberships = isRealAccount && memberships.data ? memberships.data : [];
   const languageLabel = LANGUAGES.find((l) => l.code === language).label;
 
   const stats = [
     { to: '/events?tab=mine', value: myEvents.upcoming.length, label: t('me.stats.events') },
     { to: '/ideas?tab=mine', value: myIdeas.authored.length, label: t('me.stats.ideas') },
-    { to: '/network?tab=projects&show=mine', value: myProjects.length, label: t('me.stats.projects') },
+    isRealAccount
+      ? {
+          to: '/me#projects',
+          value: memberships.data ? realMemberships.filter((m) => m.myStatus === 'member').length : '–',
+          label: t('me.stats.projects'),
+        }
+      : { to: '/network?tab=projects&show=mine', value: myProjects.length, label: t('me.stats.projects') },
   ];
 
   return (
@@ -85,6 +95,32 @@ export default function MePage() {
           <p className="muted">{t('me.noInterests')}</p>
         )}
       </Section>
+
+      {isRealAccount && (
+        <div id="projects">
+          <Section title={t('me.myProjects')} icon="folder">
+            {memberships.status === 'ready' && realMemberships.length === 0 && (
+              <p className="muted">{t('projects.noMemberships')}</p>
+            )}
+            {memberships.status === 'notInstalled' && <p className="muted">{t('projects.errors.notInstalled')}</p>}
+            {memberships.status === 'error' && <p className="muted">{t(memberships.errorKey)}</p>}
+            {realMemberships.length > 0 && (
+              <ul className="list-group">
+                {realMemberships.map((m) => (
+                  <ListLink
+                    key={m.ideaId}
+                    to={`/ideas/${m.ideaId}`}
+                    icon="folder"
+                    title={m.title}
+                    subtitle={m.memberCount != null ? t('projects.memberCount', { count: m.memberCount }) : undefined}
+                    trailing={<span className="badge badge--neutral">{t(`projects.myStatus.${m.myStatus}`)}</span>}
+                  />
+                ))}
+              </ul>
+            )}
+          </Section>
+        </div>
+      )}
 
       {myProjects.length > 0 && (
         <Section title={t('me.myProjects')} icon="folder">

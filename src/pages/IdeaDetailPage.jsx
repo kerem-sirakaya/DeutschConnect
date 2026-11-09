@@ -12,6 +12,7 @@ import InfoList from '../components/InfoList.jsx';
 import SupportButton from '../components/SupportButton.jsx';
 import Icon from '../components/Icon.jsx';
 import { DemoBadge, StatusBadge, TopicTags } from '../components/Badges.jsx';
+import ProjectParticipation from '../components/projects/ProjectParticipation.jsx';
 import NotFoundPage from './NotFoundPage.jsx';
 
 export default function IdeaDetailPage() {
@@ -148,6 +149,8 @@ export default function IdeaDetailPage() {
           <h2>{t('ideaDetail.supportTitle')}</h2>
           <p className="muted">{isOwn ? t('ideaDetail.ownIdeaNote') : t('ideaDetail.supportText')}</p>
           <SupportButton idea={idea} />
+
+          <ProjectParticipation idea={idea} />
 
           {canDelete && (
             <div className="danger-zone">

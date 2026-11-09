@@ -457,3 +457,48 @@
   border-color: #f59e0b;
   color: #fde68a;
 }
+
+/* ---------- Projekt-Mitwirkung (Stufe 6) ---------- */
+.project-participation {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+}
+
+.project-participation h2 {
+  margin: 0;
+}
+
+.project-participation h3 {
+  margin: 6px 0 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.team-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.team-list__item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 44px;
+  padding: 6px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-2);
+}
+
+.team-list__actions {
+  display: flex;
+  gap: 6px;
+}

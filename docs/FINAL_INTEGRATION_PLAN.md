@@ -92,7 +92,7 @@ echte URLs; Tabs stehen in `?tab=`.
 | Startseite/Dashboard | `HomePage` | Codex-Begrüßungskarte + Nachhilfe-Bereich, Claude-Daten | 3 ✔ |
 | Nachhilfe-Börse | – (neu) | Migration **011** + `tutoringApi` + `TutoringContext` + 3 Seiten | 4 ✔ (Code) |
 | Profile + Statistiken | `profiles` (privat) | Migration 012: `profile_sharing` (privat als Standard), `get_public_profile()`, `list_public_profiles()`, `get_my_activity_stats()` | 5 ✔ (Code) |
-| Projekte: Anträge/Mitglieder/Abschluss | `ideas`, `idea_supports` | Migration 013: `project_members` (requested/accepted/declined/left), RPCs für Eigentümer | 6 |
+| Projekte: Anträge/Mitglieder/Abschluss | `ideas`, `idea_supports` | Migration 013: `idea_members` (requested/member/declined/left), 8 RPCs, kein direkter Tabellenzugriff | 6 ✔ (Code; Abschluss → 7) |
 | Events | Claude komplett | nur Codex-Optik | 6 |
 | Gruppen/Beiträge, Meldungen, Sperren | – | Migration 014 – **für den Pilot AUS** (Entscheidung Ege 2026-11-09); erst mit ausgearbeitetem Moderationsablauf | später |
 | Admin für neue Module | `admin_*`-RPCs | Migration 015: Nachhilfe/Meldungen/Kontosperre + Seiten im Admin-Bereich | 7 |
@@ -112,7 +112,8 @@ Archivierung (24 h nach Absage/Ende, stündlich per `pg_cron`), Admin-Kennzahlen
 |---|---|---|
 | `011_tutoring.sql` | `tutoring_entries`, `tutoring_requests`, `tutoring_saves`, `dc_has_contact_data()`, 5 RPCs, Selbstprüfung | **nur Datei – nicht ausgeführt, SQL nicht gegen eine Datenbank getestet** |
 | `012_profiles_stats.sql` | `profile_sharing`, 3 RPCs, Selbstprüfung; braucht nur 001 (011 optional) | **nur Datei – nicht ausgeführt** |
-| 013–017 | siehe Abschnitt 4 | geplant |
+| `013_project_members.sql` | `idea_members`, Anfragen/Annahme/Austritt, Team, öffentliche Mitgliedschaften; braucht 001 + 012 | **nur Datei – nicht ausgeführt** |
+| 014–017 | siehe Abschnitt 4 | geplant |
 
 ### 5.1 Hinweis zur „24-Stunden-Bereinigung“
 
@@ -131,7 +132,7 @@ nicht ausgeführt sind, braucht diese Ausblendung entweder 009 (pg_cron) oder ei
 3. Codex-Startseite/Dashboard ✔
 4. Nachhilfe ✔ (Code + Migration-Datei; Live-Abnahme offen)
 5. Profile + Statistiken ✔ (Code + Migration-Datei; Live-Abnahme offen)
-6. Projekte, Events, Community
+6. Projekte, Events, Community ◐ (Mitwirkung fertig; Abschluss in 7; Gruppen aus)
 7. Admin-Anbindung aller Module
 8. Spiele + Bestenlisten
 9. Restliche Inkonsistenzen
@@ -158,6 +159,22 @@ Live-Tests mit Supabase nur nach Freigabe und mit fiktiven Testinhalten.
   drop table if exists public.tutoring_saves, public.tutoring_requests, public.tutoring_entries;
   drop function if exists public.tutoring_touch_updated_at();
   drop function if exists public.dc_has_contact_data(text);
+  commit;
+  ```
+
+  Rückbau von 013 (zuerst, da es 012 voraussetzt):
+
+  ```sql
+  begin;
+  drop function if exists public.list_public_memberships(uuid);
+  drop function if exists public.project_my_memberships();
+  drop function if exists public.project_get_team(uuid);
+  drop function if exists public.project_get_overview(uuid);
+  drop function if exists public.project_review_request(uuid, uuid, boolean);
+  drop function if exists public.project_leave(uuid);
+  drop function if exists public.project_cancel_request(uuid);
+  drop function if exists public.project_request_join(uuid);
+  drop table if exists public.idea_members;
   commit;
   ```
 

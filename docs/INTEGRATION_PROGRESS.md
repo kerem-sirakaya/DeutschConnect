@@ -1,9 +1,28 @@
 # DeutschConnect – Integrationsfortschritt
 
-Plan: [FINAL_INTEGRATION_PLAN.md](FINAL_INTEGRATION_PLAN.md) · Branch `integration-v1` · Stufen 1–4 **lokal committet**
-(`a7b50a3`), Stufe 5 noch uncommittet · **nichts gepusht, keine Migration ausgeführt, nichts veröffentlicht.**
+Plan: [FINAL_INTEGRATION_PLAN.md](FINAL_INTEGRATION_PLAN.md) · Branch `integration-v1` · lokale Commits: Stufen 1–4
+(`a7b50a3`), Stufe 5 (`c15bfdf`), Stufe 6 (dritter Commit) · **nichts gepusht, keine Migration ausgeführt, nichts veröffentlicht.**
 
-Live-Stand der Datenbank (laut Ege, 2026-11-09): 001–007 ausgeführt · **008, 009, 010 NICHT ausgeführt** · 011, 012 nur Dateien.
+Live-Stand der Datenbank (laut Ege, 2026-11-09): 001–007 ausgeführt · **008, 009, 010 NICHT ausgeführt** · 011, 012, 013 nur Dateien.
+
+> **⚠ Migrationen 011, 012 und 013 sind NOCH NIE gegen eine echte Datenbank gelaufen.** Geprüft sind sie nur
+> durch Lesen (Review), automatische Tests der SQL-Texte und den PostgreSQL-Parser (Syntax). Ob Tabellen, Spalten,
+> Rechte und Policies zur Laufzeit wirklich so funktionieren, zeigt erst der Staging-Test
+> ([STAGING_RUNBOOK.md](STAGING_RUNBOOK.md)).
+
+### Teststand je Modul (drei getrennte Ebenen)
+
+Lokal = Code + `npm test` + Build + Render-Test (Demo). DB = gegen eine echte Supabase-Datenbank (Staging).
+Browser = von Hand im Browser mit echten Konten bedient.
+
+| Modul | Lokal umgesetzt | DB-getestet | Browser-getestet |
+|---|---|---|---|
+| Design, Navigation, Startseite (Stufen 2–3) | ✔ | – (keine DB nötig) | ✘ |
+| Nachhilfe (011) | ✔ | ✘ | ✘ |
+| Profile, Freigaben, Statistik (012) | ✔ | ✘ | ✘ |
+| Projekt-Mitwirkung (013) | ✔ | ✘ | ✘ |
+| Staging-Modus (`check:staging`, `dev:staging`) | ✔ (mit fiktiver Datei geprüft) | ✘ (echte Staging-Datei fehlt) | ✘ |
+| Bestehende Claude-Funktionen (Auth, Events, Ideen, Admin; 001–007) | unverändert | ✔ live (laut Team) | ✔ live (laut Team) |
 
 Legende: ✔ erledigt und lokal geprüft · ◐ Code fertig, Live-Abnahme offen · ○ offen
 
@@ -14,8 +33,8 @@ Legende: ✔ erledigt und lokal geprüft · ◐ Code fertig, Live-Abnahme offen 
 | 3 | Codex-Startseite/Dashboard | ✔ |
 | 4 | Nachhilfe-Börse | ◐ 011 geprüft (Review unten), Staging-Test offen → im Konto-Modus noch nicht nutzbar |
 | 5 | Profile + Statistiken | ◐ Code fertig, Migration 012 nicht ausgeführt |
-| 6 | Projekte (Anträge/Mitglieder), Events-Optik, Gruppen | ○ – Gruppenbeiträge bleiben für den Pilot AUS (Entscheidung Ege) |
-| 7 | Admin für neue Module, 24-h-Ausblendung abgelehnter Ideen | ○ |
+| 6 | Projekte (Anträge/Mitglieder), Events-Optik, Gruppen | ◐ Mitwirkung fertig (013 nicht ausgeführt); Abschluss → Stufe 7; Gruppenbeiträge AUS (Entscheidung Ege) |
+| 7 | Admin für neue Module, 24-h-Ausblendung abgelehnter Ideen | ○ Plan steht (unten, Sitzung 5) |
 | 8 | Spiele + Bestenlisten | ○ |
 | 9 | Inkonsistenzen beheben | ○ |
 | 10 | Mehrbenutzer-Gesamttest | ○ |
@@ -232,3 +251,50 @@ Projekt-Paket): alle 12 Migrationen parsen; alle 15 PL/pgSQL-Funktionskörper un
 Kontrolltest mit absichtlich kaputtem Körper wird erkannt; die alte 011 aus `a7b50a3` scheitert wie erwartet.
 Grenze: Der Parser prüft **Syntax**, nicht ob Tabellen/Spalten existieren oder Typen passen – das zeigt erst Staging.
 Dauerhafter Test in `tests/migrations.test.js`: keine einzelnen `$`-Begrenzer, `$$` immer paarweise.
+
+---
+
+## Sitzung 2026-11-09 (4) – Commit Stufe 5, Stufe 6 (Projekt-Mitwirkung)
+
+Commit `c15bfdf` (lokal, nicht gepusht): Stufe 5 + Migration 012 + Korrekturen 004/011 + Staging-Zugang.
+
+### Stufe 6 – Projekt-Mitwirkung (wie Codex, auf Claude-Backend)
+
+Eine veröffentlichte Idee (collecting/review/planned) ist ein Projekt. Ablauf: **anfragen → Autor:in nimmt an /
+lehnt ab → Mitglied → austreten**; nach Ablehnung/Austritt erneut anfragen möglich. „Interesse“ bleibt die
+bestehende Unterstützung (kein doppeltes System).
+
+| Datei | Änderung |
+|---|---|
+| `supabase/migrations/013_project_members.sql` (neu) | `idea_members` ohne direkten Zugriff (RLS an, keine Policies, keine Rechte); 8 SECURITY-DEFINER-Funktionen; braucht 001 + 012 |
+| `src/lib/projects.js`, `src/lib/projectsApi.js` (neu) | Regeln (welcher Knopf), Umwandlung, Fehlercodes DC021–DC024, Supabase-Aufrufe |
+| `src/state/useRemote.js` (neu) | gemeinsames Laden für Profile + Projekte; beim Neuladen bleiben alte Daten sichtbar (kein Flackern) |
+| `src/state/useProjects.js` (neu), `src/state/useProfiles.js` | Hooks; useProfiles nutzt jetzt useRemote |
+| `src/components/projects/ProjectParticipation.jsx` (neu), `src/pages/IdeaDetailPage.jsx` | Bereich „Mitmachen“ auf der Ideen-Seite: Status, Knopf, Anfragen annehmen/ablehnen, Team |
+| `src/pages/MePage.jsx` | Konto: echte Mitwirkungen unter „Meine Projekte“ + Zähler; Demo unverändert |
+| `src/pages/PublicProfilePage.jsx` | „Projekt-Mitgliedschaften“ (nur mit Freigabe `show_projects`) |
+| `src/locales/*`, `src/styles/modules.css` | Texte DE/TR/EN, Stile |
+| `tests/projects.test.js` (neu), `tests/migrations.test.js` | 7 neue Tests; 013 hängt nicht von 008–010 ab |
+
+Datenschutz: Außenstehende sehen nur die **Anzahl** der Mitglieder. Namen (Vorname + Schule) sehen nur Autor:in
+(Anfragende + Mitglieder) und Mitglieder (Team). Im Profil nur mit Freigabe. Keine Nachrichten.
+
+| Funktion | Echt / Demo / offen |
+|---|---|
+| Anfragen, zurückziehen, annehmen/ablehnen, austreten | echt nach 013 |
+| Team + Anzahl, eigene Mitwirkungen, Mitgliedschaften im Profil | echt nach 013 |
+| Demo (abgemeldet) | nur Hinweis „mit Konto mitmachen“ – keine vorgetäuschten Anfragen |
+| Projekt-**Abschluss** | offen → Stufe 7 (braucht Admin-Status) |
+| Statische Projekte p1–p3 im Netzwerk | weiterhin Demo |
+| Events-Optik | Codex-Farben/Formen über die Tokens aus Stufe 2; kein eigener Umbau |
+| Gruppenbeiträge | **aus** für den Pilot (Entscheidung Ege) |
+
+Prüfungen: `npm test` **322/322**, `npm run build` ok, Render-Test 9 Routen ok (u. a. `/ideas/i1`, `/ideas/i3`, `/me`),
+013 mit echtem PostgreSQL-Parser geprüft (25 Anweisungen, 8 Funktionen + 3 DO-Blöcke ok).
+**Nicht geprüft:** gegen eine Datenbank, Konto-Modus, Browser.
+
+**Staging-Reihenfolge jetzt:** 001–007 → 011 → 012 → 013. Zusatztest Projekt: A (Autor:in, Idee freigegeben
+durch Admin) · B fragt an · A sieht B unter „Offene Anfragen“, nimmt an · B sieht „Du bist Mitglied“ + Team ·
+C (dritte Person) sieht nur „1 Mitglied“, keine Namen · B tritt aus.
+Hinweis: Damit eine Idee veröffentlicht ist, muss auf Staging ein Admin existieren (005: Eintrag in `admins`)
+und die Idee freigeben.
