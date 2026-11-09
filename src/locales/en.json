@@ -5,7 +5,8 @@
     "skipToContent": "Skip to content",
     "cancel": "Cancel",
     "yourSchool": "Your school",
-    "clearSearch": "Clear search"
+    "clearSearch": "Clear search",
+    "footerNote": "DeutschConnect · cross-school pilot ERS & Anka Bilim"
   },
   "demo": {
     "label": "Demo",
@@ -24,7 +25,10 @@
     "meShort": "My Area",
     "about": "About DeutschConnect",
     "mainLabel": "Main navigation",
-    "admin": "Admin area"
+    "admin": "Admin area",
+    "discover": "Discover",
+    "tutoring": "Tutoring",
+    "community": "Community"
   },
   "profileMenu": {
     "open": "Open profile menu (demo profile: {name})",
@@ -51,13 +55,20 @@
     "myProjectsIdeas": "My projects & ideas",
     "noProjectsIdeas": "You don’t have any projects or ideas yet.",
     "suggestedProject": "A project that suits you",
-    "typeProject": "Project"
+    "typeProject": "Project",
+    "dashboardSubtitle": "Your events, ideas and learning contacts at a glance.",
+    "tutoringMatches": "Matching tutoring",
+    "tutoringDiscover": "Discover tutoring",
+    "tutoringOpenRequests_one": "{count} open request",
+    "tutoringOpenRequests_other": "{count} open requests",
+    "noTutoring": "No tutoring listings yet."
   },
   "quick": {
-    "discover": "Discover events",
+    "discover": "Discover",
     "myEvents": "My events",
     "newIdea": "Submit an idea",
-    "schools": "Explore schools"
+    "schools": "Explore schools",
+    "tutoring": "Tutoring"
   },
   "updates": {
     "invitation": "{school} invites you: {event}",
@@ -766,6 +777,165 @@
       "unavailable": "This admin function is not available in the database. Have all migrations (006, 007) been run?",
       "network": "Cannot reach the server. Please try again.",
       "generic": "That did not work. Please try again."
+    }
+  },
+  "discover": {
+    "title": "Discover",
+    "subtitle": "Events, ideas and the school network in one place.",
+    "overview": "Overview",
+    "eventsText": "Joint workshops, meetups and competitions of both schools.",
+    "ideasText": "Ideas and projects by students – submit and support them.",
+    "networkText": "The pilot schools and ongoing projects.",
+    "upcomingCount_one": "{count} upcoming event",
+    "upcomingCount_other": "{count} upcoming events",
+    "ideasCount_one": "{count} idea",
+    "ideasCount_other": "{count} ideas",
+    "schoolsCount_one": "{count} school",
+    "schoolsCount_other": "{count} schools",
+    "demoHint": "You are not signed in – numbers and content are demo examples."
+  },
+  "community": {
+    "title": "Community",
+    "subtitle": "Learn and work together.",
+    "tutoringText": "Offer or find tutoring – voluntary and free of charge.",
+    "networkText": "Schools and projects in the pilot network.",
+    "plannedTitle": "More community features",
+    "plannedText": "These features from the Codex version are currently being connected to the real backend. They cannot be used yet.",
+    "inIntegration": "In integration",
+    "planned": {
+      "profiles": "Voluntarily shared student profiles and statistics",
+      "groups": "Project and event groups with posts",
+      "games": "Games (chess, symbol pairs, Paper Flight, Bridge Runner) with leaderboards"
+    }
+  },
+  "tutoring": {
+    "title": "Tutoring board",
+    "subtitle": "Find support and share knowledge voluntarily – without payments.",
+    "newRequest": "Find tutoring",
+    "newOffer": "Offer tutoring",
+    "tabsLabel": "Sections of the tutoring board",
+    "tabs": {
+      "offers": "Offers",
+      "requests": "Requests",
+      "my": "Mine",
+      "saved": "Saved",
+      "contacts": "Contact requests"
+    },
+    "search": "Search subjects or topics",
+    "subject": "Subject",
+    "allSubjects": "All subjects",
+    "languagesLabel": "Languages",
+    "allLanguages": "All languages",
+    "formatLabel": "Format",
+    "allFormats": "All formats",
+    "clearFilters": "Reset filters",
+    "empty": "No matching listings yet. Adjust filters or create your own listing.",
+    "emptySaved": "You have not saved any listings yet.",
+    "rulesHint": "Tutoring is voluntary and free. Please do not enter phone numbers, email addresses, links or addresses – meetings are arranged through the school.",
+    "incoming": "Incoming requests",
+    "outgoing": "Sent requests",
+    "noIncoming": "No requests for your listings yet.",
+    "noOutgoing": "You have not sent any requests yet.",
+    "kind": {
+      "offer": "Offer",
+      "request": "Request"
+    },
+    "languages": {
+      "de": "German",
+      "tr": "Turkish",
+      "en": "English"
+    },
+    "formats": {
+      "online": "Online",
+      "school": "At school",
+      "either": "By arrangement"
+    },
+    "own": "Your listing",
+    "closed": "Closed",
+    "saved": "Saved",
+    "requestStatus": {
+      "pending": "Request open",
+      "accepted": "Accepted",
+      "declined": "Declined",
+      "withdrawn": "Withdrawn"
+    },
+    "openRequests_one": "{count} open request",
+    "openRequests_other": "{count} open requests",
+    "demoHint": "Demo: these are fictional examples. Please sign in to create, save and send requests.",
+    "loginLink": "Go to sign-in",
+    "loading": "Loading tutoring listings …",
+    "retry": "Try again",
+    "someoneFrom": "Someone from {school}",
+    "fromPerson": "From {name}",
+    "toPerson": "To {name}",
+    "responseNote": "Reply",
+    "acceptedHint": "Accepted: please arrange the meeting through your school or a teacher.",
+    "responseNoteLabel": "Short reply (optional, no contact details)",
+    "decline": "Decline",
+    "accept": "Accept",
+    "withdrawRequest": "Withdraw request",
+    "notFound": "Listing not found",
+    "editTitle": "Edit listing",
+    "formSubtitle": "For your school {school}",
+    "kindLabel": "Listing type",
+    "fields": {
+      "subject": "Subject",
+      "topics": "Topics",
+      "description": "Support offered or needed",
+      "availability": "Possible dates / availability"
+    },
+    "subjects": {
+      "math": "Mathematics",
+      "german": "German",
+      "english": "English",
+      "turkish": "Turkish",
+      "physics": "Physics",
+      "chemistry": "Chemistry",
+      "biology": "Biology",
+      "coding": "Computer science"
+    },
+    "privacyHint": "Others see your listing with your school but without your name. Only people whose request you accept see your first name.",
+    "save": "Save",
+    "school": "School",
+    "anonymousHint": "The name of the person who created this listing is shown once they accept your request.",
+    "savedNotice": "Saved.",
+    "ownActiveHint": "Your listing is active and visible to others.",
+    "ownClosedHint": "Your listing is closed and no longer visible to others.",
+    "edit": "Edit",
+    "close": "Close",
+    "reopen": "Reopen",
+    "deleteConfirm": "Really delete this listing? All requests for it will be deleted too.",
+    "delete": "Delete",
+    "unsave": "Remove from saved",
+    "saveEntry": "Save",
+    "inactiveHint": "This listing is closed. New requests are not possible.",
+    "contactTitle": "Send a contact request",
+    "contactHint": "Your message and first name go to the person who created the listing. Please do not enter contact details.",
+    "messageLabel": "Your message (10–600 characters)",
+    "sendRequest": "Send request",
+    "demoContactHint": "No requests are sent in demo mode.",
+    "errors": {
+      "kind": "Please choose offer or request.",
+      "subject": "Please enter a subject with 2–80 characters.",
+      "topics": "Please enter topics with 3–200 characters.",
+      "description": "Please describe the support with 20–1000 characters.",
+      "availability": "Please enter availability with 3–200 characters.",
+      "contactData": "Please do not enter email addresses, links or phone numbers.",
+      "languages": "Please choose at least one language.",
+      "format": "Please choose a format.",
+      "message": "Please write a message with 10–600 characters.",
+      "note": "The reply can be at most 600 characters long.",
+      "notInstalled": "The tutoring board is not set up in the database yet (migration 011 is missing).",
+      "inactive": "This listing is no longer active.",
+      "own": "This is your own listing.",
+      "duplicate": "You have already sent a request for this listing.",
+      "transition": "This request can no longer be changed.",
+      "rejectedByServer": "The input was rejected. Please check the length and do not use contact details.",
+      "invalid": "Invalid input.",
+      "notFound": "Not found – the listing may have been deleted.",
+      "notAllowed": "You are not allowed to do this.",
+      "generic": "That did not work. Please try again later.",
+      "loginRequired": "Please sign in first."
     }
   }
 }

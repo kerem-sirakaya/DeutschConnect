@@ -1,5 +1,11 @@
 # DeutschConnect – Übergabe 2 (Admin-Dashboard, Archivierung, Status-Anzeige)
 
+> **NEU (2026-11-09): Die Integration Claude + Codex läuft auf Branch `integration-v1`.**
+> Zuerst lesen: [`docs/FINAL_INTEGRATION_PLAN.md`](FINAL_INTEGRATION_PLAN.md) (Architektur, Entscheidungen, Rollback)
+> und [`docs/INTEGRATION_PROGRESS.md`](INTEGRATION_PROGRESS.md) (erledigte Stufen, Tests, offene Punkte).
+> Seitdem gilt: Navigation = 5 Codex-Bereiche (Seitenleiste entfernt), neue Migration `011_tutoring.sql`
+> (**nicht ausgeführt**), `npm test` = 293 Tests. Der Rest dieser Datei beschreibt den Stand vor der Integration.
+
 Stand: **2026-11-08** · Branch: **`claude-version-1.0`** · Hauptbranch: `main`
 Letzter Commit: `9121665 Create HANDOFF.md` – **alles danach ist lokal und NICHT committet** (Liste in Abschnitt 14).
 

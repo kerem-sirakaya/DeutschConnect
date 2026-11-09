@@ -14,6 +14,7 @@ import {
 } from '../lib/selectors.js';
 import { describeMatch } from '../lib/reasons.js';
 import PageHeader from '../components/PageHeader.jsx';
+import SectionNav from '../components/SectionNav.jsx';
 import Tabs from '../components/Tabs.jsx';
 import EventCard from '../components/EventCard.jsx';
 import EmptyState from '../components/EmptyState.jsx';
@@ -36,6 +37,7 @@ export default function EventsPage() {
   return (
     <div className="page">
       <PageHeader title={t('events.title')} />
+      <SectionNav section="discover" />
       <Tabs
         label={t('events.tabsLabel')}
         active={tab}

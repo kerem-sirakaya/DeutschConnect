@@ -5,6 +5,7 @@ import { useAppState } from '../state/AppStateContext.jsx';
 import { TOPICS } from '../data/topics.js';
 import { filterIdeas, getMyIdeas } from '../lib/selectors.js';
 import PageHeader from '../components/PageHeader.jsx';
+import SectionNav from '../components/SectionNav.jsx';
 import Tabs from '../components/Tabs.jsx';
 import IdeaCard from '../components/IdeaCard.jsx';
 import EmptyState from '../components/EmptyState.jsx';
@@ -33,6 +34,7 @@ export default function IdeasPage() {
           </Link>
         }
       />
+      <SectionNav section="discover" />
       <Tabs
         label={t('ideas.tabsLabel')}
         active={tab}

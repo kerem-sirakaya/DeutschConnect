@@ -18,6 +18,11 @@ import AboutPage from './pages/AboutPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
+import DiscoverPage from './pages/DiscoverPage.jsx';
+import CommunityPage from './pages/CommunityPage.jsx';
+import TutoringPage from './pages/TutoringPage.jsx';
+import TutoringFormPage from './pages/TutoringFormPage.jsx';
+import TutoringDetailPage from './pages/TutoringDetailPage.jsx';
 
 // Admin-Bereich: wird erst heruntergeladen, wenn AdminRoute den Zugriff erlaubt (lazy loading).
 const AdminLayout = lazy(() => import('./components/admin/AdminLayout.jsx'));
@@ -36,6 +41,9 @@ export default function App() {
       <Route element={<AppShell />}>
         <Route index element={<HomePage />} />
 
+        {/* Bereich „Entdecken“ (Codex-Struktur): Übersicht + bestehende Events/Ideen/Netzwerk-Routen */}
+        <Route path="discover" element={<DiscoverPage />} />
+
         <Route path="events" element={<EventsPage />} />
         <Route path="events/:eventId" element={<EventDetailPage />} />
 
@@ -46,6 +54,14 @@ export default function App() {
         <Route path="network" element={<NetworkPage />} />
         <Route path="network/schools/:schoolId" element={<SchoolDetailPage />} />
         <Route path="network/projects/:projectId" element={<ProjectDetailPage />} />
+
+        {/* Nachhilfe-Börse (Codex-Funktion, Claude-Backend: Migration 011) */}
+        <Route path="tutoring" element={<TutoringPage />} />
+        <Route path="tutoring/new" element={<TutoringFormPage />} />
+        <Route path="tutoring/:entryId" element={<TutoringDetailPage />} />
+        <Route path="tutoring/:entryId/edit" element={<TutoringFormPage />} />
+
+        <Route path="community" element={<CommunityPage />} />
 
         <Route path="me" element={<MePage />} />
         <Route path="me/interests" element={<InterestsPage />} />

@@ -1,0 +1,357 @@
+/*
+ * Integrierte Codex-Module (Startseite, Entdecken, Community, Nachhilfe).
+ * Optik nach src/styles/global.css + modules.css der Codex-Version (Kerem),
+ * aber mit den Design-Variablen aus variables.css und eigenen Klassennamen,
+ * damit keine globalen Codex-Selektoren (button, a, .button …) die Claude-Seiten verändern.
+ */
+
+/* ---------- Begrüßungskarte (Codex „dashboard-welcome“) ---------- */
+
+.dashboard-welcome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 23px;
+  border: 1px solid #79aff5;
+  border-radius: 21px;
+  background: var(--color-primary);
+  color: #0b213d;
+}
+
+.dashboard-welcome h1 {
+  color: #071a33;
+}
+
+.dashboard-welcome h1:focus {
+  outline: none;
+}
+
+.dashboard-welcome p {
+  color: #12335c;
+}
+
+.dashboard-welcome__school {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.dashboard-welcome__icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.28);
+  color: #0b213d;
+}
+
+@media (max-width: 420px) {
+  .dashboard-welcome__icon {
+    display: none;
+  }
+}
+
+/* ---------- Unter-Navigation eines Bereichs (Codex „module-tabs“) ---------- */
+
+.section-nav {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+
+.section-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.section-nav__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.section-nav__link:hover {
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+}
+
+.section-nav__link[aria-current='page'] {
+  color: #fff;
+  background: var(--color-primary-strong);
+  border-color: var(--color-primary-strong);
+}
+
+/* ---------- Bereichs-Übersicht (Entdecken / Community) ---------- */
+
+.hub-grid {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 720px) {
+  .hub-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
+.hub-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.hub-card:hover {
+  border-color: var(--color-border-strong);
+  background: var(--color-surface-2);
+}
+
+.hub-card__icon,
+.task-card__icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 15px;
+  background: #1d3554;
+  color: var(--color-primary-text);
+}
+
+.hub-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+
+.hub-card__title {
+  font-weight: 650;
+  font-size: var(--text-md);
+}
+
+.hub-card__text {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.hub-card__meta {
+  color: var(--color-primary-text);
+  font-size: var(--text-xs);
+  font-weight: 600;
+}
+
+.module-note {
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  line-height: 1.6;
+}
+
+.planned-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.planned-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text-muted);
+}
+
+.status-chip {
+  padding: 2px 8px;
+  border: 1px solid #426082;
+  border-radius: 6px;
+  background: #284263;
+  color: #c7dfff;
+  font-size: var(--text-xs);
+  font-weight: 650;
+}
+
+/* ---------- Listeneinträge (Codex „task-card“) ---------- */
+
+.task-card {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.task-card:hover {
+  border-color: var(--color-border-strong);
+  background: var(--color-surface-2);
+}
+
+.task-card__icon--request {
+  background: #2d2a4a;
+  color: #c9b8ff;
+}
+
+.task-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.task-card__eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  color: var(--color-primary-text);
+  font-size: var(--text-xs);
+  font-weight: 650;
+  letter-spacing: 0.02em;
+}
+
+.task-card__title {
+  font-weight: 620;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.task-card__meta {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.task-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.task-card__tags:empty {
+  display: none;
+}
+
+/* ---------- Nachhilfe ---------- */
+
+.page-header__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter-grid {
+  display: grid;
+  gap: 10px;
+}
+
+@media (min-width: 600px) {
+  .filter-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.filter-grid .field > span {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.details-layout {
+  display: grid;
+  gap: 14px;
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .details-layout {
+    grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr);
+  }
+}
+
+.form__fieldset {
+  display: contents;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.request-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.request-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.request-card__date {
+  font-size: var(--text-xs);
+}
+
+.request-card__who {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.request-card__message {
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-2);
+  overflow-wrap: anywhere;
+}
+
+.request-card__note {
+  color: var(--color-text-muted);
+  overflow-wrap: anywhere;
+}
+
+.notice--info {
+  border-color: rgba(75, 145, 234, 0.45);
+  background: var(--color-primary-soft);
+}
+
+.text-link {
+  color: var(--color-primary-text);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+}

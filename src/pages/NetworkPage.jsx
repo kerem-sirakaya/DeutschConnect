@@ -5,6 +5,7 @@ import { schools } from '../data/schools.js';
 import { projects } from '../data/projects.js';
 import { getProjectRole } from '../lib/selectors.js';
 import PageHeader from '../components/PageHeader.jsx';
+import SectionNav from '../components/SectionNav.jsx';
 import Tabs from '../components/Tabs.jsx';
 import SchoolCard from '../components/SchoolCard.jsx';
 import ProjectCard from '../components/ProjectCard.jsx';
@@ -23,6 +24,7 @@ export default function NetworkPage() {
   return (
     <div className="page">
       <PageHeader title={t('network.title')} />
+      <SectionNav section="discover" />
       <Tabs
         label={t('network.tabsLabel')}
         active={tab}

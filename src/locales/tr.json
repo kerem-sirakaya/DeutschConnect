@@ -5,7 +5,8 @@
     "skipToContent": "İçeriğe geç",
     "cancel": "İptal",
     "yourSchool": "Okulun",
-    "clearSearch": "Aramayı temizle"
+    "clearSearch": "Aramayı temizle",
+    "footerNote": "DeutschConnect · ERS ve Anka Bilim okullar arası pilot proje"
   },
   "demo": {
     "label": "Demo",
@@ -24,7 +25,10 @@
     "meShort": "Alanım",
     "about": "DeutschConnect Hakkında",
     "mainLabel": "Ana gezinme",
-    "admin": "Yönetici alanı"
+    "admin": "Yönetici alanı",
+    "discover": "Keşfet",
+    "tutoring": "Ders desteği",
+    "community": "Topluluk"
   },
   "profileMenu": {
     "open": "Profil menüsünü aç (demo profili: {name})",
@@ -51,13 +55,20 @@
     "myProjectsIdeas": "Projelerim ve fikirlerim",
     "noProjectsIdeas": "Henüz bir projen ya da fikrin yok.",
     "suggestedProject": "Sana uygun bir proje",
-    "typeProject": "Proje"
+    "typeProject": "Proje",
+    "dashboardSubtitle": "Etkinliklerin, fikirlerin ve öğrenme bağlantıların tek bakışta.",
+    "tutoringMatches": "Sana uygun ders desteği",
+    "tutoringDiscover": "Ders desteğini keşfet",
+    "tutoringOpenRequests_one": "{count} açık talep",
+    "tutoringOpenRequests_other": "{count} açık talep",
+    "noTutoring": "Henüz ders desteği ilanı yok."
   },
   "quick": {
-    "discover": "Etkinlikleri keşfet",
+    "discover": "Keşfet",
     "myEvents": "Etkinliklerim",
     "newIdea": "Fikir gönder",
-    "schools": "Okulları keşfet"
+    "schools": "Okulları keşfet",
+    "tutoring": "Ders desteği"
   },
   "updates": {
     "invitation": "{school} seni davet ediyor: {event}",
@@ -766,6 +777,165 @@
       "unavailable": "Bu yönetici fonksiyonu veritabanında bulunamadı. Tüm migration dosyaları (006, 007) çalıştırıldı mı?",
       "network": "Sunucuya bağlanılamadı. Lütfen tekrar dene.",
       "generic": "Bu işlem başarısız oldu. Lütfen tekrar dene."
+    }
+  },
+  "discover": {
+    "title": "Keşfet",
+    "subtitle": "Etkinlikler, fikirler ve okul ağı tek yerde.",
+    "overview": "Genel bakış",
+    "eventsText": "İki okulun ortak atölyeleri, buluşmaları ve yarışmaları.",
+    "ideasText": "Öğrencilerin fikirleri ve projeleri – öner ve destekle.",
+    "networkText": "Pilot okullar ve devam eden projeler.",
+    "upcomingCount_one": "{count} yaklaşan etkinlik",
+    "upcomingCount_other": "{count} yaklaşan etkinlik",
+    "ideasCount_one": "{count} fikir",
+    "ideasCount_other": "{count} fikir",
+    "schoolsCount_one": "{count} okul",
+    "schoolsCount_other": "{count} okul",
+    "demoHint": "Giriş yapmadın – sayılar ve içerikler demo örnekleridir."
+  },
+  "community": {
+    "title": "Topluluk",
+    "subtitle": "Birlikte öğren ve birlikte çalış.",
+    "tutoringText": "Ders desteği sun veya ara – gönüllü ve ücretsiz.",
+    "networkText": "Pilot ağdaki okullar ve projeler.",
+    "plannedTitle": "Diğer topluluk özellikleri",
+    "plannedText": "Codex sürümündeki bu özellikler şu anda gerçek altyapıya bağlanıyor. Henüz kullanılamaz.",
+    "inIntegration": "Entegrasyonda",
+    "planned": {
+      "profiles": "Gönüllü paylaşılan öğrenci profilleri ve istatistikler",
+      "groups": "Paylaşımlı proje ve etkinlik grupları",
+      "games": "Liderlik tablolu oyunlar (satranç, sembol eşleştirme, Paper Flight, Bridge Runner)"
+    }
+  },
+  "tutoring": {
+    "title": "Ders desteği panosu",
+    "subtitle": "Destek ara ve bilgini gönüllü paylaş – ücret olmadan.",
+    "newRequest": "Destek ara",
+    "newOffer": "Destek sun",
+    "tabsLabel": "Ders desteği panosunun bölümleri",
+    "tabs": {
+      "offers": "Teklifler",
+      "requests": "Talepler",
+      "my": "İlanlarım",
+      "saved": "Kaydedilenler",
+      "contacts": "İletişim talepleri"
+    },
+    "search": "Ders veya konu ara",
+    "subject": "Ders",
+    "allSubjects": "Tüm dersler",
+    "languagesLabel": "Diller",
+    "allLanguages": "Tüm diller",
+    "formatLabel": "Format",
+    "allFormats": "Tüm formatlar",
+    "clearFilters": "Filtreleri sıfırla",
+    "empty": "Henüz uygun ilan yok. Filtreleri değiştir veya kendi ilanını oluştur.",
+    "emptySaved": "Henüz kaydettiğin bir ilan yok.",
+    "rulesHint": "Ders desteği gönüllü ve ücretsizdir. Lütfen telefon numarası, e-posta adresi, bağlantı veya adres yazma – buluşmalar okul üzerinden ayarlanır.",
+    "incoming": "Gelen talepler",
+    "outgoing": "Gönderilen talepler",
+    "noIncoming": "İlanlarına henüz talep gelmedi.",
+    "noOutgoing": "Henüz talep göndermedin.",
+    "kind": {
+      "offer": "Teklif",
+      "request": "Talep"
+    },
+    "languages": {
+      "de": "Almanca",
+      "tr": "Türkçe",
+      "en": "İngilizce"
+    },
+    "formats": {
+      "online": "Çevrim içi",
+      "school": "Okulda",
+      "either": "Birlikte kararlaştırılır"
+    },
+    "own": "Senin ilanın",
+    "closed": "Kapalı",
+    "saved": "Kaydedildi",
+    "requestStatus": {
+      "pending": "Talep açık",
+      "accepted": "Kabul edildi",
+      "declined": "Reddedildi",
+      "withdrawn": "Geri çekildi"
+    },
+    "openRequests_one": "{count} açık talep",
+    "openRequests_other": "{count} açık talep",
+    "demoHint": "Demo: Bunlar hayalî örneklerdir. İlan oluşturmak, kaydetmek ve talep göndermek için lütfen giriş yap.",
+    "loginLink": "Girişe git",
+    "loading": "Ders desteği ilanları yükleniyor …",
+    "retry": "Tekrar dene",
+    "someoneFrom": "{school} okulundan biri",
+    "fromPerson": "Gönderen: {name}",
+    "toPerson": "Alıcı: {name}",
+    "responseNote": "Yanıt",
+    "acceptedHint": "Kabul edildi: Buluşmayı lütfen okulunuz veya bir öğretmen üzerinden ayarlayın.",
+    "responseNoteLabel": "Kısa yanıt (isteğe bağlı, iletişim bilgisi olmadan)",
+    "decline": "Reddet",
+    "accept": "Kabul et",
+    "withdrawRequest": "Talebi geri çek",
+    "notFound": "İlan bulunamadı",
+    "editTitle": "İlanı düzenle",
+    "formSubtitle": "Okulun {school} için",
+    "kindLabel": "İlan türü",
+    "fields": {
+      "subject": "Ders",
+      "topics": "Konular",
+      "description": "Sunulan veya istenen destek",
+      "availability": "Olası tarihler / uygun zamanlar"
+    },
+    "subjects": {
+      "math": "Matematik",
+      "german": "Almanca",
+      "english": "İngilizce",
+      "turkish": "Türkçe",
+      "physics": "Fizik",
+      "chemistry": "Kimya",
+      "biology": "Biyoloji",
+      "coding": "Bilişim"
+    },
+    "privacyHint": "Diğerleri ilanını okulunla birlikte ama adın olmadan görür. Adını yalnızca talebini kabul ettiğin kişi görür.",
+    "save": "Kaydet",
+    "school": "Okul",
+    "anonymousHint": "İlanı oluşturan kişinin adı, talebini kabul ettiğinde gösterilir.",
+    "savedNotice": "Kaydedildi.",
+    "ownActiveHint": "İlanın aktif ve başkaları tarafından görülebiliyor.",
+    "ownClosedHint": "İlanın kapalı ve artık başkaları tarafından görülmüyor.",
+    "edit": "Düzenle",
+    "close": "Kapat",
+    "reopen": "Yeniden aç",
+    "deleteConfirm": "İlan gerçekten silinsin mi? İlgili tüm talepler de silinir.",
+    "delete": "Sil",
+    "unsave": "Kaydı kaldır",
+    "saveEntry": "Kaydet",
+    "inactiveHint": "Bu ilan kapalı. Yeni talep gönderilemez.",
+    "contactTitle": "İletişim talebi gönder",
+    "contactHint": "Mesajın ve adın, ilanı oluşturan kişiye iletilir. Lütfen iletişim bilgisi yazma.",
+    "messageLabel": "Mesajın (10–600 karakter)",
+    "sendRequest": "Talep gönder",
+    "demoContactHint": "Demo modunda talep gönderilmez.",
+    "errors": {
+      "kind": "Lütfen teklif veya talep seç.",
+      "subject": "Lütfen 2–80 karakterlik bir ders gir.",
+      "topics": "Lütfen 3–200 karakterlik konular gir.",
+      "description": "Lütfen desteği 20–1000 karakterle açıkla.",
+      "availability": "Lütfen uygun zamanları 3–200 karakterle belirt.",
+      "contactData": "Lütfen e-posta adresi, bağlantı veya telefon numarası yazma.",
+      "languages": "Lütfen en az bir dil seç.",
+      "format": "Lütfen bir format seç.",
+      "message": "Lütfen 10–600 karakterlik bir mesaj yaz.",
+      "note": "Yanıt en fazla 600 karakter olabilir.",
+      "notInstalled": "Ders desteği panosu veritabanında henüz kurulmadı (Migration 011 eksik).",
+      "inactive": "Bu ilan artık aktif değil.",
+      "own": "Bu senin kendi ilanın.",
+      "duplicate": "Bu ilana zaten bir talep gönderdin.",
+      "transition": "Bu talep artık değiştirilemez.",
+      "rejectedByServer": "Giriş reddedildi. Lütfen uzunluğu kontrol et ve iletişim bilgisi kullanma.",
+      "invalid": "Geçersiz giriş.",
+      "notFound": "Bulunamadı – ilan silinmiş olabilir.",
+      "notAllowed": "Bunun için yetkin yok.",
+      "generic": "Bu işlem olmadı. Lütfen daha sonra tekrar dene.",
+      "loginRequired": "Lütfen önce giriş yap."
     }
   }
 }

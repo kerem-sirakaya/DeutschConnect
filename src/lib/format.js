@@ -22,3 +22,8 @@ export function formatTime(date, locale) {
 export function formatRelativeDays(days, locale) {
   return new Intl.RelativeTimeFormat(locale, { numeric: 'auto' }).format(days, 'day');
 }
+
+/** z. B. „9. Nov. 2026“ */
+export function formatDateShort(date, locale) {
+  return new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'short', year: 'numeric' }).format(new Date(date));
+}

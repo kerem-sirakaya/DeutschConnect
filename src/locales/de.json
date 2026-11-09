@@ -5,7 +5,8 @@
     "skipToContent": "Zum Inhalt springen",
     "cancel": "Abbrechen",
     "yourSchool": "Deine Schule",
-    "clearSearch": "Suche löschen"
+    "clearSearch": "Suche löschen",
+    "footerNote": "DeutschConnect · schulübergreifender Pilot ERS & Anka Bilim"
   },
   "demo": {
     "label": "Demo",
@@ -24,7 +25,10 @@
     "meShort": "Mein Bereich",
     "about": "Über DeutschConnect",
     "mainLabel": "Hauptnavigation",
-    "admin": "Admin-Bereich"
+    "admin": "Admin-Bereich",
+    "discover": "Entdecken",
+    "tutoring": "Nachhilfe",
+    "community": "Community"
   },
   "profileMenu": {
     "open": "Profilmenü öffnen (Demo-Profil: {name})",
@@ -51,13 +55,20 @@
     "myProjectsIdeas": "Meine Projekte & Ideen",
     "noProjectsIdeas": "Du hast noch keine Projekte oder Ideen.",
     "suggestedProject": "Projekt, das zu dir passt",
-    "typeProject": "Projekt"
+    "typeProject": "Projekt",
+    "dashboardSubtitle": "Deine Events, Ideen und Lernkontakte auf einen Blick.",
+    "tutoringMatches": "Passende Nachhilfe",
+    "tutoringDiscover": "Nachhilfe entdecken",
+    "tutoringOpenRequests_one": "{count} offene Anfrage",
+    "tutoringOpenRequests_other": "{count} offene Anfragen",
+    "noTutoring": "Noch keine Nachhilfe-Einträge."
   },
   "quick": {
-    "discover": "Events entdecken",
+    "discover": "Entdecken",
     "myEvents": "Meine Events",
     "newIdea": "Idee einreichen",
-    "schools": "Schulen erkunden"
+    "schools": "Schulen erkunden",
+    "tutoring": "Nachhilfe"
   },
   "updates": {
     "invitation": "{school} lädt dich ein: {event}",
@@ -766,6 +777,165 @@
       "unavailable": "Diese Admin-Funktion ist in der Datenbank nicht verfügbar. Wurden alle Migrationen (006, 007) ausgeführt?",
       "network": "Keine Verbindung zum Server. Bitte versuche es noch einmal.",
       "generic": "Das hat nicht geklappt. Bitte versuche es noch einmal."
+    }
+  },
+  "discover": {
+    "title": "Entdecken",
+    "subtitle": "Events, Ideen und das Schulnetzwerk an einem Ort.",
+    "overview": "Übersicht",
+    "eventsText": "Gemeinsame Workshops, Treffen und Wettbewerbe beider Schulen.",
+    "ideasText": "Ideen und Projekte von Schüler:innen – einreichen und unterstützen.",
+    "networkText": "Die Pilotschulen und laufende Projekte.",
+    "upcomingCount_one": "{count} kommendes Event",
+    "upcomingCount_other": "{count} kommende Events",
+    "ideasCount_one": "{count} Idee",
+    "ideasCount_other": "{count} Ideen",
+    "schoolsCount_one": "{count} Schule",
+    "schoolsCount_other": "{count} Schulen",
+    "demoHint": "Du bist nicht angemeldet – Zahlen und Inhalte sind Demo-Beispiele."
+  },
+  "community": {
+    "title": "Community",
+    "subtitle": "Gemeinsam lernen und zusammenarbeiten.",
+    "tutoringText": "Nachhilfe anbieten oder suchen – freiwillig und ohne Bezahlung.",
+    "networkText": "Schulen und Projekte im Pilotnetzwerk.",
+    "plannedTitle": "Weitere Community-Funktionen",
+    "plannedText": "Diese Funktionen aus der Codex-Version werden gerade an das echte Backend angeschlossen. Sie sind noch nicht nutzbar.",
+    "inIntegration": "In Integration",
+    "planned": {
+      "profiles": "Freiwillig geteilte Schülerprofile und Statistiken",
+      "groups": "Projekt- und Eventgruppen mit Beiträgen",
+      "games": "Spiele (Schach, Symbol-Paare, Paper Flight, Bridge Runner) mit Bestenlisten"
+    }
+  },
+  "tutoring": {
+    "title": "Nachhilfe-Börse",
+    "subtitle": "Unterstützung suchen und freiwillig Wissen teilen – ohne Bezahlung.",
+    "newRequest": "Nachhilfe suchen",
+    "newOffer": "Nachhilfe anbieten",
+    "tabsLabel": "Bereiche der Nachhilfe-Börse",
+    "tabs": {
+      "offers": "Angebote",
+      "requests": "Gesuche",
+      "my": "Meine",
+      "saved": "Gemerkt",
+      "contacts": "Anfragen"
+    },
+    "search": "Fach oder Thema suchen",
+    "subject": "Fach",
+    "allSubjects": "Alle Fächer",
+    "languagesLabel": "Sprachen",
+    "allLanguages": "Alle Sprachen",
+    "formatLabel": "Format",
+    "allFormats": "Alle Formate",
+    "clearFilters": "Filter zurücksetzen",
+    "empty": "Hier gibt es noch keine passenden Einträge. Passe die Filter an oder erstelle einen eigenen Eintrag.",
+    "emptySaved": "Du hast noch keine Einträge gemerkt.",
+    "rulesHint": "Nachhilfe ist freiwillig und kostenlos. Bitte keine Telefonnummern, E-Mail-Adressen, Links oder Adressen eintragen – Treffen werden über die Schule vereinbart.",
+    "incoming": "Eingehende Anfragen",
+    "outgoing": "Gesendete Anfragen",
+    "noIncoming": "Noch keine Anfragen zu deinen Einträgen.",
+    "noOutgoing": "Du hast noch keine Anfragen gesendet.",
+    "kind": {
+      "offer": "Angebot",
+      "request": "Gesuch"
+    },
+    "languages": {
+      "de": "Deutsch",
+      "tr": "Türkisch",
+      "en": "Englisch"
+    },
+    "formats": {
+      "online": "Online",
+      "school": "An der Schule",
+      "either": "Nach Absprache"
+    },
+    "own": "Dein Eintrag",
+    "closed": "Geschlossen",
+    "saved": "Gemerkt",
+    "requestStatus": {
+      "pending": "Anfrage offen",
+      "accepted": "Angenommen",
+      "declined": "Abgelehnt",
+      "withdrawn": "Zurückgezogen"
+    },
+    "openRequests_one": "{count} offene Anfrage",
+    "openRequests_other": "{count} offene Anfragen",
+    "demoHint": "Demo: Das sind fiktive Beispiele. Zum Erstellen, Merken und Anfragen bitte anmelden.",
+    "loginLink": "Zur Anmeldung",
+    "loading": "Nachhilfe-Einträge werden geladen …",
+    "retry": "Erneut versuchen",
+    "someoneFrom": "Eine Person von {school}",
+    "fromPerson": "Von {name}",
+    "toPerson": "An {name}",
+    "responseNote": "Antwort",
+    "acceptedHint": "Angenommen: Vereinbart das Treffen bitte über eure Schule oder eine Lehrkraft.",
+    "responseNoteLabel": "Kurze Antwort (optional, ohne Kontaktdaten)",
+    "decline": "Ablehnen",
+    "accept": "Annehmen",
+    "withdrawRequest": "Anfrage zurückziehen",
+    "notFound": "Eintrag nicht gefunden",
+    "editTitle": "Eintrag bearbeiten",
+    "formSubtitle": "Für deine Schule {school}",
+    "kindLabel": "Art des Eintrags",
+    "fields": {
+      "subject": "Fach",
+      "topics": "Themen",
+      "description": "Angebotene oder gewünschte Unterstützung",
+      "availability": "Mögliche Termine / Verfügbarkeit"
+    },
+    "subjects": {
+      "math": "Mathematik",
+      "german": "Deutsch",
+      "english": "Englisch",
+      "turkish": "Türkisch",
+      "physics": "Physik",
+      "chemistry": "Chemie",
+      "biology": "Biologie",
+      "coding": "Informatik"
+    },
+    "privacyHint": "Andere sehen deinen Eintrag mit deiner Schule, aber ohne deinen Namen. Deinen Vornamen sieht nur, wessen Anfrage du annimmst.",
+    "save": "Speichern",
+    "school": "Schule",
+    "anonymousHint": "Der Name der erstellenden Person wird erst angezeigt, wenn sie deine Anfrage annimmt.",
+    "savedNotice": "Gespeichert.",
+    "ownActiveHint": "Dein Eintrag ist aktiv und für andere sichtbar.",
+    "ownClosedHint": "Dein Eintrag ist geschlossen und für andere nicht mehr sichtbar.",
+    "edit": "Bearbeiten",
+    "close": "Schließen",
+    "reopen": "Wieder öffnen",
+    "deleteConfirm": "Eintrag wirklich löschen? Alle Anfragen dazu werden ebenfalls gelöscht.",
+    "delete": "Löschen",
+    "unsave": "Nicht mehr merken",
+    "saveEntry": "Merken",
+    "inactiveHint": "Dieser Eintrag ist geschlossen. Neue Anfragen sind nicht möglich.",
+    "contactTitle": "Kontaktanfrage senden",
+    "contactHint": "Deine Nachricht und dein Vorname gehen an die Person, die den Eintrag erstellt hat. Bitte keine Kontaktdaten eingeben.",
+    "messageLabel": "Deine Nachricht (10–600 Zeichen)",
+    "sendRequest": "Anfrage senden",
+    "demoContactHint": "Im Demo-Modus werden keine Anfragen gesendet.",
+    "errors": {
+      "kind": "Bitte Angebot oder Gesuch wählen.",
+      "subject": "Bitte ein Fach mit 2–80 Zeichen angeben.",
+      "topics": "Bitte Themen mit 3–200 Zeichen angeben.",
+      "description": "Bitte die Unterstützung mit 20–1000 Zeichen beschreiben.",
+      "availability": "Bitte die Verfügbarkeit mit 3–200 Zeichen angeben.",
+      "contactData": "Bitte keine E-Mail-Adressen, Links oder Telefonnummern eingeben.",
+      "languages": "Bitte mindestens eine Sprache wählen.",
+      "format": "Bitte ein Format wählen.",
+      "message": "Bitte eine Nachricht mit 10–600 Zeichen schreiben.",
+      "note": "Die Antwort darf höchstens 600 Zeichen lang sein.",
+      "notInstalled": "Die Nachhilfe-Börse ist in der Datenbank noch nicht eingerichtet (Migration 011 fehlt).",
+      "inactive": "Dieser Eintrag ist nicht mehr aktiv.",
+      "own": "Das ist dein eigener Eintrag.",
+      "duplicate": "Du hast zu diesem Eintrag bereits eine Anfrage gesendet.",
+      "transition": "Diese Anfrage kann nicht mehr geändert werden.",
+      "rejectedByServer": "Die Eingabe wurde abgelehnt. Bitte Länge prüfen und keine Kontaktdaten verwenden.",
+      "invalid": "Ungültige Eingabe.",
+      "notFound": "Nicht gefunden – vielleicht wurde der Eintrag gelöscht.",
+      "notAllowed": "Dafür fehlt die Berechtigung.",
+      "generic": "Das hat nicht geklappt. Bitte später erneut versuchen.",
+      "loginRequired": "Bitte zuerst anmelden."
     }
   }
 }

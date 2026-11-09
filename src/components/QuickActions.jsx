@@ -3,10 +3,10 @@ import { useI18n } from '../i18n/LanguageContext.jsx';
 import Icon from './Icon.jsx';
 
 const ACTIONS = [
-  { to: '/events?tab=all', icon: 'search', key: 'quick.discover' },
+  { to: '/discover', icon: 'search', key: 'quick.discover' },
   { to: '/events?tab=mine', icon: 'calendar', key: 'quick.myEvents' },
   { to: '/ideas/new', icon: 'plus', key: 'quick.newIdea', primary: true },
-  { to: '/network', icon: 'network', key: 'quick.schools' },
+  { to: '/tutoring', icon: 'lightbulb', key: 'quick.tutoring' },
 ];
 
 export default function QuickActions() {

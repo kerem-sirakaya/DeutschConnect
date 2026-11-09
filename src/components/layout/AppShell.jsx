@@ -1,13 +1,12 @@
 import { useEffect, useRef } from 'react';
-import { Outlet, useLocation } from 'react-router';
+import { Link, Outlet, useLocation } from 'react-router';
 import { useI18n } from '../../i18n/LanguageContext.jsx';
 import BottomNav from './BottomNav.jsx';
-import SideNav from './SideNav.jsx';
 import TopBar from './TopBar.jsx';
 
 /**
- * Grundgerüst der App: Kopfleiste, Inhalt, Navigation.
- * Smartphone/Tablet: Bottom-Navigation · Desktop: Seitenleiste links.
+ * Grundgerüst der App im Codex-Layout: Kopfleiste (Desktop mit Hauptnavigation),
+ * Inhalt, Fußzeile und schwebende Bottom-Navigation (Smartphone/Tablet).
  */
 export default function AppShell() {
   const { t } = useI18n();
@@ -31,13 +30,14 @@ export default function AppShell() {
       <a className="skip-link" href="#main">
         {t('common.skipToContent')}
       </a>
-      <SideNav />
-      <div className="app__body">
-        <TopBar />
-        <main id="main" ref={mainRef} className="app__main" tabIndex={-1}>
-          <Outlet />
-        </main>
-      </div>
+      <TopBar />
+      <main id="main" ref={mainRef} className="app__main" tabIndex={-1}>
+        <Outlet />
+      </main>
+      <footer className="site-footer">
+        <span>{t('common.footerNote')}</span>
+        <Link to="/about">{t('nav.about')}</Link>
+      </footer>
       <BottomNav />
     </div>
   );

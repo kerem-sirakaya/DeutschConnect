@@ -23,6 +23,9 @@ import UpdatesList from '../components/UpdatesList.jsx';
 import EmptyState from '../components/EmptyState.jsx';
 import Icon from '../components/Icon.jsx';
 import { StatusBadge } from '../components/Badges.jsx';
+import TutoringCard from '../components/tutoring/TutoringCard.jsx';
+import { useTutoring } from '../state/TutoringContext.jsx';
+import { countOpenIncoming, matchTutoring } from '../lib/tutoring.js';
 
 /**
  * Startseite = persönliches Dashboard. Alle Inhalte hängen vom aktiven Profil ab:
@@ -40,18 +43,28 @@ export default function HomePage() {
   const myIdeas = getMyIdeas(user, ideas).authored;
   const myProjects = getMyProjects(user, projects);
   const projectSuggestion = getProjectRecommendations(user, projects)[0];
+  const tutoring = useTutoring();
+  const tutoringSuggestions = matchTutoring(tutoring.entries, language);
+  const openTutoringRequests = countOpenIncoming(tutoring.requests);
 
   return (
     <div className="page home">
-      <div className="home__greeting">
-        <h1 tabIndex={-1}>{t('home.greeting', { name: user.firstName })}</h1>
-        <p className="home__school">
-          <Icon name="school" size={16} />
-          <span>
-            {user.school.name} · {t('profile.grade', { grade: user.grade })}
-          </span>
-        </p>
-      </div>
+      {/* Begrüßungskarte im Codex-Design (blaue Karte) */}
+      <section className="dashboard-welcome" aria-labelledby="welcome-title">
+        <div>
+          <p className="dashboard-welcome__school">
+            {user.school.name}
+            {user.grade ? ` · ${t('profile.grade', { grade: user.grade })}` : ''}
+          </p>
+          <h1 id="welcome-title" tabIndex={-1}>
+            {t('home.greeting', { name: user.firstName })}
+          </h1>
+          <p>{t('home.dashboardSubtitle')}</p>
+        </div>
+        <span className="dashboard-welcome__icon" aria-hidden="true">
+          <Icon name="network" size={36} />
+        </span>
+      </section>
 
       <QuickActions />
 
@@ -113,6 +126,33 @@ export default function HomePage() {
               action={
                 <Link to="/me/interests" className="btn btn--secondary btn--sm">
                   {t('recommend.editInterests')}
+                </Link>
+              }
+            />
+          )}
+        </Section>
+
+        <Section
+          title={t(tutoringSuggestions.type === 'matches' ? 'home.tutoringMatches' : 'home.tutoringDiscover')}
+          icon="lightbulb"
+          linkTo={openTutoringRequests > 0 ? '/tutoring?tab=contacts' : '/tutoring'}
+          linkLabel={
+            openTutoringRequests > 0 ? t('home.tutoringOpenRequests', { count: openTutoringRequests }) : t('common.showAll')
+          }
+        >
+          {tutoringSuggestions.entries.length > 0 ? (
+            <div className="card-list">
+              {tutoringSuggestions.entries.slice(0, 2).map((entry) => (
+                <TutoringCard key={entry.id} entry={entry} />
+              ))}
+            </div>
+          ) : (
+            <EmptyState
+              icon="lightbulb"
+              title={t(tutoring.status === 'notInstalled' ? 'tutoring.errors.notInstalled' : 'home.noTutoring')}
+              action={
+                <Link to="/tutoring" className="btn btn--secondary btn--sm">
+                  {t('nav.tutoring')}
                 </Link>
               }
             />
