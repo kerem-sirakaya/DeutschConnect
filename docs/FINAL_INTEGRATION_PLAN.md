@@ -211,11 +211,21 @@ Live-Tests mit Supabase nur nach Freigabe und mit fiktiven Testinhalten.
 
 Empfehlung: zuerst **geschlossene Beta** mit freigegebenen Testkonten, Registrierung danach wieder schließen.
 
-## 8. Offene Entscheidungen (brauchen Ege/Kerem)
+## 8. Entscheidungen
 
-1. Sind die Migrationen **007–010 live**? (Grundlage für 011 – sonst zuerst diese.)
-2. Darf **011** auf einer Kopie/Staging und danach live ausgeführt werden?
-3. Gruppenbeiträge (Codex „Community-Räume“): mit Moderation freigeben oder für den Pilot weglassen?
-4. Öffentliche Profile: Welche Felder dürfen Schüler:innen freiwillig teilen (Vorschlag: Vorname, Schule, Interessen,
-   öffentliche Projekte; Standard: aus)?
-5. Hosting-Anbieter (Netlify oder Vercel) und Beta-Testkonten.
+### Getroffen (Ege, 2026-11-09)
+
+| # | Frage | Entscheidung |
+|---|---|---|
+| 1 | Live-Stand der Migrationen | 001–007 live; **008, 009, 010 nicht** ausgeführt |
+| 2 | Wo wird 011 (und 012, 013) getestet? | **Nur** auf separatem Projekt `DeutschConnect-Staging`; SQL führt Ege selbst im Dashboard aus; Live erst nach eigener Freigabe |
+| 3 | Gruppenbeiträge | Für den Pilot **aus** („In Integration“), bis ein Moderationsablauf ausgearbeitet ist |
+| 4 | Öffentliche Profile | wie vorgeschlagen umgesetzt (Stufe 5): Standard privat; einzeln Schule, Interessen, Projekte, Aktivität |
+| 5 | Stufe 7 – Nachhilfe-Moderation | Admins dürfen Nachhilfe-**Einträge** moderieren, aber **keine privaten Anfrage-Texte** lesen |
+| 6 | Stufe 7 – Projekt-Abschluss | **Nur Admins** dürfen Projekte als abgeschlossen markieren |
+
+Stufe 7 ist damit entschieden, aber **noch nicht umgesetzt** (Plan: `docs/INTEGRATION_PROGRESS.md`, Sitzung 5).
+
+### Noch offen
+
+1. Hosting-Anbieter (Netlify oder Vercel) und Beta-Testkonten.

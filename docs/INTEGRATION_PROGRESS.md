@@ -3,12 +3,17 @@
 Plan: [FINAL_INTEGRATION_PLAN.md](FINAL_INTEGRATION_PLAN.md) · Branch `integration-v1` · lokale Commits: Stufen 1–4
 (`a7b50a3`), Stufe 5 (`c15bfdf`), Stufe 6 (dritter Commit) · **nichts gepusht, keine Migration ausgeführt, nichts veröffentlicht.**
 
-Live-Stand der Datenbank (laut Ege, 2026-11-09): 001–007 ausgeführt · **008, 009, 010 NICHT ausgeführt** · 011, 012, 013 nur Dateien.
+**Staging** (`DeutschConnect-Staging`, laut Ege, 2026-11-09): **001–007, 010, 011, 012, 013 erfolgreich ausgeführt** ·
+008 und 009 bewusst ausgelassen · `admin_get_overview_stats()` vorhanden, Admin-Statistik funktioniert (von Ege geprüft).
+**Nicht erneut ausführen.**
 
-> **⚠ Migrationen 011, 012 und 013 sind NOCH NIE gegen eine echte Datenbank gelaufen.** Geprüft sind sie nur
-> durch Lesen (Review), automatische Tests der SQL-Texte und den PostgreSQL-Parser (Syntax). Ob Tabellen, Spalten,
-> Rechte und Policies zur Laufzeit wirklich so funktionieren, zeigt erst der Staging-Test
-> ([STAGING_RUNBOOK.md](STAGING_RUNBOOK.md)).
+**Live** (laut Ege, 2026-11-09, unverändert): 001–007 ausgeführt · 008, 009, 010 nicht ausgeführt · 011–013 nicht ausgeführt.
+Alle weitere Arbeit nur gegen Staging.
+
+> **Stand 011–013:** Auf Staging ausgeführt, die eingebauten Selbstprüfungen sind durchgelaufen (sonst wäre die Datei
+> zurückgerollt worden). Die **Funktionstests** mit Testkonten (T1–T6, P1–P4, J1–J5 im
+> [STAGING_RUNBOOK.md](STAGING_RUNBOOK.md)) sind noch **nicht** durchgeführt; `staging_verify.sql` wurde mir noch
+> nicht zurückgemeldet.
 
 ### Teststand je Modul (drei getrennte Ebenen)
 
@@ -18,10 +23,11 @@ Browser = von Hand im Browser mit echten Konten bedient.
 | Modul | Lokal umgesetzt | DB-getestet | Browser-getestet |
 |---|---|---|---|
 | Design, Navigation, Startseite (Stufen 2–3) | ✔ | – (keine DB nötig) | ✘ |
-| Nachhilfe (011) | ✔ | ✘ | ✘ |
-| Profile, Freigaben, Statistik (012) | ✔ | ✘ | ✘ |
-| Projekt-Mitwirkung (013) | ✔ | ✘ | ✘ |
-| Staging-Modus (`check:staging`, `dev:staging`) | ✔ (mit fiktiver Datei geprüft) | ✘ (echte Staging-Datei fehlt) | ✘ |
+| Nachhilfe (011) | ✔ | ◐ Migration auf Staging gelaufen; Funktionstests T1–T6 offen | ✘ |
+| Profile, Freigaben, Statistik (012) | ✔ | ◐ Migration auf Staging gelaufen; Funktionstests P1–P4 offen | ✘ |
+| Projekt-Mitwirkung (013) | ✔ | ◐ Migration auf Staging gelaufen; Funktionstests J1–J5 offen | ✘ |
+| Admin-Kennzahlen (010) | ✔ (Claude-Bestand) | ✔ Staging (Ege: Funktion vorhanden, Statistik funktioniert) | ✔ Staging (laut Ege) |
+| Staging-Modus (`check:staging`, `dev:staging`) | ✔ | ✔ Verbindung zum echten Staging-Projekt (Auth + Data API erreichbar, 2026-11-09) | ✘ (Kennzeichnung nur im ausgelieferten Code geprüft, nicht im Browser angesehen) |
 | Bestehende Claude-Funktionen (Auth, Events, Ideen, Admin; 001–007) | unverändert | ✔ live (laut Team) | ✔ live (laut Team) |
 
 Legende: ✔ erledigt und lokal geprüft · ◐ Code fertig, Live-Abnahme offen · ○ offen
@@ -31,9 +37,9 @@ Legende: ✔ erledigt und lokal geprüft · ◐ Code fertig, Live-Abnahme offen 
 | 1 | Claude-Backend + Auth als Basis | ✔ unverändert (AuthContext, AppStateContext, Admin, Migrationen 001–010) |
 | 2 | Codex-Design + Hauptnavigation | ✔ |
 | 3 | Codex-Startseite/Dashboard | ✔ |
-| 4 | Nachhilfe-Börse | ◐ 011 geprüft (Review unten), Staging-Test offen → im Konto-Modus noch nicht nutzbar |
-| 5 | Profile + Statistiken | ◐ Code fertig, Migration 012 nicht ausgeführt |
-| 6 | Projekte (Anträge/Mitglieder), Events-Optik, Gruppen | ◐ Mitwirkung fertig (013 nicht ausgeführt); Abschluss → Stufe 7; Gruppenbeiträge AUS (Entscheidung Ege) |
+| 4 | Nachhilfe-Börse | ◐ 011 auf Staging ausgeführt; Funktionstests offen; live nicht ausgeführt |
+| 5 | Profile + Statistiken | ◐ 012 auf Staging ausgeführt; Funktionstests offen; live nicht ausgeführt |
+| 6 | Projekte (Anträge/Mitglieder), Events-Optik, Gruppen | ◐ Mitwirkung: 013 auf Staging ausgeführt, Tests offen; Abschluss → Stufe 7; Projekt-/Event-Gruppen + Chat noch nicht portiert (siehe Sitzung 7) |
 | 7 | Admin für neue Module, 24-h-Ausblendung abgelehnter Ideen | ○ Plan steht (unten, Sitzung 5) |
 | 8 | Spiele + Bestenlisten | ○ |
 | 9 | Inkonsistenzen beheben | ○ |
@@ -298,3 +304,102 @@ durch Admin) · B fragt an · A sieht B unter „Offene Anfragen“, nimmt an ·
 C (dritte Person) sieht nur „1 Mitglied“, keine Namen · B tritt aus.
 Hinweis: Damit eine Idee veröffentlicht ist, muss auf Staging ein Admin existieren (005: Eintrag in `admins`)
 und die Idee freigeben.
+
+---
+
+## Sitzung 2026-11-09 (5) – Commit Stufe 6, Staging-Ablauf, Vorbereitung Stufe 7
+
+Commit `fc0b9d7` (lokal, nicht gepusht): Stufe 6 + Migration 013 + Staging-Ablauf.
+Neu: [STAGING_RUNBOOK.md](STAGING_RUNBOOK.md) (genaue Reihenfolge 001–007, 011, 012, 013; Testkonten; Tests T1–T6,
+P1–P4, J1–J5) und `supabase/tests/staging_verify.sql` (nur lesen; mit dem PostgreSQL-Parser geprüft, keine
+schreibenden Befehle). `.env.staging.local` existiert noch nicht → Staging-Prüfung offen.
+
+### Plan Stufe 7 – Admin für die neuen Module (noch NICHT umgesetzt)
+
+Grundsatz wie bisher: Admin-Rechte prüft **nur die Datenbank** (`public.is_admin()` aus 005, in jeder
+`admin_*`-Funktion zuerst). Das Ausblenden von Knöpfen im Frontend ist nur Komfort, kein Schutz.
+
+Geplante Migration **`015_admin_modules.sql`** (014 bleibt für Gruppen reserviert, die für den Pilot aus sind).
+Abhängigkeiten: 005 (`is_admin`), 006, 011, 012, 013 – **nicht** 008–010.
+
+| Teil | Inhalt | Annahme (empfohlene Variante) |
+|---|---|---|
+| A Nachhilfe-Moderation | `admin_list_tutoring_entries()` (alle, auch geschlossene, mit Schule + Anzahl Anfragen), `admin_set_tutoring_status(id, 'closed'/'active')`, `admin_delete_tutoring_entry(id)` | Admins sehen **Einträge**, aber **nicht** den Text privater Anfragen – nur deren Anzahl/Status. |
+| B Profil-Moderation | `admin_list_public_profiles()`, `admin_hide_profile(user_id)` setzt `is_public = false` | Nur Ausblenden, kein Bearbeiten von Namen; die Person kann neu freigeben. |
+| C Projekt-Abschluss | Spalte `ideas.completed_at` (Status bleibt `planned`); `admin_complete_project(idea_id)` nur für `planned`; Mitglieder bekommen „Abschluss bestätigt“ in Profil/Statistik | Neue Spalte statt neuem Status → keine Änderung an der Status-Prüfregel aus 006. |
+| D 24-h-Ausblendung abgelehnter Ideen | Spalte `ideas.rejected_at` (Trigger setzt sie, wenn der Status auf `rejected` wechselt – `admin_set_idea_status` aus 006 bleibt unverändert); Lese-Policy: eigene abgelehnte Ideen nur noch bis 24 h nach `rejected_at` | **Ohne pg_cron** (009 ist live nicht ausgeführt): reine Lese-Bedingung mit `now()`, nichts wird gelöscht. Bereits abgelehnte Ideen bekommen beim Ausführen `rejected_at = now()` (24 h Schonfrist). Admins sehen weiterhin alles. |
+| E Admin-Seiten | `/admin/tutoring`, `/admin/profiles`, Abschluss-Knopf in `/admin/ideas` | Gleiches Muster wie bestehende Admin-Seiten (lazy geladen hinter `AdminRoute`). |
+
+Risiko D: Die Lese-Policy auf `ideas` ändert sich. 006 prüft beim Ausführen zeichengenau gegen v3 – deshalb muss
+015 **nach** 006 laufen und 006 danach nie erneut. 015 bekommt eine eigene Selbstprüfung für die neue Policy.
+
+**Entschieden (Ege, 2026-11-09)** – siehe auch FINAL_INTEGRATION_PLAN.md Abschnitt 8:
+1. Admins moderieren Nachhilfe-**Einträge**, lesen aber **keine** privaten Anfrage-Texte (nur Anzahl/Status).
+2. Projekt-Abschluss **nur durch Admins**.
+
+Stufe 7 bleibt bis zur Freigabe **nicht umgesetzt**.
+
+---
+
+## Sitzung 2026-11-09 (6) – Staging-Verbindung geprüft (kein SQL, keine Datenbank-Änderung)
+
+`.env.staging.local` von Ege angelegt (in `.gitignore`, nicht gestaget). Alle Prüfungen nur lesend; ausgegeben
+wurden nur Hosts, HTTP-Codes und Ja/Nein.
+
+| Prüfung | Ergebnis |
+|---|---|
+| `npm run check:staging` | OK · Host `ycyqdqmiawhzzrduxupe.supabase.co` · unterscheidet sich von `.env.local` (Live) |
+| `GET /auth/v1/health` (Staging) | HTTP 200 |
+| `GET /auth/v1/settings` (Staging) | HTTP 200 · E-Mail-Anmeldung an · Registrierung erlaubt · **E-Mail-Bestätigung an** (→ Runbook Variante B oder auf A umstellen) |
+| `GET /rest/v1/schools` (Staging) | HTTP 404 / `PGRST205` = Data API antwortet, Tabelle fehlt (**erwartet**: Migrationen noch nicht ausgeführt) |
+| Staging-Build (`npm run build -- --mode staging`, Ausgabe im Scratchpad, danach gelöscht) | Staging-Host enthalten: Ja · Live-Host: Nein · Live-Key: Nein · `sb_secret_`: Nein · service_role-JWT: Nein (0 JWTs im Bundle) · STAGING-Kennzeichnung: Ja |
+| Wort „service_role“ im Bundle | nur die Schutzprüfung aus `supabaseClient.js` (lehnt geheime Keys ab), kein Key |
+| `npm run dev:staging` (kurz auf Port 5199, danach beendet) | startet · Modus `staging` · `[Staging] Supabase-Projekt: ycyqdqmiawhzzrduxupe…` · nutzt Staging-Host, nicht Live-Host · `VITE_DC_TARGET = "staging"` gesetzt |
+
+**Vorfall:** Beim Prüfen des Wortes „service_role“ wurde ein Code-Ausschnitt ausgegeben, der die letzten 13 Zeichen
+des **Staging-publishable-Keys** enthielt (Maskierung griff nicht, weil der Ausschnitt mitten im Key begann).
+Publishable Keys sind für den Browser bestimmt und stehen ohnehin im Bundle; Live-Daten waren nicht betroffen.
+Seitdem werden in der Nähe von Keys nur noch Ja/Nein ausgegeben. Optional: Staging-Key im Dashboard neu erzeugen.
+
+Weiterhin **nicht** getestet: Migrationen 001–013 auf Staging, alle Funktionen gegen eine echte Datenbank, Browser.
+*(Überholt durch Sitzung 7: Migrationen sind inzwischen auf Staging ausgeführt.)*
+
+---
+
+## Sitzung 2026-11-09 (7) – Staging-Stand korrigiert, Bestandsaufnahme Spiele/Chat/Gruppen
+
+**Korrektur (Ege):** Staging hat **001–007, 010, 011, 012, 013** erfolgreich ausgeführt. 008 und 009 sind bewusst
+ausgelassen. 010 ist von Ege geprüft: `admin_get_overview_stats()` existiert und die Admin-Statistik funktioniert.
+Ich habe **kein** SQL ausgeführt. Geändert habe ich nur die Doku und `staging_verify.sql`: Die Prüfabfrage prüft jetzt
+zusätzlich `admin_get_overview_stats()` (SECURITY DEFINER, fester search_path, kein anon).
+Der Live-Stand bleibt unverändert: 001–007.
+
+### Bestandsaufnahme Kerems Codex-Version (`codex-version-1.0`, `124fc15`) – nur gelesen
+
+Grundproblem aller vier Module: Codex speichert alles in **einem JSONB-Workspace** und prüft Befehle in einer
+Edge Function (`supabase/functions/_shared/platform.js`, `social.js`, Migration `202611070001_platform.sql`).
+Die Integration nutzt dagegen **eigene Tabellen + RLS + RPCs** (001–013). Deshalb lässt sich nichts 1:1 übernehmen.
+Übernehmen lassen sich die **Regeln und die Oberfläche**, die Speicherung muss als neue Migration nachgebaut werden.
+
+| Modul | Was Codex hat | Was davon echt war | Was für die Integration fehlt | Migration |
+|---|---|---|---|---|
+| **Spiele: Symbolpaare, Papierflug, Brückenläufer** | `src/games/MemoryGame.jsx`, `ArcadeGame.jsx`, `arcade.js`, `games.css` | Spiele laufen komplett im Browser | UI portieren (geht ohne DB) | **keine** für reines Spielen |
+| **Bestenlisten** | `leaderboards.js`, `resultRepository.js`, `GameLeaderboard.jsx`; Opt-in je Spiel; Ränge 1-1-3 | **nur lokaler Browserspeicher**, keine echte globale Liste; Codex sagt selbst, Punkte sind ohne Serverprüfung fälschbar | Tabelle `game_results` + `game_leaderboard_optin`, RPC zum Eintragen mit Plausibilitätsgrenzen, RPC für Global/Schule ohne Namen anderer ohne Opt-in | **017** (geplant) |
+| **Schach + Einladungen** | `ChessBoard.jsx`, `ChessLobby.jsx`, `_shared/chess.js` (Zugprüfung serverseitig), Glocke + `/me/notifications` | Edge Function prüfte Züge; Polling alle ~4 s; kein E-Mail-Versand | Tabellen `chess_challenges`, `chess_games` + RPCs, Zugprüfung in SQL **oder** eigene Edge Function (Architektur-Entscheidung nötig); Benachrichtigungen | **016** (geplant) |
+| **Chatroom (Themenräume general/learning/projects/events)** | `Community.jsx` Abschnitt „rooms“, `postMessage` (3–1200 Zeichen, keine Kontaktdaten, max. 10/min), `report`, `moderateMessage`, `resolveReport`, Blockieren | Schreiben im Konto-Modus nur, wenn `communityEnabled` (Moderation) an war, sonst `moderation-required` | Tabellen `groups`, `group_members`, `group_messages`, `reports`, `blocks`; Moderation durch Admins; Melden; Löschfristen | **014** (reserviert) |
+| **Projektgruppen** | `createProjectGroup`: nur Ideen-Autor:in; Mitglieder = Autor:in + Projektmitglieder; geschlossen bei gelöschter/zurückgezogener Idee | Mitgliederliste war aus der Idee abgeleitet | Mitglieder können direkt aus `idea_members` (013) abgeleitet werden → keine eigene Mitgliederliste nötig; Nachrichten wie Chatroom | **014** |
+| **Eventgruppen** | `createEventGroup`: nur bei bestätigtem Event, durch Ersteller:in oder Moderator; Mitglieder = Ersteller:in + Angemeldete; geschlossen bei Absage | wie oben | Mitglieder aus `event_registrations` (001, `status = 'registered'`); Nachrichten wie Chatroom | **014** |
+
+### Was noch offen ist (Reihenfolge-Vorschlag)
+
+1. **Erst Staging-Funktionstests** T1–T6, P1–P4, J1–J5 für 011–013 (braucht Testkonten + Admin, Runbook Abschnitt 4).
+2. **Stufe 7** (Migration 015, Admin für die neuen Module) – Plan steht, Freigabe ausstehend.
+3. **Spiele ohne Bestenliste** (Stufe 8a): reine Frontend-Portierung, keine Migration, kein Datenschutzrisiko.
+4. **Bestenlisten** (Stufe 8b, Migration 017) und **Schach** (Migration 016): vorher entscheiden, ob Schachzüge in SQL
+   oder in einer Edge Function geprüft werden.
+5. **Gruppen + Chat** (Migration 014): Für den Pilot bleibt das **aus** (Entscheidung Ege), bis der Moderationsablauf feststeht.
+   Offene Fragen: Wer moderiert? Wie schnell wird auf Meldungen reagiert? Wie lange werden Nachrichten aufbewahrt?
+   Gibt es Gruppen-Chats nur für Projekte/Events oder auch offene Themenräume? Wichtig: Es sind **Gruppen**chats,
+   keine privaten 1:1-Nachrichten (AGENTS Regel 11).
+
+Noch **nichts davon umgesetzt**, keine neue Migration angelegt.

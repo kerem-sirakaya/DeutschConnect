@@ -12,6 +12,7 @@ Nie nötig und nie anfordern: Datenbank-Passwort, `service_role`-/secret-Key.
 ## 1. Projekt + Zugang (Ege)
 
 1. Supabase → neues Projekt **DeutschConnect-Staging** (eigenes Projekt, nicht ein Branch des Live-Projekts).
+   Beim Anlegen die **Data API aktiviert lassen** (Standard) – sonst erreicht die App die Datenbank nicht.
 2. Project Settings → API Keys → **Project URL** und **publishable Key** kopieren.
 3. Im Projektordner `.env.staging.local` anlegen (steht in `.gitignore`):
 
@@ -34,8 +35,16 @@ Nie nötig und nie anfordern: Datenbank-Passwort, `service_role`-/secret-Key.
 
 ## 3. Migrationen (Ege, SQL Editor von **DeutschConnect-Staging**)
 
+> **Stand Staging (laut Ege, 2026-11-09): 001–007, 010, 011, 012, 013 erfolgreich ausgeführt.**
+> 008 und 009 bewusst ausgelassen. `admin_get_overview_stats()` existiert, Admin-Statistik funktioniert.
+> **Keine dieser Dateien erneut ausführen.** Die Tabelle unten bleibt nur als Nachweis der Reihenfolge.
+
 Jede Datei **komplett** öffnen, einfügen, **Run**. Oben im Dashboard vorher prüfen, dass das Staging-Projekt
 ausgewählt ist. Bricht eine Datei mit `ABBRUCH: …` ab, wurde nichts geändert → Meldung an Claude, **nicht** weitermachen.
+
+**Unklar, ob eine Datei gelaufen ist?** Nicht erneut ausführen, sondern `staging_verify.sql` laufen lassen und das
+Ergebnis an Claude geben. Grund: z. B. `001` legt Tabellen ohne `if not exists` an und bricht bei einem zweiten
+Lauf ab; andere Dateien sind wiederholbar – das wird im Einzelfall geprüft.
 
 | # | Datei | Hinweis |
 |---|---|---|
@@ -46,7 +55,8 @@ ausgewählt ist. Bricht eine Datei mit `ABBRUCH: …` ab, wurde nichts geändert
 | 5 | `005_admin_role.sql` | |
 | 6 | `006_admin_events_ideas.sql` | große Selbstprüfung; prüft 004 v3 zeichengenau |
 | 7 | `007_admin_delete_idea.sql` | |
-| – | 008, 009, 010 | **nicht** ausführen (wie live) |
+| – | 008, 009 | **nicht** ausführen (bewusst ausgelassen) |
+| 7b | `010_admin_overview_stats.sql` | auf Staging **ausgeführt** (Ege, 2026-11-09) – unabhängig von 008, braucht 005 + 006 |
 | 8 | `011_tutoring.sql` | |
 | 9 | `012_profiles_stats.sql` | |
 | 10 | `013_project_members.sql` | braucht 012 |
@@ -63,8 +73,19 @@ Danach **`supabase/tests/staging_verify.sql`** ausführen (nur lesen) → alle Z
 | C | ERS oder Anka | Außenstehende:r (sieht keine Namen) |
 | Admin | beliebig | gibt Test-Idee frei |
 
-Registrierung über `npm run dev:staging` → „Registrieren“ (E-Mail bestätigen). Admin auf Staging festlegen
-(SQL Editor **Staging**): `insert into public.admins (user_id, note) select id, 'Staging-Admin' from auth.users where email = '<admin-email>';`
+**Konten nur über die App registrieren** (`npm run dev:staging` → „Registrieren“), **nicht** im Dashboard über
+„Add user“: Der Anmelde-Trigger aus 001 braucht Vorname und Schule aus dem Registrierungsformular. Ohne diese Angaben
+scheitert das Anlegen mit „Database error creating new user“ (Schule ist Pflichtfeld).
+
+**E-Mail-Bestätigung auf Staging** – eine der beiden Varianten wählen:
+- **A (einfach, nur Staging):** Authentication → Sign In / Providers → Email → „Confirm email“ **aus**.
+  Im Live-Projekt **nichts** ändern.
+- **B:** Bestätigung an lassen. Dann Authentication → URL Configuration: Site URL `http://localhost:5173`,
+  Redirect URL `http://localhost:5173/login`. Achtung: Der eingebaute Mailversand von Supabase schickt nur wenige
+  Mails pro Stunde und ggf. nur an Adressen von Mitgliedern des Supabase-Teams.
+
+Admin auf Staging festlegen (SQL Editor **Staging**, nachdem das Admin-Konto registriert ist):
+`insert into public.admins (user_id, note) select id, 'Staging-Admin' from auth.users where email = '<admin-email>';`
 
 ## 5. Tests (Claude, mit den Testkonten im Staging-Modus)
 

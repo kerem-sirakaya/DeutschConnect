@@ -1,5 +1,6 @@
 -- =============================================================================
--- Staging-Prüfung nach 001–007 + 011 + 012 + 013 – NUR LESEN, ändert NICHTS
+-- Staging-Prüfung nach 001–007 + 010 + 011 + 012 + 013 – NUR LESEN, ändert NICHTS
+-- (008 und 009 bewusst nicht ausgeführt)
 -- =============================================================================
 -- Wo ausführen? NUR im SQL Editor des Projekts "DeutschConnect-Staging".
 -- Was passiert? Nur SELECT-Abfragen auf Systemkatalogen. Keine Daten, keine Rechte,
@@ -30,6 +31,7 @@ with checks(pruefpunkt, ok, ist) as (
                           || ' authenticated=' || has_function_privilege('authenticated', p.oid, 'execute')
                      from pg_proc p where p.oid = to_regprocedure(f)), 'Funktion fehlt')
     from unnest(array[
+      'public.admin_get_overview_stats()',
       'public.tutoring_list_entries()', 'public.tutoring_send_request(uuid,text)',
       'public.tutoring_respond_request(uuid,boolean,text)', 'public.tutoring_withdraw_request(uuid)',
       'public.tutoring_list_requests()',
@@ -79,7 +81,7 @@ with checks(pruefpunkt, ok, ist) as (
            and policyname = 'ideas: lesen (freigegeben oder eigene)')
 
   union all
-  -- 008–010 sollen auf Staging NICHT ausgeführt sein (wie live)
+  -- 008 (und 009) sollen auf Staging NICHT ausgeführt sein; 010 ist ausgeführt (Funktion oben geprüft)
   select '008 nicht ausgeführt (wie live)',
          not exists (select 1 from information_schema.columns
                       where table_schema = 'public' and table_name = 'events' and column_name = 'archived_at'),
@@ -88,15 +90,25 @@ with checks(pruefpunkt, ok, ist) as (
               then 'archived_at vorhanden (008 ausgeführt)' else 'nicht ausgeführt' end
 
   union all
-  -- Mindestens ein Admin (für die Freigabe von Test-Ideen)
+  -- Mindestens ein Admin (für die Freigabe von Test-Ideen).
+  -- query_to_xml zählt nur, wenn die Tabelle existiert – sonst "Tabelle fehlt" statt Abbruch der ganzen Abfrage.
   select 'mindestens 1 Admin auf Staging',
-         (select count(*) from public.admins) > 0,
-         (select count(*)::text || ' Admin(s)' from public.admins)
+         case when to_regclass('public.admins') is null then false
+              else (xpath('/row/n/text()', query_to_xml('select count(*) as n from public.admins', false, true, '')))[1]::text::int > 0
+         end,
+         case when to_regclass('public.admins') is null then 'Tabelle fehlt (005 nicht ausgeführt?)'
+              else (xpath('/row/n/text()', query_to_xml('select count(*) as n from public.admins', false, true, '')))[1]::text || ' Admin(s)'
+         end
 
   union all
   -- Beide Pilotschulen vorhanden (aus 001)
   select 'Schulen ers + anka',
-         (select count(*) from public.schools where id in ('ers', 'anka')) = 2,
-         (select string_agg(id, ', ') from public.schools)
+         case when to_regclass('public.schools') is null then false
+              else (xpath('/row/n/text()', query_to_xml(
+                     'select count(*) as n from public.schools where id in (''ers'', ''anka'')', false, true, '')))[1]::text::int = 2
+         end,
+         case when to_regclass('public.schools') is null then 'Tabelle fehlt (001 nicht ausgeführt?)'
+              else (xpath('/row/n/text()', query_to_xml('select count(*) as n from public.schools', false, true, '')))[1]::text || ' Schule(n)'
+         end
 )
 select pruefpunkt, ok, ist from checks order by ok, pruefpunkt;
