@@ -45,13 +45,13 @@ begin;
 -- -----------------------------------------------------------------------------
 -- 0) Voraussetzungen (nur 001)
 -- -----------------------------------------------------------------------------
-do $
+do $$
 begin
   if to_regclass('public.profiles') is null or to_regclass('public.schools') is null then
     raise exception 'ABBRUCH: Bitte zuerst Migration 001 ausführen.';
   end if;
 end;
-$;
+$$;
 
 -- -----------------------------------------------------------------------------
 -- 1) Hilfsfunktion: enthält ein Text Kontaktdaten?
@@ -369,7 +369,10 @@ returns table (
   entry_kind text, entry_subject text, entry_topics text, entry_status text,
   other_first_name text, other_school_id text,
   message text, status text, response_note text,
-  created_at timestamptz, responded_at timestamptz
+  created_at timestamptz, responded_at timestamptz,
+  -- ID der anderen Person – nur wenn ihr Vorname ohnehin sichtbar ist (für den Profil-Link;
+  -- das Profil selbst zeigt nur, was die Person freiwillig freigibt, Migration 012).
+  other_profile_id uuid
 )
 language plpgsql
 stable
@@ -388,7 +391,7 @@ begin
     select r.id, r.entry_id, 'incoming'::text,
            e.kind, e.subject, e.topics, e.status,
            p.first_name, p.school_id,
-           r.message, r.status, r.response_note, r.created_at, r.responded_at
+           r.message, r.status, r.response_note, r.created_at, r.responded_at, r.sender_id
       from public.tutoring_requests r
       join public.tutoring_entries e on e.id = r.entry_id
       join public.profiles p on p.id = r.sender_id
@@ -398,7 +401,8 @@ begin
     select r.id, r.entry_id, 'outgoing'::text,
            e.kind, e.subject, e.topics, e.status,
            case when r.status = 'accepted' then p.first_name else null end, e.school_id,
-           r.message, r.status, r.response_note, r.created_at, r.responded_at
+           r.message, r.status, r.response_note, r.created_at, r.responded_at,
+           case when r.status = 'accepted' then e.owner_id else null end
       from public.tutoring_requests r
       join public.tutoring_entries e on e.id = r.entry_id
       join public.profiles p on p.id = e.owner_id

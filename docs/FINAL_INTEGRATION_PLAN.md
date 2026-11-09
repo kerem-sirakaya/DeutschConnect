@@ -91,10 +91,10 @@ echte URLs; Tabs stehen in `?tab=`.
 | Designsystem, Kopfleiste, Bottom-Nav | `variables.css`, `AppShell` | Codex-Werte/Struktur in Claude-Komponenten | 2 ✔ |
 | Startseite/Dashboard | `HomePage` | Codex-Begrüßungskarte + Nachhilfe-Bereich, Claude-Daten | 3 ✔ |
 | Nachhilfe-Börse | – (neu) | Migration **011** + `tutoringApi` + `TutoringContext` + 3 Seiten | 4 ✔ (Code) |
-| Profile + Statistiken | `profiles` (privat) | Migration 012: `profile_visibility`/freiwillige Felder, `get_public_profile()`, Statistik-RPCs | 5 |
+| Profile + Statistiken | `profiles` (privat) | Migration 012: `profile_sharing` (privat als Standard), `get_public_profile()`, `list_public_profiles()`, `get_my_activity_stats()` | 5 ✔ (Code) |
 | Projekte: Anträge/Mitglieder/Abschluss | `ideas`, `idea_supports` | Migration 013: `project_members` (requested/accepted/declined/left), RPCs für Eigentümer | 6 |
 | Events | Claude komplett | nur Codex-Optik | 6 |
-| Gruppen/Beiträge, Meldungen, Sperren | – | Migration 014 (nur nach Freigabe, Moderation zuerst) | 6 |
+| Gruppen/Beiträge, Meldungen, Sperren | – | Migration 014 – **für den Pilot AUS** (Entscheidung Ege 2026-11-09); erst mit ausgearbeitetem Moderationsablauf | später |
 | Admin für neue Module | `admin_*`-RPCs | Migration 015: Nachhilfe/Meldungen/Kontosperre + Seiten im Admin-Bereich | 7 |
 | Schach + Herausforderungen | – | Migration 016: `chess_challenges`, `chess_games`, Zugprüfung serverseitig (Codex `_shared/chess.js` als Vorlage) | 8 |
 | Symbol-Paare, Paper Flight, Bridge Runner | – | Spiele 1:1 aus Codex; Migration 017: `game_results` mit Plausibilitätsgrenzen, Bestenlisten-RPC, Opt-in | 8 |
@@ -102,7 +102,7 @@ echte URLs; Tabs stehen in `?tab=`.
 
 ## 5. Backend: vorhanden vs. neu
 
-**Vorhanden (Claude, Migrationen 001–010):** Schulen, private Profile, Events + Anmeldungen (Kapazität, Zeitregeln),
+**Vorhanden (Claude, Migrationen 001–010 im Repo; live laut Ege nur 001–007 – 008/009/010 NICHT ausgeführt):** Schulen, private Profile, Events + Anmeldungen (Kapazität, Zeitregeln),
 Ideen + Unterstützungen (Moderation mit Erlaubnisliste), `admins`/`is_admin()`, `admin_*`-RPCs für Events/Ideen,
 Archivierung (24 h nach Absage/Ende, stündlich per `pg_cron`), Admin-Kennzahlen.
 
@@ -111,7 +111,8 @@ Archivierung (24 h nach Absage/Ende, stündlich per `pg_cron`), Admin-Kennzahlen
 | Migration | Inhalt | Status |
 |---|---|---|
 | `011_tutoring.sql` | `tutoring_entries`, `tutoring_requests`, `tutoring_saves`, `dc_has_contact_data()`, 5 RPCs, Selbstprüfung | **nur Datei – nicht ausgeführt, SQL nicht gegen eine Datenbank getestet** |
-| 012–017 | siehe Abschnitt 4 | geplant |
+| `012_profiles_stats.sql` | `profile_sharing`, 3 RPCs, Selbstprüfung; braucht nur 001 (011 optional) | **nur Datei – nicht ausgeführt** |
+| 013–017 | siehe Abschnitt 4 | geplant |
 
 ### 5.1 Hinweis zur „24-Stunden-Bereinigung“
 
@@ -119,8 +120,9 @@ Geprüft: In Eges Code gibt es **keine** 24-h-Bereinigung für Projektvorschläg
 **Events** (Migration 008/009: Archivierung 24 h nach Absage bzw. Ende, serverseitig per `pg_cron`).
 Abgelehnte Ideen sind schon heute für andere unsichtbar (RLS-Erlaubnisliste, live **v3**); nur die Autor:in sieht sie
 mit Hinweis „Nicht freigegeben“. Vorschlag für Stufe 7: Spalte `ideas.rejected_at` + Ausblenden 24 h nach Ablehnung
-nach demselben `pg_cron`-Muster (kein Löschen; Moderationsverlauf bleibt erhalten). **Achtung:** Die Repo-Datei
-`004_ideas_moderation.sql` enthält weiterhin v1 – nie erneut ausführen.
+nach demselben `pg_cron`-Muster (kein Löschen; Moderationsverlauf bleibt erhalten). Hinweis: Da 008/009 live
+nicht ausgeführt sind, braucht diese Ausblendung entweder 009 (pg_cron) oder eine reine Lese-Bedingung ohne Zeitplan.
+`004_ideas_moderation.sql` im Repo ist seit 2026-11-09 **v3** (= live, automatisch gegen 006 getestet).
 
 ## 6. Reihenfolge (Phase 11) und Abnahme je Stufe
 
@@ -128,7 +130,7 @@ nach demselben `pg_cron`-Muster (kein Löschen; Moderationsverlauf bleibt erhalt
 2. Codex-Designsystem + Hauptnavigation ✔
 3. Codex-Startseite/Dashboard ✔
 4. Nachhilfe ✔ (Code + Migration-Datei; Live-Abnahme offen)
-5. Profile + Statistiken
+5. Profile + Statistiken ✔ (Code + Migration-Datei; Live-Abnahme offen)
 6. Projekte, Events, Community
 7. Admin-Anbindung aller Module
 8. Spiele + Bestenlisten
@@ -156,6 +158,19 @@ Live-Tests mit Supabase nur nach Freigabe und mit fiktiven Testinhalten.
   drop table if exists public.tutoring_saves, public.tutoring_requests, public.tutoring_entries;
   drop function if exists public.tutoring_touch_updated_at();
   drop function if exists public.dc_has_contact_data(text);
+  commit;
+  ```
+
+  Rückbau von 012 (gleiche Bedingungen):
+
+  ```sql
+  begin;
+  drop function if exists public.save_profile_sharing(boolean, boolean, boolean, boolean, boolean);
+  drop function if exists public.get_public_profile(uuid);
+  drop function if exists public.list_public_profiles();
+  drop function if exists public.get_my_activity_stats();
+  drop table if exists public.profile_sharing;
+  drop function if exists public.profile_sharing_touch();
   commit;
   ```
 

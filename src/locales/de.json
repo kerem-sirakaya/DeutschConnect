@@ -409,7 +409,7 @@
     "registerTitle": "Registrieren",
     "registerSubtitle": "Konto für Schüler:innen der beteiligten Schulen",
     "firstNameLabel": "Vorname",
-    "firstNameHint": "Nur dein Vorname. Andere Nutzer:innen sehen ihn nicht.",
+    "firstNameHint": "Nur dein Vorname. Andere sehen ihn nur, wenn du dein Profil freigibst oder eine Nachhilfe-Anfrage sendest.",
     "emailLabel": "E-Mail",
     "passwordLabel": "Passwort",
     "passwordHint": "Mindestens {min} Zeichen.",
@@ -803,10 +803,10 @@
     "plannedText": "Diese Funktionen aus der Codex-Version werden gerade an das echte Backend angeschlossen. Sie sind noch nicht nutzbar.",
     "inIntegration": "In Integration",
     "planned": {
-      "profiles": "Freiwillig geteilte Schülerprofile und Statistiken",
       "groups": "Projekt- und Eventgruppen mit Beiträgen",
       "games": "Spiele (Schach, Symbol-Paare, Paper Flight, Bridge Runner) mit Bestenlisten"
-    }
+    },
+    "peopleText": "Profile, die Schüler:innen freiwillig teilen."
   },
   "tutoring": {
     "title": "Nachhilfe-Börse",
@@ -936,6 +936,81 @@
       "notAllowed": "Dafür fehlt die Berechtigung.",
       "generic": "Das hat nicht geklappt. Bitte später erneut versuchen.",
       "loginRequired": "Bitte zuerst anmelden."
+    }
+  },
+  "profiles": {
+    "demoHint": "Demo: fiktive Profile und Beispielzahlen. Nichts wird gespeichert.",
+    "loginLink": "Anmelden für echte Daten",
+    "loading": "Profildaten werden geladen …",
+    "retry": "Erneut versuchen",
+    "errors": {
+      "generic": "Die Profildaten konnten nicht geladen oder gespeichert werden. Bitte später erneut versuchen.",
+      "notInstalled": "Profile und Statistiken sind in der Datenbank noch nicht eingerichtet (Migration 012 fehlt).",
+      "notAllowed": "Dafür musst du angemeldet sein.",
+      "demoReadOnly": "Im Demo-Modus können Freigaben nur angesehen, nicht gespeichert werden."
+    },
+    "peopleTitle": "Schülerprofile",
+    "peopleSubtitle": "Freiwillig geteilte Profile aus den Pilotschulen",
+    "onlyShared": "Hier erscheinen nur Profile, die ihre Besitzer:innen selbst freigegeben haben. Privat ist Standard.",
+    "manageMine": "Eigene Freigabe verwalten",
+    "searchLabel": "Profile durchsuchen",
+    "searchPlaceholder": "Vorname, Schule oder Interesse",
+    "noMatches": "Keine passenden Profile gefunden.",
+    "noPublic": "Noch hat niemand ein Profil freigegeben.",
+    "profileTitle": "Profil",
+    "openProfile": "Profil ansehen",
+    "notAvailable": "Profil nicht verfügbar",
+    "previewPublic": "Vorschau: So sehen andere angemeldete Schüler:innen dein Profil.",
+    "previewPrivate": "Vorschau: Dein Profil ist privat – andere sehen es nicht.",
+    "onlySharedHere": "Hier stehen nur freiwillig freigegebene Angaben. Klasse, E-Mail und Kontaktdaten gehören nie zum Profil.",
+    "sharedActivity": "Freigegebene Aktivität",
+    "publicStats": {
+      "ideasPublished": "Veröffentlichte Projektideen",
+      "eventsPast": "Teilgenommene Events",
+      "supportsReceived": "Erhaltene Unterstützungen"
+    },
+    "projectsTitle": "Projektvorschläge",
+    "noProjects": "Keine veröffentlichten Projektvorschläge.",
+    "membershipsLater": "Projektmitgliedschaften kommen mit der nächsten Integrationsstufe.",
+    "sharingTitle": "Profil-Freigabe",
+    "sharingSubtitle": "Du entscheidest, was andere sehen.",
+    "sharingRowHint": "Öffentliches Profil und einzelne Angaben",
+    "statePublic": "Öffentlich",
+    "statePrivate": "Privat",
+    "fields": {
+      "isPublic": "Profil für andere Schüler:innen sichtbar machen",
+      "isPublicHint": "Andere angemeldete Schüler:innen sehen dann deinen Vornamen. Besucher:innen ohne Konto sehen nichts.",
+      "school": "Schule anzeigen",
+      "interests": "Interessen anzeigen",
+      "projects": "Eigene veröffentlichte Projektvorschläge anzeigen",
+      "activity": "Aktivitätszahlen anzeigen (Projektideen, Event-Teilnahmen, Unterstützungen)"
+    },
+    "fieldsLegend": "Zusätzlich freigeben",
+    "fieldsInactive": "Diese Angaben werden erst sichtbar, wenn dein Profil öffentlich ist.",
+    "neverShared": "Nie öffentlich: Klasse, E-Mail-Adresse, Event-Anmeldungen im Einzelnen, Nachhilfe-Anfragen.",
+    "save": "Freigabe speichern",
+    "saving": "Wird gespeichert …",
+    "saved": "Gespeichert.",
+    "openPreview": "Vorschau meines Profils öffnen",
+    "myActivity": "Meine Aktivität",
+    "statsPrivateHint": "Diese Zahlen siehst nur du. Teilnahmen bedeuten „angemeldet und Event hat stattgefunden“ – eine Anwesenheit wird nicht erfasst.",
+    "statGroups": {
+      "events": "Events",
+      "ideas": "Ideen",
+      "tutoring": "Nachhilfe"
+    },
+    "stats": {
+      "eventsUpcoming": "Angemeldet, kommend",
+      "eventsPast": "Teilgenommen",
+      "eventsInterested": "Interessiert",
+      "ideasSubmitted": "Eingereicht",
+      "ideasPublished": "Veröffentlicht",
+      "ideasPlanned": "In Planung",
+      "supportsGiven": "Unterstützt",
+      "supportsReceived": "Unterstützungen erhalten",
+      "tutoringOffers": "Aktive Angebote",
+      "tutoringRequests": "Aktive Gesuche",
+      "tutoringContacts": "Angenommene Kontakte"
     }
   }
 }

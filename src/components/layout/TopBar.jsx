@@ -26,6 +26,12 @@ export default function TopBar() {
         </Link>
         <MainNav variant="top" />
         <div className="topbar__actions">
+          {/* Nur bei "npm run dev:staging": deutlich zeigen, dass das Test-Projekt aktiv ist */}
+          {import.meta.env.VITE_DC_TARGET === 'staging' && (
+            <span className="demo-pill demo-pill--staging" title="DeutschConnect-Staging">
+              STAGING
+            </span>
+          )}
           {/* Wie bisher: Teile der Inhalte (z. B. Projekte im Netzwerk) sind auch angemeldet noch Demo. */}
           <span className="demo-pill" title={t(isRealAccount ? 'auth.demoStillActive' : 'demo.tooltip')}>
             {t('demo.label')}

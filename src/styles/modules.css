@@ -355,3 +355,105 @@
 .text-link:hover {
   text-decoration: underline;
 }
+
+/* ---------- Profile + Statistik (Stufe 5) ---------- */
+.small {
+  font-size: var(--text-sm);
+}
+
+.people-list {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 720px) {
+  .people-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.person-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--color-text);
+  text-decoration: none;
+  min-height: 44px;
+}
+
+.person-card:hover {
+  border-color: var(--color-border-strong);
+}
+
+.person-card__body {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.person-card__name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 650;
+}
+
+.activity-stats {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 720px) {
+  .activity-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.activity-stats__group {
+  padding: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+
+.activity-stats__group h3 {
+  margin: 0 0 8px;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.activity-stats__list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+}
+
+.activity-stats__item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.activity-stats__item dt {
+  color: var(--color-text-muted);
+}
+
+.activity-stats__item dd {
+  margin: 0;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Staging-Kennzeichen (nur npm run dev:staging) */
+.demo-pill--staging {
+  background: #7a2e0e;
+  border-color: #f59e0b;
+  color: #fde68a;
+}

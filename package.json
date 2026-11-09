@@ -6,6 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:staging": "vite --mode staging",
+    "check:staging": "node scripts/stagingEnv.mjs",
     "build": "vite build",
     "preview": "vite preview",
     "test": "node --test"

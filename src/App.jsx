@@ -20,6 +20,9 @@ import RegisterPage from './pages/RegisterPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
 import DiscoverPage from './pages/DiscoverPage.jsx';
 import CommunityPage from './pages/CommunityPage.jsx';
+import PeoplePage from './pages/PeoplePage.jsx';
+import PublicProfilePage from './pages/PublicProfilePage.jsx';
+import ProfileSharingPage from './pages/ProfileSharingPage.jsx';
 import TutoringPage from './pages/TutoringPage.jsx';
 import TutoringFormPage from './pages/TutoringFormPage.jsx';
 import TutoringDetailPage from './pages/TutoringDetailPage.jsx';
@@ -62,10 +65,13 @@ export default function App() {
         <Route path="tutoring/:entryId/edit" element={<TutoringFormPage />} />
 
         <Route path="community" element={<CommunityPage />} />
+        <Route path="community/people" element={<PeoplePage />} />
+        <Route path="community/people/:profileId" element={<PublicProfilePage />} />
 
         <Route path="me" element={<MePage />} />
         <Route path="me/interests" element={<InterestsPage />} />
         <Route path="me/settings" element={<SettingsPage />} />
+        <Route path="me/sharing" element={<ProfileSharingPage />} />
 
         <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<RegisterPage />} />

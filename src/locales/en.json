@@ -409,7 +409,7 @@
     "registerTitle": "Sign up",
     "registerSubtitle": "Account for students of the participating schools",
     "firstNameLabel": "First name",
-    "firstNameHint": "Only your first name. Other users cannot see it.",
+    "firstNameHint": "Only your first name. Others see it only if you share your profile or send a tutoring request.",
     "emailLabel": "Email",
     "passwordLabel": "Password",
     "passwordHint": "At least {min} characters.",
@@ -803,10 +803,10 @@
     "plannedText": "These features from the Codex version are currently being connected to the real backend. They cannot be used yet.",
     "inIntegration": "In integration",
     "planned": {
-      "profiles": "Voluntarily shared student profiles and statistics",
       "groups": "Project and event groups with posts",
       "games": "Games (chess, symbol pairs, Paper Flight, Bridge Runner) with leaderboards"
-    }
+    },
+    "peopleText": "Profiles that students choose to share."
   },
   "tutoring": {
     "title": "Tutoring board",
@@ -936,6 +936,81 @@
       "notAllowed": "You are not allowed to do this.",
       "generic": "That did not work. Please try again later.",
       "loginRequired": "Please sign in first."
+    }
+  },
+  "profiles": {
+    "demoHint": "Demo: fictional profiles and sample numbers. Nothing is saved.",
+    "loginLink": "Sign in for real data",
+    "loading": "Loading profile data …",
+    "retry": "Try again",
+    "errors": {
+      "generic": "Profile data could not be loaded or saved. Please try again later.",
+      "notInstalled": "Profiles and statistics are not set up in the database yet (migration 012 missing).",
+      "notAllowed": "You need to be signed in for this.",
+      "demoReadOnly": "In demo mode, sharing settings can only be viewed, not saved."
+    },
+    "peopleTitle": "Student profiles",
+    "peopleSubtitle": "Profiles voluntarily shared by students of the pilot schools",
+    "onlyShared": "Only profiles their owners have chosen to share appear here. Private is the default.",
+    "manageMine": "Manage my sharing",
+    "searchLabel": "Search profiles",
+    "searchPlaceholder": "First name, school or interest",
+    "noMatches": "No matching profiles found.",
+    "noPublic": "Nobody has shared a profile yet.",
+    "profileTitle": "Profile",
+    "openProfile": "View profile",
+    "notAvailable": "Profile not available",
+    "previewPublic": "Preview: this is how other signed-in students see your profile.",
+    "previewPrivate": "Preview: your profile is private – others cannot see it.",
+    "onlySharedHere": "Only voluntarily shared information appears here. Grade, email and contact details are never part of the profile.",
+    "sharedActivity": "Shared activity",
+    "publicStats": {
+      "ideasPublished": "Published project ideas",
+      "eventsPast": "Events attended",
+      "supportsReceived": "Support received"
+    },
+    "projectsTitle": "Project proposals",
+    "noProjects": "No published project proposals.",
+    "membershipsLater": "Project memberships will come with the next integration stage.",
+    "sharingTitle": "Profile sharing",
+    "sharingSubtitle": "You decide what others see.",
+    "sharingRowHint": "Public profile and individual details",
+    "statePublic": "Public",
+    "statePrivate": "Private",
+    "fields": {
+      "isPublic": "Make my profile visible to other students",
+      "isPublicHint": "Other signed-in students will then see your first name. Visitors without an account see nothing.",
+      "school": "Show school",
+      "interests": "Show interests",
+      "projects": "Show my published project proposals",
+      "activity": "Show activity numbers (project ideas, events attended, support received)"
+    },
+    "fieldsLegend": "Also share",
+    "fieldsInactive": "These details only become visible once your profile is public.",
+    "neverShared": "Never public: grade, email address, individual event registrations, tutoring requests.",
+    "save": "Save sharing",
+    "saving": "Saving …",
+    "saved": "Saved.",
+    "openPreview": "Open a preview of my profile",
+    "myActivity": "My activity",
+    "statsPrivateHint": "Only you can see these numbers. “Attended” means “registered and the event took place” – attendance is not recorded.",
+    "statGroups": {
+      "events": "Events",
+      "ideas": "Ideas",
+      "tutoring": "Tutoring"
+    },
+    "stats": {
+      "eventsUpcoming": "Registered, upcoming",
+      "eventsPast": "Attended",
+      "eventsInterested": "Interested",
+      "ideasSubmitted": "Submitted",
+      "ideasPublished": "Published",
+      "ideasPlanned": "Being planned",
+      "supportsGiven": "Supported",
+      "supportsReceived": "Support received",
+      "tutoringOffers": "Active offers",
+      "tutoringRequests": "Active requests",
+      "tutoringContacts": "Accepted contacts"
     }
   }
 }

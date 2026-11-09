@@ -3,8 +3,10 @@
 > **NEU (2026-11-09): Die Integration Claude + Codex läuft auf Branch `integration-v1`.**
 > Zuerst lesen: [`docs/FINAL_INTEGRATION_PLAN.md`](FINAL_INTEGRATION_PLAN.md) (Architektur, Entscheidungen, Rollback)
 > und [`docs/INTEGRATION_PROGRESS.md`](INTEGRATION_PROGRESS.md) (erledigte Stufen, Tests, offene Punkte).
-> Seitdem gilt: Navigation = 5 Codex-Bereiche (Seitenleiste entfernt), neue Migration `011_tutoring.sql`
-> (**nicht ausgeführt**), `npm test` = 293 Tests. Der Rest dieser Datei beschreibt den Stand vor der Integration.
+> Seitdem gilt: Navigation = 5 Codex-Bereiche (Seitenleiste entfernt), neue Migrationen `011_tutoring.sql` und
+> `012_profiles_stats.sql` (**nicht ausgeführt**), Live-Stand laut Ege: 001–007 (008–010 **nicht** ausgeführt).
+> **`004_ideas_moderation.sql` im Repo ist jetzt v3** (= live) – die Hinweise unten „Repo-Datei = v1“ sind überholt.
+> Der Rest dieser Datei beschreibt den Stand vor der Integration.
 
 Stand: **2026-11-08** · Branch: **`claude-version-1.0`** · Hauptbranch: `main`
 Letzter Commit: `9121665 Create HANDOFF.md` – **alles danach ist lokal und NICHT committet** (Liste in Abschnitt 14).

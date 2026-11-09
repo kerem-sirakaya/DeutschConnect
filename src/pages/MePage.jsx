@@ -12,12 +12,18 @@ import Section from '../components/Section.jsx';
 import ListLink from '../components/ListLink.jsx';
 import DemoNotice from '../components/DemoNotice.jsx';
 import { RoleBadge, TopicTags } from '../components/Badges.jsx';
+import ActivityStats from '../components/profiles/ActivityStats.jsx';
+import ProfileStatusNotice from '../components/profiles/ProfileStatusNotice.jsx';
+import { useMySharing, useMyStats } from '../state/useProfiles.js';
 
 export default function MePage() {
   const { t, language } = useI18n();
   const { user, ideas, events, isRealAccount } = useAppState();
   const auth = useAuth();
   const [now] = useState(() => new Date());
+  const activity = useMyStats();
+  const sharing = useMySharing();
+  const sharingLabel = sharing.data ? t(sharing.data.isPublic ? 'profiles.statePublic' : 'profiles.statePrivate') : '–';
 
   const myEvents = getMyEvents(user, events, now);
   const myIdeas = getMyIdeas(user, ideas);
@@ -66,6 +72,12 @@ export default function MePage() {
         ))}
       </ul>
 
+      <Section title={t('profiles.myActivity')} icon="star">
+        <ProfileStatusNotice status={activity.status} errorKey={activity.errorKey} reload={activity.reload} />
+        {activity.data && <ActivityStats stats={activity.data} />}
+        {activity.data && <p className="muted small">{t('profiles.statsPrivateHint')}</p>}
+      </Section>
+
       <Section title={t('me.interests')} icon="sparkles" linkTo="/me/interests" linkLabel={t('me.edit')}>
         {user.interests.length > 0 ? (
           <TopicTags topics={user.interests} highlight={user.interests} />
@@ -100,6 +112,13 @@ export default function MePage() {
               trailing={auth.user ? t('auth.meRowSignedIn') : t('auth.toLogin')}
             />
           )}
+          <ListLink
+            to="/me/sharing"
+            icon="shield"
+            title={t('profiles.sharingTitle')}
+            subtitle={t('profiles.sharingRowHint')}
+            trailing={sharingLabel}
+          />
           <ListLink to="/me/interests" icon="sparkles" title={t('me.rows.interests')} subtitle={t('me.rows.interestsHint')} />
           <ListLink to="/me/settings" icon="globe" title={t('me.rows.language')} trailing={languageLabel} />
           <ListLink to="/me/settings" icon="users" title={t('me.rows.settings')} subtitle={t('me.rows.settingsHint')} />

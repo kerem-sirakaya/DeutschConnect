@@ -78,6 +78,9 @@ web_modules/
 .env.test.local
 .env.production.local
 .env.local
+# Staging-Zugang (DeutschConnect-Staging) – nie committen
+.env.staging.local
+.env.*.local
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache

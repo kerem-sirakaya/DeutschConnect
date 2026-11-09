@@ -409,7 +409,7 @@
     "registerTitle": "Kayıt ol",
     "registerSubtitle": "Katılımcı okulların öğrencileri için hesap",
     "firstNameLabel": "Adın",
-    "firstNameHint": "Sadece adın. Diğer kullanıcılar bunu görmez.",
+    "firstNameHint": "Sadece adın. Diğerleri onu yalnızca profilini paylaşırsan veya bir ders desteği talebi gönderirsen görür.",
     "emailLabel": "E-posta",
     "passwordLabel": "Şifre",
     "passwordHint": "En az {min} karakter.",
@@ -803,10 +803,10 @@
     "plannedText": "Codex sürümündeki bu özellikler şu anda gerçek altyapıya bağlanıyor. Henüz kullanılamaz.",
     "inIntegration": "Entegrasyonda",
     "planned": {
-      "profiles": "Gönüllü paylaşılan öğrenci profilleri ve istatistikler",
       "groups": "Paylaşımlı proje ve etkinlik grupları",
       "games": "Liderlik tablolu oyunlar (satranç, sembol eşleştirme, Paper Flight, Bridge Runner)"
-    }
+    },
+    "peopleText": "Öğrencilerin gönüllü olarak paylaştığı profiller."
   },
   "tutoring": {
     "title": "Ders desteği panosu",
@@ -936,6 +936,81 @@
       "notAllowed": "Bunun için yetkin yok.",
       "generic": "Bu işlem olmadı. Lütfen daha sonra tekrar dene.",
       "loginRequired": "Lütfen önce giriş yap."
+    }
+  },
+  "profiles": {
+    "demoHint": "Demo: hayalî profiller ve örnek sayılar. Hiçbir şey kaydedilmez.",
+    "loginLink": "Gerçek veriler için giriş yap",
+    "loading": "Profil verileri yükleniyor …",
+    "retry": "Tekrar dene",
+    "errors": {
+      "generic": "Profil verileri yüklenemedi veya kaydedilemedi. Lütfen daha sonra tekrar dene.",
+      "notInstalled": "Profiller ve istatistikler veritabanında henüz kurulmadı (Migration 012 eksik).",
+      "notAllowed": "Bunun için giriş yapmalısın.",
+      "demoReadOnly": "Demo modunda paylaşım ayarları yalnızca görüntülenebilir, kaydedilemez."
+    },
+    "peopleTitle": "Öğrenci profilleri",
+    "peopleSubtitle": "Pilot okullardan gönüllü olarak paylaşılan profiller",
+    "onlyShared": "Burada yalnızca sahiplerinin kendisinin paylaştığı profiller görünür. Varsayılan olarak her şey gizlidir.",
+    "manageMine": "Kendi paylaşımımı yönet",
+    "searchLabel": "Profillerde ara",
+    "searchPlaceholder": "Ad, okul veya ilgi alanı",
+    "noMatches": "Uygun profil bulunamadı.",
+    "noPublic": "Henüz kimse profilini paylaşmadı.",
+    "profileTitle": "Profil",
+    "openProfile": "Profili görüntüle",
+    "notAvailable": "Profil kullanılamıyor",
+    "previewPublic": "Önizleme: Giriş yapmış diğer öğrenciler profilini böyle görür.",
+    "previewPrivate": "Önizleme: Profilin gizli – diğerleri onu göremez.",
+    "onlySharedHere": "Burada yalnızca gönüllü olarak paylaşılan bilgiler yer alır. Sınıf, e-posta ve iletişim bilgileri asla profile dahil değildir.",
+    "sharedActivity": "Paylaşılan etkinlik",
+    "publicStats": {
+      "ideasPublished": "Yayımlanan proje fikirleri",
+      "eventsPast": "Katılınan etkinlikler",
+      "supportsReceived": "Alınan destekler"
+    },
+    "projectsTitle": "Proje önerileri",
+    "noProjects": "Yayımlanmış proje önerisi yok.",
+    "membershipsLater": "Proje üyelikleri bir sonraki entegrasyon aşamasıyla gelecek.",
+    "sharingTitle": "Profil paylaşımı",
+    "sharingSubtitle": "Diğerlerinin ne göreceğine sen karar verirsin.",
+    "sharingRowHint": "Herkese açık profil ve tek tek bilgiler",
+    "statePublic": "Açık",
+    "statePrivate": "Gizli",
+    "fields": {
+      "isPublic": "Profilimi diğer öğrencilere görünür yap",
+      "isPublicHint": "Giriş yapmış diğer öğrenciler adını görür. Hesabı olmayan ziyaretçiler hiçbir şey görmez.",
+      "school": "Okulu göster",
+      "interests": "İlgi alanlarını göster",
+      "projects": "Kendi yayımlanmış proje önerilerimi göster",
+      "activity": "Etkinlik sayılarını göster (proje fikirleri, etkinlik katılımları, destekler)"
+    },
+    "fieldsLegend": "Ek olarak paylaş",
+    "fieldsInactive": "Bu bilgiler yalnızca profilin açık olduğunda görünür.",
+    "neverShared": "Asla herkese açık değil: sınıf, e-posta adresi, tek tek etkinlik kayıtları, ders desteği talepleri.",
+    "save": "Paylaşımı kaydet",
+    "saving": "Kaydediliyor …",
+    "saved": "Kaydedildi.",
+    "openPreview": "Profilimin önizlemesini aç",
+    "myActivity": "Etkinliğim",
+    "statsPrivateHint": "Bu sayıları yalnızca sen görürsün. Katılım, “kayıtlı ve etkinlik gerçekleşti” anlamına gelir – yoklama tutulmaz.",
+    "statGroups": {
+      "events": "Etkinlikler",
+      "ideas": "Fikirler",
+      "tutoring": "Ders desteği"
+    },
+    "stats": {
+      "eventsUpcoming": "Kayıtlı, yaklaşan",
+      "eventsPast": "Katıldı",
+      "eventsInterested": "İlgileniyor",
+      "ideasSubmitted": "Gönderildi",
+      "ideasPublished": "Yayımlandı",
+      "ideasPlanned": "Planlanıyor",
+      "supportsGiven": "Desteklendi",
+      "supportsReceived": "Alınan destekler",
+      "tutoringOffers": "Aktif teklifler",
+      "tutoringRequests": "Aktif talepler",
+      "tutoringContacts": "Kabul edilen bağlantılar"
     }
   }
 }

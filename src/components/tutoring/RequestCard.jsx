@@ -55,6 +55,12 @@ export default function RequestCard({ request, showEntryLink = true }) {
         <Icon name={incoming ? 'mail' : 'arrowRight'} size={15} />
         {incoming ? t('tutoring.fromPerson', { name: who }) : t('tutoring.toPerson', { name: who })}
       </p>
+      {request.otherProfileId && (
+        // Das Profil zeigt nur, was die Person freigegeben hat (sonst "nicht verfügbar").
+        <Link to={`/community/people/${request.otherProfileId}`} className="text-link">
+          {t('profiles.openProfile')}
+        </Link>
+      )}
       {showEntryLink && (
         <Link to={`/tutoring/${request.entryId}`} className="text-link">
           {t(`tutoring.kind.${request.entryKind}`)}: {request.entrySubject} · {request.entryTopics}

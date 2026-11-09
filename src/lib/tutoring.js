@@ -199,6 +199,8 @@ export function mapRequestRow(row) {
     responseNote: row.response_note ?? null,
     createdAt: row.created_at,
     respondedAt: row.responded_at ?? null,
+    // nur gesetzt, wenn der Vorname sichtbar ist (eingehend immer, ausgehend nach Annahme)
+    otherProfileId: row.other_profile_id ?? null,
   };
 }
 
