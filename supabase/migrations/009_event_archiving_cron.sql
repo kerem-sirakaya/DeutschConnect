@@ -1,6 +1,9 @@
 -- =============================================================================
 -- 009 – Zeitplan: Events stündlich automatisch archivieren (pg_cron)
 -- =============================================================================
+-- ÜBERHOLT durch 018/019 (automatisches Löschen, jede Minute): Löschen ist immer vor dem
+-- Archivieren fällig. Nicht mehr nötig – 019 entfernt diesen Job, falls er existiert.
+-- =============================================================================
 -- Ausführen NACH 008 (Supabase Dashboard -> SQL Editor -> Run), als Datenbank-
 -- Eigentümer (postgres) – derselben Rolle, der archive_finished_events gehört.
 -- IMMER die ganze Datei ausführen. Kann gefahrlos mehrfach ausgeführt werden

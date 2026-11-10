@@ -67,10 +67,34 @@ test('1) abgesagtes Event bleibt vor Ablauf von 24 Stunden sichtbar', () => {
   assert.deepEqual(visibleToStudents([cancelled], at('2026-11-09T09:00:00Z')).map((e) => e.id), ['c']);
 });
 
-test('2) abgesagtes Event ist nach 24 Stunden archiviert – auch wenn sein Datum noch in der Zukunft liegt', () => {
-  assert.equal(studentArchiveDueAt(cancelled), at('2026-11-09T10:00:00Z').getTime());
-  assert.equal(isArchivedForStudents(cancelled, at('2026-11-09T10:00:00Z')), true);
-  assert.deepEqual(visibleToStudents([cancelled], at('2026-11-10T00:00:00Z')), []);
+// Entscheidung Ege (2026-11-09): abgesagt → ausgeblendet erst ab dem SPÄTEREN Zeitpunkt von
+// „Absage + 24 h“ und „Ende + 24 h“. Angemeldete sehen die Absage bis zum ursprünglichen Termin.
+test('2) abgesagtes Event mit künftigem Termin bleibt bis Termin-Ende + 24 h sichtbar (nicht nur 24 h ab Absage)', () => {
+  const end = eventEndsAt(cancelled); // 20.12. 15:30 Ankara
+  assert.equal(end, at('2026-12-20T15:30:00+03:00').getTime());
+  assert.equal(studentArchiveDueAt(cancelled), end + 24 * H);
+  assert.equal(isArchivedForStudents(cancelled, at('2026-11-09T10:00:00Z')), false, '24 h nach Absage: noch sichtbar');
+  assert.equal(isArchivedForStudents(cancelled, at('2026-12-20T14:00:00+03:00')), false, 'zum Termin: sichtbar');
+  assert.equal(isArchivedForStudents(cancelled, at('2026-12-21T15:29:59+03:00')), false, '1 s vorher: sichtbar');
+  assert.equal(isArchivedForStudents(cancelled, at('2026-12-21T15:30:00+03:00')), true, 'Ende + 24 h: ausgeblendet');
+  assert.deepEqual(visibleToStudents([cancelled], at('2026-12-22T00:00:00Z')), []);
+});
+
+test('2b) spät abgesagt (Termin schon vorbei): immer noch mindestens 24 h ab der Absage sichtbar', () => {
+  const late = ev('late', 'cancelled', '2026-11-07T10:00:00Z', { durationMinutes: 60, cancelledAt: '2026-11-09T08:00:00Z' });
+  assert.equal(studentArchiveDueAt(late), at('2026-11-10T08:00:00Z').getTime());
+  assert.equal(isArchivedForStudents(late, at('2026-11-10T07:59:59Z')), false);
+  assert.equal(isArchivedForStudents(late, at('2026-11-10T08:00:00Z')), true);
+});
+
+test('2c) Absage: es gilt immer der spätere Zeitpunkt (Absage + 24 h vs. Ende + 24 h)', () => {
+  for (const cancelOffsetH of [-500, -48, -25, -1, 0, 1, 25, 100]) {
+    const start = '2026-12-10T10:00:00Z';
+    const e = ev('x', 'cancelled', start, { durationMinutes: 90, cancelledAt: plus(start, cancelOffsetH).toISOString() });
+    const expected = Math.max(plus(start, cancelOffsetH).getTime(), plus(start, 1.5).getTime()) + 24 * H;
+    assert.equal(studentArchiveDueAt(e), expected, String(cancelOffsetH));
+    assert.ok(studentArchiveDueAt(e) >= plus(start, 24).getTime(), 'nie vor Start + 24 h');
+  }
 });
 
 test('abgesagt ohne bekannten Zeitpunkt (vor Migration 008): bleibt sichtbar, bis die Datenbank archiviert', () => {
@@ -268,7 +292,7 @@ test('008: archivieren statt löschen – kein DELETE, kein DROP TABLE, kein TRU
 
 test('008: Archivierung ist idempotent und trifft nie künftige oder laufende Events', () => {
   assert.match(archiveFn, /where e\.archived_at is null/);
-  assert.match(archiveFn, /e\.cancelled_at <= now\(\) - interval '24 hours'/);
+  assert.match(archiveFn, /greatest\(e\.cancelled_at, public\.event_ends_at\(e\.start_at, e\.duration_minutes\)\) <= now\(\) - interval '24 hours'/);
   assert.match(archiveFn, /public\.event_ends_at\(e\.start_at, e\.duration_minutes\) <= now\(\) - interval '24 hours'/);
   assert.match(archiveFn, /e\.status in \('planned', 'confirmed', 'completed'\)/);
   assert.doesNotMatch(archiveFn, /'draft'/);
@@ -308,8 +332,10 @@ test('008 K3: Policy wird vollständig gegen eine Vergleichs-Policy geprüft', (
 
 test('008 K4: Laufzeit-Probe mit echten Test-Events, danach vollständig zurückgerollt', () => {
   assert.match(m008, /perform public\.archive_finished_events\(\);\s+second_run := public\.archive_finished_events\(\);/);
-  for (const text of ['künftiges Event archiviert', 'laufendes Event archiviert', 'Entwurf archiviert', 'Absage vor 1 h archiviert',
-    'Event ohne Dauer zu früh archiviert', 'Ende vor 29 h nicht archiviert', 'Absage vor 25 h nicht archiviert', 'nicht idempotent', 'Status verändert']) {
+  // Abgesagt: archiviert erst, wenn Absage UND Ende 24 h vorbei sind (Entscheidung Ege, 2026-11-09)
+  for (const text of ['künftiges Event archiviert', 'laufendes Event archiviert', 'Entwurf archiviert', 'Absage vor 1 h archiviert (Termin vorbei)',
+    'Event ohne Dauer zu früh archiviert', 'Ende vor 29 h nicht archiviert', 'Absage + Ende vor über 24 h nicht archiviert',
+    'abgesagtes künftiges Event vor seinem Termin archiviert', 'nicht idempotent', 'Status verändert']) {
     assert.ok(m008.includes(text), text);
   }
   assert.match(m008, /raise exception using errcode = 'DC8PR'/);
@@ -364,10 +390,10 @@ const updateFn = m008.slice(
 );
 
 test('008: admin_update_event merkt sich die alte Dauer und berechnet archived_at bei Datum ODER Dauer neu', () => {
-  assert.match(updateFn, /select e\.status, e\.start_at, e\.duration_minutes, e\.archived_at\s+into old_status, old_start, old_duration, old_archived/);
-  assert.match(updateFn, /old_status in \('planned', 'confirmed', 'completed'\)\s+and \(p_start_at is distinct from old_start or p_duration_minutes is distinct from old_duration\)/);
-  // gleiche Regel wie archive_finished_events: Ende + 24 h
-  assert.match(updateFn, /public\.event_ends_at\(p_start_at, p_duration_minutes\) <= now\(\) - interval '24 hours'\s+then coalesce\(old_archived, now\(\)\)\s+else null/);
+  assert.match(updateFn, /select e\.status, e\.start_at, e\.duration_minutes, e\.archived_at, e\.cancelled_at\s+into old_status, old_start, old_duration, old_archived, old_cancelled/);
+  assert.match(updateFn, /old_status in \('planned', 'confirmed', 'completed', 'cancelled'\)\s+and \(p_start_at is distinct from old_start or p_duration_minutes is distinct from old_duration\)/);
+  // gleiche Regel wie archive_finished_events: Ende + 24 h; abgesagt zusätzlich Absage + 24 h
+  assert.match(updateFn, /public\.event_ends_at\(p_start_at, p_duration_minutes\) <= now\(\) - interval '24 hours'\s+and \(old_status <> 'cancelled' or old_cancelled <= now\(\) - interval '24 hours'\)\s+then coalesce\(old_archived, now\(\)\)\s+else null/);
   assert.match(updateFn, /archived_at = new_archived/);
   // Abgesagt: kein Neustart des Countdowns – cancelled_at wird hier nie verändert
   assert.doesNotMatch(updateFn, /cancelled_at\s*=/);
@@ -395,14 +421,15 @@ test('Frontend: kürzere Dauer kann ein Event sofort fällig machen – gleiche 
   assert.equal(isArchivedForStudents(shortened, now), true);
 });
 
-test('Frontend: Dauer eines abgesagten Events ändert den 24-h-Countdown NICHT', () => {
+test('Frontend: abgesagtes Event – Dauer verschiebt nur das Termin-Ende, der Absage-Zeitpunkt bleibt', () => {
   const base = ev('c', 'cancelled', '2026-12-20T14:00:00+03:00', { cancelledAt: '2026-11-08T10:00:00Z', durationMinutes: 60 });
   const longer = { ...base, durationMinutes: 1440 };
-  const none = { ...base, durationMinutes: null };
-  assert.equal(studentArchiveDueAt(longer), studentArchiveDueAt(base));
-  assert.equal(studentArchiveDueAt(none), studentArchiveDueAt(base));
-  assert.equal(isArchivedForStudents(longer, at('2026-11-09T09:59:00Z')), false);
-  assert.equal(isArchivedForStudents(longer, at('2026-11-09T10:00:00Z')), true);
+  assert.equal(studentArchiveDueAt(base), at('2026-12-21T15:00:00+03:00').getTime());
+  assert.equal(studentArchiveDueAt(longer), at('2026-12-22T14:00:00+03:00').getTime());
+  // Termin lange vorbei: dann zählt die Absage, die Dauer ändert nichts mehr
+  const past = ev('p', 'cancelled', '2026-10-01T10:00:00Z', { cancelledAt: '2026-11-08T10:00:00Z', durationMinutes: 60 });
+  assert.equal(studentArchiveDueAt({ ...past, durationMinutes: 1440 }), studentArchiveDueAt(past));
+  assert.equal(studentArchiveDueAt(past), at('2026-11-09T10:00:00Z').getTime());
 });
 
 test('Frontend und Datenbank nutzen dieselbe Grenze (Ende/Absage + genau 24 h) und dieselbe Status-Liste', () => {
@@ -413,4 +440,104 @@ test('Frontend und Datenbank nutzen dieselbe Grenze (Ende/Absage + genau 24 h) u
   assert.match(archiveFn, /e\.status in \('planned', 'confirmed', 'completed'\)/);
   // Ohne Dauer: Mitternacht nach dem Ankara-Tag – hier und in event_ends_at
   assert.ok(m008.includes("((p_start_at at time zone 'Europe/Istanbul')::date + 1)::timestamp at time zone 'Europe/Istanbul'"));
+});
+
+// ---------------------------------------------------------------------------
+// Ablauf-Regeln: gezielte Grenzfälle (Audit 2026-11-09). Gegenstück in der Datenbank:
+// supabase/tests/008_event_expiry_rules_test.sql
+// ---------------------------------------------------------------------------
+const START = '2026-12-10T10:00:00Z'; // 13:00 Ankara-Zeit
+const plus = (iso, hours) => new Date(new Date(iso).getTime() + hours * H);
+
+test('Ablauf: lange im Voraus angelegt – das Erstellungsdatum spielt keine Rolle', () => {
+  const early = ev('early', 'confirmed', START, { createdAt: '2026-10-01T08:00:00Z' });
+  // 25 h nach dem Anlegen, 30 Tage nach dem Anlegen, eine Stunde vor dem Start: immer sichtbar
+  for (const now of [at('2026-10-02T09:00:00Z'), at('2026-10-31T08:00:00Z'), plus(START, -1)]) {
+    assert.equal(isArchivedForStudents(early, now), false, now.toISOString());
+  }
+});
+
+test('Ablauf: 23 / 24 / 25 Stunden nach dem Start (Dauer 60 min)', () => {
+  const event = ev('d60', 'confirmed', START, { durationMinutes: 60 });
+  assert.equal(isArchivedForStudents(event, plus(START, 23)), false, '23 h');
+  assert.equal(isArchivedForStudents(event, plus(START, 24)), false, '24 h (Ende erst vor 23 h)');
+  assert.equal(isArchivedForStudents(event, plus(START, 25)), true, '25 h = Ende + 24 h');
+});
+
+test('Ablauf: 23 / 24 / 25 Stunden nach dem Start – ohne Dauer (Mitternacht-Regel, Ankara)', () => {
+  const event = ev('nodur', 'planned', START, { durationMinutes: null });
+  // Start 13:00 Ankara → Ende = Mitternacht (Ankara) → ausgeblendet ab Start + 11 h + 24 h = Start + 35 h
+  assert.equal(studentArchiveDueAt(event), plus(START, 35).getTime());
+  for (const h of [23, 24, 25, 34]) assert.equal(isArchivedForStudents(event, plus(START, h)), false, `${h} h`);
+  assert.equal(isArchivedForStudents(event, plus(START, 35)), true, '35 h');
+});
+
+test('Ablauf ohne Dauer: Zeitzonen-Ränder in Ankara-Zeit (UTC+3)', () => {
+  // 23:30 Ankara → Mitternacht 30 min später → sichtbar bis Start + 24,5 h
+  const late = ev('late', 'planned', '2026-12-10T23:30:00+03:00', { durationMinutes: null });
+  assert.equal(eventEndsAt(late), at('2026-12-11T00:00:00+03:00').getTime());
+  assert.equal(isArchivedForStudents(late, plus('2026-12-10T23:30:00+03:00', 24)), false, '24 h');
+  assert.equal(isArchivedForStudents(late, plus('2026-12-10T23:30:00+03:00', 24.5)), true, '24,5 h');
+  // 00:00 Ankara → Ende 24 h später → sichtbar bis Start + 48 h
+  const midnight = ev('mid', 'planned', '2026-12-10T00:00:00+03:00', { durationMinutes: null });
+  assert.equal(studentArchiveDueAt(midnight), plus('2026-12-10T00:00:00+03:00', 48).getTime());
+  // 01:00 Ankara (= 22:00 UTC am Vortag!) → zählt als Tag in Ankara, nicht als UTC-Tag
+  const utcPrevDay = ev('utc', 'planned', '2026-12-09T22:00:00Z', { durationMinutes: null });
+  assert.equal(eventEndsAt(utcPrevDay), at('2026-12-11T00:00:00+03:00').getTime());
+});
+
+test('Ablauf: Garantie – KEIN (nicht abgesagtes) Event verschwindet vor Start + 24 h', () => {
+  const durations = [null, 1, 30, 60, 90, 180, 24 * 60, 3 * 24 * 60];
+  for (let minute = 0; minute < 24 * 60; minute += 7) {
+    const start = new Date(Date.UTC(2026, 11, 10, 0, minute) - 3 * H).toISOString(); // jede Uhrzeit in Ankara
+    for (const durationMinutes of durations) {
+      for (const status of ['planned', 'confirmed', 'completed']) {
+        const due = studentArchiveDueAt(ev('g', status, start, { durationMinutes }));
+        assert.ok(due >= new Date(start).getTime() + 24 * H, `${start} / ${durationMinutes} / ${status}`);
+        assert.equal(isArchivedForStudents(ev('g', status, start, { durationMinutes }), plus(start, 24 - 1 / 3600)), false);
+      }
+    }
+  }
+});
+
+test('Ablauf: Verschieben ändert den Ablauf sofort (früher, später, in die Zukunft)', () => {
+  const original = ev('mv', 'confirmed', START, { durationMinutes: 60 });
+  const now = plus(START, 30); // ursprünglicher Termin ist vorbei → ausgeblendet
+  assert.equal(isArchivedForStudents(original, now), true);
+  const movedLater = { ...original, start: plus(START, 48).toISOString() };
+  assert.equal(isArchivedForStudents(movedLater, now), false, 'auf später verschoben → wieder sichtbar');
+  assert.equal(studentArchiveDueAt(movedLater), plus(START, 48 + 1 + 24).getTime());
+  const futureEvent = ev('fut', 'planned', plus(START, 72).toISOString(), { durationMinutes: 60 });
+  const movedEarlier = { ...futureEvent, start: plus(START, 40).toISOString() };
+  assert.equal(isArchivedForStudents(movedEarlier, now), false, 'früher, aber noch Zukunft → sichtbar');
+});
+
+test('Ablauf: mehrfache Prüfung liefert immer dasselbe (keine Nebenwirkungen)', () => {
+  const list = [ev('a1', 'confirmed', START, { durationMinutes: 60 }), ev('a2', 'planned', plus(START, 100).toISOString())];
+  const copy = JSON.parse(JSON.stringify(list));
+  const now = plus(START, 30);
+  const first = visibleToStudents(list, now).map((e) => e.id);
+  const second = visibleToStudents(list, now).map((e) => e.id);
+  assert.deepEqual(first, ['a2']);
+  assert.deepEqual(second, first);
+  assert.deepEqual(list, copy, 'Liste unverändert');
+});
+
+test('Ablauf: Frontend und Datenbank nutzen dieselbe Regel (008)', () => {
+  const sql = readFileSync(join(root, 'supabase', 'migrations', '008_event_archiving.sql'), 'utf8');
+  assert.ok(sql.includes("((p_start_at at time zone 'Europe/Istanbul')::date + 1)::timestamp at time zone 'Europe/Istanbul'"));
+  assert.ok(sql.includes("public.event_ends_at(e.start_at, e.duration_minutes) <= now() - interval '24 hours'"));
+  assert.ok(sql.includes('where e.archived_at is null'), 'idempotent: nur noch nicht archivierte');
+  assert.ok(!/created_at/.test(sql.match(/create or replace function public\.archive_finished_events[\s\S]*?\$\$;/)[0]));
+  assert.ok(!/delete from public\.events/.test(sql), '008 löscht keine Events');
+  assert.equal(ARCHIVE_DELAY_MS, 24 * H);
+});
+
+test('Chat (014): Event löschen nimmt Chat-Gruppe und Nachrichten NICHT automatisch mit', () => {
+  const sql = readFileSync(join(root, 'supabase', 'migrations', '014_chat.sql'), 'utf8');
+  assert.ok(sql.includes('event_id    uuid unique references public.events (id) on delete restrict'));
+  assert.ok(sql.includes("raise exception 'ABBRUCH: chat_rooms.event_id muss ON DELETE RESTRICT sein'"));
+  // Meldungen behalten ihre Beweis-Kopie, auch wenn Nachrichten/Räume später gelöscht werden
+  assert.ok(/message_id\s+uuid references public\.chat_messages \(id\) on delete set null/.test(sql));
+  assert.ok(/room_id\s+uuid references public\.chat_rooms \(id\) on delete set null/.test(sql));
 });

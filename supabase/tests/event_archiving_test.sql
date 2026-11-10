@@ -21,7 +21,9 @@ declare
   b uuid;
   s text;
   e_cancel_new uuid;  -- abgesagt vor 1 h            -> sichtbar
-  e_cancel_old uuid;  -- abgesagt vor 25 h           -> archiviert
+  e_cancel_old uuid;  -- abgesagt vor 25 h, Termin in 5 Tagen -> sichtbar (bis Termin + 24 h)
+  e_cancel_past uuid; -- abgesagt vor 25 h, Ende vor 71 h      -> archiviert
+  e_cancel_late uuid; -- abgesagt vor 1 h, Ende vor 29 h       -> sichtbar (Absage < 24 h)
   e_done_new uuid;    -- Ende vor 2 h                -> sichtbar
   e_done_old uuid;    -- Ende vor 29 h (mit Anmeldung) -> archiviert
   e_plan_old uuid;    -- planned, Ende vor 29 h (nie abgeschlossen) -> archiviert
@@ -62,6 +64,12 @@ begin
   insert into public.events (title, start_at, duration_minutes, host_school_id, school_ids, status, cancelled_at)
   values ('{"de":"[Rollback] abgesagt vor 25 h"}', now() + interval '5 days', 60, s, array[s], 'cancelled', now() - interval '25 hours')
   returning id into e_cancel_old;
+  insert into public.events (title, start_at, duration_minutes, host_school_id, school_ids, status, cancelled_at)
+  values ('{"de":"[Rollback] abgesagt vor 25 h, vorbei"}', now() - interval '3 days', 60, s, array[s], 'cancelled', now() - interval '25 hours')
+  returning id into e_cancel_past;
+  insert into public.events (title, start_at, duration_minutes, host_school_id, school_ids, status, cancelled_at)
+  values ('{"de":"[Rollback] spät abgesagt"}', now() - interval '30 hours', 60, s, array[s], 'cancelled', now() - interval '1 hour')
+  returning id into e_cancel_late;
   insert into public.events (title, start_at, duration_minutes, host_school_id, school_ids, status)
   values ('{"de":"[Rollback] Ende vor 2 h"}', now() - interval '3 hours', 60, s, array[s], 'completed')
   returning id into e_done_new;
@@ -88,8 +96,12 @@ begin
 
   log := log || case when (select archived_at is null from public.events where id = e_cancel_new)
                      then 'OK   T1  abgesagt vor 1 h: noch sichtbar' else 'FEHL T1' end || E'\n';
-  log := log || case when (select archived_at is not null from public.events where id = e_cancel_old)
-                     then 'OK   T2  abgesagt vor 25 h: archiviert' else 'FEHL T2' end || E'\n';
+  log := log || case when (select archived_at is null from public.events where id = e_cancel_old)
+                     then 'OK   T2  abgesagt vor 25 h, Termin in 5 Tagen: bleibt sichtbar' else 'FEHL T2' end || E'\n';
+  log := log || case when (select archived_at is not null from public.events where id = e_cancel_past)
+                     then 'OK   T2b abgesagt vor 25 h, Termin vorbei: archiviert' else 'FEHL T2b' end || E'\n';
+  log := log || case when (select archived_at is null from public.events where id = e_cancel_late)
+                     then 'OK   T2c abgesagt vor 1 h, Termin vorbei: noch sichtbar (mind. 24 h ab Absage)' else 'FEHL T2c' end || E'\n';
   log := log || case when (select archived_at is null from public.events where id = e_done_new)
                      then 'OK   T3  Ende vor 2 h: noch sichtbar' else 'FEHL T3' end || E'\n';
   log := log || case when (select archived_at is not null from public.events where id = e_done_old)
@@ -114,12 +126,12 @@ begin
   perform set_config('request.jwt.claim.sub', b::text, true);
   perform set_config('request.jwt.claims', json_build_object('sub', b, 'role', 'authenticated')::text, true);
   set local role authenticated;
-  select count(*) into n from public.events where id in (e_cancel_old, e_done_old, e_plan_old);
+  select count(*) into n from public.events where id in (e_cancel_past, e_done_old, e_plan_old);
   log := log || case when n = 0 then 'OK   T11 B sieht archivierte Events nicht (RLS)'
                      else 'FEHL T11 B sieht ' || n || ' archivierte Events' end || E'\n';
-  select count(*) into n from public.events where id in (e_cancel_new, e_done_new, e_future, e_running);
-  log := log || case when n = 4 then 'OK   T12 B sieht die nicht archivierten Events'
-                     else 'FEHL T12 B sieht nur ' || n || ' von 4' end || E'\n';
+  select count(*) into n from public.events where id in (e_cancel_new, e_cancel_old, e_cancel_late, e_done_new, e_future, e_running);
+  log := log || case when n = 6 then 'OK   T12 B sieht die nicht archivierten Events'
+                     else 'FEHL T12 B sieht nur ' || n || ' von 6' end || E'\n';
   select count(*) into n from public.event_registrations where event_id = e_done_old;
   log := log || case when n = 1 then 'OK   T13 B sieht die eigene Anmeldung weiterhin'
                      else 'FEHL T13' end || E'\n';
@@ -135,7 +147,7 @@ begin
   perform set_config('request.jwt.claims', json_build_object('sub', a, 'role', 'authenticated')::text, true);
   set local role authenticated;
   select count(*) into n from public.admin_list_events() l
-  where l.id in (e_cancel_old, e_done_old, e_plan_old) and l.archived_at is not null;
+  where l.id in (e_cancel_past, e_done_old, e_plan_old) and l.archived_at is not null;
   log := log || case when n = 3 then 'OK   T7  Admin sieht archivierte Events (mit archived_at)'
                      else 'FEHL T7  Admin sieht nur ' || n || ' von 3' end || E'\n';
 
@@ -163,9 +175,9 @@ begin
   perform public.admin_update_event(ev.id, ev.title, ev.start_at, ev.host_school_id, ev.school_ids,
     ev.summary, ev.description, ev.location, ev.audience, 120, ev.capacity, ev.online, ev.topics, ev.format);
 
-  -- T18: abgesagt + archiviert, Dauer geändert -> bleibt archiviert (24 h zählen ab cancelled_at)
+  -- T18: abgesagt + archiviert, Dauer 60 -> 240 (Ende weiter > 24 h vorbei) -> bleibt archiviert
   reset role;
-  select * into ev from public.events where id = e_cancel_old;
+  select * into ev from public.events where id = e_cancel_past;
   set local role authenticated;
   perform public.admin_update_event(ev.id, ev.title, ev.start_at, ev.host_school_id, ev.school_ids,
     ev.summary, ev.description, ev.location, ev.audience, 240, ev.capacity, ev.online, ev.topics, ev.format);
@@ -189,7 +201,7 @@ begin
                      then 'OK   T16 Dauer verlängert: archiviertes Event wieder sichtbar' else 'FEHL T16' end || E'\n';
   log := log || case when (select archived_at = old_arch from public.events where id = e_plan_old)
                      then 'OK   T17 Dauer geändert, Ende weiter > 24 h vorbei: bleibt archiviert (gleicher Zeitpunkt)' else 'FEHL T17' end || E'\n';
-  log := log || case when (select archived_at is not null and cancelled_at <= now() - interval '24 hours' from public.events where id = e_cancel_old)
+  log := log || case when (select archived_at is not null and cancelled_at <= now() - interval '24 hours' from public.events where id = e_cancel_past)
                      then 'OK   T18 abgesagt: Dauer ändern hebt Archivierung nicht auf' else 'FEHL T18' end || E'\n';
   log := log || case when (select archived_at is null and cancelled_at > now() - interval '2 hours' from public.events where id = e_cancel_new)
                      then 'OK   T19 abgesagt: Countdown bleibt an cancelled_at' else 'FEHL T19' end || E'\n';

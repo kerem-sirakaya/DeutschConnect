@@ -1,5 +1,5 @@
 -- =============================================================================
--- 008 – Events automatisch archivieren (24 Stunden nach Absage bzw. Ende)
+-- 008 – Events automatisch archivieren (24 Stunden nach Ende bzw. Absage)
 -- =============================================================================
 -- Ausführen NACH 006 (007 ist unabhängig davon) – Supabase Dashboard -> SQL Editor -> Run.
 -- IMMER die ganze Datei ausführen (nichts markieren), als Datenbank-Eigentümer (postgres).
@@ -15,7 +15,10 @@
 --   * Es wird NICHTS gelöscht: keine Events, keine Anmeldungen, keine Profile.
 --
 -- Wann wird archiviert? (Funktion archive_finished_events, Teil 4)
---   * cancelled:                       24 h nach cancelled_at
+--   * cancelled:                       24 h nach dem SPÄTEREN Zeitpunkt von cancelled_at
+--                                      und dem ENDE (greatest(...)) – Angemeldete sehen die
+--                                      Absage bis zum ursprünglichen Termin, immer mind. 24 h
+--                                      (Entscheidung Ege, 2026-11-09)
 --   * planned / confirmed / completed: 24 h nach dem ENDE des Events
 --       Ende = start_at + duration_minutes
 --       ohne Dauer: Mitternacht nach dem Starttag in Ankara-Zeit (Europe/Istanbul)
@@ -38,9 +41,10 @@
 --     planned/confirmed/completed-Events, wird archived_at SOFORT neu berechnet:
 --       neues Ende + 24 h vorbei -> bleibt/wird archiviert (alter Zeitpunkt bleibt erhalten)
 --       sonst                    -> wieder sichtbar (archived_at = null)
---     Abgesagte Events: archived_at bleibt unverändert – die 24 h zählen ab cancelled_at,
---     nicht ab dem Bearbeiten. (Das Datum abgesagter/abgeschlossener Events ist ohnehin
---     fest, DC006.) Entwürfe werden nie archiviert.
+--     Abgesagte Events: gleiche Neuberechnung (nur die Dauer kann sich ändern – das Datum
+--     abgesagter/abgeschlossener Events ist fest, DC006); cancelled_at wird NIE verändert,
+--     der Absage-Countdown startet also nicht neu. Entwürfe werden nie archiviert.
+--     Ein Event, das beim Absagen schon archiviert war (Termin lange vorbei), bleibt archiviert.
 --   * Bereits abgesagte Events bekommen cancelled_at = Zeitpunkt dieser Migration
 --     (der echte Zeitpunkt ist unbekannt) – sie bleiben also noch 24 h sichtbar.
 --
@@ -137,7 +141,7 @@ begin
      and (
        (e.status = 'cancelled'
         and e.cancelled_at is not null
-        and e.cancelled_at <= now() - interval '24 hours')
+        and greatest(e.cancelled_at, public.event_ends_at(e.start_at, e.duration_minutes)) <= now() - interval '24 hours')
        or
        (e.status in ('planned', 'confirmed', 'completed')
         and public.event_ends_at(e.start_at, e.duration_minutes) <= now() - interval '24 hours')
@@ -225,6 +229,7 @@ declare
   old_start    timestamptz;
   old_duration integer;
   old_archived timestamptz;
+  old_cancelled timestamptz;
   new_archived timestamptz;
   registered   bigint;
 begin
@@ -239,8 +244,8 @@ begin
 
   -- Sperre ZUERST setzen (kollidiert mit dem Anmelde-Trigger) – danach sind Status,
   -- Datum und Anmeldezahl verlässlich
-  select e.status, e.start_at, e.duration_minutes, e.archived_at
-    into old_status, old_start, old_duration, old_archived
+  select e.status, e.start_at, e.duration_minutes, e.archived_at, e.cancelled_at
+    into old_status, old_start, old_duration, old_archived, old_cancelled
   from public.events e where e.id = p_id
   for update;
   if not found then
@@ -264,13 +269,14 @@ begin
   end if;
 
   -- Archiv-Zustand: nur bei geändertem Ende (Datum oder Dauer) neu berechnen – gleiche
-  -- Regel wie archive_finished_events. Abgesagt: unverändert (24 h ab cancelled_at).
-  -- Entwurf: nie archiviert.
+  -- Regel wie archive_finished_events. Abgesagt: Ende UND Absage müssen 24 h vorbei sein
+  -- (cancelled_at bleibt unverändert). Entwurf: nie archiviert.
   new_archived := old_archived;
-  if old_status in ('planned', 'confirmed', 'completed')
+  if old_status in ('planned', 'confirmed', 'completed', 'cancelled')
      and (p_start_at is distinct from old_start or p_duration_minutes is distinct from old_duration) then
     new_archived := case
       when public.event_ends_at(p_start_at, p_duration_minutes) <= now() - interval '24 hours'
+       and (old_status <> 'cancelled' or old_cancelled <= now() - interval '24 hours')
         then coalesce(old_archived, now())
       else null
     end;
@@ -381,7 +387,7 @@ declare
   -- Laufzeit-Probe (9h)
   sch text;
   p_done_old uuid; p_done_new uuid; p_plan_old uuid; p_future uuid; p_running uuid;
-  p_cancel_old uuid; p_cancel_new uuid; p_draft uuid; p_nodur uuid;
+  p_cancel_old uuid; p_cancel_new uuid; p_cancel_past uuid; p_cancel_late uuid; p_draft uuid; p_nodur uuid;
   second_run integer;
   probe_fail text;
 begin
@@ -556,11 +562,17 @@ begin
     values ('{"de":"[008-Probe] ohne Dauer, heute"}', now() - interval '1 hour', null, sch, array[sch], 'planned')
     returning id into p_nodur;
     insert into public.events (title, start_at, duration_minutes, host_school_id, school_ids, status, cancelled_at)
-    values ('{"de":"[008-Probe] abgesagt vor 25 h"}', now() + interval '5 days', 60, sch, array[sch], 'cancelled', now() - interval '25 hours')
+    values ('{"de":"[008-Probe] abgesagt vor 25 h, Termin in 5 Tagen"}', now() + interval '5 days', 60, sch, array[sch], 'cancelled', now() - interval '25 hours')
     returning id into p_cancel_old;
     insert into public.events (title, start_at, duration_minutes, host_school_id, school_ids, status, cancelled_at)
     values ('{"de":"[008-Probe] abgesagt vor 1 h"}', now() + interval '5 days', 60, sch, array[sch], 'cancelled', now() - interval '1 hour')
     returning id into p_cancel_new;
+    insert into public.events (title, start_at, duration_minutes, host_school_id, school_ids, status, cancelled_at)
+    values ('{"de":"[008-Probe] abgesagt vor 25 h, Ende vor 71 h"}', now() - interval '3 days', 60, sch, array[sch], 'cancelled', now() - interval '25 hours')
+    returning id into p_cancel_past;
+    insert into public.events (title, start_at, duration_minutes, host_school_id, school_ids, status, cancelled_at)
+    values ('{"de":"[008-Probe] abgesagt vor 1 h, Ende vor 29 h"}', now() - interval '30 hours', 60, sch, array[sch], 'cancelled', now() - interval '1 hour')
+    returning id into p_cancel_late;
     insert into public.events (title, start_at, duration_minutes, host_school_id, school_ids, status)
     values ('{"de":"[008-Probe] alter Entwurf"}', now() - interval '10 days', 60, sch, array[sch], 'draft')
     returning id into p_draft;
@@ -571,7 +583,9 @@ begin
     probe_fail := concat_ws('; ',
       case when (select archived_at is null from public.events where id = p_done_old) then 'Ende vor 29 h nicht archiviert' end,
       case when (select archived_at is null from public.events where id = p_plan_old) then 'planned vorbei nicht archiviert' end,
-      case when (select archived_at is null from public.events where id = p_cancel_old) then 'Absage vor 25 h nicht archiviert' end,
+      case when (select archived_at is null from public.events where id = p_cancel_past) then 'Absage + Ende vor über 24 h nicht archiviert' end,
+      case when (select archived_at is not null from public.events where id = p_cancel_old) then 'abgesagtes künftiges Event vor seinem Termin archiviert' end,
+      case when (select archived_at is not null from public.events where id = p_cancel_late) then 'Absage vor 1 h archiviert (Termin vorbei)' end,
       case when (select archived_at is not null from public.events where id = p_done_new) then 'Ende vor 2 h archiviert' end,
       case when (select archived_at is not null from public.events where id = p_future) then 'künftiges Event archiviert' end,
       case when (select archived_at is not null from public.events where id = p_running) then 'laufendes Event archiviert' end,
@@ -580,7 +594,7 @@ begin
       case when (select archived_at is not null from public.events where id = p_draft) then 'Entwurf archiviert' end,
       case when (select status from public.events where id = p_done_old) <> 'completed'
              or (select status from public.events where id = p_plan_old) <> 'planned'
-             or (select status from public.events where id = p_cancel_old) <> 'cancelled' then 'Status verändert' end,
+             or (select status from public.events where id = p_cancel_past) <> 'cancelled' then 'Status verändert' end,
       case when second_run <> 0 then 'zweiter Lauf archivierte ' || second_run || ' Events (nicht idempotent)' end
     );
     if probe_fail = '' then probe_fail := null; end if;
