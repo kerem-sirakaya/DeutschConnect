@@ -6,14 +6,10 @@ import Icon from '../components/Icon.jsx';
 /**
  * Bereich „Community“ (Struktur aus der Codex-Version).
  *
- * EHRLICHER STAND: Schülerprofile sind angeschlossen (Stufe 5, Migration 012). Gruppen und
- * Spiele aus der Codex-Version sind noch NICHT an das Supabase-Backend angeschlossen (Stufen 6 und 8 in
- * docs/INTEGRATION_PROGRESS.md). Deshalb zeigt diese Seite dafür bewusst keine Knöpfe,
- * die nur so tun, als ob – nur Links zu Funktionen, die wirklich funktionieren.
+ * Schülerprofile (Stufe 5, Migration 012) und Projekt-/Eventgruppen (Chat-Räume aus Migration 014,
+ * Seite /community/groups) sind angeschlossen. Kerems Spiele („Spiele“, /games) und der Chatroom
+ * („Chatroom“, /chat) haben eigene Hauptbereiche in der Navigation.
  */
-// Gruppenbeiträge bleiben für den Pilot bewusst AUS (Entscheidung Ege, 2026-11-09).
-const PLANNED = ['groups', 'games'];
-
 export default function CommunityPage() {
   const { t } = useI18n();
   return (
@@ -41,30 +37,17 @@ export default function CommunityPage() {
           </span>
           <Icon name="chevronRight" size={18} />
         </Link>
-        <Link to="/network" className="hub-card">
+        <Link to="/community/groups" className="hub-card">
           <span className="hub-card__icon" aria-hidden="true">
-            <Icon name="network" size={24} />
+            <Icon name="chat" size={24} />
           </span>
           <span className="hub-card__body">
-            <span className="hub-card__title">{t('nav.network')}</span>
-            <span className="hub-card__text">{t('community.networkText')}</span>
+            <span className="hub-card__title">{t('community.groups.title')}</span>
+            <span className="hub-card__text">{t('community.groupsText')}</span>
           </span>
           <Icon name="chevronRight" size={18} />
         </Link>
       </div>
-
-      <section className="card stack" aria-labelledby="community-planned">
-        <h2 id="community-planned">{t('community.plannedTitle')}</h2>
-        <p className="muted">{t('community.plannedText')}</p>
-        <ul className="planned-list">
-          {PLANNED.map((id) => (
-            <li key={id}>
-              <span className="status-chip">{t('community.inIntegration')}</span>
-              <span>{t(`community.planned.${id}`)}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
     </div>
   );
 }

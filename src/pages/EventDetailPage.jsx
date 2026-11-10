@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import { useI18n } from '../i18n/LanguageContext.jsx';
 import { localize } from '../i18n/localize.js';
 import { useAppState } from '../state/AppStateContext.jsx';
@@ -13,12 +13,14 @@ import InfoList from '../components/InfoList.jsx';
 import Icon from '../components/Icon.jsx';
 import { DemoBadge, RoleBadge, StatusBadge, TopicTags } from '../components/Badges.jsx';
 import NotFoundPage from './NotFoundPage.jsx';
+import { useToast } from '../components/toast/ToastContext.jsx';
 
 export default function EventDetailPage() {
   const { eventId } = useParams();
   const { t, language, locale } = useI18n();
   const { user, actions, getEvent, isRealAccount, registrationSync } = useAppState();
   const [now] = useState(() => new Date());
+  const toast = useToast();
   const event = getEvent(eventId);
 
   if (!event) return <NotFoundPage titleKey="eventDetail.notFound" backTo="/events" />;
@@ -37,10 +39,20 @@ export default function EventDetailPage() {
   const saving = Boolean(registrationSync.pending[event.id]);
   const saveError = registrationSync.error?.eventId === event.id ? registrationSync.error.key : null;
 
-  // Schule nicht in src/data/schools.js (z. B. neu in der Datenbank)? Dann nur die ID ohne Link.
+  // Speichern; die Erfolgsmeldung kommt erst, wenn die Datenbank bestätigt hat (ok = true).
+  // Fehler zeigt weiterhin die bestehende Meldung (saveError) an.
+  async function saveRole(next) {
+    const ok = await actions.setRegistration(event.id, next);
+    if (!ok) return;
+    if (next === 'registered') toast.success(t('toast.registered'));
+    else if (next === 'interested') toast.success(t('toast.interestSaved'));
+    else toast.success(t(role === 'registered' ? 'toast.registrationCancelled' : 'toast.interestRemoved'));
+  }
+
+  // Schule nicht in src/data/schools.js (z. B. neu in der Datenbank)? Dann nur die ID.
   const schoolLink = (id) => {
     const school = getSchool(id);
-    return school ? <Link to={`/network/schools/${id}`}>{school.name}</Link> : <span>{id}</span>;
+    return <span>{school ? school.name : id}</span>;
   };
 
   const schoolLinks = event.schoolIds.map((id, index) => (
@@ -93,7 +105,7 @@ export default function EventDetailPage() {
               {
                 icon: 'school',
                 label: t('eventDetail.host'),
-                value: host ? <Link to={`/network/schools/${host.id}`}>{host.name}</Link> : event.hostSchoolId,
+                value: host ? host.name : event.hostSchoolId,
               },
               { icon: 'network', label: t('eventDetail.schools'), value: schoolLinks },
               {
@@ -158,7 +170,7 @@ export default function EventDetailPage() {
                   type="button"
                   className={`btn btn--block ${role === 'registered' ? 'btn--secondary' : 'btn--primary'}`}
                   disabled={saving}
-                  onClick={() => actions.setRegistration(event.id, role === 'registered' ? null : 'registered')}
+                  onClick={() => saveRole(role === 'registered' ? null : 'registered')}
                 >
                   {saving
                     ? t('auth.loading')
@@ -172,7 +184,7 @@ export default function EventDetailPage() {
                     className="btn btn--ghost btn--block"
                     aria-pressed={role === 'interested'}
                     disabled={saving}
-                    onClick={() => actions.setRegistration(event.id, role === 'interested' ? null : 'interested')}
+                    onClick={() => saveRole(role === 'interested' ? null : 'interested')}
                   >
                     <Icon name="star" size={18} />
                     {role === 'interested' ? t('eventDetail.removeInterest') : t('eventDetail.markInterest')}

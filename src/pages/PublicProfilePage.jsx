@@ -11,6 +11,7 @@ import Section from '../components/Section.jsx';
 import { StatusBadge, TopicTags } from '../components/Badges.jsx';
 import ProfileStatusNotice from '../components/profiles/ProfileStatusNotice.jsx';
 import NotFoundPage from './NotFoundPage.jsx';
+import ChatRequestPanel from '../components/chat/ChatRequestPanel.jsx';
 
 /**
  * Öffentliches Profil (/community/people/:profileId).
@@ -57,11 +58,14 @@ export default function PublicProfilePage() {
           <p className="profile-card__name">{person.firstName}</p>
           {school && (
             <p className="muted">
-              <Link to={`/network/schools/${school.id}`}>{school.name}</Link>
+              {school.name}
             </p>
           )}
         </div>
       </section>
+
+      {/* „Nachricht senden“ → Nachrichtenanfrage (Chat, Migration 014); nicht auf dem eigenen Profil */}
+      <ChatRequestPanel person={person} />
 
       <p className="muted">{t('profiles.onlySharedHere')}</p>
 

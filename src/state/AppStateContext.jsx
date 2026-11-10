@@ -95,8 +95,6 @@ function applyPersonalAction(p, action) {
       return { ...p, interests: toggleItem(p.interests, action.topic) };
     case 'toggleIdeaSupport':
       return { ...p, supportedIdeas: toggleItem(p.supportedIdeas, action.ideaId) };
-    case 'toggleProjectInterest':
-      return { ...p, projectInterest: toggleItem(p.projectInterest, action.projectId) };
     case 'dismissUpdate':
       return { ...p, dismissedUpdates: [...new Set([...p.dismissedUpdates, action.updateId])] };
     default:
@@ -118,7 +116,6 @@ function reducer(state, action) {
     case 'setRegistration':
     case 'toggleInterest':
     case 'toggleIdeaSupport':
-    case 'toggleProjectInterest':
     case 'dismissUpdate':
       return updateActiveProfile(state, (p) => applyPersonalAction(p, action));
 
@@ -254,9 +251,11 @@ export function AppStateProvider({ children }) {
         if (!isAccount) dispatch({ type: 'switchProfile', profileId });
       },
       // Konto: direkt in Supabase (event_registrations). Demo: wie bisher im Browser.
-      setRegistration: (eventId, status) => {
-        if (isAccount) saveAccountRegistration(eventId, status);
-        else dispatch({ type: 'setRegistration', eventId, status });
+      // Gibt ein Promise<boolean> zurück: true = gespeichert (Konto: von Supabase bestätigt).
+      setRegistration: async (eventId, status) => {
+        if (isAccount) return saveAccountRegistration(eventId, status);
+        dispatch({ type: 'setRegistration', eventId, status });
+        return true;
       },
       toggleInterest: (topic) => {
         if (isAccount) updateInterests(toggleItem(accountInterests, topic));
@@ -267,7 +266,6 @@ export function AppStateProvider({ children }) {
         if (isAccount) toggleAccountSupport(ideaId);
         else dispatch({ type: 'toggleIdeaSupport', ideaId });
       },
-      toggleProjectInterest: (projectId) => personal({ type: 'toggleProjectInterest', projectId }),
       dismissUpdate: (updateId) => personal({ type: 'dismissUpdate', updateId }),
       /**
        * Speichert eine neue Idee. Gibt in BEIDEN Modi ein Promise zurück:
@@ -302,7 +300,7 @@ export function AppStateProvider({ children }) {
 
   const value = useMemo(() => {
     if (mode === 'account') {
-      // Archivierte Events (24 h nach Absage bzw. Ende) für Schüler:innen überall ausblenden –
+      // Archivierte Events (24 h nach Ende; abgesagt: nach Ende UND Absage) für Schüler:innen überall ausblenden –
       // Listen, "Meine", Startseite, Schulen, Empfehlungen UND Detailseite (getEvent).
       // Anmeldungen bleiben unverändert in accountEvents.registrations.
       const events = visibleToStudents(accountEvents.events, now);

@@ -4,20 +4,16 @@ import { useI18n } from '../i18n/LanguageContext.jsx';
 import { localize } from '../i18n/localize.js';
 import { useAppState } from '../state/AppStateContext.jsx';
 import { usePageTitle } from '../hooks/usePageTitle.js';
-import { projects } from '../data/projects.js';
 import {
   getEventRecommendations,
   getEventRole,
   getMyEvents,
   getMyIdeas,
-  getMyProjects,
-  getProjectRecommendations,
   getUpdates,
 } from '../lib/selectors.js';
 import { describeMatch } from '../lib/reasons.js';
 import Section from '../components/Section.jsx';
 import EventCard from '../components/EventCard.jsx';
-import ProjectCard from '../components/ProjectCard.jsx';
 import QuickActions from '../components/QuickActions.jsx';
 import UpdatesList from '../components/UpdatesList.jsx';
 import EmptyState from '../components/EmptyState.jsx';
@@ -26,6 +22,8 @@ import { StatusBadge } from '../components/Badges.jsx';
 import TutoringCard from '../components/tutoring/TutoringCard.jsx';
 import { useTutoring } from '../state/TutoringContext.jsx';
 import { countOpenIncoming, matchTutoring } from '../lib/tutoring.js';
+import { greetingMessage } from '../lib/greeting.js';
+import { useNow } from '../hooks/useNow.js';
 
 /**
  * Startseite = persönliches Dashboard. Alle Inhalte hängen vom aktiven Profil ab:
@@ -41,8 +39,6 @@ export default function HomePage() {
   const recommendations = getEventRecommendations(user, events, now);
   const updates = getUpdates(user, { events, ideas }, now);
   const myIdeas = getMyIdeas(user, ideas).authored;
-  const myProjects = getMyProjects(user, projects);
-  const projectSuggestion = getProjectRecommendations(user, projects)[0];
   const tutoring = useTutoring();
   const tutoringSuggestions = matchTutoring(tutoring.entries, language);
   const openTutoringRequests = countOpenIncoming(tutoring.requests);
@@ -56,9 +52,7 @@ export default function HomePage() {
             {user.school.name}
             {user.grade ? ` · ${t('profile.grade', { grade: user.grade })}` : ''}
           </p>
-          <h1 id="welcome-title" tabIndex={-1}>
-            {t('home.greeting', { name: user.firstName })}
-          </h1>
+          <DashboardGreeting firstName={user.firstName} />
           <p>{t('home.dashboardSubtitle')}</p>
         </div>
         <span className="dashboard-welcome__icon" aria-hidden="true">
@@ -160,7 +154,7 @@ export default function HomePage() {
         </Section>
 
         <Section title={t('home.myProjectsIdeas')} icon="folder" linkTo="/ideas?tab=mine" linkLabel={t('common.showAll')}>
-          {myProjects.length === 0 && myIdeas.length === 0 && (
+          {myIdeas.length === 0 && (
             <EmptyState
               icon="lightbulb"
               title={t('home.noProjectsIdeas')}
@@ -172,17 +166,8 @@ export default function HomePage() {
             />
           )}
 
-          {(myProjects.length > 0 || myIdeas.length > 0) && (
+          {myIdeas.length > 0 && (
             <ul className="compact-list">
-              {myProjects.map((project) => (
-                <li key={project.id}>
-                  <Link to={`/network/projects/${project.id}`} className="compact-row">
-                    <Icon name="folder" size={18} />
-                    <span className="compact-row__title">{localize(project.title, language)}</span>
-                    <span className="compact-row__type">{t('home.typeProject')}</span>
-                  </Link>
-                </li>
-              ))}
               {myIdeas.slice(0, 3).map((idea) => (
                 <li key={idea.id}>
                   <Link to={`/ideas/${idea.id}`} className="compact-row">
@@ -194,15 +179,23 @@ export default function HomePage() {
               ))}
             </ul>
           )}
-
-          {projectSuggestion && (
-            <div className="suggestion">
-              <p className="suggestion__label">{t('home.suggestedProject')}</p>
-              <ProjectCard project={projectSuggestion.project} reason={describeMatch(projectSuggestion, t)} />
-            </div>
-          )}
         </Section>
       </div>
     </div>
+  );
+}
+
+/**
+ * „Guten Morgen, Ada!“ – nach lokaler Uhrzeit, mit dem Vornamen aus dem Profil (Konto) bzw. Demo-Profil.
+ * Eigene kleine Komponente: nur sie wird jede Minute neu gezeichnet, nicht das ganze Dashboard.
+ */
+function DashboardGreeting({ firstName }) {
+  const { t } = useI18n();
+  const now = useNow();
+  const { key, values } = greetingMessage(firstName, now);
+  return (
+    <h1 id="welcome-title" tabIndex={-1}>
+      {t(key, values)}
+    </h1>
   );
 }

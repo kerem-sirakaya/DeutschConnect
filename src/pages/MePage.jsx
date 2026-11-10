@@ -1,17 +1,15 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
 import { LANGUAGES, useI18n } from '../i18n/LanguageContext.jsx';
-import { localize } from '../i18n/localize.js';
 import { useAppState } from '../state/AppStateContext.jsx';
 import { useAuth } from '../auth/AuthContext.jsx';
-import { projects } from '../data/projects.js';
-import { getMyEvents, getMyIdeas, getMyProjects, getProjectRole } from '../lib/selectors.js';
+import { getMyEvents, getMyIdeas } from '../lib/selectors.js';
 import PageHeader from '../components/PageHeader.jsx';
 import Avatar from '../components/Avatar.jsx';
 import Section from '../components/Section.jsx';
 import ListLink from '../components/ListLink.jsx';
 import DemoNotice from '../components/DemoNotice.jsx';
-import { RoleBadge, TopicTags } from '../components/Badges.jsx';
+import { TopicTags } from '../components/Badges.jsx';
 import ActivityStats from '../components/profiles/ActivityStats.jsx';
 import ProfileStatusNotice from '../components/profiles/ProfileStatusNotice.jsx';
 import { useMySharing, useMyStats } from '../state/useProfiles.js';
@@ -28,22 +26,24 @@ export default function MePage() {
 
   const myEvents = getMyEvents(user, events, now);
   const myIdeas = getMyIdeas(user, ideas);
-  // Demo: Beispiel-Projekte wie bisher. Konto: echte Mitwirkungen aus Migration 013.
+  // Projekte: nur für Konten (echte Mitwirkungen aus Migration 013). Demo-Projekte lagen im entfernten Netzwerk-Bereich.
   const memberships = useMyMemberships();
-  const myProjects = isRealAccount ? [] : getMyProjects(user, projects);
   const realMemberships = isRealAccount && memberships.data ? memberships.data : [];
   const languageLabel = LANGUAGES.find((l) => l.code === language).label;
 
   const stats = [
     { to: '/events?tab=mine', value: myEvents.upcoming.length, label: t('me.stats.events') },
     { to: '/ideas?tab=mine', value: myIdeas.authored.length, label: t('me.stats.ideas') },
-    isRealAccount
-      ? {
-          to: '/me#projects',
-          value: memberships.data ? realMemberships.filter((m) => m.myStatus === 'member').length : '–',
-          label: t('me.stats.projects'),
-        }
-      : { to: '/network?tab=projects&show=mine', value: myProjects.length, label: t('me.stats.projects') },
+    // Projekte-Kachel nur für echte Konten (Demo-Projekte gab es nur im entfernten Netzwerk-Bereich)
+    ...(isRealAccount
+      ? [
+          {
+            to: '/me#projects',
+            value: memberships.data ? realMemberships.filter((m) => m.myStatus === 'member').length : '–',
+            label: t('me.stats.projects'),
+          },
+        ]
+      : []),
   ];
 
   return (
@@ -57,7 +57,7 @@ export default function MePage() {
             {user.firstName} {user.lastName}
           </p>
           <p className="muted">
-            <Link to={`/network/schools/${user.schoolId}`}>{user.school.name}</Link> ·{' '}
+            {user.school.name} ·{' '}
             {t('profile.grade', { grade: user.grade })}
           </p>
           {isRealAccount ? (
@@ -122,22 +122,6 @@ export default function MePage() {
         </div>
       )}
 
-      {myProjects.length > 0 && (
-        <Section title={t('me.myProjects')} icon="folder">
-          <ul className="list-group">
-            {myProjects.map((project) => (
-              <ListLink
-                key={project.id}
-                to={`/network/projects/${project.id}`}
-                icon="folder"
-                title={localize(project.title, language)}
-                trailing={<RoleBadge role={getProjectRole(user, project)} />}
-              />
-            ))}
-          </ul>
-        </Section>
-      )}
-
       <Section title={t('me.settingsSection')} icon="sliders">
         <ul className="list-group">
           {auth.isConfigured && (
@@ -158,11 +142,13 @@ export default function MePage() {
           <ListLink to="/me/interests" icon="sparkles" title={t('me.rows.interests')} subtitle={t('me.rows.interestsHint')} />
           <ListLink to="/me/settings" icon="globe" title={t('me.rows.language')} trailing={languageLabel} />
           <ListLink to="/me/settings" icon="users" title={t('me.rows.settings')} subtitle={t('me.rows.settingsHint')} />
+          <ListLink to="/help" icon="help" title={t('nav.help')} />
           <ListLink to="/about" icon="info" title={t('me.rows.about')} />
         </ul>
       </Section>
 
-      <DemoNotice textKey={isRealAccount ? 'auth.demoStillActive' : 'demo.notice'} />
+      {/* Echte Konten: kein Hinweis „… vorerst weiterhin Demo-Daten“ mehr. Demo-Profile behalten ihren Demo-Hinweis. */}
+      {!isRealAccount && <DemoNotice textKey="demo.notice" />}
     </div>
   );
 }

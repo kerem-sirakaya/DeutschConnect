@@ -1,0 +1,246 @@
+/*
+ * Erfolgsmeldungen (Toasts) und Hilfe/FAQ – nutzt nur die Variablen aus variables.css.
+ */
+
+/* ---------- Toasts ----------
+ * Oben unter der Kopfleiste: unten liegen auf dem Smartphone die Bottom-Navigation und im Chat
+ * das Eingabefeld – beides soll frei bleiben. Die Region selbst lässt Klicks durch. */
+.toast-region {
+  position: fixed;
+  top: calc(var(--topbar-height) + env(safe-area-inset-top) + 10px);
+  right: var(--gutter);
+  left: var(--gutter);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 420px;
+  margin: 0 auto;
+  pointer-events: none;
+}
+
+@media (min-width: 900px) {
+  .toast-region {
+    left: auto;
+    right: 24px;
+    width: 420px;
+  }
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 6px 10px 14px;
+  border: var(--border-width) solid var(--color-success-border);
+  border-left: 4px solid var(--color-success);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-2);
+  color: var(--color-text);
+  box-shadow: var(--shadow-float);
+  pointer-events: auto;
+}
+
+.toast .icon {
+  flex: none;
+  color: var(--color-success);
+}
+
+.toast__message {
+  flex: 1;
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+.toast__close {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.toast__close:hover {
+  background: var(--color-surface-3);
+  color: var(--color-text);
+}
+
+.toast__close:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}
+
+/* ---------- Hilfe / FAQ ---------- */
+.help-section {
+  margin-top: 20px;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.faq-item {
+  padding: 0;
+}
+
+.faq-item__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 48px;
+  padding: 12px 16px;
+  font-weight: 650;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq-item__question::-webkit-details-marker {
+  display: none;
+}
+
+/* Pfeil rechts; zeigt nach oben, wenn die Antwort offen ist */
+.faq-item__question::after {
+  content: '';
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--color-text-muted);
+  border-bottom: 2px solid var(--color-text-muted);
+  transform: rotate(45deg) translateY(-2px);
+}
+
+.faq-item[open] .faq-item__question::after {
+  transform: rotate(-135deg) translateY(-2px);
+}
+
+.faq-item__question:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+  border-radius: var(--radius-md);
+}
+
+.faq-item__answer {
+  margin: 0;
+  padding: 0 16px 14px;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+}
+
+/* ---------- Paletten-Symbol oben rechts (Akzentfarbe schnell wechseln) ---------- */
+.accent-menu {
+  position: relative;
+}
+
+.accent-menu__button {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-primary-text);
+  cursor: pointer;
+}
+
+.accent-menu__button:hover,
+.accent-menu__button[aria-expanded='true'] {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+}
+
+.accent-menu__button:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.accent-menu__panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 45;
+  width: min(250px, calc(100vw - 2 * var(--gutter)));
+  padding: 12px;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-float);
+}
+
+.accent-menu__list {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.accent-menu__title {
+  margin-bottom: 6px;
+  padding: 0;
+  font-size: var(--text-sm);
+  font-weight: 650;
+  color: var(--color-text-muted);
+}
+
+.accent-menu__option {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+.accent-menu__row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  padding: 4px 8px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+}
+
+.accent-menu__option:hover .accent-menu__row {
+  background: var(--color-surface-2);
+}
+
+.accent-option__input:checked + .accent-menu__row {
+  background: var(--color-primary-soft);
+}
+
+.accent-option__input:focus-visible + .accent-menu__row {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 1px;
+}
+
+.accent-menu__swatch {
+  width: 24px;
+  height: 24px;
+}
+
+.accent-menu__more {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: var(--text-sm);
+}
+
+/* Sehr schmale Handys (≤ 359 px, z. B. 320 px): Palette etwas kleiner, Abstände enger – keine Überbreite */
+@media (max-width: 359px) {
+  .accent-menu__button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .topbar__actions {
+    gap: 4px;
+  }
+}

@@ -87,6 +87,10 @@ export default function ProfileMenu() {
             {t('profileMenu.toMyArea')}
             <Icon name="chevronRight" size={16} />
           </Link>
+          <Link to="/help" className="profile-menu__link" onClick={() => setOpen(false)}>
+            {t('nav.help')}
+            <Icon name="chevronRight" size={16} />
+          </Link>
         </div>
       )}
     </div>

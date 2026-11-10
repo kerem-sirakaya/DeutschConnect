@@ -8,7 +8,6 @@ export const SECTION_LINKS = {
     { to: '/discover', labelKey: 'discover.overview', exact: true },
     { to: '/events', labelKey: 'nav.events' },
     { to: '/ideas', labelKey: 'nav.ideas' },
-    { to: '/network', labelKey: 'nav.network' },
   ],
 };
 

@@ -20,7 +20,6 @@
     "home": "Start",
     "events": "Events",
     "ideas": "Ideen",
-    "network": "Netzwerk",
     "me": "Mein Bereich",
     "meShort": "Mein Bereich",
     "about": "Über DeutschConnect",
@@ -28,7 +27,10 @@
     "admin": "Admin-Bereich",
     "discover": "Entdecken",
     "tutoring": "Nachhilfe",
-    "community": "Community"
+    "community": "Community",
+    "chat": "Chatroom",
+    "games": "Spiele",
+    "help": "Hilfe & FAQ"
   },
   "profileMenu": {
     "open": "Profilmenü öffnen (Demo-Profil: {name})",
@@ -43,7 +45,12 @@
     "realAccount": "Dein Konto"
   },
   "home": {
-    "greeting": "Willkommen zurück, {name}!",
+    "greetingMorning": "Guten Morgen, {name}!",
+    "greetingAfternoon": "Guten Tag, {name}!",
+    "greetingEvening": "Guten Abend, {name}!",
+    "greetingMorningNoName": "Guten Morgen!",
+    "greetingAfternoonNoName": "Guten Tag!",
+    "greetingEveningNoName": "Guten Abend!",
     "quickActionsLabel": "Schnellzugriff",
     "updates": "Neu für dich",
     "myNextEvents": "Meine nächsten Events",
@@ -54,8 +61,6 @@
     "noRecsText": "Wähle weitere Interessen aus, damit wir Events für dich finden.",
     "myProjectsIdeas": "Meine Projekte & Ideen",
     "noProjectsIdeas": "Du hast noch keine Projekte oder Ideen.",
-    "suggestedProject": "Projekt, das zu dir passt",
-    "typeProject": "Projekt",
     "dashboardSubtitle": "Deine Events, Ideen und Lernkontakte auf einen Blick.",
     "tutoringMatches": "Passende Nachhilfe",
     "tutoringDiscover": "Nachhilfe entdecken",
@@ -178,7 +183,7 @@
       "cancelled": "Abgesagt"
     },
     "noCancelledTitle": "Zurzeit gibt es keine abgesagten Events.",
-    "noCancelledText": "Abgesagte Events bleiben 24 Stunden nach der Absage sichtbar.",
+    "noCancelledText": "Abgesagte Events bleiben bis 24 Stunden nach ihrem ursprünglichen Termin sichtbar – mindestens aber 24 Stunden nach der Absage.",
     "card": {
       "eventStatus": "Event:",
       "eventStatusSr": "Event-Status:",
@@ -322,55 +327,6 @@
       "privacy": "Bitte bestätige den Datenschutzhinweis."
     }
   },
-  "network": {
-    "title": "Netzwerk",
-    "tabsLabel": "Netzwerk-Bereiche",
-    "tabs": {
-      "schools": "Schulen",
-      "projects": "Projekte"
-    },
-    "eventsCount_one": "{count} Event",
-    "eventsCount_other": "{count} Events",
-    "projectsCount_one": "{count} Projekt",
-    "projectsCount_other": "{count} Projekte",
-    "statusTitle": "Stand der Zusammenarbeit",
-    "legend": {
-      "initiator": "Hier ist DeutschConnect entstanden.",
-      "interest": "Interesse an Zusammenarbeit bekundet, Details werden abgestimmt.",
-      "confirmed": "Formell bestätigte Kooperation."
-    },
-    "statusText": "Bisher ist noch keine Kooperation formell bestätigt. Die Zusammenarbeit zwischen ERS und Anka Bilim wird gerade abgestimmt.",
-    "plannedTitle": "Geplantes Netzwerk",
-    "plannedText": "Nach dem ersten Pilot sollen weitere Schulen in Ankara eingeladen werden. Gespräche mit weiteren Schulen gibt es noch nicht.",
-    "projectsFilterLabel": "Projekte filtern",
-    "filter": {
-      "all": "Alle Projekte",
-      "mine": "Meine Projekte"
-    },
-    "noMyProjects": "Du bist noch in keinem Projekt",
-    "noMyProjectsText": "Öffne ein Projekt und melde dein Interesse am Mitmachen."
-  },
-  "school": {
-    "notFound": "Schule nicht gefunden",
-    "city": "Ort",
-    "ideas": "Ideen aus dieser Schule",
-    "events": "Bevorstehende Events",
-    "projects": "Projekte",
-    "noEvents": "Derzeit keine bevorstehenden Events.",
-    "noProjects": "Noch keine Projekte."
-  },
-  "project": {
-    "notFound": "Projekt nicht gefunden",
-    "realProject": "Echtes Projekt",
-    "nextStep": "Nächster Schritt",
-    "about": "Über das Projekt",
-    "yourRole": "Deine Rolle",
-    "memberNote": "Du bist Teil dieses Projekts.",
-    "joinText": "Möchtest du mitmachen? Melde dein Interesse.",
-    "joinedNote": "Du hast Interesse am Mitmachen gemeldet.",
-    "join": "Interesse am Mitmachen",
-    "joined": "Interesse gemeldet"
-  },
   "me": {
     "title": "Mein Bereich",
     "profile": "Profil",
@@ -513,7 +469,8 @@
     "nav": {
       "overview": "Übersicht",
       "events": "Events",
-      "ideas": "Ideen"
+      "ideas": "Ideen",
+      "chat": "Chat-Moderation"
     },
     "loading": "Zugriff wird geprüft …",
     "denied": {
@@ -781,32 +738,167 @@
   },
   "discover": {
     "title": "Entdecken",
-    "subtitle": "Events, Ideen und das Schulnetzwerk an einem Ort.",
+    "subtitle": "Events und Ideen an einem Ort.",
     "overview": "Übersicht",
     "eventsText": "Gemeinsame Workshops, Treffen und Wettbewerbe beider Schulen.",
     "ideasText": "Ideen und Projekte von Schüler:innen – einreichen und unterstützen.",
-    "networkText": "Die Pilotschulen und laufende Projekte.",
     "upcomingCount_one": "{count} kommendes Event",
     "upcomingCount_other": "{count} kommende Events",
     "ideasCount_one": "{count} Idee",
     "ideasCount_other": "{count} Ideen",
-    "schoolsCount_one": "{count} Schule",
-    "schoolsCount_other": "{count} Schulen",
     "demoHint": "Du bist nicht angemeldet – Zahlen und Inhalte sind Demo-Beispiele."
   },
   "community": {
     "title": "Community",
     "subtitle": "Gemeinsam lernen und zusammenarbeiten.",
     "tutoringText": "Nachhilfe anbieten oder suchen – freiwillig und ohne Bezahlung.",
-    "networkText": "Schulen und Projekte im Pilotnetzwerk.",
-    "plannedTitle": "Weitere Community-Funktionen",
-    "plannedText": "Diese Funktionen aus der Codex-Version werden gerade an das echte Backend angeschlossen. Sie sind noch nicht nutzbar.",
-    "inIntegration": "In Integration",
-    "planned": {
-      "groups": "Projekt- und Eventgruppen mit Beiträgen",
-      "games": "Spiele (Schach, Symbol-Paare, Paper Flight, Bridge Runner) mit Bestenlisten"
+    "peopleText": "Profile, die Schüler:innen freiwillig teilen.",
+    "groupsText": "Gruppen zu Projekten und Events – mit Beiträgen und Diskussionen.",
+    "groups": {
+      "title": "Projekt- und Eventgruppen",
+      "subtitle": "Deine Gruppen zu Projekten und Events. Öffne eine Gruppe, um Beiträge zu lesen und mitzudiskutieren.",
+      "filterLabel": "Gruppen filtern",
+      "filter": {
+        "all": "Alle",
+        "project": "Projektgruppen",
+        "event": "Eventgruppen"
+      },
+      "lastPost": "letzter Beitrag {time}",
+      "noPosts": "noch keine Beiträge",
+      "empty": {
+        "all": "Du bist noch in keiner Projekt- oder Eventgruppe.",
+        "project": "Du bist noch in keiner Projektgruppe.",
+        "event": "Du bist noch in keiner Eventgruppe."
+      },
+      "emptyHint": "Gruppen erscheinen hier automatisch, sobald du Mitglied bist.",
+      "howTitle": "Wie komme ich in eine Gruppe?",
+      "howProject": "Projektgruppen gehören zu veröffentlichten Ideen. Die Person, die die Idee eingereicht hat, legt die Gruppe auf der Ideenseite an. Mitglied ist das Projektteam.",
+      "howEvent": "Eventgruppen legt die Moderation für ein Event an. Mitglied ist, wer verbindlich angemeldet ist."
+    }
+  },
+  "games": {
+    "title": "Spiele",
+    "subtitle": "Eine kurze Pause zwischendurch – direkt im Browser.",
+    "localNote": "Die Spiele laufen in deinem Browser. Gespeichert wird nur dein Bestwert bei Papierflug und Brückenläufer – und nur, wenn du angemeldet bist.",
+    "restart": "Neu starten",
+    "arcade": {
+      "score": "Punkte: {count}",
+      "tapToStart": "Tippen zum Starten",
+      "start": "Starten",
+      "pause": "Pause",
+      "resume": "Fortsetzen",
+      "paused": "Pausiert",
+      "over": "Spiel beendet",
+      "result": "Spiel beendet · Punkte: {count}"
     },
-    "peopleText": "Profile, die Schüler:innen freiwillig teilen."
+    "symbolPairs": {
+      "title": "Symbolpaare",
+      "hint": "Decke zwei gleiche Symbole auf. Ohne Zeitlimit.",
+      "board": "Spielfeld mit 12 Karten",
+      "pairs": "Gefundene Paare: {found}/{total}",
+      "moves_one": "{count} Zug",
+      "moves": "{count} Züge",
+      "cardHidden": "Karte {n}, verdeckt",
+      "cardOpen": "Karte {n}: {symbol}",
+      "cardFound": "Karte {n}: {symbol}, Paar gefunden",
+      "complete": "Alle Paare gefunden – in {count} Zügen!",
+      "symbols": {
+        "star": "Stern",
+        "circle": "Kreis",
+        "triangle": "Dreieck",
+        "diamond": "Raute",
+        "heart": "Herz",
+        "sun": "Sonne"
+      }
+    },
+    "paperFlight": {
+      "title": "Papierflug",
+      "hint": "Halte das Papierflugzeug in der Luft und fliege durch die Lücken. Tippen, Leertaste oder Pfeil nach oben gibt Auftrieb.",
+      "field": "Spielfeld Papierflug: antippen oder Leertaste für Auftrieb",
+      "accessibility": "Hinweis: Papierflug ist ein schnelles Reaktionsspiel mit Bewegung. Ohne Zeitdruck spielst du Symbolpaare."
+    },
+    "bridgeRunner": {
+      "title": "Brückenläufer",
+      "hint": "Lauf über die Brücke und spring über die Hindernisse. Tippen, Leertaste oder Pfeil nach oben lässt dich springen.",
+      "field": "Spielfeld Brückenläufer: antippen oder Leertaste zum Springen",
+      "accessibility": "Hinweis: Brückenläufer ist ein schnelles Reaktionsspiel mit Bewegung. Ohne Zeitdruck spielst du Symbolpaare."
+    },
+    "chess": {
+      "title": "Schach",
+      "hint": "Schach zu zweit am selben Gerät. Figur antippen, dann ein markiertes Feld wählen.",
+      "board": "Schachbrett",
+      "white": "Weiß",
+      "black": "Schwarz",
+      "whiteToMove": "Weiß ist am Zug.",
+      "blackToMove": "Schwarz ist am Zug.",
+      "check": "Schach!",
+      "whiteWins": "Weiß gewinnt",
+      "blackWins": "Schwarz gewinnt",
+      "draw": "Unentschieden",
+      "reasons": {
+        "checkmate": "Schachmatt",
+        "stalemate": "Patt",
+        "material": "Zu wenig Material zum Mattsetzen",
+        "seventyfive": "75-Züge-Regel",
+        "fivefold": "Fünffache Stellungswiederholung",
+        "claimed": "Remis beansprucht",
+        "agreed": "Remis vereinbart",
+        "resigned": "Aufgabe"
+      },
+      "pieces": {
+        "p": "Bauer",
+        "n": "Springer",
+        "b": "Läufer",
+        "r": "Turm",
+        "q": "Dame",
+        "k": "König"
+      },
+      "squarePiece": "{square}: {piece} ({color})",
+      "targetSuffix": "möglicher Zug",
+      "promotion": "Bauer umwandeln in:",
+      "undo": "Zug zurücknehmen",
+      "flip": "Brett drehen",
+      "claimDraw": "Remis beanspruchen",
+      "offerDraw": "Remis vereinbaren",
+      "resign": "Aufgeben",
+      "confirmResign": "{color} gibt die Partie auf?",
+      "confirmDraw": "Seid ihr beide mit Remis einverstanden?",
+      "confirmRestart": "Partie abbrechen und neu beginnen?",
+      "confirmYes": "Ja",
+      "moveList_one": "Zugliste ({count} Zug)",
+      "moveList": "Zugliste ({count} Züge)",
+      "noMoves": "Noch keine Züge."
+    },
+    "leaderboard": {
+      "sectionTitle": "Bestenlisten",
+      "sectionSubtitle": "Top 10 je Spiel · jede Person einmal, mit ihrem Bestwert",
+      "boardTitle": "{game} – Top 10",
+      "loginHintShort": "Melde dich an, um deinen Bestwert zu speichern.",
+      "viewAll": "Zu den Bestenlisten",
+      "loginHint": "Melde dich an, um deinen Bestwert zu speichern und die Bestenlisten zu sehen. Spielen kannst du auch ohne Anmeldung.",
+      "login": "Anmelden",
+      "loading": "Bestenliste wird geladen …",
+      "retry": "Erneut versuchen",
+      "empty": "Noch keine Einträge. Spiel eine Runde und schalte unten „In Bestenlisten anzeigen“ ein!",
+      "rankLabel": "Platz",
+      "points": "Punkte",
+      "you": "Du",
+      "myBest": "Dein Bestwert: {score}",
+      "noBestYet": "Du hast noch keinen Bestwert gespeichert.",
+      "myRank": "Platz {rank}",
+      "showMe": "Mit meinem Vornamen in den Bestenlisten anzeigen",
+      "showMeHint": "Gilt für Papierflug und Brückenläufer. Andere sehen nur deinen Vornamen und deinen Bestwert. Du kannst es jederzeit ausschalten.",
+      "saving": "Bestwert wird gespeichert …",
+      "newBest": "Neuer Bestwert gespeichert: {score}!",
+      "kept": "Dein Bestwert bleibt {score}.",
+      "errors": {
+        "notInstalled": "Die Bestenliste ist noch nicht eingerichtet.",
+        "notAllowed": "Bitte melde dich an.",
+        "noRun": "Diese Runde konnte nicht gewertet werden. Starte eine neue Runde.",
+        "implausible": "Diese Punktzahl konnte nicht bestätigt werden und wurde nicht gespeichert.",
+        "generic": "Das hat nicht geklappt. Bitte versuche es später noch einmal."
+      }
+    }
   },
   "tutoring": {
     "title": "Nachhilfe-Börse",
@@ -1060,5 +1152,450 @@
       "generic": "Das hat nicht geklappt. Bitte später erneut versuchen.",
       "loginRequired": "Dafür brauchst du ein echtes Konto."
     }
+  },
+  "chat": {
+    "title": "Chatroom",
+    "subtitle": "Gruppenräume und private Chats – freundlich, sicher und moderiert.",
+    "loginHint": "Melde dich an, um den Chat zu nutzen.",
+    "login": "Anmelden",
+    "loading": "Wird geladen …",
+    "retry": "Erneut versuchen",
+    "staffPreview": "Der Chat ist für Schüler:innen noch ausgeschaltet. Du siehst ihn, weil du moderierst.",
+    "tabsLabel": "Bereiche des Chats",
+    "tabs": {
+      "rooms": "Gruppenräume",
+      "private": "Private Chats",
+      "requests": "Nachrichtenanfragen",
+      "search": "Suche"
+    },
+    "kind": {
+      "topic": "Themenraum",
+      "project": "Projektgruppe",
+      "event": "Eventgruppe",
+      "private": "Privater Chat"
+    },
+    "rooms": {
+      "general": {
+        "title": "Schulübergreifender Austausch",
+        "description": "Fragen zum Schulalltag und neue Perspektiven."
+      },
+      "learning": {
+        "title": "Nachhilfe und Lernen",
+        "description": "Lernfragen, Erfahrungen und gegenseitige Unterstützung."
+      },
+      "projects": {
+        "title": "Projekte und Zusammenarbeit",
+        "description": "Ideen weiterdenken und Mitwirkende finden."
+      },
+      "events": {
+        "title": "Events und Workshops",
+        "description": "Formate und organisatorische Fragen besprechen."
+      },
+      "projectFallback": "Projektgruppe",
+      "eventFallback": "Eventgruppe"
+    },
+    "topicRooms": "Themenräume",
+    "myGroups": "Meine Projekt- und Eventgruppen",
+    "noGroups": "Du bist noch in keiner Projekt- oder Eventgruppe.",
+    "memberCount_one": "{count} Mitglied",
+    "memberCount": "{count} Mitglieder",
+    "members_one": "Mitglieder ({count})",
+    "members": "Mitglieder ({count})",
+    "join": "Beitreten",
+    "leave": "Verlassen",
+    "enter": "Raum betreten",
+    "joined": "Beigetreten",
+    "liveOn": "Live",
+    "liveOff": "Aktualisiert regelmäßig",
+    "lockedTitle": "Nur für Mitglieder",
+    "lockedGroupHint": "Diese Gruppe ist nur für Mitglieder des Projekts bzw. Angemeldete des Events.",
+    "archived": "Archiviert",
+    "roomTitle": "Gruppenraum",
+    "groupHint": "Alle Mitglieder dieses Raums lesen mit.",
+    "joinToRead": "Tritt dem Raum bei, um die Nachrichten zu lesen.",
+    "joinToWrite": "Tritt dem Raum bei, um zu schreiben.",
+    "readOnly": "Hier kannst du gerade nur lesen.",
+    "archivedHint": "Dieser Raum ist archiviert – nur noch lesen.",
+    "emptyRoom": "Noch keine Nachrichten. Schreib die erste!",
+    "reportRoom": "Raum melden",
+    "privateTitle": "Privater Chat",
+    "privateHint": "Private Chats entstehen nur, wenn jemand deine Nachrichtenanfrage annimmt (oder du ihre).",
+    "privateContextHint": "Nur ihr zwei lest diesen Chat.",
+    "archivedConversationHint": "Dieser Chat ist archiviert – nur noch lesen.",
+    "conversationUnavailable": "Dieser Chat ist nicht (mehr) verfügbar.",
+    "noConversations": "Noch keine privaten Chats.",
+    "noMessagesYet": "Noch keine Nachrichten.",
+    "reportConversation": "Chat melden",
+    "blockedTitle": "Blockierte Personen",
+    "blockedHint": "Blockierte Personen können dir keine Anfragen schicken; eure Nachrichten sind für beide ausgeblendet.",
+    "block": "Blockieren",
+    "unblock": "Blockierung aufheben",
+    "blockConfirm": "{name} blockieren? Ihr seht dann gegenseitig eure Nachrichten nicht mehr.",
+    "requestsHint": "Nachrichtenanfragen musst du nicht beantworten. Erst wenn du annimmst, entsteht ein privater Chat.",
+    "incoming": "Eingegangene Anfragen",
+    "outgoing": "Gesendete Anfragen",
+    "noIncoming": "Keine offenen Anfragen.",
+    "noOutgoing": "Keine gesendeten Anfragen.",
+    "accept": "Annehmen",
+    "decline": "Ablehnen",
+    "cancelRequest": "Zurückziehen",
+    "openConversation": "Chat öffnen",
+    "requestStatus": {
+      "pending": "ausstehend",
+      "accepted": "angenommen",
+      "declined": "abgelehnt",
+      "cancelled": "zurückgezogen",
+      "blocked": "beendet"
+    },
+    "sendMessage": "Nachricht senden",
+    "requestTitle": "Nachrichtenanfrage an {name}",
+    "requestExplain": "Schreib eine kurze Vorstellung. {name} kann annehmen oder ablehnen – erst danach könnt ihr chatten.",
+    "requestIntro": "Deine Vorstellung",
+    "sendRequest": "Anfrage senden",
+    "requestSent": "Anfrage an {name} gesendet.",
+    "searchLabel": "Nachrichten durchsuchen",
+    "searchPlaceholder": "Suchbegriff …",
+    "searchButton": "Suchen",
+    "searchHint": "Durchsucht nur Räume, in denen du Mitglied bist, und deine eigenen privaten Chats.",
+    "searchResults": "Suchergebnisse",
+    "searchInConversation": "Privater Chat mit {name}",
+    "noResults": "Keine Treffer.",
+    "messagesLabel": "Nachrichten",
+    "you": "Du",
+    "deletedMessage": "Nachricht gelöscht",
+    "censoredHint": "Einige Wörter wurden automatisch ausgeblendet.",
+    "censoredSent": "Hinweis: Einige Wörter wurden automatisch durch *** ersetzt.",
+    "reactionsLabel": "Reaktionen",
+    "reactionCount": "{emoji} – {count}",
+    "react": "Reagieren",
+    "chooseReaction": "Reaktion auswählen",
+    "delete": "Löschen",
+    "deleteConfirm": "Diese Nachricht löschen?",
+    "reportAction": "Melden",
+    "composerLabel": "Nachricht schreiben",
+    "composerPlaceholder": "Nachricht schreiben …",
+    "composerHint": "Keine Telefonnummern, E-Mail-Adressen oder Links. Bitte freundlich bleiben.",
+    "send": "Senden",
+    "openProjectGroup": "Projektgruppe öffnen",
+    "createProjectGroup": "Projektgruppe im Chat anlegen",
+    "groupApprovalHint": "Diese Gruppe kann erst erstellt werden, nachdem ein Admin die zugehörige Projektidee bzw. das Event freigegeben hat. Sobald die Freigabe erfolgt ist, kannst du die Gruppe erstellen.",
+    "report": {
+      "title": {
+        "message": "Nachricht melden",
+        "user": "Person melden",
+        "room": "Raum melden",
+        "conversation": "Chat melden",
+        "request": "Anfrage melden"
+      },
+      "category": "Grund",
+      "choose": "Bitte auswählen",
+      "categories": {
+        "language": "Unangemessene Sprache",
+        "harassment": "Belästigung oder Mobbing",
+        "discrimination": "Diskriminierung",
+        "privacy": "Verletzung der Privatsphäre",
+        "spam": "Spam",
+        "other": "Sonstiges"
+      },
+      "note": "Hinweis (freiwillig)",
+      "noteHint": "Die gemeldete Person erfährt nicht, wer gemeldet hat.",
+      "submit": "Meldung senden",
+      "sent": "Danke! Die Meldung wurde an die Moderation geschickt."
+    },
+    "errors": {
+      "notInstalled": "Der Chat ist noch nicht eingerichtet.",
+      "notAllowed": "Dafür hast du keine Berechtigung.",
+      "notFound": "Nicht gefunden.",
+      "invalid": "Bitte prüfe deine Eingabe.",
+      "disabled": "Der Chat ist noch nicht freigeschaltet.",
+      "banned": "Du bist bis {until} für den Chat gesperrt. Lesen geht weiterhin.",
+      "bannedRoom": "Du bist in diesem Raum bis {until} gesperrt. Lesen geht weiterhin.",
+      "noAccess": "Dafür hast du keinen Zugriff.",
+      "contactData": "Telefonnummern, E-Mail-Adressen und Links sind im Chat nicht erlaubt.",
+      "rateLimit": "Zu viele Nachrichten in kurzer Zeit. Bitte warte kurz.",
+      "blocked": "Das geht nicht, weil eine Blockierung besteht.",
+      "requestPendingOutgoing": "Du hast dieser Person schon eine Anfrage geschickt.",
+      "requestPendingIncoming": "Diese Person hat dir schon eine Anfrage geschickt – sieh in deinen Nachrichtenanfragen nach.",
+      "cooldown": "Deine letzte Anfrage wurde abgelehnt. Eine neue Anfrage ist ab {until} möglich.",
+      "conversationExists": "Ihr habt schon einen gemeinsamen Chat.",
+      "unreachable": "Diese Person kann keine Nachrichtenanfragen erhalten.",
+      "archived": "Archiviert – hier kann nicht mehr geschrieben werden.",
+      "eventDeleted": "Das Event dieser Gruppe wurde gelöscht – die Gruppe bleibt nur zum Nachlesen.",
+      "empty": "Bitte schreib etwas.",
+      "tooLong": "Die Nachricht ist zu lang.",
+      "generic": "Das hat nicht geklappt. Bitte versuche es später noch einmal."
+    },
+    "mod": {
+      "title": "Chat-Moderation",
+      "tabsLabel": "Bereiche der Moderation",
+      "tabs": {
+        "reports": "Meldungen",
+        "bans": "Sperren",
+        "rooms": "Räume",
+        "conversations": "Private Chats",
+        "audit": "Protokoll",
+        "settings": "Einstellungen"
+      },
+      "role": {
+        "admin": "Admin",
+        "moderator": "Moderation"
+      },
+      "roleHint": {
+        "admin": "Du kannst alles verwalten. Jede Aktion wird protokolliert.",
+        "moderator": "Du bearbeitest Meldungen, löschst Nachrichten, sperrst bis 7 Tage und archivierst Räume. Jede Aktion wird protokolliert."
+      },
+      "reason": "Begründung",
+      "reasonHint": "Pflicht (mind. 3 Zeichen). Wird im Protokoll gespeichert.",
+      "reportStatus": {
+        "open": "Offen",
+        "resolved": "Erledigt",
+        "dismissed": "Verworfen"
+      },
+      "target": {
+        "message": "Nachricht",
+        "user": "Person",
+        "room": "Raum",
+        "conversation": "Privater Chat",
+        "request": "Anfrage"
+      },
+      "noReports": "Keine Meldungen.",
+      "reportedBy": "Gemeldet von {name}",
+      "concerns": "betrifft {name}",
+      "note": "Hinweis",
+      "resolution": "Ergebnis",
+      "viewContext": "Zusammenhang ansehen",
+      "contextRoom": "Zusammenhang der gemeldeten Nachricht im Raum ansehen?",
+      "contextPrivateWarning": "Achtung: privater Chat. Du siehst bis zu 10 Nachrichten rund um die gemeldete Nachricht. Der Zugriff wird mit Begründung protokolliert.",
+      "deleteMessage": "Nachricht löschen",
+      "deleteMessageConfirm": "Die gemeldete Nachricht löschen?",
+      "resolve": "Erledigt",
+      "resolveConfirm": "Meldung als erledigt markieren?",
+      "dismiss": "Verwerfen",
+      "dismissConfirm": "Meldung verwerfen (kein Verstoß)?",
+      "banUser": "Sperren",
+      "newBan": "Neue Sperre",
+      "banTarget": "Person: {name}",
+      "change": "Ändern",
+      "findUser": "Person suchen (Vorname)",
+      "select": "Auswählen",
+      "scope": "Bereich",
+      "scopes": {
+        "global": "Ganzer Chat",
+        "room": "Ein Raum"
+      },
+      "room": "Raum",
+      "duration": "Dauer",
+      "durations": {
+        "1h": "1 Stunde",
+        "24h": "24 Stunden",
+        "3d": "3 Tage",
+        "7d": "7 Tage",
+        "14d": "14 Tage",
+        "30d": "30 Tage",
+        "custom": "Eigene Dauer"
+      },
+      "customHours": "Dauer in Stunden",
+      "maxDuration": {
+        "admin": "Höchstens 365 Tage.",
+        "moderator": "Moderation: höchstens 7 Tage."
+      },
+      "banConfirm": "{name} sperren? Die Person kann während der Sperre nur noch lesen.",
+      "activeOnly": "Nur aktive Sperren",
+      "noBans": "Keine Sperren.",
+      "active": "aktiv",
+      "ended": "beendet",
+      "issuedBy": "von {name}",
+      "endBan": "Sperre beenden",
+      "endBanConfirm": "Sperre von {name} vorzeitig beenden?",
+      "createEventGroup": "Eventgruppe anlegen",
+      "event": "Event",
+      "create": "Anlegen",
+      "messageCount_one": "{count} Nachricht",
+      "messageCount": "{count} Nachrichten",
+      "archive": "Archivieren",
+      "unarchive": "Wiederherstellen",
+      "deleteRoom": "Raum löschen",
+      "roomConfirm": {
+        "archive": "Raum archivieren? Mitglieder können dann nur noch lesen.",
+        "unarchive": "Raum wiederherstellen?",
+        "delete": "Raum ENDGÜLTIG löschen – samt allen Nachrichten und Reaktionen? Meldungen bleiben erhalten."
+      },
+      "conversationsHint": "Hier stehen nur Metadaten (wer, seit wann, wie viele Nachrichten) – keine Inhalte. Inhalte siehst du nur über Meldungen.",
+      "openReports_one": "{count} offene Meldung",
+      "openReports": "{count} offene Meldungen",
+      "deleteConversation": "Chat löschen",
+      "conversationConfirm": {
+        "archive": "Chat archivieren? Beide können dann nur noch lesen.",
+        "unarchive": "Chat wiederherstellen?",
+        "delete": "Chat ENDGÜLTIG löschen – beide verlieren den Zugriff, Nachrichten und Reaktionen werden gelöscht. Meldungen bleiben erhalten."
+      },
+      "noAudit": "Noch keine Einträge.",
+      "actions": {
+        "create_event_room": "Eventgruppe angelegt",
+        "resolve_report": "Meldung bearbeitet",
+        "view_private_context": "Privaten Zusammenhang einer Meldung angesehen",
+        "view_room_context": "Raum-Zusammenhang einer Meldung angesehen",
+        "delete_message": "Nachricht gelöscht",
+        "ban": "Sperre ausgesprochen",
+        "end_ban": "Sperre beendet",
+        "archive_room": "Raum archiviert",
+        "unarchive_room": "Raum wiederhergestellt",
+        "archive_conversation": "Gespräch archiviert",
+        "unarchive_conversation": "Gespräch wiederhergestellt",
+        "delete_conversation": "Gespräch gelöscht",
+        "delete_room": "Raum gelöscht",
+        "add_moderator": "Moderator:in ernannt",
+        "remove_moderator": "Moderator:in entfernt",
+        "set_config": "Einstellungen geändert",
+        "add_term": "Wort zur Filterliste hinzugefügt",
+        "remove_term": "Wort von der Filterliste entfernt"
+      },
+      "settingsTitle": "Chat-Einstellungen",
+      "staffCount_one": "{count} Person mit Moderationsrechten",
+      "staffCount": "{count} Personen mit Moderationsrechten",
+      "enabled": "Chat für alle angemeldeten Schüler:innen einschalten",
+      "enabledHint": "Erst einschalten, wenn Moderation und Ablauf geklärt sind.",
+      "cooldownHours": "Wartezeit nach abgelehnter Anfrage (Stunden)",
+      "requestsPerDay": "Höchstens Anfragen pro Person und Tag",
+      "messagesPerMinute": "Höchstens Nachrichten pro Person und Minute",
+      "save": "Speichern",
+      "saveConfirm": "Einstellungen speichern?",
+      "staffTitle": "Moderation",
+      "adminsHint": "Admins werden in der Datenbank (Tabelle admins) eingetragen – siehe Anleitung. Moderator:innen kannst du hier ernennen.",
+      "addModerator": "Zur Moderation ernennen",
+      "addModeratorConfirm": "{name} zur Moderation ernennen?",
+      "removeModerator": "Entfernen",
+      "removeModeratorConfirm": "{name} aus der Moderation entfernen?",
+      "termsTitle": "Wortfilter",
+      "termsHint": "Wörter werden vereinheitlicht gespeichert (klein, ohne Akzente). „Wortanfang“ trifft auch Zusammensetzungen.",
+      "term": "Wort",
+      "termLanguage": "Sprache",
+      "languages": {
+        "de": "Deutsch",
+        "tr": "Türkisch",
+        "en": "Englisch",
+        "other": "Andere"
+      },
+      "termPrefix": "Wortanfang",
+      "addTerm": "Hinzufügen",
+      "showTerms_one": "Liste anzeigen ({count} Wort)",
+      "showTerms": "Liste anzeigen ({count} Wörter)",
+      "prefix": "Wortanfang",
+      "removeTerm": "Entfernen"
+    },
+    "lastMessage": "Letzte Nachricht: {time}",
+    "unread": "Ungelesene Nachrichten"
+  },
+  "toast": {
+    "regionLabel": "Bestätigungen",
+    "dismiss": "Meldung schließen",
+    "roomJoined": "Du bist dem Raum beigetreten!",
+    "roomLeft": "Du hast den Raum verlassen.",
+    "messageSent": "Deine Nachricht wurde gesendet.",
+    "registered": "Du bist für dieses Event angemeldet!",
+    "registrationCancelled": "Deine Anmeldung wurde storniert.",
+    "interestSaved": "Dein Interesse wurde gespeichert.",
+    "interestRemoved": "Dein Interesse wurde zurückgezogen.",
+    "sharingSaved": "Deine Profil-Freigabe wurde gespeichert."
+  },
+  "help": {
+    "title": "Hilfe & FAQ",
+    "subtitle": "Kurze Antworten auf häufige Fragen",
+    "intro": "Hier erfährst du, wie DeutschConnect funktioniert. Tippe auf eine Frage, um die Antwort zu öffnen.",
+    "more": "Deine Frage ist nicht dabei? Mehr über das Projekt steht unter „Über DeutschConnect“.",
+    "sections": {
+      "start": {
+        "title": "Erste Schritte",
+        "what": {
+          "q": "Was ist DeutschConnect?",
+          "a": "Eine Plattform von Schüler:innen für die Zusammenarbeit zwischen der Ernst-Reuter-Schule Ankara und Anka Bilim. Ihr findet gemeinsame Events, teilt Ideen für Projekte und tauscht euch aus."
+        },
+        "how": {
+          "q": "Wie benutze ich die Plattform?",
+          "a": "„Start“ zeigt deine nächsten Events und Vorschläge. Unter „Entdecken“ findest du Events und Ideen, unter „Community“ Profile und den Chat. Ohne Anmeldung siehst du eine Demo mit fiktiven Profilen."
+        },
+        "profile": {
+          "q": "Wie ändere ich mein Profil?",
+          "a": "Unter „Mein Bereich“ wählst du deine Interessen, stellst die Sprache ein und legst unter „Profil-Freigabe“ fest, was andere sehen. Vorname, Schule und Klasse gibst du bei der Registrierung an; in der App kannst du sie noch nicht ändern."
+        }
+      },
+      "chat": {
+        "title": "Community und Chat",
+        "join": {
+          "q": "Wie trete ich einem Chatraum bei?",
+          "a": "Öffne den Chat und tippe bei einem Themenraum auf „Beitreten“. Der Chat ist nur nutzbar, wenn du angemeldet bist und er für die Plattform eingeschaltet ist."
+        },
+        "enter": {
+          "q": "Wie betrete ich einen Raum und schreibe Nachrichten?",
+          "a": "Als Mitglied tippst du auf „Raum betreten“. Unten schreibst du deine Nachricht und tippst auf „Senden“ (oder drückst Enter). Neue Nachrichten erscheinen automatisch."
+        },
+        "leave": {
+          "q": "Wie verlasse ich einen Chatraum?",
+          "a": "Tippe in der Übersicht oder im Raum auf „Verlassen“. Danach kannst du die Nachrichten nicht mehr lesen, bis du wieder beitrittst. Projekt- und Eventgruppen gehören zum Projekt-Team bzw. zur Event-Anmeldung und lassen sich nicht einzeln verlassen."
+        },
+        "private": {
+          "q": "Wie funktionieren private Chats?",
+          "a": "Auf einem freigegebenen Profil kannst du eine Nachrichtenanfrage senden. Erst wenn die andere Person annimmt, entsteht ein privater Chat. Anfragen musst du nicht beantworten; du kannst Personen auch blockieren oder melden."
+        }
+      },
+      "events": {
+        "title": "Events",
+        "discover": {
+          "q": "Wie finde ich Events?",
+          "a": "Unter „Entdecken“ → „Events“ gibt es „Für mich“ (passend zu deinen Interessen), „Alle“ und „Meine“. Auf der Startseite stehen deine nächsten Events."
+        },
+        "register": {
+          "q": "Wie melde ich mich für ein Event an?",
+          "a": "Öffne das Event und tippe auf „Teilnehmen“. Mit „Interesse bekunden“ merkst du es unverbindlich vor. Ist ein Event voll oder hat es schon begonnen, ist keine Anmeldung mehr möglich."
+        },
+        "cancel": {
+          "q": "Wie storniere ich meine Anmeldung?",
+          "a": "Öffne das Event und tippe auf „Abmelden“."
+        },
+        "cancelled": {
+          "q": "Was passiert, wenn ein Event abgesagt wird?",
+          "a": "Das Event wird als „abgesagt“ markiert und findet nicht statt. Du musst nichts tun."
+        }
+      },
+      "privacy": {
+        "title": "Konto und Privatsphäre",
+        "manage": {
+          "q": "Wie verwalte ich mein Profil?",
+          "a": "In „Mein Bereich“ findest du deine Interessen, deine Aktivität und die Profil-Freigabe. Deine Aktivitätszahlen siehst nur du."
+        },
+        "visible": {
+          "q": "Wer kann meine Angaben sehen?",
+          "a": "Dein Profil ist standardmäßig privat. Erst wenn du es freigibst, sehen andere angemeldete Schüler:innen deinen Vornamen, deine Schule und die Angaben, die du zusätzlich auswählst. Klasse, E-Mail-Adresse und einzelne Event-Anmeldungen sind nie öffentlich."
+        },
+        "privacy": {
+          "q": "Wie funktioniert die Privatsphäre im Konto?",
+          "a": "Du entscheidest unter „Profil-Freigabe“, was geteilt wird, und kannst es jederzeit wieder auf privat stellen. Im Chat lesen nur Mitglieder eines Raums dessen Nachrichten; private Chats sehen nur die zwei beteiligten Personen."
+        }
+      }
+    }
+  },
+  "appearance": {
+    "title": "Darstellung",
+    "intro": "Wähle deine Akzentfarbe für Buttons, Links und Markierungen. Hintergrund und Statusfarben bleiben gleich.",
+    "accentLegend": "Akzentfarbe",
+    "default": "Standard",
+    "preview": "Vorschau",
+    "previewPrimary": "Teilnehmen",
+    "previewSecondary": "Mehr erfahren",
+    "previewChip": "Ausgewählt",
+    "previewLink": "Ein Link",
+    "current": "Aktuell: {name}",
+    "localOnly": "Wird nur in diesem Browser gespeichert.",
+    "reset": "Auf Ozeanblau zurücksetzen",
+    "accents": {
+      "ocean": "Ozeanblau",
+      "forest": "Waldgrün",
+      "lavender": "Lavendel",
+      "sunset": "Abendorange",
+      "rose": "Rosé",
+      "midnight": "Mitternacht"
+    },
+    "paletteButton": "Akzentfarbe wählen",
+    "moreSettings": "Weitere Einstellungen zur Darstellung"
   }
 }

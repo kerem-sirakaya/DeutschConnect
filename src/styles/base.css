@@ -175,7 +175,7 @@ button {
   gap: 8px;
   min-height: 44px;
   padding: 0 18px;
-  border: 1px solid transparent;
+  border: var(--border-width) solid transparent;
   border-radius: var(--radius-md);
   font-weight: 600;
   font-size: var(--text-base);
@@ -204,6 +204,7 @@ button {
 
 .btn--secondary:hover {
   background: var(--color-surface-3);
+  border-color: var(--color-primary-border); /* dezenter Akzent der gewählten Farbe */
 }
 
 .btn--ghost {
@@ -297,7 +298,7 @@ button {
   width: 100%;
   min-height: 46px;
   padding: 10px 14px;
-  border: 1px solid var(--color-border);
+  border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-md);
   background: var(--color-surface-2);
   font-size: 1rem; /* 16px verhindert Auto-Zoom auf iOS */
@@ -349,7 +350,7 @@ fieldset[aria-invalid='true'] .chip-group {
   align-items: flex-start;
   gap: 12px;
   padding: 10px 12px;
-  border: 1px solid var(--color-border);
+  border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-md);
   background: var(--color-surface-2);
   cursor: pointer;

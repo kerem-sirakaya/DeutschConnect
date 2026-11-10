@@ -20,7 +20,6 @@
     "home": "Ana Sayfa",
     "events": "Etkinlikler",
     "ideas": "Fikirler",
-    "network": "Ağ",
     "me": "Alanım",
     "meShort": "Alanım",
     "about": "DeutschConnect Hakkında",
@@ -28,7 +27,10 @@
     "admin": "Yönetici alanı",
     "discover": "Keşfet",
     "tutoring": "Ders desteği",
-    "community": "Topluluk"
+    "community": "Topluluk",
+    "chat": "Sohbet",
+    "games": "Oyunlar",
+    "help": "Yardım & SSS"
   },
   "profileMenu": {
     "open": "Profil menüsünü aç (demo profili: {name})",
@@ -43,7 +45,12 @@
     "realAccount": "Hesabın"
   },
   "home": {
-    "greeting": "Tekrar hoş geldin, {name}!",
+    "greetingMorning": "Günaydın, {name}!",
+    "greetingAfternoon": "İyi günler, {name}!",
+    "greetingEvening": "İyi akşamlar, {name}!",
+    "greetingMorningNoName": "Günaydın!",
+    "greetingAfternoonNoName": "İyi günler!",
+    "greetingEveningNoName": "İyi akşamlar!",
     "quickActionsLabel": "Hızlı erişim",
     "updates": "Senin için yeni",
     "myNextEvents": "Yaklaşan etkinliklerim",
@@ -54,8 +61,6 @@
     "noRecsText": "Sana uygun etkinlikler bulabilmemiz için daha fazla ilgi alanı seç.",
     "myProjectsIdeas": "Projelerim ve fikirlerim",
     "noProjectsIdeas": "Henüz bir projen ya da fikrin yok.",
-    "suggestedProject": "Sana uygun bir proje",
-    "typeProject": "Proje",
     "dashboardSubtitle": "Etkinliklerin, fikirlerin ve öğrenme bağlantıların tek bakışta.",
     "tutoringMatches": "Sana uygun ders desteği",
     "tutoringDiscover": "Ders desteğini keşfet",
@@ -178,7 +183,7 @@
       "cancelled": "İptal edildi"
     },
     "noCancelledTitle": "Şu anda iptal edilen etkinlik yok.",
-    "noCancelledText": "İptal edilen etkinlikler iptalden sonra 24 saat görünür kalır.",
+    "noCancelledText": "İptal edilen etkinlikler, asıl tarihlerinden 24 saat sonrasına kadar – ve iptalden sonra en az 24 saat – görünür kalır.",
     "card": {
       "eventStatus": "Etkinlik:",
       "eventStatusSr": "Etkinlik durumu:",
@@ -322,55 +327,6 @@
       "privacy": "Lütfen gizlilik notunu onayla."
     }
   },
-  "network": {
-    "title": "Ağ",
-    "tabsLabel": "Ağ bölümleri",
-    "tabs": {
-      "schools": "Okullar",
-      "projects": "Projeler"
-    },
-    "eventsCount_one": "{count} etkinlik",
-    "eventsCount_other": "{count} etkinlik",
-    "projectsCount_one": "{count} proje",
-    "projectsCount_other": "{count} proje",
-    "statusTitle": "İş birliğinin durumu",
-    "legend": {
-      "initiator": "DeutschConnect burada doğdu.",
-      "interest": "İş birliğine ilgi gösterildi, ayrıntılar netleştiriliyor.",
-      "confirmed": "Resmî olarak onaylanmış iş birliği."
-    },
-    "statusText": "Henüz resmî olarak onaylanmış bir iş birliği yok. ERS ile Anka Bilim arasındaki iş birliği şu anda netleştiriliyor.",
-    "plannedTitle": "Planlanan ağ",
-    "plannedText": "İlk pilot uygulamadan sonra Ankara'daki başka okulların da davet edilmesi planlanıyor. Başka okullarla henüz görüşme yapılmadı.",
-    "projectsFilterLabel": "Projeleri filtrele",
-    "filter": {
-      "all": "Tüm projeler",
-      "mine": "Projelerim"
-    },
-    "noMyProjects": "Henüz bir projede değilsin",
-    "noMyProjectsText": "Bir proje aç ve katılmak istediğini belirt."
-  },
-  "school": {
-    "notFound": "Okul bulunamadı",
-    "city": "Şehir",
-    "ideas": "Bu okuldan fikirler",
-    "events": "Yaklaşan etkinlikler",
-    "projects": "Projeler",
-    "noEvents": "Şu anda yaklaşan etkinlik yok.",
-    "noProjects": "Henüz proje yok."
-  },
-  "project": {
-    "notFound": "Proje bulunamadı",
-    "realProject": "Gerçek proje",
-    "nextStep": "Sonraki adım",
-    "about": "Proje hakkında",
-    "yourRole": "Rolün",
-    "memberNote": "Bu projenin bir parçasısın.",
-    "joinText": "Katılmak ister misin? İlgini belirt.",
-    "joinedNote": "Katılmak istediğini belirttin.",
-    "join": "Katılmak istiyorum",
-    "joined": "İlgi bildirildi"
-  },
   "me": {
     "title": "Alanım",
     "profile": "Profil",
@@ -513,7 +469,8 @@
     "nav": {
       "overview": "Genel bakış",
       "events": "Etkinlikler",
-      "ideas": "Fikirler"
+      "ideas": "Fikirler",
+      "chat": "Sohbet moderasyonu"
     },
     "loading": "Erişim kontrol ediliyor …",
     "denied": {
@@ -781,32 +738,167 @@
   },
   "discover": {
     "title": "Keşfet",
-    "subtitle": "Etkinlikler, fikirler ve okul ağı tek yerde.",
+    "subtitle": "Etkinlikler ve fikirler tek yerde.",
     "overview": "Genel bakış",
     "eventsText": "İki okulun ortak atölyeleri, buluşmaları ve yarışmaları.",
     "ideasText": "Öğrencilerin fikirleri ve projeleri – öner ve destekle.",
-    "networkText": "Pilot okullar ve devam eden projeler.",
     "upcomingCount_one": "{count} yaklaşan etkinlik",
     "upcomingCount_other": "{count} yaklaşan etkinlik",
     "ideasCount_one": "{count} fikir",
     "ideasCount_other": "{count} fikir",
-    "schoolsCount_one": "{count} okul",
-    "schoolsCount_other": "{count} okul",
     "demoHint": "Giriş yapmadın – sayılar ve içerikler demo örnekleridir."
   },
   "community": {
     "title": "Topluluk",
     "subtitle": "Birlikte öğren ve birlikte çalış.",
     "tutoringText": "Ders desteği sun veya ara – gönüllü ve ücretsiz.",
-    "networkText": "Pilot ağdaki okullar ve projeler.",
-    "plannedTitle": "Diğer topluluk özellikleri",
-    "plannedText": "Codex sürümündeki bu özellikler şu anda gerçek altyapıya bağlanıyor. Henüz kullanılamaz.",
-    "inIntegration": "Entegrasyonda",
-    "planned": {
-      "groups": "Paylaşımlı proje ve etkinlik grupları",
-      "games": "Liderlik tablolu oyunlar (satranç, sembol eşleştirme, Paper Flight, Bridge Runner)"
+    "peopleText": "Öğrencilerin gönüllü olarak paylaştığı profiller.",
+    "groupsText": "Projeler ve etkinlikler için gruplar – paylaşımlar ve tartışmalarla.",
+    "groups": {
+      "title": "Proje ve etkinlik grupları",
+      "subtitle": "Projeler ve etkinlikler için grupların. Paylaşımları okumak ve tartışmaya katılmak için bir grubu aç.",
+      "filterLabel": "Grupları filtrele",
+      "filter": {
+        "all": "Tümü",
+        "project": "Proje grupları",
+        "event": "Etkinlik grupları"
+      },
+      "lastPost": "son paylaşım {time}",
+      "noPosts": "henüz paylaşım yok",
+      "empty": {
+        "all": "Henüz hiçbir proje veya etkinlik grubunda değilsin.",
+        "project": "Henüz hiçbir proje grubunda değilsin.",
+        "event": "Henüz hiçbir etkinlik grubunda değilsin."
+      },
+      "emptyHint": "Üye olduğun anda gruplar burada otomatik olarak görünür.",
+      "howTitle": "Bir gruba nasıl katılırım?",
+      "howProject": "Proje grupları yayımlanmış fikirlere aittir. Fikri gönderen kişi grubu fikir sayfasında oluşturur. Üyeler proje ekibidir.",
+      "howEvent": "Etkinlik gruplarını moderasyon bir etkinlik için oluşturur. Kesin kayıt yaptıran herkes üyedir."
+    }
+  },
+  "games": {
+    "title": "Oyunlar",
+    "subtitle": "Arada kısa bir mola – doğrudan tarayıcıda.",
+    "localNote": "Oyunlar tarayıcında çalışır. Yalnızca Kağıt uçuşu ve Köprü koşucusu’ndaki en iyi puanın kaydedilir – o da yalnızca giriş yaptıysan.",
+    "restart": "Yeniden başlat",
+    "arcade": {
+      "score": "Puan: {count}",
+      "tapToStart": "Başlamak için dokun",
+      "start": "Başlat",
+      "pause": "Duraklat",
+      "resume": "Devam et",
+      "paused": "Duraklatıldı",
+      "over": "Oyun bitti",
+      "result": "Oyun bitti · Puan: {count}"
     },
-    "peopleText": "Öğrencilerin gönüllü olarak paylaştığı profiller."
+    "symbolPairs": {
+      "title": "Sembol çiftleri",
+      "hint": "İki eş sembolü aç. Süre sınırı yok.",
+      "board": "12 kartlık oyun alanı",
+      "pairs": "Bulunan çiftler: {found}/{total}",
+      "moves_one": "{count} hamle",
+      "moves": "{count} hamle",
+      "cardHidden": "Kart {n}, kapalı",
+      "cardOpen": "Kart {n}: {symbol}",
+      "cardFound": "Kart {n}: {symbol}, çift bulundu",
+      "complete": "Tüm çiftler bulundu – {count} hamlede!",
+      "symbols": {
+        "star": "Yıldız",
+        "circle": "Daire",
+        "triangle": "Üçgen",
+        "diamond": "Eşkenar dörtgen",
+        "heart": "Kalp",
+        "sun": "Güneş"
+      }
+    },
+    "paperFlight": {
+      "title": "Kağıt uçuşu",
+      "hint": "Kağıt uçağı havada tut ve boşluklardan geçir. Dokunmak, Boşluk veya Yukarı ok tuşu yükseltir.",
+      "field": "Kağıt uçuşu oyun alanı: yükselmek için dokun veya Boşluk tuşuna bas",
+      "accessibility": "Not: Kağıt uçuşu hareketli, hızlı bir refleks oyunudur. Zaman baskısı olmadan Sembol çiftleri oynayabilirsin."
+    },
+    "bridgeRunner": {
+      "title": "Köprü koşucusu",
+      "hint": "Köprüde koş ve engellerin üzerinden atla. Zıplamak için dokun, Boşluk veya Yukarı ok tuşuna bas.",
+      "field": "Köprü koşucusu oyun alanı: zıplamak için dokun veya Boşluk tuşuna bas",
+      "accessibility": "Not: Köprü koşucusu hareketli, hızlı bir refleks oyunudur. Zaman baskısı olmadan Sembol çiftleri oynayabilirsin."
+    },
+    "chess": {
+      "title": "Satranç",
+      "hint": "Aynı cihazda iki kişilik satranç. Bir taşa dokun, sonra işaretli bir kare seç.",
+      "board": "Satranç tahtası",
+      "white": "Beyaz",
+      "black": "Siyah",
+      "whiteToMove": "Sıra beyazda.",
+      "blackToMove": "Sıra siyahta.",
+      "check": "Şah!",
+      "whiteWins": "Beyaz kazandı",
+      "blackWins": "Siyah kazandı",
+      "draw": "Berabere",
+      "reasons": {
+        "checkmate": "Şah mat",
+        "stalemate": "Pat",
+        "material": "Mat için yetersiz taş",
+        "seventyfive": "75 hamle kuralı",
+        "fivefold": "Beş kez aynı pozisyon",
+        "claimed": "Beraberlik talep edildi",
+        "agreed": "Beraberlikte anlaşıldı",
+        "resigned": "Terk"
+      },
+      "pieces": {
+        "p": "Piyon",
+        "n": "At",
+        "b": "Fil",
+        "r": "Kale",
+        "q": "Vezir",
+        "k": "Şah"
+      },
+      "squarePiece": "{square}: {piece} ({color})",
+      "targetSuffix": "olası hamle",
+      "promotion": "Piyonu şuna terfi ettir:",
+      "undo": "Hamleyi geri al",
+      "flip": "Tahtayı çevir",
+      "claimDraw": "Beraberlik talep et",
+      "offerDraw": "Beraberlikte anlaş",
+      "resign": "Terk et",
+      "confirmResign": "{color} oyunu terk etsin mi?",
+      "confirmDraw": "İkiniz de beraberliği kabul ediyor musunuz?",
+      "confirmRestart": "Oyun bitirilip yeniden başlatılsın mı?",
+      "confirmYes": "Evet",
+      "moveList_one": "Hamle listesi ({count} hamle)",
+      "moveList": "Hamle listesi ({count} hamle)",
+      "noMoves": "Henüz hamle yok."
+    },
+    "leaderboard": {
+      "sectionTitle": "Liderlik tabloları",
+      "sectionSubtitle": "Her oyun için ilk 10 · herkes bir kez, en iyi puanıyla",
+      "boardTitle": "{game} – İlk 10",
+      "loginHintShort": "En iyi puanını kaydetmek için giriş yap.",
+      "viewAll": "Liderlik tablolarına git",
+      "loginHint": "En iyi puanını kaydetmek ve liderlik tablolarını görmek için giriş yap. Giriş yapmadan da oynayabilirsin.",
+      "login": "Giriş yap",
+      "loading": "Liderlik tablosu yükleniyor …",
+      "retry": "Tekrar dene",
+      "empty": "Henüz kayıt yok. Bir tur oyna ve aşağıdan “Liderlik tablolarında göster” seçeneğini aç!",
+      "rankLabel": "Sıra",
+      "points": "puan",
+      "you": "Sen",
+      "myBest": "En iyi puanın: {score}",
+      "noBestYet": "Henüz kaydedilmiş en iyi puanın yok.",
+      "myRank": "{rank}. sıra",
+      "showMe": "Liderlik tablolarında adımla görün",
+      "showMeHint": "Kağıt uçuşu ve Köprü koşucusu için geçerlidir. Diğerleri yalnızca adını ve en iyi puanını görür. İstediğin zaman kapatabilirsin.",
+      "saving": "En iyi puan kaydediliyor …",
+      "newBest": "Yeni en iyi puan kaydedildi: {score}!",
+      "kept": "En iyi puanın {score} olarak kalıyor.",
+      "errors": {
+        "notInstalled": "Liderlik tablosu henüz kurulmadı.",
+        "notAllowed": "Lütfen giriş yap.",
+        "noRun": "Bu tur değerlendirilemedi. Yeni bir tur başlat.",
+        "implausible": "Bu puan doğrulanamadı ve kaydedilmedi.",
+        "generic": "Bu işlem olmadı. Lütfen daha sonra tekrar dene."
+      }
+    }
   },
   "tutoring": {
     "title": "Ders desteği panosu",
@@ -1060,5 +1152,450 @@
       "generic": "Olmadı. Lütfen daha sonra tekrar dene.",
       "loginRequired": "Bunun için gerçek bir hesaba ihtiyacın var."
     }
+  },
+  "chat": {
+    "title": "Sohbet",
+    "subtitle": "Grup odaları ve özel sohbetler – nazik, güvenli ve moderasyonlu.",
+    "loginHint": "Sohbeti kullanmak için giriş yap.",
+    "login": "Giriş yap",
+    "loading": "Yükleniyor …",
+    "retry": "Tekrar dene",
+    "staffPreview": "Sohbet öğrenciler için henüz kapalı. Moderasyon yaptığın için görüyorsun.",
+    "tabsLabel": "Sohbet bölümleri",
+    "tabs": {
+      "rooms": "Grup odaları",
+      "private": "Özel sohbetler",
+      "requests": "Mesaj istekleri",
+      "search": "Arama"
+    },
+    "kind": {
+      "topic": "Konu odası",
+      "project": "Proje grubu",
+      "event": "Etkinlik grubu",
+      "private": "Özel sohbet"
+    },
+    "rooms": {
+      "general": {
+        "title": "Okullar arası paylaşım",
+        "description": "Okul hayatı hakkında sorular ve yeni bakış açıları."
+      },
+      "learning": {
+        "title": "Ders desteği ve öğrenme",
+        "description": "Öğrenme soruları, deneyimler ve karşılıklı destek."
+      },
+      "projects": {
+        "title": "Projeler ve iş birliği",
+        "description": "Fikirleri geliştir ve katılımcı bul."
+      },
+      "events": {
+        "title": "Etkinlikler ve atölyeler",
+        "description": "Formatları ve organizasyon sorularını konuş."
+      },
+      "projectFallback": "Proje grubu",
+      "eventFallback": "Etkinlik grubu"
+    },
+    "topicRooms": "Konu odaları",
+    "myGroups": "Proje ve etkinlik gruplarım",
+    "noGroups": "Henüz bir proje veya etkinlik grubunda değilsin.",
+    "memberCount_one": "{count} üye",
+    "memberCount": "{count} üye",
+    "members_one": "Üyeler ({count})",
+    "members": "Üyeler ({count})",
+    "join": "Katıl",
+    "leave": "Ayrıl",
+    "enter": "Odaya gir",
+    "joined": "Katıldın",
+    "liveOn": "Canlı",
+    "liveOff": "Düzenli olarak güncellenir",
+    "lockedTitle": "Yalnızca üyeler için",
+    "lockedGroupHint": "Bu grup yalnızca proje üyeleri veya etkinliğe kayıtlı kişiler içindir.",
+    "archived": "Arşivlendi",
+    "roomTitle": "Grup odası",
+    "groupHint": "Bu odanın tüm üyeleri mesajları okur.",
+    "joinToRead": "Mesajları okumak için odaya katıl.",
+    "joinToWrite": "Yazmak için odaya katıl.",
+    "readOnly": "Şu anda burada yalnızca okuyabilirsin.",
+    "archivedHint": "Bu oda arşivlendi – yalnızca okunabilir.",
+    "emptyRoom": "Henüz mesaj yok. İlk mesajı sen yaz!",
+    "reportRoom": "Odayı bildir",
+    "privateTitle": "Özel sohbet",
+    "privateHint": "Özel sohbetler yalnızca biri mesaj isteğini kabul ettiğinde oluşur.",
+    "privateContextHint": "Bu sohbeti yalnızca ikiniz okursunuz.",
+    "archivedConversationHint": "Bu sohbet arşivlendi – yalnızca okunabilir.",
+    "conversationUnavailable": "Bu sohbet (artık) kullanılamıyor.",
+    "noConversations": "Henüz özel sohbet yok.",
+    "noMessagesYet": "Henüz mesaj yok.",
+    "reportConversation": "Sohbeti bildir",
+    "blockedTitle": "Engellenen kişiler",
+    "blockedHint": "Engellenen kişiler sana istek gönderemez; mesajlarınız iki taraf için de gizlenir.",
+    "block": "Engelle",
+    "unblock": "Engeli kaldır",
+    "blockConfirm": "{name} engellensin mi? Artık birbirinizin mesajlarını görmezsiniz.",
+    "requestsHint": "Mesaj isteklerine cevap vermek zorunda değilsin. Ancak kabul edersen özel sohbet oluşur.",
+    "incoming": "Gelen istekler",
+    "outgoing": "Gönderilen istekler",
+    "noIncoming": "Bekleyen istek yok.",
+    "noOutgoing": "Gönderilmiş istek yok.",
+    "accept": "Kabul et",
+    "decline": "Reddet",
+    "cancelRequest": "Geri çek",
+    "openConversation": "Sohbeti aç",
+    "requestStatus": {
+      "pending": "bekliyor",
+      "accepted": "kabul edildi",
+      "declined": "reddedildi",
+      "cancelled": "geri çekildi",
+      "blocked": "sonlandı"
+    },
+    "sendMessage": "Mesaj gönder",
+    "requestTitle": "{name} kişisine mesaj isteği",
+    "requestExplain": "Kısa bir tanıtım yaz. {name} kabul edebilir veya reddedebilir – ancak ondan sonra sohbet edebilirsiniz.",
+    "requestIntro": "Tanıtımın",
+    "sendRequest": "İsteği gönder",
+    "requestSent": "{name} kişisine istek gönderildi.",
+    "searchLabel": "Mesajlarda ara",
+    "searchPlaceholder": "Arama terimi …",
+    "searchButton": "Ara",
+    "searchHint": "Yalnızca üyesi olduğun odalarda ve kendi özel sohbetlerinde arar.",
+    "searchResults": "Arama sonuçları",
+    "searchInConversation": "{name} ile özel sohbet",
+    "noResults": "Sonuç yok.",
+    "messagesLabel": "Mesajlar",
+    "you": "Sen",
+    "deletedMessage": "Mesaj silindi",
+    "censoredHint": "Bazı kelimeler otomatik olarak gizlendi.",
+    "censoredSent": "Not: Bazı kelimeler otomatik olarak *** ile değiştirildi.",
+    "reactionsLabel": "Tepkiler",
+    "reactionCount": "{emoji} – {count}",
+    "react": "Tepki ver",
+    "chooseReaction": "Tepki seç",
+    "delete": "Sil",
+    "deleteConfirm": "Bu mesaj silinsin mi?",
+    "reportAction": "Bildir",
+    "composerLabel": "Mesaj yaz",
+    "composerPlaceholder": "Mesaj yaz …",
+    "composerHint": "Telefon numarası, e-posta adresi veya bağlantı yok. Lütfen nazik ol.",
+    "send": "Gönder",
+    "openProjectGroup": "Proje grubunu aç",
+    "createProjectGroup": "Sohbette proje grubu oluştur",
+    "groupApprovalHint": "Bu grup, ilgili proje fikri veya etkinlik bir yönetici tarafından onaylandıktan sonra oluşturulabilir. Onay verildiği anda grubu oluşturabilirsin.",
+    "report": {
+      "title": {
+        "message": "Mesajı bildir",
+        "user": "Kişiyi bildir",
+        "room": "Odayı bildir",
+        "conversation": "Sohbeti bildir",
+        "request": "İsteği bildir"
+      },
+      "category": "Sebep",
+      "choose": "Lütfen seç",
+      "categories": {
+        "language": "Uygunsuz dil",
+        "harassment": "Taciz veya zorbalık",
+        "discrimination": "Ayrımcılık",
+        "privacy": "Gizlilik ihlali",
+        "spam": "Spam",
+        "other": "Diğer"
+      },
+      "note": "Not (isteğe bağlı)",
+      "noteHint": "Bildirilen kişi kimin bildirdiğini öğrenmez.",
+      "submit": "Bildirimi gönder",
+      "sent": "Teşekkürler! Bildirim moderasyona gönderildi."
+    },
+    "errors": {
+      "notInstalled": "Sohbet henüz kurulmadı.",
+      "notAllowed": "Bunun için yetkin yok.",
+      "notFound": "Bulunamadı.",
+      "invalid": "Lütfen girdini kontrol et.",
+      "disabled": "Sohbet henüz açılmadı.",
+      "banned": "{until} tarihine kadar sohbetten engellendin. Okumaya devam edebilirsin.",
+      "bannedRoom": "Bu odada {until} tarihine kadar engellendin. Okumaya devam edebilirsin.",
+      "noAccess": "Buna erişimin yok.",
+      "contactData": "Sohbette telefon numarası, e-posta adresi ve bağlantıya izin verilmez.",
+      "rateLimit": "Kısa sürede çok fazla mesaj. Lütfen biraz bekle.",
+      "blocked": "Bir engelleme olduğu için bu mümkün değil.",
+      "requestPendingOutgoing": "Bu kişiye zaten bir istek gönderdin.",
+      "requestPendingIncoming": "Bu kişi sana zaten bir istek gönderdi – mesaj isteklerine bak.",
+      "cooldown": "Son isteğin reddedildi. Yeni bir istek {until} tarihinden itibaren mümkün.",
+      "conversationExists": "Zaten ortak bir sohbetiniz var.",
+      "unreachable": "Bu kişi mesaj isteği alamaz.",
+      "archived": "Arşivlendi – burada artık yazılamaz.",
+      "eventDeleted": "Bu grubun etkinliği silindi – grup yalnızca okunabilir olarak kalır.",
+      "empty": "Lütfen bir şey yaz.",
+      "tooLong": "Mesaj çok uzun.",
+      "generic": "Bu işlem olmadı. Lütfen daha sonra tekrar dene."
+    },
+    "mod": {
+      "title": "Sohbet moderasyonu",
+      "tabsLabel": "Moderasyon bölümleri",
+      "tabs": {
+        "reports": "Bildirimler",
+        "bans": "Engellemeler",
+        "rooms": "Odalar",
+        "conversations": "Özel sohbetler",
+        "audit": "Kayıt",
+        "settings": "Ayarlar"
+      },
+      "role": {
+        "admin": "Yönetici",
+        "moderator": "Moderasyon"
+      },
+      "roleHint": {
+        "admin": "Her şeyi yönetebilirsin. Her işlem kaydedilir.",
+        "moderator": "Bildirimleri işler, mesaj siler, 7 güne kadar engeller ve odaları arşivlersin. Her işlem kaydedilir."
+      },
+      "reason": "Gerekçe",
+      "reasonHint": "Zorunlu (en az 3 karakter). Kayda geçer.",
+      "reportStatus": {
+        "open": "Açık",
+        "resolved": "Tamamlandı",
+        "dismissed": "Reddedildi"
+      },
+      "target": {
+        "message": "Mesaj",
+        "user": "Kişi",
+        "room": "Oda",
+        "conversation": "Özel sohbet",
+        "request": "İstek"
+      },
+      "noReports": "Bildirim yok.",
+      "reportedBy": "Bildiren: {name}",
+      "concerns": "ilgili kişi: {name}",
+      "note": "Not",
+      "resolution": "Sonuç",
+      "viewContext": "Bağlamı gör",
+      "contextRoom": "Bildirilen mesajın odadaki bağlamı görüntülensin mi?",
+      "contextPrivateWarning": "Dikkat: özel sohbet. Bildirilen mesajın çevresindeki en fazla 10 mesajı görürsün. Erişim gerekçesiyle kaydedilir.",
+      "deleteMessage": "Mesajı sil",
+      "deleteMessageConfirm": "Bildirilen mesaj silinsin mi?",
+      "resolve": "Tamamlandı",
+      "resolveConfirm": "Bildirim tamamlandı olarak işaretlensin mi?",
+      "dismiss": "Reddet",
+      "dismissConfirm": "Bildirim reddedilsin mi (ihlal yok)?",
+      "banUser": "Engelle",
+      "newBan": "Yeni engelleme",
+      "banTarget": "Kişi: {name}",
+      "change": "Değiştir",
+      "findUser": "Kişi ara (ad)",
+      "select": "Seç",
+      "scope": "Kapsam",
+      "scopes": {
+        "global": "Tüm sohbet",
+        "room": "Bir oda"
+      },
+      "room": "Oda",
+      "duration": "Süre",
+      "durations": {
+        "1h": "1 saat",
+        "24h": "24 saat",
+        "3d": "3 gün",
+        "7d": "7 gün",
+        "14d": "14 gün",
+        "30d": "30 gün",
+        "custom": "Özel süre"
+      },
+      "customHours": "Saat olarak süre",
+      "maxDuration": {
+        "admin": "En fazla 365 gün.",
+        "moderator": "Moderasyon: en fazla 7 gün."
+      },
+      "banConfirm": "{name} engellensin mi? Engelleme süresince yalnızca okuyabilir.",
+      "activeOnly": "Yalnızca aktif engellemeler",
+      "noBans": "Engelleme yok.",
+      "active": "aktif",
+      "ended": "sona erdi",
+      "issuedBy": "veren: {name}",
+      "endBan": "Engellemeyi bitir",
+      "endBanConfirm": "{name} için engelleme erken bitirilsin mi?",
+      "createEventGroup": "Etkinlik grubu oluştur",
+      "event": "Etkinlik",
+      "create": "Oluştur",
+      "messageCount_one": "{count} mesaj",
+      "messageCount": "{count} mesaj",
+      "archive": "Arşivle",
+      "unarchive": "Geri al",
+      "deleteRoom": "Odayı sil",
+      "roomConfirm": {
+        "archive": "Oda arşivlensin mi? Üyeler yalnızca okuyabilir.",
+        "unarchive": "Oda geri alınsın mı?",
+        "delete": "Oda tüm mesajları ve tepkileriyle KALICI olarak silinsin mi? Bildirimler korunur."
+      },
+      "conversationsHint": "Burada yalnızca meta veriler var (kim, ne zamandan beri, kaç mesaj) – içerik yok. İçerikleri yalnızca bildirimler üzerinden görürsün.",
+      "openReports_one": "{count} açık bildirim",
+      "openReports": "{count} açık bildirim",
+      "deleteConversation": "Sohbeti sil",
+      "conversationConfirm": {
+        "archive": "Sohbet arşivlensin mi? İkisi de yalnızca okuyabilir.",
+        "unarchive": "Sohbet geri alınsın mı?",
+        "delete": "Sohbet KALICI olarak silinsin mi – iki taraf da erişimi kaybeder, mesajlar ve tepkiler silinir. Bildirimler korunur."
+      },
+      "noAudit": "Henüz kayıt yok.",
+      "actions": {
+        "create_event_room": "Etkinlik grubu oluşturuldu",
+        "resolve_report": "Bildirim işlendi",
+        "view_private_context": "Bir bildirimin özel bağlamı görüntülendi",
+        "view_room_context": "Bir bildirimin oda bağlamı görüntülendi",
+        "delete_message": "Mesaj silindi",
+        "ban": "Engelleme verildi",
+        "end_ban": "Engelleme sona erdirildi",
+        "archive_room": "Oda arşivlendi",
+        "unarchive_room": "Oda geri alındı",
+        "archive_conversation": "Sohbet arşivlendi",
+        "unarchive_conversation": "Sohbet geri alındı",
+        "delete_conversation": "Sohbet silindi",
+        "delete_room": "Oda silindi",
+        "add_moderator": "Moderatör atandı",
+        "remove_moderator": "Moderatör kaldırıldı",
+        "set_config": "Ayarlar değiştirildi",
+        "add_term": "Filtre listesine kelime eklendi",
+        "remove_term": "Filtre listesinden kelime çıkarıldı"
+      },
+      "settingsTitle": "Sohbet ayarları",
+      "staffCount_one": "Moderasyon yetkili {count} kişi",
+      "staffCount": "Moderasyon yetkili {count} kişi",
+      "enabled": "Sohbeti giriş yapmış tüm öğrenciler için aç",
+      "enabledHint": "Ancak moderasyon ve süreç netleştiğinde aç.",
+      "cooldownHours": "Reddedilen istekten sonra bekleme süresi (saat)",
+      "requestsPerDay": "Kişi başına günde en fazla istek",
+      "messagesPerMinute": "Kişi başına dakikada en fazla mesaj",
+      "save": "Kaydet",
+      "saveConfirm": "Ayarlar kaydedilsin mi?",
+      "staffTitle": "Moderasyon",
+      "adminsHint": "Yöneticiler veritabanında (admins tablosu) tanımlanır – kılavuza bak. Moderatörleri burada atayabilirsin.",
+      "addModerator": "Moderatör yap",
+      "addModeratorConfirm": "{name} moderatör yapılsın mı?",
+      "removeModerator": "Kaldır",
+      "removeModeratorConfirm": "{name} moderasyondan kaldırılsın mı?",
+      "termsTitle": "Kelime filtresi",
+      "termsHint": "Kelimeler standartlaştırılarak kaydedilir (küçük harf, aksansız). “Kelime başı” birleşik kelimeleri de yakalar.",
+      "term": "Kelime",
+      "termLanguage": "Dil",
+      "languages": {
+        "de": "Almanca",
+        "tr": "Türkçe",
+        "en": "İngilizce",
+        "other": "Diğer"
+      },
+      "termPrefix": "Kelime başı",
+      "addTerm": "Ekle",
+      "showTerms_one": "Listeyi göster ({count} kelime)",
+      "showTerms": "Listeyi göster ({count} kelime)",
+      "prefix": "Kelime başı",
+      "removeTerm": "Kaldır"
+    },
+    "lastMessage": "Son mesaj: {time}",
+    "unread": "Okunmamış mesajlar"
+  },
+  "toast": {
+    "regionLabel": "Onaylar",
+    "dismiss": "Bildirimi kapat",
+    "roomJoined": "Odaya katıldın!",
+    "roomLeft": "Odadan ayrıldın.",
+    "messageSent": "Mesajın gönderildi.",
+    "registered": "Bu etkinliğe kaydoldun!",
+    "registrationCancelled": "Kaydın iptal edildi.",
+    "interestSaved": "İlgin kaydedildi.",
+    "interestRemoved": "İlgini geri çektin.",
+    "sharingSaved": "Profil paylaşım ayarların kaydedildi."
+  },
+  "help": {
+    "title": "Yardım & SSS",
+    "subtitle": "Sık sorulan sorulara kısa yanıtlar",
+    "intro": "DeutschConnect’in nasıl çalıştığını burada öğrenebilirsin. Yanıtı açmak için bir soruya dokun.",
+    "more": "Sorun burada yok mu? Proje hakkında daha fazlası “DeutschConnect Hakkında” bölümünde.",
+    "sections": {
+      "start": {
+        "title": "Başlarken",
+        "what": {
+          "q": "DeutschConnect nedir?",
+          "a": "Ernst-Reuter-Schule Ankara ile Anka Bilim arasındaki iş birliği için öğrenciler tarafından geliştirilen bir platform. Ortak etkinlikleri bulabilir, proje fikirlerini paylaşabilir ve birbirinizle konuşabilirsiniz."
+        },
+        "how": {
+          "q": "Platformu nasıl kullanırım?",
+          "a": "“Ana Sayfa” sıradaki etkinliklerini ve önerileri gösterir. “Keşfet” etkinlikleri ve fikirleri, “Topluluk” ise profilleri ve sohbeti içerir. Giriş yapmadan kurgusal profillerle bir demo görürsün."
+        },
+        "profile": {
+          "q": "Profilimi nasıl güncellerim?",
+          "a": "“Alanım” bölümünde ilgi alanlarını seçer, dili ayarlar ve “Profil paylaşımı” altında başkalarının neyi görebileceğine karar verirsin. Adını, okulunu ve sınıfını kayıt sırasında girersin; bunları uygulamada henüz değiştiremezsin."
+        }
+      },
+      "chat": {
+        "title": "Topluluk ve sohbet",
+        "join": {
+          "q": "Bir sohbet odasına nasıl katılırım?",
+          "a": "Sohbeti aç ve bir konu odasında “Katıl”a dokun. Sohbet yalnızca giriş yaptığında ve platform için açık olduğunda kullanılabilir."
+        },
+        "enter": {
+          "q": "Bir odaya nasıl girer ve mesaj gönderirim?",
+          "a": "Üye olarak “Odaya gir”e dokun. Mesajını alta yaz ve “Gönder”e dokun (veya Enter’a bas). Yeni mesajlar otomatik olarak görünür."
+        },
+        "leave": {
+          "q": "Bir sohbet odasından nasıl ayrılırım?",
+          "a": "Genel bakışta veya odanın içinde “Ayrıl”a dokun. Sonrasında tekrar katılana kadar mesajları okuyamazsın. Proje ve etkinlik grupları proje ekibine veya etkinlik kaydına bağlıdır, ayrıca terk edilemez."
+        },
+        "private": {
+          "q": "Özel sohbetler nasıl çalışır?",
+          "a": "Paylaşılan bir profilde mesaj isteği gönderebilirsin. Özel sohbet ancak karşı taraf kabul ettiğinde başlar. İsteklere yanıt vermek zorunda değilsin; kişileri engelleyebilir veya bildirebilirsin."
+        }
+      },
+      "events": {
+        "title": "Etkinlikler",
+        "discover": {
+          "q": "Etkinlikleri nasıl bulurum?",
+          "a": "“Keşfet” → “Etkinlikler” altında “Bana özel” (ilgi alanlarına uygun), “Tümü” ve “Benimkiler” sekmeleri var. Sıradaki etkinliklerin ana sayfada da görünür."
+        },
+        "register": {
+          "q": "Bir etkinliğe nasıl kaydolurum?",
+          "a": "Etkinliği aç ve “Katıl”a dokun. “İlgimi belirt” ile bağlayıcı olmadan işaretleyebilirsin. Etkinlik doluysa veya başladıysa kayıt artık mümkün değildir."
+        },
+        "cancel": {
+          "q": "Kaydımı nasıl iptal ederim?",
+          "a": "Etkinliği aç ve “Kaydı iptal et”e dokun."
+        },
+        "cancelled": {
+          "q": "Bir etkinlik iptal edilirse ne olur?",
+          "a": "Etkinlik “iptal edildi” olarak işaretlenir ve gerçekleşmez. Bir şey yapmana gerek yok."
+        }
+      },
+      "privacy": {
+        "title": "Hesap ve gizlilik",
+        "manage": {
+          "q": "Profilimi nasıl yönetirim?",
+          "a": "“Alanım” bölümünde ilgi alanlarını, etkinliklerini ve profil paylaşımını bulursun. Etkinlik sayılarını yalnızca sen görürsün."
+        },
+        "visible": {
+          "q": "Bilgilerimi kimler görebilir?",
+          "a": "Profilin varsayılan olarak gizlidir. Yalnızca paylaştığında, giriş yapmış diğer öğrenciler adını, okulunu ve seçtiğin bilgileri görebilir. Sınıfın, e-posta adresin ve tek tek etkinlik kayıtların asla herkese açık değildir."
+        },
+        "privacy": {
+          "q": "Hesap gizliliği nasıl çalışır?",
+          "a": "“Profil paylaşımı” altında neyin paylaşılacağına sen karar verirsin ve istediğin zaman tekrar gizliye alabilirsin. Sohbette bir odanın mesajlarını yalnızca üyeleri okuyabilir; özel sohbetleri yalnızca içindeki iki kişi görebilir."
+        }
+      }
+    }
+  },
+  "appearance": {
+    "title": "Görünüm",
+    "intro": "Düğmeler, bağlantılar ve vurgular için vurgu rengini seç. Arka plan ve durum renkleri değişmez.",
+    "accentLegend": "Vurgu rengi",
+    "default": "Varsayılan",
+    "preview": "Önizleme",
+    "previewPrimary": "Katıl",
+    "previewSecondary": "Daha fazla bilgi",
+    "previewChip": "Seçili",
+    "previewLink": "Bir bağlantı",
+    "current": "Şu an: {name}",
+    "localOnly": "Yalnızca bu tarayıcıda kaydedilir.",
+    "reset": "Okyanus Mavisine sıfırla",
+    "accents": {
+      "ocean": "Okyanus Mavisi",
+      "forest": "Orman Yeşili",
+      "lavender": "Lavanta",
+      "sunset": "Gün Batımı Turuncusu",
+      "rose": "Gül",
+      "midnight": "Gece Yarısı"
+    },
+    "paletteButton": "Vurgu rengini seç",
+    "moreSettings": "Diğer görünüm ayarları"
   }
 }

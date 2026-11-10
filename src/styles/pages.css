@@ -2,6 +2,45 @@
 
 /* ---------- Startseite ---------- */
 
+/* Alle Texte der Startseite schwarz (#000). Gilt NUR innerhalb von .home – gemeinsame Komponenten
+   (Event-Karten, Badges, Nachhilfe-Karten) sehen auf anderen Seiten unverändert aus.
+   Ausnahme: Schrift auf voll gefärbten Akzentflächen (Haupt-Button, Rollen-Kennzeichen „Angemeldet“ /
+   „Organisierst du“) bleibt weiß – Schwarz wäre dort je nach Akzentfarbe (z. B. Mitternacht) unlesbar. */
+.home {
+  --color-text: #000000;
+  --color-text-muted: #000000;
+  --color-text-subtle: #000000;
+  color: #000000;
+}
+
+.home .section__link,
+.home .date-block__month,
+.home .event-card__reason,
+.home .task-card__eyebrow,
+.home .task-card__eyebrow *,
+.home .badge:not(.badge--role),
+.home .badge--role-interested {
+  color: #000000;
+}
+
+/* Begrüßungskarte: heller Akzent-Ton statt voller Akzentfläche, damit die Schrift schwarz sein kann.
+   Akzentfarbe bleibt sichtbar (Rahmen + Symbol-Kachel) und folgt weiterhin der Farbwahl. */
+.home .dashboard-welcome {
+  background: var(--color-primary-tile);
+  border-color: var(--color-primary);
+  color: #000000;
+}
+
+.home .dashboard-welcome h1,
+.home .dashboard-welcome p {
+  color: #000000;
+}
+
+.home .dashboard-welcome__icon {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
 .home__greeting {
   display: flex;
   flex-direction: column;
@@ -115,11 +154,6 @@
   gap: 10px;
 }
 
-.info-card--dashed {
-  border-style: dashed;
-  background: transparent;
-}
-
 .info-card__title {
   display: flex;
   align-items: center;
@@ -129,21 +163,6 @@
 
 .info-card__title .icon {
   color: var(--color-primary);
-}
-
-.legend {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.legend li {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 10px;
-  align-items: start;
-  font-size: var(--text-sm);
-  color: var(--color-text-muted);
 }
 
 /* ---------- Mein Bereich ---------- */
@@ -187,7 +206,8 @@
 
 .stats {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-flow: column; /* 3 Kacheln (echtes Konto) oder 2 (Demo) – immer volle Breite */
+  grid-auto-columns: minmax(0, 1fr);
   gap: 8px;
 }
 
@@ -197,7 +217,7 @@
   align-items: center;
   gap: 2px;
   padding: 12px 6px;
-  border: 1px solid var(--color-border);
+  border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-lg);
   background: var(--color-surface);
   color: var(--color-text);
@@ -411,7 +431,7 @@
   width: 100%;
   min-height: 46px;
   padding: 10px 14px;
-  border: 1px solid var(--color-border);
+  border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-md);
   background: var(--color-surface-2);
   font-size: 1rem;
@@ -497,7 +517,7 @@
   gap: 4px;
   min-width: 0;
   padding: 14px;
-  border: 1px solid var(--color-border);
+  border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-lg);
   background: var(--color-surface);
   color: var(--color-text);
@@ -595,7 +615,7 @@
   min-width: 0;
   min-height: 64px;
   padding: 12px;
-  border: 1px solid var(--color-border);
+  border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-lg);
   background: var(--color-surface);
   color: var(--color-text);
@@ -641,7 +661,7 @@
 
 /* Aktivitäten */
 .admin-activity {
-  border: 1px solid var(--color-border);
+  border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-lg);
   background: var(--color-surface);
   overflow: hidden;
@@ -759,7 +779,7 @@
 
 .admin-event-group__empty {
   padding: 14px;
-  border: 1px dashed var(--color-border);
+  border: var(--border-width) dashed var(--color-border);
   border-radius: var(--radius-lg);
   color: var(--color-text-subtle);
   font-size: var(--text-sm);
@@ -767,4 +787,158 @@
 
 .admin-event__cancelled {
   padding: 8px 12px;
+}
+
+/* ---------- Einstellungen → Darstellung (Akzentfarbe) ---------- */
+.accent-picker {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.accent-picker__legend {
+  margin-bottom: 10px;
+  padding: 0;
+  font-weight: 650;
+}
+
+.accent-picker__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+@media (min-width: 560px) {
+  .accent-picker__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.accent-option {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+/* echter Radio-Button: unsichtbar, aber fokussier- und bedienbar */
+.accent-option__input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.accent-option__body {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 10px 12px;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-2);
+  transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
+}
+
+.accent-option:hover .accent-option__body {
+  border-color: var(--color-border-strong);
+}
+
+.accent-option__input:checked + .accent-option__body {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+  box-shadow: inset 0 0 0 1px var(--color-primary);
+}
+
+.accent-option__input:focus-visible + .accent-option__body {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.accent-option__swatch {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--swatch);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+.accent-option__text {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* nur zwischen Wörtern umbrechen (nicht mitten im Wort) */
+.accent-option__name {
+  font-weight: 600;
+  line-height: 1.25;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.accent-option__default {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.accent-preview {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border: var(--border-width) dashed var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
+}
+
+.accent-preview__label {
+  margin: 0 0 8px;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.accent-preview__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.accent-preview__row .btn {
+  pointer-events: none;
+}
+
+/* ausgewählte Markierung in der Akzentfarbe (wie aktive Navigation / ausgewählte Optionen) */
+.accent-preview__pill {
+  padding: 4px 12px;
+  border: var(--border-width) solid var(--color-primary-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-primary-soft);
+  color: var(--color-primary-text);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.accent-picker__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  margin-top: 12px;
+}
+
+.accent-picker__footer p {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accent-option__body {
+    transition: none;
+  }
 }

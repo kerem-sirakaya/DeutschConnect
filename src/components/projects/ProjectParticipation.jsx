@@ -5,6 +5,7 @@ import { getSchool } from '../../data/schools.js';
 import { useProjectParticipation } from '../../state/useProjects.js';
 import { isProjectOpen, primaryAction, splitTeam } from '../../lib/projects.js';
 import Icon from '../Icon.jsx';
+import ProjectChatLink from '../chat/ProjectChatLink.jsx';
 
 const TONES = { requested: 'warning', member: 'success', declined: 'danger', left: 'muted' };
 
@@ -123,6 +124,8 @@ export default function ProjectParticipation({ idea }) {
       {(overview.isOwner || overview.myStatus === 'member') && (
         <div className="stack">
           <h3>{t('projects.teamTitle')}</h3>
+          {/* Projektgruppe im Chat (Migration 014) – nur Autor:in und Mitglieder */}
+          <ProjectChatLink ideaId={idea.id} ideaStatus={idea.status} isOwner={overview.isOwner} />
           {members.length === 0 ? (
             <p className="muted small">{t('projects.noMembers')}</p>
           ) : (

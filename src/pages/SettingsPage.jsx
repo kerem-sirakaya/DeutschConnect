@@ -34,6 +34,8 @@ export default function SettingsPage() {
         </div>
       </section>
 
+      {/* Darstellung (Akzentfarbe) hier entfernt – Farbwahl nur noch über das Paletten-Symbol in der Kopfzeile */}
+
       <section className="card settings-block" aria-labelledby="settings-account">
         <h2 id="settings-account">{t('auth.accountTitle')}</h2>
         <AccountCard />

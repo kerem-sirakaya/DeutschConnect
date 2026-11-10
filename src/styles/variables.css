@@ -4,48 +4,61 @@
  * Quelle Codex: src/styles/global.css (:root). Änderungen am Look am besten nur hier vornehmen.
  */
 :root {
-  color-scheme: dark;
+  /* Helles Design: warmer Creme-Hintergrund, schwarze Schrift (alle Werte mit WCAG-Kontrast geprüft, siehe tests/appearance.test.js) */
+  color-scheme: light;
 
   /* Flächen */
-  --color-bg: #091522;
-  --color-bg-elevated: #0c1827;
-  --color-surface: #172231;
-  --color-surface-2: #222e3e;
-  --color-surface-3: #2c3a4d;
-  --color-border: #354151;
-  --color-border-strong: #4b5b70;
+  --color-bg: #f8f6f0; /* warmes Creme, sehr hell */
+  --color-bg-elevated: #fffdf9; /* Eingabefelder (fast weiß, hebt sich ab) */
+  --color-surface: #fdfcf8; /* Karten (heller als der Hintergrund + Rahmen) */
+  --color-surface-2: #f2efe7; /* Flächen in Karten, Nachrichten, Optionen */
+  --color-surface-3: #e8e4da; /* Hover, Chips */
+  --color-border: #cfcabe; /* warmes Grau */
+  --color-border-strong: #a39e92;
 
   /* Text */
-  --color-text: #f1f4f8;
-  --color-text-muted: #a6b2c2;
-  --color-text-subtle: #8a98ad;
+  --color-text: #111111;
+  --color-text-muted: #4a5462; /* ≥ 7:1 auf Weiß */
+  --color-text-subtle: #5b6573; /* ≥ 5.5:1 auf Weiß */
 
-  /* Akzent (Blau aus dem Prototyp) */
-  --color-primary: #4b91ea;
-  --color-primary-strong: #2f6fd6; /* Buttons mit weißem Text (Kontrast ≥ 4.5:1) */
-  --color-primary-hover: #3b7de0;
-  --color-primary-text: #85b9ff; /* Links/aktive Icons auf dunklem Grund */
-  --color-primary-soft: rgba(74, 143, 231, 0.16);
+  /* Akzentfarbe (--color-primary*, --color-focus …): siehe themes.css – wählbar unter Einstellungen → Darstellung */
 
-  /* Status */
-  --color-success: #79d4a0;
-  --color-success-soft: rgba(121, 212, 160, 0.14);
-  --color-warning: #f2c46d;
-  --color-warning-soft: rgba(242, 196, 109, 0.14);
-  --color-danger: #f59a92;
-  --color-danger-soft: rgba(245, 154, 146, 0.14);
-  --color-danger-strong: #c2413a;
+  /* Status – gleiche Bedeutung (Grün/Gelb/Rot), dunklere Töne für weißen Grund (Text ≥ 4.5:1) */
+  --color-success: #1d7a46;
+  --color-success-soft: rgba(29, 122, 70, 0.1);
+  --color-success-border: rgba(29, 122, 70, 0.35);
+  --color-warning: #8a5a00;
+  --color-warning-soft: rgba(214, 152, 20, 0.14);
+  --color-warning-border: rgba(176, 120, 0, 0.4);
+  --color-danger: #b42318;
+  --color-danger-soft: rgba(180, 35, 24, 0.08);
+  --color-danger-border: rgba(180, 35, 24, 0.35);
+  --color-danger-strong: #b42318;
 
-  --color-focus: #a5ccff;
+  /* Info-Kennzeichen (neutral-blau, NICHT Akzentfarbe) */
+  --color-info-bg: #eef3f9;
+  --color-info-border: #c3d1e2;
+  --color-info-text: #1f3a5f;
+
+
+  /* Markenfarben – fest, unabhängig von der gewählten Akzentfarbe (Schwarz-Rot-Gold) */
+  --brand-black: #000000;
+  --brand-red: #dd0000;
+  --brand-gold: #ffce00;
+  --brand-blue: #2f6fd6; /* Logo-Kachel (weißes Symbol ≥ 4.5:1) */
+  --brand-blue-text: #2d6bd0; /* „Connect“ im Schriftzug (≥ 4.5:1 auf Creme) */
 
   /* Form */
+  /* Rahmenstärke: Umrisse von Karten, Feldern, Buttons, Navigation. Trennlinien in Karten bleiben dünn. */
+  --border-width: 2px;
+
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 19px;
   --radius-xl: 22px;
   --radius-pill: 999px;
 
-  --shadow-float: 0 10px 30px rgba(0, 0, 0, 0.4);
+  --shadow-float: 0 10px 30px rgba(17, 24, 39, 0.14);
 
   /* Typografie: Systemschriften (keine externen Fonts → kein Datentransfer zu Dritten) */
   --font-sans: 'Segoe UI Variable Display', 'Segoe UI', system-ui, -apple-system, 'Roboto', 'Helvetica Neue', Arial, sans-serif;

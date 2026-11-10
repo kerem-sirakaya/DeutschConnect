@@ -7,6 +7,8 @@ const ADMIN_NAV = [
   { to: '/admin', labelKey: 'admin.nav.overview', end: true },
   { to: '/admin/events', labelKey: 'admin.nav.events' },
   { to: '/admin/ideas', labelKey: 'admin.nav.ideas' },
+  // Chat-Moderation liegt unter /chat/moderation (auch für Moderator:innen ohne Admin-Rolle)
+  { to: '/chat/moderation', labelKey: 'admin.nav.chat' },
 ];
 
 /**

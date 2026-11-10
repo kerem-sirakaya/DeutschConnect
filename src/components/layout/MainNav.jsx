@@ -4,7 +4,7 @@ import Icon from '../Icon.jsx';
 import { NAV_ITEMS, sectionForPath } from './navigation.js';
 
 /**
- * Hauptnavigation mit den fünf Bereichen.
+ * Hauptnavigation mit den sechs Bereichen (siehe navigation.js).
  * variant="bottom": schwebende Leiste unten (Smartphone/Tablet)
  * variant="top":    in der Kopfleiste (Desktop ab 1050 px)
  * Der aktive Bereich wird aus der URL abgeleitet (sectionForPath), nicht nur aus dem exakten Pfad.

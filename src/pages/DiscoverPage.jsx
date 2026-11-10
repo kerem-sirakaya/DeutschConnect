@@ -2,15 +2,13 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import { useI18n } from '../i18n/LanguageContext.jsx';
 import { useAppState } from '../state/AppStateContext.jsx';
-import { schools } from '../data/schools.js';
 import { isUpcoming } from '../lib/selectors.js';
 import PageHeader from '../components/PageHeader.jsx';
 import SectionNav from '../components/SectionNav.jsx';
 import Icon from '../components/Icon.jsx';
 
 /**
- * Bereich „Entdecken“ (Struktur aus der Codex-Version): Einstieg zu Events, Ideen/Projekten
- * und dem Schulnetzwerk. Die Zahlen kommen aus denselben Daten wie die Unterseiten
+ * Bereich „Entdecken“ (Struktur aus der Codex-Version): Einstieg zu Events und Ideen/Projekten. Die Zahlen kommen aus denselben Daten wie die Unterseiten
  * (angemeldet: Supabase, abgemeldet: Demo).
  */
 export default function DiscoverPage() {
@@ -22,7 +20,6 @@ export default function DiscoverPage() {
   const cards = [
     { to: '/events?tab=all', icon: 'calendar', title: t('nav.events'), text: t('discover.eventsText'), count: upcoming, countLabel: t('discover.upcomingCount', { count: upcoming }) },
     { to: '/ideas?tab=all', icon: 'lightbulb', title: t('nav.ideas'), text: t('discover.ideasText'), count: ideas.length, countLabel: t('discover.ideasCount', { count: ideas.length }) },
-    { to: '/network', icon: 'network', title: t('nav.network'), text: t('discover.networkText'), count: schools.length, countLabel: t('discover.schoolsCount', { count: schools.length }) },
   ];
 
   return (

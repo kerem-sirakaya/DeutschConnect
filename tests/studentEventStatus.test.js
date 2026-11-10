@@ -226,11 +226,10 @@ test('Zahlen je Status kommen aus den sichtbaren Events und denselben übrigen F
 // 14: Startseite und Schulseite nutzen dieselbe Karte mit Status
 // ---------------------------------------------------------------------------
 
-test('14) Startseite und Schulseite zeigen Events über EventCard (Status immer sichtbar)', () => {
-  for (const page of ['HomePage.jsx', 'SchoolDetailPage.jsx', 'EventsPage.jsx']) {
+test('14) Startseite und Eventliste zeigen Events über EventCard (Status immer sichtbar)', () => {
+  for (const page of ['HomePage.jsx', 'EventsPage.jsx']) {
     assert.match(read('src', 'pages', page), /<EventCard\b/, page);
   }
-  assert.match(read('src', 'pages', 'SchoolDetailPage.jsx'), /isListed\(e, now\)/);
 });
 
 // ---------------------------------------------------------------------------
@@ -310,5 +309,7 @@ test('18) bestehende Anmelde-Logik unverändert: registered/interested, keine an
     { event_id: 'c', status: 'unbekannt' },
   ]), { a: 'registered', b: 'interested' });
   const detail = read('src', 'pages', 'EventDetailPage.jsx');
-  assert.match(detail, /actions\.setRegistration\(event\.id, role === 'registered' \? null : 'registered'\)/);
+  // seit den Erfolgsmeldungen: Knopf -> saveRole(...) -> actions.setRegistration(event.id, next)
+  assert.match(detail, /saveRole\(role === 'registered' \? null : 'registered'\)/);
+  assert.match(detail, /await actions\.setRegistration\(event\.id, next\)/);
 });

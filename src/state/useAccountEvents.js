@@ -42,7 +42,7 @@ export function useAccountEvents(userId) {
   /** next: 'registered' | 'interested' | null (= entfernen) */
   const setRegistration = useCallback(
     async (eventId, next) => {
-      if (!userId || pending[eventId]) return;
+      if (!userId || pending[eventId]) return false;
       const current = result.userId === userId ? result.registrations[eventId] ?? null : null;
       setSaveError(null);
       setPending((p) => ({ ...p, [eventId]: true }));
@@ -60,6 +60,8 @@ export function useAccountEvents(userId) {
         delete copy[eventId];
         return copy;
       });
+      // true = von der Datenbank bestätigt gespeichert (für Erfolgsmeldungen)
+      return !error;
     },
     [userId, pending, result],
   );

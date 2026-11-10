@@ -36,6 +36,7 @@ export default function AppShell() {
       </main>
       <footer className="site-footer">
         <span>{t('common.footerNote')}</span>
+        <Link to="/help">{t('nav.help')}</Link>
         <Link to="/about">{t('nav.about')}</Link>
       </footer>
       <BottomNav />

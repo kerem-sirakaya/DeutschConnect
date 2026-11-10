@@ -5,8 +5,8 @@ import { useAppState } from '../state/AppStateContext.jsx';
 import { useMySharing } from '../state/useProfiles.js';
 import { SHARING_FIELDS } from '../lib/profiles.js';
 import PageHeader from '../components/PageHeader.jsx';
-import Icon from '../components/Icon.jsx';
 import ProfileStatusNotice from '../components/profiles/ProfileStatusNotice.jsx';
+import { useToast } from '../components/toast/ToastContext.jsx';
 
 /**
  * Profil-Freigabe (/me/sharing). Privat ist Standard; jede Angabe wird einzeln freigegeben.
@@ -17,19 +17,13 @@ export default function ProfileSharingPage() {
   const { t } = useI18n();
   const { user } = useAppState();
   const sharing = useMySharing();
-  const [saved, setSaved] = useState(false);
+  const toast = useToast();
   const ready = sharing.status === 'ready' || sharing.status === 'demo';
 
   return (
     <div className="page page--narrow">
       <PageHeader title={t('profiles.sharingTitle')} subtitle={t('profiles.sharingSubtitle')} backTo="/me" />
       <ProfileStatusNotice status={sharing.status} errorKey={sharing.errorKey} reload={sharing.reload} />
-      {saved && (
-        <p className="notice notice--success" role="status">
-          <Icon name="check" size={16} />
-          {t('profiles.saved')}
-        </p>
-      )}
       {ready && (
         <SharingForm
           // neu aufbauen, sobald die Datenbank einen neuen Stand liefert
@@ -37,9 +31,9 @@ export default function ProfileSharingPage() {
           initial={sharing.data}
           readOnly={sharing.status === 'demo'}
           onSave={async (values) => {
-            setSaved(false);
             const result = await sharing.save(values);
-            if (result.ok) setSaved(true);
+            // Bestätigung erst nach erfolgreichem Speichern in der Datenbank
+            if (result.ok) toast.success(t('toast.sharingSaved'));
             return result;
           }}
         />
