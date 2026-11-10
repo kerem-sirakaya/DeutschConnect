@@ -38,6 +38,11 @@ Nie nötig und nie anfordern: Datenbank-Passwort, `service_role`-/secret-Key.
 > **Stand Staging (laut Ege, 2026-11-09): 001–007, 010, 011, 012, 013 erfolgreich ausgeführt.**
 > 008 und 009 bewusst ausgelassen. `admin_get_overview_stats()` existiert, Admin-Statistik funktioniert.
 > **Keine dieser Dateien erneut ausführen.** Die Tabelle unten bleibt nur als Nachweis der Reihenfolge.
+>
+> **Nachtrag (laut Ege, 2026-11-10 – von Claude NICHT geprüft):** zusätzlich `014_chat.sql` und `020_chat_read_state.sql`
+> ausgeführt. Welche 014-Fassung dort läuft, ist unbestätigt → **014 und 020 nicht erneut ausführen**, sondern zuerst
+> prüfen (z. B. ob `chat_create_project_room`, `chat_load_messages` und `chat_mark_read` existieren).
+> `staging_verify.sql` prüft nur bis 013. 017, 018, 019 sind **nicht** ausgeführt.
 
 Jede Datei **komplett** öffnen, einfügen, **Run**. Oben im Dashboard vorher prüfen, dass das Staging-Projekt
 ausgewählt ist. Bricht eine Datei mit `ABBRUCH: …` ab, wurde nichts geändert → Meldung an Claude, **nicht** weitermachen.
@@ -60,9 +65,33 @@ Lauf ab; andere Dateien sind wiederholbar – das wird im Einzelfall geprüft.
 | 8 | `011_tutoring.sql` | |
 | 9 | `012_profiles_stats.sql` | |
 | 10 | `013_project_members.sql` | braucht 012 |
+| 11 | `017_game_leaderboards.sql` | **NEU, noch nicht ausgeführt** – Bestenlisten Papierflug/Brückenläufer; braucht 001 + 012, **nicht** 014–016 |
+| 12 | `014_chat.sql` | **laut Ege ausgeführt (nicht geprüft)** – Chatroom inkl. Projekt-/Eventgruppen; braucht 001, 005, 011, 012, 013. Danach ist der Chat **aus**. Details: [CHATROOM.md](CHATROOM.md) |
+| 13 | `020_chat_read_state.sql` | **laut Ege ausgeführt (nicht geprüft)** – Lesestand/„ungelesen“; braucht 014. Rückbau: `supabase/rollback/020_chat_read_state_rollback.sql` |
+| 14 | `018_event_auto_delete.sql` | **nicht ausgeführt** – Events automatisch löschen; braucht **008** (auf Staging bewusst ausgelassen → vorher entscheiden) und, falls Chat genutzt wird, 014. Details: [EVENT_EXPIRATION.md](EVENT_EXPIRATION.md) |
+| 15 | `019_event_auto_delete_cron.sql` | **nicht ausgeführt** – pg_cron jede Minute; nach 018; entfernt den Job aus 009 (009 ist dann nicht mehr nötig) |
 
 Danach **`supabase/tests/staging_verify.sql`** ausführen (nur lesen) → alle Zeilen `ok = true`
 (außer „mindestens 1 Admin“, das kommt in Schritt 4).
+
+**Nach 017:** `supabase/tests/017_leaderboard_test.sql` mit drei Testkonten (A, B, C) ausführen. Der Test endet
+absichtlich mit `ERROR: TESTERGEBNIS …` und rollt alles zurück; alle Zeilen L1–L22 (inkl. L7b, L7c, L13b: abgelehnte Runde ist verbraucht) müssen `OK` sein.
+
+**Nach 014 (Chat):** `supabase/tests/014_chat_test.sql` mit **fünf** Testkonten ausführen: A, B, C (Schüler:innen),
+MOD (normales Konto, wird im Test kurz Moderator:in) und ADM (Admin aus Schritt 4). Endet absichtlich mit
+`ERROR: TESTERGEBNIS …`, rollt alles zurück; **alle** Zeilen müssen `OK` sein (lokal: 141 OK, 0 FEHL).
+Notabschaltung jederzeit: `update public.chat_config set enabled = false where id = 1;`
+Rückbau (löscht alle Chat-Daten): `supabase/rollback/014_chat_rollback.sql`.
+
+Weitere SQL-Tests (alle rollen zurück bzw. arbeiten nur mit Test-Events; Konten jeweils im Dateikopf eintragen):
+
+| Test | Wann | Konten | lokal (Wegwerf-PostgreSQL) |
+|---|---|---|---|
+| `014_chat_room_access_test.sql` | nach 014 | A, B, C (normal); es muss ein **anderes** Admin-Konto geben | 23 OK |
+| `014_group_approval_test.sql` | nach 014 – Gruppen erst nach Admin-Freigabe | A (normal), MOD (wird kurz Moderator:in), ADM (Admin) | 16 OK |
+| `020_chat_read_state_test.sql` | nach 014 + 020 – **mit `psql`**, nicht im SQL Editor (siehe Dateikopf) | A, B, C (normal) + anderes Admin-Konto | lokal gelaufen, Ergebnis nicht in der Doku festgehalten |
+| `008_event_expiry_rules_test.sql` | nur wenn 008 ausgeführt wird | A (Admin), B (normal) | 17 OK |
+| `018_event_auto_delete_test.sql` | nach 018 | A (Admin), B, C (normal) | 29 OK |
 
 ## 4. Testkonten (Ege, nur fiktive Inhalte)
 
@@ -108,6 +137,30 @@ Jeder Test: Aktion → **beide Konten neu laden** → Zustand muss bleiben.
 | J3 | Außenstehend | C: Idee öffnen | nur „1 Mitglied“, **keine** Namen |
 | J4 | Austreten | B: „Projekt verlassen“ | B: „Ausgetreten“; Anzahl 0 |
 | J5 | Profil-Mitgliedschaft | B: Profil öffentlich + Projekte · C öffnet B | Mitgliedschaft sichtbar (nach J2, vor J4) |
+| B1 | Bestenlisten leer | A: `/games` (unter den Spiel-Kacheln) | zwei Listen „Papierflug – Top 10“ / „Brückenläufer – Top 10“ mit „Noch keine Einträge“; Haken „In Bestenlisten anzeigen“ aus |
+| B2 | Bestwert | A: `/games/bridge-runner` eine Runde | unter dem Spiel „Neuer Bestwert gespeichert: X“ (keine Liste auf der Spielseite); auf `/games` „Dein Bestwert: X“, A noch **nicht** in der Liste |
+| B3 | Zustimmung | A: `/games` Haken an | A erscheint mit Vorname + „Du“; B sieht A nach Neuladen (nur Vorname + Punkte) |
+| B4 | Niedriger | A: schlechtere Runde | keine Meldung, Bestwert bleibt |
+| B5 | Andere Person | B: Runde + Haken an | beide in der Liste; bei gleichen Punkten gleicher Platz |
+| B6 | Spiele getrennt | A: `/games` Papierflug-Liste | Brückenläufer-Werte erscheinen dort nicht |
+| B7 | Abgemeldet | abmelden, `/games` und ein Spiel öffnen | `/games`: ein Hinweis „Melde dich an …“ statt Listen; Spiel: kurzer Hinweis, Spielen geht trotzdem |
+| B8 | Zustimmung aus | A: `/games` Haken aus | A verschwindet nach Neuladen bei B |
+| C0 | Chat aus | A: `/chat` | „Der Chat ist noch nicht freigeschaltet.“ |
+| C1 | Einschalten | Admin: `/chat/moderation` → Einstellungen → einschalten (Begründung) | A sieht danach die 4 Themenräume |
+| C2 | Raum | A: Raum beitreten, „Hallo zusammen“ senden · B: beitreten | B sieht die Nachricht **ohne Neuladen** (Realtime) mit Name + Zeit |
+| C3 | Wortfilter | A: „Du bist ein Arschloch!“ | gespeichert/angezeigt „Du bist ein ***!“; A sieht Hinweis |
+| C4 | Kontaktdaten | A: Nachricht mit E-Mail-Adresse | abgelehnt mit verständlicher Meldung |
+| C5 | Anfrage | B: Profil öffentlich · A: Profil von B → „Nachricht senden“ | B: Reiter „Nachrichtenanfragen 1“; A kann keine zweite Anfrage senden |
+| C6 | Annehmen | B: annehmen, antworten | beide sehen das Gespräch; C findet es nicht (Suche, Link) |
+| C7 | Ablehnen + Wartezeit | neue Anfrage C → B (C öffentlich) · B lehnt ab · C fragt erneut | „… ab <Datum> möglich“ |
+| C8 | Reaktion + Suche | B: 👍 auf Nachricht von A; Suche „hallo“ | A sieht 👍 1 ohne Neuladen; Treffer nur aus erlaubten Räumen/Chats |
+| C9 | Melden + Moderation | B meldet Nachricht · Admin: Meldungen → Zusammenhang, löschen, A 1 h sperren | Audit-Protokoll zeigt alle Schritte; A kann lesen, aber nicht schreiben |
+| C10 | Blockieren | B blockiert A | Gespräch für beide weg; A kann B keine Anfrage senden |
+| C11 | Handy | alles oben einmal auf einem echten Handy | Bedienung, Lesbarkeit, Tastatur deckt Eingabe nicht dauerhaft ab |
+| G1 | Gruppe vor Freigabe | A: neue Idee einreichen (wartet auf Admin) → Ideenseite → „Projektgruppe im Chat anlegen“ | Hinweis „… erst erstellt werden, nachdem ein Admin …“ erst **nach** dem Klick; keine Gruppe entsteht |
+| G2 | Gruppe nach Freigabe | Admin gibt die Idee frei · A: erneut anlegen | Gruppe entsteht, A landet im Gruppenraum; zweiter Versuch → dieselbe Gruppe |
+| G3 | Community-Gruppen | A und Projektmitglied B: `/community/groups` | Gruppe sichtbar (Filter „Projektgruppen“); C sieht sie **nicht** |
+| G4 | Eventgruppe | Moderation: `/chat/moderation` → Räume → Event wählen → „Anlegen“ | nur veröffentlichte Events wählbar; Angemeldete sehen die Gruppe unter `/community/groups` |
 
 Ergebnisse → `docs/INTEGRATION_PROGRESS.md` (Spalte „DB-getestet“ bzw. „Browser-getestet“).
 
