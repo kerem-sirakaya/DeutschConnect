@@ -53,7 +53,7 @@ Legende: ✔ erledigt und lokal geprüft · ◐ Code fertig, Live-Abnahme offen 
 | 5 | Profile + Statistiken | ◐ 012 auf Staging ausgeführt; Funktionstests offen; live nicht ausgeführt |
 | 6 | Projekte (Anträge/Mitglieder), Events-Optik, Gruppen | ◐ Mitwirkung: 013 auf Staging ausgeführt, Tests offen; Abschluss → Stufe 7; Projekt-/Eventgruppen = Chat-Räume aus 014, sichtbar unter `/community/groups`, Anlegen erst nach Admin-Freigabe (Sitzungen 27, 29) – nur lokal getestet |
 | 7 | Admin für neue Module, 24-h-Ausblendung abgelehnter Ideen | ○ Plan steht (unten, Sitzung 5) |
-| 8 | Spiele + Bestenlisten | ◐ 8a: alle vier Spiele im Browser (eigener Bereich /games); 8b: Bestenlisten Papierflug + Brückenläufer gebaut, Migration 017 noch NICHT auf Staging ausgeführt |
+| 8 | Spiele + Bestenlisten | ◐ 8a: alle vier Spiele im Browser (seit 2026-11-11 unter Community: /community/games, alte /games-Links leiten um); 8b: Bestenlisten Papierflug + Brückenläufer gebaut, Migration 017 noch NICHT auf Staging ausgeführt |
 | 9 | Inkonsistenzen beheben | ○ (bekannte Punkte: Sitzung 30, „Offen“) |
 | 10 | Mehrbenutzer-Gesamttest | ○ |
 

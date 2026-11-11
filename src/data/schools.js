@@ -37,6 +37,28 @@ export const schools = [
   },
 ];
 
+/**
+ * Schulen, die auf der Website NICHT angezeigt werden (Entscheidung Ege, 2026-11-10: Anka Bilim ausblenden).
+ * Nur Anzeige: Einträge oben, Datenbank-Zeilen und Verknüpfungen bleiben unverändert erhalten.
+ * Wieder einblenden: ID aus dieser Liste entfernen.
+ */
+export const HIDDEN_SCHOOL_IDS = ['anka'];
+
+export const isHiddenSchool = (id) => HIDDEN_SCHOOL_IDS.includes(id);
+
+/** Schulen für Auswahllisten, Filter und Übersichten (ohne ausgeblendete). */
+export const visibleSchools = schools.filter((school) => !isHiddenSchool(school.id));
+
+/** Nur die sichtbaren Schul-IDs einer Liste (Reihenfolge bleibt). */
+export const visibleSchoolIds = (ids) => (Array.isArray(ids) ? ids.filter((id) => !isHiddenSchool(id)) : []);
+
+/** Schule für die ANZEIGE – ausgeblendete Schulen liefern undefined (wie eine unbekannte Schule). */
 export function getSchool(id) {
+  if (isHiddenSchool(id)) return undefined;
+  return schools.find((school) => school.id === id);
+}
+
+/** Interner Zugriff inkl. ausgeblendeter Schulen (z. B. Namen, um Inhalte zu erkennen) – nicht anzeigen. */
+export function getSchoolRecord(id) {
   return schools.find((school) => school.id === id);
 }

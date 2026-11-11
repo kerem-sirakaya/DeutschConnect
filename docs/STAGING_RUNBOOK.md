@@ -98,13 +98,30 @@ Weitere SQL-Tests (alle rollen zurück bzw. arbeiten nur mit Test-Events; Konten
 | Konto | Schule | Zweck |
 |---|---|---|
 | A | ERS | Nachhilfe-Angebot, Idee/Projekt-Autor:in, Profil teilen |
-| B | Anka Bilim | anfragen, Profil ansehen |
-| C | ERS oder Anka | Außenstehende:r (sieht keine Namen) |
+| B | ERS (neu registriert) **oder** bestehendes Staging-Testkonto mit Schule `anka` (siehe unten) | anfragen, Profil ansehen |
+| C | ERS | Außenstehende:r (sieht keine Namen) |
 | Admin | beliebig | gibt Test-Idee frei |
 
 **Konten nur über die App registrieren** (`npm run dev:staging` → „Registrieren“), **nicht** im Dashboard über
 „Add user“: Der Anmelde-Trigger aus 001 braucht Vorname und Schule aus dem Registrierungsformular. Ohne diese Angaben
 scheitert das Anlegen mit „Database error creating new user“ (Schule ist Pflichtfeld).
+
+**Anka Bilim ist auf der Website ausgeblendet** (Stand 2026-11-10, `src/data/schools.js` → `HIDDEN_SCHOOL_IDS`):
+Die Registrierung bietet die Schule nicht mehr an; die Datenbank (Tabelle `schools`, Zeile `anka`) ist unverändert.
+- Für T1–T6, P1–P4, J1–J5, C0–C11 genügt ein **ERS**-Konto B – das prüft dieselben Rechte.
+- Die Anka-Bilim-Ansicht (H1–H6 unten) nur mit einem **bereits bestehenden** Staging-Testkonto prüfen, das schon
+  vor der Ausblendung mit Schule Anka Bilim registriert wurde (Kontrolle im SQL Editor **Staging**, nur lesen:
+  `select p.id, p.first_name from public.profiles p where p.school_id = 'anka';`).
+  Gibt es keines: H1–H6 überspringen. **Keine** Konten umschreiben, kein Dashboard-„Add user“, nichts auf Live.
+
+| # | Anka-Bilim-Ausblendung | Schritte | Erwartung |
+|---|---|---|---|
+| H1 | normale Schüler:innen | ERS-Konto: Start, Entdecken, Events, Ideen, Nachhilfe, Community, Profile, Hilfe, Über uns | nirgends „Anka Bilim“; ERS-Events mit Anka als Partner ohne Anka-Kennzeichen |
+| H2 | Registrierung | abgemeldet `/register` | Schul-Auswahl ohne Anka Bilim |
+| H3 | eigene Inhalte | Anka-Testkonto: eigene Idee und eigenen Nachhilfe-Eintrag öffnen, bearbeiten, schließen/öffnen | funktioniert; kein Schulname, keine ID `anka` sichtbar |
+| H4 | Anfragen | ERS-Konto fragt beim Eintrag des Anka-Kontos an (falls er vor der Ausblendung sichtbar war) · Anka-Konto antwortet | Antwort möglich; der Eintrag erscheint beim ERS-Konto nicht in „Angebote/Gesuche“ |
+| H5 | Anmeldungen | Anka-Konto (oder ERS-Konto) mit Anmeldung zu einem Anka-Event: „Meine Events“ | Event sichtbar, Detailseite erreichbar; NICHT unter „Alle“ |
+| H6 | Admin/Moderation | Admin: `/admin/events` und `/chat/moderation` → Räume | Anka-Events in der Verwaltung; Eventgruppe für ein veröffentlichtes Anka-Event anlegbar; nicht angemeldete Schüler:innen sehen weder Event noch Gruppe (Angemeldete sehen beides – eigene Anmeldung) |
 
 **E-Mail-Bestätigung auf Staging** – eine der beiden Varianten wählen:
 - **A (einfach, nur Staging):** Authentication → Sign In / Providers → Email → „Confirm email“ **aus**.

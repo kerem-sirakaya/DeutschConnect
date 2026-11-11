@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router';
 import { useI18n } from '../i18n/LanguageContext.jsx';
 import { useTutoring } from '../state/TutoringContext.jsx';
-import { getSchool } from '../data/schools.js';
+import { getSchool, isHiddenSchool } from '../data/schools.js';
 import { TUTOR_LIMITS, entryText, sortRequests, validateRequestMessage } from '../lib/tutoring.js';
 import PageHeader from '../components/PageHeader.jsx';
 import InfoList from '../components/InfoList.jsx';
@@ -81,7 +81,8 @@ export default function TutoringDetailPage() {
           <p className="pre-line">{entryText(entry, 'description', language)}</p>
           <InfoList
             items={[
-              { icon: 'school', label: t('tutoring.school'), value: school?.name ?? entry.schoolId },
+              // ausgeblendete Schule (eigener Eintrag): keine Schulzeile – weder Name noch ID
+              ...(isHiddenSchool(entry.schoolId) ? [] : [{ icon: 'school', label: t('tutoring.school'), value: school?.name ?? entry.schoolId }]),
               { icon: 'globe', label: t('tutoring.languagesLabel'), value: entry.languages.map((c) => t(`tutoring.languages.${c}`)).join(' · ') },
               { icon: 'mapPin', label: t('tutoring.formatLabel'), value: t(`tutoring.formats.${entry.format}`) },
               { icon: 'clock', label: t('tutoring.fields.availability'), value: entryText(entry, 'availability', language) },

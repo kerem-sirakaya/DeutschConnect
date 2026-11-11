@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { useParams } from 'react-router';
+import { Link, useParams } from 'react-router';
 import { useI18n } from '../i18n/LanguageContext.jsx';
 import { localize } from '../i18n/localize.js';
 import { useAppState } from '../state/AppStateContext.jsx';
-import { getSchool } from '../data/schools.js';
+import { getSchool, isHiddenSchool, visibleSchoolIds } from '../data/schools.js';
 import { getEventRole, isPast } from '../lib/selectors.js';
 import { daysUntil, addMinutes } from '../lib/dates.js';
 import { formatDateLong, formatRelativeDays, formatTime } from '../lib/format.js';
@@ -12,6 +12,7 @@ import PageHeader from '../components/PageHeader.jsx';
 import InfoList from '../components/InfoList.jsx';
 import Icon from '../components/Icon.jsx';
 import { DemoBadge, RoleBadge, StatusBadge, TopicTags } from '../components/Badges.jsx';
+import EmptyState from '../components/EmptyState.jsx';
 import NotFoundPage from './NotFoundPage.jsx';
 import { useToast } from '../components/toast/ToastContext.jsx';
 
@@ -21,9 +22,31 @@ export default function EventDetailPage() {
   const { user, actions, getEvent, isRealAccount, registrationSync } = useAppState();
   const [now] = useState(() => new Date());
   const toast = useToast();
+  // Event, das nur wegen der eigenen Anmeldung sichtbar war (ownOnly, ausgeblendete Schule) und gerade
+  // verlassen wird: verschwindet es danach aus der Liste, kommt eine verständliche Rückmeldung statt „nicht gefunden“.
+  const [leftOwnOnlyId, setLeftOwnOnlyId] = useState(null);
   const event = getEvent(eventId);
 
-  if (!event) return <NotFoundPage titleKey="eventDetail.notFound" backTo="/events" />;
+  if (!event) {
+    if (leftOwnOnlyId === eventId) {
+      return (
+        <div className="page page--narrow">
+          <PageHeader title={t('nav.events')} backTo="/events?tab=mine" />
+          <EmptyState
+            icon="check"
+            title={t('eventDetail.leftOwnOnly.title')}
+            text={t('eventDetail.leftOwnOnly.text')}
+            action={
+              <Link to="/events?tab=mine" className="btn btn--secondary btn--sm">
+                {t('eventDetail.leftOwnOnly.toMine')}
+              </Link>
+            }
+          />
+        </div>
+      );
+    }
+    return <NotFoundPage titleKey="eventDetail.notFound" backTo="/events" />;
+  }
 
   const role = getEventRole(user, event);
   const past = isPast(event, now);
@@ -42,8 +65,14 @@ export default function EventDetailPage() {
   // Speichern; die Erfolgsmeldung kommt erst, wenn die Datenbank bestätigt hat (ok = true).
   // Fehler zeigt weiterhin die bestehende Meldung (saveError) an.
   async function saveRole(next) {
+    // VOR dem Speichern merken: das Event kann sofort danach aus der Liste fallen (nur ownOnly + Abmelden)
+    const leavingOwnOnly = event.ownOnly === true && next === null;
+    if (leavingOwnOnly) setLeftOwnOnlyId(event.id);
     const ok = await actions.setRegistration(event.id, next);
-    if (!ok) return;
+    if (!ok) {
+      if (leavingOwnOnly) setLeftOwnOnlyId(null); // Fehler: Anmeldung besteht weiter, Seite bleibt normal
+      return;
+    }
     if (next === 'registered') toast.success(t('toast.registered'));
     else if (next === 'interested') toast.success(t('toast.interestSaved'));
     else toast.success(t(role === 'registered' ? 'toast.registrationCancelled' : 'toast.interestRemoved'));
@@ -55,7 +84,8 @@ export default function EventDetailPage() {
     return <span>{school ? school.name : id}</span>;
   };
 
-  const schoolLinks = event.schoolIds.map((id, index) => (
+  // Ausgeblendete Schulen (src/data/schools.js) nicht aufzählen – event.schoolIds bleibt unverändert
+  const schoolLinks = visibleSchoolIds(event.schoolIds).map((id, index) => (
     <span key={id}>
       {index > 0 && ', '}
       {schoolLink(id)}
@@ -102,11 +132,10 @@ export default function EventDetailPage() {
                 label: t('eventDetail.where'),
                 value: event.online ? t('events.online') : localize(event.location, language),
               },
-              {
-                icon: 'school',
-                label: t('eventDetail.host'),
-                value: host ? host.name : event.hostSchoolId,
-              },
+              // ausgeblendete Gastgeber-Schule (nur bei eigener Anmeldung erreichbar): keine Gastgeber-Zeile
+              ...(isHiddenSchool(event.hostSchoolId)
+                ? []
+                : [{ icon: 'school', label: t('eventDetail.host'), value: host ? host.name : event.hostSchoolId }]),
               { icon: 'network', label: t('eventDetail.schools'), value: schoolLinks },
               {
                 icon: 'users',

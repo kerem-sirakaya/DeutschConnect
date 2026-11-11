@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 import { useI18n } from '../../i18n/LanguageContext.jsx';
 import { localize } from '../../i18n/localize.js';
-import { getSchool } from '../../data/schools.js';
+import { getSchool, isHiddenSchool } from '../../data/schools.js';
 import { DELETE_ACTION, canDeleteEvent, eventActionsFor } from '../../lib/adminEvents.js';
 import { formatAnkaraDateTime } from '../../lib/eventForm.js';
 import { StatusBadge } from '../Badges.jsx';
@@ -39,10 +39,13 @@ export default function AdminEventCard({ event, confirming, pending, errorKey, o
           <Icon name="calendar" size={16} />
           <span>{t('admin.events.when', { date: formatAnkaraDateTime(event.start, locale) })}</span>
         </li>
-        <li>
-          <Icon name="school" size={16} />
-          <span>{t('admin.events.host', { school: host?.name ?? event.hostSchoolId })}</span>
-        </li>
+        {/* Gastgeber nur, wenn die Schule angezeigt werden darf (ausgeblendet: src/data/schools.js) */}
+        {!isHiddenSchool(event.hostSchoolId) && (
+          <li>
+            <Icon name="school" size={16} />
+            <span>{t('admin.events.host', { school: host?.name ?? event.hostSchoolId })}</span>
+          </li>
+        )}
         <li>
           <Icon name="mapPin" size={16} />
           <span>{location || t('admin.events.noLocation')}</span>

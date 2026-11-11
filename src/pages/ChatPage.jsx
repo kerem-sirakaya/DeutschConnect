@@ -29,6 +29,7 @@ import ReportForm from '../components/chat/ReportForm.jsx';
 import RoomActionButtons from '../components/chat/RoomActionButtons.jsx';
 import { ChatStateNotice, formatChatTime, useChatAction } from '../components/chat/chatUi.jsx';
 import { useToast } from '../components/toast/ToastContext.jsx';
+import { mentionsHiddenSchool } from '../lib/schoolVisibility.js';
 
 /**
  * Chatroom (/chat): Gruppenräume · Private Chats · Nachrichtenanfragen · Suche.
@@ -100,7 +101,10 @@ function RoomsTab({ readState }) {
     .filter((r) => r.kind === 'topic')
     .sort((a, b) => TOPIC_SLUGS.indexOf(a.slug) - TOPIC_SLUGS.indexOf(b.slug));
   // Gruppen mit der neuesten Nachricht zuerst (echter Zeitstempel aus der Datenbank)
-  const groups = sortByActivity(rooms.data.filter((r) => r.kind !== 'topic'));
+  // Gruppen, deren Titel eine ausgeblendete Schule nennt (src/data/schools.js), nicht auflisten – nur Anzeige
+  const groups = sortByActivity(
+    rooms.data.filter((r) => r.kind !== 'topic' && !mentionsHiddenSchool(r.ideaTitle, r.eventTitle)),
+  );
 
   async function toggle(room) {
     const leaving = room.isMember;

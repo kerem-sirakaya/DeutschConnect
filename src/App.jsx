@@ -43,10 +43,10 @@ const AdminIdeasPage = lazy(() => import('./pages/admin/AdminIdeasPage.jsx'));
 // Chat-Moderation: nur für Moderator:innen/Admins – erst bei Bedarf laden. Rechte prüft die Datenbank.
 const ChatModerationPage = lazy(() => import('./pages/ChatModerationPage.jsx'));
 
-/** Leitet alte Links wie /community/games/chess auf /games/chess um (ersetzt den Verlaufseintrag). */
+/** Leitet alte Links wie /games/chess auf /community/games/chess um (ersetzt den Verlaufseintrag). */
 function LegacyGameRedirect() {
   const { game } = useParams();
-  return <Navigate to={`/games/${encodeURIComponent(game)}`} replace />;
+  return <Navigate to={`/community/games/${encodeURIComponent(game)}`} replace />;
 }
 
 /**
@@ -83,16 +83,16 @@ export default function App() {
         <Route path="community/groups" element={<CommunityGroupsPage />} />
         <Route path="community/people" element={<PeoplePage />} />
         <Route path="community/people/:profileId" element={<PublicProfilePage />} />
-        {/* Alte Spiele-Adressen (Spiele lagen vorher unter Community) → neue Adressen unter /games */}
-        <Route path="community/games" element={<Navigate to="/games" replace />} />
-        <Route path="community/games/:game" element={<LegacyGameRedirect />} />
+        {/* Community → Spiele: Kerems Spiele (Codex-Version) mit Bestenlisten (Stufe 8a/8b) */}
+        <Route path="community/games" element={<GamesPage />} />
+        <Route path="community/games/symbol-pairs" element={<SymbolPairsPage />} />
+        <Route path="community/games/paper-flight" element={<PaperFlightPage />} />
+        <Route path="community/games/bridge-runner" element={<BridgeRunnerPage />} />
+        <Route path="community/games/chess" element={<ChessPage />} />
 
-        {/* Bereich „Spiele“: Kerems Spiele (Codex-Version) – nur im Browser, ohne Speicherung (Stufe 8a) */}
-        <Route path="games" element={<GamesPage />} />
-        <Route path="games/symbol-pairs" element={<SymbolPairsPage />} />
-        <Route path="games/paper-flight" element={<PaperFlightPage />} />
-        <Route path="games/bridge-runner" element={<BridgeRunnerPage />} />
-        <Route path="games/chess" element={<ChessPage />} />
+        {/* Alte Spiele-Adressen (Spiele waren vorher ein eigener Hauptbereich /games) → Community → Spiele */}
+        <Route path="games" element={<Navigate to="/community/games" replace />} />
+        <Route path="games/:game" element={<LegacyGameRedirect />} />
 
         {/* Chatroom (Migration 014) – aus, bis in der Datenbank eingeschaltet (chat_config.enabled) */}
         <Route path="chat" element={<ChatPage />} />

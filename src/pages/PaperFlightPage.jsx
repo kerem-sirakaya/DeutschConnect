@@ -14,7 +14,7 @@ export default function PaperFlightPage() {
   const leaderboard = useGameLeaderboard(LEADERBOARD_GAMES.paperFlight, { loadBoard: false });
   return (
     <div className="page page--narrow">
-      <PageHeader title={t('games.paperFlight.title')} backTo="/games" />
+      <PageHeader title={t('games.paperFlight.title')} backTo="/community/games" />
       <PaperFlight onRoundStart={leaderboard.roundStarted} onRoundEnd={leaderboard.roundEnded} />
       <LeaderboardSaveStatus leaderboard={leaderboard} />
       <p className="muted">{t('games.localNote')}</p>

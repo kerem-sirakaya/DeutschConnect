@@ -7,6 +7,7 @@
  * (nur Gruppen, in denen man Mitglied ist bzw. die man lesen darf). Beiträge = Chat-Nachrichten im Raum.
  */
 import { sortByActivity } from './chat.js';
+import { mentionsHiddenSchool } from './schoolVisibility.js';
 
 export const GROUP_KINDS = ['project', 'event'];
 export const GROUP_FILTERS = ['all', ...GROUP_KINDS];
@@ -20,7 +21,11 @@ export function normalizeGroupFilter(value) {
 export function communityGroups(rooms, filter = 'all') {
   const kind = normalizeGroupFilter(filter);
   const groups = (Array.isArray(rooms) ? rooms : []).filter(
-    (room) => GROUP_KINDS.includes(room?.kind) && (kind === 'all' || room.kind === kind),
+    (room) =>
+      GROUP_KINDS.includes(room?.kind) &&
+      (kind === 'all' || room.kind === kind) &&
+      // Gruppen zu Ideen/Events einer ausgeblendeten Schule (Titel nennt sie) nicht anzeigen – nur Anzeige
+      !mentionsHiddenSchool(room.ideaTitle, room.eventTitle),
   );
   // Doppelte Einträge (gleiche Raum-ID) nur einmal zeigen
   const seen = new Set();

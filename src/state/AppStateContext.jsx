@@ -7,6 +7,11 @@ import { useAccountEvents } from './useAccountEvents.js';
 import { useAccountIdeas } from './useAccountIdeas.js';
 import { getSupportCounts } from '../lib/selectors.js';
 import { visibleToStudents } from '../lib/eventArchive.js';
+import { isVisibleDemoProfile, visibleContent, visibleOrOwn } from '../lib/schoolVisibility.js';
+
+// Inhalte ausgeblendeter Schulen (src/data/schools.js → HIDDEN_SCHOOL_IDS) nur in der Anzeige weglassen – Daten bleiben erhalten.
+const visibleDemoEvents = visibleContent(demoEvents);
+const visibleSeedIdeas = visibleContent(seedIdeas);
 
 // Wie oft die Archiv-Ausblendung neu berechnet wird (Events verschwinden pünktlich,
 // auch wenn die Seite lange offen bleibt)
@@ -71,7 +76,10 @@ function loadState() {
     }
     return {
       ...initial,
-      activeProfileId: profileState[saved.activeProfileId] ? saved.activeProfileId : initial.activeProfileId,
+      activeProfileId:
+        profileState[saved.activeProfileId] && isVisibleDemoProfile(saved.activeProfileId)
+          ? saved.activeProfileId
+          : initial.activeProfileId,
       profileState,
       customIdeas: Array.isArray(saved.customIdeas) ? saved.customIdeas : [],
     };
@@ -111,7 +119,9 @@ function updateActiveProfile(state, updater) {
 function reducer(state, action) {
   switch (action.type) {
     case 'switchProfile':
-      return state.profileState[action.profileId] ? { ...state, activeProfileId: action.profileId } : state;
+      return state.profileState[action.profileId] && isVisibleDemoProfile(action.profileId)
+        ? { ...state, activeProfileId: action.profileId }
+        : state;
 
     case 'setRegistration':
     case 'toggleInterest':
@@ -303,7 +313,10 @@ export function AppStateProvider({ children }) {
       // Archivierte Events (24 h nach Ende; abgesagt: nach Ende UND Absage) für Schüler:innen überall ausblenden –
       // Listen, "Meine", Startseite, Schulen, Empfehlungen UND Detailseite (getEvent).
       // Anmeldungen bleiben unverändert in accountEvents.registrations.
-      const events = visibleToStudents(accountEvents.events, now);
+      // Zusätzlich: Events ausgeblendeter Schulen nicht anzeigen (nur Anzeige, Daten bleiben) – AUSSER mit
+      // eigener Anmeldung: dann nur für diese Person (ownOnly → „Meine Events“, Detailseite; nicht in öffentlichen Listen).
+      const studentEvents = visibleToStudents(accountEvents.events, now);
+      const events = visibleOrOwn(studentEvents, (event) => Boolean(accountEvents.registrations[event.id]));
       return {
         mode,
         isRealAccount: true,
@@ -316,10 +329,17 @@ export function AppStateProvider({ children }) {
         ),
         events,
         getEvent: (id) => events.find((event) => event.id === id),
+        /**
+         * NUR für Moderation/Admin (Eventgruppen anlegen, /chat/moderation): veröffentlichte, nicht archivierte
+         * Events OHNE Schul-Ausblendung. Dieselben Zeilen, die die Datenbank (RLS) ohnehin liefert – keine
+         * zusätzlichen Rechte. Nicht in Schüler-Ansichten verwenden.
+         */
+        staffEvents: studentEvents,
         /** Speicherzustand der echten Anmeldungen (für die Event-Detailseite) */
         registrationSync: { pending: accountEvents.pending, error: accountEvents.saveError },
         // NUR echte Ideen aus Supabase – keine Demo-Ideen, keine alten Browser-Ideen.
-        ideas: accountIdeas.ideas,
+        // Ideen ausgeblendeter Schulen nicht anzeigen – AUSSER die eigenen (ownOnly, nur für die Autor:in)
+        ideas: visibleOrOwn(accountIdeas.ideas, (idea) => idea.authorId === auth.user.id),
         // Zahlen aus der Datenbank-Funktion get_idea_support_counts()
         supportCounts: accountIdeas.counts,
         /** Speicherzustand der echten Unterstützungen */
@@ -333,10 +353,10 @@ export function AppStateProvider({ children }) {
       mode,
       isRealAccount: false,
       user,
-      events: demoEvents,
-      getEvent: (id) => demoEvents.find((event) => event.id === id),
+      events: visibleDemoEvents,
+      getEvent: (id) => visibleDemoEvents.find((event) => event.id === id),
       registrationSync: { pending: {}, error: null },
-      ideas: [...state.customIdeas, ...seedIdeas],
+      ideas: [...state.customIdeas, ...visibleSeedIdeas],
       supportCounts: getSupportCounts(state.profileState),
       ideaSync: { pending: {}, error: null },
       actions,

@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState } 
 import { supabase } from '../lib/supabaseClient.js';
 import { useAppState } from './AppStateContext.jsx';
 import { demoTutoringFor } from '../data/tutoring.js';
+import { visibleContent, visibleOrOwn } from '../lib/schoolVisibility.js';
 import {
   createTutoringEntry,
   deleteTutoringEntry,
@@ -95,7 +96,8 @@ export function TutoringProvider({ children }) {
       return {
         status: 'demo',
         readOnly: true,
-        entries: demoTutoringFor(user.id),
+        // Einträge ausgeblendeter Schulen (src/data/schools.js) nicht anzeigen – Daten bleiben erhalten
+        entries: visibleContent(demoTutoringFor(user.id)),
         requests: [],
         errorKey: null,
         reload: () => {},
@@ -115,7 +117,9 @@ export function TutoringProvider({ children }) {
     return {
       status,
       readOnly: !ready,
-      entries: ready ? result.entries : [],
+      // Einträge ausgeblendeter Schulen nicht anzeigen – AUSSER die eigenen (isOwn): bearbeiten, schließen,
+      // löschen und Anfragen beantworten bleibt möglich. Öffentliche Reiter zeigen eigene Einträge ohnehin nicht.
+      entries: ready ? visibleOrOwn(result.entries, (entry) => entry.isOwn === true) : [],
       requests: ready ? result.requests : [],
       errorKey,
       reload: () => {

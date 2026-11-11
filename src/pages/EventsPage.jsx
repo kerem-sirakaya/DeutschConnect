@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { useI18n } from '../i18n/LanguageContext.jsx';
 import { useAppState } from '../state/AppStateContext.jsx';
-import { schools } from '../data/schools.js';
+// Schul-Filter: nur sichtbare Schulen (ausgeblendete: src/data/schools.js → HIDDEN_SCHOOL_IDS)
+import { visibleSchools as schools } from '../data/schools.js';
 import { EVENT_FORMATS, TOPICS } from '../data/topics.js';
 import {
   EVENT_STATUS_FILTERS,

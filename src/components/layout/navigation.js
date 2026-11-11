@@ -1,4 +1,4 @@
-// Die sieben Hauptbereiche (Struktur aus der Codex-Version von Kerem, plus „Chatroom“ und „Spiele“) – gemeinsam genutzt
+// Die sechs Hauptbereiche (Struktur aus der Codex-Version von Kerem, plus „Chatroom“) – gemeinsam genutzt
 // von der Bottom-Navigation (Smartphone/Tablet) und der Kopfleiste (Desktop).
 //
 // Bestehende Routen bleiben erhalten (Links, Lesezeichen, E-Mail-Rücksprünge):
@@ -10,17 +10,15 @@ export const NAV_ITEMS = [
   { id: 'community', to: '/community', labelKey: 'nav.community', icon: 'users' },
   // Eigener Bereich für den Chatroom (Gruppenräume, private Chats, Nachrichtenanfragen – alles unter /chat)
   { id: 'chat', to: '/chat', labelKey: 'nav.chat', icon: 'chat' },
-  // Eigener Bereich für Kerems Spiele (vorher unter /community/games; alte Links werden umgeleitet)
-  { id: 'games', to: '/games', labelKey: 'nav.games', icon: 'gamepad' },
   { id: 'me', to: '/me', labelKey: 'nav.me', icon: 'user' },
 ];
 
 const SECTION_PREFIXES = [
   ['discover', ['/discover', '/events', '/ideas']],
   ['tutoring', ['/tutoring']],
-  ['community', ['/community']],
+  // Spiele liegen unter /community/games; /games ist nur noch eine Weiterleitung dorthin (App.jsx)
+  ['community', ['/community', '/games']],
   ['chat', ['/chat']],
-  ['games', ['/games']],
   ['me', ['/me', '/about', '/login', '/register']],
 ];
 

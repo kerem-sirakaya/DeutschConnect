@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import { useI18n } from '../../i18n/LanguageContext.jsx';
-import { getSchool } from '../../data/schools.js';
+import { getSchool, isHiddenSchool } from '../../data/schools.js';
 import { entryText } from '../../lib/tutoring.js';
 import Icon from '../Icon.jsx';
 import { DemoBadge } from '../Badges.jsx';
@@ -17,7 +17,8 @@ export default function TutoringCard({ entry }) {
       <span className="task-card__body">
         <span className="task-card__eyebrow">
           <span>{t(`tutoring.kind.${entry.kind}`)}</span>
-          <span>{school?.shortName ?? entry.schoolId}</span>
+          {/* ausgeblendete Schule (src/data/schools.js): weder Name noch ID anzeigen */}
+          {!isHiddenSchool(entry.schoolId) && <span>{school?.shortName ?? entry.schoolId}</span>}
           {entry.isDemo && <DemoBadge />}
         </span>
         <span className="task-card__title">

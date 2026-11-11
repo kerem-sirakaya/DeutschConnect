@@ -176,7 +176,7 @@ export function LeaderboardSaveStatus({ leaderboard }) {
     return (
       <p className="muted leaderboard-status">
         {t('games.leaderboard.loginHintShort')}{' '}
-        <Link to={`/games#${LEADERBOARDS_ANCHOR}`}>{t('games.leaderboard.viewAll')}</Link>
+        <Link to={`/community/games#${LEADERBOARDS_ANCHOR}`}>{t('games.leaderboard.viewAll')}</Link>
       </p>
     );
   }
@@ -190,7 +190,7 @@ export function LeaderboardSaveStatus({ leaderboard }) {
       </p>
       <p className="muted">
         {me.status === 'ready' && me.data.bestScore != null && `${t('games.leaderboard.myBest', { score: me.data.bestScore })} · `}
-        <Link to={`/games#${LEADERBOARDS_ANCHOR}`}>{t('games.leaderboard.viewAll')}</Link>
+        <Link to={`/community/games#${LEADERBOARDS_ANCHOR}`}>{t('games.leaderboard.viewAll')}</Link>
       </p>
     </div>
   );

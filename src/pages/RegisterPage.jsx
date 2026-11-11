@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { useI18n } from '../i18n/LanguageContext.jsx';
 import { useAuth } from '../auth/AuthContext.jsx';
 import { supabase } from '../lib/supabaseClient.js';
-import { schools as localSchools } from '../data/schools.js';
+import { isHiddenSchool, visibleSchools as localSchools } from '../data/schools.js';
 import { AUTH_LIMITS, GRADES, authErrorKey, validateRegistration } from '../lib/authValidation.js';
 import PageHeader from '../components/PageHeader.jsx';
 import AccountCard from '../components/AccountCard.jsx';
@@ -30,7 +30,9 @@ function useSchoolOptions() {
       .order('name')
       .then(({ data, error }) => {
         if (!active) return;
-        if (!error && data?.length) setOptions(data);
+        // Ausgeblendete Schulen (src/data/schools.js → HIDDEN_SCHOOL_IDS) nicht zur Auswahl anbieten
+        const visible = (data ?? []).filter((school) => !isHiddenSchool(school.id));
+        if (!error && visible.length) setOptions(visible);
         else if (import.meta.env.DEV) console.warn('[Auth] Schulen aus lokaler Liste (Fallback):', error?.message ?? 'keine Daten');
       });
     return () => {

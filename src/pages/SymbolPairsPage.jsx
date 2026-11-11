@@ -7,7 +7,7 @@ export default function SymbolPairsPage() {
   const { t } = useI18n();
   return (
     <div className="page page--narrow">
-      <PageHeader title={t('games.symbolPairs.title')} backTo="/games" />
+      <PageHeader title={t('games.symbolPairs.title')} backTo="/community/games" />
       <SymbolPairs />
       <p className="muted">{t('games.localNote')}</p>
     </div>

@@ -1,7 +1,8 @@
 import { useI18n } from '../i18n/LanguageContext.jsx';
 import { useAppState } from '../state/AppStateContext.jsx';
-import { demoProfiles } from '../data/profiles.js';
 import { getSchool } from '../data/schools.js';
+// Demo-Profile ohne Personen ausgeblendeter Schulen (src/data/schools.js) – die Profile selbst bleiben in src/data/profiles.js
+import { visibleDemoProfiles as demoProfiles } from '../lib/schoolVisibility.js';
 import Avatar from './Avatar.jsx';
 import Icon from './Icon.jsx';
 

@@ -49,8 +49,8 @@ export default function HomePage() {
       <section className="dashboard-welcome" aria-labelledby="welcome-title">
         <div>
           <p className="dashboard-welcome__school">
-            {user.school.name}
-            {user.grade ? ` · ${t('profile.grade', { grade: user.grade })}` : ''}
+            {/* Schulname fehlt bei ausgeblendeter Schule → kein loses „·“ */}
+            {[user.school?.name, user.grade ? t('profile.grade', { grade: user.grade }) : ''].filter(Boolean).join(' · ')}
           </p>
           <DashboardGreeting firstName={user.firstName} />
           <p>{t('home.dashboardSubtitle')}</p>

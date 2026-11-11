@@ -75,7 +75,11 @@ test('Erfolgsmeldung erst NACH bestätigtem Erfolg', () => {
   assert.match(read('src', 'components', 'chat', 'MessageComposer.jsx'), /if \(result\) \{[\s\S]{0,200}toast\.success\(t\('toast\.messageSent'\)\)/);
   // Events: setRegistration liefert true nur ohne Datenbank-Fehler
   assert.match(read('src', 'state', 'useAccountEvents.js'), /return !error;/);
-  assert.match(read('src', 'pages', 'EventDetailPage.jsx'), /const ok = await actions\.setRegistration\(event\.id, next\);\s*if \(!ok\) return;/);
+  // bei Fehler sofort zurück (seit der ownOnly-Rückmeldung: vorher Markierung zurücksetzen) – Toast nur danach
+  assert.match(
+    read('src', 'pages', 'EventDetailPage.jsx'),
+    /const ok = await actions\.setRegistration\(event\.id, next\);\s*if \(!ok\) \{\s*if \(leavingOwnOnly\) setLeftOwnOnlyId\(null\);[^\n]*\n\s*return;\s*\}\s*if \(next === 'registered'\) toast\.success/,
+  );
   // Profil-Freigabe
   assert.match(read('src', 'pages', 'ProfileSharingPage.jsx'), /if \(result\.ok\) toast\.success\(t\('toast\.sharingSaved'\)\)/);
 });

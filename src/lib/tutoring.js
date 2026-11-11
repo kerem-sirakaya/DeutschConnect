@@ -159,6 +159,16 @@ export function countOpenIncoming(requests) {
   return requests.filter((request) => request.direction === 'incoming' && request.status === 'pending').length;
 }
 
+/**
+ * Wer steht hinter einer Anfrage? (Kopfzeile der RequestCard)
+ * schoolShortName fehlt bei ausgeblendeten (src/data/schools.js) oder unbekannten Schulen –
+ * dann ohne Schulteil, statt „Eine Person von –“ oder „Anna · “.
+ */
+export function requestPartnerLabel(firstName, schoolShortName, t) {
+  if (firstName) return schoolShortName ? `${firstName} · ${schoolShortName}` : firstName;
+  return schoolShortName ? t('tutoring.someoneFrom', { school: schoolShortName }) : t('tutoring.someone');
+}
+
 /** Datenbankzeile (tutoring_list_entries) → Objekt für die Oberfläche. */
 export function mapEntryRow(row) {
   return {

@@ -416,7 +416,10 @@ function BansTab({ role }) {
 // ---------- Räume ----------
 function RoomsTab({ role }) {
   const { t, language } = useI18n();
-  const { events } = useAppState();
+  // Moderation: Events OHNE Schul-Ausblendung (staffEvents), damit Eventgruppen auch für bestehende Events
+  // ausgeblendeter Schulen angelegt werden können. Rechte prüft weiterhin die Datenbank (chat_create_event_room).
+  const { events: studentEvents, staffEvents } = useAppState();
+  const events = staffEvents ?? studentEvents;
   const rooms = useLoad((client) => api.modListRooms(client), []);
   const [panel, setPanel] = useState(null); // { id, kind: 'archive'|'unarchive'|'delete' }
   const [eventId, setEventId] = useState('');

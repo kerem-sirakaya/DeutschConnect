@@ -104,7 +104,8 @@ export default function IdeaDetailPage() {
               {
                 icon: 'network',
                 label: t('ideaDetail.targetSchools'),
-                value: idea.schoolIds.map((id) => getSchool(id)?.name).join(', '),
+                // nur sichtbare Schulen (getSchool liefert für ausgeblendete nichts) – kein „ERS, “
+                value: idea.schoolIds.map((id) => getSchool(id)?.name).filter(Boolean).join(', '),
               },
             ]}
           />

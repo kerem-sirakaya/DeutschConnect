@@ -52,7 +52,8 @@ export function getMyEvents(user, events, now = new Date()) {
  */
 export function getEventRecommendations(user, events, now = new Date()) {
   return events
-    .filter((event) => isUpcoming(event, now) && !getEventRole(user, event))
+    // ownOnly: nur für die eigene Anmeldung sichtbar (ausgeblendete Schule) – nie als Empfehlung
+    .filter((event) => !event.ownOnly && isUpcoming(event, now) && !getEventRole(user, event))
     .map((event) => {
       const matchedTopics = event.topics.filter((topic) => user.interests.includes(topic));
       const schoolMatch = event.schoolIds.includes(user.schoolId);
@@ -149,6 +150,8 @@ export function filterEvents(
   const statusFilter = EVENT_STATUS_FILTERS.includes(status) ? status : 'all';
   return events
     .filter((event) => {
+      // ownOnly (ausgeblendete Schule, nur eigene Anmeldung): nicht in öffentlichen Listen – nur unter „Meine“
+      if (event.ownOnly) return false;
       if (!matchesStatusFilter(event, statusFilter)) return false;
       if (timeframe === 'past') {
         if (!isPast(event, now)) return false;
@@ -180,7 +183,11 @@ export function countEventsByStatusFilter(events, filters = {}, now = new Date()
 export function filterIdeas(ideas, { query = '', topic = 'all', sort = 'popular' } = {}, supportCounts = {}) {
   const byNewest = (a, b) => new Date(b.createdAt) - new Date(a.createdAt);
   return ideas
-    .filter((idea) => (topic === 'all' || idea.topics.includes(topic)) && matchesQuery(query, idea.title, idea.summary))
+    // ownOnly (eigene Idee einer ausgeblendeten Schule): nicht in öffentlichen Listen – nur unter „Meine“
+    .filter(
+      (idea) =>
+        !idea.ownOnly && (topic === 'all' || idea.topics.includes(topic)) && matchesQuery(query, idea.title, idea.summary),
+    )
     .sort((a, b) =>
       sort === 'new' ? byNewest(a, b) : (supportCounts[b.id] ?? 0) - (supportCounts[a.id] ?? 0) || byNewest(a, b),
     );

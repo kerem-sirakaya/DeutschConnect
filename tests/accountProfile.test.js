@@ -17,8 +17,11 @@ test('Supabase-Profil wird zum aktiven Profil mit derselben Form wie Demo-Profil
   const user = buildAccountUser('uuid-1', profile, emptyAccountData());
   assert.equal(user.id, 'uuid-1');
   assert.equal(user.firstName, 'Test');
-  assert.equal(user.schoolId, 'anka');
-  assert.equal(user.school.shortName, 'Anka Bilim');
+  assert.equal(user.schoolId, 'anka'); // Schulzuordnung bleibt erhalten …
+  // … aber Anka Bilim ist ausgeblendet (src/data/schools.js → HIDDEN_SCHOOL_IDS): kein Name in der Anzeige
+  assert.equal(user.school.shortName, '');
+  assert.equal(user.school.name, '');
+  assert.equal(user.school.hidden, true);
   assert.deepEqual(user.interests, ['music']);
   assert.deepEqual(user.invitations, []);
   assert.equal(user.isRealAccount, true);

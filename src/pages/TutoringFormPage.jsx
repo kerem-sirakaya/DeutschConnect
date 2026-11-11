@@ -111,7 +111,12 @@ function TutoringForm({ existing }) {
 
   return (
     <div className="page page--narrow">
-      <PageHeader title={title} subtitle={t('tutoring.formSubtitle', { school: user.school.shortName })} backTo="/tutoring" />
+      {/* ohne (sichtbaren) Schulnamen kein halber Satz */}
+      <PageHeader
+        title={title}
+        subtitle={user.school?.shortName ? t('tutoring.formSubtitle', { school: user.school.shortName }) : undefined}
+        backTo="/tutoring"
+      />
       <TutoringStatusNotice />
 
       <form ref={formRef} className="form card" onSubmit={handleSubmit} noValidate aria-busy={busy}>

@@ -11,6 +11,7 @@ import {
   mapRequestRow,
   matchTutoring,
   normalizeSubject,
+  requestPartnerLabel,
   sortRequests,
   subjectOptions,
   validateRequestMessage,
@@ -274,4 +275,19 @@ test('Fehlercodes → eigene Meldungen; fehlende Migration wird erkannt', () => 
   assert.equal(tutoringErrorKey({ code: 'DC014' }), 'tutoring.errors.transition');
   assert.equal(tutoringErrorKey({ code: '23514' }), 'tutoring.errors.rejectedByServer');
   assert.equal(tutoringErrorKey({ code: 'whatever' }), 'tutoring.errors.generic');
+});
+
+test('Anfrage-Kopfzeile: ohne sichtbare Schule kein „Eine Person von –“ und kein „Anna · “', async () => {
+  const { getSchool } = await import('../src/data/schools.js');
+  const t = (key, vars) => (vars ? `${key}(${vars.school})` : key);
+  const label = (firstName, schoolId) => requestPartnerLabel(firstName, getSchool(schoolId)?.shortName, t);
+  const ers = getSchool('ers').shortName;
+  // normale Schule: unverändert
+  assert.equal(label('Anna', 'ers'), `Anna · ${ers}`);
+  assert.equal(label(null, 'ers'), `tutoring.someoneFrom(${ers})`);
+  // ausgeblendete Schule (Anka Bilim) und unbekannte Schule: neutral, ohne Schulnamen, ohne „–“
+  assert.equal(label('Anna', 'anka'), 'Anna');
+  assert.equal(label(null, 'anka'), 'tutoring.someone');
+  assert.equal(label(undefined, 'unbekannt'), 'tutoring.someone');
+  assert.equal(label('', null), 'tutoring.someone');
 });

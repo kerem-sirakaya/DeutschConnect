@@ -57,8 +57,8 @@ export default function MePage() {
             {user.firstName} {user.lastName}
           </p>
           <p className="muted">
-            {user.school.name} ·{' '}
-            {t('profile.grade', { grade: user.grade })}
+            {/* Schulname fehlt bei ausgeblendeter Schule → kein loses „·“ */}
+            {[user.school?.name, t('profile.grade', { grade: user.grade })].filter(Boolean).join(' · ')}
           </p>
           {isRealAccount ? (
             <span className="badge badge--info">{t('profile.realAccount')}</span>

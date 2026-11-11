@@ -7,7 +7,7 @@ export default function ChessPage() {
   const { t } = useI18n();
   return (
     <div className="page page--narrow">
-      <PageHeader title={t('games.chess.title')} backTo="/games" />
+      <PageHeader title={t('games.chess.title')} backTo="/community/games" />
       <ChessGame />
       <p className="muted">{t('games.localNote')}</p>
     </div>

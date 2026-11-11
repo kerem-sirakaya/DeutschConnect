@@ -6,7 +6,7 @@
     "cancel": "İptal",
     "yourSchool": "Okulun",
     "clearSearch": "Aramayı temizle",
-    "footerNote": "DeutschConnect · ERS ve Anka Bilim okullar arası pilot proje"
+    "footerNote": "DeutschConnect · okullar arası iş birliği"
   },
   "demo": {
     "label": "Demo",
@@ -228,6 +228,11 @@
       "conflict": "Kaydın bu arada değişti. Güncel durum gösteriliyor.",
       "network": "Sunucuya bağlanılamadı. Lütfen tekrar dene.",
       "generic": "Bu işlem başarısız oldu. Lütfen tekrar dene."
+    },
+    "leftOwnOnly": {
+      "title": "Kaydedildi",
+      "text": "Kaydın veya ilgin kaldırıldı. Bu etkinlik yalnızca kayıtlı ve ilgilenen kişilere gösterildiği için artık burada görünmüyor.",
+      "toMine": "Etkinliklerime git"
     }
   },
   "ideas": {
@@ -442,7 +447,7 @@
     "whatTitle": "DeutschConnect nedir?",
     "whatText": "DeutschConnect, öğrenciler tarafından geliştirilen ve okulların ortak etkinlikler, fikirler ve projeler düzenlemesini sağlayan bir platformdur. Öğrenciler inisiyatif alabilmeli ve başka okullarla bağlantı kurabilmelidir.",
     "originTitle": "Nasıl başladı",
-    "originText": "Fikir, Ernst-Reuter-Schule Ankara'daki bir öğrenci grubundan çıktı. Almanca dersleri için hazırlanan önceki bir tasarım prototipi, okullar arası iş birliği platformuna dönüştü. Anka Bilim ilk ortak okul olarak ilgi gösterdi.",
+    "originText": "Fikir, Ernst-Reuter-Schule Ankara'daki bir öğrenci grubundan çıktı. Almanca dersleri için hazırlanan önceki bir tasarım prototipi, okullar arası iş birliği platformuna dönüştü.",
     "statusTitle": "Güncel durum",
     "worksTitle": "Tamamlananlar",
     "works1": "Akıllı telefon ve masaüstü için web prototipi",
@@ -715,7 +720,8 @@
         "hostNotParticipating": "Ev sahibi okul katılan okullardan biri olmalıdır.",
         "topics": "Lütfen listeden en fazla on konu seç.",
         "format": "Lütfen listeden bir biçim seç."
-      }
+      },
+      "hiddenSchool": "web sitesinde gizli"
     },
     "errors": {
       "notAllowed": "Bunun için yönetici yetkin yok.",
@@ -751,7 +757,7 @@
   "community": {
     "title": "Topluluk",
     "subtitle": "Birlikte öğren ve birlikte çalış.",
-    "tutoringText": "Ders desteği sun veya ara – gönüllü ve ücretsiz.",
+    "gamesText": "Tarayıcıda kısa oyunlar – Kağıt uçuşu ve Köprü koşucusu için sıralamalarla.",
     "peopleText": "Öğrencilerin gönüllü olarak paylaştığı profiller.",
     "groupsText": "Projeler ve etkinlikler için gruplar – paylaşımlar ve tartışmalarla.",
     "groups": {
@@ -958,6 +964,7 @@
     "loading": "Ders desteği ilanları yükleniyor …",
     "retry": "Tekrar dene",
     "someoneFrom": "{school} okulundan biri",
+    "someone": "Biri",
     "fromPerson": "Gönderen: {name}",
     "toPerson": "Alıcı: {name}",
     "responseNote": "Yanıt",
@@ -1508,7 +1515,7 @@
         "title": "Başlarken",
         "what": {
           "q": "DeutschConnect nedir?",
-          "a": "Ernst-Reuter-Schule Ankara ile Anka Bilim arasındaki iş birliği için öğrenciler tarafından geliştirilen bir platform. Ortak etkinlikleri bulabilir, proje fikirlerini paylaşabilir ve birbirinizle konuşabilirsiniz."
+          "a": "Okullar arası iş birliği için öğrenciler tarafından geliştirilen, Ernst-Reuter-Schule Ankara'da ortaya çıkan bir platform. Ortak etkinlikleri bulabilir, proje fikirlerini paylaşabilir ve birbirinizle konuşabilirsiniz."
         },
         "how": {
           "q": "Platformu nasıl kullanırım?",

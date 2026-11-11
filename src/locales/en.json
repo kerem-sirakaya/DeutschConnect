@@ -6,7 +6,7 @@
     "cancel": "Cancel",
     "yourSchool": "Your school",
     "clearSearch": "Clear search",
-    "footerNote": "DeutschConnect · cross-school pilot ERS & Anka Bilim"
+    "footerNote": "DeutschConnect · cross-school collaboration"
   },
   "demo": {
     "label": "Demo",
@@ -228,6 +228,11 @@
       "conflict": "Your entry has changed in the meantime. The current state is shown.",
       "network": "Cannot reach the server. Please try again.",
       "generic": "That did not work. Please try again."
+    },
+    "leftOwnOnly": {
+      "title": "Saved",
+      "text": "Your registration or interest has been removed. This event is only shown to registered and interested people, so it is no longer visible here.",
+      "toMine": "Go to my events"
     }
   },
   "ideas": {
@@ -442,7 +447,7 @@
     "whatTitle": "What is DeutschConnect?",
     "whatText": "DeutschConnect is a platform developed by students that lets schools organise joint events, ideas and projects. Students should be able to take the initiative themselves and connect with other schools.",
     "originTitle": "How it started",
-    "originText": "The idea came from a group of students at Ernst-Reuter-Schule Ankara. An earlier design prototype for German lessons turned into a platform for cross-school collaboration. Anka Bilim has shown interest as the first partner school.",
+    "originText": "The idea came from a group of students at Ernst-Reuter-Schule Ankara. An earlier design prototype for German lessons turned into a platform for cross-school collaboration.",
     "statusTitle": "Current status",
     "worksTitle": "Already done",
     "works1": "Web prototype for smartphone and desktop",
@@ -715,7 +720,8 @@
         "hostNotParticipating": "The host school must be one of the participating schools.",
         "topics": "Please choose at most ten topics from the list.",
         "format": "Please choose a format from the list."
-      }
+      },
+      "hiddenSchool": "hidden on the website"
     },
     "errors": {
       "notAllowed": "You do not have admin permissions for this.",
@@ -751,7 +757,7 @@
   "community": {
     "title": "Community",
     "subtitle": "Learn and work together.",
-    "tutoringText": "Offer or find tutoring – voluntary and free of charge.",
+    "gamesText": "Short browser games – with leaderboards for Paper flight and Bridge runner.",
     "peopleText": "Profiles that students choose to share.",
     "groupsText": "Groups for projects and events – with posts and discussions.",
     "groups": {
@@ -958,6 +964,7 @@
     "loading": "Loading tutoring listings …",
     "retry": "Try again",
     "someoneFrom": "Someone from {school}",
+    "someone": "Someone",
     "fromPerson": "From {name}",
     "toPerson": "To {name}",
     "responseNote": "Reply",
@@ -1508,7 +1515,7 @@
         "title": "Getting started",
         "what": {
           "q": "What is DeutschConnect?",
-          "a": "A student-made platform for collaboration between Ernst-Reuter-Schule Ankara and Anka Bilim. You can find joint events, share project ideas and talk to each other."
+          "a": "A student-made platform for collaboration between schools – started at Ernst-Reuter-Schule Ankara. You can find joint events, share project ideas and talk to each other."
         },
         "how": {
           "q": "How do I use the platform?",

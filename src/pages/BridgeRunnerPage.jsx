@@ -14,7 +14,7 @@ export default function BridgeRunnerPage() {
   const leaderboard = useGameLeaderboard(LEADERBOARD_GAMES.bridgeRunner, { loadBoard: false });
   return (
     <div className="page page--narrow">
-      <PageHeader title={t('games.bridgeRunner.title')} backTo="/games" />
+      <PageHeader title={t('games.bridgeRunner.title')} backTo="/community/games" />
       <BridgeRunner onRoundStart={leaderboard.roundStarted} onRoundEnd={leaderboard.roundEnded} />
       <LeaderboardSaveStatus leaderboard={leaderboard} />
       <p className="muted">{t('games.localNote')}</p>

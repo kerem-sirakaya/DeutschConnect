@@ -4,6 +4,8 @@ import { useAppState } from './AppStateContext.jsx';
 import { useRemote as useRemoteData } from './useRemote.js';
 import { demoDirectory, demoPublicProfile, demoSharingFor } from '../data/publicProfiles.js';
 import { demoStats, isProfileId, profileErrorKey } from '../lib/profiles.js';
+import { isHiddenSchool } from '../data/schools.js';
+import { isVisibleDemoProfile, visibleContent } from '../lib/schoolVisibility.js';
 import {
   fetchMySharing,
   fetchMyStats,
@@ -31,17 +33,41 @@ export function useMyStats() {
   return useRemote(fetchMyStats, () => demoStats(user, ideas, events), [user.id]);
 }
 
+// Personen ausgeblendeter Schulen (src/data/schools.js → HIDDEN_SCHOOL_IDS) nicht anzeigen – nur Anzeige,
+// Profile und Freigaben in der Datenbank bleiben unverändert.
+// Ausnahme: das EIGENE Profil (ownId) sieht die Person selbst immer – andere sehen es nicht.
+const hideHiddenSchools = (list, ownId) =>
+  Array.isArray(list) ? list.filter((p) => p?.id === ownId || !isHiddenSchool(p?.schoolId)) : list;
+const hideIfHiddenSchool = (profile, ownId) => {
+  if (profile && profile.id === ownId) return profile;
+  if (!profile || isHiddenSchool(profile.schoolId)) return profile ? null : profile;
+  // Projektvorschläge der Person: Inhalte ausgeblendeter Schulen (Titel/Schule) weglassen
+  return Array.isArray(profile.projects) ? { ...profile, projects: visibleContent(profile.projects) } : profile;
+};
+
 /** Verzeichnis öffentlicher Profile. */
 export function usePublicProfiles() {
   const { user } = useAppState();
-  return useRemote(fetchPublicProfiles, () => demoDirectory(user.id), [user.id]);
+  return useRemote(
+    (client) => fetchPublicProfiles(client).then((list) => hideHiddenSchools(list, user.id)),
+    // Demo: zusätzlich nach der Schule des Demo-Profils (auch wenn die Schule nicht freigegeben ist)
+    () => hideHiddenSchools(demoDirectory(user.id)).filter((p) => isVisibleDemoProfile(p.id)),
+    [user.id],
+  );
 }
 
 /** Ein Profil (data = null: privat oder nicht vorhanden – bewusst nicht unterscheidbar). */
 export function usePublicProfile(profileId) {
   const { user } = useAppState();
-  const load = (client) => (isProfileId(profileId) ? fetchPublicProfile(client, profileId) : Promise.resolve(null));
-  return useRemote(load, () => demoPublicProfile(profileId, user.id), [user.id, profileId]);
+  const load = (client) =>
+    isProfileId(profileId)
+      ? fetchPublicProfile(client, profileId).then((profile) => hideIfHiddenSchool(profile, user.id))
+      : Promise.resolve(null);
+  return useRemote(
+    load,
+    () => (isVisibleDemoProfile(profileId) ? hideIfHiddenSchool(demoPublicProfile(profileId, user.id)) : null),
+    [user.id, profileId],
+  );
 }
 
 /**

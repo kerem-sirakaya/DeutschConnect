@@ -190,7 +190,11 @@ test('11) archivierte Events erscheinen in keinem Bereich für Schüler:innen', 
     for (const id of hidden) assert.ok(!ids(list).includes(id), `${id} in ${area}`);
   }
   // Ausblenden passiert zentral (AppStateContext), auch für die Detailseite (getEvent)
-  assert.match(read('src', 'state', 'AppStateContext.jsx'), /const events = visibleToStudents\(accountEvents\.events, now\);/);
+  // (seit dem Ausblenden von Anka Bilim: archiviert wird ZUERST entfernt, danach Schul-Filter mit Ausnahme für
+  // eigene Anmeldungen – archivierte Events kommen dadurch nie zurück)
+  const appState = read('src', 'state', 'AppStateContext.jsx');
+  assert.match(appState, /const studentEvents = visibleToStudents\(accountEvents\.events, now\);/);
+  assert.match(appState, /const events = visibleOrOwn\(studentEvents, /);
 });
 
 test('12) Filterwechsel holt archivierte Events nicht zurück', () => {

@@ -188,6 +188,8 @@ falls nötig. Lokal getestet: Rückbau → keine `chat_`-Objekte mehr, 001–013
    **Entschieden (Ege, 2026-11-10):** „Chatroom“ ist **dauerhaft ein eigenständiger siebter Hauptbereich**
    (`/chat`, in der Navigation vor „Spiele“; `src/components/layout/navigation.js`). Die mobile Navigation mit sieben
    Einträgen ist auf schmalen Handys eng – sie wird **später separat** verbessert (eigene Aufgabe, noch offen).
+   **Update (Ege, 2026-11-11):** „Spiele“ ist kein Hauptbereich mehr, sondern Unterbereich von Community
+   (`/community/games`, alte `/games`-Links leiten um). Die Navigation hat damit **sechs** Einträge; Chatroom steht vor „Mein Bereich“.
 4. **Verlauf für neue Mitglieder:** derzeit sehen neue Raum-Mitglieder den ganzen bisherigen Verlauf.
 5. **Namen in Themenräumen:** Vorname der Schreibenden und Mitgliederliste sind für Raum-Mitglieder sichtbar.
 6. **Wer kann angeschrieben werden:** derzeit nur Personen mit öffentlichem Profil.

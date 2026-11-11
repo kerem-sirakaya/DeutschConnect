@@ -3,7 +3,8 @@ import { Link, useNavigate, useParams } from 'react-router';
 import { useI18n } from '../../i18n/LanguageContext.jsx';
 import { localize } from '../../i18n/localize.js';
 import { supabase } from '../../lib/supabaseClient.js';
-import { schools } from '../../data/schools.js';
+import { isHiddenSchool, schools as allSchools, visibleSchools as schools } from '../../data/schools.js';
+import { schoolsIncludingExisting } from '../../lib/schoolVisibility.js';
 import { EVENT_FORMATS, TOPICS } from '../../data/topics.js';
 import { loadAdminEvents, saveEvent } from '../../lib/adminEvents.js';
 import {
@@ -24,7 +25,11 @@ import NotFoundPage from '../NotFoundPage.jsx';
 
 // Schulen aus src/data/schools.js – dieselben IDs wie in der Tabelle "schools".
 // Eine unbekannte ID würde die Datenbank ohnehin ablehnen (22023).
-const ALLOWED_SCHOOL_IDS = schools.map((school) => school.id);
+// Prüfung: ALLE Schulen erlaubt – sonst könnte ein bestehendes Event mit ausgeblendeter Schule nicht gespeichert werden.
+// Anzeige (Ankreuzfelder, Gastgeber-Auswahl, Vorbelegung): nur sichtbare Schulen. Bereits gespeicherte
+// ausgeblendete Schulen bleiben im Formularwert erhalten (werden nicht entfernt).
+const ALLOWED_SCHOOL_IDS = allSchools.map((school) => school.id);
+const VISIBLE_SCHOOL_IDS = schools.map((school) => school.id);
 
 /**
  * Event anlegen (/admin/events/new) oder bearbeiten (/admin/events/:eventId/edit).
@@ -101,12 +106,17 @@ function EventForm({ original }) {
   const formRef = useRef(null);
   const isEdit = Boolean(original);
   const [values, setValues] = useState(() =>
-    original ? eventToForm(original) : emptyEventForm({ schoolIds: [...ALLOWED_SCHOOL_IDS] }),
+    original ? eventToForm(original) : emptyEventForm({ schoolIds: [...VISIBLE_SCHOOL_IDS] }),
   );
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [busy, setBusy] = useState(false);
   const [serverError, setServerError] = useState(null);
+  // Schulen im Formular: sichtbare Schulen + ausgeblendete Schulen, die DIESES bestehende Event schon enthält
+  // (Gastgeber oder beteiligt) – sichtbar markiert und unverändert erhalten. Für neue Events nicht wählbar.
+  const formSchools = schoolsIncludingExisting([original?.hostSchoolId, ...(original?.schoolIds ?? [])]);
+  const schoolLabel = (school) =>
+    isHiddenSchool(school.id) ? `${school.name} (${t('admin.eventForm.hiddenSchool')})` : school.name;
 
   const validate = (next) => validateEventForm(next, { allowedSchoolIds: ALLOWED_SCHOOL_IDS, original });
   const update = (key, value) => {
@@ -311,14 +321,14 @@ function EventForm({ original }) {
         <fieldset className="field" {...fieldProps('schoolIds')} tabIndex={-1}>
           <legend>{t('admin.eventForm.schoolsLabel')}</legend>
           <div className="checkbox-list">
-            {schools.map((school) => (
+            {formSchools.map((school) => (
               <label key={school.id} className="checkbox">
                 <input
                   type="checkbox"
                   checked={values.schoolIds.includes(school.id)}
                   onChange={() => toggleIn('schoolIds', school.id)}
                 />
-                <span>{school.name}</span>
+                <span>{schoolLabel(school)}</span>
               </label>
             ))}
           </div>
@@ -334,11 +344,11 @@ function EventForm({ original }) {
             {...fieldProps('hostSchoolId')}
           >
             <option value="">{t('admin.eventForm.hostPlaceholder')}</option>
-            {schools
+            {formSchools
               .filter((school) => values.schoolIds.includes(school.id))
               .map((school) => (
                 <option key={school.id} value={school.id}>
-                  {school.name}
+                  {schoolLabel(school)}
                 </option>
               ))}
           </select>

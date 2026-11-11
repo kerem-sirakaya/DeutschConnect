@@ -1,4 +1,4 @@
-import { getSchool } from '../data/schools.js';
+import { getSchool, isHiddenSchool } from '../data/schools.js';
 
 /**
  * Hilfsfunktionen für das ECHTE Konto (Supabase) – ohne React, testbar.
@@ -48,11 +48,14 @@ export function sanitizeAccountData(saved) {
  */
 export function buildAccountUser(userId, profile, data, registrations, supportedIdeas) {
   const localSchool = getSchool(profile.school_id);
-  const school = localSchool ?? {
-    id: profile.school_id,
-    name: profile.school?.name ?? profile.school_id,
-    shortName: profile.school?.short_name ?? profile.school_id,
-  };
+  // Ausgeblendete Schule (src/data/schools.js): kein Name in der Anzeige – Profil und school_id bleiben unverändert.
+  const school = isHiddenSchool(profile.school_id)
+    ? { id: profile.school_id, name: '', shortName: '', hidden: true }
+    : localSchool ?? {
+        id: profile.school_id,
+        name: profile.school?.name ?? profile.school_id,
+        shortName: profile.school?.short_name ?? profile.school_id,
+      };
   return {
     id: userId,
     firstName: profile.first_name,

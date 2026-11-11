@@ -2,7 +2,8 @@ import { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { useI18n } from '../i18n/LanguageContext.jsx';
 import { useAppState } from '../state/AppStateContext.jsx';
-import { schools } from '../data/schools.js';
+// Auswahl „Für Schulen“: nur sichtbare Schulen (ausgeblendete: src/data/schools.js → HIDDEN_SCHOOL_IDS)
+import { visibleSchools as schools } from '../data/schools.js';
 import { EVENT_FORMATS, TOPICS } from '../data/topics.js';
 import PageHeader from '../components/PageHeader.jsx';
 import FilterChips from '../components/FilterChips.jsx';
@@ -100,7 +101,12 @@ export default function NewIdeaPage() {
 
   return (
     <div className="page page--narrow">
-      <PageHeader title={t('newIdea.title')} subtitle={t('newIdea.subtitle', { school: user.school.shortName })} backTo="/ideas" />
+      {/* ohne (sichtbaren) Schulnamen kein halber Satz */}
+      <PageHeader
+        title={t('newIdea.title')}
+        subtitle={user.school?.shortName ? t('newIdea.subtitle', { school: user.school.shortName }) : undefined}
+        backTo="/ideas"
+      />
 
       <form ref={formRef} className="form card" onSubmit={handleSubmit} noValidate aria-busy={busy}>
         {serverError && (

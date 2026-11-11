@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { useI18n } from '../i18n/LanguageContext.jsx';
 import { useAppState } from '../state/AppStateContext.jsx';
 import { isUpcoming } from '../lib/selectors.js';
+import { publicOnly } from '../lib/schoolVisibility.js';
 import PageHeader from '../components/PageHeader.jsx';
 import SectionNav from '../components/SectionNav.jsx';
 import Icon from '../components/Icon.jsx';
@@ -15,11 +16,13 @@ export default function DiscoverPage() {
   const { t } = useI18n();
   const { events, ideas, isRealAccount } = useAppState();
   const [now] = useState(() => new Date());
-  const upcoming = events.filter((event) => isUpcoming(event, now)).length;
+  // Zähler wie die öffentlichen Listen: ohne ownOnly-Einträge (ausgeblendete Schule, nur eigene Inhalte)
+  const upcoming = publicOnly(events).filter((event) => isUpcoming(event, now)).length;
+  const ideaCount = publicOnly(ideas).length;
 
   const cards = [
     { to: '/events?tab=all', icon: 'calendar', title: t('nav.events'), text: t('discover.eventsText'), count: upcoming, countLabel: t('discover.upcomingCount', { count: upcoming }) },
-    { to: '/ideas?tab=all', icon: 'lightbulb', title: t('nav.ideas'), text: t('discover.ideasText'), count: ideas.length, countLabel: t('discover.ideasCount', { count: ideas.length }) },
+    { to: '/ideas?tab=all', icon: 'lightbulb', title: t('nav.ideas'), text: t('discover.ideasText'), count: ideaCount, countLabel: t('discover.ideasCount', { count: ideaCount }) },
   ];
 
   return (

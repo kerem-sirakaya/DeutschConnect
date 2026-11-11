@@ -88,14 +88,14 @@ test('Raumtitel: Themenraum übersetzt, Projekt/Event aus den Daten', () => {
   assert.equal(roomTitle({ kind: 'event', eventTitle: null }, t, () => ''), 'T(chat.rooms.eventFallback)');
 });
 
-test('Navigation: /chat ist der eigene Hauptbereich „chat“ (siebter Bereich, vor „Spiele“)', () => {
+test('Navigation: /chat ist der eigene Hauptbereich „chat“ (sechster Bereich, vor „Mein Bereich“)', () => {
   assert.equal(sectionForPath('/chat'), 'chat');
   assert.equal(sectionForPath('/chat/rooms/abc'), 'chat');
   assert.equal(sectionForPath('/chat/moderation'), 'chat');
   assert.equal(sectionForPath('/chatroom'), null);
-  assert.equal(NAV_ITEMS.length, 7);
+  assert.equal(NAV_ITEMS.length, 6);
   const ids = NAV_ITEMS.map((item) => item.id);
-  assert.ok(ids.indexOf('chat') < ids.indexOf('games'), 'chat steht vor games');
+  assert.ok(ids.indexOf('chat') < ids.indexOf('me'), 'chat steht vor me');
 });
 
 // ---------- API mit Test-Client ----------

@@ -6,7 +6,7 @@ import Icon from '../components/Icon.jsx';
 import GameLeaderboards, { LEADERBOARDS_ANCHOR } from '../games/GameLeaderboards.jsx';
 
 /**
- * Spiele-Übersicht – eigener Hauptbereich „Spiele“ (/games) in der Navigation.
+ * Spiele-Übersicht – Unterbereich von Community (/community/games). Alte /games-Links leiten hierher um.
  *
  * Die Spiele stammen von Kerem (Codex-Version, Branch `codex-version-1.0`, `src/pages/Games.jsx`).
  * Stand: Alle vier Spiele sind eingebaut (Stufe 8a) – nur im Browser, kein Online-Schach.
@@ -17,7 +17,7 @@ export default function GamesPage() {
   const { t } = useI18n();
   const { hash } = useLocation();
 
-  // Link „Zu den Bestenlisten“ von einer Spielseite (/games#leaderboards): dorthin scrollen.
+  // Link „Zu den Bestenlisten“ von einer Spielseite (/community/games#leaderboards): dorthin scrollen.
   // Erst im nächsten Bild – AppShell scrollt bei jedem Seitenwechsel nach oben, und dessen Effekt
   // läuft nach diesem (Eltern-Effekte laufen nach Kind-Effekten).
   useEffect(() => {
@@ -28,10 +28,10 @@ export default function GamesPage() {
 
   return (
     <div className="page">
-      <PageHeader title={t('games.title')} subtitle={t('games.subtitle')} />
+      <PageHeader title={t('games.title')} subtitle={t('games.subtitle')} backTo="/community" />
 
       <div className="hub-grid">
-        <Link to="/games/symbol-pairs" className="hub-card">
+        <Link to="/community/games/symbol-pairs" className="hub-card">
           <span className="hub-card__icon" aria-hidden="true">
             <Icon name="sparkles" size={24} />
           </span>
@@ -41,7 +41,7 @@ export default function GamesPage() {
           </span>
           <Icon name="chevronRight" size={18} />
         </Link>
-        <Link to="/games/paper-flight" className="hub-card">
+        <Link to="/community/games/paper-flight" className="hub-card">
           <span className="hub-card__icon" aria-hidden="true">
             <Icon name="arrowRight" size={24} />
           </span>
@@ -51,7 +51,7 @@ export default function GamesPage() {
           </span>
           <Icon name="chevronRight" size={18} />
         </Link>
-        <Link to="/games/bridge-runner" className="hub-card">
+        <Link to="/community/games/bridge-runner" className="hub-card">
           <span className="hub-card__icon" aria-hidden="true">
             <Icon name="refresh" size={24} />
           </span>
@@ -61,7 +61,7 @@ export default function GamesPage() {
           </span>
           <Icon name="chevronRight" size={18} />
         </Link>
-        <Link to="/games/chess" className="hub-card">
+        <Link to="/community/games/chess" className="hub-card">
           <span className="hub-card__icon" aria-hidden="true">
             <Icon name="users" size={24} />
           </span>

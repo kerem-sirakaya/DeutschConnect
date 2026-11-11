@@ -6,7 +6,7 @@
     "cancel": "Abbrechen",
     "yourSchool": "Deine Schule",
     "clearSearch": "Suche löschen",
-    "footerNote": "DeutschConnect · schulübergreifender Pilot ERS & Anka Bilim"
+    "footerNote": "DeutschConnect · schulübergreifende Zusammenarbeit"
   },
   "demo": {
     "label": "Demo",
@@ -228,6 +228,11 @@
       "conflict": "Dein Eintrag hat sich inzwischen geändert. Der aktuelle Stand wird angezeigt.",
       "network": "Keine Verbindung zum Server. Bitte versuche es noch einmal.",
       "generic": "Das hat nicht geklappt. Bitte versuche es noch einmal."
+    },
+    "leftOwnOnly": {
+      "title": "Gespeichert",
+      "text": "Deine Anmeldung bzw. dein Interesse wurde entfernt. Dieses Event wird nur angemeldeten und interessierten Personen angezeigt und ist deshalb hier nicht mehr sichtbar.",
+      "toMine": "Zu meinen Events"
     }
   },
   "ideas": {
@@ -442,7 +447,7 @@
     "whatTitle": "Was ist DeutschConnect?",
     "whatText": "DeutschConnect ist eine von Schüler:innen entwickelte Plattform, über die Schulen gemeinsame Veranstaltungen, Ideen und Projekte organisieren. Schüler:innen sollen selbst Initiative ergreifen und Kontakte zu anderen Schulen aufbauen können.",
     "originTitle": "Wie es entstanden ist",
-    "originText": "Die Idee entstand in einer Schülergruppe der Ernst-Reuter-Schule Ankara. Aus einem früheren Design-Prototyp für Deutschunterricht wurde eine Plattform für schulübergreifende Zusammenarbeit. Als erste Partnerschule hat Anka Bilim Interesse gezeigt.",
+    "originText": "Die Idee entstand in einer Schülergruppe der Ernst-Reuter-Schule Ankara. Aus einem früheren Design-Prototyp für Deutschunterricht wurde eine Plattform für schulübergreifende Zusammenarbeit.",
     "statusTitle": "Aktueller Stand",
     "worksTitle": "Bereits umgesetzt",
     "works1": "Web-Prototyp für Smartphone und Desktop",
@@ -715,7 +720,8 @@
         "hostNotParticipating": "Die Gastgeber-Schule muss zu den beteiligten Schulen gehören.",
         "topics": "Bitte wähle höchstens zehn Themen aus der Liste.",
         "format": "Bitte wähle ein Format aus der Liste."
-      }
+      },
+      "hiddenSchool": "auf der Website ausgeblendet"
     },
     "errors": {
       "notAllowed": "Dafür fehlen dir die Admin-Rechte.",
@@ -751,7 +757,7 @@
   "community": {
     "title": "Community",
     "subtitle": "Gemeinsam lernen und zusammenarbeiten.",
-    "tutoringText": "Nachhilfe anbieten oder suchen – freiwillig und ohne Bezahlung.",
+    "gamesText": "Kurze Spiele im Browser – mit Bestenlisten für Papierflug und Brückenläufer.",
     "peopleText": "Profile, die Schüler:innen freiwillig teilen.",
     "groupsText": "Gruppen zu Projekten und Events – mit Beiträgen und Diskussionen.",
     "groups": {
@@ -958,6 +964,7 @@
     "loading": "Nachhilfe-Einträge werden geladen …",
     "retry": "Erneut versuchen",
     "someoneFrom": "Eine Person von {school}",
+    "someone": "Eine Person",
     "fromPerson": "Von {name}",
     "toPerson": "An {name}",
     "responseNote": "Antwort",
@@ -1508,7 +1515,7 @@
         "title": "Erste Schritte",
         "what": {
           "q": "Was ist DeutschConnect?",
-          "a": "Eine Plattform von Schüler:innen für die Zusammenarbeit zwischen der Ernst-Reuter-Schule Ankara und Anka Bilim. Ihr findet gemeinsame Events, teilt Ideen für Projekte und tauscht euch aus."
+          "a": "Eine Plattform von Schüler:innen für die Zusammenarbeit zwischen Schulen – entstanden an der Ernst-Reuter-Schule Ankara. Ihr findet gemeinsame Events, teilt Ideen für Projekte und tauscht euch aus."
         },
         "how": {
           "q": "Wie benutze ich die Plattform?",

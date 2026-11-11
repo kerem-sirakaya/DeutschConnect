@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { useI18n } from '../../i18n/LanguageContext.jsx';
 import { getSchool } from '../../data/schools.js';
 import { useTutoring } from '../../state/TutoringContext.jsx';
-import { TUTOR_LIMITS, validateResponseNote } from '../../lib/tutoring.js';
+import { TUTOR_LIMITS, requestPartnerLabel, validateResponseNote } from '../../lib/tutoring.js';
 import { formatDateShort } from '../../lib/format.js';
 import Icon from '../Icon.jsx';
 
@@ -20,10 +20,8 @@ export default function RequestCard({ request, showEntryLink = true }) {
   const [busy, setBusy] = useState(false);
   const [errorKey, setErrorKey] = useState(null);
   const incoming = request.direction === 'incoming';
-  const school = getSchool(request.otherSchoolId);
-  const who = request.otherFirstName
-    ? `${request.otherFirstName} · ${school?.shortName ?? ''}`
-    : t('tutoring.someoneFrom', { school: school?.shortName ?? '–' });
+  // getSchool liefert für ausgeblendete Schulen nichts → neutrale Angabe ohne Schulnamen
+  const who = requestPartnerLabel(request.otherFirstName, getSchool(request.otherSchoolId)?.shortName, t);
 
   const act = async (operation) => {
     if (busy || !actions) return;

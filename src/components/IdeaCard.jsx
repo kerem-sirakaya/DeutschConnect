@@ -24,7 +24,8 @@ export default function IdeaCard({ idea }) {
           {isOwn ? (
             <span className="badge badge--role">{t('ideas.yourIdea')}</span>
           ) : (
-            <span className="idea-card__school">{t('ideas.fromSchool', { school: school?.shortName ?? '' })}</span>
+            // ohne (sichtbare) Schule kein leeres „Aus:“
+            school && <span className="idea-card__school">{t('ideas.fromSchool', { school: school.shortName })}</span>
           )}
         </span>
         <SupportButton idea={idea} compact />

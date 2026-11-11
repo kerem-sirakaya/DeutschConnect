@@ -1,5 +1,6 @@
 import { useI18n } from '../i18n/LanguageContext.jsx';
-import { schools } from '../data/schools.js';
+// nur sichtbare Schulen (ausgeblendete: src/data/schools.js → HIDDEN_SCHOOL_IDS)
+import { visibleSchools as schools } from '../data/schools.js';
 import PageHeader from '../components/PageHeader.jsx';
 import Icon from '../components/Icon.jsx';
 import { StatusBadge } from '../components/Badges.jsx';
