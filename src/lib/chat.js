@@ -235,6 +235,23 @@ export function mapConversation(row) {
   };
 }
 
+/**
+ * „Nachricht senden“ an eine bestimmte Person (z. B. nach angenommener Nachhilfe): nächster Schritt.
+ * Gleiche Reihenfolge wie chat_send_request (014), damit keine doppelte Anfrage entsteht:
+ *   1. Gespräch besteht schon        → { step: 'open', conversationId }
+ *   2. offene Anfrage zwischen beiden → { step: 'pendingOutgoing' | 'pendingIncoming' }
+ *   3. Profil nicht öffentlich        → { step: 'unreachable' } (014 würde mit DC049 ablehnen)
+ *   4. sonst                          → { step: 'request' } (Nachrichtenanfrage schreiben)
+ * conversations/requests: Ergebnisse von fetchConversations/fetchRequests (mapConversation/mapRequest).
+ */
+export function directMessageStep(otherId, { conversations = [], requests = [], reachable = false } = {}) {
+  const conversation = (conversations ?? []).find((c) => c?.otherId === otherId);
+  if (conversation) return { step: 'open', conversationId: conversation.id };
+  const pending = (requests ?? []).find((r) => r?.otherId === otherId && r.status === 'pending');
+  if (pending) return { step: pending.direction === 'incoming' ? 'pendingIncoming' : 'pendingOutgoing' };
+  return { step: reachable ? 'request' : 'unreachable' };
+}
+
 export function mapSearchResult(row) {
   return {
     messageId: row.message_id,

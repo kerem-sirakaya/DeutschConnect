@@ -6,6 +6,7 @@ import { useTutoring } from '../../state/TutoringContext.jsx';
 import { TUTOR_LIMITS, requestPartnerLabel, validateResponseNote } from '../../lib/tutoring.js';
 import { formatDateShort } from '../../lib/format.js';
 import Icon from '../Icon.jsx';
+import TutoringChatButton from './TutoringChatButton.jsx';
 
 const TONES = { pending: 'warning', accepted: 'success', declined: 'danger', withdrawn: 'muted' };
 
@@ -71,6 +72,8 @@ export default function RequestCard({ request, showEntryLink = true }) {
         </p>
       )}
       {request.status === 'accepted' && <p className="hint">{t('tutoring.acceptedHint')}</p>}
+      {/* Nur bei angenommener Anfrage: private Nachrichtenanfrage über den bestehenden Chat (für beide Seiten) */}
+      {request.status === 'accepted' && <TutoringChatButton request={request} />}
 
       {incoming && request.status === 'pending' && (
         <div className="stack">

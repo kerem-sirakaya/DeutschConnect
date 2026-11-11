@@ -969,6 +969,7 @@
     "toPerson": "An {name}",
     "responseNote": "Antwort",
     "acceptedHint": "Angenommen: Vereinbart das Treffen bitte über eure Schule oder eine Lehrkraft.",
+    "chatUnreachable": "Eine Nachricht an {name} ist erst möglich, wenn {name} das Profil öffentlich macht („Mein Bereich“ → „Profil-Freigabe“). Bis dahin vereinbart das Treffen bitte über eure Schule oder eine Lehrkraft.",
     "responseNoteLabel": "Kurze Antwort (optional, ohne Kontaktdaten)",
     "decline": "Ablehnen",
     "accept": "Annehmen",

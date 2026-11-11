@@ -969,6 +969,7 @@
     "toPerson": "To {name}",
     "responseNote": "Reply",
     "acceptedHint": "Accepted: please arrange the meeting through your school or a teacher.",
+    "chatUnreachable": "You can only message {name} once {name} makes their profile public (“My Area” → “Profile sharing”). Until then, please arrange the meeting through your school or a teacher.",
     "responseNoteLabel": "Short reply (optional, no contact details)",
     "decline": "Decline",
     "accept": "Accept",

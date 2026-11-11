@@ -969,6 +969,7 @@
     "toPerson": "Alıcı: {name}",
     "responseNote": "Yanıt",
     "acceptedHint": "Kabul edildi: Buluşmayı lütfen okulunuz veya bir öğretmen üzerinden ayarlayın.",
+    "chatUnreachable": "{name} profilini herkese açık yapana kadar ona mesaj gönderemezsin (“Alanım” → “Profil paylaşımı”). O zamana kadar buluşmayı lütfen okulunuz veya bir öğretmen üzerinden ayarlayın.",
     "responseNoteLabel": "Kısa yanıt (isteğe bağlı, iletişim bilgisi olmadan)",
     "decline": "Reddet",
     "accept": "Kabul et",

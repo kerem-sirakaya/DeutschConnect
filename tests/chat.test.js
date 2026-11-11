@@ -11,6 +11,7 @@ import {
   TOPIC_SLUGS,
   chatError,
   chatErrorKey,
+  directMessageStep,
   isStaffRole,
   isValidSearch,
   mapConversation,
@@ -211,4 +212,42 @@ test('014: Anfrage ≠ Gespräch; eindeutige Paare; Sperren bei jeder Schreibakt
   // Gespräch nur über Annahme (chat_respond_request) – sonst nirgends ein INSERT in chat_conversations
   const inserts = [...sql.matchAll(/insert into public\.chat_conversations/g)];
   assert.equal(inserts.length, 1);
+});
+
+test('Nachhilfe → „Nachricht senden“: bestehendes Gespräch öffnen, keine doppelte Anfrage', () => {
+  const other = 'u-other';
+  const conv = mapConversation({ id: 'c-1', other_id: other });
+  const unrelated = mapConversation({ id: 'c-9', other_id: 'u-someone-else' });
+  // 1. Gespräch besteht → öffnen (auch wenn das Profil inzwischen privat ist)
+  assert.deepEqual(directMessageStep(other, { conversations: [unrelated, conv], reachable: false }), {
+    step: 'open',
+    conversationId: 'c-1',
+  });
+  // 2. offene Nachrichtenanfrage → Hinweis statt neuer Anfrage
+  const out = mapRequest({ id: 'r-1', direction: 'outgoing', other_id: other, status: 'pending' });
+  const inc = mapRequest({ id: 'r-2', direction: 'incoming', other_id: other, status: 'pending' });
+  assert.equal(directMessageStep(other, { requests: [out], reachable: true }).step, 'pendingOutgoing');
+  assert.equal(directMessageStep(other, { requests: [inc], reachable: true }).step, 'pendingIncoming');
+  // entschiedene Anfragen zählen nicht (abgelehnt → neue Anfrage; Wartezeit prüft die Datenbank, DC047)
+  const declined = mapRequest({ id: 'r-3', direction: 'outgoing', other_id: other, status: 'declined' });
+  assert.equal(directMessageStep(other, { requests: [declined], reachable: true }).step, 'request');
+  // 3./4. Erreichbarkeit = öffentliches Profil (wie chat_send_request, sonst DC049)
+  assert.equal(directMessageStep(other, { reachable: true }).step, 'request');
+  assert.equal(directMessageStep(other, { reachable: false }).step, 'unreachable');
+  assert.equal(directMessageStep(other).step, 'unreachable');
+  assert.equal(directMessageStep(other, { conversations: null, requests: undefined, reachable: true }).step, 'request');
+});
+
+test('Nachhilfe → „Nachricht senden“ nur bei angenommener Anfrage, über das bestehende Chat-System', () => {
+  const card = readFileSync(new URL('../src/components/tutoring/RequestCard.jsx', import.meta.url), 'utf8');
+  const button = readFileSync(new URL('../src/components/tutoring/TutoringChatButton.jsx', import.meta.url), 'utf8');
+  assert.match(card, /request\.status === 'accepted' && <TutoringChatButton request=\{request\} \/>/);
+  // Zusätzliche Absicherung in der Komponente selbst (ausstehend/abgelehnt/zurückgezogen → nichts)
+  assert.match(button, /if \(request\.status !== 'accepted' \|\| !otherId \|\| !supabase\) return null;/);
+  // Chat aus oder Demo → kein Button
+  assert.match(button, /if \(status\.status !== 'ready' \|\| !status\.data\?\.enabled\) return null;/);
+  // kein eigenes Nachrichtensystem: nur bestehende API-Funktionen + ChatRequestPanel (chat_send_request)
+  assert.doesNotMatch(button, /\.rpc\(|\.from\(/);
+  assert.match(button, /import ChatRequestPanel from '\.\.\/chat\/ChatRequestPanel\.jsx'/);
+  assert.match(button, /navigate\(`\/chat\/conversations\/\$\{next\.conversationId\}`\)/);
 });
