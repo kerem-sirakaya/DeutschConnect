@@ -11,7 +11,7 @@ import { formatAnkaraDateTime } from '../lib/eventForm.js';
 import PageHeader from '../components/PageHeader.jsx';
 import InfoList from '../components/InfoList.jsx';
 import Icon from '../components/Icon.jsx';
-import { DemoBadge, RoleBadge, StatusBadge, TopicTags } from '../components/Badges.jsx';
+import { RoleBadge, StatusBadge, TopicTags } from '../components/Badges.jsx';
 import EmptyState from '../components/EmptyState.jsx';
 import NotFoundPage from './NotFoundPage.jsx';
 import { useToast } from '../components/toast/ToastContext.jsx';
@@ -107,7 +107,6 @@ export default function EventDetailPage() {
           <div className="badge-row">
             <StatusBadge type="event" status={event.status} />
             <RoleBadge role={role} />
-            {event.isDemo && <DemoBadge labelKey="demo.exampleEvent" />}
           </div>
 
           <p className="lead">{localize(event.summary, language)}</p>
@@ -225,7 +224,7 @@ export default function EventDetailPage() {
 
           <p className="hint">
             <Icon name="info" size={14} />
-            {t(isRealAccount ? 'eventDetail.savedToAccount' : 'demo.localOnly')}
+            {t('eventDetail.savedToAccount')}
           </p>
         </aside>
       </div>

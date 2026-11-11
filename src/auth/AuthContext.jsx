@@ -7,8 +7,8 @@ import { resetRedirectUrl } from '../lib/passwordRecovery.js';
  * ECHTE Anmeldung über Supabase Auth.
  *
  * Ist jemand angemeldet, macht src/state/AppStateContext.jsx aus dem hier
- * geladenen Profil das aktive Profil der ganzen App. Events, Ideen und Projekte
- * bleiben vorerst Demo-Inhalte – auch nach dem Login.
+ * geladenen Profil das aktive Profil der ganzen App. Ohne Anmeldung gibt es keine
+ * Inhalte für Mitglieder (Gast-Modus, siehe AppStateContext.jsx).
  *
  * Registrierung ist nur sichtbar, wenn in .env.local VITE_ENABLE_SIGNUP=true steht.
  * Das ist nur ein Schalter für die Oberfläche. Der echte Schutz ist die Einstellung

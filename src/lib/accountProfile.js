@@ -8,13 +8,36 @@ import { getSchool, isHiddenSchool } from '../data/schools.js';
  *   - Event-Anmeldungen                               -> Supabase "event_registrations"
  *   - Ideen-Unterstützungen                           -> Supabase "idea_supports"
  *   - Projekt-Interesse, ausgeblendete Hinweise        -> vorerst nur im Browser,
- *     getrennt pro Konto (Projekte sind noch Demo-Inhalte)
+ *     getrennt pro Konto
  *   Die alten Felder "registrations", "supportedIdeas" und "customIdeas" im
  *   Browser-Speicher (aus der Zeit davor) werden nicht mehr gelesen, aber auch nicht gelöscht.
- * Demo-Profile und ihre Daten werden hier nie gelesen oder verändert.
+ * Ohne Anmeldung gilt GUEST_USER (keine erfundenen Daten).
  */
 
 export const ACCOUNT_STORAGE_PREFIX = 'deutschconnect.accountState.v1.';
+
+/**
+ * Nicht angemeldet: neutraler Gast – KEIN erfundenes Profil (kein Name, keine Schule, keine Inhalte).
+ * Gleiche Form wie buildAccountUser, damit gemeinsame Bausteine (Kopfzeile, Avatar) ohne Sonderfälle laufen.
+ * Inhalte für Mitglieder zeigt die App Gästen nicht (RequireAccount) – die Datenbank (RLS) gibt sie ohnehin nicht heraus.
+ */
+export const GUEST_USER = Object.freeze({
+  id: 'guest',
+  firstName: '',
+  lastName: '',
+  schoolId: null,
+  grade: null,
+  avatarColor: '#6b7280',
+  interests: Object.freeze([]),
+  invitations: Object.freeze([]),
+  registrations: Object.freeze({}),
+  supportedIdeas: Object.freeze([]),
+  projectInterest: Object.freeze([]),
+  dismissedUpdates: Object.freeze([]),
+  school: null,
+  isRealAccount: false,
+  isGuest: true,
+});
 
 export function emptyAccountData() {
   return { registrations: {}, supportedIdeas: [], projectInterest: [], dismissedUpdates: [], customIdeas: [] };
@@ -42,7 +65,7 @@ export function sanitizeAccountData(saved) {
 
 /**
  * Baut aus dem Supabase-Profil das "user"-Objekt, das alle Seiten erwarten
- * (gleiche Form wie bei den Demo-Profilen).
+ * (gleiche Form wie GUEST_USER).
  * registrations: { [eventId]: 'registered' | 'interested' } aus event_registrations
  * supportedIdeas: [ideaId, ...] aus idea_supports
  */

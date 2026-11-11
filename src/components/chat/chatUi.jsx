@@ -49,7 +49,7 @@ export function useChatAction() {
  */
 export function ChatStateNotice({ result }) {
   const { t } = useI18n();
-  if (result.status === 'demo') {
+  if (result.status === 'guest') {
     return (
       <div className="card stack">
         <p>{t('chat.loginHint')}</p>

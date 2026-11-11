@@ -8,7 +8,7 @@ import Logo from './Logo.jsx';
 /**
  * Wird statt der App gezeigt, solange das echte Profil, die Events oder die Ideen
  * laden oder nicht geladen werden konnten. So sieht man nie kurz ein falsches
- * (Demo-)Profil und nie Demo-Inhalte als stillen Ersatz.
+ * Profil und nie erfundene Inhalte als stillen Ersatz.
  */
 export default function ProfileGate({ status, titleKey, messageKey, onRetry }) {
   const { t } = useI18n();

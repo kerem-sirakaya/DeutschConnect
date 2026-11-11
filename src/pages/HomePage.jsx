@@ -24,12 +24,90 @@ import { useTutoring } from '../state/TutoringContext.jsx';
 import { countOpenIncoming, matchTutoring } from '../lib/tutoring.js';
 import { greetingMessage } from '../lib/greeting.js';
 import { useNow } from '../hooks/useNow.js';
+import { useAuth } from '../auth/AuthContext.jsx';
 
 /**
- * Startseite = persönliches Dashboard. Alle Inhalte hängen vom aktiven Profil ab:
- * eigene Events, Empfehlungen (Interessen + Schule), Projekte/Ideen, Hinweise.
+ * Startseite. Gäste: Begrüßung mit Anmelden/Registrieren (keine erfundenen Inhalte).
+ * Mitglieder: persönliches Dashboard – eigene Events, Empfehlungen (Interessen + Schule), Projekte/Ideen, Hinweise.
+ * Zwei getrennte Komponenten, damit die Reihenfolge der React-Hooks beim An-/Abmelden stabil bleibt.
  */
 export default function HomePage() {
+  const { mode } = useAppState();
+  return mode === 'guest' ? <GuestHome /> : <MemberHome />;
+}
+
+/** Öffentliche Startseite für Gäste: was Connect/ED ist, Anmelden/Registrieren, frei zugängliche Bereiche. */
+function GuestHome() {
+  const { t } = useI18n();
+  const auth = useAuth();
+  usePageTitle(t('nav.home'));
+  const features = [
+    { icon: 'calendar', key: 'events' },
+    { icon: 'lightbulb', key: 'ideas' },
+    { icon: 'school', key: 'tutoring' },
+    { icon: 'chat', key: 'chat' },
+  ];
+  return (
+    <div className="page home">
+      <section className="dashboard-welcome" aria-labelledby="welcome-title">
+        <div>
+          <h1 id="welcome-title" tabIndex={-1}>
+            {t('guest.welcomeTitle')}
+          </h1>
+          <p>{t('guest.welcomeText')}</p>
+          <div className="guest-welcome__actions">
+            <Link to="/login" className="btn btn--primary">
+              <Icon name="user" size={18} />
+              {t('auth.toLogin')}
+            </Link>
+            {auth.isSignupEnabled && (
+              <Link to="/register" className="btn btn--secondary">
+                {t('auth.toRegister')}
+              </Link>
+            )}
+          </div>
+        </div>
+        <span className="dashboard-welcome__icon" aria-hidden="true">
+          <Icon name="network" size={36} />
+        </span>
+      </section>
+
+      <Section title={t('guest.featuresTitle')} icon="sparkles">
+        <ul className="guest-features">
+          {features.map((feature) => (
+            <li key={feature.key} className="card guest-feature">
+              <Icon name={feature.icon} size={22} />
+              <div>
+                <p className="guest-feature__title">{t(`guest.features.${feature.key}.title`)}</p>
+                <p className="muted">{t(`guest.features.${feature.key}.text`)}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <p className="muted small">{t('guest.membersOnlyHint')}</p>
+      </Section>
+
+      <Section title={t('guest.openTitle')} icon="globe">
+        <div className="guest-open">
+          <Link to="/community/games" className="btn btn--secondary btn--sm">
+            <Icon name="gamepad" size={16} />
+            {t('games.title')}
+          </Link>
+          <Link to="/about" className="btn btn--secondary btn--sm">
+            <Icon name="info" size={16} />
+            {t('nav.about')}
+          </Link>
+          <Link to="/help" className="btn btn--secondary btn--sm">
+            <Icon name="help" size={16} />
+            {t('nav.help')}
+          </Link>
+        </div>
+      </Section>
+    </div>
+  );
+}
+
+function MemberHome() {
   const { t, language } = useI18n();
   const { user, ideas, events } = useAppState();
   const [now] = useState(() => new Date());
@@ -186,7 +264,7 @@ export default function HomePage() {
 }
 
 /**
- * „Guten Morgen, Ada!“ – nach lokaler Uhrzeit, mit dem Vornamen aus dem Profil (Konto) bzw. Demo-Profil.
+ * „Guten Morgen, Ada!“ – nach lokaler Uhrzeit, mit dem Vornamen aus dem Profil (Konto).
  * Eigene kleine Komponente: nur sie wird jede Minute neu gezeichnet, nicht das ganze Dashboard.
  */
 function DashboardGreeting({ firstName }) {

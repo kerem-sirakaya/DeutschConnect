@@ -17,7 +17,7 @@ import ChatRequestPanel from '../chat/ChatRequestPanel.jsx';
  *   – sonst Nachrichtenanfrage über ChatRequestPanel (chat_send_request)
  * Erreichbar ist nur, wer ein öffentliches Profil hat (Regel von chat_send_request) – sonst ein Hinweis.
  * Geprüft wird erst beim Klick, damit eine Liste mit vielen Anfragen nicht viele Abfragen auslöst.
- * Nicht sichtbar: Demo-Modus, Chat ausgeschaltet, Anfrage nicht angenommen, ID der anderen Person fehlt.
+ * Nicht sichtbar: ohne Anmeldung, Chat ausgeschaltet, Anfrage nicht angenommen, ID der anderen Person fehlt.
  */
 export default function TutoringChatButton({ request }) {
   const { t } = useI18n();

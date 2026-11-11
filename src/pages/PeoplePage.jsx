@@ -37,7 +37,7 @@ export default function PeoplePage() {
 
       <ProfileStatusNotice status={directory.status} errorKey={directory.errorKey} reload={directory.reload} />
 
-      {(directory.status === 'ready' || directory.status === 'demo') && (
+      {directory.status === 'ready' && (
         <>
           <SearchField
             label={t('profiles.searchLabel')}
@@ -59,7 +59,6 @@ export default function PeoplePage() {
                       <span className="person-card__body">
                         <span className="person-card__name">
                           {person.firstName}
-                          {person.isDemo && <span className="badge badge--demo">{t('demo.label')}</span>}
                         </span>
                         {school && <span className="muted">{school.name}</span>}
                         {person.interests.length > 0 && <TopicTags topics={person.interests.slice(0, 4)} />}

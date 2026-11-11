@@ -94,7 +94,7 @@ export function getMyIdeas(user, ideas) {
   };
 }
 
-/** Zählt Unterstützungen aus allen (Demo-)Profilen – keine erfundenen Zahlen. */
+/** Zählt Unterstützungen aus mehreren Profil-Zuständen (nur Tests) – keine erfundenen Zahlen. */
 export function getSupportCounts(profileStates) {
   const counts = {};
   for (const state of Object.values(profileStates)) {

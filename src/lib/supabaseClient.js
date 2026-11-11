@@ -8,7 +8,7 @@ import { RESET_PASSWORD_PATH, createRecoveryStore, parseAuthRedirect } from './p
  * Der "publishable" Key darf im Browser stehen – die Sicherheit entsteht durch
  * Row Level Security in der Datenbank (supabase/migrations/001_initial_schema.sql).
  *
- * Fehlen die Werte, ist `supabase` = null und die App läuft nur im Demo-Modus.
+ * Fehlen die Werte, ist `supabase` = null: keine Anmeldung möglich (Builds/Start brechen vorher ab).
  */
 const url = import.meta.env.VITE_SUPABASE_URL;
 const key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
@@ -74,7 +74,7 @@ if (supabase) {
  */
 export async function checkSupabaseConnection() {
   if (!supabase) {
-    console.info('[Supabase] Nicht konfiguriert – App läuft im Demo-Modus.');
+    console.info('[Supabase] Nicht konfiguriert – Anmeldung nicht möglich.');
     return 'not-configured';
   }
   const { error } = await supabase.from('profiles').select('id').limit(1);

@@ -11,7 +11,7 @@ import PageHeader from '../components/PageHeader.jsx';
 import InfoList from '../components/InfoList.jsx';
 import SupportButton from '../components/SupportButton.jsx';
 import Icon from '../components/Icon.jsx';
-import { DemoBadge, StatusBadge, TopicTags } from '../components/Badges.jsx';
+import { StatusBadge, TopicTags } from '../components/Badges.jsx';
 import ProjectParticipation from '../components/projects/ProjectParticipation.jsx';
 import NotFoundPage from './NotFoundPage.jsx';
 
@@ -35,7 +35,7 @@ export default function IdeaDetailPage() {
   // Echtes Konto, eigene Idee: "wartet auf Freigabe" (submitted) oder "nicht freigegeben" (rejected).
   // In beiden Fällen sehen andere die Idee nicht.
   const notice = ownIdeaNotice({ status: idea.status, isOwn, isRealAccount });
-  const canDelete = isOwn && (idea.isLocal || isRealAccount);
+  const canDelete = isOwn && isRealAccount;
 
   const handleDelete = async () => {
     setDeleting(true);
@@ -58,7 +58,7 @@ export default function IdeaDetailPage() {
           <Icon name="check" size={18} />
           <div>
             <strong>{t('ideaDetail.created')}</strong>
-            <p>{t(isRealAccount ? 'ideaDetail.createdHintAccount' : 'ideaDetail.createdHint')}</p>
+            <p>{t('ideaDetail.createdHintAccount')}</p>
           </div>
         </div>
       )}
@@ -85,7 +85,6 @@ export default function IdeaDetailPage() {
           <div className="badge-row">
             <StatusBadge type="idea" status={idea.status} />
             {isOwn && <span className="badge badge--role">{t('ideas.yourIdea')}</span>}
-            {idea.isDemo && <DemoBadge />}
           </div>
 
           <InfoList

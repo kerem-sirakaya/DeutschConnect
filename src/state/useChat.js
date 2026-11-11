@@ -20,7 +20,7 @@ import {
 /**
  * Hooks für den Chatroom (Migration 014).
  * Ergebnis wie useRemote: { status, data, errorKey, reload, refreshing }
- *   status: 'demo' (abgemeldet) | 'loading' | 'ready' | 'error' | 'notInstalled'
+ *   status: 'guest' (nicht angemeldet) | 'loading' | 'ready' | 'error' | 'notInstalled'
  * errorKey 'chat.errors.disabled' = Chat ist (noch) ausgeschaltet.
  */
 const useChatRemote = (load, deps) => useRemote(load, () => null, deps, chatErrorKey);

@@ -3,7 +3,6 @@ import { useI18n } from '../../i18n/LanguageContext.jsx';
 import { getSchool, isHiddenSchool } from '../../data/schools.js';
 import { entryText } from '../../lib/tutoring.js';
 import Icon from '../Icon.jsx';
-import { DemoBadge } from '../Badges.jsx';
 
 /** Karte eines Nachhilfeeintrags (Aufbau wie die Codex-„task-card“). */
 export default function TutoringCard({ entry }) {
@@ -19,7 +18,6 @@ export default function TutoringCard({ entry }) {
           <span>{t(`tutoring.kind.${entry.kind}`)}</span>
           {/* ausgeblendete Schule (src/data/schools.js): weder Name noch ID anzeigen */}
           {!isHiddenSchool(entry.schoolId) && <span>{school?.shortName ?? entry.schoolId}</span>}
-          {entry.isDemo && <DemoBadge />}
         </span>
         <span className="task-card__title">
           {entryText(entry, 'subject', language)} · {entryText(entry, 'topics', language)}

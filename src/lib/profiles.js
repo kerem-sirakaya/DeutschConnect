@@ -7,7 +7,6 @@
  * Projektvorschläge und Aktivitätszahlen jeweils nur, wenn sie zusätzlich freigegeben sind.
  * Klasse und Konto-Daten sind nie öffentlich.
  */
-import { PUBLIC_IDEA_STATUSES } from './ideasApi.js';
 
 /** Einzeln freigebbare Angaben (Reihenfolge = Reihenfolge im Formular). */
 export const SHARING_FIELDS = ['school', 'interests', 'projects', 'activity'];
@@ -71,34 +70,6 @@ export const STAT_GROUPS = [
   { id: 'tutoring', keys: ['tutoringOffers', 'tutoringRequests', 'tutoringContacts'] },
 ];
 
-/** Statistik aus den Demo-Daten (nur Demo-Modus – echte Konten nutzen get_my_activity_stats). */
-export function demoStats(user, ideas, events, now = new Date()) {
-  const registrations = user.registrations ?? {};
-  const eventById = new Map(events.map((event) => [event.id, event]));
-  let upcoming = 0;
-  let past = 0;
-  let interested = 0;
-  for (const [eventId, status] of Object.entries(registrations)) {
-    const event = eventById.get(eventId);
-    if (status === 'interested') interested += 1;
-    if (!event || status !== 'registered' || event.status === 'cancelled') continue;
-    if (new Date(event.start) > now) upcoming += 1;
-    else past += 1;
-  }
-  const own = ideas.filter((idea) => idea.authorId === user.id);
-  const published = own.filter((idea) => PUBLIC_IDEA_STATUSES.includes(idea.status));
-  return {
-    ...mapStatsRow(null),
-    eventsUpcoming: upcoming,
-    eventsPast: past,
-    eventsInterested: interested,
-    ideasSubmitted: own.length,
-    ideasPublished: published.length,
-    ideasPlanned: own.filter((idea) => idea.status === 'planned').length,
-    supportsGiven: (user.supportedIdeas ?? []).length,
-  };
-}
-
 /** Zeile aus list_public_profiles() → Verzeichnis-Eintrag. */
 export function mapDirectoryRow(row) {
   return {
@@ -151,7 +122,7 @@ export function filterDirectory(profiles, { query = '', schoolId = '' } = {}, de
 }
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-/** Nur echte Konto-IDs an die Datenbank schicken (Demo-IDs wie "elif" wären ein SQL-Fehler). */
+/** Nur echte Konto-IDs an die Datenbank schicken (ungültige IDs wie "elif" wären ein SQL-Fehler). */
 export const isProfileId = (value) => typeof value === 'string' && UUID.test(value);
 
 /** Supabase-Fehler → i18n-Schlüssel. "notInstalled" = Migration 012 fehlt in der Datenbank. */

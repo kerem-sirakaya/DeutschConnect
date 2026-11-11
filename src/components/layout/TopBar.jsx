@@ -5,7 +5,6 @@ import Icon from '../Icon.jsx';
 import ProfileMenu from '../ProfileMenu.jsx';
 import AccentPicker from '../AccentPicker.jsx';
 import MainNav from './MainNav.jsx';
-import { useAppState } from '../../state/AppStateContext.jsx';
 
 /**
  * Kopfleiste im Stil der Codex-Version: Marke links, auf dem Desktop die Hauptnavigation
@@ -13,7 +12,7 @@ import { useAppState } from '../../state/AppStateContext.jsx';
  */
 export default function TopBar() {
   const { t } = useI18n();
-  const { isRealAccount } = useAppState();
+  // Kennzeichen NUR bei „npm run dev:staging“ (Diagnose). „npm run dev“ und der öffentliche Build zeigen keins.
   const isStaging = import.meta.env.VITE_DC_TARGET === 'staging';
   return (
     <header className={`topbar${isStaging ? ' topbar--staging' : ''}`}>
@@ -36,10 +35,6 @@ export default function TopBar() {
               <span className="demo-pill__short" aria-hidden="true">STG</span>
             </span>
           )}
-          {/* Wie bisher: Teile der Inhalte (z. B. Projekte im Netzwerk) sind auch angemeldet noch Demo. */}
-          <span className="demo-pill" title={t(isRealAccount ? 'auth.demoStillActive' : 'demo.tooltip')}>
-            {t('demo.label')}
-          </span>
           <AccentPicker />
           <LanguageSwitcher />
           <ProfileMenu />

@@ -20,12 +20,12 @@ export default function ProjectParticipation({ idea }) {
   const [errorKey, setErrorKey] = useState(null);
   const [savedKey, setSavedKey] = useState(null);
 
-  if (project.status === 'demo') {
+  if (project.status === 'guest') {
     if (!isProjectOpen(idea)) return null;
     return (
       <section className="project-participation" aria-labelledby="project-participation">
         <h2 id="project-participation">{t('projects.title')}</h2>
-        <p className="muted">{t('projects.demoHint')}</p>
+        <p className="muted">{t('projects.guestHint')}</p>
         <Link to="/login" className="text-link">
           {t('projects.loginLink')}
         </Link>

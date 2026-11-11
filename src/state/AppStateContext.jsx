@@ -1,23 +1,11 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useState } from 'react';
-import { demoProfiles, getDemoProfile } from '../data/profiles.js';
-import { getSchool } from '../data/schools.js';
-import { seedIdeas } from '../data/ideas.js';
-import { events as demoEvents } from '../data/events.js';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { useAccountEvents } from './useAccountEvents.js';
 import { useAccountIdeas } from './useAccountIdeas.js';
-import { getSupportCounts } from '../lib/selectors.js';
 import { visibleToStudents } from '../lib/eventArchive.js';
-import { isVisibleDemoProfile, visibleContent, visibleOrOwn } from '../lib/schoolVisibility.js';
-
-// Inhalte ausgeblendeter Schulen (src/data/schools.js → HIDDEN_SCHOOL_IDS) nur in der Anzeige weglassen – Daten bleiben erhalten.
-const visibleDemoEvents = visibleContent(demoEvents);
-const visibleSeedIdeas = visibleContent(seedIdeas);
-
-// Wie oft die Archiv-Ausblendung neu berechnet wird (Events verschwinden pünktlich,
-// auch wenn die Seite lange offen bleibt)
-const ARCHIVE_TICK_MS = 5 * 60 * 1000;
+import { visibleOrOwn } from '../lib/schoolVisibility.js';
 import {
   ACCOUNT_STORAGE_PREFIX,
+  GUEST_USER,
   buildAccountUser,
   emptyAccountData,
   sanitizeAccountData,
@@ -25,144 +13,40 @@ import {
 import { useAuth } from '../auth/AuthContext.jsx';
 import ProfileGate from '../components/ProfileGate.jsx';
 
+// Wie oft die Archiv-Ausblendung neu berechnet wird (Events verschwinden pünktlich,
+// auch wenn die Seite lange offen bleibt)
+const ARCHIVE_TICK_MS = 5 * 60 * 1000;
+
 /**
  * ZENTRALER ZUSTAND der App – alle Seiten lesen das aktive Profil über useAppState().
  *
- * Zwei getrennte Modi:
- *   1. DEMO (niemand angemeldet): wie bisher. Fiktive Profile, Daten nur im Browser
- *      (localStorage-Schlüssel "deutschconnect.demoState").
+ * Zwei Modi:
+ *   1. GAST (niemand angemeldet): KEINE erfundenen Profile, Events oder Ideen. Die Datenbank (RLS) gibt
+ *      Gästen keine Inhalte heraus; Seiten für Mitglieder zeigen stattdessen „Bitte anmelden“
+ *      (components/RequireAccount.jsx). Aktionen sind ohne Konto nicht möglich.
  *   2. ECHTES KONTO (Supabase-Login): Name, Schule, Klasse, Avatar-Farbe und Interessen
  *      kommen aus der Tabelle "profiles", Events aus "events" und die eigenen
  *      Event-Anmeldungen aus "event_registrations" (siehe useAccountEvents.js),
  *      Ideen + Unterstützungen aus "ideas"/"idea_supports" (siehe useAccountIdeas.js).
- *      Nur Projekt-Interesse und ausgeblendete Hinweise liegen noch im Browser –
- *      in einem EIGENEN Schlüssel pro Konto, nie zusammen mit den Demo-Daten.
- *      Demo-Events, Demo-Ideen und Demo-Anmeldungen werden im Konto-Modus NIE verwendet.
+ *      Nur ausgeblendete Hinweise liegen noch im Browser – in einem EIGENEN Schlüssel pro Konto.
  *
- * Beim Abmelden ist automatisch wieder das zuletzt gewählte Demo-Profil aktiv,
- * weil der Demo-Zustand während der Anmeldung nicht verändert wird.
+ * Früher gab es einen Demo-Modus mit fiktiven Profilen („Alex“) und Beispiel-Inhalten. Er ist entfernt;
+ * die Beispieldaten liegen nur noch als Test-Daten unter tests/fixtures/.
  */
 
-const STORAGE_KEY = 'deutschconnect.demoState';
-const STATE_VERSION = 1;
-
-function seedProfileState(profile) {
-  return {
-    interests: [...profile.interests],
-    registrations: { ...profile.registrations },
-    supportedIdeas: [...profile.supportedIdeas],
-    projectInterest: [],
-    dismissedUpdates: [],
-  };
-}
-
-export function createInitialState() {
-  return {
-    version: STATE_VERSION,
-    activeProfileId: demoProfiles[0].id,
-    profileState: Object.fromEntries(demoProfiles.map((profile) => [profile.id, seedProfileState(profile)])),
-    customIdeas: [],
-  };
-}
-
-function loadState() {
-  const initial = createInitialState();
-  try {
-    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    if (!saved || saved.version !== STATE_VERSION) return initial;
-    const profileState = { ...initial.profileState };
-    for (const id of Object.keys(profileState)) {
-      if (saved.profileState?.[id]) profileState[id] = { ...profileState[id], ...saved.profileState[id] };
-    }
-    return {
-      ...initial,
-      activeProfileId:
-        profileState[saved.activeProfileId] && isVisibleDemoProfile(saved.activeProfileId)
-          ? saved.activeProfileId
-          : initial.activeProfileId,
-      profileState,
-      customIdeas: Array.isArray(saved.customIdeas) ? saved.customIdeas : [],
-    };
-  } catch {
-    return initial;
-  }
-}
+/** mode: 'guest' | 'loading' | 'error' | 'account' */
+export const GUEST_MODE = 'guest';
 
 const toggleItem = (list, item) => (list.includes(item) ? list.filter((x) => x !== item) : [...list, item]);
 
-/** Aktionen, die nur die persönlichen Daten EINES Profils betreffen (Demo oder Konto). */
-function applyPersonalAction(p, action) {
-  switch (action.type) {
-    case 'setRegistration': {
-      const registrations = { ...p.registrations };
-      if (action.status) registrations[action.eventId] = action.status;
-      else delete registrations[action.eventId];
-      return { ...p, registrations };
-    }
-    case 'toggleInterest':
-      return { ...p, interests: toggleItem(p.interests, action.topic) };
-    case 'toggleIdeaSupport':
-      return { ...p, supportedIdeas: toggleItem(p.supportedIdeas, action.ideaId) };
-    case 'dismissUpdate':
-      return { ...p, dismissedUpdates: [...new Set([...p.dismissedUpdates, action.updateId])] };
-    default:
-      return p;
-  }
-}
-
-function updateActiveProfile(state, updater) {
-  const id = state.activeProfileId;
-  return { ...state, profileState: { ...state.profileState, [id]: updater(state.profileState[id]) } };
-}
-
-/** Reducer für den DEMO-Modus (Verhalten unverändert). */
-function reducer(state, action) {
-  switch (action.type) {
-    case 'switchProfile':
-      return state.profileState[action.profileId] && isVisibleDemoProfile(action.profileId)
-        ? { ...state, activeProfileId: action.profileId }
-        : state;
-
-    case 'setRegistration':
-    case 'toggleInterest':
-    case 'toggleIdeaSupport':
-    case 'dismissUpdate':
-      return updateActiveProfile(state, (p) => applyPersonalAction(p, action));
-
-    case 'addIdea': {
-      const author = getDemoProfile(state.activeProfileId);
-      const idea = {
-        ...action.idea,
-        authorId: author.id,
-        schoolId: author.schoolId,
-        status: 'submitted',
-        isLocal: true,
-      };
-      return { ...state, customIdeas: [idea, ...state.customIdeas] };
-    }
-
-    case 'deleteIdea':
-      return {
-        ...state,
-        customIdeas: state.customIdeas.filter(
-          (idea) => !(idea.id === action.ideaId && idea.authorId === state.activeProfileId),
-        ),
-      };
-
-    case 'reset':
-      return { ...createInitialState(), activeProfileId: state.activeProfileId };
-
-    default:
-      return state;
-  }
-}
-
-/**
- * Reducer für die lokal gespeicherten Daten des ECHTEN Kontos
- * (nur noch Projekt-Interesse und ausgeblendete Hinweise – alles andere liegt in Supabase).
- */
+/** Lokal gespeicherte Daten des Kontos (nur ausgeblendete Hinweise – alles andere liegt in Supabase). */
 function accountReducer(data, action) {
-  return applyPersonalAction(data, action);
+  switch (action.type) {
+    case 'dismissUpdate':
+      return { ...data, dismissedUpdates: [...new Set([...data.dismissedUpdates, action.updateId])] };
+    default:
+      return data;
+  }
 }
 
 function loadAccountData(userId) {
@@ -173,13 +57,36 @@ function loadAccountData(userId) {
   }
 }
 
-const newIdeaId = () => `local-${Date.now().toString(36)}`;
+const LOGIN_REQUIRED = Object.freeze({ errorKey: 'guest.loginRequiredText' });
+
+/** Aktionen für Gäste: nichts wird gespeichert oder erfunden – nur ein ehrlicher Hinweis. */
+const GUEST_ACTIONS = Object.freeze({
+  setRegistration: async () => false,
+  toggleInterest: () => {},
+  toggleIdeaSupport: () => {},
+  dismissUpdate: () => {},
+  addIdea: async () => LOGIN_REQUIRED,
+  deleteIdea: async () => LOGIN_REQUIRED,
+});
+
+const GUEST_VALUE = Object.freeze({
+  mode: GUEST_MODE,
+  isRealAccount: false,
+  user: GUEST_USER,
+  events: Object.freeze([]),
+  getEvent: () => undefined,
+  staffEvents: Object.freeze([]),
+  registrationSync: Object.freeze({ pending: Object.freeze({}), error: null }),
+  ideas: Object.freeze([]),
+  supportCounts: Object.freeze({}),
+  ideaSync: Object.freeze({ pending: Object.freeze({}), error: null }),
+  actions: GUEST_ACTIONS,
+});
 
 const AppStateContext = createContext(null);
 
 export function AppStateProvider({ children }) {
   const auth = useAuth();
-  const [state, dispatch] = useReducer(reducer, undefined, loadState);
   const [account, setAccount] = useState({ userId: null, data: null });
   const [now, setNow] = useState(() => new Date());
 
@@ -188,15 +95,6 @@ export function AppStateProvider({ children }) {
     return () => clearInterval(id);
   }, []);
 
-  // Demo-Daten speichern (wie bisher)
-  useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    } catch {
-      // Speicher nicht verfügbar – Demo funktioniert weiter, aber ohne Speicherung
-    }
-  }, [state]);
-
   // Lokale Daten des angemeldeten Kontos laden – direkt beim Rendern, sobald sich
   // das Konto ändert (React-Muster "State beim Rendern anpassen", kein extra Ladeschritt) ...
   const authUserId = auth.user?.id ?? null;
@@ -204,7 +102,7 @@ export function AppStateProvider({ children }) {
     setAccount({ userId: authUserId, data: loadAccountData(authUserId) });
   }
 
-  // ... und speichern (eigener Schlüssel pro Konto, getrennt von der Demo)
+  // ... und speichern (eigener Schlüssel pro Konto)
   useEffect(() => {
     if (!account.userId) return;
     try {
@@ -221,8 +119,7 @@ export function AppStateProvider({ children }) {
 
   const isPreparing = (status) => status === 'loading' || status === 'idle';
 
-  /** 'demo' | 'loading' | 'error' | 'account' */
-  let mode = 'demo';
+  let mode = GUEST_MODE;
   let gateError = null; // { titleKey, messageKey, retry }
   if (auth.isConfigured && auth.loading) mode = 'loading';
   else if (auth.user) {
@@ -253,112 +150,61 @@ export function AppStateProvider({ children }) {
   const { toggleSupport: toggleAccountSupport, createIdea: createAccountIdea, deleteIdea: deleteAccountIdea } =
     accountIdeas;
 
-  const actions = useMemo(() => {
-    // Persönliche Aktionen gehen je nach Modus an die Demo ODER an das Konto – nie an beide.
-    const personal = (action) => (isAccount ? dispatchAccount(action) : dispatch(action));
-    return {
-      switchProfile: (profileId) => {
-        if (!isAccount) dispatch({ type: 'switchProfile', profileId });
-      },
-      // Konto: direkt in Supabase (event_registrations). Demo: wie bisher im Browser.
-      // Gibt ein Promise<boolean> zurück: true = gespeichert (Konto: von Supabase bestätigt).
-      setRegistration: async (eventId, status) => {
-        if (isAccount) return saveAccountRegistration(eventId, status);
-        dispatch({ type: 'setRegistration', eventId, status });
-        return true;
-      },
-      toggleInterest: (topic) => {
-        if (isAccount) updateInterests(toggleItem(accountInterests, topic));
-        else dispatch({ type: 'toggleInterest', topic });
-      },
-      // Konto: direkt in Supabase (idea_supports). Demo: wie bisher im Browser.
-      toggleIdeaSupport: (ideaId) => {
-        if (isAccount) toggleAccountSupport(ideaId);
-        else dispatch({ type: 'toggleIdeaSupport', ideaId });
-      },
-      dismissUpdate: (updateId) => personal({ type: 'dismissUpdate', updateId }),
-      /**
-       * Speichert eine neue Idee. Gibt in BEIDEN Modi ein Promise zurück:
-       * { id } bei Erfolg oder { errorKey } bei einem Fehler.
-       */
-      addIdea: async (idea) => {
-        if (isAccount) return createAccountIdea(idea, accountSchoolId);
-        const id = newIdeaId();
-        dispatch({ type: 'addIdea', idea: { ...idea, id, createdAt: new Date().toISOString() } });
-        return { id };
-      },
+  const actions = useMemo(
+    () => ({
+      // Direkt in Supabase (event_registrations). Promise<boolean>: true = von Supabase bestätigt.
+      setRegistration: (eventId, status) => saveAccountRegistration(eventId, status),
+      toggleInterest: (topic) => updateInterests(toggleItem(accountInterests ?? [], topic)),
+      // Direkt in Supabase (idea_supports)
+      toggleIdeaSupport: (ideaId) => toggleAccountSupport(ideaId),
+      dismissUpdate: (updateId) => dispatchAccount({ type: 'dismissUpdate', updateId }),
+      /** Speichert eine neue Idee. Promise: { id } bei Erfolg oder { errorKey } bei einem Fehler. */
+      addIdea: (idea) => createAccountIdea(idea, accountSchoolId),
       /** Löscht eine eigene Idee. Promise mit {} oder { errorKey }. */
-      deleteIdea: async (ideaId) => {
-        if (isAccount) return deleteAccountIdea(ideaId);
-        dispatch({ type: 'deleteIdea', ideaId });
-        return {};
-      },
-      /** Setzt NUR die Demo-Daten zurück – nie das echte Konto. */
-      resetDemo: () => dispatch({ type: 'reset' }),
-    };
-  }, [
-    isAccount,
-    dispatchAccount,
-    updateInterests,
-    saveAccountRegistration,
-    accountInterests,
-    accountSchoolId,
-    toggleAccountSupport,
-    createAccountIdea,
-    deleteAccountIdea,
-  ]);
+      deleteIdea: (ideaId) => deleteAccountIdea(ideaId),
+    }),
+    [
+      dispatchAccount,
+      updateInterests,
+      saveAccountRegistration,
+      accountInterests,
+      accountSchoolId,
+      toggleAccountSupport,
+      createAccountIdea,
+      deleteAccountIdea,
+    ],
+  );
 
   const value = useMemo(() => {
-    if (mode === 'account') {
-      // Archivierte Events (24 h nach Ende; abgesagt: nach Ende UND Absage) für Schüler:innen überall ausblenden –
-      // Listen, "Meine", Startseite, Schulen, Empfehlungen UND Detailseite (getEvent).
-      // Anmeldungen bleiben unverändert in accountEvents.registrations.
-      // Zusätzlich: Events ausgeblendeter Schulen nicht anzeigen (nur Anzeige, Daten bleiben) – AUSSER mit
-      // eigener Anmeldung: dann nur für diese Person (ownOnly → „Meine Events“, Detailseite; nicht in öffentlichen Listen).
-      const studentEvents = visibleToStudents(accountEvents.events, now);
-      const events = visibleOrOwn(studentEvents, (event) => Boolean(accountEvents.registrations[event.id]));
-      return {
-        mode,
-        isRealAccount: true,
-        user: buildAccountUser(
-          auth.user.id,
-          auth.profile,
-          account.data,
-          accountEvents.registrations,
-          accountIdeas.supported,
-        ),
-        events,
-        getEvent: (id) => events.find((event) => event.id === id),
-        /**
-         * NUR für Moderation/Admin (Eventgruppen anlegen, /chat/moderation): veröffentlichte, nicht archivierte
-         * Events OHNE Schul-Ausblendung. Dieselben Zeilen, die die Datenbank (RLS) ohnehin liefert – keine
-         * zusätzlichen Rechte. Nicht in Schüler-Ansichten verwenden.
-         */
-        staffEvents: studentEvents,
-        /** Speicherzustand der echten Anmeldungen (für die Event-Detailseite) */
-        registrationSync: { pending: accountEvents.pending, error: accountEvents.saveError },
-        // NUR echte Ideen aus Supabase – keine Demo-Ideen, keine alten Browser-Ideen.
-        // Ideen ausgeblendeter Schulen nicht anzeigen – AUSSER die eigenen (ownOnly, nur für die Autor:in)
-        ideas: visibleOrOwn(accountIdeas.ideas, (idea) => idea.authorId === auth.user.id),
-        // Zahlen aus der Datenbank-Funktion get_idea_support_counts()
-        supportCounts: accountIdeas.counts,
-        /** Speicherzustand der echten Unterstützungen */
-        ideaSync: { pending: accountIdeas.pending, error: accountIdeas.saveError },
-        actions,
-      };
-    }
-    const profile = getDemoProfile(state.activeProfileId);
-    const user = { ...profile, ...state.profileState[profile.id], school: getSchool(profile.schoolId) };
+    if (mode !== 'account') return GUEST_VALUE;
+    // Archivierte Events (24 h nach Ende; abgesagt: nach Ende UND Absage) für Schüler:innen überall ausblenden –
+    // Listen, "Meine", Startseite, Schulen, Empfehlungen UND Detailseite (getEvent).
+    // Anmeldungen bleiben unverändert in accountEvents.registrations.
+    // Zusätzlich: Events ausgeblendeter Schulen nicht anzeigen (nur Anzeige, Daten bleiben) – AUSSER mit
+    // eigener Anmeldung: dann nur für diese Person (ownOnly → „Meine Events“, Detailseite; nicht in öffentlichen Listen).
+    const studentEvents = visibleToStudents(accountEvents.events, now);
+    const events = visibleOrOwn(studentEvents, (event) => Boolean(accountEvents.registrations[event.id]));
     return {
       mode,
-      isRealAccount: false,
-      user,
-      events: visibleDemoEvents,
-      getEvent: (id) => visibleDemoEvents.find((event) => event.id === id),
-      registrationSync: { pending: {}, error: null },
-      ideas: [...state.customIdeas, ...visibleSeedIdeas],
-      supportCounts: getSupportCounts(state.profileState),
-      ideaSync: { pending: {}, error: null },
+      isRealAccount: true,
+      user: buildAccountUser(auth.user.id, auth.profile, account.data, accountEvents.registrations, accountIdeas.supported),
+      events,
+      getEvent: (id) => events.find((event) => event.id === id),
+      /**
+       * NUR für Moderation/Admin (Eventgruppen anlegen, /chat/moderation): veröffentlichte, nicht archivierte
+       * Events OHNE Schul-Ausblendung. Dieselben Zeilen, die die Datenbank (RLS) ohnehin liefert – keine
+       * zusätzlichen Rechte. Nicht in Schüler-Ansichten verwenden.
+       */
+      staffEvents: studentEvents,
+      /** Speicherzustand der echten Anmeldungen (für die Event-Detailseite) */
+      registrationSync: { pending: accountEvents.pending, error: accountEvents.saveError },
+      // NUR echte Ideen aus Supabase. Ideen ausgeblendeter Schulen nicht anzeigen – AUSSER die eigenen
+      // (ownOnly, nur für die Autor:in)
+      ideas: visibleOrOwn(accountIdeas.ideas, (idea) => idea.authorId === auth.user.id),
+      // Zahlen aus der Datenbank-Funktion get_idea_support_counts()
+      supportCounts: accountIdeas.counts,
+      /** Speicherzustand der echten Unterstützungen */
+      ideaSync: { pending: accountIdeas.pending, error: accountIdeas.saveError },
       actions,
     };
   }, [
@@ -367,7 +213,6 @@ export function AppStateProvider({ children }) {
     auth.user,
     auth.profile,
     account,
-    state,
     actions,
     accountEvents.events,
     accountEvents.registrations,

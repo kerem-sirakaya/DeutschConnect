@@ -62,10 +62,6 @@ export default function AccountCard() {
           {t('auth.profileMissing')}
         </p>
       )}
-      <p className="hint">
-        <Icon name="info" size={14} />
-        {t('auth.demoStillActive')}
-      </p>
       {error && (
         <p className="notice notice--error" role="alert">
           <Icon name="info" size={16} />

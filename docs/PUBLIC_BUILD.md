@@ -14,12 +14,13 @@ Die öffentliche Connect/ED-Website nutzt das **bisherige Staging-Supabase-Proje
 | `npm run build` | **Öffentlicher Build** nach `dist/` (Standard, auch für Hoster) | nur `ycyqdqmiawhzzrduxupe` | nein |
 | `npm run build:public` | gleicher Build (Alias) | nur `ycyqdqmiawhzzrduxupe` | nein |
 | `npm run check:public` | Prüft die Werte vorab (gibt nur Host und Quelle aus, nie den Key) | – | – |
-| `npm run dev:staging` / `npm run check:staging` | Entwicklung/Test gegen Staging (unverändert) | Staging | ja |
+| `npm run dev` | Entwicklung: normale Connect/ED-Oberfläche, gleiche Prüfung wie der öffentliche Build | nur `ycyqdqmiawhzzrduxupe` | nein (Hinweis im Terminal) |
+| `npm run dev:staging` / `npm run check:staging` | Entwicklung/Test zur Diagnose (unverändert) | Staging | ja |
 | `vite build` ohne `--mode` | **wird abgelehnt** (würde `.env.local` = altes Live-Projekt laden) | – | – |
 
 Es gibt keinen Build-Befehl mehr, der `.env.local` (altes Live-Projekt) verwendet.
-Hinweis: `npm run dev` (Entwicklungsserver ohne Modus) lädt weiterhin `.env.local` – für Browser-Tests nur
-`npm run dev:staging` verwenden.
+`npm run dev` und `npx vite` laden `.env.local` **nicht** mehr (seit der Bereinigung am 2026-11-11). Jeder andere
+Modus ohne Prüfung wird abgelehnt.
 
 ## Woher kommen die Werte?
 

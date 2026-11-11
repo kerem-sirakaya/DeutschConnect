@@ -11,14 +11,14 @@ import { useToast } from '../components/toast/ToastContext.jsx';
 /**
  * Profil-Freigabe (/me/sharing). Privat ist Standard; jede Angabe wird einzeln freigegeben.
  * Gespeichert gilt erst, wenn die Datenbank bestätigt (danach wird neu geladen).
- * Demo: nur ansehen, nicht speichern.
+ * Nur für angemeldete Mitglieder (RequireAccount).
  */
 export default function ProfileSharingPage() {
   const { t } = useI18n();
   const { user } = useAppState();
   const sharing = useMySharing();
   const toast = useToast();
-  const ready = sharing.status === 'ready' || sharing.status === 'demo';
+  const ready = sharing.status === 'ready';
 
   return (
     <div className="page page--narrow">
@@ -29,7 +29,7 @@ export default function ProfileSharingPage() {
           // neu aufbauen, sobald die Datenbank einen neuen Stand liefert
           key={JSON.stringify(sharing.data)}
           initial={sharing.data}
-          readOnly={sharing.status === 'demo'}
+          readOnly={false}
           onSave={async (values) => {
             const result = await sharing.save(values);
             // Bestätigung erst nach erfolgreichem Speichern in der Datenbank
@@ -92,7 +92,7 @@ function SharingForm({ initial, readOnly, onSave }) {
         </p>
       )}
       {readOnly ? (
-        <p className="muted">{t('profiles.errors.demoReadOnly')}</p>
+        <p className="muted">{t('guest.loginRequiredText')}</p>
       ) : (
         <button type="submit" className="btn btn--primary" disabled={busy}>
           {busy ? t('profiles.saving') : t('profiles.save')}

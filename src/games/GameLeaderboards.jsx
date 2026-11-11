@@ -25,7 +25,7 @@ export default function GameLeaderboards() {
     { key: 'paper-flight', title: t('games.paperFlight.title'), lb: flight },
     { key: 'bridge-runner', title: t('games.bridgeRunner.title'), lb: runner },
   ];
-  const isDemo = flight.me.status === 'demo';
+  const isGuest = flight.me.status === 'guest';
   // Zustimmung ist für beide Spiele gleich gespeichert → Stand aus einer der beiden Abfragen
   const me = flight.me.status === 'ready' ? flight.me : runner.me.status === 'ready' ? runner.me : null;
   const busy = flight.visibility.busy || runner.visibility.busy || flight.me.refreshing || runner.me.refreshing;
@@ -51,7 +51,7 @@ export default function GameLeaderboards() {
         </div>
       </div>
 
-      {isDemo ? (
+      {isGuest ? (
         <div className="card stack">
           <p>{t('games.leaderboard.loginHint')}</p>
           <div>
@@ -172,7 +172,7 @@ function LeaderboardCard({ id, title, leaderboard }) {
 export function LeaderboardSaveStatus({ leaderboard }) {
   const { t } = useI18n();
   const { save, me } = leaderboard;
-  if (me.status === 'demo') {
+  if (me.status === 'guest') {
     return (
       <p className="muted leaderboard-status">
         {t('games.leaderboard.loginHintShort')}{' '}

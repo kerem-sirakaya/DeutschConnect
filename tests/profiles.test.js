@@ -4,7 +4,6 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import {
   DEFAULT_SHARING,
-  demoStats,
   filterDirectory,
   isProfileId,
   mapPublicProfileRow,
@@ -20,7 +19,7 @@ import {
   fetchPublicProfiles,
   saveMySharing,
 } from '../src/lib/profilesApi.js';
-import { demoDirectory, demoPublicProfile } from '../src/data/publicProfiles.js';
+import { demoDirectory, demoPublicProfile } from './fixtures/publicProfiles.js';
 import { sectionForPath } from '../src/components/layout/navigation.js';
 
 const sql = readFileSync(new URL('../supabase/migrations/012_profiles_stats.sql', import.meta.url), 'utf8');
@@ -50,32 +49,7 @@ test('Statistik: fehlende Zahlen bleiben null (keine erfundene 0)', () => {
   assert.equal(stats.supportsReceived, null);
 });
 
-test('Demo-Statistik zählt nur eigene Daten und keine abgesagten Events', () => {
-  const now = new Date('2026-06-01T12:00:00Z');
-  const user = { id: 'alex', registrations: { a: 'registered', b: 'registered', c: 'interested', d: 'registered' }, supportedIdeas: ['x'] };
-  const events = [
-    { id: 'a', status: 'planned', start: '2026-06-10T10:00:00Z' },
-    { id: 'b', status: 'completed', start: '2026-05-10T10:00:00Z' },
-    { id: 'c', status: 'planned', start: '2026-06-10T10:00:00Z' },
-    { id: 'd', status: 'cancelled', start: '2026-05-10T10:00:00Z' },
-  ];
-  const ideas = [
-    { id: 'i1', authorId: 'alex', status: 'planned' },
-    { id: 'i2', authorId: 'alex', status: 'submitted' },
-    { id: 'i3', authorId: 'elif', status: 'collecting' },
-  ];
-  const s = demoStats(user, ideas, events, now);
-  assert.equal(s.eventsUpcoming, 1);
-  assert.equal(s.eventsPast, 1);
-  assert.equal(s.eventsInterested, 1);
-  assert.equal(s.ideasSubmitted, 2);
-  assert.equal(s.ideasPublished, 1);
-  assert.equal(s.ideasPlanned, 1);
-  assert.equal(s.supportsGiven, 1);
-  assert.equal(s.tutoringOffers, null);
-});
 
-// ---------- Öffentliches Profil ----------
 test('öffentliches Profil: Aktivität nur mit Freigabe', () => {
   const base = { id: UID, first_name: 'Ada', avatar_color: '#123456', school_id: null, interests: null, is_public: true };
   const hidden = mapPublicProfileRow({ ...base, show_activity: false, ideas_published: 5 });

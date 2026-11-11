@@ -10,16 +10,16 @@ export const isMissingInDatabase = (error) => NOT_INSTALLED.has(error?.code);
 /**
  * Lädt Daten aus Supabase – nur im Konto-Modus. Gemeinsam genutzt von Profilen (012) und Projekten (013).
  *
- *   const result = useRemote(load, demoValue, deps, errorKey)
+ *   const result = useRemote(load, guestValue, deps, errorKey)
  *   result: { status, data, errorKey, reload, refreshing }
- *   status: 'demo' | 'loading' | 'ready' | 'error' | 'notInstalled'
+ *   status: 'guest' | 'loading' | 'ready' | 'error' | 'notInstalled'
  *
- * - demo: abgemeldet → demoValue() (fiktive Daten), nichts wird geladen
+ * - guest: nicht angemeldet → guestValue() (immer leer/null – keine erfundenen Daten), nichts wird geladen
  * - reload(): lädt neu; die bisherigen Daten bleiben bis dahin sichtbar (refreshing = true),
  *   damit nichts flackert. Ändern sich die Parameter (deps), gibt es dagegen nie veraltete
  *   Daten zu sehen – dann steht status auf 'loading'.
  */
-export function useRemote(load, demoValue, deps, errorKey) {
+export function useRemote(load, guestValue, deps, errorKey) {
   const { mode } = useAppState();
   const isAccount = mode === 'account' && Boolean(supabase);
   const [state, setState] = useState({ key: null, baseKey: null, status: 'loading', data: null, errorKey: null });
@@ -50,7 +50,7 @@ export function useRemote(load, demoValue, deps, errorKey) {
   }, [key]);
 
   const reload = useCallback(() => setToken((n) => n + 1), []);
-  if (!isAccount) return { status: 'demo', data: demoValue(), errorKey: null, reload, refreshing: false };
+  if (!isAccount) return { status: 'guest', data: guestValue(), errorKey: null, reload, refreshing: false };
   if (state.key === key) return { ...state, reload, refreshing: false };
   if (state.baseKey === baseKey && state.status === 'ready') return { ...state, reload, refreshing: true };
   return { status: 'loading', data: null, errorKey: null, reload, refreshing: false };

@@ -18,7 +18,7 @@ export const PUBLIC_IDEA_STATUSES = ['collecting', 'review', 'planned'];
 export const IDEA_COLUMNS =
   'id, author_id, school_id, title, summary, description, topics, format, school_ids, status, created_at';
 
-/** Datenbank-Zeile -> gleiche Form wie die Demo-Ideen (src/data/ideas.js). */
+/** Datenbank-Zeile -> Ideen-Objekt der App (gleiche Form wie die Testdaten in tests/fixtures/ideas.js). */
 export function mapDbIdea(row) {
   return {
     id: row.id,

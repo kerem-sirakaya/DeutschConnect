@@ -10,7 +10,7 @@ import { useAppState } from './AppStateContext.jsx';
  * App geteilt (Admin-Route, Seitenleiste, Profilmenü).
  *
  * - Geprüft wird nur mit einem echten, fertig geladenen Konto (mode === 'account').
- *   Demo-Profile und Abgemeldete sind nie Admins – es gibt dann keine Anfrage.
+ *   Gäste (nicht angemeldet) sind nie Admins – es gibt dann keine Anfrage.
  * - Das Ergebnis liegt NUR im Arbeitsspeicher (kein localStorage/sessionStorage).
  *   Nach Abmelden oder Kontowechsel wird es automatisch verworfen.
  * - Das ist nur für die Anzeige. Die Datenbank prüft bei jeder admin_*()-Funktion selbst.

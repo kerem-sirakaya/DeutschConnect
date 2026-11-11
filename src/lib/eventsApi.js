@@ -21,7 +21,7 @@ export const EVENT_COLUMNS_BASE =
 /** Ab Migration 008: zusätzlich Absage- und Archiv-Zeitpunkt */
 export const EVENT_COLUMNS = `${EVENT_COLUMNS_BASE}, cancelled_at, archived_at`;
 
-/** Datenbank-Zeile -> gleiche Form wie die Demo-Events (src/data/events.js). */
+/** Datenbank-Zeile -> Event-Objekt der App (gleiche Form wie die Testdaten in tests/fixtures/events.js). */
 export function mapDbEvent(row) {
   return {
     id: row.id,

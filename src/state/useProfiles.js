@@ -2,10 +2,9 @@ import { useCallback } from 'react';
 import { supabase } from '../lib/supabaseClient.js';
 import { useAppState } from './AppStateContext.jsx';
 import { useRemote as useRemoteData } from './useRemote.js';
-import { demoDirectory, demoPublicProfile, demoSharingFor } from '../data/publicProfiles.js';
-import { demoStats, isProfileId, profileErrorKey } from '../lib/profiles.js';
+import { isProfileId, profileErrorKey } from '../lib/profiles.js';
 import { isHiddenSchool } from '../data/schools.js';
-import { isVisibleDemoProfile, visibleContent } from '../lib/schoolVisibility.js';
+import { visibleContent } from '../lib/schoolVisibility.js';
 import {
   fetchMySharing,
   fetchMyStats,
@@ -18,19 +17,19 @@ import {
  * Hooks für Profile + Statistik (Migration 012).
  *
  * Gemeinsames Ergebnis: { status, data, errorKey, reload }
- *   status: 'demo' | 'loading' | 'ready' | 'error' | 'notInstalled'
- *   - demo:         abgemeldet → fiktive Daten (aus Demo-Profilen), nichts wird gespeichert
+ *   status: 'guest' | 'loading' | 'ready' | 'error' | 'notInstalled'
+ *   - guest:        nicht angemeldet → keine Daten (null), nichts wird geladen oder gespeichert
  *   - notInstalled: Migration 012 fehlt in der Datenbank → Seite zeigt einen Hinweis,
  *                   der Rest der App funktioniert weiter
  *
  * Bewusst KEIN globaler Context: Die Daten werden nur auf den Seiten geladen, die sie brauchen.
  */
-const useRemote = (load, demoValue, deps) => useRemoteData(load, demoValue, deps, profileErrorKey);
+const useRemote = (load, deps) => useRemoteData(load, () => null, deps, profileErrorKey);
 
-/** Eigene Statistik. Demo: aus den Demo-Daten berechnet. */
+/** Eigene Statistik (Datenbank-Funktion get_my_activity_stats). */
 export function useMyStats() {
-  const { user, ideas, events } = useAppState();
-  return useRemote(fetchMyStats, () => demoStats(user, ideas, events), [user.id]);
+  const { user } = useAppState();
+  return useRemote(fetchMyStats, [user.id]);
 }
 
 // Personen ausgeblendeter Schulen (src/data/schools.js → HIDDEN_SCHOOL_IDS) nicht anzeigen – nur Anzeige,
@@ -48,12 +47,7 @@ const hideIfHiddenSchool = (profile, ownId) => {
 /** Verzeichnis öffentlicher Profile. */
 export function usePublicProfiles() {
   const { user } = useAppState();
-  return useRemote(
-    (client) => fetchPublicProfiles(client).then((list) => hideHiddenSchools(list, user.id)),
-    // Demo: zusätzlich nach der Schule des Demo-Profils (auch wenn die Schule nicht freigegeben ist)
-    () => hideHiddenSchools(demoDirectory(user.id)).filter((p) => isVisibleDemoProfile(p.id)),
-    [user.id],
-  );
+  return useRemote((client) => fetchPublicProfiles(client).then((list) => hideHiddenSchools(list, user.id)), [user.id]);
 }
 
 /** Ein Profil (data = null: privat oder nicht vorhanden – bewusst nicht unterscheidbar). */
@@ -63,25 +57,21 @@ export function usePublicProfile(profileId) {
     isProfileId(profileId)
       ? fetchPublicProfile(client, profileId).then((profile) => hideIfHiddenSchool(profile, user.id))
       : Promise.resolve(null);
-  return useRemote(
-    load,
-    () => (isVisibleDemoProfile(profileId) ? hideIfHiddenSchool(demoPublicProfile(profileId, user.id)) : null),
-    [user.id, profileId],
-  );
+  return useRemote(load, [user.id, profileId]);
 }
 
 /**
  * Eigene Freigaben lesen + speichern.
  * save(sharing) → { ok: true } oder { errorKey }. Erfolg erst, wenn die Datenbank bestätigt.
- * Demo: nur lesen (fiktive Werte), Speichern ist gesperrt.
+ * Gast: keine Daten, Speichern nicht möglich.
  */
 export function useMySharing() {
   const { user, mode } = useAppState();
-  const result = useRemote((client) => fetchMySharing(client, user.id), () => demoSharingFor(user.id), [user.id]);
+  const result = useRemote((client) => fetchMySharing(client, user.id), [user.id]);
   const { reload } = result;
   const save = useCallback(
     async (sharing) => {
-      if (mode !== 'account' || !supabase) return { errorKey: 'profiles.errors.demoReadOnly' };
+      if (mode !== 'account' || !supabase) return { errorKey: 'guest.loginRequiredText' };
       try {
         await saveMySharing(supabase, sharing);
         reload();

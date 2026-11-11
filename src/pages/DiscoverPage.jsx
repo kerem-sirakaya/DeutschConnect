@@ -10,11 +10,11 @@ import Icon from '../components/Icon.jsx';
 
 /**
  * Bereich „Entdecken“ (Struktur aus der Codex-Version): Einstieg zu Events und Ideen/Projekten. Die Zahlen kommen aus denselben Daten wie die Unterseiten
- * (angemeldet: Supabase, abgemeldet: Demo).
+ * (aus Supabase; nur für angemeldete Mitglieder).
  */
 export default function DiscoverPage() {
   const { t } = useI18n();
-  const { events, ideas, isRealAccount } = useAppState();
+  const { events, ideas } = useAppState();
   const [now] = useState(() => new Date());
   // Zähler wie die öffentlichen Listen: ohne ownOnly-Einträge (ausgeblendete Schule, nur eigene Inhalte)
   const upcoming = publicOnly(events).filter((event) => isUpcoming(event, now)).length;
@@ -44,7 +44,6 @@ export default function DiscoverPage() {
           </Link>
         ))}
       </div>
-      {!isRealAccount && <p className="module-note">{t('discover.demoHint')}</p>}
     </div>
   );
 }

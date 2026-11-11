@@ -40,7 +40,6 @@ export default function PublicProfilePage() {
     <div className="page page--narrow">
       <PageHeader title={person.firstName} backTo="/community/people" />
 
-      {person.isDemo && <ProfileStatusNotice status="demo" />}
       {person.isSelf && (
         <p className={`notice ${person.isPublic ? 'notice--info' : 'notice--demo'}`}>
           <span>
@@ -111,16 +110,16 @@ export default function PublicProfilePage() {
         </Section>
       )}
 
-      {person.showProjects && <Memberships profileId={person.id} isDemo={person.isDemo} />}
+      {person.showProjects && <Memberships profileId={person.id} />}
     </div>
   );
 }
 
 /** Projekt-Mitgliedschaften (Migration 013) – die Datenbank liefert sie nur mit Profil-Freigabe. */
-function Memberships({ profileId, isDemo }) {
+function Memberships({ profileId }) {
   const { t } = useI18n();
   const memberships = usePublicMemberships(profileId);
-  if (isDemo || memberships.status === 'demo') return null;
+  if (memberships.status === 'guest') return null;
   return (
     <Section title={t('projects.membershipsTitle')} icon="users">
       {memberships.status === 'loading' && <p className="muted">{t('projects.loading')}</p>}

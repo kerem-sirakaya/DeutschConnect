@@ -12,7 +12,7 @@ export function daysUntil(date, now = new Date()) {
 }
 
 /**
- * Erzeugt ein Datum relativ zu heute. Nur für Demo-Daten: So bleiben die
+ * Erzeugt ein Datum relativ zu heute. Nur für Testdaten (tests/fixtures): So bleiben die
  * Beispiel-Events immer „bevorstehend“, egal wann die App geöffnet wird.
  */
 export function relativeDate(dayOffset, time = '00:00', base = new Date()) {

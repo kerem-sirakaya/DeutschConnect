@@ -4,18 +4,18 @@ import Icon from '../Icon.jsx';
 
 /**
  * Ehrlicher Hinweis zum Datenstand der Profile/Statistik:
- * Demo (fiktiv) · lädt · Backend fehlt (Migration 012) · Ladefehler.
+ * nicht angemeldet · lädt · Backend fehlt (Migration 012) · Ladefehler.
  * Gibt null zurück, wenn echte Daten bereitstehen.
  */
 export default function ProfileStatusNotice({ status, errorKey, reload }) {
   const { t } = useI18n();
   if (status === 'ready') return null;
-  if (status === 'demo') {
+  if (status === 'guest') {
     return (
       <p className="notice notice--info">
         <Icon name="info" size={16} />
         <span>
-          {t('profiles.demoHint')}{' '}
+          {t('profiles.guestHint')}{' '}
           <Link to="/login" className="text-link">
             {t('profiles.loginLink')}
           </Link>

@@ -8,14 +8,6 @@
     "clearSearch": "Clear search",
     "footerNote": "Connect/ED · cross-school collaboration"
   },
-  "demo": {
-    "label": "Demo",
-    "tooltip": "Demo mode: fictional profiles and sample data",
-    "notice": "Demo mode: profiles, events and ideas are fictional sample data. Choosing a profile is not a real login.",
-    "localOnly": "Demo: only saved in this browser.",
-    "example": "Example",
-    "exampleEvent": "Example event"
-  },
   "nav": {
     "home": "Home",
     "events": "Events",
@@ -33,15 +25,13 @@
     "help": "Help & FAQ"
   },
   "profileMenu": {
-    "open": "Open profile menu (demo profile: {name})",
-    "demoProfiles": "Switch demo profile",
-    "hint": "For demonstration only – not a real login.",
     "openAccount": "Open profile menu (signed in as {name})",
-    "toMyArea": "Go to My Area"
+    "toMyArea": "Go to My Area",
+    "openGuest": "Open account menu",
+    "guestLabel": "Not signed in"
   },
   "profile": {
     "grade": "Grade {grade}",
-    "demoProfile": "Demo profile",
     "realAccount": "Your account"
   },
   "home": {
@@ -281,7 +271,6 @@
   "ideaDetail": {
     "notFound": "Idea not found",
     "created": "Your idea has been saved.",
-    "createdHint": "In demo mode it is only visible in this browser.",
     "createdHintAccount": "Others will see your idea once the Connect/ED team has approved it.",
     "awaitingApproval": "Awaiting approval – so far only you can see this idea.",
     "rejectedText": "The Connect/ED team did not approve this idea. It is still only visible to you and cannot be supported. You can delete it or submit a revised idea.",
@@ -318,7 +307,6 @@
     "formatLabel": "Format",
     "schoolsLabel": "With which schools?",
     "privacyLabel": "I have not entered any personal data of other people (e.g. names or phone numbers).",
-    "demoHint": "Demo: the idea is only saved in this browser and is not sent to the schools.",
     "accountHint": "Your idea is saved to your account. Other students only see it after approval – with your school, not your name.",
     "submit": "Submit idea",
     "errorSummary_one": "Please check the highlighted field.",
@@ -335,7 +323,6 @@
   "me": {
     "title": "My Area",
     "profile": "Profile",
-    "switchProfile": "Switch profile",
     "stats": {
       "events": "Events",
       "ideas": "Ideas",
@@ -350,8 +337,6 @@
       "interests": "Interests & recommendations",
       "interestsHint": "Decides what is recommended to you",
       "language": "Language",
-      "settings": "Demo profile & local data",
-      "settingsHint": "Switch profile, reset demo",
       "about": "About Connect/ED"
     }
   },
@@ -390,16 +375,15 @@
     "signedInAs": "Signed in as {name}",
     "profileLoading": "Loading profile …",
     "profileMissing": "Your profile could not be loaded.",
-    "notConfigured": "Real accounts are not available in this version. The app is running in demo mode.",
+    "notConfigured": "Sign-in is currently not available.",
     "signupClosed": "Sign-up is not open yet. Please contact the Connect/ED team at your school.",
-    "demoStillActive": "Events, ideas and projects are still demo data for now.",
     "accountTitle": "Account",
-    "accountSignedOut": "You are not signed in. The app keeps working in demo mode.",
+    "accountSignedOut": "You are not signed in.",
     "meRow": "Account & sign-in",
     "meRowSignedIn": "Signed in",
     "gateLoading": "Loading your profile …",
     "gateErrorTitle": "Profile could not be loaded",
-    "gateErrorText": "You can try again, or sign out and keep using the demo.",
+    "gateErrorText": "You can try again or sign out.",
     "retry": "Try again",
     "gateEventsErrorTitle": "Events could not be loaded",
     "gateIdeasErrorTitle": "Ideas could not be loaded",
@@ -457,16 +441,7 @@
   },
   "settings": {
     "title": "Settings",
-    "language": "Language",
-    "profile": "Demo profile",
-    "profileHint": "Switch between fictional student profiles to try out the personalisation. This is not a real login.",
-    "data": "Local data",
-    "dataText": "Sign-ups, interests and your own ideas are only saved in this browser (localStorage) and are not sent to any server.",
-    "reset": "Reset demo",
-    "resetConfirm": "All local changes (sign-ups, interests, your own ideas) will be deleted. Continue?",
-    "resetYes": "Yes, reset",
-    "resetDone": "The demo has been reset.",
-    "profileSignedIn": "You are signed in with your real account. You can choose demo profiles again after signing out."
+    "language": "Language"
   },
   "about": {
     "title": "About Connect/ED",
@@ -479,7 +454,7 @@
     "worksTitle": "Already done",
     "works1": "Web prototype for smartphone and desktop",
     "works2": "Interface in German, Turkish and English",
-    "works3": "Demo with fictional profiles and sample data",
+    "works3": "Accounts with sign-in, profile sharing and password recovery",
     "openTitle": "Not done yet",
     "open1": "Real user accounts and login",
     "open2": "Shared database for all schools",
@@ -778,8 +753,7 @@
     "upcomingCount_one": "{count} upcoming event",
     "upcomingCount_other": "{count} upcoming events",
     "ideasCount_one": "{count} idea",
-    "ideasCount_other": "{count} ideas",
-    "demoHint": "You are not signed in – numbers and content are demo examples."
+    "ideasCount_other": "{count} ideas"
   },
   "community": {
     "title": "Community",
@@ -986,7 +960,6 @@
     },
     "openRequests_one": "{count} open request",
     "openRequests_other": "{count} open requests",
-    "demoHint": "Demo: these are fictional examples. Please sign in to create, save and send requests.",
     "loginLink": "Go to sign-in",
     "loading": "Loading tutoring listings …",
     "retry": "Try again",
@@ -1040,7 +1013,6 @@
     "contactHint": "Your message and first name go to the person who created the listing. Please do not enter contact details.",
     "messageLabel": "Your message (10–600 characters)",
     "sendRequest": "Send request",
-    "demoContactHint": "No requests are sent in demo mode.",
     "errors": {
       "kind": "Please choose offer or request.",
       "subject": "Please enter a subject with 2–80 characters.",
@@ -1063,18 +1035,17 @@
       "notAllowed": "You are not allowed to do this.",
       "generic": "That did not work. Please try again later.",
       "loginRequired": "Please sign in first."
-    }
+    },
+    "guestHint": "The tutoring board is only visible to signed-in members."
   },
   "profiles": {
-    "demoHint": "Demo: fictional profiles and sample numbers. Nothing is saved.",
     "loginLink": "Sign in for real data",
     "loading": "Loading profile data …",
     "retry": "Try again",
     "errors": {
       "generic": "Profile data could not be loaded or saved. Please try again later.",
       "notInstalled": "Profiles and statistics are not set up in the database yet (migration 012 missing).",
-      "notAllowed": "You need to be signed in for this.",
-      "demoReadOnly": "In demo mode, sharing settings can only be viewed, not saved."
+      "notAllowed": "You need to be signed in for this."
     },
     "peopleTitle": "Student profiles",
     "peopleSubtitle": "Profiles voluntarily shared by students of the pilot schools",
@@ -1137,11 +1108,11 @@
       "tutoringOffers": "Active offers",
       "tutoringRequests": "Active requests",
       "tutoringContacts": "Accepted contacts"
-    }
+    },
+    "guestHint": "Student profiles are only visible to signed-in members."
   },
   "projects": {
     "title": "Join in",
-    "demoHint": "You can't join projects in demo mode. With a real account you can ask to take part in the project.",
     "loginLink": "Sign in to join",
     "loading": "Loading project data …",
     "memberCount_one": "{count} member",
@@ -1186,7 +1157,8 @@
       "invalid": "Invalid input.",
       "generic": "That didn't work. Please try again later.",
       "loginRequired": "You need a real account for this."
-    }
+    },
+    "guestHint": "With an account you can ask to join the project."
   },
   "chat": {
     "title": "Chat",
@@ -1547,7 +1519,7 @@
         },
         "how": {
           "q": "How do I use the platform?",
-          "a": "“Home” shows your next events and suggestions. “Discover” contains events and ideas. “Tutoring” is a separate area where you can offer or look for tutoring. “Community” contains student profiles, project and event groups, and games. For messages there is a separate “Chatroom” area. Without signing in you see a demo with fictional profiles."
+          "a": "“Home” shows your next events and suggestions. “Discover” contains events and ideas. “Tutoring” is a separate area where you can offer or look for tutoring. “Community” contains student profiles, project and event groups, and games. For messages there is a separate “Chatroom” area. Without signing in you can see the home page, the games, the help and “About Connect/ED”."
         },
         "profile": {
           "q": "How do I update my profile?",
@@ -1632,5 +1604,34 @@
     },
     "paletteButton": "Choose accent colour",
     "moreSettings": "More appearance settings"
+  },
+  "guest": {
+    "welcomeTitle": "Welcome to Connect/ED",
+    "welcomeText": "The cross-school platform for joint events, project ideas, tutoring and exchange between students. Sign in with your Connect/ED account to take part.",
+    "featuresTitle": "What you will find",
+    "features": {
+      "events": {
+        "title": "Events",
+        "text": "Joint events of the participating schools – with registration."
+      },
+      "ideas": {
+        "title": "Ideas & projects",
+        "text": "Submit project ideas, support them and work on them as a team."
+      },
+      "tutoring": {
+        "title": "Tutoring",
+        "text": "Offer or find tutoring – across schools, too."
+      },
+      "chat": {
+        "title": "Chatroom",
+        "text": "Topic rooms, project and event groups and messages – moderated."
+      }
+    },
+    "membersOnlyHint": "These areas are only visible to signed-in students of the participating schools.",
+    "openTitle": "Without signing in",
+    "loginRequiredTitle": "Please sign in",
+    "loginRequiredText": "This area is only visible to signed-in Connect/ED members. Sign in to use it.",
+    "aboutLink": "What is Connect/ED?",
+    "gamesLink": "Games without signing in"
   }
 }

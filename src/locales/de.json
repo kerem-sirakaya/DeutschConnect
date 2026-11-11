@@ -8,14 +8,6 @@
     "clearSearch": "Suche löschen",
     "footerNote": "Connect/ED · schulübergreifende Zusammenarbeit"
   },
-  "demo": {
-    "label": "Demo",
-    "tooltip": "Demo-Modus: fiktive Profile und Beispieldaten",
-    "notice": "Demo-Modus: Profile, Events und Ideen sind fiktive Beispieldaten. Die Profilauswahl ist keine echte Anmeldung.",
-    "localOnly": "Demo: Wird nur in diesem Browser gespeichert.",
-    "example": "Beispiel",
-    "exampleEvent": "Beispiel-Event"
-  },
   "nav": {
     "home": "Start",
     "events": "Events",
@@ -33,15 +25,13 @@
     "help": "Hilfe & FAQ"
   },
   "profileMenu": {
-    "open": "Profilmenü öffnen (Demo-Profil: {name})",
-    "demoProfiles": "Demo-Profil wechseln",
-    "hint": "Nur zur Vorführung – keine echte Anmeldung.",
     "openAccount": "Profilmenü öffnen (angemeldet als {name})",
-    "toMyArea": "Zu Mein Bereich"
+    "toMyArea": "Zu Mein Bereich",
+    "openGuest": "Kontomenü öffnen",
+    "guestLabel": "Nicht angemeldet"
   },
   "profile": {
     "grade": "Klasse {grade}",
-    "demoProfile": "Demo-Profil",
     "realAccount": "Dein Konto"
   },
   "home": {
@@ -281,7 +271,6 @@
   "ideaDetail": {
     "notFound": "Idee nicht gefunden",
     "created": "Deine Idee wurde gespeichert.",
-    "createdHint": "Im Demo-Modus ist sie nur in diesem Browser sichtbar.",
     "createdHintAccount": "Andere sehen deine Idee, sobald das Connect/ED-Team sie freigegeben hat.",
     "awaitingApproval": "Wartet auf Freigabe – bisher kannst nur du diese Idee sehen.",
     "rejectedText": "Das Connect/ED-Team hat diese Idee nicht freigegeben. Sie ist weiterhin nur für dich sichtbar und kann nicht unterstützt werden. Du kannst sie löschen oder eine überarbeitete Idee neu einreichen.",
@@ -318,7 +307,6 @@
     "formatLabel": "Format",
     "schoolsLabel": "Mit welchen Schulen?",
     "privacyLabel": "Ich habe keine persönlichen Daten anderer Personen (z. B. Namen oder Telefonnummern) eingetragen.",
-    "demoHint": "Demo: Die Idee wird nur in diesem Browser gespeichert und nicht an die Schulen gesendet.",
     "accountHint": "Deine Idee wird in deinem Konto gespeichert. Andere Schüler:innen sehen sie erst nach der Freigabe – und nur mit deiner Schule, nicht mit deinem Namen.",
     "submit": "Idee einreichen",
     "errorSummary_one": "Bitte prüfe das markierte Feld.",
@@ -335,7 +323,6 @@
   "me": {
     "title": "Mein Bereich",
     "profile": "Profil",
-    "switchProfile": "Profil wechseln",
     "stats": {
       "events": "Events",
       "ideas": "Ideen",
@@ -350,8 +337,6 @@
       "interests": "Interessen & Empfehlungen",
       "interestsHint": "Bestimmt, was dir empfohlen wird",
       "language": "Sprache",
-      "settings": "Demo-Profil & lokale Daten",
-      "settingsHint": "Profil wechseln, Demo zurücksetzen",
       "about": "Über Connect/ED"
     }
   },
@@ -390,16 +375,15 @@
     "signedInAs": "Angemeldet als {name}",
     "profileLoading": "Profil wird geladen …",
     "profileMissing": "Dein Profil konnte nicht geladen werden.",
-    "notConfigured": "Echte Konten sind in dieser Version nicht verfügbar. Die App läuft im Demo-Modus.",
+    "notConfigured": "Die Anmeldung ist zurzeit nicht verfügbar.",
     "signupClosed": "Die Registrierung ist noch nicht freigeschaltet. Wende dich an das Connect/ED-Team deiner Schule.",
-    "demoStillActive": "Events, Ideen und Projekte sind vorerst weiterhin Demo-Daten.",
     "accountTitle": "Konto",
-    "accountSignedOut": "Du bist nicht angemeldet. Die App funktioniert weiterhin im Demo-Modus.",
+    "accountSignedOut": "Du bist nicht angemeldet.",
     "meRow": "Konto & Anmeldung",
     "meRowSignedIn": "Angemeldet",
     "gateLoading": "Dein Profil wird geladen …",
     "gateErrorTitle": "Profil konnte nicht geladen werden",
-    "gateErrorText": "Du kannst es erneut versuchen oder dich abmelden und die Demo weiter nutzen.",
+    "gateErrorText": "Du kannst es erneut versuchen oder dich abmelden.",
     "retry": "Erneut versuchen",
     "gateEventsErrorTitle": "Events konnten nicht geladen werden",
     "gateIdeasErrorTitle": "Ideen konnten nicht geladen werden",
@@ -457,16 +441,7 @@
   },
   "settings": {
     "title": "Einstellungen",
-    "language": "Sprache",
-    "profile": "Demo-Profil",
-    "profileHint": "Wechsle zwischen fiktiven Schülerprofilen, um die Personalisierung auszuprobieren. Das ist keine echte Anmeldung.",
-    "data": "Lokale Daten",
-    "dataText": "Anmeldungen, Interessen und eigene Ideen werden nur in diesem Browser gespeichert (localStorage) und nicht an einen Server gesendet.",
-    "reset": "Demo zurücksetzen",
-    "resetConfirm": "Alle lokalen Änderungen (Anmeldungen, Interessen, eigene Ideen) werden gelöscht. Fortfahren?",
-    "resetYes": "Ja, zurücksetzen",
-    "resetDone": "Die Demo wurde zurückgesetzt.",
-    "profileSignedIn": "Du bist mit deinem echten Konto angemeldet. Demo-Profile kannst du nach dem Abmelden wieder auswählen."
+    "language": "Sprache"
   },
   "about": {
     "title": "Über Connect/ED",
@@ -479,7 +454,7 @@
     "worksTitle": "Bereits umgesetzt",
     "works1": "Web-Prototyp für Smartphone und Desktop",
     "works2": "Oberfläche auf Deutsch, Türkisch und Englisch",
-    "works3": "Demo mit fiktiven Profilen und Beispieldaten",
+    "works3": "Konten mit Anmeldung, Profil-Freigabe und Passwort-Wiederherstellung",
     "openTitle": "Noch nicht umgesetzt",
     "open1": "Echte Benutzerkonten und Anmeldung",
     "open2": "Gemeinsame Datenbank für alle Schulen",
@@ -778,8 +753,7 @@
     "upcomingCount_one": "{count} kommendes Event",
     "upcomingCount_other": "{count} kommende Events",
     "ideasCount_one": "{count} Idee",
-    "ideasCount_other": "{count} Ideen",
-    "demoHint": "Du bist nicht angemeldet – Zahlen und Inhalte sind Demo-Beispiele."
+    "ideasCount_other": "{count} Ideen"
   },
   "community": {
     "title": "Community",
@@ -986,7 +960,6 @@
     },
     "openRequests_one": "{count} offene Anfrage",
     "openRequests_other": "{count} offene Anfragen",
-    "demoHint": "Demo: Das sind fiktive Beispiele. Zum Erstellen, Merken und Anfragen bitte anmelden.",
     "loginLink": "Zur Anmeldung",
     "loading": "Nachhilfe-Einträge werden geladen …",
     "retry": "Erneut versuchen",
@@ -1040,7 +1013,6 @@
     "contactHint": "Deine Nachricht und dein Vorname gehen an die Person, die den Eintrag erstellt hat. Bitte keine Kontaktdaten eingeben.",
     "messageLabel": "Deine Nachricht (10–600 Zeichen)",
     "sendRequest": "Anfrage senden",
-    "demoContactHint": "Im Demo-Modus werden keine Anfragen gesendet.",
     "errors": {
       "kind": "Bitte Angebot oder Gesuch wählen.",
       "subject": "Bitte ein Fach mit 2–80 Zeichen angeben.",
@@ -1063,18 +1035,17 @@
       "notAllowed": "Dafür fehlt die Berechtigung.",
       "generic": "Das hat nicht geklappt. Bitte später erneut versuchen.",
       "loginRequired": "Bitte zuerst anmelden."
-    }
+    },
+    "guestHint": "Die Nachhilfe-Börse ist nur für angemeldete Mitglieder sichtbar."
   },
   "profiles": {
-    "demoHint": "Demo: fiktive Profile und Beispielzahlen. Nichts wird gespeichert.",
     "loginLink": "Anmelden für echte Daten",
     "loading": "Profildaten werden geladen …",
     "retry": "Erneut versuchen",
     "errors": {
       "generic": "Die Profildaten konnten nicht geladen oder gespeichert werden. Bitte später erneut versuchen.",
       "notInstalled": "Profile und Statistiken sind in der Datenbank noch nicht eingerichtet (Migration 012 fehlt).",
-      "notAllowed": "Dafür musst du angemeldet sein.",
-      "demoReadOnly": "Im Demo-Modus können Freigaben nur angesehen, nicht gespeichert werden."
+      "notAllowed": "Dafür musst du angemeldet sein."
     },
     "peopleTitle": "Schülerprofile",
     "peopleSubtitle": "Freiwillig geteilte Profile aus den Pilotschulen",
@@ -1137,11 +1108,11 @@
       "tutoringOffers": "Aktive Angebote",
       "tutoringRequests": "Aktive Gesuche",
       "tutoringContacts": "Angenommene Kontakte"
-    }
+    },
+    "guestHint": "Schülerprofile sind nur für angemeldete Mitglieder sichtbar."
   },
   "projects": {
     "title": "Mitmachen",
-    "demoHint": "Im Demo-Modus kann man nicht mitmachen. Mit einem echten Konto kannst du anfragen, ob du im Projekt mitwirken darfst.",
     "loginLink": "Anmelden zum Mitmachen",
     "loading": "Projektdaten werden geladen …",
     "memberCount_one": "{count} Mitglied",
@@ -1186,7 +1157,8 @@
       "invalid": "Ungültige Eingabe.",
       "generic": "Das hat nicht geklappt. Bitte später erneut versuchen.",
       "loginRequired": "Dafür brauchst du ein echtes Konto."
-    }
+    },
+    "guestHint": "Mit einem Konto kannst du anfragen, ob du im Projekt mitwirken darfst."
   },
   "chat": {
     "title": "Chatroom",
@@ -1547,7 +1519,7 @@
         },
         "how": {
           "q": "Wie benutze ich die Plattform?",
-          "a": "„Start“ zeigt deine nächsten Events und Vorschläge. Unter „Entdecken“ findest du Events und Ideen. „Nachhilfe“ ist ein eigener Bereich, in dem du Nachhilfe anbieten oder suchen kannst. In der „Community“ findest du Schülerprofile, Projekt- und Eventgruppen sowie Spiele. Zum Schreiben gibt es den eigenen Bereich „Chatroom“. Ohne Anmeldung siehst du eine Demo mit fiktiven Profilen."
+          "a": "„Start“ zeigt deine nächsten Events und Vorschläge. Unter „Entdecken“ findest du Events und Ideen. „Nachhilfe“ ist ein eigener Bereich, in dem du Nachhilfe anbieten oder suchen kannst. In der „Community“ findest du Schülerprofile, Projekt- und Eventgruppen sowie Spiele. Zum Schreiben gibt es den eigenen Bereich „Chatroom“. Ohne Anmeldung siehst du die Startseite, die Spiele, die Hilfe und „Über Connect/ED“."
         },
         "profile": {
           "q": "Wie ändere ich mein Profil?",
@@ -1632,5 +1604,34 @@
     },
     "paletteButton": "Akzentfarbe wählen",
     "moreSettings": "Weitere Einstellungen zur Darstellung"
+  },
+  "guest": {
+    "welcomeTitle": "Willkommen bei Connect/ED",
+    "welcomeText": "Die schulübergreifende Plattform für gemeinsame Events, Projektideen, Nachhilfe und Austausch zwischen Schüler:innen. Melde dich mit deinem Connect/ED-Konto an, um mitzumachen.",
+    "featuresTitle": "Was dich erwartet",
+    "features": {
+      "events": {
+        "title": "Events",
+        "text": "Gemeinsame Veranstaltungen der beteiligten Schulen – mit Anmeldung."
+      },
+      "ideas": {
+        "title": "Ideen & Projekte",
+        "text": "Eigene Projektideen einreichen, unterstützen und im Team umsetzen."
+      },
+      "tutoring": {
+        "title": "Nachhilfe",
+        "text": "Nachhilfe anbieten oder suchen – auch schulübergreifend."
+      },
+      "chat": {
+        "title": "Chatroom",
+        "text": "Themenräume, Projekt- und Eventgruppen und Nachrichten – moderiert."
+      }
+    },
+    "membersOnlyHint": "Diese Bereiche sind nur für angemeldete Schüler:innen der beteiligten Schulen sichtbar.",
+    "openTitle": "Ohne Anmeldung",
+    "loginRequiredTitle": "Bitte melde dich an",
+    "loginRequiredText": "Dieser Bereich ist nur für angemeldete Mitglieder von Connect/ED sichtbar. Melde dich an, um ihn zu nutzen.",
+    "aboutLink": "Was ist Connect/ED?",
+    "gamesLink": "Spiele ohne Anmeldung"
   }
 }

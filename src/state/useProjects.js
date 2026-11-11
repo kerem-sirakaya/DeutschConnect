@@ -14,7 +14,7 @@ import {
 } from '../lib/projectsApi.js';
 
 /**
- * Hooks für Projekt-Mitwirkung (Migration 013). Demo-Modus: keine Mitwirkung (nur Hinweis) –
+ * Hooks für Projekt-Mitwirkung (Migration 013). Ohne Anmeldung: keine Mitwirkung (nur Hinweis) –
  * es gibt bewusst keine vorgetäuschten Anfragen.
  */
 const useProjectRemote = (load, deps) => useRemote(load, () => null, deps, projectErrorKey);
@@ -25,7 +25,7 @@ const useProjectRemote = (load, deps) => useRemote(load, () => null, deps, proje
  * eine Aktion gilt erst als erfolgreich, wenn die Datenbank sie bestätigt.
  */
 export function useProjectParticipation(ideaId) {
-  const enabled = isProfileId(ideaId); // Demo-Ideen (i1, i2 …) gibt es in der Datenbank nicht
+  const enabled = isProfileId(ideaId); // nur echte Ideen-IDs (UUID) an die Datenbank schicken
   const result = useProjectRemote(
     (client) => (enabled ? fetchProjectState(client, ideaId) : Promise.resolve(null)),
     [ideaId],
@@ -59,7 +59,7 @@ export function useProjectParticipation(ideaId) {
   return { ...result, busy, actions };
 }
 
-/** Eigene Mitwirkungen (angefragt / Mitglied). Demo: null → Seite zeigt Demo-Projekte wie bisher. */
+/** Eigene Mitwirkungen (angefragt / Mitglied). Ohne Anmeldung: null. */
 export function useMyMemberships() {
   return useProjectRemote((client) => fetchMyMemberships(client), []);
 }

@@ -33,10 +33,10 @@ export default function TutoringPage() {
   const { status, entries, requests, readOnly } = useTutoring();
   const [filters, setFilters] = useState(EMPTY_FILTERS);
   const change = (key, value) => setFilters((prev) => ({ ...prev, [key]: value }));
-  const isDemo = status === 'demo';
+  const isGuest = status === 'guest';
   const openIncoming = countOpenIncoming(requests);
 
-  const tabs = TUTORING_TABS.filter((id) => !isDemo || !['saved', 'contacts'].includes(id)).map((id) => ({
+  const tabs = TUTORING_TABS.filter((id) => !isGuest || !['saved', 'contacts'].includes(id)).map((id) => ({
     id,
     label: t(`tutoring.tabs.${id}`),
     count: id === 'contacts' && openIncoming > 0 ? openIncoming : undefined,
@@ -125,7 +125,7 @@ export default function TutoringPage() {
               ))}
             </div>
           ) : (
-            (status === 'ready' || status === 'demo') && (
+            status === 'ready' && (
               <EmptyState icon="lightbulb" title={t(tab === 'saved' ? 'tutoring.emptySaved' : 'tutoring.empty')} />
             )
           )}

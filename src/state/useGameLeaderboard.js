@@ -20,7 +20,7 @@ import {
  *   <LeaderboardSaveStatus leaderboard={lb} />
  * Spiele-Übersicht /games (anzeigen): siehe src/games/GameLeaderboards.jsx
  *
- * - Abgemeldet (Demo): nichts wird geladen oder gespeichert; status = 'demo'.
+ * - Nicht angemeldet (Gast): nichts wird geladen oder gespeichert; status = 'guest'.
  * - roundStarted(): Der Server merkt sich die Startzeit der Runde (Schutz vor erfundenen Punkten).
  * - roundEnded(score): Nur ein HÖHERER Wert als der bekannte Bestwert wird eingereicht;
  *   danach werden Liste und eigener Stand neu geladen.

@@ -45,14 +45,34 @@ export default defineConfig(({ command, mode, isPreview }) => {
   }
 
   if (mode !== 'staging') {
+    // „vite preview“ zeigt nur den fertigen Ordner dist/ an – lädt selbst keine Zugangsdaten.
+    if (isPreview) return { plugins: [react()] };
     // Kein Build ohne geprüften Modus: „vite build“ ohne --mode würde .env.local (altes Live-Projekt) laden.
-    if (command === 'build' && !isPreview) {
+    if (command === 'build') {
       throw new Error(
         `Build im Modus "${mode}" abgebrochen: Bitte "npm run build" (öffentlicher Build, Modus public) verwenden. ` +
           'Ein Build mit .env.local (altes Live-Projekt) ist nicht vorgesehen.',
       );
     }
-    return { plugins: [react()] };
+    // ENTWICKLUNG (npm run dev / npx vite): dieselben Werte und dieselbe Prüfung wie der öffentliche Build –
+    // nur das freigegebene Supabase-Projekt, nie .env.local. KEIN STAGING-Kennzeichen (VITE_DC_TARGET=development);
+    // die Warnung steht stattdessen hier im Terminal.
+    if (mode !== 'development') {
+      throw new Error(`Start im Modus "${mode}" abgebrochen: Bitte "npm run dev" oder "npm run dev:staging" verwenden.`);
+    }
+    const report = loadPublicEnv(root);
+    if (!report.ok) {
+      throw new Error(`Entwicklungsstart abgebrochen:\n  - ${report.problems.join('\n  - ')}`);
+    }
+    console.info(
+      `[Entwicklung] Supabase-Projekt: ${report.host} · Quelle: ${report.source} (.env.local wird NICHT geladen)\n` +
+        '[Entwicklung] ACHTUNG: Das ist dieselbe Datenbank wie die öffentliche Website – Änderungen sehen echte Nutzer:innen.',
+    );
+    return {
+      plugins: [react()],
+      envDir: emptyEnvDir,
+      define: defineEnv({ ...report.env, VITE_DC_TARGET: 'development' }),
+    };
   }
 
   // STAGING (npm run dev:staging): NUR .env.staging.local verwenden.

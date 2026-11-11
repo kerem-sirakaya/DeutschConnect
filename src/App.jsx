@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes, useParams } from 'react-router';
 import AppShell from './components/layout/AppShell.jsx';
 import AdminRoute from './components/admin/AdminRoute.jsx';
+import RequireAccount from './components/RequireAccount.jsx';
 import HomePage from './pages/HomePage.jsx';
 import EventsPage from './pages/EventsPage.jsx';
 import EventDetailPage from './pages/EventDetailPage.jsx';
@@ -61,58 +62,61 @@ export default function App() {
       <Route element={<AppShell />}>
         <Route index element={<HomePage />} />
 
-        {/* Bereich „Entdecken“ (Codex-Struktur): Übersicht + bestehende Events/Ideen-Routen */}
-        <Route path="discover" element={<DiscoverPage />} />
-
-        <Route path="events" element={<EventsPage />} />
-        <Route path="events/:eventId" element={<EventDetailPage />} />
-
-        <Route path="ideas" element={<IdeasPage />} />
-        <Route path="ideas/new" element={<NewIdeaPage />} />
-        <Route path="ideas/:ideaId" element={<IdeaDetailPage />} />
-
-        {/* Netzwerk-Bereich entfernt: alte Links/Lesezeichen (/network, /network/schools/…, /network/projects/…) → Entdecken */}
-        <Route path="network/*" element={<Navigate to="/discover" replace />} />
-
-        {/* Nachhilfe-Börse (Codex-Funktion, Claude-Backend: Migration 011) */}
-        <Route path="tutoring" element={<TutoringPage />} />
-        <Route path="tutoring/new" element={<TutoringFormPage />} />
-        <Route path="tutoring/:entryId" element={<TutoringDetailPage />} />
-        <Route path="tutoring/:entryId/edit" element={<TutoringFormPage />} />
-
+        {/* Öffentlich (ohne Anmeldung): Start (Gäste: Begrüßung), Community-Übersicht, Spiele, Login, Hilfe, Über */}
         <Route path="community" element={<CommunityPage />} />
-        {/* Projekt- und Eventgruppen = Projekt-/Eventräume aus dem Chat (Migration 014), Beiträge = Nachrichten */}
-        <Route path="community/groups" element={<CommunityGroupsPage />} />
-        <Route path="community/people" element={<PeoplePage />} />
-        <Route path="community/people/:profileId" element={<PublicProfilePage />} />
-        {/* Community → Spiele: Kerems Spiele (Codex-Version) mit Bestenlisten (Stufe 8a/8b) */}
+        {/* Community → Spiele: Kerems Spiele (Codex-Version); Bestenlisten nur mit Konto */}
         <Route path="community/games" element={<GamesPage />} />
         <Route path="community/games/symbol-pairs" element={<SymbolPairsPage />} />
         <Route path="community/games/paper-flight" element={<PaperFlightPage />} />
         <Route path="community/games/bridge-runner" element={<BridgeRunnerPage />} />
         <Route path="community/games/chess" element={<ChessPage />} />
-
         {/* Alte Spiele-Adressen (Spiele waren vorher ein eigener Hauptbereich /games) → Community → Spiele */}
         <Route path="games" element={<Navigate to="/community/games" replace />} />
         <Route path="games/:game" element={<LegacyGameRedirect />} />
+        {/* Netzwerk-Bereich entfernt: alte Links/Lesezeichen (/network, /network/schools/…, /network/projects/…) → Entdecken */}
+        <Route path="network/*" element={<Navigate to="/discover" replace />} />
 
-        {/* Chatroom (Migration 014) – aus, bis in der Datenbank eingeschaltet (chat_config.enabled) */}
-        <Route path="chat" element={<ChatPage />} />
-        <Route path="chat/rooms/:roomId" element={<ChatRoomPage />} />
-        <Route path="chat/conversations/:conversationId" element={<ChatConversationPage />} />
-        <Route
-          path="chat/moderation"
-          element={
-            <Suspense fallback={<p className="muted">…</p>}>
-              <ChatModerationPage />
-            </Suspense>
-          }
-        />
+        {/* Nur für Mitglieder: Gäste sehen „Bitte anmelden“ (RequireAccount) – keine erfundenen Inhalte */}
+        <Route element={<RequireAccount />}>
+          {/* Bereich „Entdecken“ (Codex-Struktur): Übersicht + bestehende Events/Ideen-Routen */}
+          <Route path="discover" element={<DiscoverPage />} />
 
-        <Route path="me" element={<MePage />} />
-        <Route path="me/interests" element={<InterestsPage />} />
-        <Route path="me/settings" element={<SettingsPage />} />
-        <Route path="me/sharing" element={<ProfileSharingPage />} />
+          <Route path="events" element={<EventsPage />} />
+          <Route path="events/:eventId" element={<EventDetailPage />} />
+
+          <Route path="ideas" element={<IdeasPage />} />
+          <Route path="ideas/new" element={<NewIdeaPage />} />
+          <Route path="ideas/:ideaId" element={<IdeaDetailPage />} />
+
+          {/* Nachhilfe-Börse (Codex-Funktion, Claude-Backend: Migration 011) */}
+          <Route path="tutoring" element={<TutoringPage />} />
+          <Route path="tutoring/new" element={<TutoringFormPage />} />
+          <Route path="tutoring/:entryId" element={<TutoringDetailPage />} />
+          <Route path="tutoring/:entryId/edit" element={<TutoringFormPage />} />
+
+          {/* Projekt- und Eventgruppen = Projekt-/Eventräume aus dem Chat (Migration 014), Beiträge = Nachrichten */}
+          <Route path="community/groups" element={<CommunityGroupsPage />} />
+          <Route path="community/people" element={<PeoplePage />} />
+          <Route path="community/people/:profileId" element={<PublicProfilePage />} />
+
+          {/* Chatroom (Migration 014) – aus, bis in der Datenbank eingeschaltet (chat_config.enabled) */}
+          <Route path="chat" element={<ChatPage />} />
+          <Route path="chat/rooms/:roomId" element={<ChatRoomPage />} />
+          <Route path="chat/conversations/:conversationId" element={<ChatConversationPage />} />
+          <Route
+            path="chat/moderation"
+            element={
+              <Suspense fallback={<p className="muted">…</p>}>
+                <ChatModerationPage />
+              </Suspense>
+            }
+          />
+
+          <Route path="me" element={<MePage />} />
+          <Route path="me/interests" element={<InterestsPage />} />
+          <Route path="me/settings" element={<SettingsPage />} />
+          <Route path="me/sharing" element={<ProfileSharingPage />} />
+        </Route>
 
         <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<RegisterPage />} />

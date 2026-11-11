@@ -7,7 +7,6 @@ import { TUTOR_LIMITS, entryText, sortRequests, validateRequestMessage } from '.
 import PageHeader from '../components/PageHeader.jsx';
 import InfoList from '../components/InfoList.jsx';
 import Icon from '../components/Icon.jsx';
-import { DemoBadge } from '../components/Badges.jsx';
 import RequestCard from '../components/tutoring/RequestCard.jsx';
 import TutoringStatusNotice from '../components/tutoring/TutoringStatusNotice.jsx';
 import NotFoundPage from './NotFoundPage.jsx';
@@ -75,7 +74,6 @@ export default function TutoringDetailPage() {
             <span className="badge badge--info">{t(`tutoring.kind.${entry.kind}`)}</span>
             {entry.status === 'closed' && <span className="badge badge--muted">{t('tutoring.closed')}</span>}
             {entry.isOwn && <span className="badge badge--neutral">{t('tutoring.own')}</span>}
-            {entry.isDemo && <DemoBadge />}
           </div>
           <h2>{t('tutoring.fields.description')}</h2>
           <p className="pre-line">{entryText(entry, 'description', language)}</p>
@@ -231,7 +229,6 @@ function ContactPanel({ entry, outgoing, busy, readOnly, onSave, onSend }) {
           </button>
         </form>
       )}
-      {readOnly && entry.isDemo && <p className="hint">{t('tutoring.demoContactHint')}</p>}
     </div>
   );
 }

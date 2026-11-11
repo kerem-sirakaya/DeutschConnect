@@ -49,7 +49,7 @@ export default function EventsPage() {
         ]}
       />
       {events.length === 0 ? (
-        // Angemeldet und noch keine echten Events in der Datenbank (Demo-Events gibt es hier bewusst nicht).
+        // Angemeldet und noch keine echten Events in der Datenbank (erfundene Events gibt es bewusst nicht).
         <EmptyState icon="calendar" title={t('events.noRealEventsTitle')} text={t('events.noRealEventsText')} />
       ) : (
         <>

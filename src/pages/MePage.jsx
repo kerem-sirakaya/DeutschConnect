@@ -8,7 +8,6 @@ import PageHeader from '../components/PageHeader.jsx';
 import Avatar from '../components/Avatar.jsx';
 import Section from '../components/Section.jsx';
 import ListLink from '../components/ListLink.jsx';
-import DemoNotice from '../components/DemoNotice.jsx';
 import { TopicTags } from '../components/Badges.jsx';
 import ActivityStats from '../components/profiles/ActivityStats.jsx';
 import ProfileStatusNotice from '../components/profiles/ProfileStatusNotice.jsx';
@@ -17,7 +16,7 @@ import { useMyMemberships } from '../state/useProjects.js';
 
 export default function MePage() {
   const { t, language } = useI18n();
-  const { user, ideas, events, isRealAccount } = useAppState();
+  const { user, ideas, events } = useAppState();
   const auth = useAuth();
   const [now] = useState(() => new Date());
   const activity = useMyStats();
@@ -26,24 +25,19 @@ export default function MePage() {
 
   const myEvents = getMyEvents(user, events, now);
   const myIdeas = getMyIdeas(user, ideas);
-  // Projekte: nur für Konten (echte Mitwirkungen aus Migration 013). Demo-Projekte lagen im entfernten Netzwerk-Bereich.
+  // Projekte: echte Mitwirkungen aus Migration 013
   const memberships = useMyMemberships();
-  const realMemberships = isRealAccount && memberships.data ? memberships.data : [];
+  const realMemberships = memberships.data ?? [];
   const languageLabel = LANGUAGES.find((l) => l.code === language).label;
 
   const stats = [
     { to: '/events?tab=mine', value: myEvents.upcoming.length, label: t('me.stats.events') },
     { to: '/ideas?tab=mine', value: myIdeas.authored.length, label: t('me.stats.ideas') },
-    // Projekte-Kachel nur für echte Konten (Demo-Projekte gab es nur im entfernten Netzwerk-Bereich)
-    ...(isRealAccount
-      ? [
-          {
-            to: '/me#projects',
-            value: memberships.data ? realMemberships.filter((m) => m.myStatus === 'member').length : '–',
-            label: t('me.stats.projects'),
-          },
-        ]
-      : []),
+    {
+      to: '/me#projects',
+      value: memberships.data ? realMemberships.filter((m) => m.myStatus === 'member').length : '–',
+      label: t('me.stats.projects'),
+    },
   ];
 
   return (
@@ -60,14 +54,10 @@ export default function MePage() {
             {/* Schulname fehlt bei ausgeblendeter Schule → kein loses „·“ */}
             {[user.school?.name, t('profile.grade', { grade: user.grade })].filter(Boolean).join(' · ')}
           </p>
-          {isRealAccount ? (
-            <span className="badge badge--info">{t('profile.realAccount')}</span>
-          ) : (
-            <span className="badge badge--demo">{t('profile.demoProfile')}</span>
-          )}
+          <span className="badge badge--info">{t('profile.realAccount')}</span>
         </div>
         <Link to="/me/settings" className="btn btn--secondary btn--sm profile-card__switch">
-          {isRealAccount ? t('auth.accountTitle') : t('me.switchProfile')}
+          {t('auth.accountTitle')}
         </Link>
       </section>
 
@@ -96,31 +86,29 @@ export default function MePage() {
         )}
       </Section>
 
-      {isRealAccount && (
-        <div id="projects">
-          <Section title={t('me.myProjects')} icon="folder">
-            {memberships.status === 'ready' && realMemberships.length === 0 && (
-              <p className="muted">{t('projects.noMemberships')}</p>
-            )}
-            {memberships.status === 'notInstalled' && <p className="muted">{t('projects.errors.notInstalled')}</p>}
-            {memberships.status === 'error' && <p className="muted">{t(memberships.errorKey)}</p>}
-            {realMemberships.length > 0 && (
-              <ul className="list-group">
-                {realMemberships.map((m) => (
-                  <ListLink
-                    key={m.ideaId}
-                    to={`/ideas/${m.ideaId}`}
-                    icon="folder"
-                    title={m.title}
-                    subtitle={m.memberCount != null ? t('projects.memberCount', { count: m.memberCount }) : undefined}
-                    trailing={<span className="badge badge--neutral">{t(`projects.myStatus.${m.myStatus}`)}</span>}
-                  />
-                ))}
-              </ul>
-            )}
-          </Section>
-        </div>
-      )}
+      <div id="projects">
+        <Section title={t('me.myProjects')} icon="folder">
+          {memberships.status === 'ready' && realMemberships.length === 0 && (
+            <p className="muted">{t('projects.noMemberships')}</p>
+          )}
+          {memberships.status === 'notInstalled' && <p className="muted">{t('projects.errors.notInstalled')}</p>}
+          {memberships.status === 'error' && <p className="muted">{t(memberships.errorKey)}</p>}
+          {realMemberships.length > 0 && (
+            <ul className="list-group">
+              {realMemberships.map((m) => (
+                <ListLink
+                  key={m.ideaId}
+                  to={`/ideas/${m.ideaId}`}
+                  icon="folder"
+                  title={m.title}
+                  subtitle={m.memberCount != null ? t('projects.memberCount', { count: m.memberCount }) : undefined}
+                  trailing={<span className="badge badge--neutral">{t(`projects.myStatus.${m.myStatus}`)}</span>}
+                />
+              ))}
+            </ul>
+          )}
+        </Section>
+      </div>
 
       <Section title={t('me.settingsSection')} icon="sliders">
         <ul className="list-group">
@@ -141,14 +129,11 @@ export default function MePage() {
           />
           <ListLink to="/me/interests" icon="sparkles" title={t('me.rows.interests')} subtitle={t('me.rows.interestsHint')} />
           <ListLink to="/me/settings" icon="globe" title={t('me.rows.language')} trailing={languageLabel} />
-          <ListLink to="/me/settings" icon="users" title={t('me.rows.settings')} subtitle={t('me.rows.settingsHint')} />
           <ListLink to="/help" icon="help" title={t('nav.help')} />
           <ListLink to="/about" icon="info" title={t('me.rows.about')} />
         </ul>
       </Section>
 
-      {/* Echte Konten: kein Hinweis „… vorerst weiterhin Demo-Daten“ mehr. Demo-Profile behalten ihren Demo-Hinweis. */}
-      {!isRealAccount && <DemoNotice textKey="demo.notice" />}
     </div>
   );
 }

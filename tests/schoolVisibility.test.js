@@ -12,19 +12,17 @@ import {
   visibleSchoolIds,
   visibleSchools,
 } from '../src/data/schools.js';
-import { events } from '../src/data/events.js';
-import { seedIdeas } from '../src/data/ideas.js';
-import { demoProfiles } from '../src/data/profiles.js';
-import { demoTutoringEntries } from '../src/data/tutoring.js';
+import { events } from './fixtures/events.js';
+import { seedIdeas } from './fixtures/ideas.js';
+import { demoProfiles } from './fixtures/profiles.js';
+import { demoTutoringEntries } from './fixtures/tutoring.js';
 import {
   isVisibleContent,
-  isVisibleDemoProfile,
   matchesSchoolName,
   mentionsHiddenSchool,
   publicOnly,
   schoolsIncludingExisting,
   visibleContent,
-  visibleDemoProfiles,
   visibleOrOwn,
 } from '../src/lib/schoolVisibility.js';
 import { communityGroups } from '../src/lib/communityGroups.js';
@@ -77,14 +75,6 @@ test('Demo-Inhalte: alles mit Bezug zu Anka Bilim ausgeblendet, gemeinsame Inhal
   assert.ok(visibleContent(events).some((e) => e.hostSchoolId === 'ers' && e.schoolIds.includes('anka')));
   assert.equal(isVisibleContent(null), false);
   assert.deepEqual(visibleContent(undefined), []);
-});
-
-test('Demo-Profile: Personen von Anka Bilim nicht wählbar und nicht im Verzeichnis', () => {
-  assert.ok(visibleDemoProfiles.length > 0);
-  assert.ok(visibleDemoProfiles.every((p) => p.schoolId !== 'anka'));
-  assert.equal(isVisibleDemoProfile('elif'), false);
-  assert.equal(isVisibleDemoProfile('alex'), true);
-  assert.equal(isVisibleDemoProfile('unbekannt'), false);
 });
 
 test('Community-Gruppen: Gruppen, deren Titel Anka Bilim nennt, werden nicht gelistet', () => {

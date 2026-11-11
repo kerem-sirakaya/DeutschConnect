@@ -3,14 +3,15 @@ import { Link } from 'react-router';
 import { useI18n } from '../i18n/LanguageContext.jsx';
 import { useAppState } from '../state/AppStateContext.jsx';
 import { useIsAdmin } from '../state/AdminStatusContext.jsx';
+import { useAuth } from '../auth/AuthContext.jsx';
 import Avatar from './Avatar.jsx';
 import Icon from './Icon.jsx';
-import ProfileSwitcher from './ProfileSwitcher.jsx';
 
-/** Avatar oben rechts: schneller Wechsel des Demo-Profils + Link zu "Mein Bereich". */
+/** Avatar oben rechts: Konto, „Mein Bereich“, Admin-Link – für Gäste Anmelden/Registrieren. */
 export default function ProfileMenu() {
   const { t } = useI18n();
   const { user, isRealAccount } = useAppState();
+  const auth = useAuth();
   const { isAdmin } = useIsAdmin();
   const [open, setOpen] = useState(false);
   const containerRef = useRef(null);
@@ -46,9 +47,9 @@ export default function ProfileMenu() {
         aria-controls={panelId}
         onClick={() => setOpen((value) => !value)}
       >
-        <Avatar profile={user} size="sm" />
+        {isRealAccount ? <Avatar profile={user} size="sm" /> : <Icon name="user" size={20} />}
         <span className="visually-hidden">
-          {t(isRealAccount ? 'profileMenu.openAccount' : 'profileMenu.open', { name: user.firstName })}
+          {isRealAccount ? t('profileMenu.openAccount', { name: user.firstName }) : t('profileMenu.openGuest')}
         </span>
       </button>
 
@@ -57,10 +58,6 @@ export default function ProfileMenu() {
           {isRealAccount ? (
             <>
               <p className="profile-menu__label">{t('auth.signedInAs', { name: user.firstName })}</p>
-              <p className="profile-menu__hint">
-                <Icon name="info" size={14} />
-                {t('auth.demoStillActive')}
-              </p>
               <Link to="/me/settings" className="profile-menu__link" onClick={() => setOpen(false)}>
                 {t('auth.accountTitle')}
                 <Icon name="chevronRight" size={16} />
@@ -75,18 +72,25 @@ export default function ProfileMenu() {
             </>
           ) : (
             <>
-              <p className="profile-menu__label">{t('profileMenu.demoProfiles')}</p>
-              <ProfileSwitcher onSwitch={() => setOpen(false)} />
-              <p className="profile-menu__hint">
-                <Icon name="info" size={14} />
-                {t('profileMenu.hint')}
-              </p>
+              <p className="profile-menu__label">{t('profileMenu.guestLabel')}</p>
+              <Link to="/login" className="profile-menu__link" onClick={() => setOpen(false)}>
+                {t('auth.toLogin')}
+                <Icon name="chevronRight" size={16} />
+              </Link>
+              {auth.isSignupEnabled && (
+                <Link to="/register" className="profile-menu__link" onClick={() => setOpen(false)}>
+                  {t('auth.toRegister')}
+                  <Icon name="chevronRight" size={16} />
+                </Link>
+              )}
             </>
           )}
-          <Link to="/me" className="profile-menu__link" onClick={() => setOpen(false)}>
-            {t('profileMenu.toMyArea')}
-            <Icon name="chevronRight" size={16} />
-          </Link>
+          {isRealAccount && (
+            <Link to="/me" className="profile-menu__link" onClick={() => setOpen(false)}>
+              {t('profileMenu.toMyArea')}
+              <Icon name="chevronRight" size={16} />
+            </Link>
+          )}
           <Link to="/help" className="profile-menu__link" onClick={() => setOpen(false)}>
             {t('nav.help')}
             <Icon name="chevronRight" size={16} />

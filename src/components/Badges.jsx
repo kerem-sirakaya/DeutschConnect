@@ -30,11 +30,6 @@ export function RoleBadge({ role }) {
   );
 }
 
-export function DemoBadge({ labelKey = 'demo.example' }) {
-  const { t } = useI18n();
-  return <span className="badge badge--demo">{t(labelKey)}</span>;
-}
-
 export function SchoolTags({ schoolIds, highlightId }) {
   const { t } = useI18n();
   return (

@@ -1,8 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { supabase } from '../lib/supabaseClient.js';
 import { useAppState } from './AppStateContext.jsx';
-import { demoTutoringFor } from '../data/tutoring.js';
-import { visibleContent, visibleOrOwn } from '../lib/schoolVisibility.js';
+import { visibleOrOwn } from '../lib/schoolVisibility.js';
 import {
   createTutoringEntry,
   deleteTutoringEntry,
@@ -19,7 +18,7 @@ import {
 /**
  * Nachhilfe-Daten für die ganze App (Startseite + Nachhilfe-Seiten).
  *
- * - Demo (abgemeldet): fiktive Einträge, NUR LESEN. Nichts wird gesendet oder gespeichert.
+ * - Gast (nicht angemeldet): keine Einträge (die Datenbank gibt Gästen nichts heraus). Nichts wird gesendet.
  * - Konto: echte Daten aus Supabase (Migration 011). Nach JEDER Änderung wird der echte
  *   Stand neu geladen – eine Aktion gilt erst als erfolgreich, wenn die Datenbank sie bestätigt.
  *   Neue eingehende Anfragen erscheinen beim Öffnen der Seite und wenn das Fenster wieder
@@ -27,7 +26,7 @@ import {
  * - Fehlt Migration 011 in der Datenbank, steht status auf 'notInstalled'. Der Rest der App
  *   funktioniert weiter (bewusst NICHT im ProfileGate, damit ein fehlendes Modul nicht alles blockiert).
  *
- * status: 'demo' | 'loading' | 'ready' | 'error' | 'notInstalled'
+ * status: 'guest' | 'loading' | 'ready' | 'error' | 'notInstalled'
  */
 const TutoringContext = createContext(null);
 const EMPTY = { userId: null, entries: [], requests: [], error: null };
@@ -94,10 +93,9 @@ export function TutoringProvider({ children }) {
   const value = useMemo(() => {
     if (!isAccount) {
       return {
-        status: 'demo',
+        status: 'guest',
         readOnly: true,
-        // Einträge ausgeblendeter Schulen (src/data/schools.js) nicht anzeigen – Daten bleiben erhalten
-        entries: visibleContent(demoTutoringFor(user.id)),
+        entries: [],
         requests: [],
         errorKey: null,
         reload: () => {},

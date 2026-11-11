@@ -5,10 +5,10 @@ import { fetchEvents, fetchMyRegistrations, registrationErrorKey, saveRegistrati
 /**
  * Lädt für ein angemeldetes Konto die ECHTEN Events und die EIGENEN Anmeldungen.
  * Wird nur von AppStateContext benutzt. Für abgemeldete Besucher (userId = null)
- * passiert hier nichts – dann gelten weiter die Demo-Events.
+ * passiert hier nichts – Gäste sehen keine Events.
  *
  * status: 'idle' | 'loading' | 'error' | 'ready'
- * Bei einem Fehler gibt es KEINEN Rückfall auf Demo-Events.
+ * Bei einem Fehler gibt es KEINEN Rückfall auf erfundene Events.
  */
 export function useAccountEvents(userId) {
   const [result, setResult] = useState({ userId: null, events: [], registrations: {}, error: null });

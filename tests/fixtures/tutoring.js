@@ -1,3 +1,4 @@
+// TESTDATEN (fiktiv) – nur für automatische Tests. Die App verwendet diese Datei NICHT (früherer Demo-Modus).
 /**
  * DEMO-Nachhilfeeinträge – fiktiv, keine echten Personen (Idee aus der Codex-Version).
  * Werden NUR abgemeldet (Demo-Modus) angezeigt. Im Demo-Modus kann man nichts senden

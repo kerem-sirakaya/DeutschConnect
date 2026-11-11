@@ -1,3 +1,4 @@
+// TESTDATEN (fiktiv) – nur für automatische Tests. Die App verwendet diese Datei NICHT (früherer Demo-Modus).
 /**
  * DEMO-PROFILE – fiktive Schüler:innen, keine echten Personen.
  *

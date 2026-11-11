@@ -87,7 +87,7 @@ export function normalizeSubject(subject) {
   return value;
 }
 
-/** Text eines Eintrags in der aktuellen Sprache (Demo-Einträge sind mehrsprachig, echte nicht). */
+/** Text eines Eintrags in der aktuellen Sprache (Testdaten sind mehrsprachig, echte Einträge nicht). */
 export function entryText(entry, field, language) {
   return localize(entry[field], language);
 }

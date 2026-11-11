@@ -10,7 +10,7 @@ import { useChatAction } from './chatUi.jsx';
 /**
  * „Nachricht senden“ auf einem öffentlichen Profil → NACHRICHTENANFRAGE (kein Gespräch).
  * Erst wenn die andere Person annimmt, entsteht ein privater Chat (Migration 014).
- * Nicht auf dem eigenen Profil, nicht im Demo-Modus, nicht wenn der Chat aus ist.
+ * Nicht auf dem eigenen Profil, nicht ohne Anmeldung, nicht wenn der Chat aus ist.
  * startOpen: Formular sofort zeigen (z. B. nach dem Klick auf „Nachricht senden“ bei angenommener Nachhilfe).
  */
 export default function ChatRequestPanel({ person, startOpen = false }) {
@@ -22,7 +22,7 @@ export default function ChatRequestPanel({ person, startOpen = false }) {
   const [localError, setLocalError] = useState(null);
   const action = useChatAction();
 
-  if (person.isSelf || person.isDemo || status.status !== 'ready' || !status.data.enabled) return null;
+  if (person.isSelf || status.status !== 'ready' || !status.data.enabled) return null;
 
   const existing = action.raw?.code === 'DC048' ? chatError(action.raw).conversationId : null;
 

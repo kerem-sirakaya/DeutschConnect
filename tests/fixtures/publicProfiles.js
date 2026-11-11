@@ -1,3 +1,4 @@
+// TESTDATEN (fiktiv) – nur für automatische Tests. Die App verwendet diese Datei NICHT (früherer Demo-Modus).
 /**
  * DEMO – fiktive öffentliche Profile für den Demo-Modus (abgemeldet).
  * Basieren auf den fiktiven Demo-Profilen aus profiles.js. Keine echten Personen.
@@ -6,7 +7,7 @@
  */
 import { demoProfiles } from './profiles.js';
 import { seedIdeas } from './ideas.js';
-import { PUBLIC_IDEA_STATUSES } from '../lib/ideasApi.js';
+import { PUBLIC_IDEA_STATUSES } from '../../src/lib/ideasApi.js';
 
 const DEMO_SHARING = {
   elif: { isPublic: true, school: true, interests: true, projects: true, activity: true },

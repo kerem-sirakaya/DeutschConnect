@@ -1,6 +1,6 @@
 /**
  * Inhalte ausgeblendeter Schulen (src/data/schools.js → HIDDEN_SCHOOL_IDS) NUR in der Anzeige weglassen.
- * Nichts wird gelöscht: Demo-Dateien, Datenbank-Zeilen, Anmeldungen und Verknüpfungen bleiben unverändert.
+ * Nichts wird gelöscht: Datenbank-Zeilen, Anmeldungen und Verknüpfungen bleiben unverändert.
  *
  * Ausgeblendet wird ein Inhalt (Event, Idee, Nachhilfe-Eintrag, Profil), wenn
  *   - er von einer ausgeblendeten Schule stammt (hostSchoolId bzw. schoolId), oder
@@ -13,7 +13,6 @@
  * Freie Nutzertexte (Chat, Nachrichtenanfragen, Nachhilfe-Nachrichten, Notizen) werden bewusst NICHT gefiltert.
  */
 import { HIDDEN_SCHOOL_IDS, getSchoolRecord, isHiddenSchool, schools } from '../data/schools.js';
-import { demoProfiles } from '../data/profiles.js';
 
 /** Textfelder, in denen nach dem Namen gesucht wird (Events, Ideen, Nachhilfe-Einträge). */
 export const TEXT_FIELDS = ['title', 'summary', 'description', 'location', 'audience', 'subject', 'topics', 'availability'];
@@ -115,12 +114,3 @@ export function schoolsIncludingExisting(existingIds) {
   const existing = new Set((existingIds ?? []).filter(Boolean));
   return schools.filter((school) => !isHiddenSchool(school.id) || existing.has(school.id));
 }
-
-/** Demo-Profile (Profilwechsel, Verzeichnis) ohne Personen ausgeblendeter Schulen. */
-export const visibleDemoProfiles = demoProfiles.filter((profile) => !isHiddenSchool(profile.schoolId));
-
-/** Gibt es dieses Demo-Profil UND ist seine Schule sichtbar? (getDemoProfile fällt bei unbekannter ID auf das erste zurück) */
-export const isVisibleDemoProfile = (id) => {
-  const profile = demoProfiles.find((p) => p.id === id);
-  return Boolean(profile) && !isHiddenSchool(profile.schoolId);
-};

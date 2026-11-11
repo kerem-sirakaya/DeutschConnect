@@ -56,7 +56,7 @@ function DiscoverIdeas() {
   const [sort, setSort] = useState('popular');
   const results = filterIdeas(ideas, { query, topic, sort }, supportCounts);
 
-  // Angemeldet und noch keine (sichtbaren) echten Ideen – Demo-Ideen gibt es hier bewusst nicht.
+  // Angemeldet und noch keine (sichtbaren) echten Ideen – erfundene Ideen gibt es bewusst nicht.
   if (isRealAccount && ideas.length === 0) {
     return (
       <EmptyState

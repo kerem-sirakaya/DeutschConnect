@@ -1,10 +1,10 @@
 // Tests für die Personalisierungslogik. Ausführen mit: npm test
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { events } from '../src/data/events.js';
-import { seedIdeas } from '../src/data/ideas.js';
-import { projects } from '../src/data/projects.js';
-import { demoProfiles } from '../src/data/profiles.js';
+import { events } from './fixtures/events.js';
+import { seedIdeas } from './fixtures/ideas.js';
+import { projects } from './fixtures/projects.js';
+import { demoProfiles } from './fixtures/profiles.js';
 import {
   filterEvents,
   filterIdeas,

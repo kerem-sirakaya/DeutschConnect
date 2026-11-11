@@ -14,10 +14,10 @@ const EMPTY = { userId: null, ideas: [], supported: [], counts: {}, error: null 
 /**
  * Lädt für ein angemeldetes Konto die ECHTEN Ideen, die eigenen Unterstützungen
  * und die Unterstützer-Zahlen. Für abgemeldete Besucher (userId = null) passiert
- * nichts – dann gelten weiter die Demo-Ideen.
+ * nichts – Gäste sehen keine Ideen.
  *
  * status: 'idle' | 'loading' | 'error' | 'ready'
- * Bei einem Fehler gibt es KEINEN Rückfall auf Demo-Ideen.
+ * Bei einem Fehler gibt es KEINEN Rückfall auf erfundene Ideen.
  */
 export function useAccountIdeas(userId) {
   const [result, setResult] = useState(EMPTY);

@@ -31,7 +31,7 @@ function validate(values) {
 
 export default function NewIdeaPage() {
   const { t } = useI18n();
-  const { user, actions, isRealAccount } = useAppState();
+  const { user, actions } = useAppState();
   const navigate = useNavigate();
   const formRef = useRef(null);
   const [values, setValues] = useState({
@@ -68,7 +68,7 @@ export default function NewIdeaPage() {
       formRef.current?.querySelector(`[data-field="${first}"]`)?.focus();
       return;
     }
-    // Demo: sofort fertig. Echtes Konto: wird in Supabase gespeichert.
+    // Wird in Supabase gespeichert.
     setBusy(true);
     const result = await actions.addIdea({
       title: values.title.trim(),
@@ -219,7 +219,7 @@ export default function NewIdeaPage() {
 
         <p className="hint">
           <Icon name="info" size={14} />
-          {t(isRealAccount ? 'newIdea.accountHint' : 'newIdea.demoHint')}
+          {t('newIdea.accountHint')}
         </p>
 
         <div className="form__actions">

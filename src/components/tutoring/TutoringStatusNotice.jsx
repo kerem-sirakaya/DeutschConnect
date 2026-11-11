@@ -5,19 +5,19 @@ import Icon from '../Icon.jsx';
 
 /**
  * Ehrlicher Hinweis zum Datenstand der Nachhilfe:
- * Demo (nur lesen) · lädt · Backend fehlt (Migration 011) · Ladefehler.
+ * nicht angemeldet · lädt · Backend fehlt (Migration 011) · Ladefehler.
  * Gibt null zurück, wenn echte Daten bereitstehen.
  */
 export default function TutoringStatusNotice() {
   const { t } = useI18n();
   const { status, errorKey, reload } = useTutoring();
   if (status === 'ready') return null;
-  if (status === 'demo') {
+  if (status === 'guest') {
     return (
       <p className="notice notice--info">
         <Icon name="info" size={16} />
         <span>
-          {t('tutoring.demoHint')}{' '}
+          {t('tutoring.guestHint')}{' '}
           <Link to="/login" className="text-link">
             {t('tutoring.loginLink')}
           </Link>

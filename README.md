@@ -1344,7 +1344,7 @@ Voraussetzung: Node.js (LTS oder neuer) mit npm.
 
 ```bash
 npm install      # einmalig: Abhängigkeiten installieren
-npm run dev      # Entwicklungsserver starten → http://localhost:5173
+npm run dev      # Entwicklungsserver (freigegebenes Supabase-Projekt, ohne STAGING-Kennzeichen) → http://localhost:5173
 npm test         # automatische Tests (Personalisierung, Übersetzungen)
 npm run build    # Öffentlicher Produktions-Build nach dist/ (nur freigegebenes Supabase-Projekt, siehe docs/PUBLIC_BUILD.md)
 npm run preview  # Produktions-Build lokal ansehen → http://localhost:4173
@@ -1354,15 +1354,19 @@ npm run preview  # Produktions-Build lokal ansehen → http://localhost:4173
 Werte fehlen oder nicht zum freigegebenen Projekt passen. `.env.local` wird beim Bauen nie gelesen; ein `vite build`
 ohne Modus wird abgelehnt. Details: [docs/PUBLIC_BUILD.md](docs/PUBLIC_BUILD.md).
 
-### 22.2 Was funktioniert – und was nur Demo ist
+`npm run dev` nutzt dieselben geprüften Werte wie der öffentliche Build (nur das freigegebene Supabase-Projekt, nie
+`.env.local`) und zeigt die normale Connect/ED-Oberfläche. Im Terminal steht ein Hinweis, dass es dieselbe Datenbank wie
+die öffentliche Website ist. `npm run dev:staging` zeigt zusätzlich oben „STAGING“ (zur Diagnose).
 
-**Funktioniert tatsächlich (im Browser):** Navigation mit Unterseiten, persönliches Dashboard, Empfehlungen auf Basis von Interessen und Schule, Event-Suche und -Filter, Anmeldung/Interesse an Events, Ideen einreichen (mit Validierung), Ideen unterstützen, Interesse an Projekten, Interessen bearbeiten, Sprachwechsel DE/TR/EN, Speicherung im Browser.
+### 22.2 Gäste und Mitglieder (kein Demo-Modus mehr)
 
-**Demonstrationscharakter:**
+**Seit 2026-11-11 gibt es keinen Demo-Modus mehr** – keine fiktiven Profile, Events, Ideen oder Nachhilfe-Einträge in der App.
 
-- Drei fiktive Demo-Profile (Alex, Elif, Deniz). Die Profilauswahl ist **keine** Anmeldung.
-- Alle Events, Ideen und zwei der drei Projekte sind Beispieldaten. Event-Termine werden relativ zum heutigen Datum berechnet.
-- Alle Eingaben werden nur per `localStorage` im jeweiligen Browser gespeichert. Es gibt **keine** Synchronisierung zwischen Geräten oder Schulen und keinen Server.
+- **Gäste (nicht angemeldet):** Startseite mit Begrüßung und Anmelden/Registrieren, Community-Übersicht, Spiele (ohne
+  Bestenliste), Hilfe, „Über Connect/ED“, Login/Registrierung/Passwort vergessen. Alle anderen Bereiche zeigen
+  „Bitte melde dich an“ (`src/components/RequireAccount.jsx`). Die Datenbank (RLS) gibt Gästen ohnehin keine Inhalte heraus.
+- **Mitglieder (angemeldet):** nur echte Daten aus Supabase; leere Bereiche zeigen Hinweise statt Beispiel-Inhalten.
+- Die früheren Beispieldaten liegen nur noch als Testdaten unter `tests/fixtures/` (nicht im ausgelieferten Code).
 
 ### 22.3 Architektur
 
@@ -1371,9 +1375,9 @@ ohne Modus wird abgelehnt. Details: [docs/PUBLIC_BUILD.md](docs/PUBLIC_BUILD.md)
 | `src/pages/` | Eine Datei pro Seite (Start, Events, Event-Detail, Ideen, Neue Idee, Netzwerk, Schule, Projekt, Mein Bereich, Interessen, Einstellungen, Über uns) |
 | `src/components/` | Wiederverwendbare Bausteine (EventCard, IdeaCard, FilterChips, Tabs, StatusBadge …) |
 | `src/components/layout/` | App-Gerüst: Bottom-Navigation (Smartphone), Seitenleiste (Desktop), Kopfleiste |
-| `src/data/` | Schulen, Demo-Profile und Beispieldaten |
+| `src/data/` | Schulen und Themen (feste Listen) |
 | `src/lib/selectors.js` | Personalisierung, Empfehlungen, Filter – reine Funktionen, getestet in `tests/` |
-| `src/state/AppStateContext.jsx` | Zentraler Zustand: Demo-Modus oder echtes Konto (siehe 22.3a). **Hier werden später auch Events/Ideen aus der Datenbank angebunden.** |
+| `src/state/AppStateContext.jsx` | Zentraler Zustand: Gast oder echtes Konto (siehe 22.3a) |
 | `src/i18n/`, `src/locales/` | Eigenes kleines i18n-System; alle festen Texte in `de.json`, `tr.json`, `en.json` |
 | `src/styles/variables.css` | Farben, Abstände, Radien – abgeleitet aus den FlutterFlow-Screenshots |
 
@@ -1386,22 +1390,18 @@ Entscheidungen:
 
 ### 22.3a Supabase-Anmeldung (in Vorbereitung)
 
-Stand: Registrierung, E-Mail-Bestätigung und Login wurden mit einem echten Testkonto erfolgreich getestet. **Angemeldete Nutzer sehen echte Events und echte Ideen aus Supabase**; Event-Anmeldungen und Ideen-Unterstützungen werden direkt in der Datenbank gespeichert (Events im Browser getestet; Ideen: noch vom Team zu testen). Projekte bleiben vorerst Demo-Inhalte.
+Stand: Registrierung, E-Mail-Bestätigung und Login wurden mit einem echten Testkonto erfolgreich getestet. **Angemeldete Nutzer sehen echte Events und echte Ideen aus Supabase**; Event-Anmeldungen und Ideen-Unterstützungen werden direkt in der Datenbank gespeichert.
 
-**Zwei getrennte Modi** (`src/state/AppStateContext.jsx`, alle Seiten nutzen `useAppState()`):
+**Zwei Modi** (`src/state/AppStateContext.jsx`, alle Seiten nutzen `useAppState()`):
 
-| | Abgemeldet = Demo | Angemeldet = echtes Konto |
+| | Gast (nicht angemeldet) | Angemeldet = echtes Konto |
 |---|---|---|
-| Name, Schule, Klasse, Avatar-Farbe | Demo-Profil | Supabase `profiles` |
-| Interessen | Browser (`deutschconnect.demoState`) | Supabase `profiles.interests` |
-| Events | Demo-Events (`src/data/events.js`) | Supabase `events` – leer = Hinweis „Noch keine Events“, **nie** Demo-Events als Ersatz |
-| Event-Anmeldung / „Interessiert“ | Browser (`deutschconnect.demoState`) | Supabase `event_registrations` (`status` = `registered` bzw. `interested`; „interested“ ist keine Anmeldung) |
-| Ideen | Demo-Ideen + eigene im Browser | Supabase `ideas` – eigene in jedem Status, fremde nur freigegeben; leer = Hinweis, **nie** Demo-Ideen als Ersatz |
-| Unterstützungen | Browser (`deutschconnect.demoState`) | Supabase `idea_supports` (nur fremde, freigegebene Ideen) |
-| Unterstützer-Zahlen | aus allen Demo-Profilen | Datenbank-Funktion `get_idea_support_counts()` (ohne Namen) |
-| Projekt-Interesse, ausgeblendete Hinweise | Browser (`deutschconnect.demoState`) | Browser, eigener Schlüssel pro Konto (`deutschconnect.accountState.v1.<id>`) |
-
-Beim Abmelden ist wieder das zuletzt gewählte Demo-Profil aktiv. „Demo zurücksetzen“ betrifft nur die Demo-Daten.
+| Name, Schule, Klasse, Avatar-Farbe | keine (`GUEST_USER`) | Supabase `profiles` |
+| Events, Ideen, Nachhilfe, Profile, Chat | nicht sichtbar („Bitte melde dich an“) | Supabase – leer = Hinweis, **nie** Beispiel-Inhalte als Ersatz |
+| Event-Anmeldung / „Interessiert“ | – | Supabase `event_registrations` (`status` = `registered` bzw. `interested`) |
+| Unterstützungen | – | Supabase `idea_supports` (nur fremde, freigegebene Ideen) |
+| Unterstützer-Zahlen | – | Datenbank-Funktion `get_idea_support_counts()` (ohne Namen) |
+| Ausgeblendete Hinweise | – | Browser, eigener Schlüssel pro Konto (`deutschconnect.accountState.v1.<id>`) |
 
 | Datei | Aufgabe |
 |---|---|

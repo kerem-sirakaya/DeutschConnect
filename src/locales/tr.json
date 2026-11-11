@@ -8,14 +8,6 @@
     "clearSearch": "Aramayı temizle",
     "footerNote": "Connect/ED · okullar arası iş birliği"
   },
-  "demo": {
-    "label": "Demo",
-    "tooltip": "Demo modu: kurgusal profiller ve örnek veriler",
-    "notice": "Demo modu: Profiller, etkinlikler ve fikirler kurgusal örnek verilerdir. Profil seçimi gerçek bir giriş değildir.",
-    "localOnly": "Demo: Yalnızca bu tarayıcıda kaydedilir.",
-    "example": "Örnek",
-    "exampleEvent": "Örnek etkinlik"
-  },
   "nav": {
     "home": "Ana Sayfa",
     "events": "Etkinlikler",
@@ -33,15 +25,13 @@
     "help": "Yardım & SSS"
   },
   "profileMenu": {
-    "open": "Profil menüsünü aç (demo profili: {name})",
-    "demoProfiles": "Demo profilini değiştir",
-    "hint": "Yalnızca tanıtım amaçlı – gerçek bir giriş değildir.",
     "openAccount": "Profil menüsünü aç ({name} olarak giriş yapıldı)",
-    "toMyArea": "Alanıma git"
+    "toMyArea": "Alanıma git",
+    "openGuest": "Hesap menüsünü aç",
+    "guestLabel": "Giriş yapılmadı"
   },
   "profile": {
     "grade": "{grade}. sınıf",
-    "demoProfile": "Demo profili",
     "realAccount": "Hesabın"
   },
   "home": {
@@ -281,7 +271,6 @@
   "ideaDetail": {
     "notFound": "Fikir bulunamadı",
     "created": "Fikrin kaydedildi.",
-    "createdHint": "Demo modunda yalnızca bu tarayıcıda görünür.",
     "createdHintAccount": "Connect/ED ekibi onayladığında fikrin başkaları tarafından görülebilir.",
     "awaitingApproval": "Onay bekliyor – şu anda bu fikri yalnızca sen görebilirsin.",
     "rejectedText": "Connect/ED ekibi bu fikri onaylamadı. Fikir hâlâ yalnızca sana görünür ve desteklenemez. Fikri silebilir veya düzenlenmiş yeni bir fikir gönderebilirsin.",
@@ -318,7 +307,6 @@
     "formatLabel": "Biçim",
     "schoolsLabel": "Hangi okullarla?",
     "privacyLabel": "Başka kişilere ait kişisel bilgi (ör. isim veya telefon numarası) girmedim.",
-    "demoHint": "Demo: Fikir yalnızca bu tarayıcıda kaydedilir ve okullara gönderilmez.",
     "accountHint": "Fikrin hesabına kaydedilir. Diğer öğrenciler onu yalnızca onaydan sonra görür – adınla değil, yalnızca okulunla.",
     "submit": "Fikri gönder",
     "errorSummary_one": "Lütfen işaretli alanı kontrol et.",
@@ -335,7 +323,6 @@
   "me": {
     "title": "Alanım",
     "profile": "Profil",
-    "switchProfile": "Profili değiştir",
     "stats": {
       "events": "Etkinlik",
       "ideas": "Fikir",
@@ -350,8 +337,6 @@
       "interests": "İlgi alanları ve öneriler",
       "interestsHint": "Sana neyin önerileceğini belirler",
       "language": "Dil",
-      "settings": "Demo profili ve yerel veriler",
-      "settingsHint": "Profili değiştir, demoyu sıfırla",
       "about": "Connect/ED Hakkında"
     }
   },
@@ -390,16 +375,15 @@
     "signedInAs": "{name} olarak giriş yapıldı",
     "profileLoading": "Profil yükleniyor …",
     "profileMissing": "Profilin yüklenemedi.",
-    "notConfigured": "Bu sürümde gerçek hesaplar kullanılamıyor. Uygulama demo modunda çalışıyor.",
+    "notConfigured": "Giriş şu anda kullanılamıyor.",
     "signupClosed": "Kayıt henüz açılmadı. Okulundaki Connect/ED ekibine başvur.",
-    "demoStillActive": "Etkinlikler, fikirler ve projeler şimdilik demo verileridir.",
     "accountTitle": "Hesap",
-    "accountSignedOut": "Giriş yapmadın. Uygulama demo modunda çalışmaya devam ediyor.",
+    "accountSignedOut": "Giriş yapmadın.",
     "meRow": "Hesap ve giriş",
     "meRowSignedIn": "Giriş yapıldı",
     "gateLoading": "Profilin yükleniyor …",
     "gateErrorTitle": "Profil yüklenemedi",
-    "gateErrorText": "Tekrar deneyebilir ya da çıkış yapıp demoyu kullanmaya devam edebilirsin.",
+    "gateErrorText": "Tekrar deneyebilir ya da çıkış yapabilirsin.",
     "retry": "Tekrar dene",
     "gateEventsErrorTitle": "Etkinlikler yüklenemedi",
     "gateIdeasErrorTitle": "Fikirler yüklenemedi",
@@ -457,16 +441,7 @@
   },
   "settings": {
     "title": "Ayarlar",
-    "language": "Dil",
-    "profile": "Demo profili",
-    "profileHint": "Kişiselleştirmeyi denemek için kurgusal öğrenci profilleri arasında geçiş yap. Bu gerçek bir giriş değildir.",
-    "data": "Yerel veriler",
-    "dataText": "Kayıtlar, ilgi alanları ve kendi fikirlerin yalnızca bu tarayıcıda (localStorage) saklanır ve hiçbir sunucuya gönderilmez.",
-    "reset": "Demoyu sıfırla",
-    "resetConfirm": "Tüm yerel değişiklikler (kayıtlar, ilgi alanları, kendi fikirlerin) silinecek. Devam edilsin mi?",
-    "resetYes": "Evet, sıfırla",
-    "resetDone": "Demo sıfırlandı.",
-    "profileSignedIn": "Gerçek hesabınla giriş yaptın. Çıkış yaptıktan sonra demo profillerini yeniden seçebilirsin."
+    "language": "Dil"
   },
   "about": {
     "title": "Connect/ED Hakkında",
@@ -479,7 +454,7 @@
     "worksTitle": "Tamamlananlar",
     "works1": "Akıllı telefon ve masaüstü için web prototipi",
     "works2": "Almanca, Türkçe ve İngilizce arayüz",
-    "works3": "Kurgusal profiller ve örnek verilerle demo",
+    "works3": "Giriş, profil paylaşımı ve şifre sıfırlama özellikli hesaplar",
     "openTitle": "Henüz tamamlanmayanlar",
     "open1": "Gerçek kullanıcı hesapları ve giriş",
     "open2": "Tüm okullar için ortak veri tabanı",
@@ -778,8 +753,7 @@
     "upcomingCount_one": "{count} yaklaşan etkinlik",
     "upcomingCount_other": "{count} yaklaşan etkinlik",
     "ideasCount_one": "{count} fikir",
-    "ideasCount_other": "{count} fikir",
-    "demoHint": "Giriş yapmadın – sayılar ve içerikler demo örnekleridir."
+    "ideasCount_other": "{count} fikir"
   },
   "community": {
     "title": "Topluluk",
@@ -986,7 +960,6 @@
     },
     "openRequests_one": "{count} açık talep",
     "openRequests_other": "{count} açık talep",
-    "demoHint": "Demo: Bunlar hayalî örneklerdir. İlan oluşturmak, kaydetmek ve talep göndermek için lütfen giriş yap.",
     "loginLink": "Girişe git",
     "loading": "Ders desteği ilanları yükleniyor …",
     "retry": "Tekrar dene",
@@ -1040,7 +1013,6 @@
     "contactHint": "Mesajın ve adın, ilanı oluşturan kişiye iletilir. Lütfen iletişim bilgisi yazma.",
     "messageLabel": "Mesajın (10–600 karakter)",
     "sendRequest": "Talep gönder",
-    "demoContactHint": "Demo modunda talep gönderilmez.",
     "errors": {
       "kind": "Lütfen teklif veya talep seç.",
       "subject": "Lütfen 2–80 karakterlik bir ders gir.",
@@ -1063,18 +1035,17 @@
       "notAllowed": "Bunun için yetkin yok.",
       "generic": "Bu işlem olmadı. Lütfen daha sonra tekrar dene.",
       "loginRequired": "Lütfen önce giriş yap."
-    }
+    },
+    "guestHint": "Ders desteği panosu yalnızca giriş yapmış üyelere görünür."
   },
   "profiles": {
-    "demoHint": "Demo: hayalî profiller ve örnek sayılar. Hiçbir şey kaydedilmez.",
     "loginLink": "Gerçek veriler için giriş yap",
     "loading": "Profil verileri yükleniyor …",
     "retry": "Tekrar dene",
     "errors": {
       "generic": "Profil verileri yüklenemedi veya kaydedilemedi. Lütfen daha sonra tekrar dene.",
       "notInstalled": "Profiller ve istatistikler veritabanında henüz kurulmadı (Migration 012 eksik).",
-      "notAllowed": "Bunun için giriş yapmalısın.",
-      "demoReadOnly": "Demo modunda paylaşım ayarları yalnızca görüntülenebilir, kaydedilemez."
+      "notAllowed": "Bunun için giriş yapmalısın."
     },
     "peopleTitle": "Öğrenci profilleri",
     "peopleSubtitle": "Pilot okullardan gönüllü olarak paylaşılan profiller",
@@ -1137,11 +1108,11 @@
       "tutoringOffers": "Aktif teklifler",
       "tutoringRequests": "Aktif talepler",
       "tutoringContacts": "Kabul edilen bağlantılar"
-    }
+    },
+    "guestHint": "Öğrenci profilleri yalnızca giriş yapmış üyelere görünür."
   },
   "projects": {
     "title": "Katıl",
-    "demoHint": "Demo modunda katılım mümkün değil. Gerçek bir hesapla projede yer alıp alamayacağını sorabilirsin.",
     "loginLink": "Katılmak için giriş yap",
     "loading": "Proje verileri yükleniyor …",
     "memberCount_one": "{count} üye",
@@ -1186,7 +1157,8 @@
       "invalid": "Geçersiz giriş.",
       "generic": "Olmadı. Lütfen daha sonra tekrar dene.",
       "loginRequired": "Bunun için gerçek bir hesaba ihtiyacın var."
-    }
+    },
+    "guestHint": "Bir hesapla projeye katılmak için istekte bulunabilirsin."
   },
   "chat": {
     "title": "Sohbet",
@@ -1547,7 +1519,7 @@
         },
         "how": {
           "q": "Platformu nasıl kullanırım?",
-          "a": "“Ana Sayfa” sıradaki etkinliklerini ve önerileri gösterir. “Keşfet” etkinlikleri ve fikirleri içerir. “Ders desteği” ayrı bir bölümdür; burada ders desteği sunabilir veya arayabilirsin. “Topluluk” öğrenci profillerini, proje ve etkinlik gruplarını ve oyunları içerir. Mesajlaşmak için ayrı bir “Sohbet” bölümü vardır. Giriş yapmadan kurgusal profillerle bir demo görürsün."
+          "a": "“Ana Sayfa” sıradaki etkinliklerini ve önerileri gösterir. “Keşfet” etkinlikleri ve fikirleri içerir. “Ders desteği” ayrı bir bölümdür; burada ders desteği sunabilir veya arayabilirsin. “Topluluk” öğrenci profillerini, proje ve etkinlik gruplarını ve oyunları içerir. Mesajlaşmak için ayrı bir “Sohbet” bölümü vardır. Giriş yapmadan ana sayfayı, oyunları, yardımı ve “Connect/ED Hakkında” bölümünü görebilirsin."
         },
         "profile": {
           "q": "Profilimi nasıl güncellerim?",
@@ -1632,5 +1604,34 @@
     },
     "paletteButton": "Vurgu rengini seç",
     "moreSettings": "Diğer görünüm ayarları"
+  },
+  "guest": {
+    "welcomeTitle": "Connect/ED'ye hoş geldin",
+    "welcomeText": "Öğrenciler arasında ortak etkinlikler, proje fikirleri, ders desteği ve paylaşım için okullar arası platform. Katılmak için Connect/ED hesabınla giriş yap.",
+    "featuresTitle": "Seni neler bekliyor",
+    "features": {
+      "events": {
+        "title": "Etkinlikler",
+        "text": "Katılımcı okulların ortak etkinlikleri – kayıt olarak katılabilirsin."
+      },
+      "ideas": {
+        "title": "Fikirler ve projeler",
+        "text": "Proje fikirlerini paylaş, destekle ve ekip olarak hayata geçir."
+      },
+      "tutoring": {
+        "title": "Ders desteği",
+        "text": "Ders desteği sun ya da ara – okullar arasında da."
+      },
+      "chat": {
+        "title": "Sohbet",
+        "text": "Konu odaları, proje ve etkinlik grupları ve mesajlar – moderasyonlu."
+      }
+    },
+    "membersOnlyHint": "Bu bölümler yalnızca katılımcı okulların giriş yapmış öğrencilerine görünür.",
+    "openTitle": "Giriş yapmadan",
+    "loginRequiredTitle": "Lütfen giriş yap",
+    "loginRequiredText": "Bu bölüm yalnızca giriş yapmış Connect/ED üyelerine görünür. Kullanmak için giriş yap.",
+    "aboutLink": "Connect/ED nedir?",
+    "gamesLink": "Giriş yapmadan oyunlar"
   }
 }

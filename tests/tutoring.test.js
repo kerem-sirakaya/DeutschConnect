@@ -28,7 +28,7 @@ import {
   tutoringErrorKey,
   updateTutoringEntry,
 } from '../src/lib/tutoringApi.js';
-import { demoTutoringEntries, demoTutoringFor } from '../src/data/tutoring.js';
+import { demoTutoringEntries, demoTutoringFor } from './fixtures/tutoring.js';
 
 const valid = {
   kind: 'offer',

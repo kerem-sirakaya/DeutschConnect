@@ -1,3 +1,4 @@
+// TESTDATEN (fiktiv) – nur für automatische Tests. Die App verwendet diese Datei NICHT (früherer Demo-Modus).
 /**
  * Gemeinsame Projekte.
  * p1 beschreibt das echte DeutschConnect-Projekt; die Mitgliedschaft dort ist aber

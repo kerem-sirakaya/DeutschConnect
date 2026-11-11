@@ -1,4 +1,5 @@
-import { relativeDate } from '../lib/dates.js';
+// TESTDATEN (fiktiv) – nur für automatische Tests. Die App verwendet diese Datei NICHT (früherer Demo-Modus).
+import { relativeDate } from '../../src/lib/dates.js';
 
 /**
  * BEISPIEL-IDEEN (Demo-Daten).

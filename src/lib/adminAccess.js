@@ -9,7 +9,7 @@
 
 /**
  * Admin-Status aus dem letzten Ergebnis von is_admin() ableiten.
- * @param {string|null} userId  ID des ECHTEN Kontos (null = Demo / abgemeldet / lädt noch)
+ * @param {string|null} userId  ID des ECHTEN Kontos (null = nicht angemeldet / lädt noch)
  * @param {{ userId: string|null, isAdmin: boolean, error: unknown }} result  letztes Ergebnis
  * @returns {{ status: 'none'|'loading'|'error'|'ready', isAdmin: boolean }}
  */
