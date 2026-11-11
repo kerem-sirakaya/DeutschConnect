@@ -1519,7 +1519,7 @@
         },
         "how": {
           "q": "Platformu nasıl kullanırım?",
-          "a": "“Ana Sayfa” sıradaki etkinliklerini ve önerileri gösterir. “Keşfet” etkinlikleri ve fikirleri, “Topluluk” ise profilleri ve sohbeti içerir. Giriş yapmadan kurgusal profillerle bir demo görürsün."
+          "a": "“Ana Sayfa” sıradaki etkinliklerini ve önerileri gösterir. “Keşfet” etkinlikleri ve fikirleri içerir. “Ders desteği” ayrı bir bölümdür; burada ders desteği sunabilir veya arayabilirsin. “Topluluk” öğrenci profillerini, proje ve etkinlik gruplarını ve oyunları içerir. Mesajlaşmak için ayrı bir “Sohbet” bölümü vardır. Giriş yapmadan kurgusal profillerle bir demo görürsün."
         },
         "profile": {
           "q": "Profilimi nasıl güncellerim?",

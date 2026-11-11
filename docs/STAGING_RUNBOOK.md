@@ -123,6 +123,17 @@ Die Registrierung bietet die Schule nicht mehr an; die Datenbank (Tabelle `schoo
 | H5 | Anmeldungen | Anka-Konto (oder ERS-Konto) mit Anmeldung zu einem Anka-Event: „Meine Events“ | Event sichtbar, Detailseite erreichbar; NICHT unter „Alle“ |
 | H6 | Admin/Moderation | Admin: `/admin/events` und `/chat/moderation` → Räume | Anka-Events in der Verwaltung; Eventgruppe für ein veröffentlichtes Anka-Event anlegbar; nicht angemeldete Schüler:innen sehen weder Event noch Gruppe (Angemeldete sehen beides – eigene Anmeldung) |
 
+**Bekannte Einschränkungen der Anka-Ausblendung** (Code-Review 2026-11-11; bewusst so belassen, keine DB-Änderung):
+- **M1 – Personenverzeichnis:** Anka-Konten mit öffentlichem Profil, aber **ohne** freigegebene Schule können weiterhin
+  unter Community → Schülerprofile erscheinen (ohne Schulnamen). Grund: `list_public_profiles` / `get_public_profile`
+  (012) liefern dann `school_id = null` – das Frontend kann die Schule nicht erkennen.
+- **G1 – Nachhilfe-Link:** Hat ein anderes Konto (z. B. ERS) bei einem ausgeblendeten Anka-Nachhilfeeintrag angefragt,
+  führt der Link „Zum Eintrag“ in „Kontakte“ zu „nicht gefunden“. Die Kontaktfunktion (Anfrage, Antwort) funktioniert weiterhin.
+- **G2 – Projektideen:** Eigene Anka-Projektideen sind nur für die Autorin oder den Autor sichtbar, nicht für andere
+  Projektbeteiligte oder Unterstützer:innen.
+- **G3 – Gruppen:** Gruppen mit „Anka Bilim“ im Titel werden auch für ihre eigenen Mitglieder ausgeblendet
+  (Filter über den Titel, `src/lib/communityGroups.js`, `src/pages/ChatPage.jsx`).
+
 **E-Mail-Bestätigung auf Staging** – eine der beiden Varianten wählen:
 - **A (einfach, nur Staging):** Authentication → Sign In / Providers → Email → „Confirm email“ **aus**.
   Im Live-Projekt **nichts** ändern.
