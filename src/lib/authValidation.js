@@ -77,6 +77,6 @@ export function safeRedirectPath(from, fallback = '/me/settings') {
   if (typeof from !== 'string' || !from.startsWith('/') || from.startsWith('//') || from.includes('\\')) {
     return fallback;
   }
-  if (from === '/login' || from === '/register') return fallback;
+  if (['/login', '/register', '/forgot-password', '/reset-password'].includes(from)) return fallback;
   return from;
 }

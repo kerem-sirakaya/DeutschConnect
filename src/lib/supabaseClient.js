@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { RESET_PASSWORD_PATH, createRecoveryStore, parseAuthRedirect } from './passwordRecovery.js';
 
 /**
  * Supabase-Verbindung.
@@ -23,7 +24,45 @@ if (looksSecret) {
 
 export const isSupabaseConfigured = Boolean(url && key && !looksSecret);
 
+/**
+ * Passwort-Wiederherstellung: Die Adresse VOR dem Start von supabase-js auswerten – supabase-js
+ * entfernt die Token danach aus der Adresse. Gespeichert wird nur die Art ('recovery'/'error'/'none'),
+ * nie ein Token. Landet ein Wiederherstellungs-Link auf einer anderen Seite (z. B. der Startseite,
+ * weil die Ziel-Adresse in Supabase nicht erlaubt ist), wechseln wir vorher auf /reset-password.
+ */
+export const initialAuthRedirect =
+  typeof window === 'undefined' ? { kind: 'none' } : parseAuthRedirect(window.location.href);
+if (initialAuthRedirect.kind === 'recovery' && window.location.pathname !== RESET_PASSWORD_PATH) {
+  window.history.replaceState(window.history.state, '', `${RESET_PASSWORD_PATH}${window.location.search}${window.location.hash}`);
+}
+
 export const supabase = isSupabaseConfigured ? createClient(url, key) : null;
+
+/**
+ * Zustand der Passwort-Wiederherstellung. Der Listener wird SOFORT nach createClient angemeldet –
+ * vor React –, damit das Ereignis PASSWORD_RECOVERY (kommt beim Einlösen des Links) nie verpasst wird.
+ * Nur dieses Ereignis schaltet das Formular frei; SIGNED_OUT beendet die Wiederherstellung.
+ */
+function tabStorage() {
+  try {
+    return typeof window === 'undefined' ? null : window.sessionStorage;
+  } catch {
+    return null;
+  }
+}
+export const recoveryStore = createRecoveryStore({
+  storage: tabStorage(),
+  pendingLink: Boolean(supabase) && initialAuthRedirect.kind === 'recovery',
+});
+if (supabase) {
+  supabase.auth.onAuthStateChange((event, session) => {
+    // Hier KEINE Supabase-Aufrufe – nur Zustand setzen.
+    recoveryStore.handleAuthEvent(event, session);
+    // PASSWORD_RECOVERY folgt direkt nach dem Start (eigener Timer in supabase-js). Kam es nicht,
+    // war der Link ungültig → nach kurzer Wartezeit „ungültig“ statt „lädt …“ zeigen.
+    if (event === 'INITIAL_SESSION') setTimeout(() => recoveryStore.settleLink(), 300);
+  });
+}
 
 /**
  * Prüft (nur zur Entwicklung), ob die Verbindung zu Supabase klappt.

@@ -1,6 +1,7 @@
-import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { isSupabaseConfigured, supabase } from '../lib/supabaseClient.js';
+import { createContext, useContext, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
+import { initialAuthRedirect, isSupabaseConfigured, recoveryStore, supabase } from '../lib/supabaseClient.js';
 import { buildSignUpMetadata } from '../lib/authValidation.js';
+import { resetRedirectUrl } from '../lib/passwordRecovery.js';
 
 /**
  * ECHTE Anmeldung über Supabase Auth.
@@ -37,6 +38,8 @@ export function AuthProvider({ children }) {
   const [interestsSaveError, setInterestsSaveError] = useState(null);
   // Speichervorgänge nacheinander ausführen, damit ein älterer nie einen neueren überschreibt.
   const saveQueue = useRef(Promise.resolve());
+  // Passwort-Wiederherstellung (Zustand lebt in supabaseClient.js, damit kein Ereignis verloren geht)
+  const recovery = useSyncExternalStore(recoveryStore.subscribe, recoveryStore.getState);
 
   // 1) Sitzung beim Start laden und auf Login/Logout reagieren.
   useEffect(() => {
@@ -82,6 +85,9 @@ export function AuthProvider({ children }) {
       profileError: userId ? current.error : null,
       profileLoading: Boolean(userId) && profileResult.userId !== userId,
       interestsSaveError,
+      /** Passwort-Wiederherstellung: { userId, linkPending } und Art des Start-Links ('error' → Meldung). */
+      recovery,
+      initialAuthRedirect,
 
       /** Profil erneut laden (z. B. nach einem Netzwerkfehler). */
       reloadProfile() {
@@ -136,6 +142,32 @@ export function AuthProvider({ children }) {
         return { error };
       },
 
+      /**
+       * „Passwort vergessen“: E-Mail mit Link anfordern. Supabase antwortet auch bei unbekannten
+       * Adressen gleich – die Oberfläche verrät daher nicht, ob es ein Konto gibt.
+       */
+      async requestPasswordReset(email) {
+        if (!supabase) return { error: { code: 'not_configured' } };
+        const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+          redirectTo: resetRedirectUrl(window.location.origin),
+        });
+        return { error };
+      },
+
+      /**
+       * Neues Passwort speichern (nur in einer Wiederherstellungs-Sitzung), danach überall abmelden,
+       * damit man sich mit dem neuen Passwort anmeldet. Gibt { error } zurück.
+       */
+      async updatePassword(password) {
+        if (!supabase) return { error: { code: 'not_configured' } };
+        const { error } = await supabase.auth.updateUser({ password });
+        if (error) return { error };
+        recoveryStore.clear();
+        // Abmelden darf scheitern (z. B. kurz offline) – das Passwort ist trotzdem geändert.
+        await supabase.auth.signOut().catch(() => {});
+        return { error: null };
+      },
+
       async signOut() {
         if (!supabase) return { error: null };
         setInterestsSaveError(null);
@@ -143,7 +175,7 @@ export function AuthProvider({ children }) {
         return { error };
       },
     };
-  }, [session, sessionLoading, userId, profileResult, interestsSaveError]);
+  }, [session, sessionLoading, userId, profileResult, interestsSaveError, recovery]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

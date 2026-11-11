@@ -1346,9 +1346,13 @@ Voraussetzung: Node.js (LTS oder neuer) mit npm.
 npm install      # einmalig: Abhängigkeiten installieren
 npm run dev      # Entwicklungsserver starten → http://localhost:5173
 npm test         # automatische Tests (Personalisierung, Übersetzungen)
-npm run build    # Produktions-Build nach dist/
+npm run build    # Öffentlicher Produktions-Build nach dist/ (nur freigegebenes Supabase-Projekt, siehe docs/PUBLIC_BUILD.md)
 npm run preview  # Produktions-Build lokal ansehen → http://localhost:4173
 ```
+
+`npm run build` baut seit Phase 2A.1 immer den geprüften öffentlichen Build (Modus `public`) und bricht ab, wenn die
+Werte fehlen oder nicht zum freigegebenen Projekt passen. `.env.local` wird beim Bauen nie gelesen; ein `vite build`
+ohne Modus wird abgelehnt. Details: [docs/PUBLIC_BUILD.md](docs/PUBLIC_BUILD.md).
 
 ### 22.2 Was funktioniert – und was nur Demo ist
 

@@ -426,6 +426,33 @@
       "interestsSave": "Deine Interessen konnten nicht gespeichert werden. Es wird der zuletzt gespeicherte Stand angezeigt.",
       "eventsLoad": "Die Events konnten nicht vom Server geladen werden. Bitte prüfe deine Internetverbindung.",
       "ideasLoad": "Die Ideen konnten nicht vom Server geladen werden. Bitte prüfe deine Internetverbindung."
+    },
+    "forgot": {
+      "link": "Passwort vergessen?",
+      "title": "Passwort vergessen",
+      "subtitle": "Wir schicken dir einen Link zum Zurücksetzen",
+      "intro": "Gib die E-Mail-Adresse deines Connect/ED-Kontos ein. Du bekommst dann eine E-Mail mit einem Link, über den du ein neues Passwort festlegen kannst.",
+      "submit": "Link anfordern",
+      "sentText": "Falls es zu dieser Adresse ein Konto gibt, haben wir dir eine E-Mail mit einem Link geschickt.",
+      "sentHint": "Öffne den Link im selben Browser. Er ist nur kurze Zeit gültig. Wurde für diese Adresse gerade erst ein Link angefordert, kann ein neuer erst nach einigen Minuten verschickt werden. Keine E-Mail bekommen? Prüfe den Spam-Ordner und versuche es nach ein paar Minuten erneut.",
+      "again": "Erneut anfordern",
+      "backToLogin": "Zur Anmeldung"
+    },
+    "reset": {
+      "title": "Neues Passwort",
+      "subtitle": "Lege ein neues Passwort für dein Konto fest",
+      "newPasswordLabel": "Neues Passwort",
+      "confirmLabel": "Neues Passwort wiederholen",
+      "submit": "Passwort speichern",
+      "success": "Dein Passwort wurde geändert. Melde dich jetzt mit dem neuen Passwort an.",
+      "requestNew": "Neuen Link anfordern",
+      "errors": {
+        "confirmRequired": "Bitte wiederhole das neue Passwort.",
+        "mismatch": "Die beiden Passwörter stimmen nicht überein.",
+        "samePassword": "Das neue Passwort muss sich vom bisherigen unterscheiden.",
+        "linkExpired": "Dieser Link ist abgelaufen. Bitte fordere einen neuen Link an.",
+        "linkInvalid": "Dieser Link ist ungültig oder wurde schon benutzt. Bitte fordere einen neuen Link an."
+      }
     }
   },
   "settings": {

@@ -426,6 +426,33 @@
       "interestsSave": "Your interests could not be saved. The last saved state is shown.",
       "eventsLoad": "The events could not be loaded from the server. Please check your internet connection.",
       "ideasLoad": "The ideas could not be loaded from the server. Please check your internet connection."
+    },
+    "forgot": {
+      "link": "Forgot password?",
+      "title": "Forgot password",
+      "subtitle": "We will send you a link to reset it",
+      "intro": "Enter the email address of your Connect/ED account. You will receive an email with a link to set a new password.",
+      "submit": "Send link",
+      "sentText": "If an account exists for this address, we have sent you an email with a link.",
+      "sentHint": "Open the link in the same browser. It is only valid for a short time. If a link was requested for this address very recently, a new one can only be sent after a few minutes. No email? Check your spam folder and try again in a few minutes.",
+      "again": "Request again",
+      "backToLogin": "Back to sign in"
+    },
+    "reset": {
+      "title": "New password",
+      "subtitle": "Choose a new password for your account",
+      "newPasswordLabel": "New password",
+      "confirmLabel": "Repeat new password",
+      "submit": "Save password",
+      "success": "Your password has been changed. Please sign in with your new password.",
+      "requestNew": "Request a new link",
+      "errors": {
+        "confirmRequired": "Please repeat the new password.",
+        "mismatch": "The two passwords do not match.",
+        "samePassword": "The new password must be different from your current one.",
+        "linkExpired": "This link has expired. Please request a new link.",
+        "linkInvalid": "This link is invalid or has already been used. Please request a new link."
+      }
     }
   },
   "settings": {

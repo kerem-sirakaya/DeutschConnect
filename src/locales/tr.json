@@ -426,6 +426,33 @@
       "interestsSave": "İlgi alanların kaydedilemedi. En son kaydedilen durum gösteriliyor.",
       "eventsLoad": "Etkinlikler sunucudan yüklenemedi. Lütfen internet bağlantını kontrol et.",
       "ideasLoad": "Fikirler sunucudan yüklenemedi. Lütfen internet bağlantını kontrol et."
+    },
+    "forgot": {
+      "link": "Şifremi unuttum?",
+      "title": "Şifremi unuttum",
+      "subtitle": "Sana şifre sıfırlama bağlantısı gönderelim",
+      "intro": "Connect/ED hesabının e-posta adresini gir. Yeni bir şifre belirleyebileceğin bağlantıyı içeren bir e-posta alacaksın.",
+      "submit": "Bağlantı gönder",
+      "sentText": "Bu adrese ait bir hesap varsa, sana bağlantı içeren bir e-posta gönderdik.",
+      "sentHint": "Bağlantıyı aynı tarayıcıda aç. Bağlantı yalnızca kısa bir süre geçerlidir. Bu adres için kısa süre önce bir bağlantı istendiyse, yenisi ancak birkaç dakika sonra gönderilebilir. E-posta gelmedi mi? Spam klasörünü kontrol et ve birkaç dakika sonra tekrar dene.",
+      "again": "Yeniden gönder",
+      "backToLogin": "Girişe dön"
+    },
+    "reset": {
+      "title": "Yeni şifre",
+      "subtitle": "Hesabın için yeni bir şifre belirle",
+      "newPasswordLabel": "Yeni şifre",
+      "confirmLabel": "Yeni şifreyi tekrarla",
+      "submit": "Şifreyi kaydet",
+      "success": "Şifren değiştirildi. Şimdi yeni şifrenle giriş yap.",
+      "requestNew": "Yeni bağlantı iste",
+      "errors": {
+        "confirmRequired": "Lütfen yeni şifreyi tekrar gir.",
+        "mismatch": "İki şifre birbiriyle eşleşmiyor.",
+        "samePassword": "Yeni şifre eskisinden farklı olmalı.",
+        "linkExpired": "Bu bağlantının süresi doldu. Lütfen yeni bir bağlantı iste.",
+        "linkInvalid": "Bu bağlantı geçersiz veya daha önce kullanılmış. Lütfen yeni bir bağlantı iste."
+      }
     }
   },
   "settings": {

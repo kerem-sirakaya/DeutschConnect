@@ -356,6 +356,13 @@
   text-decoration: underline;
 }
 
+/* „Passwort vergessen?“ unter dem Passwortfeld, rechtsbündig, gut antippbar */
+.login__forgot {
+  align-self: flex-end;
+  padding: 6px 0;
+  font-size: var(--text-sm);
+}
+
 /* ---------- Profile + Statistik (Stufe 5) ---------- */
 .small {
   font-size: var(--text-sm);

@@ -6,6 +6,7 @@ import { authErrorKey, safeRedirectPath, validateLogin } from '../lib/authValida
 import PageHeader from '../components/PageHeader.jsx';
 import AccountCard from '../components/AccountCard.jsx';
 import Icon from '../components/Icon.jsx';
+import { FORGOT_PASSWORD_PATH } from '../lib/passwordRecovery.js';
 
 export default function LoginPage() {
   const { t } = useI18n();
@@ -18,6 +19,8 @@ export default function LoginPage() {
   const [submitted, setSubmitted] = useState(false);
   const [busy, setBusy] = useState(false);
   const [serverError, setServerError] = useState(null);
+  // Nach „Neues Passwort speichern“ (ResetPasswordPage) kommt man mit dieser Meldung hierher.
+  const passwordReset = location.state?.passwordReset === true;
 
   const header = <PageHeader title={t('auth.loginTitle')} subtitle={t('auth.loginSubtitle')} backTo="/me" />;
 
@@ -76,6 +79,12 @@ export default function LoginPage() {
     <div className="page page--narrow">
       {header}
       <form ref={formRef} className="form card" onSubmit={handleSubmit} noValidate aria-busy={busy}>
+        {passwordReset && !serverError && (
+          <p className="notice notice--success" role="status">
+            <Icon name="check" size={16} />
+            {t('auth.reset.success')}
+          </p>
+        )}
         {serverError && (
           <p className="notice notice--error" role="alert">
             <Icon name="info" size={16} />
@@ -107,6 +116,9 @@ export default function LoginPage() {
             {...fieldProps('password')}
           />
           <ErrorText name="password" />
+          <Link to={FORGOT_PASSWORD_PATH} className="text-link login__forgot">
+            {t('auth.forgot.link')}
+          </Link>
         </div>
 
         <div className="form__actions">

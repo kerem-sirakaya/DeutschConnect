@@ -15,6 +15,8 @@ import AboutPage from './pages/AboutPage.jsx';
 import HelpPage from './pages/HelpPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
+import ForgotPasswordPage from './pages/ForgotPasswordPage.jsx';
+import ResetPasswordPage from './pages/ResetPasswordPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
 import DiscoverPage from './pages/DiscoverPage.jsx';
 import CommunityPage from './pages/CommunityPage.jsx';
@@ -114,6 +116,8 @@ export default function App() {
 
         <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<RegisterPage />} />
+        <Route path="forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="reset-password" element={<ResetPasswordPage />} />
 
         <Route path="about" element={<AboutPage />} />
         <Route path="help" element={<HelpPage />} />

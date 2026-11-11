@@ -8,7 +8,9 @@
     "dev": "vite",
     "dev:staging": "vite --mode staging",
     "check:staging": "node scripts/stagingEnv.mjs",
-    "build": "vite build",
+    "build": "vite build --mode public",
+    "build:public": "vite build --mode public",
+    "check:public": "node scripts/publicEnv.mjs",
     "preview": "vite preview",
     "test": "node --test"
   },
