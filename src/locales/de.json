@@ -6,7 +6,7 @@
     "cancel": "Abbrechen",
     "yourSchool": "Deine Schule",
     "clearSearch": "Suche löschen",
-    "footerNote": "DeutschConnect · schulübergreifende Zusammenarbeit"
+    "footerNote": "Connect/ED · schulübergreifende Zusammenarbeit"
   },
   "demo": {
     "label": "Demo",
@@ -22,7 +22,7 @@
     "ideas": "Ideen",
     "me": "Mein Bereich",
     "meShort": "Mein Bereich",
-    "about": "Über DeutschConnect",
+    "about": "Über Connect/ED",
     "mainLabel": "Hauptnavigation",
     "admin": "Admin-Bereich",
     "discover": "Entdecken",
@@ -175,7 +175,7 @@
     "noResultsTitle": "Keine passenden Events",
     "noResultsText": "Ändere die Suche oder setze die Filter zurück.",
     "noRealEventsTitle": "Noch keine Events geplant",
-    "noRealEventsText": "Sobald das DeutschConnect-Team ein Event einträgt, erscheint es hier.",
+    "noRealEventsText": "Sobald das Connect/ED-Team ein Event einträgt, erscheint es hier.",
     "statusFilter": {
       "label": "Nach Status filtern",
       "all": "Alle",
@@ -282,9 +282,9 @@
     "notFound": "Idee nicht gefunden",
     "created": "Deine Idee wurde gespeichert.",
     "createdHint": "Im Demo-Modus ist sie nur in diesem Browser sichtbar.",
-    "createdHintAccount": "Andere sehen deine Idee, sobald das DeutschConnect-Team sie freigegeben hat.",
+    "createdHintAccount": "Andere sehen deine Idee, sobald das Connect/ED-Team sie freigegeben hat.",
     "awaitingApproval": "Wartet auf Freigabe – bisher kannst nur du diese Idee sehen.",
-    "rejectedText": "Das DeutschConnect-Team hat diese Idee nicht freigegeben. Sie ist weiterhin nur für dich sichtbar und kann nicht unterstützt werden. Du kannst sie löschen oder eine überarbeitete Idee neu einreichen.",
+    "rejectedText": "Das Connect/ED-Team hat diese Idee nicht freigegeben. Sie ist weiterhin nur für dich sichtbar und kann nicht unterstützt werden. Du kannst sie löschen oder eine überarbeitete Idee neu einreichen.",
     "from": "Von",
     "fromYou": "Dir",
     "fromStudentOf": "Schüler:in der {school}",
@@ -352,7 +352,7 @@
       "language": "Sprache",
       "settings": "Demo-Profil & lokale Daten",
       "settingsHint": "Profil wechseln, Demo zurücksetzen",
-      "about": "Über DeutschConnect"
+      "about": "Über Connect/ED"
     }
   },
   "interests": {
@@ -366,7 +366,7 @@
   },
   "auth": {
     "loginTitle": "Anmelden",
-    "loginSubtitle": "Mit deinem DeutschConnect-Konto",
+    "loginSubtitle": "Mit deinem Connect/ED-Konto",
     "registerTitle": "Registrieren",
     "registerSubtitle": "Konto für Schüler:innen der beteiligten Schulen",
     "firstNameLabel": "Vorname",
@@ -391,7 +391,7 @@
     "profileLoading": "Profil wird geladen …",
     "profileMissing": "Dein Profil konnte nicht geladen werden.",
     "notConfigured": "Echte Konten sind in dieser Version nicht verfügbar. Die App läuft im Demo-Modus.",
-    "signupClosed": "Die Registrierung ist noch nicht freigeschaltet. Wende dich an das DeutschConnect-Team deiner Schule.",
+    "signupClosed": "Die Registrierung ist noch nicht freigeschaltet. Wende dich an das Connect/ED-Team deiner Schule.",
     "demoStillActive": "Events, Ideen und Projekte sind vorerst weiterhin Demo-Daten.",
     "accountTitle": "Konto",
     "accountSignedOut": "Du bist nicht angemeldet. Die App funktioniert weiterhin im Demo-Modus.",
@@ -442,10 +442,10 @@
     "profileSignedIn": "Du bist mit deinem echten Konto angemeldet. Demo-Profile kannst du nach dem Abmelden wieder auswählen."
   },
   "about": {
-    "title": "Über DeutschConnect",
+    "title": "Über Connect/ED",
     "tagline": "Deine Schule. Deine Ideen. Dein Netzwerk.",
-    "whatTitle": "Was ist DeutschConnect?",
-    "whatText": "DeutschConnect ist eine von Schüler:innen entwickelte Plattform, über die Schulen gemeinsame Veranstaltungen, Ideen und Projekte organisieren. Schüler:innen sollen selbst Initiative ergreifen und Kontakte zu anderen Schulen aufbauen können.",
+    "whatTitle": "Was ist Connect/ED?",
+    "whatText": "Connect/ED ist eine von Schüler:innen entwickelte Plattform, über die Schulen gemeinsame Veranstaltungen, Ideen und Projekte organisieren. Schüler:innen sollen selbst Initiative ergreifen und Kontakte zu anderen Schulen aufbauen können.",
     "originTitle": "Wie es entstanden ist",
     "originText": "Die Idee entstand in einer Schülergruppe der Ernst-Reuter-Schule Ankara. Aus einem früheren Design-Prototyp für Deutschunterricht wurde eine Plattform für schulübergreifende Zusammenarbeit.",
     "statusTitle": "Aktueller Stand",
@@ -461,7 +461,7 @@
     "schoolsTitle": "Beteiligte Schulen",
     "impactTitle": "Wirkung",
     "impactText": "Bisher wurden noch keine Ergebnisse erhoben. Nach dem ersten Pilot werden hier echte Aktivitäten und Rückmeldungen dokumentiert.",
-    "competition": "DeutschConnect soll beim 10. DIHK-Auslandsschulwettbewerb „Schüler bauen weltweit Brücken“ eingereicht werden."
+    "competition": "Connect/ED soll beim 10. DIHK-Auslandsschulwettbewerb „Schüler bauen weltweit Brücken“ eingereicht werden."
   },
   "notFound": {
     "title": "Seite nicht gefunden",
@@ -488,8 +488,8 @@
       "retry": "Erneut prüfen"
     },
     "overview": {
-      "title": "Willkommen im DeutschConnect Admin-Dashboard",
-      "subtitle": "Hier erhältst du einen Überblick über die Aktivitäten und den aktuellen Stand von DeutschConnect.",
+      "title": "Willkommen im Connect/ED Admin-Dashboard",
+      "subtitle": "Hier erhältst du einen Überblick über die Aktivitäten und den aktuellen Stand von Connect/ED.",
       "context": "Angemeldet als {name} · {date}",
       "contextNoName": "{date}",
       "statsTitle": "Kennzahlen",
@@ -1509,13 +1509,13 @@
   "help": {
     "title": "Hilfe & FAQ",
     "subtitle": "Kurze Antworten auf häufige Fragen",
-    "intro": "Hier erfährst du, wie DeutschConnect funktioniert. Tippe auf eine Frage, um die Antwort zu öffnen.",
-    "more": "Deine Frage ist nicht dabei? Mehr über das Projekt steht unter „Über DeutschConnect“.",
+    "intro": "Hier erfährst du, wie Connect/ED funktioniert. Tippe auf eine Frage, um die Antwort zu öffnen.",
+    "more": "Deine Frage ist nicht dabei? Mehr über das Projekt steht unter „Über Connect/ED“.",
     "sections": {
       "start": {
         "title": "Erste Schritte",
         "what": {
-          "q": "Was ist DeutschConnect?",
+          "q": "Was ist Connect/ED?",
           "a": "Eine Plattform von Schüler:innen für die Zusammenarbeit zwischen Schulen – entstanden an der Ernst-Reuter-Schule Ankara. Ihr findet gemeinsame Events, teilt Ideen für Projekte und tauscht euch aus."
         },
         "how": {

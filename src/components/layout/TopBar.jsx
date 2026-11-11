@@ -18,12 +18,12 @@ export default function TopBar() {
   return (
     <header className={`topbar${isStaging ? ' topbar--staging' : ''}`}>
       <div className="topbar__inner">
-        <Link to="/" className="topbar__brand" aria-label={`DeutschConnect · ${t('nav.home')}`}>
+        <Link to="/" className="topbar__brand" aria-label={`Connect/ED · ${t('nav.home')}`}>
           <span className="brand-mark" aria-hidden="true">
             <Icon name="globe" size={22} />
           </span>
           <span className="topbar__brand-text">
-            Deutsch<span className="brand-accent">Connect</span>
+            Connect<span className="brand-accent">/ED</span>
           </span>
         </Link>
         <MainNav variant="top" />

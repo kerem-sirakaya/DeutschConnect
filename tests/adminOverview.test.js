@@ -383,6 +383,6 @@ test('alle Texte der Übersicht existieren in de, tr und en (ohne leere Werte)',
     assert.equal(dict.admin.overview.placeholder, undefined);
   }
   const de = JSON.parse(read('src', 'locales', 'de.json'));
-  assert.equal(de.admin.overview.title, 'Willkommen im DeutschConnect Admin-Dashboard');
+  assert.equal(de.admin.overview.title, 'Willkommen im Connect/ED Admin-Dashboard');
   assert.equal(de.admin.overview.activityTitle, 'Aktivitäten');
 });

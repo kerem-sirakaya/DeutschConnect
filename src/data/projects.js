@@ -9,7 +9,7 @@ export const projects = [
   {
     id: 'p1',
     isDemo: false,
-    title: { de: 'DeutschConnect-Plattform', tr: 'DeutschConnect Platformu', en: 'DeutschConnect Platform' },
+    title: { de: 'Connect/ED-Plattform', tr: 'Connect/ED Platformu', en: 'Connect/ED Platform' },
     summary: {
       de: 'Ein Schülerteam entwickelt diese Plattform für schulübergreifende Zusammenarbeit.',
       tr: 'Bir öğrenci ekibi, okullar arası iş birliği için bu platformu geliştiriyor.',

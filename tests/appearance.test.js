@@ -134,7 +134,7 @@ test('Marke: Schwarz-Rot-Gold unter dem Schriftzug, Logo-Farben unabhängig vom 
   // Logo-Kachel = deutsche Flagge: drei waagrechte Streifen (180deg), feste Markenfarben
   assert.match(layout, /\.brand-mark \{[\s\S]*?background: linear-gradient\(180deg, var\(--brand-black\) 0 33\.34%, var\(--brand-red\) 33\.34% 66\.67%, var\(--brand-gold\) 66\.67% 100%\);/);
   assert.match(layout, /\.brand-accent \{\s*color: var\(--brand-blue-text\);/);
-  assert.match(read('src', 'components', 'layout', 'TopBar.jsx'), /Deutsch<span className="brand-accent">Connect<\/span>/);
+  assert.match(read('src', 'components', 'layout', 'TopBar.jsx'), /Connect<span className="brand-accent">\/ED<\/span>/);
 });
 
 test('fest eingetragene Blautöne an Akzent-Stellen ersetzt', () => {

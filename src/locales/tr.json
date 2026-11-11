@@ -6,7 +6,7 @@
     "cancel": "İptal",
     "yourSchool": "Okulun",
     "clearSearch": "Aramayı temizle",
-    "footerNote": "DeutschConnect · okullar arası iş birliği"
+    "footerNote": "Connect/ED · okullar arası iş birliği"
   },
   "demo": {
     "label": "Demo",
@@ -22,7 +22,7 @@
     "ideas": "Fikirler",
     "me": "Alanım",
     "meShort": "Alanım",
-    "about": "DeutschConnect Hakkında",
+    "about": "Connect/ED Hakkında",
     "mainLabel": "Ana gezinme",
     "admin": "Yönetici alanı",
     "discover": "Keşfet",
@@ -175,7 +175,7 @@
     "noResultsTitle": "Uygun etkinlik bulunamadı",
     "noResultsText": "Aramanı değiştir ya da filtreleri sıfırla.",
     "noRealEventsTitle": "Henüz planlanmış etkinlik yok",
-    "noRealEventsText": "DeutschConnect ekibi bir etkinlik eklediğinde burada görünecek.",
+    "noRealEventsText": "Connect/ED ekibi bir etkinlik eklediğinde burada görünecek.",
     "statusFilter": {
       "label": "Duruma göre filtrele",
       "all": "Tümü",
@@ -282,9 +282,9 @@
     "notFound": "Fikir bulunamadı",
     "created": "Fikrin kaydedildi.",
     "createdHint": "Demo modunda yalnızca bu tarayıcıda görünür.",
-    "createdHintAccount": "DeutschConnect ekibi onayladığında fikrin başkaları tarafından görülebilir.",
+    "createdHintAccount": "Connect/ED ekibi onayladığında fikrin başkaları tarafından görülebilir.",
     "awaitingApproval": "Onay bekliyor – şu anda bu fikri yalnızca sen görebilirsin.",
-    "rejectedText": "DeutschConnect ekibi bu fikri onaylamadı. Fikir hâlâ yalnızca sana görünür ve desteklenemez. Fikri silebilir veya düzenlenmiş yeni bir fikir gönderebilirsin.",
+    "rejectedText": "Connect/ED ekibi bu fikri onaylamadı. Fikir hâlâ yalnızca sana görünür ve desteklenemez. Fikri silebilir veya düzenlenmiş yeni bir fikir gönderebilirsin.",
     "from": "Gönderen",
     "fromYou": "Sen",
     "fromStudentOf": "{school} öğrencisi",
@@ -352,7 +352,7 @@
       "language": "Dil",
       "settings": "Demo profili ve yerel veriler",
       "settingsHint": "Profili değiştir, demoyu sıfırla",
-      "about": "DeutschConnect Hakkında"
+      "about": "Connect/ED Hakkında"
     }
   },
   "interests": {
@@ -366,7 +366,7 @@
   },
   "auth": {
     "loginTitle": "Giriş yap",
-    "loginSubtitle": "DeutschConnect hesabınla",
+    "loginSubtitle": "Connect/ED hesabınla",
     "registerTitle": "Kayıt ol",
     "registerSubtitle": "Katılımcı okulların öğrencileri için hesap",
     "firstNameLabel": "Adın",
@@ -391,7 +391,7 @@
     "profileLoading": "Profil yükleniyor …",
     "profileMissing": "Profilin yüklenemedi.",
     "notConfigured": "Bu sürümde gerçek hesaplar kullanılamıyor. Uygulama demo modunda çalışıyor.",
-    "signupClosed": "Kayıt henüz açılmadı. Okulundaki DeutschConnect ekibine başvur.",
+    "signupClosed": "Kayıt henüz açılmadı. Okulundaki Connect/ED ekibine başvur.",
     "demoStillActive": "Etkinlikler, fikirler ve projeler şimdilik demo verileridir.",
     "accountTitle": "Hesap",
     "accountSignedOut": "Giriş yapmadın. Uygulama demo modunda çalışmaya devam ediyor.",
@@ -442,10 +442,10 @@
     "profileSignedIn": "Gerçek hesabınla giriş yaptın. Çıkış yaptıktan sonra demo profillerini yeniden seçebilirsin."
   },
   "about": {
-    "title": "DeutschConnect Hakkında",
+    "title": "Connect/ED Hakkında",
     "tagline": "Senin okulun. Senin fikirlerin. Senin ağın.",
-    "whatTitle": "DeutschConnect nedir?",
-    "whatText": "DeutschConnect, öğrenciler tarafından geliştirilen ve okulların ortak etkinlikler, fikirler ve projeler düzenlemesini sağlayan bir platformdur. Öğrenciler inisiyatif alabilmeli ve başka okullarla bağlantı kurabilmelidir.",
+    "whatTitle": "Connect/ED nedir?",
+    "whatText": "Connect/ED, öğrenciler tarafından geliştirilen ve okulların ortak etkinlikler, fikirler ve projeler düzenlemesini sağlayan bir platformdur. Öğrenciler inisiyatif alabilmeli ve başka okullarla bağlantı kurabilmelidir.",
     "originTitle": "Nasıl başladı",
     "originText": "Fikir, Ernst-Reuter-Schule Ankara'daki bir öğrenci grubundan çıktı. Almanca dersleri için hazırlanan önceki bir tasarım prototipi, okullar arası iş birliği platformuna dönüştü.",
     "statusTitle": "Güncel durum",
@@ -461,7 +461,7 @@
     "schoolsTitle": "Katılan okullar",
     "impactTitle": "Etki",
     "impactText": "Henüz sonuç toplanmadı. İlk pilot uygulamadan sonra gerçek etkinlikler ve geri bildirimler burada belgelenecek.",
-    "competition": "DeutschConnect'in 10. DIHK Yurt Dışı Okullar Yarışması'na („Schüler bauen weltweit Brücken“) gönderilmesi planlanıyor."
+    "competition": "Connect/ED'nin 10. DIHK Yurt Dışı Okullar Yarışması'na („Schüler bauen weltweit Brücken“) gönderilmesi planlanıyor."
   },
   "notFound": {
     "title": "Sayfa bulunamadı",
@@ -488,8 +488,8 @@
       "retry": "Tekrar kontrol et"
     },
     "overview": {
-      "title": "DeutschConnect yönetici paneline hoş geldin",
-      "subtitle": "Burada DeutschConnect’teki etkinliklere ve güncel duruma genel bir bakış bulursun.",
+      "title": "Connect/ED yönetici paneline hoş geldin",
+      "subtitle": "Burada Connect/ED’deki etkinliklere ve güncel duruma genel bir bakış bulursun.",
       "context": "{name} olarak giriş yapıldı · {date}",
       "contextNoName": "{date}",
       "statsTitle": "Temel sayılar",
@@ -1509,13 +1509,13 @@
   "help": {
     "title": "Yardım & SSS",
     "subtitle": "Sık sorulan sorulara kısa yanıtlar",
-    "intro": "DeutschConnect’in nasıl çalıştığını burada öğrenebilirsin. Yanıtı açmak için bir soruya dokun.",
-    "more": "Sorun burada yok mu? Proje hakkında daha fazlası “DeutschConnect Hakkında” bölümünde.",
+    "intro": "Connect/ED’nin nasıl çalıştığını burada öğrenebilirsin. Yanıtı açmak için bir soruya dokun.",
+    "more": "Sorun burada yok mu? Proje hakkında daha fazlası “Connect/ED Hakkında” bölümünde.",
     "sections": {
       "start": {
         "title": "Başlarken",
         "what": {
-          "q": "DeutschConnect nedir?",
+          "q": "Connect/ED nedir?",
           "a": "Okullar arası iş birliği için öğrenciler tarafından geliştirilen, Ernst-Reuter-Schule Ankara'da ortaya çıkan bir platform. Ortak etkinlikleri bulabilir, proje fikirlerini paylaşabilir ve birbirinizle konuşabilirsiniz."
         },
         "how": {

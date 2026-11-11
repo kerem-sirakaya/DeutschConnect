@@ -6,7 +6,7 @@
     "cancel": "Cancel",
     "yourSchool": "Your school",
     "clearSearch": "Clear search",
-    "footerNote": "DeutschConnect · cross-school collaboration"
+    "footerNote": "Connect/ED · cross-school collaboration"
   },
   "demo": {
     "label": "Demo",
@@ -22,7 +22,7 @@
     "ideas": "Ideas",
     "me": "My Area",
     "meShort": "My Area",
-    "about": "About DeutschConnect",
+    "about": "About Connect/ED",
     "mainLabel": "Main navigation",
     "admin": "Admin area",
     "discover": "Discover",
@@ -175,7 +175,7 @@
     "noResultsTitle": "No matching events",
     "noResultsText": "Change your search or reset the filters.",
     "noRealEventsTitle": "No events planned yet",
-    "noRealEventsText": "As soon as the DeutschConnect team adds an event, it will appear here.",
+    "noRealEventsText": "As soon as the Connect/ED team adds an event, it will appear here.",
     "statusFilter": {
       "label": "Filter by status",
       "all": "All",
@@ -282,9 +282,9 @@
     "notFound": "Idea not found",
     "created": "Your idea has been saved.",
     "createdHint": "In demo mode it is only visible in this browser.",
-    "createdHintAccount": "Others will see your idea once the DeutschConnect team has approved it.",
+    "createdHintAccount": "Others will see your idea once the Connect/ED team has approved it.",
     "awaitingApproval": "Awaiting approval – so far only you can see this idea.",
-    "rejectedText": "The DeutschConnect team did not approve this idea. It is still only visible to you and cannot be supported. You can delete it or submit a revised idea.",
+    "rejectedText": "The Connect/ED team did not approve this idea. It is still only visible to you and cannot be supported. You can delete it or submit a revised idea.",
     "from": "From",
     "fromYou": "You",
     "fromStudentOf": "A student at {school}",
@@ -352,7 +352,7 @@
       "language": "Language",
       "settings": "Demo profile & local data",
       "settingsHint": "Switch profile, reset demo",
-      "about": "About DeutschConnect"
+      "about": "About Connect/ED"
     }
   },
   "interests": {
@@ -366,7 +366,7 @@
   },
   "auth": {
     "loginTitle": "Sign in",
-    "loginSubtitle": "With your DeutschConnect account",
+    "loginSubtitle": "With your Connect/ED account",
     "registerTitle": "Sign up",
     "registerSubtitle": "Account for students of the participating schools",
     "firstNameLabel": "First name",
@@ -391,7 +391,7 @@
     "profileLoading": "Loading profile …",
     "profileMissing": "Your profile could not be loaded.",
     "notConfigured": "Real accounts are not available in this version. The app is running in demo mode.",
-    "signupClosed": "Sign-up is not open yet. Please contact the DeutschConnect team at your school.",
+    "signupClosed": "Sign-up is not open yet. Please contact the Connect/ED team at your school.",
     "demoStillActive": "Events, ideas and projects are still demo data for now.",
     "accountTitle": "Account",
     "accountSignedOut": "You are not signed in. The app keeps working in demo mode.",
@@ -442,10 +442,10 @@
     "profileSignedIn": "You are signed in with your real account. You can choose demo profiles again after signing out."
   },
   "about": {
-    "title": "About DeutschConnect",
+    "title": "About Connect/ED",
     "tagline": "Your school. Your ideas. Your network.",
-    "whatTitle": "What is DeutschConnect?",
-    "whatText": "DeutschConnect is a platform developed by students that lets schools organise joint events, ideas and projects. Students should be able to take the initiative themselves and connect with other schools.",
+    "whatTitle": "What is Connect/ED?",
+    "whatText": "Connect/ED is a platform developed by students that lets schools organise joint events, ideas and projects. Students should be able to take the initiative themselves and connect with other schools.",
     "originTitle": "How it started",
     "originText": "The idea came from a group of students at Ernst-Reuter-Schule Ankara. An earlier design prototype for German lessons turned into a platform for cross-school collaboration.",
     "statusTitle": "Current status",
@@ -461,7 +461,7 @@
     "schoolsTitle": "Participating schools",
     "impactTitle": "Impact",
     "impactText": "No results have been collected yet. After the first pilot, real activities and feedback will be documented here.",
-    "competition": "DeutschConnect is to be submitted to the 10th DIHK competition for German schools abroad, “Schüler bauen weltweit Brücken” (Students build bridges worldwide)."
+    "competition": "Connect/ED is to be submitted to the 10th DIHK competition for German schools abroad, “Schüler bauen weltweit Brücken” (Students build bridges worldwide)."
   },
   "notFound": {
     "title": "Page not found",
@@ -488,8 +488,8 @@
       "retry": "Check again"
     },
     "overview": {
-      "title": "Welcome to the DeutschConnect admin dashboard",
-      "subtitle": "Here you get an overview of the activity and current state of DeutschConnect.",
+      "title": "Welcome to the Connect/ED admin dashboard",
+      "subtitle": "Here you get an overview of the activity and current state of Connect/ED.",
       "context": "Signed in as {name} · {date}",
       "contextNoName": "{date}",
       "statsTitle": "Key figures",
@@ -1509,13 +1509,13 @@
   "help": {
     "title": "Help & FAQ",
     "subtitle": "Short answers to common questions",
-    "intro": "Learn how DeutschConnect works. Tap a question to open the answer.",
-    "more": "Your question is not here? You can find more about the project under “About DeutschConnect”.",
+    "intro": "Learn how Connect/ED works. Tap a question to open the answer.",
+    "more": "Your question is not here? You can find more about the project under “About Connect/ED”.",
     "sections": {
       "start": {
         "title": "Getting started",
         "what": {
-          "q": "What is DeutschConnect?",
+          "q": "What is Connect/ED?",
           "a": "A student-made platform for collaboration between schools – started at Ernst-Reuter-Schule Ankara. You can find joint events, share project ideas and talk to each other."
         },
         "how": {

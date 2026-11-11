@@ -17,9 +17,9 @@ export const schools = [
     partnershipStatus: 'initiator',
     color: '#2f6fd6',
     description: {
-      de: 'Ausgangsschule von DeutschConnect. Hier hat eine Schülergruppe die Idee für die Plattform entwickelt und arbeitet an ihrer Umsetzung.',
-      tr: "DeutschConnect'in çıkış noktası. Bu okuldaki bir öğrenci grubu platform fikrini geliştirdi ve hayata geçirmek için çalışıyor.",
-      en: 'Starting point of DeutschConnect. A group of students here developed the idea for the platform and is building it.',
+      de: 'Ausgangsschule von Connect/ED. Hier hat eine Schülergruppe die Idee für die Plattform entwickelt und arbeitet an ihrer Umsetzung.',
+      tr: "Connect/ED'nin çıkış noktası. Bu okuldaki bir öğrenci grubu platform fikrini geliştirdi ve hayata geçirmek için çalışıyor.",
+      en: 'Starting point of Connect/ED. A group of students here developed the idea for the platform and is building it.',
     },
   },
   {
