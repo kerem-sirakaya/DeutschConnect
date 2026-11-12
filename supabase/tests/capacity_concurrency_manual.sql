@@ -1,0 +1,82 @@
+-- =============================================================================
+-- MANUELLE Gleichzeitigkeits-Tests für Migration 006 – NUR auf einer KOPIE ausführen
+-- =============================================================================
+-- WO?   NICHT in der Live-Datenbank. Geeignet:
+--         * lokal:   "supabase start" (Supabase CLI) + Migrationen 001–006 einspielen
+--         * oder ein separates Staging-/Branch-Projekt mit denselben Migrationen
+--       Grund: Zwei Sitzungen brauchen ein GEMEINSAMES, bestätigtes Test-Event.
+--       Das lässt sich nicht herstellen, ohne in die Datenbank zu schreiben.
+--
+-- WIE?  Zwei Terminal-Fenster mit psql, beide mit der Kopie verbunden:
+--         psql "<Connection-String der KOPIE>"
+--       Passwort nur lokal eingeben – nie in Dateien, Git oder Chats.
+--       Der Supabase SQL Editor eignet sich NICHT (er hält keine Transaktion offen).
+--
+-- PLATZHALTER: <ID_A> (Admin), <ID_B> (normal), <ID_C> (optional dritte:r Schüler:in), <EVENT_ID>
+-- =============================================================================
+
+-- Vorbereitung (Fenster 1, auf der KOPIE): Konten-IDs und Test-Event mit 1 Platz
+-- select id, email from auth.users;
+-- insert into public.events (title, start_at, host_school_id, school_ids, capacity, status)
+-- values ('"[Test] Ein Platz"', now() + interval '10 days', 'ers', array['ers'], 1, 'planned') returning id;
+
+-- Hilfsblock "als Konto X" (vor jedem Szenario in der jeweiligen Sitzung, NACH begin):
+--   select set_config('request.jwt.claim.sub', '<ID_X>', true);
+--   select set_config('request.jwt.claims', json_build_object('sub', '<ID_X>', 'role', 'authenticated')::text, true);
+--   set local role authenticated;
+
+-- -----------------------------------------------------------------------------
+-- K1) Zwei Anmeldungen um den LETZTEN Platz
+-- -----------------------------------------------------------------------------
+-- F1: begin;  <als A>  insert into public.event_registrations (event_id, user_id, status) values ('<EVENT_ID>', '<ID_A>', 'registered');
+--     -> INSERT 0 1   (Transaktion offen lassen)
+-- F2: begin;  <als B>  insert into public.event_registrations (event_id, user_id, status) values ('<EVENT_ID>', '<ID_B>', 'registered');
+--     -> HÄNGT
+-- F1: commit;
+-- F2: -> ERROR: Dieses Event ist ausgebucht. (DC008)        F2: rollback;
+-- Variante: F1 rollback; statt commit -> F2: INSERT 0 1     F2: rollback;
+-- Aufräumen: delete from public.event_registrations where event_id = '<EVENT_ID>';
+
+-- -----------------------------------------------------------------------------
+-- K2) interested -> registered gegen neue Anmeldung um den letzten Platz
+-- -----------------------------------------------------------------------------
+-- Vorbereitung: <als B> insert ... ('<EVENT_ID>', '<ID_B>', 'interested'); commit;
+-- F1: begin; <als A> insert ... ('<EVENT_ID>', '<ID_A>', 'registered');          -> INSERT 0 1 (offen)
+-- F2: begin; <als B> update public.event_registrations set status = 'registered'
+--                    where event_id = '<EVENT_ID>' and user_id = '<ID_B>';       -> HÄNGT
+-- F1: commit;   F2: -> ERROR DC008   F2: rollback;
+-- Aufräumen wie K1.
+
+-- -----------------------------------------------------------------------------
+-- K3) Anmeldung gegen Admin-Reduzierung der Plätze (Event vorher auf capacity = 2 setzen)
+-- -----------------------------------------------------------------------------
+-- Vorbereitung: update public.events set capacity = 2 where id = '<EVENT_ID>';
+--               <als C oder A> eine verbindliche Anmeldung anlegen und committen (1 von 2 belegt)
+-- Fall a) Anmeldung zuerst:
+--   F1: begin; <als B> insert ... ('<EVENT_ID>', '<ID_B>', 'registered');       -> INSERT 0 1 (offen)
+--   F2: begin; <als A> select public.admin_update_event('<EVENT_ID>', '"[Test] Ein Platz"', <gleiches start_at>,
+--               'ers', array['ers'], null, null, null, null, null, 1, false, '{}', 'meetup');  -> HÄNGT
+--   F1: commit;   F2: -> ERROR DC005 (2 Anmeldungen, Plätze nicht auf 1 reduzierbar)   F2: rollback;
+-- Fall b) Admin zuerst:
+--   F1: begin; <als A> admin_update_event(... capacity 1 ...)                    -> ok (offen)
+--   F2: begin; <als B> insert ... 'registered'                                   -> HÄNGT
+--   F1: commit;   F2: -> ERROR DC008 (1 Platz, schon belegt)                     F2: rollback;
+
+-- -----------------------------------------------------------------------------
+-- K4) Anmeldung gegen Admin-Absage
+-- -----------------------------------------------------------------------------
+-- F1: begin; <als A> select public.admin_set_event_status('<EVENT_ID>', 'cancelled');   -> ok (offen)
+-- F2: begin; <als B> insert ... 'registered'                                           -> HÄNGT
+-- F1: commit;   F2: -> ERROR: Für dieses Event ist keine Anmeldung möglich. (42501)   F2: rollback;
+-- Umgekehrt (Anmeldung zuerst, dann Absage): Anmeldung bleibt nach der Absage erhalten.
+
+-- -----------------------------------------------------------------------------
+-- K5) Andere Isolationsstufen werden sicher abgelehnt
+-- -----------------------------------------------------------------------------
+-- F1: begin isolation level repeatable read; <als B> insert ... 'registered';
+--     -> ERROR: Anmeldungen sind nur mit der Isolationsstufe READ COMMITTED möglich. (DC009)
+--     rollback;
+-- F1: begin isolation level serializable; <als A> select public.admin_set_event_status('<EVENT_ID>', 'confirmed');
+--     -> ERROR DC009   rollback;
+
+-- Ende: Kopie aufräumen oder verwerfen (z. B. "supabase db reset" lokal).

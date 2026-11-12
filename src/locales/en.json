@@ -1,0 +1,1637 @@
+{
+  "common": {
+    "back": "Back",
+    "showAll": "All",
+    "skipToContent": "Skip to content",
+    "cancel": "Cancel",
+    "yourSchool": "Your school",
+    "clearSearch": "Clear search",
+    "footerNote": "Connect/ED · cross-school collaboration"
+  },
+  "nav": {
+    "home": "Home",
+    "events": "Events",
+    "ideas": "Ideas",
+    "me": "My Area",
+    "meShort": "My Area",
+    "about": "About Connect/ED",
+    "mainLabel": "Main navigation",
+    "admin": "Admin area",
+    "discover": "Discover",
+    "tutoring": "Tutoring",
+    "community": "Community",
+    "chat": "Chatroom",
+    "games": "Games",
+    "help": "Help & FAQ"
+  },
+  "profileMenu": {
+    "openAccount": "Open profile menu (signed in as {name})",
+    "toMyArea": "Go to My Area",
+    "openGuest": "Open account menu",
+    "guestLabel": "Not signed in"
+  },
+  "profile": {
+    "grade": "Grade {grade}",
+    "realAccount": "Your account"
+  },
+  "home": {
+    "greetingMorning": "Good morning, {name}!",
+    "greetingAfternoon": "Good afternoon, {name}!",
+    "greetingEvening": "Good evening, {name}!",
+    "greetingMorningNoName": "Good morning!",
+    "greetingAfternoonNoName": "Good afternoon!",
+    "greetingEveningNoName": "Good evening!",
+    "quickActionsLabel": "Quick access",
+    "updates": "New for you",
+    "myNextEvents": "My upcoming events",
+    "noEventsTitle": "No events planned yet",
+    "noEventsText": "Sign up for an event or show your interest.",
+    "forYou": "Recommended for you",
+    "noRecsTitle": "No matching events right now",
+    "noRecsText": "Choose more interests so we can find events for you.",
+    "myProjectsIdeas": "My projects & ideas",
+    "noProjectsIdeas": "You don’t have any projects or ideas yet.",
+    "dashboardSubtitle": "Your events, ideas and learning contacts at a glance.",
+    "tutoringMatches": "Matching tutoring",
+    "tutoringDiscover": "Discover tutoring",
+    "tutoringOpenRequests_one": "{count} open request",
+    "tutoringOpenRequests_other": "{count} open requests",
+    "noTutoring": "No tutoring listings yet."
+  },
+  "quick": {
+    "discover": "Discover",
+    "myEvents": "My events",
+    "newIdea": "Submit an idea",
+    "schools": "Explore schools",
+    "tutoring": "Tutoring"
+  },
+  "updates": {
+    "invitation": "{school} invites you: {event}",
+    "reminder": "{when}: {event}",
+    "ideaReview": "Your idea “{idea}” is being reviewed by the schools.",
+    "view": "View",
+    "dismiss": "Dismiss notice"
+  },
+  "recommend": {
+    "matches": "Matches: {topics}",
+    "yourSchool": "Your school takes part",
+    "basedOn": "Based on your interests: {topics}.",
+    "noInterests": "You haven’t chosen any interests yet.",
+    "editInterests": "Edit interests"
+  },
+  "roles": {
+    "organizer": "You organise",
+    "registered": "Signed up",
+    "interested": "Interested",
+    "member": "Member"
+  },
+  "status": {
+    "event": {
+      "planned": "Planned",
+      "confirmed": "Confirmed",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "draft": "Draft"
+    },
+    "idea": {
+      "submitted": "Submitted",
+      "collecting": "Gathering interest",
+      "review": "Under review",
+      "planned": "Being planned",
+      "rejected": "Not approved"
+    },
+    "project": {
+      "active": "Active",
+      "planning": "Being planned"
+    },
+    "partnership": {
+      "initiator": "Initiator",
+      "interest": "Interest expressed",
+      "confirmed": "Confirmed partnership"
+    }
+  },
+  "topics": {
+    "languages": "Languages",
+    "science": "Science",
+    "technology": "Tech & IT",
+    "arts": "Arts & media",
+    "music": "Music",
+    "sports": "Sports",
+    "culture": "Culture & exchange",
+    "debate": "Debate & society",
+    "career": "University & careers",
+    "social": "Social engagement"
+  },
+  "formats": {
+    "workshop": "Workshop",
+    "meetup": "Meet-up",
+    "discussion": "Discussion",
+    "competition": "Competition",
+    "online": "Online",
+    "project": "Project"
+  },
+  "events": {
+    "title": "Events",
+    "tabsLabel": "Event sections",
+    "tabs": {
+      "mine": "Mine",
+      "foryou": "For me",
+      "all": "All"
+    },
+    "online": "Online",
+    "all": "All",
+    "roleFilterLabel": "Filter by my role",
+    "mineEmptyTitle": "No upcoming events",
+    "mineEmptyText": "Events you signed up for, are interested in or organise will appear here.",
+    "past_one": "Past event ({count})",
+    "past_other": "Past events ({count})",
+    "searchLabel": "Search events",
+    "searchPlaceholder": "Search title, topic or place …",
+    "filters": "Filters",
+    "filtersActive": "Filters ({count})",
+    "resetFilters": "Reset filters",
+    "filterTime": "Time",
+    "filterSchool": "School",
+    "filterTopic": "Topic",
+    "filterFormat": "Format",
+    "time": {
+      "upcoming": "Upcoming",
+      "week": "7 days",
+      "month": "30 days",
+      "past": "Past"
+    },
+    "results_one": "{count} event",
+    "results_other": "{count} events",
+    "noResultsTitle": "No matching events",
+    "noResultsText": "Change your search or reset the filters.",
+    "noRealEventsTitle": "No events planned yet",
+    "noRealEventsText": "As soon as the Connect/ED team adds an event, it will appear here.",
+    "statusFilter": {
+      "label": "Filter by status",
+      "all": "All",
+      "scheduled": "Planned",
+      "cancelled": "Cancelled"
+    },
+    "noCancelledTitle": "There are no cancelled events at the moment.",
+    "noCancelledText": "Cancelled events stay visible until 24 hours after their original date – and always for at least 24 hours after the cancellation.",
+    "card": {
+      "eventStatus": "Event:",
+      "eventStatusSr": "Event status:",
+      "yourStatus": "You:",
+      "yourStatusSr": "Your participation:",
+      "cancelled": "This event has been cancelled – it will not take place.",
+      "cancelledOn": "Cancelled on {date} (Ankara) – will not take place."
+    }
+  },
+  "eventDetail": {
+    "notFound": "Event not found",
+    "when": "When",
+    "where": "Where",
+    "host": "Hosted by",
+    "schools": "Participating schools",
+    "audience": "Audience",
+    "capacity": "max. {count} places",
+    "format": "Format",
+    "about": "What’s it about?",
+    "yourParticipation": "Your participation",
+    "register": "Join",
+    "cancelRegistration": "Cancel sign-up",
+    "markInterest": "Show interest",
+    "removeInterest": "Withdraw interest",
+    "state": {
+      "none": "You haven’t signed up yet.",
+      "registered": "You’re signed up.",
+      "interested": "You’ve shown interest."
+    },
+    "organizerNote": "You are organising this event.",
+    "pastNote": "This event is already over.",
+    "pastNoteParticipated": "This event is over. Feedback will be collected in a later version.",
+    "cancelledNote": "This event has been cancelled.",
+    "cancelledOn": "Cancelled on {date} (Ankara).",
+    "cancelledRegistrationKept": "Your participation stays saved: {role}. The event itself will not take place.",
+    "closedNote": "New sign-ups are no longer possible for this event.",
+    "savedToAccount": "Sign-ups and interest are saved to your account. “Interested” is not a binding sign-up.",
+    "errors": {
+      "closed": "Signing up for this event is no longer possible (e.g. because it has already started).",
+      "full": "Sorry, this event is fully booked. You can show your interest instead.",
+      "technical": "A technical error occurred while saving. Please try again later or let the team know.",
+      "conflict": "Your entry has changed in the meantime. The current state is shown.",
+      "network": "Cannot reach the server. Please try again.",
+      "generic": "That did not work. Please try again."
+    },
+    "leftOwnOnly": {
+      "title": "Saved",
+      "text": "Your registration or interest has been removed. This event is only shown to registered and interested people, so it is no longer visible here.",
+      "toMine": "Go to my events"
+    }
+  },
+  "ideas": {
+    "title": "Ideas",
+    "tabsLabel": "Idea sections",
+    "tabs": {
+      "discover": "Discover",
+      "mine": "My ideas"
+    },
+    "newIdea": "New idea",
+    "searchLabel": "Search ideas",
+    "searchPlaceholder": "Search ideas …",
+    "sortLabel": "Sort order",
+    "sort": {
+      "popular": "Popular",
+      "new": "New"
+    },
+    "results_one": "{count} idea",
+    "results_other": "{count} ideas",
+    "supportHint": "Support shows interest. The participating schools decide whether an idea goes ahead.",
+    "noRealIdeasTitle": "No ideas yet",
+    "noRealIdeasText": "New ideas appear here once the team has approved them. You can also submit one yourself.",
+    "errors": {
+      "notAllowed": "This is not allowed (e.g. your own idea or one that has not been approved yet).",
+      "alreadySupported": "You already support this idea.",
+      "invalid": "Some details are invalid. Please check the form.",
+      "deleteFailed": "The idea could not be deleted.",
+      "network": "Cannot reach the server. Please try again.",
+      "generic": "That did not work. Please try again."
+    },
+    "fromSchool": "From: {school}",
+    "yourIdea": "Your idea",
+    "support": "Support",
+    "supported": "Supported",
+    "supportCount_one": "{count} supporter",
+    "supportCount_other": "{count} supporters",
+    "supportAria": "Support idea “{title}”",
+    "authored": "Submitted by me",
+    "supportedSection": "Supported by me",
+    "noOwnTitle": "You haven’t submitted an idea yet",
+    "noOwnText": "Got an idea for a joint project? Share it with the other schools.",
+    "noSupportedText": "You don’t support any ideas yet.",
+    "noResultsTitle": "No matching ideas",
+    "noResultsText": "Try a different search term or topic."
+  },
+  "ideaDetail": {
+    "notFound": "Idea not found",
+    "created": "Your idea has been saved.",
+    "createdHintAccount": "Others will see your idea once the Connect/ED team has approved it.",
+    "awaitingApproval": "Awaiting approval – so far only you can see this idea.",
+    "rejectedText": "The Connect/ED team did not approve this idea. It is still only visible to you and cannot be supported. You can delete it or submit a revised idea.",
+    "from": "From",
+    "fromYou": "You",
+    "fromStudentOf": "A student at {school}",
+    "submitted": "Submitted",
+    "targetSchools": "For schools",
+    "about": "Description",
+    "progress": "From proposal to event",
+    "steps": {
+      "submitted": "Submitted",
+      "collecting": "Gathering interest",
+      "review": "School review",
+      "planned": "Planning",
+      "rejected": "Not approved"
+    },
+    "approvalNote": "Lots of support does not automatically mean an idea will happen. The schools review every idea.",
+    "supportTitle": "Support",
+    "supportText": "Like this idea? Show that you would take part.",
+    "ownIdeaNote": "This is your idea. Here you can see how many people support it.",
+    "delete": "Delete idea",
+    "deleteConfirm": "Do you really want to delete this idea?",
+    "deleteYes": "Yes, delete"
+  },
+  "newIdea": {
+    "title": "New idea",
+    "subtitle": "Suggest an activity that connects schools. Submitted as a student at {school}.",
+    "titleLabel": "Title",
+    "titlePlaceholder": "e.g. Joint film evening",
+    "descriptionLabel": "Description",
+    "descriptionHint": "What should happen, and why is it exciting across schools?",
+    "topicsLabel": "Topics (1–3)",
+    "formatLabel": "Format",
+    "schoolsLabel": "With which schools?",
+    "privacyLabel": "I have not entered any personal data of other people (e.g. names or phone numbers).",
+    "accountHint": "Your idea is saved to your account. Other students only see it after approval – with your school, not your name.",
+    "submit": "Submit idea",
+    "errorSummary_one": "Please check the highlighted field.",
+    "errorSummary_other": "Please check the {count} highlighted fields.",
+    "errors": {
+      "title": "Please enter a title with at least 5 characters.",
+      "description": "Please describe your idea in at least 20 characters.",
+      "topicsRequired": "Please choose at least one topic.",
+      "topicsMax": "Please choose no more than three topics.",
+      "schools": "Please choose at least one school.",
+      "privacy": "Please confirm the privacy notice."
+    }
+  },
+  "me": {
+    "title": "My Area",
+    "profile": "Profile",
+    "stats": {
+      "events": "Events",
+      "ideas": "Ideas",
+      "projects": "Projects"
+    },
+    "interests": "My interests",
+    "edit": "Edit",
+    "noInterests": "No interests chosen yet.",
+    "myProjects": "My projects",
+    "settingsSection": "Settings",
+    "rows": {
+      "interests": "Interests & recommendations",
+      "interestsHint": "Decides what is recommended to you",
+      "language": "Language",
+      "about": "About Connect/ED"
+    }
+  },
+  "interests": {
+    "title": "Interests",
+    "intro": "Choose what you’re interested in. Your recommendations update instantly.",
+    "groupLabel": "Interests",
+    "matching_one": "{count} matching event for you",
+    "matching_other": "{count} matching events for you",
+    "showRecs": "See recommendations",
+    "savedToAccount": "Your interests are saved to your account."
+  },
+  "auth": {
+    "loginTitle": "Sign in",
+    "loginSubtitle": "With your Connect/ED account",
+    "registerTitle": "Sign up",
+    "registerSubtitle": "Account for students of the participating schools",
+    "firstNameLabel": "First name",
+    "firstNameHint": "Only your first name. Others see it only if you share your profile or send a tutoring request.",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "passwordHint": "At least {min} characters.",
+    "schoolLabel": "School",
+    "schoolPlaceholder": "Choose your school",
+    "gradeLabel": "Grade",
+    "gradePlaceholder": "Choose your grade",
+    "consentLabel": "I agree that my first name, school and grade are stored for my account.",
+    "submitLogin": "Sign in",
+    "submitRegister": "Create account",
+    "loading": "Please wait …",
+    "logout": "Sign out",
+    "toRegister": "Sign up",
+    "toLogin": "Sign in",
+    "checkEmailTitle": "Almost done!",
+    "checkEmailText": "We have sent you an email. Confirm your address there, then sign in.",
+    "signedInAs": "Signed in as {name}",
+    "profileLoading": "Loading profile …",
+    "profileMissing": "Your profile could not be loaded.",
+    "notConfigured": "Sign-in is currently not available.",
+    "signupClosed": "Sign-up is not open yet. Please contact the Connect/ED team at your school.",
+    "accountTitle": "Account",
+    "accountSignedOut": "You are not signed in.",
+    "meRow": "Account & sign-in",
+    "meRowSignedIn": "Signed in",
+    "gateLoading": "Loading your profile …",
+    "gateErrorTitle": "Profile could not be loaded",
+    "gateErrorText": "You can try again or sign out.",
+    "retry": "Try again",
+    "gateEventsErrorTitle": "Events could not be loaded",
+    "gateIdeasErrorTitle": "Ideas could not be loaded",
+    "errorSummary_one": "1 field still needs to be corrected.",
+    "errorSummary_other": "{count} fields still need to be corrected.",
+    "errors": {
+      "firstName": "Please enter your first name (max. 40 characters).",
+      "email": "Please enter a valid email address.",
+      "password": "The password must be at least 8 characters long.",
+      "passwordRequired": "Please enter your password.",
+      "school": "Please choose your school.",
+      "grade": "Please choose your grade.",
+      "consent": "Please confirm your consent.",
+      "invalidCredentials": "Email or password is incorrect.",
+      "emailNotConfirmed": "Please confirm your email address first.",
+      "userExists": "An account with this email address already exists.",
+      "signupDisabled": "Sign-up is currently closed.",
+      "weakPassword": "This password is too weak. Please choose a longer one.",
+      "rateLimit": "Too many attempts. Please wait a few minutes.",
+      "emailInvalid": "This email address is not accepted.",
+      "profileFailed": "The profile could not be created. Please check your school and grade.",
+      "network": "Cannot reach the server. Please check your internet connection.",
+      "generic": "Something went wrong. Please try again.",
+      "interestsSave": "Your interests could not be saved. The last saved state is shown.",
+      "eventsLoad": "The events could not be loaded from the server. Please check your internet connection.",
+      "ideasLoad": "The ideas could not be loaded from the server. Please check your internet connection."
+    },
+    "forgot": {
+      "link": "Forgot password?",
+      "title": "Forgot password",
+      "subtitle": "We will send you a link to reset it",
+      "intro": "Enter the email address of your Connect/ED account. You will receive an email with a link to set a new password.",
+      "submit": "Send link",
+      "sentText": "If an account exists for this address, we have sent you an email with a link.",
+      "sentHint": "Open the link in the same browser. It is only valid for a short time. If a link was requested for this address very recently, a new one can only be sent after a few minutes. No email? Check your spam folder and try again in a few minutes.",
+      "again": "Request again",
+      "backToLogin": "Back to sign in"
+    },
+    "reset": {
+      "title": "New password",
+      "subtitle": "Choose a new password for your account",
+      "newPasswordLabel": "New password",
+      "confirmLabel": "Repeat new password",
+      "submit": "Save password",
+      "success": "Your password has been changed. Please sign in with your new password.",
+      "requestNew": "Request a new link",
+      "errors": {
+        "confirmRequired": "Please repeat the new password.",
+        "mismatch": "The two passwords do not match.",
+        "samePassword": "The new password must be different from your current one.",
+        "linkExpired": "This link has expired. Please request a new link.",
+        "linkInvalid": "This link is invalid or has already been used. Please request a new link."
+      }
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language"
+  },
+  "about": {
+    "title": "About Connect/ED",
+    "tagline": "Your school. Your ideas. Your network.",
+    "whatTitle": "What is Connect/ED?",
+    "whatText": "Connect/ED is a platform developed by students that lets schools organise joint events, ideas and projects. Students should be able to take the initiative themselves and connect with other schools.",
+    "originTitle": "How it started",
+    "originText": "The idea came from a group of students at Ernst-Reuter-Schule Ankara. An earlier design prototype for German lessons turned into a platform for cross-school collaboration.",
+    "statusTitle": "Current status",
+    "worksTitle": "Already done",
+    "works1": "Web prototype for smartphone and desktop",
+    "works2": "Interface in German, Turkish and English",
+    "works3": "Accounts with sign-in, profile sharing and password recovery",
+    "openTitle": "Not done yet",
+    "open1": "Real user accounts and login",
+    "open2": "Shared database for all schools",
+    "open3": "A real event organised through the platform",
+    "open4": "Formally confirmed school partnership",
+    "schoolsTitle": "Participating schools",
+    "impactTitle": "Impact",
+    "impactText": "No results have been collected yet. After the first pilot, real activities and feedback will be documented here.",
+    "competition": "Connect/ED is to be submitted to the 10th DIHK competition for German schools abroad, “Schüler bauen weltweit Brücken” (Students build bridges worldwide)."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "This page does not exist (anymore).",
+    "home": "Go to home"
+  },
+  "admin": {
+    "badge": "Admin area",
+    "navLabel": "Admin navigation",
+    "nav": {
+      "overview": "Overview",
+      "events": "Events",
+      "ideas": "Ideas",
+      "chat": "Chat moderation"
+    },
+    "loading": "Checking access …",
+    "denied": {
+      "title": "No access",
+      "text": "This area is only for the pilot team.",
+      "hint": "You are signed in but do not have admin permissions. If you think this is a mistake, contact the team."
+    },
+    "statusError": {
+      "title": "Access could not be checked",
+      "retry": "Check again"
+    },
+    "overview": {
+      "title": "Welcome to the Connect/ED admin dashboard",
+      "subtitle": "Here you get an overview of the activity and current state of Connect/ED.",
+      "context": "Signed in as {name} · {date}",
+      "contextNoName": "{date}",
+      "statsTitle": "Key figures",
+      "statsLoading": "Loading key figures …",
+      "statsUnavailable": "The key figures are not available yet: migration 010 (admin_get_overview_stats) is missing in the database. Quick access and activity still work.",
+      "valueUnavailable": "not available",
+      "stats": {
+        "students": {
+          "label": "Registered students",
+          "desc": "Accounts with a profile, excluding admins"
+        },
+        "upcoming": {
+          "label": "Upcoming events",
+          "desc": "Published and in the future"
+        },
+        "registrations": {
+          "label": "Total sign-ups",
+          "desc": "Confirmed sign-ups, excluding “interested”"
+        },
+        "pending": {
+          "label": "Ideas to review",
+          "desc": "Submitted, awaiting approval"
+        },
+        "archived": {
+          "label": "Archived events",
+          "desc": "Hidden from students, data is kept",
+          "unavailable": "Available after migration 008"
+        }
+      },
+      "quickTitle": "Quick access",
+      "quick": {
+        "createEvent": {
+          "label": "Create new event",
+          "desc": "Save as a draft"
+        },
+        "manageEvents": {
+          "label": "Manage events",
+          "desc": "Publish, cancel, edit"
+        },
+        "reviewIdeas": {
+          "label": "Review submitted ideas",
+          "desc": "Approve or reject"
+        },
+        "manageIdeas": {
+          "label": "Manage all ideas",
+          "desc": "Change status or delete"
+        }
+      },
+      "activityTitle": "Activity",
+      "activityNote": "Recently created events and submitted ideas – not a complete log of all changes.",
+      "activityLoading": "Loading activity …",
+      "activityEmpty": "There are no events or ideas yet.",
+      "activityEventCreated": "Event created",
+      "activityIdeaSubmitted": "Idea submitted",
+      "activityUntitled": "Untitled"
+    },
+    "events": {
+      "title": "Manage events",
+      "subtitle": "Create, publish, cancel and complete events.",
+      "new": "New event",
+      "loading": "Loading events …",
+      "statsTitle": "Event overview",
+      "stats": {
+        "all": "Total"
+      },
+      "filters": {
+        "all": "All",
+        "archived": "Archived"
+      },
+      "empty": {
+        "all": "There are no events yet. Create the first one as a draft.",
+        "filtered": "No events with this status."
+      },
+      "when": "{date} (Ankara)",
+      "host": "Host: {school}",
+      "noLocation": "No location given",
+      "offline": "In person",
+      "registered_one": "{count} signed up",
+      "registered_other": "{count} signed up",
+      "interested_one": "{count} interested",
+      "interested_other": "{count} interested",
+      "capacity": "{taken}/{capacity} places taken",
+      "noCapacity": "No limit on places",
+      "draftHint": "Draft – only visible to admins; students cannot see this event yet.",
+      "archived": "Archived",
+      "archivedHint": "Archived on {date} (Ankara) – no longer visible to students. All details and sign-ups are kept.",
+      "final": "Completed or cancelled – the status can no longer be changed.",
+      "timeZoneNote": "All times are Ankara time (UTC+3). Published events are cancelled, not deleted, so sign-ups remain traceable.",
+      "actions": {
+        "edit": "Edit",
+        "publish": "Publish",
+        "publishConfirmed": "Publish as confirmed",
+        "confirm": "Confirm",
+        "cancel": "Cancel event",
+        "complete": "Complete",
+        "delete": "Delete draft"
+      },
+      "confirm": {
+        "publish": "Publish “{title}”? All signed-in students will see the event and can sign up. The date must be in the future. A published event cannot become a draft again.",
+        "publishConfirmed": "Publish “{title}” directly as confirmed? Students will immediately see the event as “Confirmed” and can sign up. The date must be in the future.",
+        "confirm": "Mark “{title}” as confirmed? Students will see that the event will definitely take place.",
+        "cancel": "Cancel “{title}”? The event stays visible but is shown as cancelled; new sign-ups are no longer possible. There is no automatic notification – please also inform those who signed up. This step is final.",
+        "complete": "Mark “{title}” as completed? This is only possible once the event has started. This step is final.",
+        "delete": "Permanently delete the draft “{title}”? This cannot be undone."
+      },
+      "statusChanged": "“{title}” now has the status “{status}”.",
+      "deleted": "The draft “{title}” was deleted.",
+      "created": "“{title}” was saved as a draft. Publish it once everything is correct.",
+      "updated": "The changes to “{title}” were saved.",
+      "groups": {
+        "planned": {
+          "title": "Planned events",
+          "empty": "No planned events."
+        },
+        "cancelled": {
+          "title": "Cancelled events",
+          "empty": "No cancelled events."
+        },
+        "draft": {
+          "title": "Drafts",
+          "empty": "No drafts."
+        },
+        "completed": {
+          "title": "Completed events",
+          "empty": "No completed events."
+        },
+        "archived": {
+          "title": "Archived events",
+          "empty": "No archived events."
+        }
+      },
+      "groupCount_one": "{count} event",
+      "groupCount_other": "{count} events",
+      "cancelledOn": "Cancelled on {date} (Ankara).",
+      "cancelledNote": "This event has been cancelled."
+    },
+    "ideas": {
+      "title": "Moderate ideas",
+      "subtitle": "Review, approve or reject submitted ideas.",
+      "loading": "Loading ideas …",
+      "workloadTitle": "Moderation overview",
+      "workload": {
+        "submitted": "Awaiting approval",
+        "collecting": "Gathering interest",
+        "review": "Under review"
+      },
+      "filters": {
+        "all": "All"
+      },
+      "empty": {
+        "all": "No ideas have been submitted yet.",
+        "submitted": "No open ideas – all done.",
+        "filtered": "No ideas with this status."
+      },
+      "supporters_one": "{count} supporter",
+      "supporters_other": "{count} supporters",
+      "submittedAt": "Submitted {date}",
+      "actions": {
+        "approve": "Approve",
+        "reject": "Reject",
+        "toReview": "Move to review",
+        "toPlanned": "Mark as planned",
+        "backToCollecting": "Back to “Gathering interest”",
+        "reopen": "Reopen for review",
+        "delete": "Delete idea"
+      },
+      "confirm": {
+        "approve": "Approve “{title}”? The idea will then be visible to all signed-in students and can be supported.",
+        "reject": "Reject “{title}”? The idea will then only be visible to the person who submitted it.",
+        "toReview": "Move “{title}” to review? The idea stays publicly visible – the schools check whether it can be done.",
+        "toPlanned": "Mark “{title}” as planned? This step is final and cannot be undone.",
+        "backToCollecting": "Move “{title}” back to “Gathering interest”? The idea stays publicly visible.",
+        "reopen": "Reopen “{title}” for review? The idea stays private until you approve it again.",
+        "delete": "Permanently delete “{title}”? The idea and all of its support will be removed for good – also for the person who submitted it. This cannot be undone."
+      },
+      "success": "“{title}” now has the status “{status}”.",
+      "deleted": "“{title}” was deleted.",
+      "final": "Planned – no further moderation steps possible.",
+      "privacyNote": "Who submitted an idea is intentionally not shown here."
+    },
+    "saving": "Saving …",
+    "actionsLabel": "Actions for “{title}”",
+    "refresh": "Refresh",
+    "filtersLabel": "Filter by status",
+    "eventForm": {
+      "newTitle": "New event",
+      "newSubtitle": "The event is saved as a draft and only becomes visible to students once it is published.",
+      "editTitle": "Edit event",
+      "editSubtitle": "All details of the event are saved together.",
+      "statusNote": "The status is not changed here – use the buttons in the event list for that.",
+      "optional": "optional",
+      "languagesHint": "Fill in at least one language, ideally all three.",
+      "titleLabel": "Title",
+      "summaryLabel": "Short description",
+      "descriptionLabel": "Description",
+      "locationLabel": "Location",
+      "audienceLabel": "Audience",
+      "startLabel": "Date and time",
+      "startHint": "Ankara time (UTC+3) – regardless of where you are right now.",
+      "startLocked": "The date of a cancelled or completed event can no longer be changed.",
+      "durationLabel": "Duration in minutes",
+      "onlineLabel": "Takes place online",
+      "schoolsLabel": "Participating schools",
+      "hostLabel": "Host school",
+      "hostPlaceholder": "Please choose …",
+      "capacityLabel": "Maximum number of participants",
+      "capacityHint": "How many students can sign up? Leave empty for no limit.",
+      "capacityPlaceholder": "unlimited",
+      "capacityHintRegistered_one": "There is already {count} confirmed sign-up – fewer places are not possible.",
+      "capacityHintRegistered_other": "There are already {count} confirmed sign-ups – fewer places are not possible.",
+      "topicsLabel": "Topics",
+      "draftHint": "New events are always drafts. You can publish them afterwards in the event list.",
+      "editHint": "Status and sign-ups stay unchanged when saving.",
+      "saveDraft": "Save as draft",
+      "saveChanges": "Save changes",
+      "errors": {
+        "titleRequired": "Please enter a title in at least one language.",
+        "tooLong": "At most {max} characters per language.",
+        "startRequired": "Please choose a date and time.",
+        "startInvalid": "This date is invalid.",
+        "startPast": "The date is in the past. Please choose a time in the future.",
+        "duration": "The duration must be a whole number between 1 and 1440 minutes.",
+        "capacity": "Places must be a whole number between 1 and 10000.",
+        "capacityBelowRegistrations": "There are already {count} confirmed sign-ups – at least that many places are needed.",
+        "schoolsRequired": "Please choose at least one participating school.",
+        "schoolsInvalid": "The school selection is invalid.",
+        "hostRequired": "Please choose the host school.",
+        "hostNotParticipating": "The host school must be one of the participating schools.",
+        "topics": "Please choose at most ten topics from the list.",
+        "format": "Please choose a format from the list."
+      },
+      "hiddenSchool": "hidden on the website"
+    },
+    "errors": {
+      "notAllowed": "You do not have admin permissions for this.",
+      "invalid": "Some details are invalid. Please check your input.",
+      "notFound": "The entry was not found. It may have been deleted in the meantime.",
+      "hasEntries": "This event already has sign-ups or interested students and cannot be deleted.",
+      "pastDate": "The date is in the past. Please choose a future date.",
+      "onlyDrafts": "Only drafts can be deleted. Please cancel published events instead.",
+      "transition": "This status change is not allowed.",
+      "capacityTooLow": "There are already more confirmed sign-ups than this number of places allows.",
+      "dateLocked": "The date of a cancelled or completed event can no longer be changed.",
+      "notStarted": "The event has not started yet, so it cannot be marked as completed.",
+      "full": "The event is fully booked.",
+      "technical": "A technical database error occurred. Please try again later or let the team know.",
+      "ideaNotDeletable": "This idea cannot be deleted. Please approve or reject submitted ideas first.",
+      "unavailable": "This admin function is not available in the database. Have all migrations (006, 007) been run?",
+      "network": "Cannot reach the server. Please try again.",
+      "generic": "That did not work. Please try again."
+    }
+  },
+  "discover": {
+    "title": "Discover",
+    "subtitle": "Events and ideas in one place.",
+    "overview": "Overview",
+    "eventsText": "Joint workshops, meetups and competitions of both schools.",
+    "ideasText": "Ideas and projects by students – submit and support them.",
+    "upcomingCount_one": "{count} upcoming event",
+    "upcomingCount_other": "{count} upcoming events",
+    "ideasCount_one": "{count} idea",
+    "ideasCount_other": "{count} ideas"
+  },
+  "community": {
+    "title": "Community",
+    "subtitle": "Learn and work together.",
+    "gamesText": "Short browser games – with leaderboards for Paper flight and Bridge runner.",
+    "peopleText": "Profiles that students choose to share.",
+    "groupsText": "Groups for projects and events – with posts and discussions.",
+    "groups": {
+      "title": "Project and event groups",
+      "subtitle": "Your groups for projects and events. Open a group to read posts and join the discussion.",
+      "filterLabel": "Filter groups",
+      "filter": {
+        "all": "All",
+        "project": "Project groups",
+        "event": "Event groups"
+      },
+      "lastPost": "last post {time}",
+      "noPosts": "no posts yet",
+      "empty": {
+        "all": "You are not in any project or event group yet.",
+        "project": "You are not in any project group yet.",
+        "event": "You are not in any event group yet."
+      },
+      "emptyHint": "Groups appear here automatically as soon as you are a member.",
+      "howTitle": "How do I join a group?",
+      "howProject": "Project groups belong to published ideas. The person who submitted the idea creates the group on the idea page. Members are the project team.",
+      "howEvent": "Event groups are created by the moderators for an event. Members are everyone with a confirmed registration."
+    }
+  },
+  "games": {
+    "title": "Games",
+    "subtitle": "A short break in between – right in your browser.",
+    "localNote": "The games run in your browser. Only your best score in Paper flight and Bridge runner is saved – and only when you are signed in.",
+    "restart": "Restart",
+    "arcade": {
+      "score": "Score: {count}",
+      "tapToStart": "Tap to start",
+      "start": "Start",
+      "pause": "Pause",
+      "resume": "Resume",
+      "paused": "Paused",
+      "over": "Game over",
+      "result": "Game over · Score: {count}"
+    },
+    "symbolPairs": {
+      "title": "Symbol pairs",
+      "hint": "Reveal two matching symbols. No time limit.",
+      "board": "Game board with 12 cards",
+      "pairs": "Matched pairs: {found}/{total}",
+      "moves_one": "{count} move",
+      "moves": "{count} moves",
+      "cardHidden": "Card {n}, face down",
+      "cardOpen": "Card {n}: {symbol}",
+      "cardFound": "Card {n}: {symbol}, pair found",
+      "complete": "All pairs found – in {count} moves!",
+      "symbols": {
+        "star": "Star",
+        "circle": "Circle",
+        "triangle": "Triangle",
+        "diamond": "Diamond",
+        "heart": "Heart",
+        "sun": "Sun"
+      }
+    },
+    "paperFlight": {
+      "title": "Paper flight",
+      "hint": "Keep the paper plane flying and pass through the gaps. Tap, Space or Arrow Up gives lift.",
+      "field": "Paper flight play area: tap or press Space for lift",
+      "accessibility": "Note: Paper flight is a fast reaction game with movement. For a game without time pressure, play Symbol pairs."
+    },
+    "bridgeRunner": {
+      "title": "Bridge runner",
+      "hint": "Run across the bridge and jump over the obstacles. Tap, Space or Arrow Up makes you jump.",
+      "field": "Bridge runner play area: tap or press Space to jump",
+      "accessibility": "Note: Bridge runner is a fast reaction game with movement. For a game without time pressure, play Symbol pairs."
+    },
+    "chess": {
+      "title": "Chess",
+      "hint": "Two-player chess on one device. Tap a piece, then choose a highlighted square.",
+      "board": "Chessboard",
+      "white": "White",
+      "black": "Black",
+      "whiteToMove": "White to move.",
+      "blackToMove": "Black to move.",
+      "check": "Check!",
+      "whiteWins": "White wins",
+      "blackWins": "Black wins",
+      "draw": "Draw",
+      "reasons": {
+        "checkmate": "Checkmate",
+        "stalemate": "Stalemate",
+        "material": "Insufficient material",
+        "seventyfive": "75-move rule",
+        "fivefold": "Fivefold repetition",
+        "claimed": "Draw claimed",
+        "agreed": "Draw agreed",
+        "resigned": "Resignation"
+      },
+      "pieces": {
+        "p": "Pawn",
+        "n": "Knight",
+        "b": "Bishop",
+        "r": "Rook",
+        "q": "Queen",
+        "k": "King"
+      },
+      "squarePiece": "{square}: {piece} ({color})",
+      "targetSuffix": "possible move",
+      "promotion": "Promote pawn to:",
+      "undo": "Undo move",
+      "flip": "Flip board",
+      "claimDraw": "Claim draw",
+      "offerDraw": "Agree to a draw",
+      "resign": "Resign",
+      "confirmResign": "Should {color} resign the game?",
+      "confirmDraw": "Do you both agree to a draw?",
+      "confirmRestart": "End this game and start a new one?",
+      "confirmYes": "Yes",
+      "moveList_one": "Move list ({count} move)",
+      "moveList": "Move list ({count} moves)",
+      "noMoves": "No moves yet."
+    },
+    "leaderboard": {
+      "sectionTitle": "Leaderboards",
+      "sectionSubtitle": "Top 10 per game · everyone once, with their best score",
+      "boardTitle": "{game} – Top 10",
+      "loginHintShort": "Sign in to save your best score.",
+      "viewAll": "Go to the leaderboards",
+      "loginHint": "Sign in to save your best score and see the leaderboards. You can play without signing in.",
+      "login": "Sign in",
+      "loading": "Loading leaderboard …",
+      "retry": "Try again",
+      "empty": "No entries yet. Play a round and turn on “Show me on the leaderboards” below!",
+      "rankLabel": "Rank",
+      "points": "points",
+      "you": "You",
+      "myBest": "Your best score: {score}",
+      "noBestYet": "You have not saved a best score yet.",
+      "myRank": "Rank {rank}",
+      "showMe": "Show me on the leaderboards with my first name",
+      "showMeHint": "Applies to Paper flight and Bridge runner. Others only see your first name and your best score. You can turn it off at any time.",
+      "saving": "Saving best score …",
+      "newBest": "New best score saved: {score}!",
+      "kept": "Your best score stays at {score}.",
+      "errors": {
+        "notInstalled": "The leaderboard has not been set up yet.",
+        "notAllowed": "Please sign in.",
+        "noRun": "This round could not be counted. Start a new round.",
+        "implausible": "This score could not be confirmed and was not saved.",
+        "generic": "That did not work. Please try again later."
+      }
+    }
+  },
+  "tutoring": {
+    "title": "Tutoring board",
+    "subtitle": "Find support and share knowledge voluntarily – without payments.",
+    "newRequest": "Find tutoring",
+    "newOffer": "Offer tutoring",
+    "tabsLabel": "Sections of the tutoring board",
+    "tabs": {
+      "offers": "Offers",
+      "requests": "Requests",
+      "my": "Mine",
+      "saved": "Saved",
+      "contacts": "Contact requests"
+    },
+    "search": "Search subjects or topics",
+    "subject": "Subject",
+    "allSubjects": "All subjects",
+    "languagesLabel": "Languages",
+    "allLanguages": "All languages",
+    "formatLabel": "Format",
+    "allFormats": "All formats",
+    "clearFilters": "Reset filters",
+    "empty": "No matching listings yet. Adjust filters or create your own listing.",
+    "emptySaved": "You have not saved any listings yet.",
+    "rulesHint": "Tutoring is voluntary and free. Please do not enter phone numbers, email addresses, links or addresses – meetings are arranged through the school.",
+    "incoming": "Incoming requests",
+    "outgoing": "Sent requests",
+    "noIncoming": "No requests for your listings yet.",
+    "noOutgoing": "You have not sent any requests yet.",
+    "kind": {
+      "offer": "Offer",
+      "request": "Request"
+    },
+    "languages": {
+      "de": "German",
+      "tr": "Turkish",
+      "en": "English"
+    },
+    "formats": {
+      "online": "Online",
+      "school": "At school",
+      "either": "By arrangement"
+    },
+    "own": "Your listing",
+    "closed": "Closed",
+    "saved": "Saved",
+    "requestStatus": {
+      "pending": "Request open",
+      "accepted": "Accepted",
+      "declined": "Declined",
+      "withdrawn": "Withdrawn"
+    },
+    "openRequests_one": "{count} open request",
+    "openRequests_other": "{count} open requests",
+    "loginLink": "Go to sign-in",
+    "loading": "Loading tutoring listings …",
+    "retry": "Try again",
+    "someoneFrom": "Someone from {school}",
+    "someone": "Someone",
+    "fromPerson": "From {name}",
+    "toPerson": "To {name}",
+    "responseNote": "Reply",
+    "acceptedHint": "Accepted: please arrange the meeting through your school or a teacher.",
+    "chatUnreachable": "You can only message {name} once {name} makes their profile public (“My Area” → “Profile sharing”). Until then, please arrange the meeting through your school or a teacher.",
+    "responseNoteLabel": "Short reply (optional, no contact details)",
+    "decline": "Decline",
+    "accept": "Accept",
+    "withdrawRequest": "Withdraw request",
+    "notFound": "Listing not found",
+    "editTitle": "Edit listing",
+    "formSubtitle": "For your school {school}",
+    "kindLabel": "Listing type",
+    "fields": {
+      "subject": "Subject",
+      "topics": "Topics",
+      "description": "Support offered or needed",
+      "availability": "Possible dates / availability"
+    },
+    "subjects": {
+      "math": "Mathematics",
+      "german": "German",
+      "english": "English",
+      "turkish": "Turkish",
+      "physics": "Physics",
+      "chemistry": "Chemistry",
+      "biology": "Biology",
+      "coding": "Computer science"
+    },
+    "privacyHint": "Others see your listing with your school but without your name. Only people whose request you accept see your first name.",
+    "save": "Save",
+    "school": "School",
+    "anonymousHint": "The name of the person who created this listing is shown once they accept your request.",
+    "savedNotice": "Saved.",
+    "ownActiveHint": "Your listing is active and visible to others.",
+    "ownClosedHint": "Your listing is closed and no longer visible to others.",
+    "edit": "Edit",
+    "close": "Close",
+    "reopen": "Reopen",
+    "deleteConfirm": "Really delete this listing? All requests for it will be deleted too.",
+    "delete": "Delete",
+    "unsave": "Remove from saved",
+    "saveEntry": "Save",
+    "inactiveHint": "This listing is closed. New requests are not possible.",
+    "contactTitle": "Send a contact request",
+    "contactHint": "Your message and first name go to the person who created the listing. Please do not enter contact details.",
+    "messageLabel": "Your message (10–600 characters)",
+    "sendRequest": "Send request",
+    "errors": {
+      "kind": "Please choose offer or request.",
+      "subject": "Please enter a subject with 2–80 characters.",
+      "topics": "Please enter topics with 3–200 characters.",
+      "description": "Please describe the support with 20–1000 characters.",
+      "availability": "Please enter availability with 3–200 characters.",
+      "contactData": "Please do not enter email addresses, links or phone numbers.",
+      "languages": "Please choose at least one language.",
+      "format": "Please choose a format.",
+      "message": "Please write a message with 10–600 characters.",
+      "note": "The reply can be at most 600 characters long.",
+      "notInstalled": "The tutoring board is not set up in the database yet (migration 011 is missing).",
+      "inactive": "This listing is no longer active.",
+      "own": "This is your own listing.",
+      "duplicate": "You have already sent a request for this listing.",
+      "transition": "This request can no longer be changed.",
+      "rejectedByServer": "The input was rejected. Please check the length and do not use contact details.",
+      "invalid": "Invalid input.",
+      "notFound": "Not found – the listing may have been deleted.",
+      "notAllowed": "You are not allowed to do this.",
+      "generic": "That did not work. Please try again later.",
+      "loginRequired": "Please sign in first."
+    },
+    "guestHint": "The tutoring board is only visible to signed-in members."
+  },
+  "profiles": {
+    "loginLink": "Sign in for real data",
+    "loading": "Loading profile data …",
+    "retry": "Try again",
+    "errors": {
+      "generic": "Profile data could not be loaded or saved. Please try again later.",
+      "notInstalled": "Profiles and statistics are not set up in the database yet (migration 012 missing).",
+      "notAllowed": "You need to be signed in for this."
+    },
+    "peopleTitle": "Student profiles",
+    "peopleSubtitle": "Profiles voluntarily shared by students of the pilot schools",
+    "onlyShared": "Only profiles their owners have chosen to share appear here. Private is the default.",
+    "manageMine": "Manage my sharing",
+    "searchLabel": "Search profiles",
+    "searchPlaceholder": "First name, school or interest",
+    "noMatches": "No matching profiles found.",
+    "noPublic": "Nobody has shared a profile yet.",
+    "profileTitle": "Profile",
+    "openProfile": "View profile",
+    "notAvailable": "Profile not available",
+    "previewPublic": "Preview: this is how other signed-in students see your profile.",
+    "previewPrivate": "Preview: your profile is private – others cannot see it.",
+    "onlySharedHere": "Only voluntarily shared information appears here. Grade, email and contact details are never part of the profile.",
+    "sharedActivity": "Shared activity",
+    "publicStats": {
+      "ideasPublished": "Published project ideas",
+      "eventsPast": "Events attended",
+      "supportsReceived": "Support received"
+    },
+    "projectsTitle": "Project proposals",
+    "noProjects": "No published project proposals.",
+    "sharingTitle": "Profile sharing",
+    "sharingSubtitle": "You decide what others see.",
+    "sharingRowHint": "Public profile and individual details",
+    "statePublic": "Public",
+    "statePrivate": "Private",
+    "fields": {
+      "isPublic": "Make my profile visible to other students",
+      "isPublicHint": "Other signed-in students will then see your first name. Visitors without an account see nothing.",
+      "school": "Show school",
+      "interests": "Show interests",
+      "projects": "Show project proposals and project memberships",
+      "activity": "Show activity numbers (project ideas, events attended, support received)"
+    },
+    "fieldsLegend": "Also share",
+    "fieldsInactive": "These details only become visible once your profile is public.",
+    "neverShared": "Never public: grade, email address, individual event registrations, tutoring requests.",
+    "save": "Save sharing",
+    "saving": "Saving …",
+    "saved": "Saved.",
+    "openPreview": "Open a preview of my profile",
+    "myActivity": "My activity",
+    "statsPrivateHint": "Only you can see these numbers. “Attended” means “registered and the event took place” – attendance is not recorded.",
+    "statGroups": {
+      "events": "Events",
+      "ideas": "Ideas",
+      "tutoring": "Tutoring"
+    },
+    "stats": {
+      "eventsUpcoming": "Registered, upcoming",
+      "eventsPast": "Attended",
+      "eventsInterested": "Interested",
+      "ideasSubmitted": "Submitted",
+      "ideasPublished": "Published",
+      "ideasPlanned": "Being planned",
+      "supportsGiven": "Supported",
+      "supportsReceived": "Support received",
+      "tutoringOffers": "Active offers",
+      "tutoringRequests": "Active requests",
+      "tutoringContacts": "Accepted contacts"
+    },
+    "guestHint": "Student profiles are only visible to signed-in members."
+  },
+  "projects": {
+    "title": "Join in",
+    "loginLink": "Sign in to join",
+    "loading": "Loading project data …",
+    "memberCount_one": "{count} member",
+    "memberCount_other": "{count} members",
+    "myStatus": {
+      "requested": "Request sent",
+      "member": "You are a member",
+      "declined": "Request declined",
+      "left": "Left the project"
+    },
+    "actions": {
+      "request": "Ask to join",
+      "cancel": "Withdraw request",
+      "leave": "Leave project",
+      "accept": "Accept",
+      "decline": "Decline"
+    },
+    "saved": {
+      "requested": "Request sent. The author decides.",
+      "cancel": "Request withdrawn.",
+      "leave": "You have left the project.",
+      "accepted": "Accepted – the person is now a member.",
+      "declined": "Request declined."
+    },
+    "closed": "This project isn't accepting requests right now.",
+    "requestsTitle": "Open requests",
+    "noRequests": "No open requests.",
+    "teamTitle": "Team",
+    "noMembers": "No members yet.",
+    "privacyHint": "Only the author and members see names. Everyone else only sees the number.",
+    "noMemberships": "You're not part of a project yet. Open a published idea and ask to join.",
+    "membershipsTitle": "Project memberships",
+    "noPublicMemberships": "No shared memberships.",
+    "errors": {
+      "notInstalled": "Project participation is not set up in the database yet (migration 013 missing).",
+      "own": "This is your own idea.",
+      "exists": "You have already asked or are already a member.",
+      "closed": "This project is not open (any more).",
+      "transition": "This request has already been answered.",
+      "notFound": "Project or request not found.",
+      "notAllowed": "You need to be signed in for this.",
+      "invalid": "Invalid input.",
+      "generic": "That didn't work. Please try again later.",
+      "loginRequired": "You need a real account for this."
+    },
+    "guestHint": "With an account you can ask to join the project."
+  },
+  "chat": {
+    "title": "Chat",
+    "subtitle": "Group rooms and private chats – friendly, safe and moderated.",
+    "loginHint": "Sign in to use the chat.",
+    "login": "Sign in",
+    "loading": "Loading …",
+    "retry": "Try again",
+    "staffPreview": "The chat is still switched off for students. You can see it because you moderate.",
+    "tabsLabel": "Chat sections",
+    "tabs": {
+      "rooms": "Group rooms",
+      "private": "Private chats",
+      "requests": "Message requests",
+      "search": "Search"
+    },
+    "kind": {
+      "topic": "Topic room",
+      "project": "Project group",
+      "event": "Event group",
+      "private": "Private chat"
+    },
+    "rooms": {
+      "general": {
+        "title": "Cross-school exchange",
+        "description": "Questions about school life and new perspectives."
+      },
+      "learning": {
+        "title": "Tutoring and learning",
+        "description": "Learning questions, experiences and mutual support."
+      },
+      "projects": {
+        "title": "Projects and collaboration",
+        "description": "Develop ideas and find collaborators."
+      },
+      "events": {
+        "title": "Events and workshops",
+        "description": "Discuss formats and organisational questions."
+      },
+      "projectFallback": "Project group",
+      "eventFallback": "Event group"
+    },
+    "topicRooms": "Topic rooms",
+    "myGroups": "My project and event groups",
+    "noGroups": "You are not in any project or event group yet.",
+    "memberCount_one": "{count} member",
+    "memberCount": "{count} members",
+    "members_one": "Members ({count})",
+    "members": "Members ({count})",
+    "join": "Join",
+    "leave": "Leave",
+    "enter": "Enter room",
+    "joined": "Joined",
+    "liveOn": "Live",
+    "liveOff": "Updates regularly",
+    "lockedTitle": "Members only",
+    "lockedGroupHint": "This group is only for project members or people registered for the event.",
+    "archived": "Archived",
+    "roomTitle": "Group room",
+    "groupHint": "All members of this room can read along.",
+    "joinToRead": "Join the room to read the messages.",
+    "joinToWrite": "Join the room to write.",
+    "readOnly": "You can only read here at the moment.",
+    "archivedHint": "This room is archived – read only.",
+    "emptyRoom": "No messages yet. Write the first one!",
+    "reportRoom": "Report room",
+    "privateTitle": "Private chat",
+    "privateHint": "Private chats only start when someone accepts your message request (or you accept theirs).",
+    "privateContextHint": "Only the two of you read this chat.",
+    "archivedConversationHint": "This chat is archived – read only.",
+    "conversationUnavailable": "This chat is not (or no longer) available.",
+    "noConversations": "No private chats yet.",
+    "noMessagesYet": "No messages yet.",
+    "reportConversation": "Report chat",
+    "blockedTitle": "Blocked people",
+    "blockedHint": "Blocked people cannot send you requests; your messages are hidden from each other.",
+    "block": "Block",
+    "unblock": "Unblock",
+    "blockConfirm": "Block {name}? You will no longer see each other’s messages.",
+    "requestsHint": "You do not have to answer message requests. A private chat only starts if you accept.",
+    "incoming": "Received requests",
+    "outgoing": "Sent requests",
+    "noIncoming": "No open requests.",
+    "noOutgoing": "No sent requests.",
+    "accept": "Accept",
+    "decline": "Decline",
+    "cancelRequest": "Withdraw",
+    "openConversation": "Open chat",
+    "requestStatus": {
+      "pending": "pending",
+      "accepted": "accepted",
+      "declined": "declined",
+      "cancelled": "withdrawn",
+      "blocked": "ended"
+    },
+    "sendMessage": "Send message",
+    "requestTitle": "Message request to {name}",
+    "requestExplain": "Write a short introduction. {name} can accept or decline – only then can you chat.",
+    "requestIntro": "Your introduction",
+    "sendRequest": "Send request",
+    "requestSent": "Request sent to {name}.",
+    "searchLabel": "Search messages",
+    "searchPlaceholder": "Search term …",
+    "searchButton": "Search",
+    "searchHint": "Only searches rooms you are a member of and your own private chats.",
+    "searchResults": "Search results",
+    "searchInConversation": "Private chat with {name}",
+    "noResults": "No results.",
+    "messagesLabel": "Messages",
+    "you": "You",
+    "deletedMessage": "Message deleted",
+    "censoredHint": "Some words were hidden automatically.",
+    "censoredSent": "Note: some words were automatically replaced with ***.",
+    "reactionsLabel": "Reactions",
+    "reactionCount": "{emoji} – {count}",
+    "react": "React",
+    "chooseReaction": "Choose a reaction",
+    "delete": "Delete",
+    "deleteConfirm": "Delete this message?",
+    "reportAction": "Report",
+    "composerLabel": "Write a message",
+    "composerPlaceholder": "Write a message …",
+    "composerHint": "No phone numbers, email addresses or links. Please stay friendly.",
+    "send": "Send",
+    "openProjectGroup": "Open project group",
+    "createProjectGroup": "Create project group in the chat",
+    "groupApprovalHint": "This group can only be created after an admin has approved the related project idea or event. As soon as it has been approved, you can create the group.",
+    "report": {
+      "title": {
+        "message": "Report message",
+        "user": "Report person",
+        "room": "Report room",
+        "conversation": "Report chat",
+        "request": "Report request"
+      },
+      "category": "Reason",
+      "choose": "Please choose",
+      "categories": {
+        "language": "Inappropriate language",
+        "harassment": "Harassment or bullying",
+        "discrimination": "Discrimination",
+        "privacy": "Privacy violation",
+        "spam": "Spam",
+        "other": "Other"
+      },
+      "note": "Note (optional)",
+      "noteHint": "The reported person will not find out who reported them.",
+      "submit": "Send report",
+      "sent": "Thank you! The report was sent to the moderators."
+    },
+    "errors": {
+      "notInstalled": "The chat has not been set up yet.",
+      "notAllowed": "You are not allowed to do this.",
+      "notFound": "Not found.",
+      "invalid": "Please check your input.",
+      "disabled": "The chat has not been switched on yet.",
+      "banned": "You are banned from the chat until {until}. You can still read.",
+      "bannedRoom": "You are banned in this room until {until}. You can still read.",
+      "noAccess": "You do not have access to this.",
+      "contactData": "Phone numbers, email addresses and links are not allowed in the chat.",
+      "rateLimit": "Too many messages in a short time. Please wait a moment.",
+      "blocked": "Not possible because of a block.",
+      "requestPendingOutgoing": "You have already sent this person a request.",
+      "requestPendingIncoming": "This person has already sent you a request – check your message requests.",
+      "cooldown": "Your last request was declined. A new request is possible from {until}.",
+      "conversationExists": "You already have a chat together.",
+      "unreachable": "This person cannot receive message requests.",
+      "archived": "Archived – you can no longer write here.",
+      "eventDeleted": "The event of this group was deleted – the group stays read-only.",
+      "empty": "Please write something.",
+      "tooLong": "The message is too long.",
+      "generic": "That did not work. Please try again later."
+    },
+    "mod": {
+      "title": "Chat moderation",
+      "tabsLabel": "Moderation sections",
+      "tabs": {
+        "reports": "Reports",
+        "bans": "Bans",
+        "rooms": "Rooms",
+        "conversations": "Private chats",
+        "audit": "Log",
+        "settings": "Settings"
+      },
+      "role": {
+        "admin": "Admin",
+        "moderator": "Moderator"
+      },
+      "roleHint": {
+        "admin": "You can manage everything. Every action is logged.",
+        "moderator": "You handle reports, delete messages, ban for up to 7 days and archive rooms. Every action is logged."
+      },
+      "reason": "Reason",
+      "reasonHint": "Required (at least 3 characters). Stored in the log.",
+      "reportStatus": {
+        "open": "Open",
+        "resolved": "Resolved",
+        "dismissed": "Dismissed"
+      },
+      "target": {
+        "message": "Message",
+        "user": "Person",
+        "room": "Room",
+        "conversation": "Private chat",
+        "request": "Request"
+      },
+      "noReports": "No reports.",
+      "reportedBy": "Reported by {name}",
+      "concerns": "concerns {name}",
+      "note": "Note",
+      "resolution": "Outcome",
+      "viewContext": "View context",
+      "contextRoom": "View the context of the reported message in the room?",
+      "contextPrivateWarning": "Caution: private chat. You will see up to 10 messages around the reported message. Access is logged with your reason.",
+      "deleteMessage": "Delete message",
+      "deleteMessageConfirm": "Delete the reported message?",
+      "resolve": "Resolve",
+      "resolveConfirm": "Mark the report as resolved?",
+      "dismiss": "Dismiss",
+      "dismissConfirm": "Dismiss the report (no violation)?",
+      "banUser": "Ban",
+      "newBan": "New ban",
+      "banTarget": "Person: {name}",
+      "change": "Change",
+      "findUser": "Find person (first name)",
+      "select": "Select",
+      "scope": "Scope",
+      "scopes": {
+        "global": "Whole chat",
+        "room": "One room"
+      },
+      "room": "Room",
+      "duration": "Duration",
+      "durations": {
+        "1h": "1 hour",
+        "24h": "24 hours",
+        "3d": "3 days",
+        "7d": "7 days",
+        "14d": "14 days",
+        "30d": "30 days",
+        "custom": "Custom duration"
+      },
+      "customHours": "Duration in hours",
+      "maxDuration": {
+        "admin": "At most 365 days.",
+        "moderator": "Moderators: at most 7 days."
+      },
+      "banConfirm": "Ban {name}? During the ban they can only read.",
+      "activeOnly": "Active bans only",
+      "noBans": "No bans.",
+      "active": "active",
+      "ended": "ended",
+      "issuedBy": "by {name}",
+      "endBan": "End ban",
+      "endBanConfirm": "End the ban of {name} early?",
+      "createEventGroup": "Create event group",
+      "event": "Event",
+      "create": "Create",
+      "messageCount_one": "{count} message",
+      "messageCount": "{count} messages",
+      "archive": "Archive",
+      "unarchive": "Restore",
+      "deleteRoom": "Delete room",
+      "roomConfirm": {
+        "archive": "Archive the room? Members can then only read.",
+        "unarchive": "Restore the room?",
+        "delete": "PERMANENTLY delete the room including all messages and reactions? Reports are kept."
+      },
+      "conversationsHint": "Only metadata is shown here (who, since when, how many messages) – no content. You only see content through reports.",
+      "openReports_one": "{count} open report",
+      "openReports": "{count} open reports",
+      "deleteConversation": "Delete chat",
+      "conversationConfirm": {
+        "archive": "Archive the chat? Both can then only read.",
+        "unarchive": "Restore the chat?",
+        "delete": "PERMANENTLY delete the chat – both lose access, messages and reactions are deleted. Reports are kept."
+      },
+      "noAudit": "No entries yet.",
+      "actions": {
+        "create_event_room": "Event group created",
+        "resolve_report": "Report handled",
+        "view_private_context": "Viewed private context of a report",
+        "view_room_context": "Viewed room context of a report",
+        "delete_message": "Message deleted",
+        "ban": "Ban issued",
+        "end_ban": "Ban ended",
+        "archive_room": "Room archived",
+        "unarchive_room": "Room restored",
+        "archive_conversation": "Conversation archived",
+        "unarchive_conversation": "Conversation restored",
+        "delete_conversation": "Conversation deleted",
+        "delete_room": "Room deleted",
+        "add_moderator": "Moderator added",
+        "remove_moderator": "Moderator removed",
+        "set_config": "Settings changed",
+        "add_term": "Word added to filter list",
+        "remove_term": "Word removed from filter list"
+      },
+      "settingsTitle": "Chat settings",
+      "staffCount_one": "{count} person with moderation rights",
+      "staffCount": "{count} people with moderation rights",
+      "enabled": "Switch the chat on for all signed-in students",
+      "enabledHint": "Only switch on once moderation and the process are agreed.",
+      "cooldownHours": "Waiting time after a declined request (hours)",
+      "requestsPerDay": "Maximum requests per person per day",
+      "messagesPerMinute": "Maximum messages per person per minute",
+      "save": "Save",
+      "saveConfirm": "Save the settings?",
+      "staffTitle": "Moderation",
+      "adminsHint": "Admins are added in the database (admins table) – see the guide. You can appoint moderators here.",
+      "addModerator": "Make moderator",
+      "addModeratorConfirm": "Make {name} a moderator?",
+      "removeModerator": "Remove",
+      "removeModeratorConfirm": "Remove {name} from moderation?",
+      "termsTitle": "Word filter",
+      "termsHint": "Words are stored in a normalised form (lower case, no accents). “Word start” also matches compounds.",
+      "term": "Word",
+      "termLanguage": "Language",
+      "languages": {
+        "de": "German",
+        "tr": "Turkish",
+        "en": "English",
+        "other": "Other"
+      },
+      "termPrefix": "Word start",
+      "addTerm": "Add",
+      "showTerms_one": "Show list ({count} word)",
+      "showTerms": "Show list ({count} words)",
+      "prefix": "Word start",
+      "removeTerm": "Remove"
+    },
+    "lastMessage": "Last message: {time}",
+    "unread": "Unread messages"
+  },
+  "toast": {
+    "regionLabel": "Confirmations",
+    "dismiss": "Close message",
+    "roomJoined": "You joined the room!",
+    "roomLeft": "You left the room.",
+    "messageSent": "Your message was sent.",
+    "registered": "You are registered for this event!",
+    "registrationCancelled": "Your registration was cancelled.",
+    "interestSaved": "Your interest was saved.",
+    "interestRemoved": "Your interest was withdrawn.",
+    "sharingSaved": "Your profile sharing settings were saved."
+  },
+  "help": {
+    "title": "Help & FAQ",
+    "subtitle": "Short answers to common questions",
+    "intro": "Learn how Connect/ED works. Tap a question to open the answer.",
+    "more": "Your question is not here? You can find more about the project under “About Connect/ED”.",
+    "sections": {
+      "start": {
+        "title": "Getting started",
+        "what": {
+          "q": "What is Connect/ED?",
+          "a": "A student-made platform for collaboration between schools – started at Ernst-Reuter-Schule Ankara. You can find joint events, share project ideas and talk to each other."
+        },
+        "how": {
+          "q": "How do I use the platform?",
+          "a": "“Home” shows your next events and suggestions. “Discover” contains events and ideas. “Tutoring” is a separate area where you can offer or look for tutoring. “Community” contains student profiles, project and event groups, and games. For messages there is a separate “Chatroom” area. Without signing in you can see the home page, the games, the help and “About Connect/ED”."
+        },
+        "profile": {
+          "q": "How do I update my profile?",
+          "a": "In “My Area” you choose your interests, set the language and decide under “Profile sharing” what others can see. You enter your first name, school and grade when you register; you cannot change them in the app yet."
+        }
+      },
+      "chat": {
+        "title": "Community and chat",
+        "join": {
+          "q": "How can I join a chatroom?",
+          "a": "Open the chat and tap “Join” on a topic room. The chat only works when you are signed in and it is switched on for the platform."
+        },
+        "enter": {
+          "q": "How do I enter a room and send messages?",
+          "a": "As a member, tap “Enter room”. Type your message at the bottom and tap “Send” (or press Enter). New messages appear automatically."
+        },
+        "leave": {
+          "q": "How can I leave a chatroom?",
+          "a": "Tap “Leave” in the overview or inside the room. After that you cannot read the messages until you join again. Project and event groups belong to the project team or the event registration and cannot be left separately."
+        },
+        "private": {
+          "q": "How do private conversations work?",
+          "a": "On a shared profile you can send a message request. A private chat only starts when the other person accepts. You do not have to answer requests, and you can also block or report people."
+        }
+      },
+      "events": {
+        "title": "Events",
+        "discover": {
+          "q": "How do I discover events?",
+          "a": "Under “Discover” → “Events” there are “For me” (matching your interests), “All” and “Mine”. Your next events are also shown on the home page."
+        },
+        "register": {
+          "q": "How can I register for an event?",
+          "a": "Open the event and tap “Join”. With “Show interest” you bookmark it without committing. If an event is full or has already started, registration is no longer possible."
+        },
+        "cancel": {
+          "q": "How can I cancel my registration?",
+          "a": "Open the event and tap “Cancel sign-up”."
+        },
+        "cancelled": {
+          "q": "What happens when an event is cancelled?",
+          "a": "The event is marked as “cancelled” and does not take place. You do not need to do anything."
+        }
+      },
+      "privacy": {
+        "title": "Account and privacy",
+        "manage": {
+          "q": "How can I manage my profile?",
+          "a": "In “My Area” you find your interests, your activity and profile sharing. Only you can see your activity numbers."
+        },
+        "visible": {
+          "q": "Who can see my information?",
+          "a": "Your profile is private by default. Only when you share it can other signed-in students see your first name, your school and the details you choose. Your grade, email address and individual event registrations are never public."
+        },
+        "privacy": {
+          "q": "How does account privacy work?",
+          "a": "Under “Profile sharing” you decide what is shared and can switch back to private at any time. In the chat, only members of a room can read its messages; private chats are only visible to the two people in them."
+        }
+      }
+    }
+  },
+  "appearance": {
+    "title": "Appearance",
+    "intro": "Choose your accent colour for buttons, links and highlights. The background and status colours stay the same.",
+    "accentLegend": "Accent colour",
+    "default": "Default",
+    "preview": "Preview",
+    "previewPrimary": "Join",
+    "previewSecondary": "Learn more",
+    "previewChip": "Selected",
+    "previewLink": "A link",
+    "current": "Current: {name}",
+    "localOnly": "Saved in this browser only.",
+    "reset": "Reset to Ocean Blue",
+    "accents": {
+      "ocean": "Ocean Blue",
+      "forest": "Forest Green",
+      "lavender": "Lavender",
+      "sunset": "Sunset Orange",
+      "rose": "Rose",
+      "midnight": "Midnight"
+    },
+    "paletteButton": "Choose accent colour",
+    "moreSettings": "More appearance settings"
+  },
+  "guest": {
+    "welcomeTitle": "Welcome to Connect/ED",
+    "welcomeText": "The cross-school platform for joint events, project ideas, tutoring and exchange between students. Sign in with your Connect/ED account to take part.",
+    "featuresTitle": "What you will find",
+    "features": {
+      "events": {
+        "title": "Events",
+        "text": "Joint events of the participating schools – with registration."
+      },
+      "ideas": {
+        "title": "Ideas & projects",
+        "text": "Submit project ideas, support them and work on them as a team."
+      },
+      "tutoring": {
+        "title": "Tutoring",
+        "text": "Offer or find tutoring – across schools, too."
+      },
+      "chat": {
+        "title": "Chatroom",
+        "text": "Topic rooms, project and event groups and messages – moderated."
+      }
+    },
+    "membersOnlyHint": "These areas are only visible to signed-in students of the participating schools.",
+    "openTitle": "Without signing in",
+    "loginRequiredTitle": "Please sign in",
+    "loginRequiredText": "This area is only visible to signed-in Connect/ED members. Sign in to use it.",
+    "aboutLink": "What is Connect/ED?",
+    "gamesLink": "Games without signing in"
+  }
+}

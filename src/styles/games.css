@@ -1,0 +1,496 @@
+/*
+ * Spiele (Community → Spiele).
+ * Optik nach Kerems Codex-Version (`src/styles/games.css`), aber mit unseren Farbvariablen
+ * aus variables.css statt fester Farbwerte.
+ */
+
+.game-score {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.game-status {
+  min-height: 1.5em; /* Platz reservieren, damit nichts springt, wenn der Text erscheint */
+  font-weight: 600;
+  color: var(--color-success);
+}
+
+/* Symbolpaare: 4 Spalten × 3 Reihen, passt auch auf kleine Handys */
+.symbol-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.symbol-card {
+  aspect-ratio: 1;
+  min-height: 52px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: var(--border-width) solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-2);
+  color: var(--color-text-muted);
+  font-size: clamp(1.4rem, 7vw, 2.3rem);
+  line-height: 1;
+  cursor: pointer;
+  touch-action: manipulation; /* kein Doppeltipp-Zoom auf Handys */
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.symbol-card > span {
+  font-family: 'Segoe UI Symbol', 'Noto Sans Symbols 2', 'Noto Sans Symbols', var(--font-sans);
+}
+
+.symbol-card:not(.symbol-card--open) > span {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+}
+
+.symbol-card:hover:not([aria-disabled='true']) {
+  background: var(--color-surface-3);
+}
+
+.symbol-card--open {
+  background: var(--color-primary-text);
+  border-color: var(--color-primary-text);
+  color: var(--color-bg);
+}
+
+.symbol-card--found {
+  background: var(--color-success-soft);
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+.symbol-card[aria-disabled='true'] {
+  cursor: default;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .symbol-card {
+    transition: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Reaktionsspiele (Papierflug, Brückenläufer).
+ * Gezeichnet wird auf <canvas> (arcadeCanvas.js); die Farben kommen aus unseren
+ * CSS-Variablen und werden einmal per JavaScript gelesen.
+ * ------------------------------------------------------------------------- */
+
+.arcade-field {
+  position: relative; /* für das Hinweis-Fenster */
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 2px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-bg-elevated);
+  cursor: pointer;
+  touch-action: manipulation; /* kein Doppeltipp-Zoom auf Handys */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.arcade-canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 640 / 300; /* Spielfeld 640 × 300 */
+  height: auto;
+}
+
+/* Hinweis-Fenster „Tippen zum Starten“ / „Pausiert“ / „Spiel beendet“ */
+.arcade-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max-content; /* sonst bricht der Text schon bei halber Breite um (left: 50 %) */
+  max-width: calc(100% - 24px);
+  padding: 10px 22px;
+  border-radius: var(--radius-lg);
+  background: rgba(248, 246, 240, 0.94); /* --color-bg mit 94 % Deckkraft */
+  border: var(--border-width) solid var(--color-border);
+  color: var(--color-text);
+  font-size: clamp(0.95rem, 3.5vw, 1.15rem);
+  text-align: center;
+  pointer-events: none;
+}
+
+.arcade-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* ---------------------------------------------------------------------------
+ * Schach (zu zweit am selben Gerät). Brettfarben aus Kerems Codex-Version
+ * (`src/styles/games.css`): helle/dunkle Felder in unseren Blautönen.
+ * ------------------------------------------------------------------------- */
+
+.chess-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 1.5em;
+  font-weight: 650;
+}
+
+.chess-status--ended {
+  color: var(--color-success);
+}
+
+/* Farbpunkt: wer ist am Zug? */
+.chess-turn {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border-strong);
+}
+
+.chess-turn--w {
+  background: #ffffff;
+}
+
+.chess-turn--b {
+  background: #061323;
+}
+
+.chess-board {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  width: min(100%, 560px);
+  margin-inline: auto;
+  border: 2px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.chess-square {
+  position: relative;
+  aspect-ratio: 1;
+  min-width: 0;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+  touch-action: manipulation; /* kein Doppeltipp-Zoom auf Handys */
+  -webkit-tap-highlight-color: transparent;
+}
+
+.chess-square--light {
+  background-color: #b2c7de;
+  color: #234263; /* Koordinaten */
+}
+
+.chess-square--dark {
+  background-color: #577493;
+  color: #dbe7f5; /* Koordinaten */
+}
+
+.chess-square:focus-visible {
+  outline-offset: -4px;
+  z-index: 1;
+}
+
+.chess-square[aria-disabled='true'] {
+  cursor: default;
+}
+
+/* Letzter Zug (gelblich) und König im Schach (rötlich) */
+.chess-square--last {
+  background-image: linear-gradient(rgba(242, 196, 109, 0.45), rgba(242, 196, 109, 0.45));
+}
+
+.chess-square--check {
+  background-image: radial-gradient(circle, rgba(194, 65, 58, 0.85) 0%, rgba(194, 65, 58, 0.35) 55%, transparent 75%);
+}
+
+.chess-square--selected {
+  box-shadow: inset 0 0 0 4px var(--color-warning);
+}
+
+/* Mögliche Züge: Punkt auf leeren Feldern, Ring um schlagbare Figuren */
+.chess-square--target::after,
+.chess-square--capture::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.chess-square--target::after {
+  width: 30%;
+  height: 30%;
+  background: rgba(9, 21, 34, 0.45);
+}
+
+.chess-square--capture::after {
+  inset: 6%;
+  border: 4px solid rgba(9, 21, 34, 0.5);
+}
+
+.chess-piece {
+  font-family: 'Segoe UI Symbol', 'Noto Sans Symbols 2', 'Noto Sans Symbols', 'DejaVu Sans', serif;
+  font-size: clamp(1.45rem, 8.6vw, 3rem);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.chess-piece--w {
+  color: #ffffff;
+  text-shadow: 0 0 1px #061323, 0 0 2px #061323, 0 1px 2px rgba(6, 19, 35, 0.8);
+}
+
+.chess-piece--b {
+  color: #061323;
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.35);
+}
+
+/* Koordinaten am Brettrand: Reihe oben links, Linie unten rechts */
+.chess-coord {
+  position: absolute;
+  font-size: clamp(0.55rem, 2.2vw, 0.75rem);
+  font-weight: 650;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.chess-coord--rank {
+  top: 3px;
+  left: 3px;
+}
+
+.chess-coord--file {
+  right: 3px;
+  bottom: 3px;
+}
+
+/* Auswahl bei der Bauernumwandlung */
+.chess-promotion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  border: var(--border-width) solid var(--color-primary);
+  border-radius: var(--radius-md);
+  background: var(--color-primary-soft);
+}
+
+.chess-promotion p {
+  font-weight: 650;
+}
+
+.chess-promotion__choices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 8px;
+}
+
+.chess-promotion__choice {
+  gap: 8px;
+}
+
+.chess-promotion__choice .chess-piece {
+  font-size: 1.6rem;
+}
+
+.chess-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chess-moves {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 6px 20px;
+  margin-top: 8px;
+  padding-left: 28px;
+  font-variant-numeric: tabular-nums;
+}
+
+.chess-moves li span + span {
+  margin-left: 12px;
+}
+
+/* ---------------------------------------------------------------------------
+ * Bestenlisten (Papierflug, Brückenläufer – Migration 017)
+ * Plätze 1–3 hervorgehoben (Gold, Silber, Bronze), eigene Zeile markiert.
+ * ------------------------------------------------------------------------- */
+
+.leaderboard__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.leaderboard__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--color-warning-soft);
+  color: var(--color-warning);
+}
+
+.leaderboard__list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.leaderboard__row {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  padding: 6px 12px 6px 6px;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-2);
+}
+
+.leaderboard__rank {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-surface-3);
+  color: var(--color-text-muted);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.leaderboard__name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-weight: 600;
+}
+
+.leaderboard__score {
+  font-weight: 700;
+  font-size: 1.05rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Plätze 1–3 */
+.leaderboard__row--rank1 {
+  border-color: rgba(242, 196, 109, 0.6);
+  background: linear-gradient(90deg, rgba(242, 196, 109, 0.16), var(--color-surface-2) 70%);
+}
+
+.leaderboard__row--rank1 .leaderboard__rank {
+  background: #f2c46d;
+  color: #2b1d00;
+}
+
+.leaderboard__row--rank2 {
+  border-color: rgba(201, 212, 226, 0.5);
+  background: linear-gradient(90deg, rgba(201, 212, 226, 0.12), var(--color-surface-2) 70%);
+}
+
+.leaderboard__row--rank2 .leaderboard__rank {
+  background: #c9d4e2;
+  color: #172231;
+}
+
+.leaderboard__row--rank3 {
+  border-color: rgba(214, 150, 102, 0.5);
+  background: linear-gradient(90deg, rgba(214, 150, 102, 0.14), var(--color-surface-2) 70%);
+}
+
+.leaderboard__row--rank3 .leaderboard__rank {
+  background: #d69666;
+  color: #2a1508;
+}
+
+/* Eigene Zeile */
+.leaderboard__row--self {
+  box-shadow: inset 0 0 0 2px var(--color-primary);
+}
+
+.leaderboard__empty {
+  padding: 12px;
+  border: var(--border-width) dashed var(--color-border-strong);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.leaderboard__me {
+  padding-top: 10px;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.leaderboard__hint {
+  display: block;
+  margin-top: 4px;
+  font-size: var(--text-sm);
+  font-weight: 400;
+}
+
+.leaderboard__save {
+  min-height: 1.4em;
+  font-weight: 600;
+  color: var(--color-success);
+}
+
+/* Bestenlisten auf /games: zwei Listen nebeneinander (ab Tablet), auf dem Handy untereinander */
+.leaderboards {
+  margin-top: 8px;
+}
+
+.leaderboards__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+
+@media (min-width: 760px) {
+  .leaderboards__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.leaderboard__title {
+  font-size: 1.05rem;
+}
+
+/* Rückmeldung auf den Spielseiten (keine Liste) */
+.leaderboard-status {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.leaderboard-status .leaderboard__save:empty {
+  display: none;
+}

@@ -1,0 +1,26 @@
+# Netlify-Konfiguration für die öffentliche Connect/ED-Website.
+#
+# KEINE Zugangsdaten in diese Datei! Die drei Werte werden im Netlify-Dashboard eingetragen
+# (Site configuration → Environment variables), für alle Deploy-Kontexte:
+#   VITE_SUPABASE_URL              = https://ycyqdqmiawhzzrduxupe.supabase.co
+#   VITE_SUPABASE_PUBLISHABLE_KEY  = publishable Key (sb_publishable_…) – NIE den secret/service_role Key
+#   VITE_ENABLE_SIGNUP             = true oder false (ausdrücklich angeben)
+# Netlify setzt beim Bauen NETLIFY=true. Dann verlangt scripts/publicEnv.mjs genau diese drei Variablen,
+# akzeptiert nur das freigegebene Supabase-Projekt und bricht sonst ab (Details: docs/PUBLIC_BUILD.md).
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  # Node-Version für den Build (Vite 6 braucht Node 18 oder neuer). Keine geheimen Werte hier.
+  NODE_VERSION = "22"
+
+# SPA-Fallback: Die App nutzt echte Pfade (BrowserRouter). Unbekannte Pfade wie /community/games,
+# /tutoring, /chat, /forgot-password oder /reset-password liefern index.html; React Router zeigt die Seite.
+# Ohne "force" gilt die Regel nur, wenn es KEINE echte Datei unter diesem Pfad gibt –
+# vorhandene Dateien (assets/*.js, assets/*.css, favicon.svg) werden also unverändert ausgeliefert.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

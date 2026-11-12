@@ -1,0 +1,98 @@
+import { getSchool, isHiddenSchool } from '../data/schools.js';
+
+/**
+ * Hilfsfunktionen für das ECHTE Konto (Supabase) – ohne React, testbar.
+ *
+ * Trennung der Daten:
+ *   - Name, Schule, Klasse, Avatar-Farbe, Interessen -> Supabase-Tabelle "profiles"
+ *   - Event-Anmeldungen                               -> Supabase "event_registrations"
+ *   - Ideen-Unterstützungen                           -> Supabase "idea_supports"
+ *   - Projekt-Interesse, ausgeblendete Hinweise        -> vorerst nur im Browser,
+ *     getrennt pro Konto
+ *   Die alten Felder "registrations", "supportedIdeas" und "customIdeas" im
+ *   Browser-Speicher (aus der Zeit davor) werden nicht mehr gelesen, aber auch nicht gelöscht.
+ * Ohne Anmeldung gilt GUEST_USER (keine erfundenen Daten).
+ */
+
+export const ACCOUNT_STORAGE_PREFIX = 'deutschconnect.accountState.v1.';
+
+/**
+ * Nicht angemeldet: neutraler Gast – KEIN erfundenes Profil (kein Name, keine Schule, keine Inhalte).
+ * Gleiche Form wie buildAccountUser, damit gemeinsame Bausteine (Kopfzeile, Avatar) ohne Sonderfälle laufen.
+ * Inhalte für Mitglieder zeigt die App Gästen nicht (RequireAccount) – die Datenbank (RLS) gibt sie ohnehin nicht heraus.
+ */
+export const GUEST_USER = Object.freeze({
+  id: 'guest',
+  firstName: '',
+  lastName: '',
+  schoolId: null,
+  grade: null,
+  avatarColor: '#6b7280',
+  interests: Object.freeze([]),
+  invitations: Object.freeze([]),
+  registrations: Object.freeze({}),
+  supportedIdeas: Object.freeze([]),
+  projectInterest: Object.freeze([]),
+  dismissedUpdates: Object.freeze([]),
+  school: null,
+  isRealAccount: false,
+  isGuest: true,
+});
+
+export function emptyAccountData() {
+  return { registrations: {}, supportedIdeas: [], projectInterest: [], dismissedUpdates: [], customIdeas: [] };
+}
+
+const isStringArray = (value) => Array.isArray(value) && value.every((item) => typeof item === 'string');
+
+/** Übernimmt nur gültige Felder aus gespeicherten Daten (Schutz vor kaputtem localStorage). */
+export function sanitizeAccountData(saved) {
+  const data = emptyAccountData();
+  if (!saved || typeof saved !== 'object') return data;
+  if (saved.registrations && typeof saved.registrations === 'object' && !Array.isArray(saved.registrations)) {
+    for (const [eventId, status] of Object.entries(saved.registrations)) {
+      if (status === 'registered' || status === 'interested') data.registrations[eventId] = status;
+    }
+  }
+  for (const key of ['supportedIdeas', 'projectInterest', 'dismissedUpdates']) {
+    if (isStringArray(saved[key])) data[key] = [...saved[key]];
+  }
+  if (Array.isArray(saved.customIdeas)) {
+    data.customIdeas = saved.customIdeas.filter((idea) => idea && typeof idea.id === 'string');
+  }
+  return data;
+}
+
+/**
+ * Baut aus dem Supabase-Profil das "user"-Objekt, das alle Seiten erwarten
+ * (gleiche Form wie GUEST_USER).
+ * registrations: { [eventId]: 'registered' | 'interested' } aus event_registrations
+ * supportedIdeas: [ideaId, ...] aus idea_supports
+ */
+export function buildAccountUser(userId, profile, data, registrations, supportedIdeas) {
+  const localSchool = getSchool(profile.school_id);
+  // Ausgeblendete Schule (src/data/schools.js): kein Name in der Anzeige – Profil und school_id bleiben unverändert.
+  const school = isHiddenSchool(profile.school_id)
+    ? { id: profile.school_id, name: '', shortName: '', hidden: true }
+    : localSchool ?? {
+        id: profile.school_id,
+        name: profile.school?.name ?? profile.school_id,
+        shortName: profile.school?.short_name ?? profile.school_id,
+      };
+  return {
+    id: userId,
+    firstName: profile.first_name,
+    lastName: '', // wird bewusst nicht gespeichert (Datensparsamkeit)
+    schoolId: profile.school_id,
+    grade: profile.grade,
+    avatarColor: profile.avatar_color,
+    interests: Array.isArray(profile.interests) ? profile.interests : [],
+    invitations: [],
+    registrations: registrations ?? {},
+    supportedIdeas: supportedIdeas ?? [],
+    projectInterest: data.projectInterest,
+    dismissedUpdates: data.dismissedUpdates,
+    school,
+    isRealAccount: true,
+  };
+}

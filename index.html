@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f8f6f0" />
+    <meta name="description" content="Connect/ED – schulübergreifende Plattform für Events, Ideen und Projekte (Prototyp)" />
+    <title>Connect/ED</title>
+    <script>
+      // Gewählte Akzentfarbe VOR dem ersten Zeichnen setzen (kein Aufblitzen in Blau).
+      // Gleiche Liste + gleicher Schlüssel wie src/lib/theme.js – ungültig/leer → Standard (Ocean Blue).
+      (function () {
+        var accent = 'ocean';
+        try {
+          var saved = window.localStorage.getItem('deutschconnect.accent');
+          if (['ocean', 'forest', 'lavender', 'sunset', 'rose', 'midnight'].indexOf(saved) !== -1) accent = saved;
+        } catch (e) {}
+        document.documentElement.setAttribute('data-accent', accent);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

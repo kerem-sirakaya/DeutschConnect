@@ -1,0 +1,1637 @@
+{
+  "common": {
+    "back": "Zurück",
+    "showAll": "Alle",
+    "skipToContent": "Zum Inhalt springen",
+    "cancel": "Abbrechen",
+    "yourSchool": "Deine Schule",
+    "clearSearch": "Suche löschen",
+    "footerNote": "Connect/ED · schulübergreifende Zusammenarbeit"
+  },
+  "nav": {
+    "home": "Start",
+    "events": "Events",
+    "ideas": "Ideen",
+    "me": "Mein Bereich",
+    "meShort": "Mein Bereich",
+    "about": "Über Connect/ED",
+    "mainLabel": "Hauptnavigation",
+    "admin": "Admin-Bereich",
+    "discover": "Entdecken",
+    "tutoring": "Nachhilfe",
+    "community": "Community",
+    "chat": "Chatroom",
+    "games": "Spiele",
+    "help": "Hilfe & FAQ"
+  },
+  "profileMenu": {
+    "openAccount": "Profilmenü öffnen (angemeldet als {name})",
+    "toMyArea": "Zu Mein Bereich",
+    "openGuest": "Kontomenü öffnen",
+    "guestLabel": "Nicht angemeldet"
+  },
+  "profile": {
+    "grade": "Klasse {grade}",
+    "realAccount": "Dein Konto"
+  },
+  "home": {
+    "greetingMorning": "Guten Morgen, {name}!",
+    "greetingAfternoon": "Guten Tag, {name}!",
+    "greetingEvening": "Guten Abend, {name}!",
+    "greetingMorningNoName": "Guten Morgen!",
+    "greetingAfternoonNoName": "Guten Tag!",
+    "greetingEveningNoName": "Guten Abend!",
+    "quickActionsLabel": "Schnellzugriff",
+    "updates": "Neu für dich",
+    "myNextEvents": "Meine nächsten Events",
+    "noEventsTitle": "Noch keine Events geplant",
+    "noEventsText": "Melde dich für ein Event an oder bekunde Interesse.",
+    "forYou": "Für dich empfohlen",
+    "noRecsTitle": "Gerade keine passenden Events",
+    "noRecsText": "Wähle weitere Interessen aus, damit wir Events für dich finden.",
+    "myProjectsIdeas": "Meine Projekte & Ideen",
+    "noProjectsIdeas": "Du hast noch keine Projekte oder Ideen.",
+    "dashboardSubtitle": "Deine Events, Ideen und Lernkontakte auf einen Blick.",
+    "tutoringMatches": "Passende Nachhilfe",
+    "tutoringDiscover": "Nachhilfe entdecken",
+    "tutoringOpenRequests_one": "{count} offene Anfrage",
+    "tutoringOpenRequests_other": "{count} offene Anfragen",
+    "noTutoring": "Noch keine Nachhilfe-Einträge."
+  },
+  "quick": {
+    "discover": "Entdecken",
+    "myEvents": "Meine Events",
+    "newIdea": "Idee einreichen",
+    "schools": "Schulen erkunden",
+    "tutoring": "Nachhilfe"
+  },
+  "updates": {
+    "invitation": "{school} lädt dich ein: {event}",
+    "reminder": "{when}: {event}",
+    "ideaReview": "Deine Idee „{idea}“ wird gerade von den Schulen geprüft.",
+    "view": "Ansehen",
+    "dismiss": "Hinweis ausblenden"
+  },
+  "recommend": {
+    "matches": "Passt zu: {topics}",
+    "yourSchool": "Deine Schule ist dabei",
+    "basedOn": "Basierend auf deinen Interessen: {topics}.",
+    "noInterests": "Du hast noch keine Interessen gewählt.",
+    "editInterests": "Interessen bearbeiten"
+  },
+  "roles": {
+    "organizer": "Organisierst du",
+    "registered": "Angemeldet",
+    "interested": "Interessiert",
+    "member": "Mitglied"
+  },
+  "status": {
+    "event": {
+      "planned": "Geplant",
+      "confirmed": "Bestätigt",
+      "completed": "Abgeschlossen",
+      "cancelled": "Abgesagt",
+      "draft": "Entwurf"
+    },
+    "idea": {
+      "submitted": "Eingereicht",
+      "collecting": "Sammelt Interesse",
+      "review": "In Prüfung",
+      "planned": "Wird geplant",
+      "rejected": "Nicht freigegeben"
+    },
+    "project": {
+      "active": "Aktiv",
+      "planning": "In Planung"
+    },
+    "partnership": {
+      "initiator": "Initiatorin",
+      "interest": "Interesse bekundet",
+      "confirmed": "Bestätigte Kooperation"
+    }
+  },
+  "topics": {
+    "languages": "Sprachen",
+    "science": "Naturwissenschaften",
+    "technology": "Technik & IT",
+    "arts": "Kunst & Medien",
+    "music": "Musik",
+    "sports": "Sport",
+    "culture": "Kultur & Austausch",
+    "debate": "Debatte & Gesellschaft",
+    "career": "Studium & Beruf",
+    "social": "Soziales Engagement"
+  },
+  "formats": {
+    "workshop": "Workshop",
+    "meetup": "Treffen",
+    "discussion": "Diskussion",
+    "competition": "Wettbewerb",
+    "online": "Online",
+    "project": "Projekt"
+  },
+  "events": {
+    "title": "Events",
+    "tabsLabel": "Event-Bereiche",
+    "tabs": {
+      "mine": "Meine",
+      "foryou": "Für mich",
+      "all": "Alle"
+    },
+    "online": "Online",
+    "all": "Alle",
+    "roleFilterLabel": "Nach meiner Rolle filtern",
+    "mineEmptyTitle": "Keine bevorstehenden Events",
+    "mineEmptyText": "Hier erscheinen Events, für die du angemeldet bist, Interesse bekundet hast oder die du organisierst.",
+    "past_one": "Vergangenes Event ({count})",
+    "past_other": "Vergangene Events ({count})",
+    "searchLabel": "Events durchsuchen",
+    "searchPlaceholder": "Titel, Thema oder Ort suchen …",
+    "filters": "Filter",
+    "filtersActive": "Filter ({count})",
+    "resetFilters": "Filter zurücksetzen",
+    "filterTime": "Zeitraum",
+    "filterSchool": "Schule",
+    "filterTopic": "Thema",
+    "filterFormat": "Format",
+    "time": {
+      "upcoming": "Demnächst",
+      "week": "7 Tage",
+      "month": "30 Tage",
+      "past": "Vergangen"
+    },
+    "results_one": "{count} Event",
+    "results_other": "{count} Events",
+    "noResultsTitle": "Keine passenden Events",
+    "noResultsText": "Ändere die Suche oder setze die Filter zurück.",
+    "noRealEventsTitle": "Noch keine Events geplant",
+    "noRealEventsText": "Sobald das Connect/ED-Team ein Event einträgt, erscheint es hier.",
+    "statusFilter": {
+      "label": "Nach Status filtern",
+      "all": "Alle",
+      "scheduled": "Geplant",
+      "cancelled": "Abgesagt"
+    },
+    "noCancelledTitle": "Zurzeit gibt es keine abgesagten Events.",
+    "noCancelledText": "Abgesagte Events bleiben bis 24 Stunden nach ihrem ursprünglichen Termin sichtbar – mindestens aber 24 Stunden nach der Absage.",
+    "card": {
+      "eventStatus": "Event:",
+      "eventStatusSr": "Event-Status:",
+      "yourStatus": "Du:",
+      "yourStatusSr": "Deine Teilnahme:",
+      "cancelled": "Dieses Event wurde abgesagt – es findet nicht statt.",
+      "cancelledOn": "Abgesagt am {date} (Ankara) – findet nicht statt."
+    }
+  },
+  "eventDetail": {
+    "notFound": "Event nicht gefunden",
+    "when": "Wann",
+    "where": "Wo",
+    "host": "Veranstaltet von",
+    "schools": "Beteiligte Schulen",
+    "audience": "Zielgruppe",
+    "capacity": "max. {count} Plätze",
+    "format": "Format",
+    "about": "Worum geht’s?",
+    "yourParticipation": "Deine Teilnahme",
+    "register": "Teilnehmen",
+    "cancelRegistration": "Abmelden",
+    "markInterest": "Interesse bekunden",
+    "removeInterest": "Interesse zurückziehen",
+    "state": {
+      "none": "Du bist noch nicht angemeldet.",
+      "registered": "Du bist angemeldet.",
+      "interested": "Du hast Interesse bekundet."
+    },
+    "organizerNote": "Du organisierst dieses Event.",
+    "pastNote": "Dieses Event ist bereits vorbei.",
+    "pastNoteParticipated": "Dieses Event ist vorbei. Rückmeldungen werden in einer späteren Version gesammelt.",
+    "cancelledNote": "Dieses Event wurde abgesagt.",
+    "cancelledOn": "Abgesagt am {date} (Ankara).",
+    "cancelledRegistrationKept": "Deine Teilnahme bleibt gespeichert: {role}. Das Event selbst findet nicht statt.",
+    "closedNote": "Für dieses Event sind keine neuen Anmeldungen mehr möglich.",
+    "savedToAccount": "Anmeldung und Interesse werden in deinem Konto gespeichert. „Interessiert“ ist keine verbindliche Anmeldung.",
+    "errors": {
+      "closed": "Für dieses Event ist keine Anmeldung mehr möglich (z. B. weil es schon begonnen hat).",
+      "full": "Dieses Event ist leider ausgebucht. Du kannst stattdessen dein Interesse zeigen.",
+      "technical": "Technischer Fehler beim Speichern. Bitte versuche es später noch einmal oder gib dem Team Bescheid.",
+      "conflict": "Dein Eintrag hat sich inzwischen geändert. Der aktuelle Stand wird angezeigt.",
+      "network": "Keine Verbindung zum Server. Bitte versuche es noch einmal.",
+      "generic": "Das hat nicht geklappt. Bitte versuche es noch einmal."
+    },
+    "leftOwnOnly": {
+      "title": "Gespeichert",
+      "text": "Deine Anmeldung bzw. dein Interesse wurde entfernt. Dieses Event wird nur angemeldeten und interessierten Personen angezeigt und ist deshalb hier nicht mehr sichtbar.",
+      "toMine": "Zu meinen Events"
+    }
+  },
+  "ideas": {
+    "title": "Ideen",
+    "tabsLabel": "Ideen-Bereiche",
+    "tabs": {
+      "discover": "Entdecken",
+      "mine": "Meine Ideen"
+    },
+    "newIdea": "Neue Idee",
+    "searchLabel": "Ideen durchsuchen",
+    "searchPlaceholder": "Ideen suchen …",
+    "sortLabel": "Sortierung",
+    "sort": {
+      "popular": "Beliebt",
+      "new": "Neu"
+    },
+    "results_one": "{count} Idee",
+    "results_other": "{count} Ideen",
+    "supportHint": "Unterstützung zeigt Interesse. Über die Umsetzung entscheiden die beteiligten Schulen.",
+    "noRealIdeasTitle": "Noch keine Ideen",
+    "noRealIdeasText": "Neue Ideen erscheinen hier, sobald das Team sie freigegeben hat. Du kannst auch selbst eine einreichen.",
+    "errors": {
+      "notAllowed": "Das ist nicht erlaubt (z. B. eigene oder noch nicht freigegebene Idee).",
+      "alreadySupported": "Du unterstützt diese Idee bereits.",
+      "invalid": "Einige Angaben sind ungültig. Bitte prüfe das Formular.",
+      "deleteFailed": "Die Idee konnte nicht gelöscht werden.",
+      "network": "Keine Verbindung zum Server. Bitte versuche es noch einmal.",
+      "generic": "Das hat nicht geklappt. Bitte versuche es noch einmal."
+    },
+    "fromSchool": "Aus: {school}",
+    "yourIdea": "Deine Idee",
+    "support": "Unterstützen",
+    "supported": "Unterstützt",
+    "supportCount_one": "{count} Unterstützung",
+    "supportCount_other": "{count} Unterstützungen",
+    "supportAria": "Idee „{title}“ unterstützen",
+    "authored": "Von mir eingereicht",
+    "supportedSection": "Von mir unterstützt",
+    "noOwnTitle": "Du hast noch keine Idee eingereicht",
+    "noOwnText": "Hast du eine Idee für ein gemeinsames Projekt? Teile sie mit den anderen Schulen.",
+    "noSupportedText": "Du unterstützt noch keine Ideen.",
+    "noResultsTitle": "Keine passenden Ideen",
+    "noResultsText": "Versuche einen anderen Suchbegriff oder ein anderes Thema."
+  },
+  "ideaDetail": {
+    "notFound": "Idee nicht gefunden",
+    "created": "Deine Idee wurde gespeichert.",
+    "createdHintAccount": "Andere sehen deine Idee, sobald das Connect/ED-Team sie freigegeben hat.",
+    "awaitingApproval": "Wartet auf Freigabe – bisher kannst nur du diese Idee sehen.",
+    "rejectedText": "Das Connect/ED-Team hat diese Idee nicht freigegeben. Sie ist weiterhin nur für dich sichtbar und kann nicht unterstützt werden. Du kannst sie löschen oder eine überarbeitete Idee neu einreichen.",
+    "from": "Von",
+    "fromYou": "Dir",
+    "fromStudentOf": "Schüler:in der {school}",
+    "submitted": "Eingereicht",
+    "targetSchools": "Für Schulen",
+    "about": "Beschreibung",
+    "progress": "Vom Vorschlag zum Event",
+    "steps": {
+      "submitted": "Eingereicht",
+      "collecting": "Interesse sammeln",
+      "review": "Prüfung durch Schulen",
+      "planned": "Planung",
+      "rejected": "Nicht freigegeben"
+    },
+    "approvalNote": "Viel Unterstützung führt nicht automatisch zur Durchführung. Die Schulen prüfen jede Idee.",
+    "supportTitle": "Unterstützung",
+    "supportText": "Gefällt dir die Idee? Zeig, dass du mitmachen würdest.",
+    "ownIdeaNote": "Das ist deine Idee. Hier siehst du, wie viele sie unterstützen.",
+    "delete": "Idee löschen",
+    "deleteConfirm": "Möchtest du diese Idee wirklich löschen?",
+    "deleteYes": "Ja, löschen"
+  },
+  "newIdea": {
+    "title": "Neue Idee",
+    "subtitle": "Schlage eine Aktivität vor, die Schulen verbindet. Eingereicht als Schüler:in der {school}.",
+    "titleLabel": "Titel",
+    "titlePlaceholder": "z. B. Gemeinsamer Filmabend",
+    "descriptionLabel": "Beschreibung",
+    "descriptionHint": "Was soll passieren, und warum ist es schulübergreifend spannend?",
+    "topicsLabel": "Themen (1–3)",
+    "formatLabel": "Format",
+    "schoolsLabel": "Mit welchen Schulen?",
+    "privacyLabel": "Ich habe keine persönlichen Daten anderer Personen (z. B. Namen oder Telefonnummern) eingetragen.",
+    "accountHint": "Deine Idee wird in deinem Konto gespeichert. Andere Schüler:innen sehen sie erst nach der Freigabe – und nur mit deiner Schule, nicht mit deinem Namen.",
+    "submit": "Idee einreichen",
+    "errorSummary_one": "Bitte prüfe das markierte Feld.",
+    "errorSummary_other": "Bitte prüfe die {count} markierten Felder.",
+    "errors": {
+      "title": "Bitte gib einen Titel mit mindestens 5 Zeichen ein.",
+      "description": "Bitte beschreibe deine Idee mit mindestens 20 Zeichen.",
+      "topicsRequired": "Bitte wähle mindestens ein Thema.",
+      "topicsMax": "Bitte wähle höchstens drei Themen.",
+      "schools": "Bitte wähle mindestens eine Schule.",
+      "privacy": "Bitte bestätige den Datenschutzhinweis."
+    }
+  },
+  "me": {
+    "title": "Mein Bereich",
+    "profile": "Profil",
+    "stats": {
+      "events": "Events",
+      "ideas": "Ideen",
+      "projects": "Projekte"
+    },
+    "interests": "Meine Interessen",
+    "edit": "Bearbeiten",
+    "noInterests": "Noch keine Interessen gewählt.",
+    "myProjects": "Meine Projekte",
+    "settingsSection": "Einstellungen",
+    "rows": {
+      "interests": "Interessen & Empfehlungen",
+      "interestsHint": "Bestimmt, was dir empfohlen wird",
+      "language": "Sprache",
+      "about": "Über Connect/ED"
+    }
+  },
+  "interests": {
+    "title": "Interessen",
+    "intro": "Wähle, was dich interessiert. Deine Empfehlungen passen sich sofort an.",
+    "groupLabel": "Interessen",
+    "matching_one": "{count} passendes Event für dich",
+    "matching_other": "{count} passende Events für dich",
+    "showRecs": "Empfehlungen ansehen",
+    "savedToAccount": "Deine Interessen werden in deinem Konto gespeichert."
+  },
+  "auth": {
+    "loginTitle": "Anmelden",
+    "loginSubtitle": "Mit deinem Connect/ED-Konto",
+    "registerTitle": "Registrieren",
+    "registerSubtitle": "Konto für Schüler:innen der beteiligten Schulen",
+    "firstNameLabel": "Vorname",
+    "firstNameHint": "Nur dein Vorname. Andere sehen ihn nur, wenn du dein Profil freigibst oder eine Nachhilfe-Anfrage sendest.",
+    "emailLabel": "E-Mail",
+    "passwordLabel": "Passwort",
+    "passwordHint": "Mindestens {min} Zeichen.",
+    "schoolLabel": "Schule",
+    "schoolPlaceholder": "Schule auswählen",
+    "gradeLabel": "Klasse",
+    "gradePlaceholder": "Klasse auswählen",
+    "consentLabel": "Ich bin einverstanden, dass mein Vorname, meine Schule und meine Klasse für mein Konto gespeichert werden.",
+    "submitLogin": "Anmelden",
+    "submitRegister": "Konto erstellen",
+    "loading": "Bitte warten …",
+    "logout": "Abmelden",
+    "toRegister": "Registrieren",
+    "toLogin": "Anmelden",
+    "checkEmailTitle": "Fast geschafft!",
+    "checkEmailText": "Wir haben dir eine E-Mail geschickt. Bestätige darin deine Adresse und melde dich danach an.",
+    "signedInAs": "Angemeldet als {name}",
+    "profileLoading": "Profil wird geladen …",
+    "profileMissing": "Dein Profil konnte nicht geladen werden.",
+    "notConfigured": "Die Anmeldung ist zurzeit nicht verfügbar.",
+    "signupClosed": "Die Registrierung ist noch nicht freigeschaltet. Wende dich an das Connect/ED-Team deiner Schule.",
+    "accountTitle": "Konto",
+    "accountSignedOut": "Du bist nicht angemeldet.",
+    "meRow": "Konto & Anmeldung",
+    "meRowSignedIn": "Angemeldet",
+    "gateLoading": "Dein Profil wird geladen …",
+    "gateErrorTitle": "Profil konnte nicht geladen werden",
+    "gateErrorText": "Du kannst es erneut versuchen oder dich abmelden.",
+    "retry": "Erneut versuchen",
+    "gateEventsErrorTitle": "Events konnten nicht geladen werden",
+    "gateIdeasErrorTitle": "Ideen konnten nicht geladen werden",
+    "errorSummary_one": "1 Feld muss noch korrigiert werden.",
+    "errorSummary_other": "{count} Felder müssen noch korrigiert werden.",
+    "errors": {
+      "firstName": "Bitte gib deinen Vornamen ein (höchstens 40 Zeichen).",
+      "email": "Bitte gib eine gültige E-Mail-Adresse ein.",
+      "password": "Das Passwort muss mindestens 8 Zeichen lang sein.",
+      "passwordRequired": "Bitte gib dein Passwort ein.",
+      "school": "Bitte wähle deine Schule.",
+      "grade": "Bitte wähle deine Klasse.",
+      "consent": "Bitte bestätige die Einwilligung.",
+      "invalidCredentials": "E-Mail oder Passwort ist falsch.",
+      "emailNotConfirmed": "Bitte bestätige zuerst deine E-Mail-Adresse.",
+      "userExists": "Mit dieser E-Mail-Adresse gibt es bereits ein Konto.",
+      "signupDisabled": "Die Registrierung ist zurzeit geschlossen.",
+      "weakPassword": "Dieses Passwort ist zu schwach. Bitte wähle ein längeres Passwort.",
+      "rateLimit": "Zu viele Versuche. Bitte warte ein paar Minuten.",
+      "emailInvalid": "Diese E-Mail-Adresse wird nicht akzeptiert.",
+      "profileFailed": "Das Profil konnte nicht angelegt werden. Bitte prüfe Schule und Klasse.",
+      "network": "Keine Verbindung zum Server. Bitte prüfe deine Internetverbindung.",
+      "generic": "Etwas ist schiefgelaufen. Bitte versuche es noch einmal.",
+      "interestsSave": "Deine Interessen konnten nicht gespeichert werden. Es wird der zuletzt gespeicherte Stand angezeigt.",
+      "eventsLoad": "Die Events konnten nicht vom Server geladen werden. Bitte prüfe deine Internetverbindung.",
+      "ideasLoad": "Die Ideen konnten nicht vom Server geladen werden. Bitte prüfe deine Internetverbindung."
+    },
+    "forgot": {
+      "link": "Passwort vergessen?",
+      "title": "Passwort vergessen",
+      "subtitle": "Wir schicken dir einen Link zum Zurücksetzen",
+      "intro": "Gib die E-Mail-Adresse deines Connect/ED-Kontos ein. Du bekommst dann eine E-Mail mit einem Link, über den du ein neues Passwort festlegen kannst.",
+      "submit": "Link anfordern",
+      "sentText": "Falls es zu dieser Adresse ein Konto gibt, haben wir dir eine E-Mail mit einem Link geschickt.",
+      "sentHint": "Öffne den Link im selben Browser. Er ist nur kurze Zeit gültig. Wurde für diese Adresse gerade erst ein Link angefordert, kann ein neuer erst nach einigen Minuten verschickt werden. Keine E-Mail bekommen? Prüfe den Spam-Ordner und versuche es nach ein paar Minuten erneut.",
+      "again": "Erneut anfordern",
+      "backToLogin": "Zur Anmeldung"
+    },
+    "reset": {
+      "title": "Neues Passwort",
+      "subtitle": "Lege ein neues Passwort für dein Konto fest",
+      "newPasswordLabel": "Neues Passwort",
+      "confirmLabel": "Neues Passwort wiederholen",
+      "submit": "Passwort speichern",
+      "success": "Dein Passwort wurde geändert. Melde dich jetzt mit dem neuen Passwort an.",
+      "requestNew": "Neuen Link anfordern",
+      "errors": {
+        "confirmRequired": "Bitte wiederhole das neue Passwort.",
+        "mismatch": "Die beiden Passwörter stimmen nicht überein.",
+        "samePassword": "Das neue Passwort muss sich vom bisherigen unterscheiden.",
+        "linkExpired": "Dieser Link ist abgelaufen. Bitte fordere einen neuen Link an.",
+        "linkInvalid": "Dieser Link ist ungültig oder wurde schon benutzt. Bitte fordere einen neuen Link an."
+      }
+    }
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "language": "Sprache"
+  },
+  "about": {
+    "title": "Über Connect/ED",
+    "tagline": "Deine Schule. Deine Ideen. Dein Netzwerk.",
+    "whatTitle": "Was ist Connect/ED?",
+    "whatText": "Connect/ED ist eine von Schüler:innen entwickelte Plattform, über die Schulen gemeinsame Veranstaltungen, Ideen und Projekte organisieren. Schüler:innen sollen selbst Initiative ergreifen und Kontakte zu anderen Schulen aufbauen können.",
+    "originTitle": "Wie es entstanden ist",
+    "originText": "Die Idee entstand in einer Schülergruppe der Ernst-Reuter-Schule Ankara. Aus einem früheren Design-Prototyp für Deutschunterricht wurde eine Plattform für schulübergreifende Zusammenarbeit.",
+    "statusTitle": "Aktueller Stand",
+    "worksTitle": "Bereits umgesetzt",
+    "works1": "Web-Prototyp für Smartphone und Desktop",
+    "works2": "Oberfläche auf Deutsch, Türkisch und Englisch",
+    "works3": "Konten mit Anmeldung, Profil-Freigabe und Passwort-Wiederherstellung",
+    "openTitle": "Noch nicht umgesetzt",
+    "open1": "Echte Benutzerkonten und Anmeldung",
+    "open2": "Gemeinsame Datenbank für alle Schulen",
+    "open3": "Über die Plattform organisierte reale Veranstaltung",
+    "open4": "Formell bestätigte Schulkooperation",
+    "schoolsTitle": "Beteiligte Schulen",
+    "impactTitle": "Wirkung",
+    "impactText": "Bisher wurden noch keine Ergebnisse erhoben. Nach dem ersten Pilot werden hier echte Aktivitäten und Rückmeldungen dokumentiert.",
+    "competition": "Connect/ED soll beim 10. DIHK-Auslandsschulwettbewerb „Schüler bauen weltweit Brücken“ eingereicht werden."
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "text": "Diese Seite gibt es nicht (mehr).",
+    "home": "Zur Startseite"
+  },
+  "admin": {
+    "badge": "Admin-Bereich",
+    "navLabel": "Admin-Navigation",
+    "nav": {
+      "overview": "Übersicht",
+      "events": "Events",
+      "ideas": "Ideen",
+      "chat": "Chat-Moderation"
+    },
+    "loading": "Zugriff wird geprüft …",
+    "denied": {
+      "title": "Kein Zugriff",
+      "text": "Dieser Bereich ist nur für das Pilot-Team.",
+      "hint": "Du bist angemeldet, hast aber keine Admin-Rechte. Wenn das ein Fehler ist, wende dich an das Team."
+    },
+    "statusError": {
+      "title": "Zugriff konnte nicht geprüft werden",
+      "retry": "Erneut prüfen"
+    },
+    "overview": {
+      "title": "Willkommen im Connect/ED Admin-Dashboard",
+      "subtitle": "Hier erhältst du einen Überblick über die Aktivitäten und den aktuellen Stand von Connect/ED.",
+      "context": "Angemeldet als {name} · {date}",
+      "contextNoName": "{date}",
+      "statsTitle": "Kennzahlen",
+      "statsLoading": "Kennzahlen werden geladen …",
+      "statsUnavailable": "Die Kennzahlen sind noch nicht verfügbar: In der Datenbank fehlt Migration 010 (admin_get_overview_stats). Schnellzugriff und Aktivitäten funktionieren trotzdem.",
+      "valueUnavailable": "nicht verfügbar",
+      "stats": {
+        "students": {
+          "label": "Registrierte Schüler:innen",
+          "desc": "Konten mit Profil, ohne Admins"
+        },
+        "upcoming": {
+          "label": "Bevorstehende Events",
+          "desc": "Veröffentlicht und in der Zukunft"
+        },
+        "registrations": {
+          "label": "Gesamte Anmeldungen",
+          "desc": "Verbindliche Anmeldungen, ohne „Interessiert“"
+        },
+        "pending": {
+          "label": "Zu prüfende Ideen",
+          "desc": "Eingereicht, warten auf Freigabe"
+        },
+        "archived": {
+          "label": "Archivierte Events",
+          "desc": "Für Schüler:innen ausgeblendet, Daten bleiben erhalten",
+          "unavailable": "Erst nach Migration 008 verfügbar"
+        }
+      },
+      "quickTitle": "Schnellzugriff",
+      "quick": {
+        "createEvent": {
+          "label": "Neues Event anlegen",
+          "desc": "Als Entwurf speichern"
+        },
+        "manageEvents": {
+          "label": "Events verwalten",
+          "desc": "Veröffentlichen, absagen, bearbeiten"
+        },
+        "reviewIdeas": {
+          "label": "Eingereichte Ideen prüfen",
+          "desc": "Freigeben oder ablehnen"
+        },
+        "manageIdeas": {
+          "label": "Alle Ideen verwalten",
+          "desc": "Status ändern oder löschen"
+        }
+      },
+      "activityTitle": "Aktivitäten",
+      "activityNote": "Zuletzt angelegte Events und eingereichte Ideen – kein vollständiges Protokoll aller Änderungen.",
+      "activityLoading": "Aktivitäten werden geladen …",
+      "activityEmpty": "Noch keine Events oder Ideen vorhanden.",
+      "activityEventCreated": "Event angelegt",
+      "activityIdeaSubmitted": "Idee eingereicht",
+      "activityUntitled": "Ohne Titel"
+    },
+    "events": {
+      "title": "Events verwalten",
+      "subtitle": "Events anlegen, veröffentlichen, absagen und abschließen.",
+      "new": "Neues Event",
+      "loading": "Events werden geladen …",
+      "statsTitle": "Übersicht der Events",
+      "stats": {
+        "all": "Gesamt"
+      },
+      "filters": {
+        "all": "Alle",
+        "archived": "Archiviert"
+      },
+      "empty": {
+        "all": "Es gibt noch keine Events. Lege das erste als Entwurf an.",
+        "filtered": "Keine Events mit diesem Status."
+      },
+      "when": "{date} (Ankara)",
+      "host": "Gastgeber: {school}",
+      "noLocation": "Kein Ort angegeben",
+      "offline": "Vor Ort",
+      "registered_one": "{count} angemeldet",
+      "registered_other": "{count} angemeldet",
+      "interested_one": "{count} interessiert",
+      "interested_other": "{count} interessiert",
+      "capacity": "{taken}/{capacity} Plätze belegt",
+      "noCapacity": "Keine Platzbegrenzung",
+      "draftHint": "Entwurf – nur für Admins sichtbar, Schüler:innen sehen dieses Event noch nicht.",
+      "archived": "Archiviert",
+      "archivedHint": "Archiviert am {date} (Ankara) – für Schüler:innen nicht mehr sichtbar. Alle Daten und Anmeldungen bleiben erhalten.",
+      "final": "Abgeschlossen oder abgesagt – der Status kann nicht mehr geändert werden.",
+      "timeZoneNote": "Alle Zeiten sind Ankara-Zeit (UTC+3). Veröffentlichte Events werden abgesagt, nicht gelöscht – so bleiben Anmeldungen nachvollziehbar.",
+      "actions": {
+        "edit": "Bearbeiten",
+        "publish": "Veröffentlichen",
+        "publishConfirmed": "Als bestätigt veröffentlichen",
+        "confirm": "Bestätigen",
+        "cancel": "Absagen",
+        "complete": "Abschließen",
+        "delete": "Entwurf löschen"
+      },
+      "confirm": {
+        "publish": "„{title}“ veröffentlichen? Alle angemeldeten Schüler:innen sehen das Event danach und können sich anmelden. Das Datum muss in der Zukunft liegen. Ein veröffentlichtes Event kann nicht wieder zum Entwurf werden.",
+        "publishConfirmed": "„{title}“ direkt als bestätigt veröffentlichen? Schüler:innen sehen das Event sofort als „Bestätigt“ und können sich anmelden. Das Datum muss in der Zukunft liegen.",
+        "confirm": "„{title}“ als bestätigt markieren? Schüler:innen sehen dann, dass das Event sicher stattfindet.",
+        "cancel": "„{title}“ absagen? Das Event bleibt sichtbar, wird aber als abgesagt angezeigt; neue Anmeldungen sind nicht mehr möglich. Es gibt keine automatische Benachrichtigung – informiere die Angemeldeten zusätzlich. Dieser Schritt ist endgültig.",
+        "complete": "„{title}“ als abgeschlossen markieren? Das geht erst, wenn das Event begonnen hat. Dieser Schritt ist endgültig.",
+        "delete": "Entwurf „{title}“ endgültig löschen? Das kann nicht rückgängig gemacht werden."
+      },
+      "statusChanged": "„{title}“ hat jetzt den Status „{status}“.",
+      "deleted": "Der Entwurf „{title}“ wurde gelöscht.",
+      "created": "„{title}“ wurde als Entwurf gespeichert. Veröffentliche es, wenn alles stimmt.",
+      "updated": "Die Änderungen an „{title}“ wurden gespeichert.",
+      "groups": {
+        "planned": {
+          "title": "Geplante Events",
+          "empty": "Keine geplanten Events vorhanden."
+        },
+        "cancelled": {
+          "title": "Abgesagte Events",
+          "empty": "Keine abgesagten Events vorhanden."
+        },
+        "draft": {
+          "title": "Entwürfe",
+          "empty": "Keine Entwürfe vorhanden."
+        },
+        "completed": {
+          "title": "Abgeschlossene Events",
+          "empty": "Keine abgeschlossenen Events vorhanden."
+        },
+        "archived": {
+          "title": "Archivierte Events",
+          "empty": "Keine archivierten Events vorhanden."
+        }
+      },
+      "groupCount_one": "{count} Event",
+      "groupCount_other": "{count} Events",
+      "cancelledOn": "Abgesagt am {date} (Ankara).",
+      "cancelledNote": "Dieses Event wurde abgesagt."
+    },
+    "ideas": {
+      "title": "Ideen moderieren",
+      "subtitle": "Eingereichte Ideen prüfen, freigeben oder ablehnen.",
+      "loading": "Ideen werden geladen …",
+      "workloadTitle": "Moderations-Übersicht",
+      "workload": {
+        "submitted": "Warten auf Freigabe",
+        "collecting": "Sammeln Interesse",
+        "review": "In Prüfung"
+      },
+      "filters": {
+        "all": "Alle"
+      },
+      "empty": {
+        "all": "Es wurden noch keine Ideen eingereicht.",
+        "submitted": "Keine offenen Ideen – alles erledigt.",
+        "filtered": "Keine Ideen mit diesem Status."
+      },
+      "supporters_one": "{count} Unterstützer:in",
+      "supporters_other": "{count} Unterstützer:innen",
+      "submittedAt": "Eingereicht {date}",
+      "actions": {
+        "approve": "Freigeben",
+        "reject": "Ablehnen",
+        "toReview": "In Prüfung geben",
+        "toPlanned": "Als geplant markieren",
+        "backToCollecting": "Zurück zu „Sammelt Interesse“",
+        "reopen": "Wieder zur Prüfung öffnen",
+        "delete": "Idee löschen"
+      },
+      "confirm": {
+        "approve": "„{title}“ freigeben? Die Idee wird danach für alle angemeldeten Schüler:innen sichtbar und kann unterstützt werden.",
+        "reject": "„{title}“ ablehnen? Die Idee ist danach nur noch für die Person sichtbar, die sie eingereicht hat.",
+        "toReview": "„{title}“ in Prüfung geben? Die Idee bleibt öffentlich sichtbar – die Schulen prüfen die Umsetzung.",
+        "toPlanned": "„{title}“ als geplant markieren? Dieser Schritt ist endgültig und kann nicht zurückgenommen werden.",
+        "backToCollecting": "„{title}“ zurück zu „Sammelt Interesse“ setzen? Die Idee bleibt öffentlich sichtbar.",
+        "reopen": "„{title}“ wieder zur Prüfung öffnen? Die Idee bleibt privat, bis du sie erneut freigibst.",
+        "delete": "„{title}“ endgültig löschen? Die Idee und alle ihre Unterstützungen werden dauerhaft entfernt – auch für die Person, die sie eingereicht hat. Das kann nicht rückgängig gemacht werden."
+      },
+      "success": "„{title}“ hat jetzt den Status „{status}“.",
+      "deleted": "„{title}“ wurde gelöscht.",
+      "final": "Geplant – keine weiteren Moderationsschritte möglich.",
+      "privacyNote": "Wer eine Idee eingereicht hat, wird hier bewusst nicht angezeigt."
+    },
+    "saving": "Wird gespeichert …",
+    "actionsLabel": "Aktionen für „{title}“",
+    "refresh": "Aktualisieren",
+    "filtersLabel": "Nach Status filtern",
+    "eventForm": {
+      "newTitle": "Neues Event",
+      "newSubtitle": "Das Event wird als Entwurf gespeichert und ist erst nach dem Veröffentlichen für Schüler:innen sichtbar.",
+      "editTitle": "Event bearbeiten",
+      "editSubtitle": "Alle Angaben des Events werden zusammen gespeichert.",
+      "statusNote": "Der Status wird hier nicht geändert – dafür gibt es die Knöpfe in der Event-Liste.",
+      "optional": "optional",
+      "languagesHint": "Mindestens eine Sprache ausfüllen, am besten alle drei.",
+      "titleLabel": "Titel",
+      "summaryLabel": "Kurzbeschreibung",
+      "descriptionLabel": "Beschreibung",
+      "locationLabel": "Ort",
+      "audienceLabel": "Zielgruppe",
+      "startLabel": "Datum und Uhrzeit",
+      "startHint": "Ankara-Zeit (UTC+3) – unabhängig davon, wo du gerade bist.",
+      "startLocked": "Das Datum eines abgesagten oder abgeschlossenen Events kann nicht mehr geändert werden.",
+      "durationLabel": "Dauer in Minuten",
+      "onlineLabel": "Findet online statt",
+      "schoolsLabel": "Beteiligte Schulen",
+      "hostLabel": "Gastgeber-Schule",
+      "hostPlaceholder": "Bitte wählen …",
+      "capacityLabel": "Maximale Teilnehmerzahl",
+      "capacityHint": "Wie viele Schüler:innen können sich verbindlich anmelden? Leer lassen = unbegrenzt.",
+      "capacityPlaceholder": "unbegrenzt",
+      "capacityHintRegistered_one": "Es gibt bereits {count} verbindliche Anmeldung – weniger Plätze sind nicht möglich.",
+      "capacityHintRegistered_other": "Es gibt bereits {count} verbindliche Anmeldungen – weniger Plätze sind nicht möglich.",
+      "topicsLabel": "Themen",
+      "draftHint": "Neue Events sind immer Entwürfe. Veröffentlichen kannst du sie danach in der Event-Liste.",
+      "editHint": "Status und Anmeldungen bleiben beim Speichern unverändert.",
+      "saveDraft": "Als Entwurf speichern",
+      "saveChanges": "Änderungen speichern",
+      "errors": {
+        "titleRequired": "Bitte gib einen Titel in mindestens einer Sprache ein.",
+        "tooLong": "Höchstens {max} Zeichen je Sprache.",
+        "startRequired": "Bitte wähle Datum und Uhrzeit.",
+        "startInvalid": "Dieses Datum ist ungültig.",
+        "startPast": "Das Datum liegt in der Vergangenheit. Bitte wähle einen Zeitpunkt in der Zukunft.",
+        "duration": "Die Dauer muss eine ganze Zahl zwischen 1 und 1440 Minuten sein.",
+        "capacity": "Die Plätze müssen eine ganze Zahl zwischen 1 und 10000 sein.",
+        "capacityBelowRegistrations": "Es gibt bereits {count} verbindliche Anmeldungen – mindestens so viele Plätze sind nötig.",
+        "schoolsRequired": "Bitte wähle mindestens eine beteiligte Schule.",
+        "schoolsInvalid": "Die Schul-Auswahl ist ungültig.",
+        "hostRequired": "Bitte wähle die Gastgeber-Schule.",
+        "hostNotParticipating": "Die Gastgeber-Schule muss zu den beteiligten Schulen gehören.",
+        "topics": "Bitte wähle höchstens zehn Themen aus der Liste.",
+        "format": "Bitte wähle ein Format aus der Liste."
+      },
+      "hiddenSchool": "auf der Website ausgeblendet"
+    },
+    "errors": {
+      "notAllowed": "Dafür fehlen dir die Admin-Rechte.",
+      "invalid": "Einige Angaben sind ungültig. Bitte prüfe deine Eingaben.",
+      "notFound": "Der Eintrag wurde nicht gefunden. Vielleicht wurde er inzwischen gelöscht.",
+      "hasEntries": "Dieses Event hat bereits Anmeldungen oder Interessierte und kann nicht gelöscht werden.",
+      "pastDate": "Das Datum liegt in der Vergangenheit. Bitte wähle ein Datum in der Zukunft.",
+      "onlyDrafts": "Nur Entwürfe können gelöscht werden. Veröffentlichte Events bitte absagen.",
+      "transition": "Dieser Statuswechsel ist nicht erlaubt.",
+      "capacityTooLow": "Es gibt schon mehr verbindliche Anmeldungen, als diese Platzzahl erlaubt.",
+      "dateLocked": "Das Datum eines abgesagten oder abgeschlossenen Events kann nicht mehr geändert werden.",
+      "notStarted": "Das Event hat noch nicht begonnen und kann deshalb nicht abgeschlossen werden.",
+      "full": "Das Event ist ausgebucht.",
+      "technical": "Technischer Fehler in der Datenbank. Bitte versuche es später noch einmal oder gib dem Team Bescheid.",
+      "ideaNotDeletable": "Diese Idee kann nicht gelöscht werden. Eingereichte Ideen bitte zuerst freigeben oder ablehnen.",
+      "unavailable": "Diese Admin-Funktion ist in der Datenbank nicht verfügbar. Wurden alle Migrationen (006, 007) ausgeführt?",
+      "network": "Keine Verbindung zum Server. Bitte versuche es noch einmal.",
+      "generic": "Das hat nicht geklappt. Bitte versuche es noch einmal."
+    }
+  },
+  "discover": {
+    "title": "Entdecken",
+    "subtitle": "Events und Ideen an einem Ort.",
+    "overview": "Übersicht",
+    "eventsText": "Gemeinsame Workshops, Treffen und Wettbewerbe beider Schulen.",
+    "ideasText": "Ideen und Projekte von Schüler:innen – einreichen und unterstützen.",
+    "upcomingCount_one": "{count} kommendes Event",
+    "upcomingCount_other": "{count} kommende Events",
+    "ideasCount_one": "{count} Idee",
+    "ideasCount_other": "{count} Ideen"
+  },
+  "community": {
+    "title": "Community",
+    "subtitle": "Gemeinsam lernen und zusammenarbeiten.",
+    "gamesText": "Kurze Spiele im Browser – mit Bestenlisten für Papierflug und Brückenläufer.",
+    "peopleText": "Profile, die Schüler:innen freiwillig teilen.",
+    "groupsText": "Gruppen zu Projekten und Events – mit Beiträgen und Diskussionen.",
+    "groups": {
+      "title": "Projekt- und Eventgruppen",
+      "subtitle": "Deine Gruppen zu Projekten und Events. Öffne eine Gruppe, um Beiträge zu lesen und mitzudiskutieren.",
+      "filterLabel": "Gruppen filtern",
+      "filter": {
+        "all": "Alle",
+        "project": "Projektgruppen",
+        "event": "Eventgruppen"
+      },
+      "lastPost": "letzter Beitrag {time}",
+      "noPosts": "noch keine Beiträge",
+      "empty": {
+        "all": "Du bist noch in keiner Projekt- oder Eventgruppe.",
+        "project": "Du bist noch in keiner Projektgruppe.",
+        "event": "Du bist noch in keiner Eventgruppe."
+      },
+      "emptyHint": "Gruppen erscheinen hier automatisch, sobald du Mitglied bist.",
+      "howTitle": "Wie komme ich in eine Gruppe?",
+      "howProject": "Projektgruppen gehören zu veröffentlichten Ideen. Die Person, die die Idee eingereicht hat, legt die Gruppe auf der Ideenseite an. Mitglied ist das Projektteam.",
+      "howEvent": "Eventgruppen legt die Moderation für ein Event an. Mitglied ist, wer verbindlich angemeldet ist."
+    }
+  },
+  "games": {
+    "title": "Spiele",
+    "subtitle": "Eine kurze Pause zwischendurch – direkt im Browser.",
+    "localNote": "Die Spiele laufen in deinem Browser. Gespeichert wird nur dein Bestwert bei Papierflug und Brückenläufer – und nur, wenn du angemeldet bist.",
+    "restart": "Neu starten",
+    "arcade": {
+      "score": "Punkte: {count}",
+      "tapToStart": "Tippen zum Starten",
+      "start": "Starten",
+      "pause": "Pause",
+      "resume": "Fortsetzen",
+      "paused": "Pausiert",
+      "over": "Spiel beendet",
+      "result": "Spiel beendet · Punkte: {count}"
+    },
+    "symbolPairs": {
+      "title": "Symbolpaare",
+      "hint": "Decke zwei gleiche Symbole auf. Ohne Zeitlimit.",
+      "board": "Spielfeld mit 12 Karten",
+      "pairs": "Gefundene Paare: {found}/{total}",
+      "moves_one": "{count} Zug",
+      "moves": "{count} Züge",
+      "cardHidden": "Karte {n}, verdeckt",
+      "cardOpen": "Karte {n}: {symbol}",
+      "cardFound": "Karte {n}: {symbol}, Paar gefunden",
+      "complete": "Alle Paare gefunden – in {count} Zügen!",
+      "symbols": {
+        "star": "Stern",
+        "circle": "Kreis",
+        "triangle": "Dreieck",
+        "diamond": "Raute",
+        "heart": "Herz",
+        "sun": "Sonne"
+      }
+    },
+    "paperFlight": {
+      "title": "Papierflug",
+      "hint": "Halte das Papierflugzeug in der Luft und fliege durch die Lücken. Tippen, Leertaste oder Pfeil nach oben gibt Auftrieb.",
+      "field": "Spielfeld Papierflug: antippen oder Leertaste für Auftrieb",
+      "accessibility": "Hinweis: Papierflug ist ein schnelles Reaktionsspiel mit Bewegung. Ohne Zeitdruck spielst du Symbolpaare."
+    },
+    "bridgeRunner": {
+      "title": "Brückenläufer",
+      "hint": "Lauf über die Brücke und spring über die Hindernisse. Tippen, Leertaste oder Pfeil nach oben lässt dich springen.",
+      "field": "Spielfeld Brückenläufer: antippen oder Leertaste zum Springen",
+      "accessibility": "Hinweis: Brückenläufer ist ein schnelles Reaktionsspiel mit Bewegung. Ohne Zeitdruck spielst du Symbolpaare."
+    },
+    "chess": {
+      "title": "Schach",
+      "hint": "Schach zu zweit am selben Gerät. Figur antippen, dann ein markiertes Feld wählen.",
+      "board": "Schachbrett",
+      "white": "Weiß",
+      "black": "Schwarz",
+      "whiteToMove": "Weiß ist am Zug.",
+      "blackToMove": "Schwarz ist am Zug.",
+      "check": "Schach!",
+      "whiteWins": "Weiß gewinnt",
+      "blackWins": "Schwarz gewinnt",
+      "draw": "Unentschieden",
+      "reasons": {
+        "checkmate": "Schachmatt",
+        "stalemate": "Patt",
+        "material": "Zu wenig Material zum Mattsetzen",
+        "seventyfive": "75-Züge-Regel",
+        "fivefold": "Fünffache Stellungswiederholung",
+        "claimed": "Remis beansprucht",
+        "agreed": "Remis vereinbart",
+        "resigned": "Aufgabe"
+      },
+      "pieces": {
+        "p": "Bauer",
+        "n": "Springer",
+        "b": "Läufer",
+        "r": "Turm",
+        "q": "Dame",
+        "k": "König"
+      },
+      "squarePiece": "{square}: {piece} ({color})",
+      "targetSuffix": "möglicher Zug",
+      "promotion": "Bauer umwandeln in:",
+      "undo": "Zug zurücknehmen",
+      "flip": "Brett drehen",
+      "claimDraw": "Remis beanspruchen",
+      "offerDraw": "Remis vereinbaren",
+      "resign": "Aufgeben",
+      "confirmResign": "{color} gibt die Partie auf?",
+      "confirmDraw": "Seid ihr beide mit Remis einverstanden?",
+      "confirmRestart": "Partie abbrechen und neu beginnen?",
+      "confirmYes": "Ja",
+      "moveList_one": "Zugliste ({count} Zug)",
+      "moveList": "Zugliste ({count} Züge)",
+      "noMoves": "Noch keine Züge."
+    },
+    "leaderboard": {
+      "sectionTitle": "Bestenlisten",
+      "sectionSubtitle": "Top 10 je Spiel · jede Person einmal, mit ihrem Bestwert",
+      "boardTitle": "{game} – Top 10",
+      "loginHintShort": "Melde dich an, um deinen Bestwert zu speichern.",
+      "viewAll": "Zu den Bestenlisten",
+      "loginHint": "Melde dich an, um deinen Bestwert zu speichern und die Bestenlisten zu sehen. Spielen kannst du auch ohne Anmeldung.",
+      "login": "Anmelden",
+      "loading": "Bestenliste wird geladen …",
+      "retry": "Erneut versuchen",
+      "empty": "Noch keine Einträge. Spiel eine Runde und schalte unten „In Bestenlisten anzeigen“ ein!",
+      "rankLabel": "Platz",
+      "points": "Punkte",
+      "you": "Du",
+      "myBest": "Dein Bestwert: {score}",
+      "noBestYet": "Du hast noch keinen Bestwert gespeichert.",
+      "myRank": "Platz {rank}",
+      "showMe": "Mit meinem Vornamen in den Bestenlisten anzeigen",
+      "showMeHint": "Gilt für Papierflug und Brückenläufer. Andere sehen nur deinen Vornamen und deinen Bestwert. Du kannst es jederzeit ausschalten.",
+      "saving": "Bestwert wird gespeichert …",
+      "newBest": "Neuer Bestwert gespeichert: {score}!",
+      "kept": "Dein Bestwert bleibt {score}.",
+      "errors": {
+        "notInstalled": "Die Bestenliste ist noch nicht eingerichtet.",
+        "notAllowed": "Bitte melde dich an.",
+        "noRun": "Diese Runde konnte nicht gewertet werden. Starte eine neue Runde.",
+        "implausible": "Diese Punktzahl konnte nicht bestätigt werden und wurde nicht gespeichert.",
+        "generic": "Das hat nicht geklappt. Bitte versuche es später noch einmal."
+      }
+    }
+  },
+  "tutoring": {
+    "title": "Nachhilfe-Börse",
+    "subtitle": "Unterstützung suchen und freiwillig Wissen teilen – ohne Bezahlung.",
+    "newRequest": "Nachhilfe suchen",
+    "newOffer": "Nachhilfe anbieten",
+    "tabsLabel": "Bereiche der Nachhilfe-Börse",
+    "tabs": {
+      "offers": "Angebote",
+      "requests": "Gesuche",
+      "my": "Meine",
+      "saved": "Gemerkt",
+      "contacts": "Anfragen"
+    },
+    "search": "Fach oder Thema suchen",
+    "subject": "Fach",
+    "allSubjects": "Alle Fächer",
+    "languagesLabel": "Sprachen",
+    "allLanguages": "Alle Sprachen",
+    "formatLabel": "Format",
+    "allFormats": "Alle Formate",
+    "clearFilters": "Filter zurücksetzen",
+    "empty": "Hier gibt es noch keine passenden Einträge. Passe die Filter an oder erstelle einen eigenen Eintrag.",
+    "emptySaved": "Du hast noch keine Einträge gemerkt.",
+    "rulesHint": "Nachhilfe ist freiwillig und kostenlos. Bitte keine Telefonnummern, E-Mail-Adressen, Links oder Adressen eintragen – Treffen werden über die Schule vereinbart.",
+    "incoming": "Eingehende Anfragen",
+    "outgoing": "Gesendete Anfragen",
+    "noIncoming": "Noch keine Anfragen zu deinen Einträgen.",
+    "noOutgoing": "Du hast noch keine Anfragen gesendet.",
+    "kind": {
+      "offer": "Angebot",
+      "request": "Gesuch"
+    },
+    "languages": {
+      "de": "Deutsch",
+      "tr": "Türkisch",
+      "en": "Englisch"
+    },
+    "formats": {
+      "online": "Online",
+      "school": "An der Schule",
+      "either": "Nach Absprache"
+    },
+    "own": "Dein Eintrag",
+    "closed": "Geschlossen",
+    "saved": "Gemerkt",
+    "requestStatus": {
+      "pending": "Anfrage offen",
+      "accepted": "Angenommen",
+      "declined": "Abgelehnt",
+      "withdrawn": "Zurückgezogen"
+    },
+    "openRequests_one": "{count} offene Anfrage",
+    "openRequests_other": "{count} offene Anfragen",
+    "loginLink": "Zur Anmeldung",
+    "loading": "Nachhilfe-Einträge werden geladen …",
+    "retry": "Erneut versuchen",
+    "someoneFrom": "Eine Person von {school}",
+    "someone": "Eine Person",
+    "fromPerson": "Von {name}",
+    "toPerson": "An {name}",
+    "responseNote": "Antwort",
+    "acceptedHint": "Angenommen: Vereinbart das Treffen bitte über eure Schule oder eine Lehrkraft.",
+    "chatUnreachable": "Eine Nachricht an {name} ist erst möglich, wenn {name} das Profil öffentlich macht („Mein Bereich“ → „Profil-Freigabe“). Bis dahin vereinbart das Treffen bitte über eure Schule oder eine Lehrkraft.",
+    "responseNoteLabel": "Kurze Antwort (optional, ohne Kontaktdaten)",
+    "decline": "Ablehnen",
+    "accept": "Annehmen",
+    "withdrawRequest": "Anfrage zurückziehen",
+    "notFound": "Eintrag nicht gefunden",
+    "editTitle": "Eintrag bearbeiten",
+    "formSubtitle": "Für deine Schule {school}",
+    "kindLabel": "Art des Eintrags",
+    "fields": {
+      "subject": "Fach",
+      "topics": "Themen",
+      "description": "Angebotene oder gewünschte Unterstützung",
+      "availability": "Mögliche Termine / Verfügbarkeit"
+    },
+    "subjects": {
+      "math": "Mathematik",
+      "german": "Deutsch",
+      "english": "Englisch",
+      "turkish": "Türkisch",
+      "physics": "Physik",
+      "chemistry": "Chemie",
+      "biology": "Biologie",
+      "coding": "Informatik"
+    },
+    "privacyHint": "Andere sehen deinen Eintrag mit deiner Schule, aber ohne deinen Namen. Deinen Vornamen sieht nur, wessen Anfrage du annimmst.",
+    "save": "Speichern",
+    "school": "Schule",
+    "anonymousHint": "Der Name der erstellenden Person wird erst angezeigt, wenn sie deine Anfrage annimmt.",
+    "savedNotice": "Gespeichert.",
+    "ownActiveHint": "Dein Eintrag ist aktiv und für andere sichtbar.",
+    "ownClosedHint": "Dein Eintrag ist geschlossen und für andere nicht mehr sichtbar.",
+    "edit": "Bearbeiten",
+    "close": "Schließen",
+    "reopen": "Wieder öffnen",
+    "deleteConfirm": "Eintrag wirklich löschen? Alle Anfragen dazu werden ebenfalls gelöscht.",
+    "delete": "Löschen",
+    "unsave": "Nicht mehr merken",
+    "saveEntry": "Merken",
+    "inactiveHint": "Dieser Eintrag ist geschlossen. Neue Anfragen sind nicht möglich.",
+    "contactTitle": "Kontaktanfrage senden",
+    "contactHint": "Deine Nachricht und dein Vorname gehen an die Person, die den Eintrag erstellt hat. Bitte keine Kontaktdaten eingeben.",
+    "messageLabel": "Deine Nachricht (10–600 Zeichen)",
+    "sendRequest": "Anfrage senden",
+    "errors": {
+      "kind": "Bitte Angebot oder Gesuch wählen.",
+      "subject": "Bitte ein Fach mit 2–80 Zeichen angeben.",
+      "topics": "Bitte Themen mit 3–200 Zeichen angeben.",
+      "description": "Bitte die Unterstützung mit 20–1000 Zeichen beschreiben.",
+      "availability": "Bitte die Verfügbarkeit mit 3–200 Zeichen angeben.",
+      "contactData": "Bitte keine E-Mail-Adressen, Links oder Telefonnummern eingeben.",
+      "languages": "Bitte mindestens eine Sprache wählen.",
+      "format": "Bitte ein Format wählen.",
+      "message": "Bitte eine Nachricht mit 10–600 Zeichen schreiben.",
+      "note": "Die Antwort darf höchstens 600 Zeichen lang sein.",
+      "notInstalled": "Die Nachhilfe-Börse ist in der Datenbank noch nicht eingerichtet (Migration 011 fehlt).",
+      "inactive": "Dieser Eintrag ist nicht mehr aktiv.",
+      "own": "Das ist dein eigener Eintrag.",
+      "duplicate": "Du hast zu diesem Eintrag bereits eine Anfrage gesendet.",
+      "transition": "Diese Anfrage kann nicht mehr geändert werden.",
+      "rejectedByServer": "Die Eingabe wurde abgelehnt. Bitte Länge prüfen und keine Kontaktdaten verwenden.",
+      "invalid": "Ungültige Eingabe.",
+      "notFound": "Nicht gefunden – vielleicht wurde der Eintrag gelöscht.",
+      "notAllowed": "Dafür fehlt die Berechtigung.",
+      "generic": "Das hat nicht geklappt. Bitte später erneut versuchen.",
+      "loginRequired": "Bitte zuerst anmelden."
+    },
+    "guestHint": "Die Nachhilfe-Börse ist nur für angemeldete Mitglieder sichtbar."
+  },
+  "profiles": {
+    "loginLink": "Anmelden für echte Daten",
+    "loading": "Profildaten werden geladen …",
+    "retry": "Erneut versuchen",
+    "errors": {
+      "generic": "Die Profildaten konnten nicht geladen oder gespeichert werden. Bitte später erneut versuchen.",
+      "notInstalled": "Profile und Statistiken sind in der Datenbank noch nicht eingerichtet (Migration 012 fehlt).",
+      "notAllowed": "Dafür musst du angemeldet sein."
+    },
+    "peopleTitle": "Schülerprofile",
+    "peopleSubtitle": "Freiwillig geteilte Profile aus den Pilotschulen",
+    "onlyShared": "Hier erscheinen nur Profile, die ihre Besitzer:innen selbst freigegeben haben. Privat ist Standard.",
+    "manageMine": "Eigene Freigabe verwalten",
+    "searchLabel": "Profile durchsuchen",
+    "searchPlaceholder": "Vorname, Schule oder Interesse",
+    "noMatches": "Keine passenden Profile gefunden.",
+    "noPublic": "Noch hat niemand ein Profil freigegeben.",
+    "profileTitle": "Profil",
+    "openProfile": "Profil ansehen",
+    "notAvailable": "Profil nicht verfügbar",
+    "previewPublic": "Vorschau: So sehen andere angemeldete Schüler:innen dein Profil.",
+    "previewPrivate": "Vorschau: Dein Profil ist privat – andere sehen es nicht.",
+    "onlySharedHere": "Hier stehen nur freiwillig freigegebene Angaben. Klasse, E-Mail und Kontaktdaten gehören nie zum Profil.",
+    "sharedActivity": "Freigegebene Aktivität",
+    "publicStats": {
+      "ideasPublished": "Veröffentlichte Projektideen",
+      "eventsPast": "Teilgenommene Events",
+      "supportsReceived": "Erhaltene Unterstützungen"
+    },
+    "projectsTitle": "Projektvorschläge",
+    "noProjects": "Keine veröffentlichten Projektvorschläge.",
+    "sharingTitle": "Profil-Freigabe",
+    "sharingSubtitle": "Du entscheidest, was andere sehen.",
+    "sharingRowHint": "Öffentliches Profil und einzelne Angaben",
+    "statePublic": "Öffentlich",
+    "statePrivate": "Privat",
+    "fields": {
+      "isPublic": "Profil für andere Schüler:innen sichtbar machen",
+      "isPublicHint": "Andere angemeldete Schüler:innen sehen dann deinen Vornamen. Besucher:innen ohne Konto sehen nichts.",
+      "school": "Schule anzeigen",
+      "interests": "Interessen anzeigen",
+      "projects": "Projektvorschläge und Projekt-Mitgliedschaften anzeigen",
+      "activity": "Aktivitätszahlen anzeigen (Projektideen, Event-Teilnahmen, Unterstützungen)"
+    },
+    "fieldsLegend": "Zusätzlich freigeben",
+    "fieldsInactive": "Diese Angaben werden erst sichtbar, wenn dein Profil öffentlich ist.",
+    "neverShared": "Nie öffentlich: Klasse, E-Mail-Adresse, Event-Anmeldungen im Einzelnen, Nachhilfe-Anfragen.",
+    "save": "Freigabe speichern",
+    "saving": "Wird gespeichert …",
+    "saved": "Gespeichert.",
+    "openPreview": "Vorschau meines Profils öffnen",
+    "myActivity": "Meine Aktivität",
+    "statsPrivateHint": "Diese Zahlen siehst nur du. Teilnahmen bedeuten „angemeldet und Event hat stattgefunden“ – eine Anwesenheit wird nicht erfasst.",
+    "statGroups": {
+      "events": "Events",
+      "ideas": "Ideen",
+      "tutoring": "Nachhilfe"
+    },
+    "stats": {
+      "eventsUpcoming": "Angemeldet, kommend",
+      "eventsPast": "Teilgenommen",
+      "eventsInterested": "Interessiert",
+      "ideasSubmitted": "Eingereicht",
+      "ideasPublished": "Veröffentlicht",
+      "ideasPlanned": "In Planung",
+      "supportsGiven": "Unterstützt",
+      "supportsReceived": "Unterstützungen erhalten",
+      "tutoringOffers": "Aktive Angebote",
+      "tutoringRequests": "Aktive Gesuche",
+      "tutoringContacts": "Angenommene Kontakte"
+    },
+    "guestHint": "Schülerprofile sind nur für angemeldete Mitglieder sichtbar."
+  },
+  "projects": {
+    "title": "Mitmachen",
+    "loginLink": "Anmelden zum Mitmachen",
+    "loading": "Projektdaten werden geladen …",
+    "memberCount_one": "{count} Mitglied",
+    "memberCount_other": "{count} Mitglieder",
+    "myStatus": {
+      "requested": "Anfrage gesendet",
+      "member": "Du bist Mitglied",
+      "declined": "Anfrage abgelehnt",
+      "left": "Ausgetreten"
+    },
+    "actions": {
+      "request": "Mitmachen anfragen",
+      "cancel": "Anfrage zurückziehen",
+      "leave": "Projekt verlassen",
+      "accept": "Annehmen",
+      "decline": "Ablehnen"
+    },
+    "saved": {
+      "requested": "Anfrage gesendet. Die Autor:in entscheidet.",
+      "cancel": "Anfrage zurückgezogen.",
+      "leave": "Du hast das Projekt verlassen.",
+      "accepted": "Angenommen – die Person ist jetzt Mitglied.",
+      "declined": "Anfrage abgelehnt."
+    },
+    "closed": "Dieses Projekt nimmt gerade keine Anfragen an.",
+    "requestsTitle": "Offene Anfragen",
+    "noRequests": "Keine offenen Anfragen.",
+    "teamTitle": "Team",
+    "noMembers": "Noch keine Mitglieder.",
+    "privacyHint": "Namen sehen nur die Autor:in und die Mitglieder. Alle anderen sehen nur die Anzahl.",
+    "noMemberships": "Du wirkst noch an keinem Projekt mit. Öffne eine veröffentlichte Idee und frage an, ob du mitmachen darfst.",
+    "membershipsTitle": "Projekt-Mitgliedschaften",
+    "noPublicMemberships": "Keine freigegebenen Mitgliedschaften.",
+    "errors": {
+      "notInstalled": "Projekt-Mitwirkung ist in der Datenbank noch nicht eingerichtet (Migration 013 fehlt).",
+      "own": "Das ist deine eigene Idee.",
+      "exists": "Du hast schon angefragt oder bist bereits Mitglied.",
+      "closed": "Dieses Projekt ist nicht (mehr) offen.",
+      "transition": "Diese Anfrage wurde bereits beantwortet.",
+      "notFound": "Projekt oder Anfrage nicht gefunden.",
+      "notAllowed": "Dafür musst du angemeldet sein.",
+      "invalid": "Ungültige Eingabe.",
+      "generic": "Das hat nicht geklappt. Bitte später erneut versuchen.",
+      "loginRequired": "Dafür brauchst du ein echtes Konto."
+    },
+    "guestHint": "Mit einem Konto kannst du anfragen, ob du im Projekt mitwirken darfst."
+  },
+  "chat": {
+    "title": "Chatroom",
+    "subtitle": "Gruppenräume und private Chats – freundlich, sicher und moderiert.",
+    "loginHint": "Melde dich an, um den Chat zu nutzen.",
+    "login": "Anmelden",
+    "loading": "Wird geladen …",
+    "retry": "Erneut versuchen",
+    "staffPreview": "Der Chat ist für Schüler:innen noch ausgeschaltet. Du siehst ihn, weil du moderierst.",
+    "tabsLabel": "Bereiche des Chats",
+    "tabs": {
+      "rooms": "Gruppenräume",
+      "private": "Private Chats",
+      "requests": "Nachrichtenanfragen",
+      "search": "Suche"
+    },
+    "kind": {
+      "topic": "Themenraum",
+      "project": "Projektgruppe",
+      "event": "Eventgruppe",
+      "private": "Privater Chat"
+    },
+    "rooms": {
+      "general": {
+        "title": "Schulübergreifender Austausch",
+        "description": "Fragen zum Schulalltag und neue Perspektiven."
+      },
+      "learning": {
+        "title": "Nachhilfe und Lernen",
+        "description": "Lernfragen, Erfahrungen und gegenseitige Unterstützung."
+      },
+      "projects": {
+        "title": "Projekte und Zusammenarbeit",
+        "description": "Ideen weiterdenken und Mitwirkende finden."
+      },
+      "events": {
+        "title": "Events und Workshops",
+        "description": "Formate und organisatorische Fragen besprechen."
+      },
+      "projectFallback": "Projektgruppe",
+      "eventFallback": "Eventgruppe"
+    },
+    "topicRooms": "Themenräume",
+    "myGroups": "Meine Projekt- und Eventgruppen",
+    "noGroups": "Du bist noch in keiner Projekt- oder Eventgruppe.",
+    "memberCount_one": "{count} Mitglied",
+    "memberCount": "{count} Mitglieder",
+    "members_one": "Mitglieder ({count})",
+    "members": "Mitglieder ({count})",
+    "join": "Beitreten",
+    "leave": "Verlassen",
+    "enter": "Raum betreten",
+    "joined": "Beigetreten",
+    "liveOn": "Live",
+    "liveOff": "Aktualisiert regelmäßig",
+    "lockedTitle": "Nur für Mitglieder",
+    "lockedGroupHint": "Diese Gruppe ist nur für Mitglieder des Projekts bzw. Angemeldete des Events.",
+    "archived": "Archiviert",
+    "roomTitle": "Gruppenraum",
+    "groupHint": "Alle Mitglieder dieses Raums lesen mit.",
+    "joinToRead": "Tritt dem Raum bei, um die Nachrichten zu lesen.",
+    "joinToWrite": "Tritt dem Raum bei, um zu schreiben.",
+    "readOnly": "Hier kannst du gerade nur lesen.",
+    "archivedHint": "Dieser Raum ist archiviert – nur noch lesen.",
+    "emptyRoom": "Noch keine Nachrichten. Schreib die erste!",
+    "reportRoom": "Raum melden",
+    "privateTitle": "Privater Chat",
+    "privateHint": "Private Chats entstehen nur, wenn jemand deine Nachrichtenanfrage annimmt (oder du ihre).",
+    "privateContextHint": "Nur ihr zwei lest diesen Chat.",
+    "archivedConversationHint": "Dieser Chat ist archiviert – nur noch lesen.",
+    "conversationUnavailable": "Dieser Chat ist nicht (mehr) verfügbar.",
+    "noConversations": "Noch keine privaten Chats.",
+    "noMessagesYet": "Noch keine Nachrichten.",
+    "reportConversation": "Chat melden",
+    "blockedTitle": "Blockierte Personen",
+    "blockedHint": "Blockierte Personen können dir keine Anfragen schicken; eure Nachrichten sind für beide ausgeblendet.",
+    "block": "Blockieren",
+    "unblock": "Blockierung aufheben",
+    "blockConfirm": "{name} blockieren? Ihr seht dann gegenseitig eure Nachrichten nicht mehr.",
+    "requestsHint": "Nachrichtenanfragen musst du nicht beantworten. Erst wenn du annimmst, entsteht ein privater Chat.",
+    "incoming": "Eingegangene Anfragen",
+    "outgoing": "Gesendete Anfragen",
+    "noIncoming": "Keine offenen Anfragen.",
+    "noOutgoing": "Keine gesendeten Anfragen.",
+    "accept": "Annehmen",
+    "decline": "Ablehnen",
+    "cancelRequest": "Zurückziehen",
+    "openConversation": "Chat öffnen",
+    "requestStatus": {
+      "pending": "ausstehend",
+      "accepted": "angenommen",
+      "declined": "abgelehnt",
+      "cancelled": "zurückgezogen",
+      "blocked": "beendet"
+    },
+    "sendMessage": "Nachricht senden",
+    "requestTitle": "Nachrichtenanfrage an {name}",
+    "requestExplain": "Schreib eine kurze Vorstellung. {name} kann annehmen oder ablehnen – erst danach könnt ihr chatten.",
+    "requestIntro": "Deine Vorstellung",
+    "sendRequest": "Anfrage senden",
+    "requestSent": "Anfrage an {name} gesendet.",
+    "searchLabel": "Nachrichten durchsuchen",
+    "searchPlaceholder": "Suchbegriff …",
+    "searchButton": "Suchen",
+    "searchHint": "Durchsucht nur Räume, in denen du Mitglied bist, und deine eigenen privaten Chats.",
+    "searchResults": "Suchergebnisse",
+    "searchInConversation": "Privater Chat mit {name}",
+    "noResults": "Keine Treffer.",
+    "messagesLabel": "Nachrichten",
+    "you": "Du",
+    "deletedMessage": "Nachricht gelöscht",
+    "censoredHint": "Einige Wörter wurden automatisch ausgeblendet.",
+    "censoredSent": "Hinweis: Einige Wörter wurden automatisch durch *** ersetzt.",
+    "reactionsLabel": "Reaktionen",
+    "reactionCount": "{emoji} – {count}",
+    "react": "Reagieren",
+    "chooseReaction": "Reaktion auswählen",
+    "delete": "Löschen",
+    "deleteConfirm": "Diese Nachricht löschen?",
+    "reportAction": "Melden",
+    "composerLabel": "Nachricht schreiben",
+    "composerPlaceholder": "Nachricht schreiben …",
+    "composerHint": "Keine Telefonnummern, E-Mail-Adressen oder Links. Bitte freundlich bleiben.",
+    "send": "Senden",
+    "openProjectGroup": "Projektgruppe öffnen",
+    "createProjectGroup": "Projektgruppe im Chat anlegen",
+    "groupApprovalHint": "Diese Gruppe kann erst erstellt werden, nachdem ein Admin die zugehörige Projektidee bzw. das Event freigegeben hat. Sobald die Freigabe erfolgt ist, kannst du die Gruppe erstellen.",
+    "report": {
+      "title": {
+        "message": "Nachricht melden",
+        "user": "Person melden",
+        "room": "Raum melden",
+        "conversation": "Chat melden",
+        "request": "Anfrage melden"
+      },
+      "category": "Grund",
+      "choose": "Bitte auswählen",
+      "categories": {
+        "language": "Unangemessene Sprache",
+        "harassment": "Belästigung oder Mobbing",
+        "discrimination": "Diskriminierung",
+        "privacy": "Verletzung der Privatsphäre",
+        "spam": "Spam",
+        "other": "Sonstiges"
+      },
+      "note": "Hinweis (freiwillig)",
+      "noteHint": "Die gemeldete Person erfährt nicht, wer gemeldet hat.",
+      "submit": "Meldung senden",
+      "sent": "Danke! Die Meldung wurde an die Moderation geschickt."
+    },
+    "errors": {
+      "notInstalled": "Der Chat ist noch nicht eingerichtet.",
+      "notAllowed": "Dafür hast du keine Berechtigung.",
+      "notFound": "Nicht gefunden.",
+      "invalid": "Bitte prüfe deine Eingabe.",
+      "disabled": "Der Chat ist noch nicht freigeschaltet.",
+      "banned": "Du bist bis {until} für den Chat gesperrt. Lesen geht weiterhin.",
+      "bannedRoom": "Du bist in diesem Raum bis {until} gesperrt. Lesen geht weiterhin.",
+      "noAccess": "Dafür hast du keinen Zugriff.",
+      "contactData": "Telefonnummern, E-Mail-Adressen und Links sind im Chat nicht erlaubt.",
+      "rateLimit": "Zu viele Nachrichten in kurzer Zeit. Bitte warte kurz.",
+      "blocked": "Das geht nicht, weil eine Blockierung besteht.",
+      "requestPendingOutgoing": "Du hast dieser Person schon eine Anfrage geschickt.",
+      "requestPendingIncoming": "Diese Person hat dir schon eine Anfrage geschickt – sieh in deinen Nachrichtenanfragen nach.",
+      "cooldown": "Deine letzte Anfrage wurde abgelehnt. Eine neue Anfrage ist ab {until} möglich.",
+      "conversationExists": "Ihr habt schon einen gemeinsamen Chat.",
+      "unreachable": "Diese Person kann keine Nachrichtenanfragen erhalten.",
+      "archived": "Archiviert – hier kann nicht mehr geschrieben werden.",
+      "eventDeleted": "Das Event dieser Gruppe wurde gelöscht – die Gruppe bleibt nur zum Nachlesen.",
+      "empty": "Bitte schreib etwas.",
+      "tooLong": "Die Nachricht ist zu lang.",
+      "generic": "Das hat nicht geklappt. Bitte versuche es später noch einmal."
+    },
+    "mod": {
+      "title": "Chat-Moderation",
+      "tabsLabel": "Bereiche der Moderation",
+      "tabs": {
+        "reports": "Meldungen",
+        "bans": "Sperren",
+        "rooms": "Räume",
+        "conversations": "Private Chats",
+        "audit": "Protokoll",
+        "settings": "Einstellungen"
+      },
+      "role": {
+        "admin": "Admin",
+        "moderator": "Moderation"
+      },
+      "roleHint": {
+        "admin": "Du kannst alles verwalten. Jede Aktion wird protokolliert.",
+        "moderator": "Du bearbeitest Meldungen, löschst Nachrichten, sperrst bis 7 Tage und archivierst Räume. Jede Aktion wird protokolliert."
+      },
+      "reason": "Begründung",
+      "reasonHint": "Pflicht (mind. 3 Zeichen). Wird im Protokoll gespeichert.",
+      "reportStatus": {
+        "open": "Offen",
+        "resolved": "Erledigt",
+        "dismissed": "Verworfen"
+      },
+      "target": {
+        "message": "Nachricht",
+        "user": "Person",
+        "room": "Raum",
+        "conversation": "Privater Chat",
+        "request": "Anfrage"
+      },
+      "noReports": "Keine Meldungen.",
+      "reportedBy": "Gemeldet von {name}",
+      "concerns": "betrifft {name}",
+      "note": "Hinweis",
+      "resolution": "Ergebnis",
+      "viewContext": "Zusammenhang ansehen",
+      "contextRoom": "Zusammenhang der gemeldeten Nachricht im Raum ansehen?",
+      "contextPrivateWarning": "Achtung: privater Chat. Du siehst bis zu 10 Nachrichten rund um die gemeldete Nachricht. Der Zugriff wird mit Begründung protokolliert.",
+      "deleteMessage": "Nachricht löschen",
+      "deleteMessageConfirm": "Die gemeldete Nachricht löschen?",
+      "resolve": "Erledigt",
+      "resolveConfirm": "Meldung als erledigt markieren?",
+      "dismiss": "Verwerfen",
+      "dismissConfirm": "Meldung verwerfen (kein Verstoß)?",
+      "banUser": "Sperren",
+      "newBan": "Neue Sperre",
+      "banTarget": "Person: {name}",
+      "change": "Ändern",
+      "findUser": "Person suchen (Vorname)",
+      "select": "Auswählen",
+      "scope": "Bereich",
+      "scopes": {
+        "global": "Ganzer Chat",
+        "room": "Ein Raum"
+      },
+      "room": "Raum",
+      "duration": "Dauer",
+      "durations": {
+        "1h": "1 Stunde",
+        "24h": "24 Stunden",
+        "3d": "3 Tage",
+        "7d": "7 Tage",
+        "14d": "14 Tage",
+        "30d": "30 Tage",
+        "custom": "Eigene Dauer"
+      },
+      "customHours": "Dauer in Stunden",
+      "maxDuration": {
+        "admin": "Höchstens 365 Tage.",
+        "moderator": "Moderation: höchstens 7 Tage."
+      },
+      "banConfirm": "{name} sperren? Die Person kann während der Sperre nur noch lesen.",
+      "activeOnly": "Nur aktive Sperren",
+      "noBans": "Keine Sperren.",
+      "active": "aktiv",
+      "ended": "beendet",
+      "issuedBy": "von {name}",
+      "endBan": "Sperre beenden",
+      "endBanConfirm": "Sperre von {name} vorzeitig beenden?",
+      "createEventGroup": "Eventgruppe anlegen",
+      "event": "Event",
+      "create": "Anlegen",
+      "messageCount_one": "{count} Nachricht",
+      "messageCount": "{count} Nachrichten",
+      "archive": "Archivieren",
+      "unarchive": "Wiederherstellen",
+      "deleteRoom": "Raum löschen",
+      "roomConfirm": {
+        "archive": "Raum archivieren? Mitglieder können dann nur noch lesen.",
+        "unarchive": "Raum wiederherstellen?",
+        "delete": "Raum ENDGÜLTIG löschen – samt allen Nachrichten und Reaktionen? Meldungen bleiben erhalten."
+      },
+      "conversationsHint": "Hier stehen nur Metadaten (wer, seit wann, wie viele Nachrichten) – keine Inhalte. Inhalte siehst du nur über Meldungen.",
+      "openReports_one": "{count} offene Meldung",
+      "openReports": "{count} offene Meldungen",
+      "deleteConversation": "Chat löschen",
+      "conversationConfirm": {
+        "archive": "Chat archivieren? Beide können dann nur noch lesen.",
+        "unarchive": "Chat wiederherstellen?",
+        "delete": "Chat ENDGÜLTIG löschen – beide verlieren den Zugriff, Nachrichten und Reaktionen werden gelöscht. Meldungen bleiben erhalten."
+      },
+      "noAudit": "Noch keine Einträge.",
+      "actions": {
+        "create_event_room": "Eventgruppe angelegt",
+        "resolve_report": "Meldung bearbeitet",
+        "view_private_context": "Privaten Zusammenhang einer Meldung angesehen",
+        "view_room_context": "Raum-Zusammenhang einer Meldung angesehen",
+        "delete_message": "Nachricht gelöscht",
+        "ban": "Sperre ausgesprochen",
+        "end_ban": "Sperre beendet",
+        "archive_room": "Raum archiviert",
+        "unarchive_room": "Raum wiederhergestellt",
+        "archive_conversation": "Gespräch archiviert",
+        "unarchive_conversation": "Gespräch wiederhergestellt",
+        "delete_conversation": "Gespräch gelöscht",
+        "delete_room": "Raum gelöscht",
+        "add_moderator": "Moderator:in ernannt",
+        "remove_moderator": "Moderator:in entfernt",
+        "set_config": "Einstellungen geändert",
+        "add_term": "Wort zur Filterliste hinzugefügt",
+        "remove_term": "Wort von der Filterliste entfernt"
+      },
+      "settingsTitle": "Chat-Einstellungen",
+      "staffCount_one": "{count} Person mit Moderationsrechten",
+      "staffCount": "{count} Personen mit Moderationsrechten",
+      "enabled": "Chat für alle angemeldeten Schüler:innen einschalten",
+      "enabledHint": "Erst einschalten, wenn Moderation und Ablauf geklärt sind.",
+      "cooldownHours": "Wartezeit nach abgelehnter Anfrage (Stunden)",
+      "requestsPerDay": "Höchstens Anfragen pro Person und Tag",
+      "messagesPerMinute": "Höchstens Nachrichten pro Person und Minute",
+      "save": "Speichern",
+      "saveConfirm": "Einstellungen speichern?",
+      "staffTitle": "Moderation",
+      "adminsHint": "Admins werden in der Datenbank (Tabelle admins) eingetragen – siehe Anleitung. Moderator:innen kannst du hier ernennen.",
+      "addModerator": "Zur Moderation ernennen",
+      "addModeratorConfirm": "{name} zur Moderation ernennen?",
+      "removeModerator": "Entfernen",
+      "removeModeratorConfirm": "{name} aus der Moderation entfernen?",
+      "termsTitle": "Wortfilter",
+      "termsHint": "Wörter werden vereinheitlicht gespeichert (klein, ohne Akzente). „Wortanfang“ trifft auch Zusammensetzungen.",
+      "term": "Wort",
+      "termLanguage": "Sprache",
+      "languages": {
+        "de": "Deutsch",
+        "tr": "Türkisch",
+        "en": "Englisch",
+        "other": "Andere"
+      },
+      "termPrefix": "Wortanfang",
+      "addTerm": "Hinzufügen",
+      "showTerms_one": "Liste anzeigen ({count} Wort)",
+      "showTerms": "Liste anzeigen ({count} Wörter)",
+      "prefix": "Wortanfang",
+      "removeTerm": "Entfernen"
+    },
+    "lastMessage": "Letzte Nachricht: {time}",
+    "unread": "Ungelesene Nachrichten"
+  },
+  "toast": {
+    "regionLabel": "Bestätigungen",
+    "dismiss": "Meldung schließen",
+    "roomJoined": "Du bist dem Raum beigetreten!",
+    "roomLeft": "Du hast den Raum verlassen.",
+    "messageSent": "Deine Nachricht wurde gesendet.",
+    "registered": "Du bist für dieses Event angemeldet!",
+    "registrationCancelled": "Deine Anmeldung wurde storniert.",
+    "interestSaved": "Dein Interesse wurde gespeichert.",
+    "interestRemoved": "Dein Interesse wurde zurückgezogen.",
+    "sharingSaved": "Deine Profil-Freigabe wurde gespeichert."
+  },
+  "help": {
+    "title": "Hilfe & FAQ",
+    "subtitle": "Kurze Antworten auf häufige Fragen",
+    "intro": "Hier erfährst du, wie Connect/ED funktioniert. Tippe auf eine Frage, um die Antwort zu öffnen.",
+    "more": "Deine Frage ist nicht dabei? Mehr über das Projekt steht unter „Über Connect/ED“.",
+    "sections": {
+      "start": {
+        "title": "Erste Schritte",
+        "what": {
+          "q": "Was ist Connect/ED?",
+          "a": "Eine Plattform von Schüler:innen für die Zusammenarbeit zwischen Schulen – entstanden an der Ernst-Reuter-Schule Ankara. Ihr findet gemeinsame Events, teilt Ideen für Projekte und tauscht euch aus."
+        },
+        "how": {
+          "q": "Wie benutze ich die Plattform?",
+          "a": "„Start“ zeigt deine nächsten Events und Vorschläge. Unter „Entdecken“ findest du Events und Ideen. „Nachhilfe“ ist ein eigener Bereich, in dem du Nachhilfe anbieten oder suchen kannst. In der „Community“ findest du Schülerprofile, Projekt- und Eventgruppen sowie Spiele. Zum Schreiben gibt es den eigenen Bereich „Chatroom“. Ohne Anmeldung siehst du die Startseite, die Spiele, die Hilfe und „Über Connect/ED“."
+        },
+        "profile": {
+          "q": "Wie ändere ich mein Profil?",
+          "a": "Unter „Mein Bereich“ wählst du deine Interessen, stellst die Sprache ein und legst unter „Profil-Freigabe“ fest, was andere sehen. Vorname, Schule und Klasse gibst du bei der Registrierung an; in der App kannst du sie noch nicht ändern."
+        }
+      },
+      "chat": {
+        "title": "Community und Chat",
+        "join": {
+          "q": "Wie trete ich einem Chatraum bei?",
+          "a": "Öffne den Chat und tippe bei einem Themenraum auf „Beitreten“. Der Chat ist nur nutzbar, wenn du angemeldet bist und er für die Plattform eingeschaltet ist."
+        },
+        "enter": {
+          "q": "Wie betrete ich einen Raum und schreibe Nachrichten?",
+          "a": "Als Mitglied tippst du auf „Raum betreten“. Unten schreibst du deine Nachricht und tippst auf „Senden“ (oder drückst Enter). Neue Nachrichten erscheinen automatisch."
+        },
+        "leave": {
+          "q": "Wie verlasse ich einen Chatraum?",
+          "a": "Tippe in der Übersicht oder im Raum auf „Verlassen“. Danach kannst du die Nachrichten nicht mehr lesen, bis du wieder beitrittst. Projekt- und Eventgruppen gehören zum Projekt-Team bzw. zur Event-Anmeldung und lassen sich nicht einzeln verlassen."
+        },
+        "private": {
+          "q": "Wie funktionieren private Chats?",
+          "a": "Auf einem freigegebenen Profil kannst du eine Nachrichtenanfrage senden. Erst wenn die andere Person annimmt, entsteht ein privater Chat. Anfragen musst du nicht beantworten; du kannst Personen auch blockieren oder melden."
+        }
+      },
+      "events": {
+        "title": "Events",
+        "discover": {
+          "q": "Wie finde ich Events?",
+          "a": "Unter „Entdecken“ → „Events“ gibt es „Für mich“ (passend zu deinen Interessen), „Alle“ und „Meine“. Auf der Startseite stehen deine nächsten Events."
+        },
+        "register": {
+          "q": "Wie melde ich mich für ein Event an?",
+          "a": "Öffne das Event und tippe auf „Teilnehmen“. Mit „Interesse bekunden“ merkst du es unverbindlich vor. Ist ein Event voll oder hat es schon begonnen, ist keine Anmeldung mehr möglich."
+        },
+        "cancel": {
+          "q": "Wie storniere ich meine Anmeldung?",
+          "a": "Öffne das Event und tippe auf „Abmelden“."
+        },
+        "cancelled": {
+          "q": "Was passiert, wenn ein Event abgesagt wird?",
+          "a": "Das Event wird als „abgesagt“ markiert und findet nicht statt. Du musst nichts tun."
+        }
+      },
+      "privacy": {
+        "title": "Konto und Privatsphäre",
+        "manage": {
+          "q": "Wie verwalte ich mein Profil?",
+          "a": "In „Mein Bereich“ findest du deine Interessen, deine Aktivität und die Profil-Freigabe. Deine Aktivitätszahlen siehst nur du."
+        },
+        "visible": {
+          "q": "Wer kann meine Angaben sehen?",
+          "a": "Dein Profil ist standardmäßig privat. Erst wenn du es freigibst, sehen andere angemeldete Schüler:innen deinen Vornamen, deine Schule und die Angaben, die du zusätzlich auswählst. Klasse, E-Mail-Adresse und einzelne Event-Anmeldungen sind nie öffentlich."
+        },
+        "privacy": {
+          "q": "Wie funktioniert die Privatsphäre im Konto?",
+          "a": "Du entscheidest unter „Profil-Freigabe“, was geteilt wird, und kannst es jederzeit wieder auf privat stellen. Im Chat lesen nur Mitglieder eines Raums dessen Nachrichten; private Chats sehen nur die zwei beteiligten Personen."
+        }
+      }
+    }
+  },
+  "appearance": {
+    "title": "Darstellung",
+    "intro": "Wähle deine Akzentfarbe für Buttons, Links und Markierungen. Hintergrund und Statusfarben bleiben gleich.",
+    "accentLegend": "Akzentfarbe",
+    "default": "Standard",
+    "preview": "Vorschau",
+    "previewPrimary": "Teilnehmen",
+    "previewSecondary": "Mehr erfahren",
+    "previewChip": "Ausgewählt",
+    "previewLink": "Ein Link",
+    "current": "Aktuell: {name}",
+    "localOnly": "Wird nur in diesem Browser gespeichert.",
+    "reset": "Auf Ozeanblau zurücksetzen",
+    "accents": {
+      "ocean": "Ozeanblau",
+      "forest": "Waldgrün",
+      "lavender": "Lavendel",
+      "sunset": "Abendorange",
+      "rose": "Rosé",
+      "midnight": "Mitternacht"
+    },
+    "paletteButton": "Akzentfarbe wählen",
+    "moreSettings": "Weitere Einstellungen zur Darstellung"
+  },
+  "guest": {
+    "welcomeTitle": "Willkommen bei Connect/ED",
+    "welcomeText": "Die schulübergreifende Plattform für gemeinsame Events, Projektideen, Nachhilfe und Austausch zwischen Schüler:innen. Melde dich mit deinem Connect/ED-Konto an, um mitzumachen.",
+    "featuresTitle": "Was dich erwartet",
+    "features": {
+      "events": {
+        "title": "Events",
+        "text": "Gemeinsame Veranstaltungen der beteiligten Schulen – mit Anmeldung."
+      },
+      "ideas": {
+        "title": "Ideen & Projekte",
+        "text": "Eigene Projektideen einreichen, unterstützen und im Team umsetzen."
+      },
+      "tutoring": {
+        "title": "Nachhilfe",
+        "text": "Nachhilfe anbieten oder suchen – auch schulübergreifend."
+      },
+      "chat": {
+        "title": "Chatroom",
+        "text": "Themenräume, Projekt- und Eventgruppen und Nachrichten – moderiert."
+      }
+    },
+    "membersOnlyHint": "Diese Bereiche sind nur für angemeldete Schüler:innen der beteiligten Schulen sichtbar.",
+    "openTitle": "Ohne Anmeldung",
+    "loginRequiredTitle": "Bitte melde dich an",
+    "loginRequiredText": "Dieser Bereich ist nur für angemeldete Mitglieder von Connect/ED sichtbar. Melde dich an, um ihn zu nutzen.",
+    "aboutLink": "Was ist Connect/ED?",
+    "gamesLink": "Spiele ohne Anmeldung"
+  }
+}

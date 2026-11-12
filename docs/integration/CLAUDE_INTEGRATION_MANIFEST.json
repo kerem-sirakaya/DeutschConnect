@@ -1,0 +1,302 @@
+{
+  "$comment": "Maschinenlesbare Übersicht der Claude-Version von DeutschConnect. Nur tatsächlich vorhandene Dateien, Funktionen und Datenstrukturen. Menschenlesbare Fassung: docs/CLAUDE_INTEGRATION_BLUEPRINT.md",
+  "manifestVersion": 1,
+  "generatedAt": "2026-11-08",
+  "project": "DeutschConnect",
+  "variant": "claude",
+  "repository": {
+    "branch": "claude-version-1.0",
+    "headCommit": "9121665b98eef74ede9f3792b852180502eb8e0d",
+    "mergeBaseWithMainAndCodex": "23a6a0a",
+    "uncommittedChanges": { "modifiedFiles": 25, "newFiles": 36, "note": "Admin-Modul, Migrationen 007-010 und 11 Testdateien sind nur lokal (nicht committet)." },
+    "codexReference": { "branch": "origin/codex-version-1.0", "commit": "ff1c5364139a329a71f1ac3b2dcac0410bc70604", "analysis": "read-only via git show, kein Fetch" }
+  },
+  "statusLegend": {
+    "live": "vom Team mit echtem Supabase im Browser getestet",
+    "local": "nur Unit-Tests oder Server-Rendering, nicht live",
+    "demo": "simuliert mit Beispieldaten",
+    "absent": "nicht vorhanden"
+  },
+  "techStack": {
+    "runtime": "browser SPA",
+    "dependencies": {
+      "react": "^19.1.0",
+      "react-dom": "^19.1.0",
+      "react-router": "^7.6.0",
+      "@supabase/supabase-js": "^2.119.0"
+    },
+    "devDependencies": { "vite": "^6.3.5", "@vitejs/plugin-react": "^4.5.0" },
+    "testRunner": "node --test",
+    "backend": "Supabase (Auth, Postgres, RLS, pg_cron ab Migration 009)",
+    "edgeFunctions": [],
+    "serviceRoleKeyUsed": false
+  },
+  "entryPoints": {
+    "html": "index.html",
+    "main": "src/main.jsx",
+    "routes": "src/App.jsx",
+    "supabaseClient": "src/lib/supabaseClient.js",
+    "providerTree": ["BrowserRouter", "LanguageProvider", "AuthProvider", "AppStateProvider", "AdminStatusProvider", "App"]
+  },
+  "commands": {
+    "install": "npm install",
+    "dev": "npm run dev",
+    "build": "npm run build",
+    "preview": "npm run preview",
+    "test": "npm test",
+    "lastResults": { "tests": 267, "passed": 267, "failed": 0, "skipped": 0, "build": "success", "browserTests": "not performed" }
+  },
+  "environmentVariables": [
+    { "name": "VITE_SUPABASE_URL", "scope": "frontend", "required": true },
+    { "name": "VITE_SUPABASE_PUBLISHABLE_KEY", "scope": "frontend", "required": true, "note": "nur publishable Key; secret/service_role wird vom Client blockiert" },
+    { "name": "VITE_ENABLE_SIGNUP", "scope": "frontend", "required": false, "default": "false" }
+  ],
+  "routing": {
+    "type": "react-router BrowserRouter (History API, keine Hash-Fragmente)",
+    "spaFallbackRequired": true,
+    "queryParams": ["tab", "status", "time", "school", "topic", "format", "q"],
+    "routes": [
+      { "path": "/", "page": "src/pages/HomePage.jsx" },
+      { "path": "/events", "page": "src/pages/EventsPage.jsx" },
+      { "path": "/events/:eventId", "page": "src/pages/EventDetailPage.jsx" },
+      { "path": "/ideas", "page": "src/pages/IdeasPage.jsx" },
+      { "path": "/ideas/new", "page": "src/pages/NewIdeaPage.jsx" },
+      { "path": "/ideas/:ideaId", "page": "src/pages/IdeaDetailPage.jsx" },
+      { "path": "/network", "page": "src/pages/NetworkPage.jsx" },
+      { "path": "/network/schools/:schoolId", "page": "src/pages/SchoolDetailPage.jsx" },
+      { "path": "/network/projects/:projectId", "page": "src/pages/ProjectDetailPage.jsx" },
+      { "path": "/me", "page": "src/pages/MePage.jsx" },
+      { "path": "/me/interests", "page": "src/pages/InterestsPage.jsx" },
+      { "path": "/me/settings", "page": "src/pages/SettingsPage.jsx" },
+      { "path": "/login", "page": "src/pages/LoginPage.jsx" },
+      { "path": "/register", "page": "src/pages/RegisterPage.jsx" },
+      { "path": "/about", "page": "src/pages/AboutPage.jsx" },
+      { "path": "/admin", "page": "src/pages/admin/AdminOverviewPage.jsx", "guard": "src/components/admin/AdminRoute.jsx", "lazy": true },
+      { "path": "/admin/events", "page": "src/pages/admin/AdminEventsPage.jsx", "guard": "src/components/admin/AdminRoute.jsx", "lazy": true },
+      { "path": "/admin/events/new", "page": "src/pages/admin/AdminEventFormPage.jsx", "guard": "src/components/admin/AdminRoute.jsx", "lazy": true },
+      { "path": "/admin/events/:eventId/edit", "page": "src/pages/admin/AdminEventFormPage.jsx", "guard": "src/components/admin/AdminRoute.jsx", "lazy": true },
+      { "path": "/admin/ideas", "page": "src/pages/admin/AdminIdeasPage.jsx", "guard": "src/components/admin/AdminRoute.jsx", "lazy": true },
+      { "path": "*", "page": "src/pages/NotFoundPage.jsx" }
+    ]
+  },
+  "state": {
+    "src/auth/AuthContext.jsx": { "hook": "useAuth", "provides": ["user", "profile", "loading", "profileError", "signUp", "signIn", "signOut", "reloadProfile", "updateInterests"] },
+    "src/state/AppStateContext.jsx": { "hook": "useAppState", "modes": ["demo", "loading", "error", "account"], "provides": ["mode", "isRealAccount", "user", "events", "getEvent", "registrationSync", "ideas", "supportCounts", "ideaSync", "actions"], "studentArchiveFilter": "visibleToStudents(accountEvents.events, now), now alle 5 Minuten" },
+    "src/state/AdminStatusContext.jsx": { "hook": "useIsAdmin", "provides": ["status", "isAdmin", "error", "retry"], "storage": "memory only" },
+    "src/state/useAccountEvents.js": { "loads": ["fetchEvents", "fetchMyRegistrations"] },
+    "src/state/useAccountIdeas.js": { "loads": ["fetchIdeasState"] }
+  },
+  "localStorageKeys": ["deutschconnect.language", "deutschconnect.demoState", "deutschconnect.accountState.v1.<userId>"],
+  "modules": [
+    {
+      "id": "auth",
+      "status": "live",
+      "files": ["src/auth/AuthContext.jsx", "src/lib/authValidation.js", "src/pages/LoginPage.jsx", "src/pages/RegisterPage.jsx", "src/components/AccountCard.jsx", "src/components/ProfileGate.jsx"],
+      "backend": ["supabase.auth.signUp", "supabase.auth.signInWithPassword", "supabase.auth.signOut", "trigger handle_new_user"],
+      "tests": ["tests/authValidation.test.js", "tests/accountProfile.test.js"],
+      "notes": "emailRedirectTo = origin/login; Passwort-Reset fehlt"
+    },
+    {
+      "id": "profiles",
+      "status": "live",
+      "files": ["src/auth/AuthContext.jsx", "src/lib/accountProfile.js", "src/pages/MePage.jsx", "src/pages/InterestsPage.jsx", "src/pages/SettingsPage.jsx"],
+      "backend": ["select profiles", "update profiles (interests)"],
+      "publicProfiles": "absent"
+    },
+    {
+      "id": "events-student",
+      "status": "live (Laden/Anmelden); local (Status-Filter, Archiv-Ausblendung, Absage-Anzeige)",
+      "files": ["src/pages/EventsPage.jsx", "src/pages/EventDetailPage.jsx", "src/components/EventCard.jsx", "src/lib/eventsApi.js", "src/lib/selectors.js", "src/lib/eventArchive.js", "src/state/useAccountEvents.js"],
+      "backend": ["select events", "select/insert/update(status)/delete event_registrations", "trigger event_registrations_guard"],
+      "tests": ["tests/eventsApi.test.js", "tests/selectors.test.js", "tests/eventArchive.test.js", "tests/studentEventStatus.test.js"]
+    },
+    {
+      "id": "ideas-student",
+      "status": "live",
+      "files": ["src/pages/IdeasPage.jsx", "src/pages/NewIdeaPage.jsx", "src/pages/IdeaDetailPage.jsx", "src/components/IdeaCard.jsx", "src/components/SupportButton.jsx", "src/lib/ideasApi.js", "src/lib/ideaProgress.js", "src/state/useAccountIdeas.js"],
+      "backend": ["select/insert/delete ideas", "select/insert/delete idea_supports", "rpc get_idea_support_counts"],
+      "tests": ["tests/ideasApi.test.js", "tests/ideaProgress.test.js"]
+    },
+    {
+      "id": "admin-access",
+      "status": "local",
+      "files": ["src/state/AdminStatusContext.jsx", "src/lib/adminAccess.js", "src/components/admin/AdminRoute.jsx", "src/components/admin/AdminLayout.jsx", "src/components/layout/SideNav.jsx", "src/components/ProfileMenu.jsx"],
+      "backend": ["rpc is_admin"],
+      "tests": ["tests/adminAccess.test.js"]
+    },
+    {
+      "id": "admin-overview",
+      "status": "local",
+      "files": ["src/pages/admin/AdminOverviewPage.jsx", "src/lib/adminOverview.js"],
+      "backend": ["rpc admin_get_overview_stats", "rpc admin_list_events", "rpc admin_list_ideas"],
+      "requiresMigration": "010",
+      "tests": ["tests/adminOverview.test.js"]
+    },
+    {
+      "id": "admin-events",
+      "status": "local",
+      "files": ["src/pages/admin/AdminEventsPage.jsx", "src/pages/admin/AdminEventFormPage.jsx", "src/components/admin/AdminEventCard.jsx", "src/components/admin/LocalizedTextField.jsx", "src/lib/adminEvents.js", "src/lib/eventForm.js"],
+      "backend": ["rpc admin_list_events", "rpc admin_create_event", "rpc admin_update_event", "rpc admin_set_event_status", "rpc admin_delete_event"],
+      "features": ["two columns planned|cancelled", "filters all/draft/planned/confirmed/completed/cancelled/archived", "draft-first creation", "full-field edit", "Ankara time +03:00", "capacity", "cancellation date", "archive badge"],
+      "tests": ["tests/adminEvents.test.js", "tests/adminEventGroups.test.js", "tests/eventForm.test.js"]
+    },
+    {
+      "id": "admin-ideas",
+      "status": "local",
+      "files": ["src/pages/admin/AdminIdeasPage.jsx", "src/components/admin/AdminIdeaCard.jsx", "src/lib/adminIdeas.js"],
+      "backend": ["rpc admin_list_ideas", "rpc admin_set_idea_status", "rpc admin_delete_idea"],
+      "requiresMigration": "007 (nur Löschen)",
+      "tests": ["tests/adminIdeas.test.js", "tests/adminIdeaDelete.test.js"]
+    },
+    {
+      "id": "event-archiving",
+      "status": "local (Migration nicht ausgeführt)",
+      "files": ["supabase/migrations/008_event_archiving.sql", "supabase/migrations/009_event_archiving_cron.sql", "src/lib/eventArchive.js"],
+      "backend": ["function archive_finished_events", "function event_ends_at", "pg_cron job dc_archive_finished_events (7 * * * *)"],
+      "rules": { "cancelled": "24h nach cancelled_at", "planned|confirmed|completed": "24h nach Ende (Start + Dauer, ohne Dauer Mitternacht Europe/Istanbul)", "draft": "nie" },
+      "tests": ["tests/eventArchive.test.js", "supabase/tests/event_archiving_test.sql"]
+    },
+    {
+      "id": "network-projects",
+      "status": "demo",
+      "files": ["src/pages/NetworkPage.jsx", "src/pages/SchoolDetailPage.jsx", "src/pages/ProjectDetailPage.jsx", "src/components/SchoolCard.jsx", "src/components/ProjectCard.jsx", "src/data/projects.js", "src/data/schools.js"]
+    },
+    {
+      "id": "i18n",
+      "status": "live",
+      "files": ["src/i18n/LanguageContext.jsx", "src/i18n/localize.js", "src/locales/de.json", "src/locales/tr.json", "src/locales/en.json"],
+      "languages": ["de", "tr", "en"],
+      "keysPerLanguage": 599,
+      "tests": ["tests/i18n.test.js"]
+    }
+  ],
+  "absentModules": ["tutoring", "groups", "messages", "notifications", "reports", "blocking", "games", "leaderboards", "awards", "public-profiles", "project-management", "password-reset", "audit-log"],
+  "database": {
+    "migrations": [
+      { "file": "supabase/migrations/001_initial_schema.sql", "live": true },
+      { "file": "supabase/migrations/002_restrict_registration_update.sql", "live": true },
+      { "file": "supabase/migrations/003_public_school_info.sql", "live": true },
+      { "file": "supabase/migrations/004_ideas_moderation.sql", "live": true, "warning": "live = v3, Repo-Datei = v1" },
+      { "file": "supabase/migrations/005_admin_role.sql", "live": true },
+      { "file": "supabase/migrations/006_admin_events_ideas.sql", "live": true },
+      { "file": "supabase/migrations/007_admin_delete_idea.sql", "live": "unknown" },
+      { "file": "supabase/migrations/008_event_archiving.sql", "live": "unknown" },
+      { "file": "supabase/migrations/009_event_archiving_cron.sql", "live": "unknown", "dependsOn": "008" },
+      { "file": "supabase/migrations/010_admin_overview_stats.sql", "live": "unknown", "dependsOn": "005, 006" }
+    ],
+    "tables": {
+      "schools": { "pk": "id text", "columns": ["id", "name", "short_name", "city", "partnership_status", "created_at"], "rows": ["ers", "anka"] },
+      "profiles": { "pk": "id uuid -> auth.users", "columns": ["id", "first_name", "school_id", "grade", "avatar_color", "interests", "created_at", "updated_at"] },
+      "events": { "pk": "id uuid", "columns": ["id", "title", "summary", "description", "location", "audience", "start_at", "duration_minutes", "capacity", "online", "topics", "format", "host_school_id", "school_ids", "status", "created_at", "cancelled_at", "archived_at"], "statusValues": ["draft", "planned", "confirmed", "completed", "cancelled"], "newIn008": ["cancelled_at", "archived_at"] },
+      "event_registrations": { "pk": "(event_id, user_id)", "columns": ["event_id", "user_id", "status", "created_at"], "statusValues": ["registered", "interested"] },
+      "ideas": { "pk": "id uuid", "columns": ["id", "author_id", "school_id", "title", "summary", "description", "topics", "format", "school_ids", "status", "created_at"], "statusValues": ["submitted", "collecting", "review", "planned", "rejected"] },
+      "idea_supports": { "pk": "(idea_id, user_id)", "columns": ["idea_id", "user_id", "created_at"], "onDeleteIdea": "cascade" },
+      "admins": { "pk": "user_id -> auth.users", "columns": ["user_id", "created_at", "note"], "policies": "none", "appRoleAccess": "none" }
+    },
+    "policies": {
+      "events": "status in (planned, confirmed, completed, cancelled) and archived_at is null (ab 008)",
+      "profiles": "id = auth.uid()",
+      "event_registrations": "user_id = auth.uid(); insert nur bei planned/confirmed und start_at > now()",
+      "ideas": "Erlaubnisliste collecting/review/planned oder author_id = auth.uid()",
+      "idea_supports": "eigene; anlegen nur für fremde, öffentliche Ideen",
+      "admins": "keine"
+    },
+    "triggers": ["on_auth_user_created -> handle_new_user", "profiles_set_updated_at -> set_updated_at", "event_registrations_guard -> event_registration_guard"]
+  },
+  "rpc": [
+    { "name": "is_admin", "args": [], "returns": "boolean", "callers": ["authenticated"], "migration": "005", "wrapper": "fetchIsAdmin" },
+    { "name": "get_idea_support_counts", "args": [], "returns": "table(idea_id uuid, supporters bigint)", "callers": ["authenticated"], "migration": "001/004", "wrapper": "fetchSupportCounts" },
+    { "name": "admin_list_events", "args": [], "returns": "table(event columns, registered_count, interested_count, cancelled_at, archived_at)", "callers": ["authenticated+is_admin"], "migration": "006, neu angelegt in 008", "wrapper": "fetchAdminEvents" },
+    { "name": "admin_create_event", "args": ["p_title", "p_start_at", "p_host_school_id", "p_school_ids", "p_summary", "p_description", "p_location", "p_audience", "p_duration_minutes", "p_capacity", "p_online", "p_topics", "p_format"], "returns": "uuid", "callers": ["authenticated+is_admin"], "migration": "006", "wrapper": "createAdminEvent", "effect": "insert events status=draft" },
+    { "name": "admin_update_event", "args": ["p_id", "p_title", "p_start_at", "p_host_school_id", "p_school_ids", "p_summary", "p_description", "p_location", "p_audience", "p_duration_minutes", "p_capacity", "p_online", "p_topics", "p_format"], "returns": "void", "callers": ["authenticated+is_admin"], "migration": "006, ersetzt in 008", "wrapper": "updateAdminEvent", "errors": ["22023", "P0002", "DC002", "DC005", "DC006", "DC009"] },
+    { "name": "admin_set_event_status", "args": ["p_id", "p_status"], "returns": "void", "callers": ["authenticated+is_admin"], "migration": "006, ersetzt in 008", "wrapper": "setAdminEventStatus", "errors": ["22023", "P0002", "DC002", "DC004", "DC007", "DC009"] },
+    { "name": "admin_delete_event", "args": ["p_id"], "returns": "void", "callers": ["authenticated+is_admin"], "migration": "006", "wrapper": "deleteAdminEvent", "errors": ["P0002", "DC001", "DC003", "DC009"] },
+    { "name": "admin_list_ideas", "args": ["p_status"], "returns": "table(idea columns without author_id, supporters)", "callers": ["authenticated+is_admin"], "migration": "006", "wrapper": "fetchAdminIdeas" },
+    { "name": "admin_set_idea_status", "args": ["p_id", "p_status"], "returns": "void", "callers": ["authenticated+is_admin"], "migration": "006", "wrapper": "setAdminIdeaStatus", "errors": ["22023", "P0002", "DC004"] },
+    { "name": "admin_delete_idea", "args": ["p_id"], "returns": "void", "callers": ["authenticated+is_admin"], "migration": "007", "wrapper": "deleteAdminIdea", "errors": ["22023", "P0002", "DC010"] },
+    { "name": "admin_get_overview_stats", "args": [], "returns": "table(total_students, upcoming_events, total_registrations, ideas_pending_review, archived_events) bigint", "callers": ["authenticated+is_admin"], "migration": "010", "wrapper": "fetchAdminOverviewStats" },
+    { "name": "archive_finished_events", "args": [], "returns": "integer", "callers": ["database owner / pg_cron only"], "migration": "008" }
+  ],
+  "statusTransitions": {
+    "events": { "draft": ["planned", "confirmed"], "planned": ["confirmed", "cancelled", "completed"], "confirmed": ["cancelled", "completed"], "cancelled": [], "completed": [] },
+    "ideas": { "submitted": ["collecting", "rejected"], "collecting": ["review", "rejected"], "review": ["planned", "collecting", "rejected"], "rejected": ["submitted"], "planned": [] },
+    "ideaDeletableByAdmin": ["collecting", "review", "planned", "rejected"],
+    "eventDeletable": "draft ohne Anmeldungen und Interessierte"
+  },
+  "errorCodes": {
+    "42501": "nicht erlaubt / kein Admin / Anmeldung geschlossen",
+    "22023": "ungültige Eingabe",
+    "P0002": "nicht gefunden",
+    "DC001": "Event hat Einträge",
+    "DC002": "Datum in der Vergangenheit",
+    "DC003": "nur Entwürfe löschbar",
+    "DC004": "Statuswechsel nicht erlaubt",
+    "DC005": "Plätze unter Anmeldezahl",
+    "DC006": "Datum gesperrt (abgesagt/abgeschlossen)",
+    "DC007": "Event hat noch nicht begonnen",
+    "DC008": "ausgebucht",
+    "DC009": "falsche Isolationsstufe",
+    "DC010": "Idee in diesem Status nicht löschbar",
+    "PGRST202": "Funktion fehlt (Migration nicht ausgeführt)",
+    "42703": "Spalte fehlt (008 nicht ausgeführt)"
+  },
+  "frontendModels": {
+    "User": ["id", "firstName", "lastName", "schoolId", "school", "grade", "avatarColor", "interests", "registrations", "supportedIdeas", "projectInterest", "invitations", "dismissedUpdates"],
+    "Event": ["id", "title", "summary", "description", "location", "audience", "start", "durationMinutes", "capacity", "online", "topics", "format", "hostSchoolId", "schoolIds", "status", "cancelledAt", "archivedAt", "organizerIds", "isDemo"],
+    "AdminEvent": ["...Event", "createdAt", "registeredCount", "interestedCount"],
+    "Idea": ["id", "authorId", "schoolId", "title", "summary", "description", "topics", "format", "schoolIds", "status", "createdAt", "isDemo", "isLocal"],
+    "AdminIdea": ["id", "schoolId", "title", "summary", "description", "topics", "format", "schoolIds", "status", "createdAt", "supporters", "isDemo"],
+    "OverviewStats": ["totalStudents", "upcomingEvents", "totalRegistrations", "ideasPendingReview", "archivedEvents"],
+    "ActivityItem": ["type", "id", "title", "status", "createdAt", "archived", "to"]
+  },
+  "services": {
+    "src/lib/supabaseClient.js": ["supabase", "isSupabaseConfigured", "checkSupabaseConnection"],
+    "src/lib/eventsApi.js": ["EVENT_COLUMNS", "EVENT_COLUMNS_BASE", "mapDbEvent", "registrationsToMap", "fetchEvents", "fetchMyRegistrations", "planRegistrationChange", "saveRegistration", "registrationErrorKey"],
+    "src/lib/ideasApi.js": ["PUBLIC_IDEA_STATUSES", "mapDbIdea", "canSupportIdea", "fetchIdeas", "fetchMySupports", "fetchSupportCounts", "fetchIdeasState", "createIdea", "addSupport", "removeSupport", "deleteOwnIdea", "ideaErrorKey"],
+    "src/lib/adminApi.js": ["ADMIN_EVENT_STATUSES", "ADMIN_IDEA_STATUSES", "mapAdminEvent", "mapAdminIdea", "cleanText", "toEventParams", "fetchIsAdmin", "fetchAdminEvents", "createAdminEvent", "updateAdminEvent", "setAdminEventStatus", "deleteAdminEvent", "fetchAdminIdeas", "setAdminIdeaStatus", "deleteAdminIdea", "mapOverviewStats", "fetchAdminOverviewStats", "adminErrorKey"]
+  },
+  "designSystem": {
+    "tokens": "src/styles/variables.css",
+    "stylesheets": ["src/styles/variables.css", "src/styles/base.css", "src/styles/layout.css", "src/styles/components.css", "src/styles/pages.css"],
+    "theme": "dark only",
+    "colors": { "bg": "#0b1422", "surface": "#162133", "primary": "#4a8fe7", "primaryStrong": "#2f6fd6", "text": "#eef2f8", "danger": "#f59a92", "success": "#79d4a0", "warning": "#f2c46d" },
+    "breakpointsPx": [389, 420, 480, 560, 600, 720, 900, 960, 1200],
+    "icons": "src/components/Icon.jsx (33 Inline-SVGs)",
+    "references": "design references/ (9 JPEG)"
+  },
+  "tests": {
+    "command": "npm test",
+    "files": [
+      "tests/accountProfile.test.js", "tests/adminAccess.test.js", "tests/adminApi.test.js", "tests/adminEventGroups.test.js",
+      "tests/adminEvents.test.js", "tests/adminIdeaDelete.test.js", "tests/adminIdeas.test.js", "tests/adminOverview.test.js",
+      "tests/authValidation.test.js", "tests/eventArchive.test.js", "tests/eventForm.test.js", "tests/eventsApi.test.js",
+      "tests/i18n.test.js", "tests/ideaProgress.test.js", "tests/ideasApi.test.js", "tests/selectors.test.js", "tests/studentEventStatus.test.js"
+    ],
+    "sqlTests": [
+      "supabase/tests/ideas_rls_test.sql", "supabase/tests/admin_role_test.sql", "supabase/tests/admin_functions_test.sql",
+      "supabase/tests/006_readonly_checks.sql", "supabase/tests/capacity_concurrency_manual.sql",
+      "supabase/tests/admin_delete_idea_test.sql", "supabase/tests/event_archiving_test.sql"
+    ],
+    "absent": ["e2e", "browser", "multi-user automation", "mobile", "CI"]
+  },
+  "integrationDependencies": {
+    "routingConflict": "Codex nutzt Hash-Routing (readRoute in src/App.jsx), Claude BrowserRouter",
+    "authConflict": "Codex eigener REST-Client src/services/supabase.js, Claude supabase-js",
+    "dataModelConflict": "Codex dc_workspace (JSON, revision) + dc_commands + dc_commit via Edge Function platform; Claude relationale Tabellen + RLS",
+    "roleConflict": "Codex DC_MODERATOR_IDS (Function-Env), Claude public.admins + is_admin()",
+    "sharedIdentifiers": { "userId": "auth.users.id (beide)", "schoolIds": ["ers", "anka"] },
+    "filesChangedByBoth": ["src/App.jsx", "src/main.jsx", "package.json", "package-lock.json", "vite.config.js", "src/locales/de.json", "src/locales/en.json", "src/locales/tr.json", "src/i18n/LanguageContext.jsx", "src/components/EventCard.jsx", "src/components/IdeaCard.jsx", "src/components/SchoolCard.jsx", "src/components/Icon.jsx", "README.md", ".env.example", "index.html", "public/favicon.svg"],
+    "recommendedStrategy": "B: Claude als Basis, Codex-Module einzeln auf Tabellen + RLS + RPCs portieren (vorbehaltlich offener Fragen)"
+  },
+  "knownBlockers": [
+    "Lokale Claude-Arbeit nicht committet",
+    "Live-Status der Migrationen 007-010 unbekannt",
+    "Keine Browser-Tests der Admin- und Status-Funktionen",
+    "004_ideas_moderation.sql im Repo = v1 (live v3)",
+    "Kein SPA-Fallback und keine Deployment-Konfiguration",
+    "Supabase-Auth-URLs nur localhost",
+    "VITE_ENABLE_SIGNUP=true in lokaler .env.local",
+    "Kein Audit-Log, kein Rückweg-SQL für 006-010",
+    "Unklar, ob Codex dasselbe Supabase-Projekt nutzt"
+  ]
+}

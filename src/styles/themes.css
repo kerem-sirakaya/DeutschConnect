@@ -1,0 +1,113 @@
+/*
+ * Akzentfarben (Darstellung → Farbe). ERZEUGT mit scripts/generateThemes.mjs – Werte nicht von Hand ändern.
+ * Pro Farbe werden aus dem Grundton Varianten mit geprüftem Kontrast (WCAG 2.1) abgeleitet:
+ *   --color-primary         Akzent für Rahmen, Markierungen, Akzent-Text, Begrüßungskarte (≥ 4.5:1 auf Weiß/Flächen)
+ *   --color-primary-strong  Hintergrund von Buttons mit weißer Schrift      (weiß ≥ 4.5:1)
+ *   --color-primary-hover   Button bei Hover                                 (weiß ≥ 4.5:1)
+ *   --color-primary-text    Links, aktive Navigation, Icons                  (≥ 6:1 auf Weiß, ≥ 5.5:1 auf Hover-Flächen)
+ *   --color-primary-soft    zarte Fläche (ausgewählte Chips, eigene Nachrichten)
+ *   --color-primary-border  halbtransparente Rahmenfarbe
+ *   --color-primary-tile    Icon-Kacheln
+ *   --color-nav-active-bg / --color-nav-hover-bg   Hauptnavigation
+ *   --color-on-primary / --color-on-primary-muted  Schrift auf --color-primary (Begrüßungskarte)
+ *   --color-focus           Fokusrahmen (≥ 3.5:1 auf dem Hintergrund)
+ * Status-Farben (Erfolg, Warnung, Fehler) und die Markenfarben (Logo, Schwarz-Rot-Gold) sind NICHT betroffen.
+ * Ocean Blue ist der Standard (:root ohne data-accent).
+ */
+
+/* Ocean Blue – Grundton #3478CF */
+:root,
+:root[data-accent='ocean'] {
+  --color-primary: #2d6dbf;
+  --color-primary-strong: #2f72c7;
+  --color-primary-hover: #2b67b4;
+  --color-primary-text: #25599c;
+  --color-primary-soft: rgba(45, 109, 191, 0.1);
+  --color-primary-border: rgba(45, 109, 191, 0.38);
+  --color-primary-tile: #e3ecf8;
+  --color-nav-active-bg: #ebf2fa;
+  --color-nav-hover-bg: #e3e5e5;
+  --color-on-primary: #ffffff;
+  --color-on-primary-muted: #eaf0f8;
+  --color-focus: #3478cf;
+}
+
+/* Forest Green – Grundton #39866A */
+:root[data-accent='forest'] {
+  --color-primary: #347960;
+  --color-primary-strong: #357d63;
+  --color-primary-hover: #307059;
+  --color-primary-text: #2a624e;
+  --color-primary-soft: rgba(52, 121, 96, 0.1);
+  --color-primary-border: rgba(52, 121, 96, 0.38);
+  --color-primary-tile: #e3eeea;
+  --color-nav-active-bg: #ebf3f0;
+  --color-nav-hover-bg: #e3e7dd;
+  --color-on-primary: #ffffff;
+  --color-on-primary-muted: #ebf1ef;
+  --color-focus: #39866a;
+}
+
+/* Lavender – Grundton #9271CD */
+:root[data-accent='lavender'] {
+  --color-primary: #7e57c4;
+  --color-primary-strong: #825cc6;
+  --color-primary-hover: #784fc1;
+  --color-primary-text: #6a40b4;
+  --color-primary-soft: rgba(126, 87, 196, 0.1);
+  --color-primary-border: rgba(126, 87, 196, 0.38);
+  --color-primary-tile: #f0ebf8;
+  --color-nav-active-bg: #f4f1fa;
+  --color-nav-hover-bg: #eae5e5;
+  --color-on-primary: #ffffff;
+  --color-on-primary-muted: #f1edf9;
+  --color-focus: #9271cd;
+}
+
+/* Sunset Orange – Grundton #D98946 */
+:root[data-accent='sunset'] {
+  --color-primary: #a05b21;
+  --color-primary-strong: #a86023;
+  --color-primary-hover: #97561f;
+  --color-primary-text: #844b1b;
+  --color-primary-soft: rgba(160, 91, 33, 0.1);
+  --color-primary-border: rgba(160, 91, 33, 0.38);
+  --color-primary-tile: #faeee5;
+  --color-nav-active-bg: #fbf3ed;
+  --color-nav-hover-bg: #f0e7da;
+  --color-on-primary: #ffffff;
+  --color-on-primary-muted: #f5ede7;
+  --color-focus: #c06d27;
+}
+
+/* Rose – Grundton #D46B87 */
+:root[data-accent='rose'] {
+  --color-primary: #c2385d;
+  --color-primary-strong: #c74064;
+  --color-primary-hover: #b83658;
+  --color-primary-text: #9e2e4c;
+  --color-primary-soft: rgba(194, 56, 93, 0.1);
+  --color-primary-border: rgba(194, 56, 93, 0.38);
+  --color-primary-tile: #f9eaee;
+  --color-nav-active-bg: #fbf0f3;
+  --color-nav-hover-bg: #f0e4df;
+  --color-on-primary: #ffffff;
+  --color-on-primary-muted: #f8ebee;
+  --color-focus: #d05d7c;
+}
+
+/* Midnight – Grundton #47516E */
+:root[data-accent='midnight'] {
+  --color-primary: #47516e;
+  --color-primary-strong: #47516e;
+  --color-primary-hover: #414a65;
+  --color-primary-text: #47516e;
+  --color-primary-soft: rgba(71, 81, 110, 0.1);
+  --color-primary-border: rgba(71, 81, 110, 0.38);
+  --color-primary-tile: #e5e7eb;
+  --color-nav-active-bg: #edeef1;
+  --color-nav-hover-bg: #e4e2dd;
+  --color-on-primary: #ffffff;
+  --color-on-primary-muted: #e5e7eb;
+  --color-focus: #47516e;
+}
