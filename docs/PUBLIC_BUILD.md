@@ -96,13 +96,61 @@ damit Neuladen den Ablauf nicht abbricht.
 - SPA-Fallback: alle App-Pfade (auch `/reset-password`, `/forgot-password`) auf `index.html`, Assets ausgenommen.
 - HTTPS.
 
+## Bestätigungslink auf der Vercel-Website (Fehlerkorrektur 2026-11-14)
+
+Die Website ist unter `https://connected-neon.vercel.app` erreichbar. Die lesende Prüfung
+am 2026-11-14 ergab zwei getrennte Fehler: Supabase leitete auch bei ausdrücklich angefordertem
+`https://connected-neon.vercel.app/login` auf `http://localhost:3000/` zurück; direkte Aufrufe
+von `/login`, `/register` und `/reset-password` lieferten HTTP 404. Dafür wurden nur ein
+absichtlich ungültiger Testlink und öffentliche Seiten verwendet, keine echten Konten oder Tokens.
+
+`vercel.json` ergänzt den SPA-Fallback für Vercel. Die bestehende `netlify.toml` gilt nur bei Netlify.
+Vercel liefert damit beim direkten Öffnen eines App-Pfads die React-Anwendung. Der bereits vorhandene
+Supabase-Client verarbeitet den Bestätigungslink, prüft die Sitzung, speichert sie für diesen Browser
+und entfernt die Tokens aus der URL. `/login` leitet nach vorhandener Sitzung automatisch nach
+`/me/settings` bzw. zum zuvor angeforderten internen Ziel weiter. Profil und Mitgliederinhalte werden
+weiterhin mit den bestehenden Lade- und Fehlerzuständen aus Supabase geladen.
+
+**Supabase-Konfiguration für das Website-Projekt `ycyqdqmiawhzzrduxupe`**
+
+1. Unter Authentication → URL Configuration lautet die **Site URL**
+   `https://connected-neon.vercel.app`.
+2. Unter **Redirect URLs** sind `https://connected-neon.vercel.app/login` und
+   `https://connected-neon.vercel.app/reset-password` erlaubt.
+3. Unter Email Templates → Confirm signup muss der Bestätigungsbutton auf
+   `{{ .ConfirmationURL }}` zeigen. Ein bloßer Link zur Website bestätigt die E-Mail nicht und
+   übergibt auch keine Sitzung. Ein vorhandenes angepasstes Template zuerst prüfen.
+4. Ein Deployment des `main`-Branches aktiviert die Vercel-Konfiguration und den Login-Redirect.
+5. Einen **frischen** Bestätigungslink anfordern und öffnen. Alte E-Mails können noch falsche Zieladressen
+   enthalten; abgelaufene oder bereits eingelöste Links erzeugen keine neue Sitzung. Das Öffnen des frischen
+   Links soll zur Website und ohne erneute Passworteingabe zum eigenen Kontobereich führen. Auch nach
+   Neuladen muss dasselbe Konto angemeldet bleiben.
+
+Die automatische Anmeldung gilt für den Browser, in dem der Link geöffnet wird. Ein anderes Gerät
+oder ein In-App-Mailbrowser erhält dadurch keine Sitzung im ursprünglichen Browser.
+
+Die URL-Konfiguration wurde vom Projektinhaber gespeichert und am 2026-11-14 zusätzlich live geprüft.
+Ungültige Testlinks werden mit HTTP 303 zum Website-Root bzw. zu den ausdrücklich angeforderten Pfaden
+`/login` und `/reset-password` weitergeleitet. Das aktive E-Mail-Template und ein vollständiger Ablauf
+mit einer echten zugestellten Bestätigungsmail müssen noch geprüft werden.
+
+Der öffentliche Build ist erfolgreich und 29 Auth-/Registrierungs-/Recovery-Tests im Arbeitsverzeichnis
+bestehen. Die drei neuen Tests in `tests/authConfirmation.test.js` verwenden das
+echte Supabase-SDK mit simulierten Serverantworten und prüfen Link-Anmeldung, Sitzung nach Neuladen
+und abgelaufene Links. Der Gesamtlauf besteht mit **531/531 Tests** in einer temporären Kopie ohne
+Leerzeichen im Pfad und mit LF-Zeilenumbrüchen. Direkt im Windows-Arbeitsverzeichnis scheitern
+vorhandene Tests an nicht dekodierten `%20`-Pfaden und CRLF-abhängigen Textprüfungen.
+
+Grundlagen: [Vercel SPA-Routing](https://vercel.com/docs/frameworks/frontend/vite#using-vite-to-make-spas),
+[Supabase Redirect URLs](https://supabase.com/docs/guides/auth/redirect-urls).
+
 ## Bekannte Grenzen
 
 - Kann das eigene Profil während der Wiederherstellung nicht geladen werden, zeigt die App wie bei jeder
   Anmeldung „Profil konnte nicht geladen werden“.
 - Wer den Ablauf abbricht, bleibt mit der Wiederherstellungs-Sitzung angemeldet (Supabase-Standard), bis er sich
   abmeldet oder sie abläuft; solange darf er auf `/reset-password` ein neues Passwort setzen.
-- Scheitert nach dem Speichern das Abmelden (offline), zeigt `/login` die Konto-Karte statt der Erfolgsmeldung.
+- Scheitert nach dem Speichern das Abmelden (offline), führt `/login` die bestehende Sitzung zum Kontobereich weiter.
 - Über die Supabase-API selbst (nicht über die App) lässt sich am 429 weiterhin erkennen, ob ein Konto existiert.
 - Getestet im Browser mit abgefangenen Supabase-Antworten; ein Test mit echter E-Mail an ein freigegebenes
   Staging-Testkonto steht aus.

@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router';
 import { useI18n } from '../i18n/LanguageContext.jsx';
 import { useAuth } from '../auth/AuthContext.jsx';
 import { authErrorKey, safeRedirectPath, validateLogin } from '../lib/authValidation.js';
@@ -24,8 +24,14 @@ export default function LoginPage() {
 
   const header = <PageHeader title={t('auth.loginTitle')} subtitle={t('auth.loginSubtitle')} backTo="/me" />;
 
-  // Nicht konfiguriert, Sitzung lädt noch oder schon angemeldet → Konto-Karte zeigen.
-  if (!auth.isConfigured || auth.loading || auth.user) {
+  // Das SDK übernimmt die Sitzung aus dem Bestätigungslink. Erst danach in den
+  // Kontobereich wechseln; ein weiterer Passwortlogin ist nicht erforderlich.
+  if (!auth.loading && auth.user) {
+    return <Navigate to={safeRedirectPath(location.state?.from)} replace />;
+  }
+
+  // Nicht konfiguriert oder Sitzung lädt noch → Konto-Status zeigen.
+  if (!auth.isConfigured || auth.loading) {
     return (
       <div className="page page--narrow">
         {header}
