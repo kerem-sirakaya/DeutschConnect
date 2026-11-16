@@ -2,7 +2,44 @@
 // Die ersten beiden Prüfungen stammen aus Kerems `scripts/chess-games.test.mjs`.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { freshFlight, stepFlight, flightDifficulty, FIELD } from '../src/games/paperFlight.js';
+import { freshFlight, resizeFlight, stepFlight, flightDifficulty, FIELD } from '../src/games/paperFlight.js';
+
+test('mobile Flugfläche: Start, Säulen und Randkollisionen nutzen die größere Höhe', () => {
+  const height = 800;
+  const scene = freshFlight(height);
+  assert.equal(scene.y, height / 2);
+  assert.equal(scene.pipes[0].gap, height / 2);
+  assert.equal(stepFlight(scene, 0.016, false).over, false, 'unterhalb der alten 300er-Grenze weiterspielen');
+  let running = scene;
+  for (let frame = 0; frame < 40; frame += 1) {
+    running = stepFlight(running, 1 / 60, frame % 30 === 0);
+    assert.equal(running.height, height, 'die Höhe bleibt über alle Bilder erhalten');
+    assert.equal(running.over, false);
+  }
+  assert.equal(stepFlight({ ...scene, y: height - 1 }, 0.016, false).over, true);
+  for (const random of [0, 0.5, 1]) {
+    const spawned = stepFlight({ ...scene, spawn: 0 }, 0.016, false, () => random).pipes.at(-1);
+    assert.equal(spawned.gap, height / 2 - 60 + random * 120);
+    assert.ok(Math.abs(spawned.gap - scene.pipes.at(-1).gap) <= 120, 'nächste Lücke bleibt erreichbar');
+  }
+  const collision = { ...scene, pipes: [{ x: 90, gap: 600, counted: false }] };
+  assert.equal(stepFlight(collision, 0, false).over, true);
+});
+
+test('Größenwechsel überträgt Positionen und bewahrt Punkte, Phase und alte Spielstände', () => {
+  const original = { ...freshFlight(), score: 7 };
+  const taller = resizeFlight(original, 600);
+  assert.equal(taller.y, 300);
+  assert.equal(taller.pipes[0].gap, 300);
+  assert.equal(taller.score, 7);
+  assert.equal(taller.over, false);
+  assert.equal(original.y, 150);
+  assert.equal(resizeFlight(taller, 600), taller);
+  assert.deepEqual(resizeFlight(taller, 300), original);
+  const { height, ...legacy } = original;
+  assert.equal(resizeFlight(legacy, 600).y, 300);
+  assert.equal(stepFlight(legacy, 0.016, false).over, false);
+});
 
 test('Auftrieb hebt das Flugzeug, Boden beendet das Spiel (aus Kerems Tests)', () => {
   assert.ok(stepFlight(freshFlight(), 0.016, true).y < 150);

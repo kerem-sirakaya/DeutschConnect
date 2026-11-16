@@ -391,22 +391,11 @@
 
 .back-button {
   align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  min-height: 36px;
-  margin-left: -8px;
-  padding: 0 10px 0 6px;
-  border: none;
-  border-radius: var(--radius-pill);
-  background: transparent;
+  min-height: 48px;
+  margin-bottom: 8px;
+  padding: 10px 16px 10px 12px;
+  border-color: var(--color-border-strong);
   color: var(--color-primary-text);
-  font-weight: 600;
-  font-size: var(--text-sm);
-}
-
-.back-button:hover {
-  background: var(--color-surface);
 }
 
 .section {

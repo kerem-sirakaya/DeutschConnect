@@ -37,3 +37,29 @@ export function sectionForPath(pathname = '/') {
   }
   return null;
 }
+
+/** BrowserRouter setzt idx beim Einstieg auf 0 und erhöht ihn ausschließlich bei PUSH. */
+export function hasAppHistory(state) {
+  return Number.isInteger(state?.idx) && state.idx > 0;
+}
+
+/** Elternübersicht für Direktlinks. Hauptbereiche brauchen keinen zusätzlichen Rückweg. */
+export function backFallbackForPath(pathname = '/') {
+  const path = pathname.replace(/\/+$/, '') || '/';
+  if (NAV_ITEMS.some((item) => item.to === path)) return null;
+  if (matchesPrefix(path, '/community/games') && path !== '/community/games') return '/community/games';
+  if (matchesPrefix(path, '/community/people') && path !== '/community/people') return '/community/people';
+  if (matchesPrefix(path, '/community')) return '/community';
+  if (path === '/events' || path === '/ideas') return '/discover';
+  if (matchesPrefix(path, '/events')) return '/events';
+  if (matchesPrefix(path, '/ideas')) return '/ideas';
+  if (matchesPrefix(path, '/tutoring')) return '/tutoring';
+  if (matchesPrefix(path, '/chat/conversations')) return '/chat?tab=private';
+  if (matchesPrefix(path, '/chat')) return '/chat';
+  if (matchesPrefix(path, '/admin/events') && path !== '/admin/events') return '/admin/events';
+  if (path === '/admin') return '/me';
+  if (matchesPrefix(path, '/admin')) return '/admin';
+  if (path === '/forgot-password' || path === '/reset-password') return '/login';
+  if (matchesPrefix(path, '/me') || ['/login', '/register', '/about'].includes(path)) return '/me';
+  return '/';
+}

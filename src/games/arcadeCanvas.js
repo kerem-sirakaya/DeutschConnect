@@ -3,13 +3,23 @@
 // Die Formen (Himmel, Hügel, Wolkenlinie) stammen aus Kerems SVG-Zeichnung in der
 // Codex-Version (Branch `codex-version-1.0`, `src/games/ArcadeGame.jsx`) und wurden
 // 1:1 in Canvas-Befehle übersetzt. Gezeichnet wird in Spielfeld-Koordinaten (640 × 300);
-// die Umrechnung auf die echte Bildschirmgröße macht `setTransform` in ArcadeGame.jsx.
+// Im mobilen Hochformat wächst die Welt in der Höhe. Die Umrechnung auf die echte
+// Bildschirmgröße macht `setTransform` in ArcadeGame.jsx.
 //
 // Warum Canvas statt SVG? Bei SVG ändert React in jedem Bild Attribute vieler Elemente;
 // der Browser muss dafür jedes Mal Styles neu berechnen und die Grafik neu aufbauen.
 // Canvas zeichnet nur Pixel – ohne DOM-Änderungen.
 
 export const ARCADE_FIELD = { width: 640, height: 300 };
+
+/** Im Hochformat wächst die Spielwelt nach unten. Figuren behalten ihre Proportionen. */
+export function arcadeViewport(width, height, portrait = false) {
+  if (!portrait || width <= 0 || height <= 0) return ARCADE_FIELD;
+  return {
+    width: ARCADE_FIELD.width,
+    height: Math.max(ARCADE_FIELD.height, (height / width) * ARCADE_FIELD.width),
+  };
+}
 
 /**
  * Farben aus unseren CSS-Variablen (variables.css) lesen – einmal beim Einbauen/Größenwechsel,
@@ -38,7 +48,9 @@ export function fillRoundRect(ctx, x, y, width, height, radius) {
 }
 
 /** Himmel, Hügel und Wolkenlinie (gleich für beide Spiele). */
-export function drawBackground(ctx, colors) {
+export function drawBackground(ctx, colors, viewport = ARCADE_FIELD) {
+  ctx.save();
+  ctx.scale(1, viewport.height / ARCADE_FIELD.height);
   ctx.fillStyle = colors.sky;
   ctx.fillRect(0, 0, ARCADE_FIELD.width, ARCADE_FIELD.height);
 
@@ -61,4 +73,5 @@ export function drawBackground(ctx, colors) {
   ctx.quadraticCurveTo(160, 30, 320, 110);
   ctx.quadraticCurveTo(480, 190, 640, 110);
   ctx.stroke();
+  ctx.restore();
 }

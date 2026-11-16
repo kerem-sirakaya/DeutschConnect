@@ -1,7 +1,7 @@
 import { useI18n } from '../i18n/LanguageContext.jsx';
 import ArcadeGame from './ArcadeGame.jsx';
 import { fillRoundRect } from './arcadeCanvas.js';
-import { FIELD, PLANE_X, PIPE_WIDTH, GAP_HALF, freshFlight, stepFlight } from './paperFlight.js';
+import { FIELD, PLANE_X, PIPE_WIDTH, GAP_HALF, freshFlight, resizeFlight, stepFlight } from './paperFlight.js';
 
 /**
  * Spiel „Papierflug“ – läuft komplett im Browser.
@@ -17,7 +17,7 @@ function drawFlight(ctx, scene, colors) {
   ctx.fillStyle = colors.primary;
   for (const pipe of scene.pipes) {
     fillRoundRect(ctx, pipe.x, 0, PIPE_WIDTH, pipe.gap - GAP_HALF, 5);
-    fillRoundRect(ctx, pipe.x, pipe.gap + GAP_HALF, PIPE_WIDTH, FIELD.height - pipe.gap - GAP_HALF, 5);
+    fillRoundRect(ctx, pipe.x, pipe.gap + GAP_HALF, PIPE_WIDTH, (scene.height ?? FIELD.height) - pipe.gap - GAP_HALF, 5);
   }
 
   // Flugzeug (SVG-Pfad: Spitze nach rechts, Kerbe hinten)
@@ -48,6 +48,7 @@ export default function PaperFlight({ onRoundStart, onRoundEnd }) {
       fresh={freshFlight}
       step={stepFlight}
       drawScene={drawFlight}
+      resizeScene={resizeFlight}
       onRoundStart={onRoundStart}
       onRoundEnd={onRoundEnd}
     />

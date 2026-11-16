@@ -3,11 +3,12 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { TOPICS, EVENT_FORMATS } from '../src/data/topics.js';
 import { SYMBOLS } from '../src/games/symbolPairs.js';
 import { BAN_DURATIONS, REPORT_CATEGORIES, TOPIC_SLUGS } from '../src/lib/chat.js';
 
-const root = new URL('..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1');
+const root = fileURLToPath(new URL('..', import.meta.url));
 const load = (lang) => JSON.parse(readFileSync(join(root, 'src', 'locales', `${lang}.json`), 'utf8'));
 const locales = { de: load('de'), tr: load('tr'), en: load('en') };
 

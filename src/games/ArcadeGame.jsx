@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useI18n } from '../i18n/LanguageContext.jsx';
 import { useArcadeLoop } from './useArcadeLoop.js';
-import { ARCADE_FIELD, readArcadeColors, drawBackground } from './arcadeCanvas.js';
+import { ARCADE_FIELD, arcadeViewport, readArcadeColors, drawBackground } from './arcadeCanvas.js';
 
 /** Höchste Pixeldichte für das Canvas: 3× (viele Handys) kostet viel Rechenzeit, 2× sieht gleich scharf aus. */
 const MAX_PIXEL_RATIO = 2;
@@ -32,6 +32,7 @@ export default function ArcadeGame({
   fresh,
   step,
   drawScene,
+  resizeScene,
   onRoundStart,
   onRoundEnd,
 }) {
@@ -41,21 +42,22 @@ export default function ArcadeGame({
   const context = useRef(null);
   const colors = useRef(null);
   const scoreText = useRef(null);
+  const viewport = useRef(ARCADE_FIELD);
   const tRef = useRef(t);
   tRef.current = t;
 
   function paint(scene) {
     const ctx = context.current;
     if (!ctx || !colors.current) return;
-    drawBackground(ctx, colors.current);
-    drawScene(ctx, scene, colors.current);
+    drawBackground(ctx, colors.current, viewport.current);
+    drawScene(ctx, scene, colors.current, viewport.current);
   }
 
   function showScore(score) {
     if (scoreText.current) scoreText.current.textContent = tRef.current('games.arcade.score', { count: score });
   }
 
-  const { phase, finalScore, scene, start, act, pause } = useArcadeLoop(fresh, step, {
+  const { phase, finalScore, scene, start, act, pause } = useArcadeLoop(() => fresh(viewport.current.height), step, {
     onFrame: paint,
     onScore: showScore,
     onRoundStart, // optional: Bestenliste (Migration 017)
@@ -69,14 +71,20 @@ export default function ArcadeGame({
     const resize = () => {
       const ratio = Math.min(window.devicePixelRatio || 1, MAX_PIXEL_RATIO);
       const width = Math.max(1, Math.round(element.clientWidth * ratio));
-      const height = Math.max(1, Math.round((width * ARCADE_FIELD.height) / ARCADE_FIELD.width));
+      const height = Math.max(1, Math.round(element.clientHeight * ratio));
+      viewport.current = arcadeViewport(
+        element.clientWidth,
+        element.clientHeight,
+        window.matchMedia('(max-width: 599px) and (orientation: portrait)').matches,
+      );
+      if (resizeScene) scene.current = resizeScene(scene.current, viewport.current.height);
       if (element.width !== width || element.height !== height) {
         element.width = width;
         element.height = height;
       }
       const ctx = element.getContext('2d');
-      // Ab hier wird in Spielfeld-Koordinaten (640 × 300) gezeichnet.
-      ctx.setTransform(width / ARCADE_FIELD.width, 0, 0, height / ARCADE_FIELD.height, 0, 0);
+      // Darstellung und Kollisionen verwenden dieselbe Welt, ohne Figuren zu strecken.
+      ctx.setTransform(width / viewport.current.width, 0, 0, height / viewport.current.height, 0, 0);
       context.current = ctx;
       colors.current = readArcadeColors(element);
       paint(scene.current);
@@ -122,7 +130,7 @@ export default function ArcadeGame({
       <h2 id={titleId} className="visually-hidden">
         {title}
       </h2>
-      <p className="muted">{hint}</p>
+      <p className="muted arcade-hint">{hint}</p>
 
       <div className="game-score">
         {/* Inhalt wird direkt von showScore() gesetzt, nicht von React */}
@@ -135,6 +143,7 @@ export default function ArcadeGame({
         className="arcade-field"
         aria-label={fieldLabel}
         onPointerDown={(event) => {
+          if (!event.isPrimary || event.button !== 0) return;
           event.preventDefault();
           handleAct();
         }}
@@ -173,7 +182,7 @@ export default function ArcadeGame({
       <p role="status" className="game-status">
         {status}
       </p>
-      <p className="muted">{accessibility}</p>
+      <p className="muted arcade-accessibility">{accessibility}</p>
     </section>
   );
 }

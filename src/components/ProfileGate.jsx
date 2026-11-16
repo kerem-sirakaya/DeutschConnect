@@ -4,6 +4,7 @@ import { useAuth } from '../auth/AuthContext.jsx';
 import { authErrorKey } from '../lib/authValidation.js';
 import Icon from './Icon.jsx';
 import Logo from './Logo.jsx';
+import BackButton from './BackButton.jsx';
 
 /**
  * Wird statt der App gezeigt, solange das echte Profil, die Events oder die Ideen
@@ -24,6 +25,7 @@ export default function ProfileGate({ status, titleKey, messageKey, onRetry }) {
   return (
     <main id="main" className="app__main">
       <div className="page page--narrow">
+        <BackButton />
         {status === 'loading' ? (
           <section className="card settings-block" role="status" aria-live="polite">
             <Logo size={32} />

@@ -12,24 +12,25 @@ import { GROUND_Y, RUNNER_X, RUNNER_SIZE, freshRunner, stepRunner } from './brid
  * Kerems SVG-Formen als Canvas-Zeichnung (schneller, siehe arcadeCanvas.js),
  * keine Bestenliste, KEIN gespeicherter Bestwert.
  */
-function drawRunner(ctx, scene, colors) {
+function drawRunner(ctx, scene, colors, viewport) {
+  const groundY = GROUND_Y + viewport.height - ARCADE_FIELD.height;
   // Brücke (SVG: M0 270 H640, Strichstärke 3)
   ctx.strokeStyle = colors.primaryText;
   ctx.lineWidth = 3;
   ctx.beginPath();
-  ctx.moveTo(0, GROUND_Y);
-  ctx.lineTo(ARCADE_FIELD.width, GROUND_Y);
+  ctx.moveTo(0, groundY);
+  ctx.lineTo(ARCADE_FIELD.width, groundY);
   ctx.stroke();
 
   // Hindernisse (SVG: <rect rx="6">)
   ctx.fillStyle = colors.primaryText;
   for (const obstacle of scene.obstacles) {
-    fillRoundRect(ctx, obstacle.x, GROUND_Y - obstacle.height, obstacle.width, obstacle.height, 6);
+    fillRoundRect(ctx, obstacle.x, groundY - obstacle.height, obstacle.width, obstacle.height, 6);
   }
 
   // Spielfigur: steht auf der Brücke und wird beim Springen um `y` angehoben.
   const left = RUNNER_X - 1;
-  const top = GROUND_Y - RUNNER_SIZE - scene.y;
+  const top = groundY - RUNNER_SIZE - scene.y;
   ctx.fillStyle = colors.primary;
   fillRoundRect(ctx, left, top, RUNNER_SIZE, RUNNER_SIZE, 9);
   // Gesicht (SVG: M8 12H12 M21 12H25 M10 24H23)

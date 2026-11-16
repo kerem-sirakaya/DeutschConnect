@@ -3,7 +3,7 @@
 // Entscheidung Ege (2026-11-10): Chatroom ist dauerhaft ein eigener Hauptbereich.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { NAV_ITEMS, sectionForPath } from '../src/components/layout/navigation.js';
+import { NAV_ITEMS, sectionForPath, backFallbackForPath, hasAppHistory } from '../src/components/layout/navigation.js';
 
 test('genau sechs Hauptbereiche: Codex-Reihenfolge plus „Chatroom“ vor „Mein Bereich“', () => {
   assert.deepEqual(NAV_ITEMS.map((item) => item.id), ['home', 'discover', 'tutoring', 'community', 'chat', 'me']);
@@ -48,4 +48,58 @@ test('kein falscher Treffer über Präfixe und eigener Admin-Bereich', () => {
   assert.equal(sectionForPath('/eventsfoo'), null);
   assert.equal(sectionForPath('/admin'), null);
   assert.equal(sectionForPath('/admin/events'), null);
+});
+
+test('Zurück verwendet ausschließlich einen vorherigen BrowserRouter-Eintrag', () => {
+  for (const state of [null, {}, { idx: 0 }, { idx: -1 }, { idx: '1' }, { idx: 0.5 }]) {
+    assert.equal(hasAppHistory(state), false);
+  }
+  // Direktlink mit REPLACE-Weiterleitung: neuer Schlüssel, weiterhin Index 0.
+  assert.equal(hasAppHistory({ idx: 0, key: 'redirected-game' }), false);
+  assert.equal(hasAppHistory({ idx: 1 }), true);
+  assert.equal(hasAppHistory({ idx: 5, key: 'reloaded-page' }), true);
+});
+
+test('Direktlinks haben passende Rücksprünge, Hauptbereiche keinen zusätzlichen Button', () => {
+  for (const { to } of NAV_ITEMS) assert.equal(backFallbackForPath(to), null, to);
+  const cases = {
+    '/community/games': '/community',
+    '/community/games/paper-flight': '/community/games',
+    '/community/games/bridge-runner': '/community/games',
+    '/community/games/symbol-pairs': '/community/games',
+    '/community/games/chess/': '/community/games',
+    '/community/groups': '/community',
+    '/community/people': '/community',
+    '/community/people/profile-id': '/community/people',
+    '/events': '/discover',
+    '/events/event-id': '/events',
+    '/ideas': '/discover',
+    '/ideas/new': '/ideas',
+    '/ideas/idea-id': '/ideas',
+    '/tutoring/new': '/tutoring',
+    '/tutoring/entry-id': '/tutoring',
+    '/tutoring/entry-id/edit': '/tutoring',
+    '/chat/rooms/room-id': '/chat',
+    '/chat/conversations/conversation-id': '/chat?tab=private',
+    '/chat/moderation': '/chat',
+    '/me/settings': '/me',
+    '/me/interests': '/me',
+    '/me/sharing': '/me',
+    '/admin': '/me',
+    '/admin/events': '/admin',
+    '/admin/ideas': '/admin',
+    '/admin/events/new': '/admin/events',
+    '/admin/events/event-id/edit': '/admin/events',
+    '/login': '/me',
+    '/register': '/me',
+    '/forgot-password': '/login',
+    '/reset-password': '/login',
+    '/help': '/',
+    '/about': '/me',
+    '/unknown-route': '/',
+    '/eventsfoo': '/',
+  };
+  for (const [path, fallback] of Object.entries(cases)) {
+    assert.equal(backFallbackForPath(path), fallback, path);
+  }
 });

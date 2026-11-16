@@ -96,7 +96,7 @@
   overflow: hidden;
   background: var(--color-bg-elevated);
   cursor: pointer;
-  touch-action: manipulation; /* kein Doppeltipp-Zoom auf Handys */
+  touch-action: none; /* Auf dem Spielfeld steuern, außerhalb weiterhin die Seite scrollen. */
   user-select: none;
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -131,6 +131,36 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+/* Nur die Reaktionsspiele: weniger verschachtelte Ränder auf schmalen Geräten. */
+@media (max-width: 599px) {
+  .arcade-game {
+    margin-inline: calc(8px - var(--gutter));
+    padding: 8px;
+    gap: 10px;
+  }
+
+  /* Anleitung hinter die Steuerung stellen, damit Punkte und Spielfeld oben bleiben. */
+  .arcade-game .arcade-hint,
+  .arcade-game .arcade-accessibility {
+    order: 1;
+  }
+
+  .arcade-game .arcade-actions > .btn {
+    flex: 1 1 auto;
+    min-height: 48px;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 599px) and (orientation: portrait) {
+  .arcade-canvas {
+    aspect-ratio: auto;
+    /* Platz für Kopfzeile, Rückweg, Titel, Punkte, Steuerung und Bottom-Navigation.
+       svh bleibt auch beim Ein-/Ausblenden der Browserleiste stabil. */
+    height: clamp(160px, calc(100svh - 410px), 460px);
+  }
 }
 
 /* ---------------------------------------------------------------------------

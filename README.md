@@ -1427,6 +1427,26 @@ Neue Events trägt das Team im Supabase-Dashboard ein (Table Editor → `events`
 - Das Registrierungsformular erscheint nur mit `VITE_ENABLE_SIGNUP=true` in `.env.local`. **Der eigentliche Schutz** ist im Supabase-Dashboard: *Authentication → Sign In / Providers → Allow new users to sign up*. Ist das aus, kann sich niemand registrieren, auch nicht am Formular vorbei.
 - Die Schulauswahl lädt die Schulen aus der Tabelle `schools`. Besucher ohne Login dürfen dort nur `id`, `name`, `short_name`, `city` lesen (Migration `003_public_school_info.sql`). Schlägt die Abfrage fehl, wird die lokale Liste `src/data/schools.js` verwendet.
 
+### 22.3b Mobile Spielflächen und Rücknavigation (16. November 2026)
+
+- Papierflug und Brückenläufer nutzen auf Bildschirmen bis 599 px schmalere Kartenabstände. Im Hochformat richtet sich die Canvas-Höhe nach `svh`, mit reserviertem Platz für Punkte, Steuerung und Bottom-Navigation. Die Anleitung steht unter der Steuerung.
+- Die Canvas-Auflösung folgt der dargestellten Breite und Höhe. Die Spielwelt wächst proportional in der Höhe, sodass Figuren ihre Proportionen behalten. Papierflug verwendet diese Höhe für Startposition, Säulen und Randkollisionen und übernimmt Positionen bei Größenwechseln. Aufeinanderfolgende Säulenlücken bleiben in erreichbarer Nähe. Beim Brückenläufer folgt die Bodenposition der Höhe.
+- `src/components/BackButton.jsx` verwendet die vorhandenen Button-Stile und `common.back` für Deutsch, Türkisch und Englisch. Der gemeinsame `PageHeader` sowie Anmelde-, Profil- und Admin-Ladeansichten binden ihn ein. Ergänzte Rückwege betreffen auch Event-/Ideenübersichten, Hilfe, Fehlerseiten und Admin-Unterseiten.
+- `backFallbackForPath()` in `src/components/layout/navigation.js` definiert die Elternübersichten für die vorhandenen Routen. Der Verlauf wird über den von `BrowserRouter` verwalteten `history.state.idx` erkannt. Bei Direktaufrufen und REPLACE-Weiterleitungen führt der Button zur Elternübersicht und ersetzt den aktuellen Eintrag. App-interne Navigation erhält den Rückweg zur vorherigen Seite einschließlich ihrer Filterparameter.
+
+Geprüft am lokalen Prüf-Build in Chrome
+
+- Papierflug und Brückenläufer in der Hochformat-Emulation, darunter 320 × 568 und 390 × 844 px, mit Touch-Eingabe, Punkten und erreichbaren Steuerungen. Pause und Fortsetzen wurden ebenfalls bedient. Die Spielflächen passten seitlich in die getesteten Ansichten.
+- Memory per Kartenaufdecken und Schach per Zug e2–e4, außerdem beide Reaktionsspiele in der Desktop-Ansicht.
+- Rücknavigation nach App-Navigation, bei direkten Spiele-Links einschließlich `/games/bridge-runner`, auf einer Event-Detailroute mit Gast-Anmeldehinweis, zwischen Events und Über Connect/ED sowie auf Hilfe und Fehlerseite. Die Beschriftungen Zurück, Geri und Back wurden im Browser geprüft.
+- 74 relevante Tests für Spiele, Navigation, Gastansichten, UX und Übersetzungen bestanden. Der i18n-Test verwendet jetzt `fileURLToPath()`, damit der Windows-Projektpfad mit Leerzeichen korrekt gelesen wird.
+- Der vollständige Testlauf ergab 421 bestandene und 29 fehlgeschlagene Prüfungen. Die verbleibenden Fehler betreffen bestehende Windows-Pfadannahmen in anderen Tests sowie zwei bestehende Theme-Prüfungen.
+
+Offene Prüfgrenzen
+
+- Die freigegebene `.env.staging.local` und die entsprechenden Umgebungsvariablen fehlten. `npm run build` wurde für die lokale UI-Prüfung mit einem ausdrücklich fiktiven Publishable-Key und deaktivierter Registrierung erfolgreich ausgeführt. Für einen nutzbaren Backend-Build werden die freigegebenen Konfigurationswerte benötigt.
+- Authentifizierte Mitglieder-/Admin-Ansichten und physische Smartphones sind weiterhin ungeprüft. Die Routen-Zuordnung wurde zusätzlich durch Navigationstests abgedeckt.
+
 ### 22.4 Für den Echtbetrieb fehlt noch
 
 - Echte Benutzerkonten mit Anmeldung und Rollen (Schüler:in, Lehrkraft, Koordination), serverseitig abgesichert

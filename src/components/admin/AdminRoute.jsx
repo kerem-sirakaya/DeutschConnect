@@ -8,6 +8,7 @@ import { adminErrorKey } from '../../lib/adminApi.js';
 import PageHeader from '../PageHeader.jsx';
 import EmptyState from '../EmptyState.jsx';
 import Icon from '../Icon.jsx';
+import BackButton from '../BackButton.jsx';
 
 /**
  * Schützt alle Seiten unter /admin – aber NUR in der Oberfläche.
@@ -44,6 +45,7 @@ export function AdminLoading() {
   const { t } = useI18n();
   return (
     <div className="page page--narrow">
+      <BackButton />
       <section className="card settings-block" role="status" aria-live="polite">
         <p>{t('admin.loading')}</p>
       </section>

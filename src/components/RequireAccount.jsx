@@ -4,6 +4,7 @@ import { useAuth } from '../auth/AuthContext.jsx';
 import { useAppState } from '../state/AppStateContext.jsx';
 import { usePageTitle } from '../hooks/usePageTitle.js';
 import Icon from './Icon.jsx';
+import BackButton from './BackButton.jsx';
 
 /**
  * Seiten für Mitglieder (Events, Ideen, Nachhilfe, Profile, Gruppen, Chat, Mein Bereich).
@@ -25,6 +26,7 @@ export function LoginRequired() {
   const from = `${location.pathname}${location.search}`;
   return (
     <div className="page page--narrow">
+      <BackButton />
       <section className="card stack guest-gate" aria-labelledby="guest-gate-title">
         <span className="guest-gate__icon" aria-hidden="true">
           <Icon name="user" size={28} />

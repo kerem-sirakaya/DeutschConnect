@@ -2,24 +2,49 @@
 //
 // Urheber: Kerem – übernommen aus der Codex-Version (Branch `codex-version-1.0`,
 // Datei `src/games/arcade.js`: `freshFlight`, `flightDifficulty`, `stepFlight`).
-// Die Rechenregeln sind unverändert; für DeutschConnect nur lesbarer formatiert und die
-// festen Zahlen als benannte Konstanten herausgezogen. Reine Funktionen ohne React
+// Tempo, Auftrieb und Schwerkraft bleiben gleich; im mobilen Hochformat wächst die Höhe.
+// Feste Zahlen sind als benannte Konstanten herausgezogen. Reine Funktionen ohne React
 // → mit `npm test` prüfbar. Keine Speicherung, kein Bestwert.
 //
-// Koordinaten: Spielfeld 640 × 300 (SVG-viewBox), y wächst nach unten.
+// Koordinaten: 640 × 300 am Desktop, im mobilen Hochformat höher; y wächst nach unten.
 
 export const FIELD = { width: 640, height: 300 };
 export const PLANE_X = 72; // linke Kante des Flugzeugs
 export const PIPE_WIDTH = 35;
 export const GAP_HALF = 65; // Lücke zwischen den Säulen = 130 px, bei jedem Tempo gleich
+const GAP_VARIATION = 60;
+const GAP_TOP_MARGIN = 85;
+const GAP_BOTTOM_MARGIN = 95;
 const PIPE_SPACING = 304; // ungefährer Abstand zwischen zwei Säulen (px)
 const FLAP_VELOCITY = -240; // Auftrieb beim Tippen (nach oben)
 const GRAVITY = 680;
 const MAX_STEP = 0.035; // längster Zeitschritt in Sekunden (verhindert „Sprünge“ bei Rucklern)
 
 /** Startzustand einer neuen Runde. */
-export function freshFlight() {
-  return { time: 0, y: 150, velocity: 0, pipes: [{ x: 650, gap: 150, counted: false }], score: 0, over: false, spawn: 1.8 };
+export function freshFlight(height = FIELD.height) {
+  return {
+    time: 0,
+    height,
+    y: height / 2,
+    velocity: 0,
+    pipes: [{ x: 650, gap: height / 2, counted: false }],
+    score: 0,
+    over: false,
+    spawn: 1.8,
+  };
+}
+
+/** Positionen beim Größen-/Orientierungswechsel proportional in die neue Welt übertragen. */
+export function resizeFlight(scene, height) {
+  const previousHeight = scene.height ?? FIELD.height;
+  if (height === previousHeight) return scene;
+  const scale = height / previousHeight;
+  return {
+    ...scene,
+    height,
+    y: scene.y * scale,
+    pipes: scene.pipes.map((pipe) => ({ ...pipe, gap: pipe.gap * scale })),
+  };
 }
 
 /** Tempo steigt langsam von 160 auf höchstens 260 px/s; Säulen kommen so, dass der Abstand gleich bleibt. */
@@ -38,6 +63,7 @@ export function flightDifficulty(time) {
 export function stepFlight(s, delta, flap, random = Math.random) {
   if (s.over) return s;
   const dt = Math.min(MAX_STEP, Math.max(0, delta));
+  const height = s.height ?? FIELD.height;
   const difficulty = flightDifficulty(s.time);
   const velocity = flap ? FLAP_VELOCITY : s.velocity + GRAVITY * dt;
   const y = s.y + velocity * dt;
@@ -55,14 +81,21 @@ export function stepFlight(s, delta, flap, random = Math.random) {
 
   let spawn = s.spawn - dt;
   if (spawn <= 0) {
-    pipes.push({ x: 650, gap: 85 + random() * 120, counted: false });
+    // Auch in einer hohen Welt müssen aufeinanderfolgende Lücken erreichbar bleiben.
+    // Bei 300 px Höhe ergibt sich weiterhin exakt der bisherige Bereich 85–205.
+    const previousGap = pipes.at(-1)?.gap ?? height / 2;
+    const center = Math.min(
+      Math.max(previousGap, GAP_TOP_MARGIN + GAP_VARIATION),
+      height - GAP_BOTTOM_MARGIN - GAP_VARIATION,
+    );
+    pipes.push({ x: 650, gap: center - GAP_VARIATION + random() * GAP_VARIATION * 2, counted: false });
     spawn = difficulty.spawn;
   }
 
   // Vorbei, wenn das Flugzeug oben/unten den Rand oder eine Säule berührt.
-  const hitsEdge = y < 10 || y > FIELD.height - 10;
+  const hitsEdge = y < 10 || y > height - 10;
   const hitsPipe = pipes.some(
     (pipe) => pipe.x < 103 && pipe.x + PIPE_WIDTH > 77 && (y - 10 < pipe.gap - GAP_HALF || y + 10 > pipe.gap + GAP_HALF),
   );
-  return { time: s.time + dt, y, velocity, pipes, spawn, score, over: hitsEdge || hitsPipe };
+  return { time: s.time + dt, height, y, velocity, pipes, spawn, score, over: hitsEdge || hitsPipe };
 }
